@@ -1,0 +1,59 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userprefs
+*.ncb
+*.sdf
+*.opensdf
+*.cache
+*.ilk
+*.log
+*.obj
+*.bin
+*.exe
+*.dll
+*.pdb
+*.idb
+*.ipch
+*.aps
+*.pch
+*.dbmdl
+*.dbproj.schemaview
+*.dbproj
+*.jfm
+*.sln.ide
+*.sln.docstates
+*.slnf
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Bb]in/
+[Oo]bj/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+packages/
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+*.sln.iml
+
+# User-specific files
+*.sln.ide
+*.sln.docstates
+
+# Backup files
+*~ 
+*.bak
+
+# Other
+Thumbs.db

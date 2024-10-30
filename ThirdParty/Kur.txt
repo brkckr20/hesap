@@ -1,0 +1,1 @@
+USE [Hesap] Exec [dbo].[TCMB_KurPlus] 

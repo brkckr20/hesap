@@ -1,0 +1,531 @@
+﻿namespace Hesap
+{
+    partial class Main
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnUM = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnFirmaKartlari = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnSiparisGirisi = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
+            this.barStKullanici = new DevExpress.XtraBars.BarStaticItem();
+            this.barMdiChildrenListItem1 = new DevExpress.XtraBars.BarMdiChildrenListItem();
+            this.barStVeritabani = new DevExpress.XtraBars.BarStaticItem();
+            this.barBtnRapor = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
+            this.barKullanici = new DevExpress.XtraBars.BarStaticItem();
+            this.barButtonItem12 = new DevExpress.XtraBars.BarButtonItem();
+            this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
+            this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem14 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem15 = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnBoyahaneRenkKarti = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
+            this.barButtonItem16 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem17 = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rbnMalzemeYonetimi = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rbnIplik = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItem18 = new DevExpress.XtraBars.BarButtonItem();
+            ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // ribbon
+            // 
+            this.ribbon.ExpandCollapseItem.Id = 0;
+            this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.ribbon.ExpandCollapseItem,
+            this.ribbon.SearchEditItem,
+            this.barButtonItem1,
+            this.barBtnUM,
+            this.barButtonItem2,
+            this.barBtnFirmaKartlari,
+            this.barButtonItem3,
+            this.barBtnSiparisGirisi,
+            this.barButtonItem4,
+            this.barButtonItem5,
+            this.barButtonItem6,
+            this.barStKullanici,
+            this.barMdiChildrenListItem1,
+            this.barStVeritabani,
+            this.barBtnRapor,
+            this.barButtonItem7,
+            this.barButtonItem8,
+            this.barButtonItem9,
+            this.barButtonItem10,
+            this.barButtonItem11,
+            this.barKullanici,
+            this.barButtonItem12,
+            this.barCheckItem1,
+            this.barButtonItem13,
+            this.barButtonItem14,
+            this.barButtonItem15,
+            this.barBtnBoyahaneRenkKarti,
+            this.barSubItem1,
+            this.barButtonItem16,
+            this.barButtonItem17,
+            this.barButtonItem18});
+            this.ribbon.Location = new System.Drawing.Point(0, 0);
+            this.ribbon.MaxItemId = 31;
+            this.ribbon.Name = "ribbon";
+            this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
+            this.ribbonPage1,
+            this.ribbonPage2,
+            this.rbnMalzemeYonetimi});
+            this.ribbon.Size = new System.Drawing.Size(1473, 170);
+            this.ribbon.StatusBar = this.ribbonStatusBar;
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "barButtonItem1";
+            this.barButtonItem1.Id = 1;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barBtnUM
+            // 
+            this.barBtnUM.Caption = "Üretim ve Maliyet";
+            this.barBtnUM.Id = 2;
+            this.barBtnUM.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barBtnUM.ImageOptions.Image")));
+            this.barBtnUM.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barBtnUM.ImageOptions.LargeImage")));
+            this.barBtnUM.Name = "barBtnUM";
+            this.barBtnUM.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnUM_ItemClick);
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "barButtonItem2";
+            this.barButtonItem2.Id = 3;
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // barBtnFirmaKartlari
+            // 
+            this.barBtnFirmaKartlari.Id = 6;
+            this.barBtnFirmaKartlari.Name = "barBtnFirmaKartlari";
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "Firma Kartları";
+            this.barButtonItem3.Id = 5;
+            this.barButtonItem3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
+            this.barButtonItem3.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
+            // 
+            // barBtnSiparisGirisi
+            // 
+            this.barBtnSiparisGirisi.Caption = "Sipariş Girişi";
+            this.barBtnSiparisGirisi.Id = 7;
+            this.barBtnSiparisGirisi.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barBtnSiparisGirisi.ImageOptions.Image")));
+            this.barBtnSiparisGirisi.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barBtnSiparisGirisi.ImageOptions.LargeImage")));
+            this.barBtnSiparisGirisi.Name = "barBtnSiparisGirisi";
+            this.barBtnSiparisGirisi.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnSiparisGirisi_ItemClick);
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "Ürün Kartı";
+            this.barButtonItem4.Id = 8;
+            this.barButtonItem4.ImageOptions.Image = global::Hesap.Properties.Resources.Fabric_Sample;
+            this.barButtonItem4.Name = "barButtonItem4";
+            this.barButtonItem4.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
+            // 
+            // barButtonItem5
+            // 
+            this.barButtonItem5.Caption = "Ürün Reçete Kartı";
+            this.barButtonItem5.Id = 9;
+            this.barButtonItem5.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.LargeImage")));
+            this.barButtonItem5.Name = "barButtonItem5";
+            this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick);
+            // 
+            // barButtonItem6
+            // 
+            this.barButtonItem6.Caption = "İplik Kartı";
+            this.barButtonItem6.Id = 10;
+            this.barButtonItem6.ImageOptions.Image = global::Hesap.Properties.Resources.Yarn_Emoji;
+            this.barButtonItem6.Name = "barButtonItem6";
+            this.barButtonItem6.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem6.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem6_ItemClick);
+            // 
+            // barStKullanici
+            // 
+            this.barStKullanici.Caption = "Kumaş Üretim ve Takibi - Stok Yönetimi İşlemleri";
+            this.barStKullanici.Id = 11;
+            this.barStKullanici.Name = "barStKullanici";
+            // 
+            // barMdiChildrenListItem1
+            // 
+            this.barMdiChildrenListItem1.Caption = "barMdiChildrenListItem1";
+            this.barMdiChildrenListItem1.Id = 12;
+            this.barMdiChildrenListItem1.Name = "barMdiChildrenListItem1";
+            // 
+            // barStVeritabani
+            // 
+            this.barStVeritabani.Caption = ".";
+            this.barStVeritabani.Id = 13;
+            this.barStVeritabani.Name = "barStVeritabani";
+            this.barStVeritabani.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barStVeritabani_ItemClick);
+            // 
+            // barBtnRapor
+            // 
+            this.barBtnRapor.Caption = "Rapor Oluşturma";
+            this.barBtnRapor.Id = 14;
+            this.barBtnRapor.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barBtnRapor.ImageOptions.Image")));
+            this.barBtnRapor.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barBtnRapor.ImageOptions.LargeImage")));
+            this.barBtnRapor.Name = "barBtnRapor";
+            this.barBtnRapor.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnRapor_ItemClick);
+            // 
+            // barButtonItem7
+            // 
+            this.barButtonItem7.Caption = "Malzeme Kartı";
+            this.barButtonItem7.Id = 15;
+            this.barButtonItem7.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem7.ImageOptions.Image")));
+            this.barButtonItem7.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem7.ImageOptions.LargeImage")));
+            this.barButtonItem7.Name = "barButtonItem7";
+            this.barButtonItem7.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem7_ItemClick);
+            // 
+            // barButtonItem8
+            // 
+            this.barButtonItem8.Caption = "Malzeme Giriş İşlemleri";
+            this.barButtonItem8.Id = 16;
+            this.barButtonItem8.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.Image")));
+            this.barButtonItem8.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.LargeImage")));
+            this.barButtonItem8.Name = "barButtonItem8";
+            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem8_ItemClick);
+            // 
+            // barButtonItem9
+            // 
+            this.barButtonItem9.Caption = "Malzeme Çıkış İşlemleri";
+            this.barButtonItem9.Id = 17;
+            this.barButtonItem9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.Image")));
+            this.barButtonItem9.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.LargeImage")));
+            this.barButtonItem9.Name = "barButtonItem9";
+            this.barButtonItem9.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
+            // 
+            // barButtonItem10
+            // 
+            this.barButtonItem10.Caption = "Depo Kartları";
+            this.barButtonItem10.Id = 18;
+            this.barButtonItem10.ImageOptions.Image = global::Hesap.Properties.Resources.Warehouse;
+            this.barButtonItem10.Name = "barButtonItem10";
+            this.barButtonItem10.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem10.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem10_ItemClick);
+            // 
+            // barButtonItem11
+            // 
+            this.barButtonItem11.Caption = "Kullanıcı Kartları";
+            this.barButtonItem11.Id = 19;
+            this.barButtonItem11.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem11.ImageOptions.Image")));
+            this.barButtonItem11.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem11.ImageOptions.LargeImage")));
+            this.barButtonItem11.Name = "barButtonItem11";
+            this.barButtonItem11.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem11_ItemClick);
+            // 
+            // barKullanici
+            // 
+            this.barKullanici.Caption = ".";
+            this.barKullanici.Id = 20;
+            this.barKullanici.Name = "barKullanici";
+            // 
+            // barButtonItem12
+            // 
+            this.barButtonItem12.Caption = "İplik Depo Giriş İşlemleri";
+            this.barButtonItem12.Id = 21;
+            this.barButtonItem12.ImageOptions.Image = global::Hesap.Properties.Resources.YarnIn;
+            this.barButtonItem12.Name = "barButtonItem12";
+            this.barButtonItem12.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem12.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem12_ItemClick);
+            // 
+            // barCheckItem1
+            // 
+            this.barCheckItem1.Caption = "barCheckItem1";
+            this.barCheckItem1.Id = 22;
+            this.barCheckItem1.Name = "barCheckItem1";
+            // 
+            // barButtonItem13
+            // 
+            this.barButtonItem13.Caption = "İplik Depo Çıkış İşlemleri";
+            this.barButtonItem13.Id = 23;
+            this.barButtonItem13.ImageOptions.Image = global::Hesap.Properties.Resources.YarnOut;
+            this.barButtonItem13.Name = "barButtonItem13";
+            this.barButtonItem13.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem13.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem13_ItemClick);
+            // 
+            // barButtonItem14
+            // 
+            this.barButtonItem14.Caption = "barButtonItem14";
+            this.barButtonItem14.Id = 24;
+            this.barButtonItem14.Name = "barButtonItem14";
+            // 
+            // barButtonItem15
+            // 
+            this.barButtonItem15.Caption = "İplik Kartı";
+            this.barButtonItem15.Id = 25;
+            this.barButtonItem15.ImageOptions.Image = global::Hesap.Properties.Resources.Yarn_Emoji;
+            this.barButtonItem15.Name = "barButtonItem15";
+            this.barButtonItem15.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem15.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem15_ItemClick);
+            // 
+            // barBtnBoyahaneRenkKarti
+            // 
+            this.barBtnBoyahaneRenkKarti.Caption = "Boyahane Renk Kartı";
+            this.barBtnBoyahaneRenkKarti.Id = 26;
+            this.barBtnBoyahaneRenkKarti.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barBtnBoyahaneRenkKarti.ImageOptions.Image")));
+            this.barBtnBoyahaneRenkKarti.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barBtnBoyahaneRenkKarti.ImageOptions.LargeImage")));
+            this.barBtnBoyahaneRenkKarti.Name = "barBtnBoyahaneRenkKarti";
+            this.barBtnBoyahaneRenkKarti.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnBoyahaneRenkKarti_ItemClick);
+            // 
+            // barSubItem1
+            // 
+            this.barSubItem1.Caption = "Talimat Girişi";
+            this.barSubItem1.Id = 27;
+            this.barSubItem1.ImageOptions.Image = global::Hesap.Properties.Resources.Brief;
+            this.barSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem16),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem18)});
+            this.barSubItem1.Name = "barSubItem1";
+            this.barSubItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // barButtonItem16
+            // 
+            this.barButtonItem16.Caption = "İplik Satın Alma Talimatı";
+            this.barButtonItem16.Id = 28;
+            this.barButtonItem16.ImageOptions.Image = global::Hesap.Properties.Resources.Yarn_Emoji;
+            this.barButtonItem16.Name = "barButtonItem16";
+            this.barButtonItem16.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem16_ItemClick);
+            // 
+            // barButtonItem17
+            // 
+            this.barButtonItem17.Caption = "Taşıyıcı Kartları";
+            this.barButtonItem17.Id = 29;
+            this.barButtonItem17.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem17.ImageOptions.Image")));
+            this.barButtonItem17.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem17.ImageOptions.LargeImage")));
+            this.barButtonItem17.Name = "barButtonItem17";
+            this.barButtonItem17.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem17_ItemClick);
+            // 
+            // ribbonPage1
+            // 
+            this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup3,
+            this.ribbonPageGroup5});
+            this.ribbonPage1.Name = "ribbonPage1";
+            this.ribbonPage1.Text = "Ayarlar";
+            // 
+            // ribbonPageGroup3
+            // 
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem3);
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem10);
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem11);
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem17);
+            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            this.ribbonPageGroup3.Text = "Kurulum";
+            // 
+            // ribbonPageGroup5
+            // 
+            this.ribbonPageGroup5.ItemLinks.Add(this.barBtnRapor);
+            this.ribbonPageGroup5.Name = "ribbonPageGroup5";
+            this.ribbonPageGroup5.Text = "Raporlar";
+            // 
+            // ribbonPage2
+            // 
+            this.ribbonPage2.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup1,
+            this.ribbonPageGroup4});
+            this.ribbonPage2.Name = "ribbonPage2";
+            this.ribbonPage2.Text = "Üretim Yönetimi";
+            // 
+            // ribbonPageGroup1
+            // 
+            this.ribbonPageGroup1.ItemLinks.Add(this.barBtnUM);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barBtnSiparisGirisi);
+            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
+            this.ribbonPageGroup1.Text = "Üretim Yönetimi ve Maliyet İşlemleri";
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.ItemLinks.Add(this.barButtonItem4);
+            this.ribbonPageGroup4.ItemLinks.Add(this.barButtonItem5);
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "Kartlar";
+            // 
+            // rbnMalzemeYonetimi
+            // 
+            this.rbnMalzemeYonetimi.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup8,
+            this.ribbonPageGroup6,
+            this.rbnIplik,
+            this.ribbonPageGroup7});
+            this.rbnMalzemeYonetimi.Name = "rbnMalzemeYonetimi";
+            this.rbnMalzemeYonetimi.Text = "Malzeme Yönetimi";
+            // 
+            // ribbonPageGroup8
+            // 
+            this.ribbonPageGroup8.ItemLinks.Add(this.barSubItem1);
+            this.ribbonPageGroup8.Name = "ribbonPageGroup8";
+            this.ribbonPageGroup8.Text = "Talimat İşlemleri";
+            // 
+            // ribbonPageGroup6
+            // 
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItem8);
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItem9);
+            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
+            this.ribbonPageGroup6.Text = "Malzeme Depo Hareketleri";
+            // 
+            // rbnIplik
+            // 
+            this.rbnIplik.ItemLinks.Add(this.barButtonItem12);
+            this.rbnIplik.ItemLinks.Add(this.barButtonItem13);
+            this.rbnIplik.Name = "rbnIplik";
+            this.rbnIplik.Text = "İplik Depo Hareketleri";
+            // 
+            // ribbonPageGroup7
+            // 
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItem7);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItem15);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barBtnBoyahaneRenkKarti);
+            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
+            this.ribbonPageGroup7.Text = "Kartlar";
+            // 
+            // ribbonStatusBar
+            // 
+            this.ribbonStatusBar.ItemLinks.Add(this.barStKullanici);
+            this.ribbonStatusBar.ItemLinks.Add(this.barStVeritabani);
+            this.ribbonStatusBar.ItemLinks.Add(this.barKullanici);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 719);
+            this.ribbonStatusBar.Name = "ribbonStatusBar";
+            this.ribbonStatusBar.Ribbon = this.ribbon;
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1473, 31);
+            // 
+            // xtraTabbedMdiManager1
+            // 
+            this.xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
+            this.xtraTabbedMdiManager1.MdiParent = this;
+            // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Text = "Kartlar";
+            // 
+            // barButtonItem18
+            // 
+            this.barButtonItem18.Caption = "Kumaş Satın Alma Talimatı";
+            this.barButtonItem18.Id = 30;
+            this.barButtonItem18.ImageOptions.Image = global::Hesap.Properties.Resources.Fabric_Sample;
+            this.barButtonItem18.Name = "barButtonItem18";
+            this.barButtonItem18.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem18_ItemClick);
+            // 
+            // Main
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1473, 750);
+            this.Controls.Add(this.ribbonStatusBar);
+            this.Controls.Add(this.ribbon);
+            this.IconOptions.Image = global::Hesap.Properties.Resources.BookmarkBig;
+            this.IsMdiContainer = true;
+            this.Name = "Main";
+            this.Ribbon = this.ribbon;
+            this.StatusBar = this.ribbonStatusBar;
+            this.Text = "Tekstil - Stok Takip Programı";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Main_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
+        private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
+        private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barBtnUM;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barBtnFirmaKartlari;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
+        private DevExpress.XtraBars.BarButtonItem barBtnSiparisGirisi;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private DevExpress.XtraBars.BarStaticItem barStKullanici;
+        private DevExpress.XtraBars.BarMdiChildrenListItem barMdiChildrenListItem1;
+        private DevExpress.XtraBars.BarStaticItem barStVeritabani;
+        private DevExpress.XtraBars.BarButtonItem barBtnRapor;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
+        private DevExpress.XtraBars.Ribbon.RibbonPage rbnMalzemeYonetimi;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem7;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem8;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem10;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem11;
+        private DevExpress.XtraBars.BarStaticItem barKullanici;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem12;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbnIplik;
+        private DevExpress.XtraBars.BarCheckItem barCheckItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem13;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem14;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem15;
+        private DevExpress.XtraBars.BarButtonItem barBtnBoyahaneRenkKarti;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
+        private DevExpress.XtraBars.BarSubItem barSubItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem16;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem17;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem18;
+    }
+}

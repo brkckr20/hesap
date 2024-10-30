@@ -1,0 +1,1 @@
+sqlcmd -S BURAK -i C:\Users\casper\Desktop\Proje\Dev\Hesap\Hesap\ThirdParty\Kur.txt

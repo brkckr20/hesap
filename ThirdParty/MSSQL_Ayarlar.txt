@@ -1,0 +1,10 @@
+-- Ole Automation Procedures hatası alınırsa aşağıdaki komutlar çalıştırılmalıdır.
+--bu satır çalıştırılmalı
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE;
+
+--daha sonra bu satır çalıştırılmalı
+EXEC sp_configure 'Ole Automation Procedures', 1;
+RECONFIGURE;
+
+eğer ping isteği olmuyor ise yada dosya paylaşımı olmuyorsa medya akış seçeneklerinden izin verilmelidir.
