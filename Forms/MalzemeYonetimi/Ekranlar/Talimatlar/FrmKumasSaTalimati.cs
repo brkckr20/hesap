@@ -26,7 +26,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         public FrmKumasSaTalimati()
         {
             InitializeComponent();
-            //SayiFormati();
+            SayiFormati();
         }
         void SayiFormati()
         {
@@ -39,7 +39,12 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             BaslangicVerileri();
             yardimciAraclar.KolonlariGetir(gridView1,this.Text);
         }
-
+        void BaslangicVerileri()
+        {
+            dateTarih.EditValue = DateTime.Now;
+            gridControl1.DataSource = new BindingList<_KumasDepoKalem>();
+            txtTalimatNo.Text = numarator.NumaraVer("HamKSaTal");
+        }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             object Baslik = new
@@ -69,27 +74,31 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                         //connection.Execute(sqlite, FisBaslik);
                         //this.Id = connection.QuerySingle<int>(idQuery);
                     }
-                    string sql = @"INSERT INTO HamDepo2 (RefNo,KalemIslem,IplikId,NetKg,BrutKg,Fiyat,DovizCinsi,OrganikSertifikaNo,Marka,IplikRenkId
-                                ,Aciklama,UUID,SatirTutari) OUTPUT INSERTED.Id
-                                     VALUES (@RefNo,@KalemIslem,@IplikId,@NetKg,@BrutKg,@Fiyat,@DovizCinsi,@OrganikSertifikaNo,@Marka,@IplikRenkId
-                                ,@Aciklama,@UUID,@SatirTutari)";
+                    string sql = @"INSERT INTO HamDepo2 (RefNo,KalemIslem,KumasId,GrM2,BrutKg,NetKg,BrutMt,NetMt,Adet,Fiyat,FiyatBirimi,DovizCinsi,RenkId,Aciklama,UUID,SatirTutari,TakipNo,DesenId,BoyaIslemId) OUTPUT INSERTED.Id
+                                     VALUES (@RefNo,@KalemIslem,@KumasId,@GrM2,@BrutKg,@NetKg,@BrutMt,@NetMt,@Adet,@Fiyat,@FiyatBirimi,@DovizCinsi,@RenkId,@Aciklama,@UUID,@SatirTutari,@TakipNo,@DesenId,@BoyaIslemId)";
                     for (int i = 0; i < gridView1.RowCount - 1; i++)
                     {
                         connection.Execute(sql, new
                         {
                             RefNo = this.Id,
                             KalemIslem = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "KalemIslem")),
-                            IplikId = gridView1.GetRowCellValue(i, "IplikId"),
-                            NetKg = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "NetKg")),
+                            KumasId = gridView1.GetRowCellValue(i, "KumasId"),
+                            GrM2 = gridView1.GetRowCellValue(i, "GrM2"),
                             BrutKg = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "BrutKg")),
+                            NetKg = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "NetKg")),
+                            BrutMt = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "BrutMt")),
+                            NetMt = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "NetMt")),
+                            Adet = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "Adet")),
                             Fiyat = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "Fiyat")),
+                            FiyatBirimi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "FiyatBirimi")),
                             DovizCinsi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "DovizCinsi")),
-                            OrganikSertifikaNo = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "OrganikSertifikaNo")),
-                            Marka = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Marka")),
-                            IplikRenkId = gridView1.GetRowCellValue(i, "IplikRenkId"),
+                            RenkId = gridView1.GetRowCellValue(i, "RenkId"),
                             Aciklama = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Aciklama")),
                             UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
                             SatirTutari = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "SatirTutari")),
+                            TakipNo = gridView1.GetRowCellValue(i, "TakipNo"),
+                            DesenId = gridView1.GetRowCellValue(i, "DesenId"),
+                            BoyaIslemId = gridView1.GetRowCellValue(i, "BoyaIslemId"),
                         });
                     }
                     bildirim.Basarili();
@@ -109,15 +118,21 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonSecici(gridControl1); //kalemlerden devam et
+            yardimciAraclar.KolonSecici(gridControl1);
 
         }
 
-        void BaslangicVerileri()
+        private void repoBoyaRenkKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            dateTarih.EditValue = DateTime.Now;
-            //gridControl1.DataSource = new BindingList<_IplikDepoKalem>();
-            txtTalimatNo.Text = numarator.NumaraVer("HamKSaTal");
+            int newRowHandle = gridView1.FocusedRowHandle;
+            yansit.BoyahaneRenkBilgileriYansit(gridView1, newRowHandle);
         }
+
+        private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            int newRowHandle = gridView1.FocusedRowHandle;
+            yansit.KumasBilgileriYansit(gridView1,newRowHandle);
+        }
+
     }
 }

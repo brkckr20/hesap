@@ -123,6 +123,7 @@
   <ItemGroup>
     <Compile Include="Context\FirmaKarti.cs" />
     <Compile Include="Context\_IplikDepoKalem.cs" />
+    <Compile Include="Context\_KumasDepoKalem.cs" />
     <Compile Include="Context\_MalzemeKalem.cs" />
     <Compile Include="Context\SiparisKalem.cs" />
     <Compile Include="Context\_UrunReceteUB.cs" />

@@ -61,6 +61,7 @@
             this.KumasId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.KumasKodu = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.KumasAdi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GrM2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.BrutKg = new DevExpress.XtraGrid.Columns.GridColumn();
             this.NetKg = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -90,7 +91,6 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.KumasAdi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -474,7 +474,7 @@
             this.KumasId.FieldName = "KumasId";
             this.KumasId.Name = "KumasId";
             this.KumasId.Visible = true;
-            this.KumasId.VisibleIndex = 2;
+            this.KumasId.VisibleIndex = 3;
             this.KumasId.Width = 74;
             // 
             // KumasKodu
@@ -484,7 +484,7 @@
             this.KumasKodu.FieldName = "KumasKodu";
             this.KumasKodu.Name = "KumasKodu";
             this.KumasKodu.Visible = true;
-            this.KumasKodu.VisibleIndex = 4;
+            this.KumasKodu.VisibleIndex = 2;
             this.KumasKodu.Width = 70;
             // 
             // repoBtnUrunKodu
@@ -493,13 +493,21 @@
             this.repoBtnUrunKodu.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repoBtnUrunKodu.Name = "repoBtnUrunKodu";
+            this.repoBtnUrunKodu.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBtnUrunKodu_ButtonClick);
+            // 
+            // KumasAdi
+            // 
+            this.KumasAdi.Caption = "Kumaş Adı";
+            this.KumasAdi.FieldName = "KumasAdi";
+            this.KumasAdi.Name = "KumasAdi";
+            this.KumasAdi.Visible = true;
+            this.KumasAdi.VisibleIndex = 4;
             // 
             // GrM2
             // 
             this.GrM2.Caption = "Gr/M2";
             this.GrM2.FieldName = "GrM2";
             this.GrM2.Name = "GrM2";
-            this.GrM2.OptionsColumn.AllowEdit = false;
             this.GrM2.Visible = true;
             this.GrM2.VisibleIndex = 5;
             this.GrM2.Width = 121;
@@ -632,6 +640,7 @@
             this.repoBoyaRenkKodu.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repoBoyaRenkKodu.Name = "repoBoyaRenkKodu";
+            this.repoBoyaRenkKodu.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBoyaRenkKodu_ButtonClick);
             // 
             // BoyahaneRenkAdi
             // 
@@ -754,14 +763,6 @@
             this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
-            // 
-            // KumasAdi
-            // 
-            this.KumasAdi.Caption = "Kumaş Adı";
-            this.KumasAdi.FieldName = "KumasAdi";
-            this.KumasAdi.Name = "KumasAdi";
-            this.KumasAdi.Visible = true;
-            this.KumasAdi.VisibleIndex = 3;
             // 
             // FrmKumasSaTalimati
             // 
