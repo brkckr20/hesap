@@ -32,11 +32,11 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenu1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dışarıAktarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.excelAktarxlsxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dışarıAktarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.excelAktarxlsxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.contextMenu1.SuspendLayout();
@@ -63,6 +63,7 @@
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
             this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
             // contextMenu1
             // 
@@ -71,7 +72,23 @@
             this.dizaynKaydetToolStripMenuItem,
             this.satırİşlemleriToolStripMenuItem});
             this.contextMenu1.Name = "contextMenu1";
-            this.contextMenu1.Size = new System.Drawing.Size(203, 92);
+            this.contextMenu1.Size = new System.Drawing.Size(203, 70);
+            // 
+            // dışarıAktarToolStripMenuItem
+            // 
+            this.dışarıAktarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.excelAktarxlsxToolStripMenuItem});
+            this.dışarıAktarToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dışarıAktarToolStripMenuItem.Name = "dışarıAktarToolStripMenuItem";
+            this.dışarıAktarToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.dışarıAktarToolStripMenuItem.Text = "Dışarı Aktar";
+            // 
+            // excelAktarxlsxToolStripMenuItem
+            // 
+            this.excelAktarxlsxToolStripMenuItem.Name = "excelAktarxlsxToolStripMenuItem";
+            this.excelAktarxlsxToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.excelAktarxlsxToolStripMenuItem.Text = "Excel Aktar (.xlsx)";
+            this.excelAktarxlsxToolStripMenuItem.Click += new System.EventHandler(this.excelAktarxlsxToolStripMenuItem_Click);
             // 
             // dizaynKaydetToolStripMenuItem
             // 
@@ -94,25 +111,9 @@
             // sütunSeçimiToolStripMenuItem
             // 
             this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
-            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
-            // 
-            // dışarıAktarToolStripMenuItem
-            // 
-            this.dışarıAktarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.excelAktarxlsxToolStripMenuItem});
-            this.dışarıAktarToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.dışarıAktarToolStripMenuItem.Name = "dışarıAktarToolStripMenuItem";
-            this.dışarıAktarToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.dışarıAktarToolStripMenuItem.Text = "Dışarı Aktar";
-            // 
-            // excelAktarxlsxToolStripMenuItem
-            // 
-            this.excelAktarxlsxToolStripMenuItem.Name = "excelAktarxlsxToolStripMenuItem";
-            this.excelAktarxlsxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.excelAktarxlsxToolStripMenuItem.Text = "Excel Aktar (.xlsx)";
-            this.excelAktarxlsxToolStripMenuItem.Click += new System.EventHandler(this.excelAktarxlsxToolStripMenuItem_Click);
             // 
             // FrmHamDepoListe
             // 

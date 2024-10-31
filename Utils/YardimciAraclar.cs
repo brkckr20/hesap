@@ -278,11 +278,64 @@ namespace Hesap.Utils
 
         public void KolonDurumunuKaydet(GridView gridView, string EkranAdi)
         {
+            /* using (var connection = new Baglanti().GetConnection())
+             {
+                 foreach (GridColumn kolon in gridView.Columns)
+                 {
+                     // Kolonun mevcut kaydını kontrol et
+                     string checkQuery = "SELECT COUNT(*) FROM KolonDuzenleme WHERE KullaniciId = @KullaniciId AND EkranAdi = @EkranAdi AND KolonAdi = @KolonAdi";
+                     var exists = connection.ExecuteScalar<int>(checkQuery, new
+                     {
+                         KullaniciId = Properties.Settings.Default.Id,
+                         EkranAdi = EkranAdi,
+                         KolonAdi = kolon.FieldName
+                     });
+
+                     if (exists > 0)
+                     {
+                         // Eğer kayıt varsa, güncelle
+                         string updateQuery = @"
+                     UPDATE KolonDuzenleme 
+                     SET Genişlik = @Genişlik, Gizli = @Gizli, Konum = @Konum 
+                     WHERE KullaniciId = @KullaniciId AND EkranAdi = @EkranAdi AND KolonAdi = @KolonAdi";
+
+                         var updateParameters = new
+                         {
+                             KullaniciId = Properties.Settings.Default.Id,
+                             EkranAdi = EkranAdi,
+                             KolonAdi = kolon.FieldName,
+                             Genişlik = kolon.Width,
+                             Gizli = !kolon.Visible, // Gizli kolon için tersini alıyoruz
+                             Konum = kolon.VisibleIndex
+                         };
+
+                         connection.Execute(updateQuery, updateParameters);
+                     }
+                     else
+                     {
+                         // Eğer kayıt yoksa, ekle
+                         string insertQuery = @"
+                     INSERT INTO KolonDuzenleme (KullaniciId, EkranAdi, KolonAdi, Genişlik, Gizli, Konum)
+                     VALUES (@KullaniciId, @EkranAdi, @KolonAdi, @Genişlik, @Gizli, @Konum)";
+
+                         var insertParameters = new
+                         {
+                             KullaniciId = Properties.Settings.Default.Id,
+                             EkranAdi = EkranAdi,
+                             KolonAdi = kolon.FieldName,
+                             Genişlik = kolon.Width,
+                             Gizli = !kolon.Visible, // Gizli kolon için tersini alıyoruz
+                             Konum = kolon.VisibleIndex
+                         };
+
+                         connection.Execute(insertQuery, insertParameters);
+                     }
+                 }
+             }*/
             using (var connection = new Baglanti().GetConnection())
             {
                 foreach (GridColumn kolon in gridView.Columns)
                 {
-                    // Kolonun mevcut kaydını kontrol et
                     string checkQuery = "SELECT COUNT(*) FROM KolonDuzenleme WHERE KullaniciId = @KullaniciId AND EkranAdi = @EkranAdi AND KolonAdi = @KolonAdi";
                     var exists = connection.ExecuteScalar<int>(checkQuery, new
                     {
@@ -293,11 +346,10 @@ namespace Hesap.Utils
 
                     if (exists > 0)
                     {
-                        // Eğer kayıt varsa, güncelle
                         string updateQuery = @"
-                    UPDATE KolonDuzenleme 
-                    SET Genişlik = @Genişlik, Gizli = @Gizli, Konum = @Konum 
-                    WHERE KullaniciId = @KullaniciId AND EkranAdi = @EkranAdi AND KolonAdi = @KolonAdi";
+            UPDATE KolonDuzenleme 
+            SET Genişlik = @Genişlik, Gizli = @Gizli, Konum = @Konum 
+            WHERE KullaniciId = @KullaniciId AND EkranAdi = @EkranAdi AND KolonAdi = @KolonAdi";
 
                         var updateParameters = new
                         {
@@ -305,7 +357,7 @@ namespace Hesap.Utils
                             EkranAdi = EkranAdi,
                             KolonAdi = kolon.FieldName,
                             Genişlik = kolon.Width,
-                            Gizli = !kolon.Visible, // Gizli kolon için tersini alıyoruz
+                            Gizli = !kolon.Visible,
                             Konum = kolon.VisibleIndex
                         };
 
@@ -313,10 +365,9 @@ namespace Hesap.Utils
                     }
                     else
                     {
-                        // Eğer kayıt yoksa, ekle
                         string insertQuery = @"
-                    INSERT INTO KolonDuzenleme (KullaniciId, EkranAdi, KolonAdi, Genişlik, Gizli, Konum)
-                    VALUES (@KullaniciId, @EkranAdi, @KolonAdi, @Genişlik, @Gizli, @Konum)";
+            INSERT INTO KolonDuzenleme (KullaniciId, EkranAdi, KolonAdi, Genişlik, Gizli, Konum)
+            VALUES (@KullaniciId, @EkranAdi, @KolonAdi, @Genişlik, @Gizli, @Konum)";
 
                         var insertParameters = new
                         {
@@ -324,7 +375,7 @@ namespace Hesap.Utils
                             EkranAdi = EkranAdi,
                             KolonAdi = kolon.FieldName,
                             Genişlik = kolon.Width,
-                            Gizli = !kolon.Visible, // Gizli kolon için tersini alıyoruz
+                            Gizli = !kolon.Visible,
                             Konum = kolon.VisibleIndex
                         };
 
@@ -332,6 +383,7 @@ namespace Hesap.Utils
                     }
                 }
             }
+
         }
         public class KolonBilgisi
         {

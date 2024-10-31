@@ -93,7 +93,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                             FiyatBirimi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "FiyatBirim")),
                             DovizCinsi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "DovizCinsi")),
                             RenkId = gridView1.GetRowCellValue(i, "RenkId"),
-                            Aciklama = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Aciklama")),
+                            Aciklama = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "SatirAciklama")),
                             UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
                             SatirTutari = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "SatirTutari")),
                             TakipNo = gridView1.GetRowCellValue(i, "TakipNo"),
@@ -142,7 +142,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                                     FiyatBirimi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "FiyatBirim")),
                                     DovizCinsi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "DovizCinsi")),
                                     RenkId = gridView1.GetRowCellValue(i, "RenkId"),
-                                    Aciklama = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Aciklama")),
+                                    Aciklama = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "SatirAciklama")),
                                     UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
                                     SatirTutari = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "SatirTutari")),
                                     TakipNo = gridView1.GetRowCellValue(i, "TakipNo"),
@@ -169,7 +169,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                                     FiyatBirimi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "FiyatBirim")),
                                     DovizCinsi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "DovizCinsi")),
                                     RenkId = gridView1.GetRowCellValue(i, "RenkId"),
-                                    Aciklama = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Aciklama")),
+                                    Aciklama = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "SatirAciklama")),
                                     UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
                                     SatirTutari = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "SatirTutari")),
                                     TakipNo = gridView1.GetRowCellValue(i, "TakipNo"),
@@ -221,9 +221,6 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         {
             HamDepo.FrmHamDepoListe frm = new HamDepo.FrmHamDepoListe("SaTal");
             frm.ShowDialog();
-            /*
-             FrmIplikDepoListe frm = new FrmIplikDepoListe("SaTal");
-            frm.ShowDialog();
             if (frm.veriler.Count > 0)
             {
                 this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
@@ -236,15 +233,18 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 txtYetkili.Text = frm.veriler[0]["Yetkili"].ToString();
                 txtVade.Text = frm.veriler[0]["Vade"].ToString();
                 comboBoxEdit1.Text = frm.veriler[0]["OdemeSekli"].ToString();
-                string[] columnNames = new string[]
-                {
-                    "KalemIslem", "IplikId", "IplikKodu", "IplikAdi", "BrutKg", "NetKg","Fiyat","DovizCinsi","OrganikSertifikaNo","Marka","IplikRenkId",
-                    "IplikRenkKodu","IplikRenkAdi","SatirAciklama","SatirTutari","TakipNo"
-                };
+                //string[] columnNames = new string[]
+                //{
+                //    "D2Id", "RefNo", "KalemIslem", "SipNo", "KumasId", "BordurKodu", "Bordur", "GrM2", "HamGr",
+                //    "RenkId", "BrutKg", "NetKg", "BrutMt", "NetMt", "Adet", "Fire", "CuvalSayisi",
+                //    "TopSayisi", "SatirAciklama", "HataId", "IstenenEbat", "BoyaOzellik", "BaskiId",
+                //    "Barkod", "HamKod", "HamFasonKod", "TakipNo", "PartiNo", "BoyaKod", "VaryantId",
+                //    "Fiyat", "Organik", "DesenId", "BoyaIslemId", "DovizCinsi", "FiyatBirimi", "UUID",
+                //    "SatirTutari","KumasKodu","KumasAdi"
+                //};
+                string[] columnNames = yansit.SorgudakiKolonIsimleriniAl(frm.sql);
                 yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
             }
-             
-             */
         }
 
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

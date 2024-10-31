@@ -1,4 +1,6 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         string _islemCinsi;
         Listele listele = new Listele();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        public string sql;
         public FrmHamDepoListe(string islemCinsi)
         {
             InitializeComponent();
@@ -26,7 +29,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         private void FrmHamDepoListe_Load(object sender, EventArgs e)
         {
             this.Text += _islemCinsi == "SaTal" ? " [Satın Alma Talimatları Listesi ]" : " [" + this._islemCinsi + "]";
-                string sql = $@"SELECT 
+            sql = $@"SELECT 
                                     ISNULL(d1.Id, 0) AS [Id],
                                     ISNULL(d1.Tarih, '') AS [Tarih],
                                     ISNULL(d1.FirmaId, 0) AS [FirmaId],
@@ -42,22 +45,22 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
                                     ISNULL(d1.Yetkili, '') AS [Yetkili],
                                     ISNULL(d1.Vade, '') AS [Vade],
                                     ISNULL(d1.OdemeSekli, '') AS [OdemeSekli],
-	                                ISNULL(d2.Id, 0)  [D2Id],
-                                    ISNULL(d2.RefNo, '')  [RefNo],
-                                    ISNULL(d2.KalemIslem, '')  [KalemIslem],
-                                    ISNULL(d2.SipNo, '')  [SipNo],
-                                    ISNULL(d2.KumasId, 0)  [KumasId],
-                                    ISNULL(d2.BordurKodu, '')  [BordurKodu],
-                                    ISNULL(d2.Bordur, '')  [Bordur],
-                                    ISNULL(d2.GrM2, 0)  [GrM2],
-                                    ISNULL(d2.HamGr, 0)  [HamGr],
-                                    ISNULL(d2.RenkId, 0)  [RenkId],
-                                    ISNULL(d2.BrutKg, 0)  [BrutKg],
-                                    ISNULL(d2.NetKg, 0)  [NetKg],
-                                    ISNULL(d2.BrutMt, 0)  [BrutMt],
-                                    ISNULL(d2.NetMt, 0)  [NetMt],
-                                    ISNULL(d2.Adet, 0)  [Adet],
-                                    ISNULL(d2.Fire, 0)  [Fire],
+	                                ISNULL(d2.Id, 0) AS [D2Id],
+                                    ISNULL(d2.RefNo, '') AS [RefNo],
+                                    ISNULL(d2.KalemIslem, '') AS [KalemIslem],
+                                    ISNULL(d2.SipNo, '') AS [SipNo],
+                                    ISNULL(d2.KumasId, 0) AS [KumasId],
+                                    ISNULL(d2.BordurKodu, '') AS [BordurKodu],
+                                    ISNULL(d2.Bordur, '') AS [Bordur],
+                                    ISNULL(d2.GrM2, 0) AS [GrM2],
+                                    ISNULL(d2.HamGr, 0) AS [HamGr],
+                                    ISNULL(d2.RenkId, 0) AS [RenkId],
+                                    ISNULL(d2.BrutKg, 0) AS [BrutKg],
+                                    ISNULL(d2.NetKg, 0) AS [NetKg],
+                                    ISNULL(d2.BrutMt, 0) AS [BrutMt],
+                                    ISNULL(d2.NetMt, 0) AS [NetMt],
+                                    ISNULL(d2.Adet, 0) AS [Adet],
+                                    ISNULL(d2.Fire, 0) AS [Fire],
                                     ISNULL(d2.CuvalSayisi, 0)  [CuvalSayisi],
                                     ISNULL(d2.TopSayisi, 0)  [TopSayisi],
                                     ISNULL(d2.Aciklama, '')  [SatirAciklama],
@@ -77,14 +80,19 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
                                     ISNULL(d2.DesenId, 0)  [DesenId],
                                     ISNULL(d2.BoyaIslemId, 0)  [BoyaIslemId],
                                     ISNULL(d2.DovizCinsi, '')  [DovizCinsi],
-                                    ISNULL(d2.FiyatBirimi, '')  [FiyatBirimi],
+                                    ISNULL(d2.FiyatBirimi, '')  [FiyatBirim],
                                     ISNULL(d2.UUID, '')  [UUID],
-                                    ISNULL(d2.SatirTutari, 0)  [SatirTutari]
+                                    ISNULL(d2.SatirTutari, 0)  [SatirTutari],
+									ISNULL(fk.FirmaKodu,'') [FirmaKodu],
+									ISNULL(fk.FirmaUnvan,'') [FirmaUnvan],
+									ISNULL(uk.UrunKodu,'') [KumasKodu],
+									ISNULL(uk.UrunAdi,'') [KumasAdi]
                                 FROM HamDepo1 d1 inner join HamDepo2 d2 on d1.Id = d2.RefNo
+								left join FirmaKarti Fk on Fk.Id = d1.FirmaId
+								left join UrunKarti uk on uk.Id = d2.KumasId
                                                                 where d1.IslemCinsi = '{_islemCinsi}'
 								                                --where d1.IslemCinsi = 'SaTal'
 ";
-
             listele.Liste(sql, gridControl1);
             yardimciAraclar.KolonlariGetir(gridView1, this.Text);
         }
@@ -102,6 +110,34 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         private void excelAktarxlsxToolStripMenuItem_Click(object sender, EventArgs e)
         {
             yardimciAraclar.ExcelOlarakAktar(gridControl1,"Kumaş Satın Alma Talimat Listesi");
+        }
+
+        public List<Dictionary<string, object>> veriler = new List<Dictionary<string, object>>();
+
+        private void gridView1_DoubleClick(object sender, EventArgs e)
+        {
+            GridView gridView = sender as GridView;
+            if (gridView == null)
+                return;
+            int secilenId = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
+            veriler.Clear();
+            for (int i = 0; i < gridView.DataRowCount; i++)
+            {
+                int id = Convert.ToInt32(gridView.GetRowCellValue(i, "Id"));
+
+                if (id == secilenId)
+                {
+                    var rowData = new Dictionary<string, object>();
+                    foreach (GridColumn column in gridView.Columns)
+                    {
+                        var columnName = column.FieldName;
+                        var cellValue = gridView.GetRowCellValue(i, columnName);
+                        rowData[columnName] = cellValue;
+                    }
+                    veriler.Add(rowData);
+                }
+            }
+            Close();
         }
     }
 }

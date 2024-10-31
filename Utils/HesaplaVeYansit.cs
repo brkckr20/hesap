@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraExport.Helpers;
+using System.Text.RegularExpressions;
 
 namespace Hesap.Utils
 {
@@ -469,6 +470,22 @@ namespace Hesap.Utils
                 gridView.SetRowCellValue(newRowHandle, "BoyahaneRenkKodu", frm.veriler[0]["BoyahaneRenkKodu"].ToString());
                 gridView.SetRowCellValue(newRowHandle, "BoyahaneRenkAdi", frm.veriler[0]["BoyahaneRenkAdi"].ToString());
             }
+        }
+        public string[] SorgudakiKolonIsimleriniAl(string sql)
+        {
+            var columnNames = new List<string>();
+            var regex = new Regex(@"(?:AS\s+\[([^\]]+)\]|(?<=\s)\[([^\]]+)\])", RegexOptions.IgnoreCase);
+
+            var matches = regex.Matches(sql);
+            foreach (Match match in matches)
+            {
+                if (match.Groups[1].Success)
+                    columnNames.Add(match.Groups[1].Value);
+                else if (match.Groups[2].Success)
+                    columnNames.Add(match.Groups[2].Value);
+            }
+
+            return columnNames.ToArray();
         }
 
     }
