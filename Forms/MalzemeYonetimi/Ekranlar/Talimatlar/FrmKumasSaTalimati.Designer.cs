@@ -71,7 +71,8 @@
             this.Fire = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TopSayisi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Fiyat = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.FiyatBirimi = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.FiyatBirim = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoFiyatBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.DovizCinsi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbDoviz = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.RenkId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -84,6 +85,7 @@
             this.TakipNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DesenId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.BoyaIslemId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.D2Id = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoBtnMarka = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.contextMenu1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -107,6 +109,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoFiyatBirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbDoviz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
@@ -137,6 +140,7 @@
             this.btnYeni.Size = new System.Drawing.Size(75, 47);
             this.btnYeni.TabIndex = 9;
             this.btnYeni.Text = "Yeni";
+            this.btnYeni.Click += new System.EventHandler(this.btnYeni_Click);
             // 
             // btnSil
             // 
@@ -177,6 +181,7 @@
             this.btnListe.Size = new System.Drawing.Size(75, 47);
             this.btnListe.TabIndex = 11;
             this.btnListe.Text = "Liste";
+            this.btnListe.Click += new System.EventHandler(this.btnListe_Click);
             // 
             // btnKaydet
             // 
@@ -407,7 +412,8 @@
             this.repoCmbKalemIslem,
             this.repoCmbDoviz,
             this.repoBoyaRenkKodu,
-            this.repoBtnMarka});
+            this.repoBtnMarka,
+            this.repoFiyatBirim});
             this.gridControl1.Size = new System.Drawing.Size(1531, 492);
             this.gridControl1.TabIndex = 9;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -429,7 +435,7 @@
             this.Fire,
             this.TopSayisi,
             this.Fiyat,
-            this.FiyatBirimi,
+            this.FiyatBirim,
             this.DovizCinsi,
             this.RenkId,
             this.BoyahaneRenkKodu,
@@ -439,7 +445,8 @@
             this.SatirTutari,
             this.TakipNo,
             this.DesenId,
-            this.BoyaIslemId});
+            this.BoyaIslemId,
+            this.D2Id});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -455,7 +462,7 @@
             this.KalemIslem.FieldName = "KalemIslem";
             this.KalemIslem.Name = "KalemIslem";
             this.KalemIslem.Visible = true;
-            this.KalemIslem.VisibleIndex = 1;
+            this.KalemIslem.VisibleIndex = 0;
             this.KalemIslem.Width = 91;
             // 
             // repoCmbKalemIslem
@@ -474,7 +481,7 @@
             this.KumasId.FieldName = "KumasId";
             this.KumasId.Name = "KumasId";
             this.KumasId.Visible = true;
-            this.KumasId.VisibleIndex = 3;
+            this.KumasId.VisibleIndex = 1;
             this.KumasId.Width = 74;
             // 
             // KumasKodu
@@ -501,7 +508,7 @@
             this.KumasAdi.FieldName = "KumasAdi";
             this.KumasAdi.Name = "KumasAdi";
             this.KumasAdi.Visible = true;
-            this.KumasAdi.VisibleIndex = 4;
+            this.KumasAdi.VisibleIndex = 3;
             // 
             // GrM2
             // 
@@ -509,7 +516,7 @@
             this.GrM2.FieldName = "GrM2";
             this.GrM2.Name = "GrM2";
             this.GrM2.Visible = true;
-            this.GrM2.VisibleIndex = 5;
+            this.GrM2.VisibleIndex = 4;
             this.GrM2.Width = 121;
             // 
             // BrutKg
@@ -520,7 +527,7 @@
             this.BrutKg.FieldName = "BrutKg";
             this.BrutKg.Name = "BrutKg";
             this.BrutKg.Visible = true;
-            this.BrutKg.VisibleIndex = 13;
+            this.BrutKg.VisibleIndex = 5;
             this.BrutKg.Width = 61;
             // 
             // NetKg
@@ -551,7 +558,7 @@
             this.NetMt.FieldName = "NetMt";
             this.NetMt.Name = "NetMt";
             this.NetMt.Visible = true;
-            this.NetMt.VisibleIndex = 9;
+            this.NetMt.VisibleIndex = 8;
             // 
             // Adet
             // 
@@ -559,7 +566,7 @@
             this.Adet.FieldName = "Adet";
             this.Adet.Name = "Adet";
             this.Adet.Visible = true;
-            this.Adet.VisibleIndex = 8;
+            this.Adet.VisibleIndex = 9;
             // 
             // Fire
             // 
@@ -585,15 +592,30 @@
             this.Fiyat.FieldName = "Fiyat";
             this.Fiyat.Name = "Fiyat";
             this.Fiyat.Visible = true;
-            this.Fiyat.VisibleIndex = 14;
+            this.Fiyat.VisibleIndex = 12;
             // 
-            // FiyatBirimi
+            // FiyatBirim
             // 
-            this.FiyatBirimi.Caption = "Fiyat Birimi";
-            this.FiyatBirimi.FieldName = "FiyatBirimi";
-            this.FiyatBirimi.Name = "FiyatBirimi";
-            this.FiyatBirimi.Visible = true;
-            this.FiyatBirimi.VisibleIndex = 12;
+            this.FiyatBirim.Caption = "Fiyat Birimi";
+            this.FiyatBirim.ColumnEdit = this.repoFiyatBirim;
+            this.FiyatBirim.FieldName = "FiyatBirim";
+            this.FiyatBirim.Name = "FiyatBirim";
+            this.FiyatBirim.Visible = true;
+            this.FiyatBirim.VisibleIndex = 13;
+            // 
+            // repoFiyatBirim
+            // 
+            this.repoFiyatBirim.AutoHeight = false;
+            this.repoFiyatBirim.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repoFiyatBirim.Items.AddRange(new object[] {
+            "Brüt Kg",
+            "Net Kg",
+            "Brüt Mt",
+            "Net Mt",
+            "Adet"});
+            this.repoFiyatBirim.Name = "repoFiyatBirim";
+            this.repoFiyatBirim.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
             // DovizCinsi
             // 
@@ -602,7 +624,7 @@
             this.DovizCinsi.FieldName = "DovizCinsi";
             this.DovizCinsi.Name = "DovizCinsi";
             this.DovizCinsi.Visible = true;
-            this.DovizCinsi.VisibleIndex = 15;
+            this.DovizCinsi.VisibleIndex = 14;
             // 
             // repoCmbDoviz
             // 
@@ -622,7 +644,7 @@
             this.RenkId.FieldName = "RenkId";
             this.RenkId.Name = "RenkId";
             this.RenkId.Visible = true;
-            this.RenkId.VisibleIndex = 0;
+            this.RenkId.VisibleIndex = 15;
             // 
             // BoyahaneRenkKodu
             // 
@@ -701,6 +723,14 @@
             this.BoyaIslemId.Name = "BoyaIslemId";
             this.BoyaIslemId.Visible = true;
             this.BoyaIslemId.VisibleIndex = 23;
+            // 
+            // D2Id
+            // 
+            this.D2Id.Caption = "Depo 2 Kayıt No";
+            this.D2Id.FieldName = "D2Id";
+            this.D2Id.Name = "D2Id";
+            this.D2Id.Visible = true;
+            this.D2Id.VisibleIndex = 24;
             // 
             // repoCmbBirim
             // 
@@ -793,6 +823,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoFiyatBirim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbDoviz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
@@ -856,7 +887,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn Adet;
         private DevExpress.XtraGrid.Columns.GridColumn Fire;
         private DevExpress.XtraGrid.Columns.GridColumn TopSayisi;
-        private DevExpress.XtraGrid.Columns.GridColumn FiyatBirimi;
+        private DevExpress.XtraGrid.Columns.GridColumn FiyatBirim;
         private DevExpress.XtraGrid.Columns.GridColumn DesenId;
         private DevExpress.XtraGrid.Columns.GridColumn BoyaIslemId;
         private System.Windows.Forms.ContextMenuStrip contextMenu1;
@@ -865,5 +896,7 @@
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
         private DevExpress.XtraGrid.Columns.GridColumn KumasAdi;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoFiyatBirim;
+        private DevExpress.XtraGrid.Columns.GridColumn D2Id;
     }
 }

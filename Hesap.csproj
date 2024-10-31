@@ -229,6 +229,12 @@
     <Compile Include="Forms\Liste\FrmUrunReceteKartiListesi.Designer.cs">
       <DependentUpon>FrmUrunReceteKartiListesi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoListe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoListe.Designer.cs">
+      <DependentUpon>FrmHamDepoListe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MalzemeYonetimi\Ekranlar\IplikDepo\FrmFasonaGönderilenler.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -471,6 +477,9 @@
     <EmbeddedResource Include="Forms\Liste\FrmUrunReceteKartiListesi.resx">
       <DependentUpon>FrmUrunReceteKartiListesi.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoListe.resx">
+      <DependentUpon>FrmHamDepoListe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\IplikDepo\FrmFasonaGönderilenler.resx">
       <DependentUpon>FrmFasonaGönderilenler.cs</DependentUpon>
     </EmbeddedResource>
@@ -603,9 +612,7 @@
     <None Include="Resources\BookmarkBig.ico" />
     <None Include="Resources\Yarn Emoji.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
