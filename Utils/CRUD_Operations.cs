@@ -11,6 +11,20 @@ namespace Hesap.Utils
     {
         Bildirim bildirim = new Bildirim();
         Ayarlar ayarlar = new Ayarlar();
+        private int ExecuteSql(string sql, object parameters)
+        {
+            using (var connection = new Baglanti().GetConnection())
+            {
+                return connection.ExecuteScalar<int>(sql, parameters);
+            }
+        }
+        private void ExecuteNonQuery(string sql, object parameters)
+        {
+            using (var connection = new Baglanti().GetConnection())
+            {
+                connection.Execute(sql, parameters);
+            }
+        }
         public void KartSil(int Id, string TabloAdi)
         {
             if (Id != 0)
@@ -44,6 +58,30 @@ namespace Hesap.Utils
                 }
             }
         }
-       
+
+        public int InsertRecord(string tableName, IDictionary<string, object> parameters)
+        {
+            if (parameters.ContainsKey("Id"))
+            {
+                parameters.Remove("Id"); // Id parametresini kaldır
+            }
+            var columns = string.Join(", ", parameters.Keys);
+            var values = string.Join(", ", parameters.Keys.Select(k => "@" + k));
+            var sql = $"INSERT INTO {tableName} ({columns}) OUTPUT INSERTED.Id VALUES ({values})";
+
+            return ExecuteSql(sql, parameters);
+        }
+        public void UpdateRecord(string tableName, IDictionary<string, object> parameters, int id)
+        {
+            var setClause = string.Join(", ", parameters.Keys.Select(k => $"{k} = @{k}"));
+            var sql = $"UPDATE {tableName} SET {setClause} WHERE Id = @Id";
+
+            // Id'yi parametre olarak ekleyelim
+            parameters.Add("Id", id);
+
+            ExecuteNonQuery(sql, parameters);
+        }
+
+
     }
 }

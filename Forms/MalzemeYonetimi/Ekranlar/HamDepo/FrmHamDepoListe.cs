@@ -86,12 +86,16 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
 									ISNULL(fk.FirmaKodu,'') [FirmaKodu],
 									ISNULL(fk.FirmaUnvan,'') [FirmaUnvan],
 									ISNULL(uk.UrunKodu,'') [KumasKodu],
-									ISNULL(uk.UrunAdi,'') [KumasAdi]
+									ISNULL(uk.UrunAdi,'') [KumasAdi],
+									ISNULL(BoyahaneRenkKodu,'') [BoyahaneRenkKodu],
+									ISNULL(BoyahaneRenkAdi,'') [BoyahaneRenkAdi]
                                 FROM HamDepo1 d1 inner join HamDepo2 d2 on d1.Id = d2.RefNo
 								left join FirmaKarti Fk on Fk.Id = d1.FirmaId
 								left join UrunKarti uk on uk.Id = d2.KumasId
+								left join BoyahaneRenkKartlari brk on brk.Id = d2.RenkId
                                                                 where d1.IslemCinsi = '{_islemCinsi}'
 								                                --where d1.IslemCinsi = 'SaTal'
+                                    order by d1.Id asc
 ";
             listele.Liste(sql, gridControl1);
             yardimciAraclar.KolonlariGetir(gridView1, this.Text);

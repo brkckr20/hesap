@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Context;
 using Hesap.Utils;
 using System;
@@ -37,7 +38,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         private void FrmKumasSaTalimati_Load(object sender, EventArgs e)
         {
             BaslangicVerileri();
-            yardimciAraclar.KolonlariGetir(gridView1,this.Text);
+            yardimciAraclar.KolonlariGetir(gridView1, this.Text);
         }
         void BaslangicVerileri()
         {
@@ -45,143 +46,75 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             gridControl1.DataSource = new BindingList<_KumasDepoKalem>();
             txtTalimatNo.Text = numarator.NumaraVer("HamKSaTal");
         }
+        private Dictionary<string, object> CreateKalemParameters(int rowIndex)
+        {
+            return new Dictionary<string, object>
+            {
+                { "RefNo", this.Id },
+                { "KalemIslem", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "KalemIslem")) ?? "" },
+                { "KumasId", gridView1.GetRowCellValue(rowIndex, "KumasId") ?? 0 },
+                { "GrM2", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "GrM2")) },
+                { "BrutKg", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "BrutKg")) },
+                { "NetKg", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "NetKg")) },
+                { "BrutMt", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "BrutMt")) },
+                { "NetMt", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "NetMt")) },
+                { "Adet", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "Adet")) },
+                { "Fiyat", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "Fiyat")) },
+                { "FiyatBirimi", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "FiyatBirim")) },
+                { "DovizCinsi", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "DovizCinsi")) },
+                { "RenkId", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "RenkId")) },
+                { "Aciklama", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "Aciklama")) },
+                { "UUID", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "UUID")) },
+                { "SatirTutari", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "SatirTutari")) },
+                { "TakipNo", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "TakipNo")) },
+                { "DesenId", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "DesenId")) },
+                { "BoyaIslemId", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "BoyaIslemId")) }
+            };
+        }
+
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            object Baslik = new
+            var parameters = new Dictionary<string, object>
             {
-                IslemCinsi = "SaTal",
-                TalimatNo = txtTalimatNo.Text,
-                Tarih = dateTarih.EditValue,
-                FirmaId = this.FirmaId,
-                Aciklama = rchAciklama.Text,
-                Yetkili = txtYetkili.Text,
-                Vade = txtVade.Text,
-                OdemeSekli = comboBoxEdit1.Text,
-                Id = this.Id,
+                { "IslemCinsi", "SaTal" },
+                { "TalimatNo", txtTalimatNo.Text },
+                { "Tarih", dateTarih.EditValue },
+                { "FirmaId", this.FirmaId },
+                { "Aciklama", rchAciklama.Text },
+                { "Yetkili", txtYetkili.Text },
+                { "Vade", txtVade.Text },
+                { "OdemeSekli", comboBoxEdit1.Text }
             };
             if (this.Id == 0)
             {
-                using (var connection = new Baglanti().GetConnection())
+                this.Id = cRUD.InsertRecord("HamDepo1", parameters);
+                for (int i = 0; i < gridView1.RowCount - 1; i++) 
                 {
-                    string mssql = @"INSERT INTO HamDepo1 (IslemCinsi,TalimatNo,Tarih,FirmaId,Aciklama,Yetkili,Vade,OdemeSekli) OUTPUT INSERTED.Id
-                                        VALUES (@IslemCinsi,@TalimatNo,@Tarih,@FirmaId,@Aciklama,@Yetkili,@Vade,@OdemeSekli)";
-                    if (ayarlar.VeritabaniTuru() == "mssql")
-                    {
-                        this.Id = connection.QuerySingle<int>(mssql, Baslik);
-                    }
-                    else
-                    {
-                        //connection.Execute(sqlite, FisBaslik);
-                        //this.Id = connection.QuerySingle<int>(idQuery);
-                    }
-                    string sql = @"INSERT INTO HamDepo2 (RefNo,KalemIslem,KumasId,GrM2,BrutKg,NetKg,BrutMt,NetMt,Adet,Fiyat,FiyatBirimi,DovizCinsi,RenkId,Aciklama,UUID,SatirTutari,TakipNo,DesenId,BoyaIslemId) OUTPUT INSERTED.Id
-                                     VALUES (@RefNo,@KalemIslem,@KumasId,@GrM2,@BrutKg,@NetKg,@BrutMt,@NetMt,@Adet,@Fiyat,@FiyatBirimi,@DovizCinsi,@RenkId,@Aciklama,@UUID,@SatirTutari,@TakipNo,@DesenId,@BoyaIslemId)";
-                    for (int i = 0; i < gridView1.RowCount - 1; i++)
-                    {
-                        var d2Id = connection.ExecuteScalar<int>(sql, new
-                        {
-                            RefNo = this.Id,
-                            KalemIslem = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "KalemIslem")),
-                            KumasId = gridView1.GetRowCellValue(i, "KumasId"),
-                            GrM2 = gridView1.GetRowCellValue(i, "GrM2"),
-                            BrutKg = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "BrutKg")),
-                            NetKg = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "NetKg")),
-                            BrutMt = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "BrutMt")),
-                            NetMt = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "NetMt")),
-                            Adet = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "Adet")),
-                            Fiyat = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "Fiyat")),
-                            FiyatBirimi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "FiyatBirim")),
-                            DovizCinsi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "DovizCinsi")),
-                            RenkId = gridView1.GetRowCellValue(i, "RenkId"),
-                            Aciklama = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "SatirAciklama")),
-                            UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
-                            SatirTutari = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "SatirTutari")),
-                            TakipNo = gridView1.GetRowCellValue(i, "TakipNo"),
-                            DesenId = gridView1.GetRowCellValue(i, "DesenId"),
-                            BoyaIslemId = gridView1.GetRowCellValue(i, "BoyaIslemId"),
-                        });
-                        gridView1.SetRowCellValue(i, "D2Id", d2Id);
-                    }
-                    bildirim.Basarili();
+                    var kalemParameters = CreateKalemParameters(i);
+                    var d2Id = cRUD.InsertRecord("HamDepo2", kalemParameters);
+                    gridView1.SetRowCellValue(i, "D2Id", d2Id);
                 }
+                bildirim.Basarili();
             }
             else
             {
-                using (var connection = new Baglanti().GetConnection())
+                cRUD.UpdateRecord("HamDepo1", parameters,this.Id);
+                for (int i = 0; i < gridView1.RowCount - 1; i++)
                 {
-                    var query = @"select Id from HamDepo1 where Id = @Id";
-                    var sonuc = connection.QueryFirstOrDefault<int>(query, new { Id = this.Id });
-                    if (sonuc != 0)
+                    var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
+                    var kalemParameters = CreateKalemParameters(i);
+                    if (d2Id > 0) // Eğer D2Id varsa güncelle
                     {
-                        string updateD1 = @"UPDATE HamDepo1 SET TalimatNo = @TalimatNo,Tarih=@Tarih,FirmaId = @FirmaId,
-                                            Aciklama = @Aciklama, Yetkili=@Yetkili, Vade=@Vade, OdemeSekli = @OdemeSekli WHERE Id = @Id";
-
-                        connection.Execute(updateD1, Baslik);
-                        for (int i = 0; i < gridView1.RowCount - 1; i++)
-                        {
-                            int d2id = Convert.ToInt32(gridView1.GetRowCellValue(i, "Id"));
-                            var sqlKalem = @"select * from HamDepo2 where Id= @Id";
-                            var kalem = connection.QueryFirstOrDefault(sqlKalem, new { Id = d2id });
-                            if (kalem != null)
-                            {
-                                string updateKalem = @"UPDATE HamDepo2 SET KalemIslem = @KalemIslem,KumasId = @KumasId,GrM2=@GrM2,BrutKg = @BrutKg,NetKg = @NetKg,BrutMt=@BrutMt,NetMt=@NetMt,Adet=@Adet
-                                                ,Fiyat = @Fiyat,FiyatBirimi=@FiyatBirimi,DovizCinsi = @DovizCinsi,RenkId=@RenkId,Aciklama = @Aciklama,
-                                                UUID = @UUID ,SatirTutari = @SatirTutari,DesenId=@DesenId,BoyaIslemId=@BoyaIslemId WHERE Id = @Id";
-                                connection.Execute(updateKalem, new
-                                {
-                                    Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id")),
-                                    KalemIslem = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "KalemIslem")),
-                                    KumasId = gridView1.GetRowCellValue(i, "KumasId"),
-                                    GrM2 = gridView1.GetRowCellValue(i, "GrM2"),
-                                    BrutKg = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "BrutKg")),
-                                    NetKg = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "NetKg")),
-                                    BrutMt = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "BrutMt")),
-                                    NetMt = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "NetMt")),
-                                    Adet = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "Adet")),
-                                    Fiyat = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "Fiyat")),
-                                    FiyatBirimi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "FiyatBirim")),
-                                    DovizCinsi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "DovizCinsi")),
-                                    RenkId = gridView1.GetRowCellValue(i, "RenkId"),
-                                    Aciklama = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "SatirAciklama")),
-                                    UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
-                                    SatirTutari = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "SatirTutari")),
-                                    TakipNo = gridView1.GetRowCellValue(i, "TakipNo"),
-                                    DesenId = gridView1.GetRowCellValue(i, "DesenId"),
-                                    BoyaIslemId = gridView1.GetRowCellValue(i, "BoyaIslemId"),
-                                });
-                            }
-                            else
-                            {
-                                string sql = @"INSERT INTO HamDepo2 (RefNo,KalemIslem,KumasId,GrM2,BrutKg,NetKg,BrutMt,NetMt,Adet,Fiyat,FiyatBirimi,DovizCinsi,RenkId,Aciklama,UUID,SatirTutari,TakipNo,DesenId,BoyaIslemId) OUTPUT INSERTED.Id
-                                     VALUES (@RefNo,@KalemIslem,@KumasId,@GrM2,@BrutKg,@NetKg,@BrutMt,@NetMt,@Adet,@Fiyat,@FiyatBirimi,@DovizCinsi,@RenkId,@Aciklama,@UUID,@SatirTutari,@TakipNo,@DesenId,@BoyaIslemId)";
-                                int yeniId = connection.ExecuteScalar<int>(sql, new
-                                {
-                                    RefNo = this.Id,
-                                    KalemIslem = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "KalemIslem")),
-                                    KumasId = gridView1.GetRowCellValue(i, "KumasId"),
-                                    GrM2 = gridView1.GetRowCellValue(i, "GrM2"),
-                                    BrutKg = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "BrutKg")),
-                                    NetKg = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "NetKg")),
-                                    BrutMt = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "BrutMt")),
-                                    NetMt = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "NetMt")),
-                                    Adet = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "Adet")),
-                                    Fiyat = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "Fiyat")),
-                                    FiyatBirimi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "FiyatBirim")),
-                                    DovizCinsi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "DovizCinsi")),
-                                    RenkId = gridView1.GetRowCellValue(i, "RenkId"),
-                                    Aciklama = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "SatirAciklama")),
-                                    UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
-                                    SatirTutari = yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(i, "SatirTutari")),
-                                    TakipNo = gridView1.GetRowCellValue(i, "TakipNo"),
-                                    DesenId = gridView1.GetRowCellValue(i, "DesenId"),
-                                    BoyaIslemId = gridView1.GetRowCellValue(i, "BoyaIslemId"),
-                                });
-                                gridView1.SetRowCellValue(i, "D2Id", yeniId);
-                            }
-                        }
-                        bildirim.GuncellemeBasarili();
+                        cRUD.UpdateRecord("HamDepo2", kalemParameters, d2Id);
+                    }
+                    else // Yeni kayıt ekle
+                    {
+                        //kalemParameters["RefNo"] = this.Id; // RefNo ekle
+                        var yeniId = cRUD.InsertRecord("HamDepo2", kalemParameters);
+                        gridView1.SetRowCellValue(i, "D2Id", yeniId); // Yeni Id'yi gridView'a set et
                     }
                 }
+                bildirim.GuncellemeBasarili();
             }
         }
 
@@ -191,7 +124,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         }
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+            yardimciAraclar.KolonDurumunuKaydet(gridView1, this.Text);
         }
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -233,24 +166,21 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 txtYetkili.Text = frm.veriler[0]["Yetkili"].ToString();
                 txtVade.Text = frm.veriler[0]["Vade"].ToString();
                 comboBoxEdit1.Text = frm.veriler[0]["OdemeSekli"].ToString();
-                //string[] columnNames = new string[]
-                //{
-                //    "D2Id", "RefNo", "KalemIslem", "SipNo", "KumasId", "BordurKodu", "Bordur", "GrM2", "HamGr",
-                //    "RenkId", "BrutKg", "NetKg", "BrutMt", "NetMt", "Adet", "Fire", "CuvalSayisi",
-                //    "TopSayisi", "SatirAciklama", "HataId", "IstenenEbat", "BoyaOzellik", "BaskiId",
-                //    "Barkod", "HamKod", "HamFasonKod", "TakipNo", "PartiNo", "BoyaKod", "VaryantId",
-                //    "Fiyat", "Organik", "DesenId", "BoyaIslemId", "DovizCinsi", "FiyatBirimi", "UUID",
-                //    "SatirTutari","KumasKodu","KumasAdi"
-                //};
                 string[] columnNames = yansit.SorgudakiKolonIsimleriniAl(frm.sql);
                 yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
             }
         }
 
+        private void gridView1_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        {
+            GridView view = sender as GridView;
+            view.SetRowCellValue(e.RowHandle, "D2Id", 0);
+        }
+
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             int newRowHandle = gridView1.FocusedRowHandle;
-            yansit.KumasBilgileriYansit(gridView1,newRowHandle);
+            yansit.KumasBilgileriYansit(gridView1, newRowHandle);
         }
 
     }

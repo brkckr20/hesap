@@ -463,7 +463,7 @@ namespace Hesap.Utils
         {
             Forms.Liste.FrmBoyahaneRenkKartlariListesi frm = new Forms.Liste.FrmBoyahaneRenkKartlariListesi();
             frm.ShowDialog();
-            if (frm.veriler.Count > 0)
+            if (frm.veriler != null)
             {
                 int newRowHandle = gridView.FocusedRowHandle;
                 gridView.SetRowCellValue(newRowHandle, "RenkId", Convert.ToInt32(frm.veriler[0]["Id"]));
