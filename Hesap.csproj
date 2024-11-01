@@ -331,6 +331,12 @@
     <Compile Include="Forms\Rapor\FrmRaporOlusturma.Designer.cs">
       <DependentUpon>FrmRaporOlusturma.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TeknikDestek\FrmTeknikDestek.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TeknikDestek\FrmTeknikDestek.Designer.cs">
+      <DependentUpon>FrmTeknikDestek.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UretimYonetimi\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -527,6 +533,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Rapor\FrmRaporOlusturma.resx">
       <DependentUpon>FrmRaporOlusturma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TeknikDestek\FrmTeknikDestek.resx">
+      <DependentUpon>FrmTeknikDestek.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UretimYonetimi\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

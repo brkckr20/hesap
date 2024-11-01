@@ -757,6 +757,31 @@
         /c7r0eN/q4t9KjWUBYcAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="barButtonItem19.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAQHRFWHRUaXRsZQBQYWdlIFNl
+        dHVwO0xvYWQ7U2V0dXA7Q3VzdG9taXo7RGVzaWduO09wZW47U2V0dGluZztQcm9wZXJ0Gtt5JwAAAMBJ
+        REFUOE+lkj0OwjAMhXvBXIYBMaPcAwbEGbqVASG6siDUGQkxcAWTZ3DlhFfKj6VPauy8L2nVSkT+gja/
+        oYoxhoQQ0KchDwQsbAQW8owJhujFvwpSdlyA2Vs+EbB+BtukX/8JrjpYmJeCcNtOgCReBNPFXsK8lvWm
+        0zXmXuDDVNAcziqYLVtde0EZzgQI7I4XfYYAWGETC2cCC3na01Vn/R/FMAHeGbcoJaum40HDBL5wspfQ
+        oAGBxwonPwR1uAPHy8wbYHf3eAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="barButtonItem19.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAQHRFWHRUaXRsZQBQYWdlIFNl
+        dHVwO0xvYWQ7U2V0dXA7Q3VzdG9taXo7RGVzaWduO09wZW47U2V0dGluZztQcm9wZXJ0Gtt5JwAAAWZJ
+        REFUWEfFlL1NBDEQhelp69gqqABKQNsAEhllQHAp0omAmAQREUCIoADO+PnWaGZ4xj/ympE+7Y7l8fvW
+        Ot2Jc+5foYsjoYsjoYsjoYsjoYsjoYsjUc2yLLPHFYK9ar4F1ZiAEtR8C6ohATnUfAuqIQE9mGWGRTVk
+        uAsyw6IaNtwDmWFRDRvugcywqIYN90BmWFTDhgvAXECeVYpqxKE1NN/c+/68WCD5r4dDsKe2MFMqMPuN
+        AAOMTQVy4WAzgZJwoAS+DofwvHl4cfPFLnB1++ieXj/Ceqx1JilQGg5+3cBRwbmz6/sfCbxLib8EasKB
+        EsCXoyABpARuIlZKoDYcKIH4tah4E1Hg9PJuXUkI+MNqw4ESQIiUkDdQIsACcigBXHMMZDy/fYZ9mPG9
+        FmhFCuCHJr+aESX8e38BFCRsqAUS/rmNgK01jDHRA2vJCaBSEvTAWiCQA8Uk6IG98UGSCcFHdtM3KBGx
+        UXJQfTkAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="xtraTabbedMdiManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
