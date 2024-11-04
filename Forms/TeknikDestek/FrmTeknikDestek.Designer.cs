@@ -51,6 +51,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dateTamamlanmaTarihi = new DevExpress.XtraEditors.DateEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -62,6 +64,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDepartman.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateTamamlanmaTarihi.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateTamamlanmaTarihi.Properties.CalendarTimeProperties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -87,6 +91,7 @@
             this.simpleButton1.Size = new System.Drawing.Size(75, 47);
             this.simpleButton1.TabIndex = 100;
             this.simpleButton1.Text = "Yeni";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // btnIleri
             // 
@@ -97,6 +102,7 @@
             this.btnIleri.Size = new System.Drawing.Size(75, 47);
             this.btnIleri.TabIndex = 102;
             this.btnIleri.Text = "İleri";
+            this.btnIleri.Click += new System.EventHandler(this.btnIleri_Click);
             // 
             // btnGeri
             // 
@@ -107,6 +113,7 @@
             this.btnGeri.Size = new System.Drawing.Size(75, 47);
             this.btnGeri.TabIndex = 102;
             this.btnGeri.Text = "Geri";
+            this.btnGeri.Click += new System.EventHandler(this.btnGeri_Click);
             // 
             // btnSil
             // 
@@ -117,6 +124,7 @@
             this.btnSil.Size = new System.Drawing.Size(75, 47);
             this.btnSil.TabIndex = 102;
             this.btnSil.Text = "Sil";
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnListe
             // 
@@ -127,6 +135,7 @@
             this.btnListe.Size = new System.Drawing.Size(75, 47);
             this.btnListe.TabIndex = 102;
             this.btnListe.Text = "Liste";
+            this.btnListe.Click += new System.EventHandler(this.btnListe_Click);
             // 
             // btnKaydet
             // 
@@ -162,8 +171,10 @@
             this.xtraTabPage1.Controls.Add(this.label4);
             this.xtraTabPage1.Controls.Add(this.label3);
             this.xtraTabPage1.Controls.Add(this.label2);
+            this.xtraTabPage1.Controls.Add(this.dateTamamlanmaTarihi);
             this.xtraTabPage1.Controls.Add(this.dateTalepTarihi);
             this.xtraTabPage1.Controls.Add(this.label1);
+            this.xtraTabPage1.Controls.Add(this.label6);
             this.xtraTabPage1.Controls.Add(this.label72);
             this.xtraTabPage1.Name = "xtraTabPage1";
             this.xtraTabPage1.Size = new System.Drawing.Size(1225, 588);
@@ -173,7 +184,7 @@
             // 
             this.txtBaslik.Location = new System.Drawing.Point(102, 52);
             this.txtBaslik.Name = "txtBaslik";
-            this.txtBaslik.Size = new System.Drawing.Size(336, 22);
+            this.txtBaslik.Size = new System.Drawing.Size(410, 22);
             this.txtBaslik.TabIndex = 1135;
             // 
             // cmbDurum
@@ -191,14 +202,14 @@
             "Tamamlanmadı",
             "Detay Bekliyor"});
             this.cmbDurum.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cmbDurum.Size = new System.Drawing.Size(336, 24);
+            this.cmbDurum.Size = new System.Drawing.Size(410, 24);
             this.cmbDurum.TabIndex = 1134;
             // 
             // memoAciklama
             // 
             this.memoAciklama.Location = new System.Drawing.Point(102, 76);
             this.memoAciklama.Name = "memoAciklama";
-            this.memoAciklama.Size = new System.Drawing.Size(336, 215);
+            this.memoAciklama.Size = new System.Drawing.Size(410, 215);
             this.memoAciklama.TabIndex = 1133;
             // 
             // txtDosyaEk
@@ -207,7 +218,7 @@
             this.txtDosyaEk.Name = "txtDosyaEk";
             this.txtDosyaEk.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtDosyaEk.Size = new System.Drawing.Size(336, 22);
+            this.txtDosyaEk.Size = new System.Drawing.Size(410, 22);
             this.txtDosyaEk.TabIndex = 1131;
             // 
             // txtDepartman
@@ -217,7 +228,7 @@
             this.txtDepartman.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.txtDepartman.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtDepartman_Properties_ButtonClick);
-            this.txtDepartman.Size = new System.Drawing.Size(336, 22);
+            this.txtDepartman.Size = new System.Drawing.Size(410, 22);
             this.txtDepartman.TabIndex = 1132;
             this.txtDepartman.TextChanged += new System.EventHandler(this.txtDepartman_TextChanged);
             // 
@@ -274,7 +285,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateTalepTarihi.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateTalepTarihi.Size = new System.Drawing.Size(337, 22);
+            this.dateTalepTarihi.Size = new System.Drawing.Size(135, 22);
             this.dateTalepTarihi.TabIndex = 1130;
             // 
             // label1
@@ -305,6 +316,29 @@
             this.xtraTabPage2.Size = new System.Drawing.Size(1225, 588);
             this.xtraTabPage2.Text = "Görüşme Notları";
             // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.Location = new System.Drawing.Point(243, 4);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(128, 21);
+            this.label6.TabIndex = 1129;
+            this.label6.Text = "Tamamlanma Tarihi :";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dateTamamlanmaTarihi
+            // 
+            this.dateTamamlanmaTarihi.EditValue = null;
+            this.dateTamamlanmaTarihi.Location = new System.Drawing.Point(377, 3);
+            this.dateTamamlanmaTarihi.Name = "dateTamamlanmaTarihi";
+            this.dateTamamlanmaTarihi.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateTamamlanmaTarihi.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateTamamlanmaTarihi.Size = new System.Drawing.Size(135, 22);
+            this.dateTamamlanmaTarihi.TabIndex = 1130;
+            // 
             // FrmTeknikDestek
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -326,6 +360,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDepartman.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateTamamlanmaTarihi.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateTamamlanmaTarihi.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -354,5 +390,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label72;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraEditors.DateEdit dateTamamlanmaTarihi;
+        private System.Windows.Forms.Label label6;
     }
 }

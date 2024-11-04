@@ -1,4 +1,6 @@
-﻿using DevExpress.XtraEditors;
+﻿using Dapper;
+using DevExpress.XtraEditors;
+using Hesap.Context;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,9 @@ namespace Hesap.Forms.TeknikDestek
         }
         CRUD_Operations cRUD = new CRUD_Operations();
         Bildirim bildirim = new Bildirim();
+        Ayarlar ayarlar = new Ayarlar();
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        
         public int Id = 0;
         private void FrmTeknikDestek_Load(object sender, EventArgs e)
         {
@@ -28,7 +33,9 @@ namespace Hesap.Forms.TeknikDestek
         void BaslangicVerileri()
         {
             dateTalepTarihi.EditValue = DateTime.Now;
+            dateTamamlanmaTarihi.EditValue = "01.01.1900";
         }
+        #region satir kayitlari
         //private Dictionary<string, object> CreateKalemParameters(int rowIndex)
         //{
         //    return new Dictionary<string, object>
@@ -54,6 +61,7 @@ namespace Hesap.Forms.TeknikDestek
         //        { "BoyaIslemId", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "BoyaIslemId")) }
         //    };
         //}
+        #endregion
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             var parameters = new Dictionary<string, object>
@@ -63,7 +71,8 @@ namespace Hesap.Forms.TeknikDestek
                 { "Baslik", txtBaslik.Text },
                 { "Aciklama", memoAciklama.Text },
                 { "Ek", txtDosyaEk.Text },
-                { "Durum", cmbDurum.Text }
+                { "Durum", cmbDurum.Text },
+                { "TamamlanmaTarihi", dateTamamlanmaTarihi.Text },
             };
             if (this.Id == 0)
             {
@@ -115,6 +124,81 @@ namespace Hesap.Forms.TeknikDestek
         private void txtDepartman_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnListe_Click(object sender, EventArgs e)
+        {
+            FrmTalepListesi frm = new FrmTalepListesi();
+            frm.ShowDialog();
+            if (frm.veriler.Count>0)
+            {
+                this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
+                dateTalepTarihi.EditValue = (DateTime)frm.veriler[0]["Tarih"];
+                txtDepartman.Text = frm.veriler[0]["Departman"].ToString();
+                txtBaslik.Text = frm.veriler[0]["Baslik"].ToString();
+                memoAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
+                txtDosyaEk.Text = frm.veriler[0]["Ek"].ToString();
+                cmbDurum.EditValue = frm.veriler[0]["Durum"].ToString();
+
+            }
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            cRUD.KartSil(this.Id, "Talepler");
+        }
+        void ListeGetir(string KayitTipi)
+        {
+            if (this.Id != 0)
+            {
+                using (var connection = new Baglanti().GetConnection())
+                {
+                    string mssql = $"select top 1 * from Talepler where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
+                    string sqlite = $"select * from FirmaKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")} limit 1";
+                    var query = ayarlar.VeritabaniTuru() == "mssql" ? mssql : sqlite;
+                    var veri = connection.QueryFirstOrDefault(query, new { Id = this.Id });
+                    if (veri != null)
+                    {
+                        dateTalepTarihi.EditValue = veri.Tarih.ToString();
+                        txtDepartman.Text = veri.Departman.ToString();
+                        txtBaslik.Text = veri.Baslik.ToString();
+                        memoAciklama.Text = veri.Aciklama.ToString();
+                        txtDosyaEk.Text = veri.Ek.ToString();
+                        cmbDurum.EditValue= veri.Durum.ToString();
+                        this.Id = Convert.ToInt32(veri.Id);
+                    }
+                    else
+                    {
+                        bildirim.Uyari("Gösterilecek herhangi bir kayıt bulunamadı!");
+                    }
+                }
+            }
+            else
+            {
+                bildirim.Uyari("Kayıt gösterebilmek için öncelikle listeden bir kayıt getirmelisiniz!");
+            }
+
+        }
+        private void btnGeri_Click(object sender, EventArgs e)
+        {
+            ListeGetir("Önceki");
+        }
+
+        private void btnIleri_Click(object sender, EventArgs e)
+        {
+            ListeGetir("Sonraki");
+        }
+        void FormTemizle()
+        {
+            object[] bilgiler = { dateTalepTarihi, txtDepartman, txtBaslik, memoAciklama, txtDosyaEk};
+            yardimciAraclar.KartTemizle(bilgiler);
+            this.Id = 0;
+            cmbDurum.SelectedIndex = 0;
+            dateTamamlanmaTarihi.EditValue = "01.01.1900";
+        }
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            FormTemizle();
         }
     }
 }

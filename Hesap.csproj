@@ -337,6 +337,12 @@
     <Compile Include="Forms\TeknikDestek\FrmDepartmanListesi.Designer.cs">
       <DependentUpon>FrmDepartmanListesi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TeknikDestek\FrmTalepListesi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TeknikDestek\FrmTalepListesi.Designer.cs">
+      <DependentUpon>FrmTalepListesi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TeknikDestek\FrmTeknikDestek.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -542,6 +548,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeknikDestek\FrmDepartmanListesi.resx">
       <DependentUpon>FrmDepartmanListesi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TeknikDestek\FrmTalepListesi.resx">
+      <DependentUpon>FrmTalepListesi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeknikDestek\FrmTeknikDestek.resx">
       <DependentUpon>FrmTeknikDestek.cs</DependentUpon>
