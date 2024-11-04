@@ -36,29 +36,32 @@
             this.btnSil = new DevExpress.XtraEditors.SimpleButton();
             this.btnListe = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.label72 = new System.Windows.Forms.Label();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.txtBaslik = new DevExpress.XtraEditors.TextEdit();
+            this.cmbDurum = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.memoAciklama = new DevExpress.XtraEditors.MemoEdit();
+            this.txtDosyaEk = new DevExpress.XtraEditors.ButtonEdit();
+            this.txtDepartman = new DevExpress.XtraEditors.ButtonEdit();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.dateTalepTarihi = new DevExpress.XtraEditors.DateEdit();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtDepartman = new DevExpress.XtraEditors.ButtonEdit();
-            this.label2 = new System.Windows.Forms.Label();
-            this.memoAciklama = new DevExpress.XtraEditors.MemoEdit();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtDosyaEk = new DevExpress.XtraEditors.ButtonEdit();
-            this.cmbDurum = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.label72 = new System.Windows.Forms.Label();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepartman.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBaslik.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbDurum.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoAciklama.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDosyaEk.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbDurum.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepartman.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties.CalendarTimeProperties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -134,125 +137,52 @@
             this.btnKaydet.Size = new System.Drawing.Size(75, 47);
             this.btnKaydet.TabIndex = 101;
             this.btnKaydet.Text = "Kaydet";
+            this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
             // 
-            // panelControl1
+            // xtraTabControl1
             // 
-            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.textEdit1);
-            this.panelControl1.Controls.Add(this.cmbDurum);
-            this.panelControl1.Controls.Add(this.memoAciklama);
-            this.panelControl1.Controls.Add(this.txtDosyaEk);
-            this.panelControl1.Controls.Add(this.txtDepartman);
-            this.panelControl1.Controls.Add(this.label5);
-            this.panelControl1.Controls.Add(this.label4);
-            this.panelControl1.Controls.Add(this.label3);
-            this.panelControl1.Controls.Add(this.label2);
-            this.panelControl1.Controls.Add(this.dateTalepTarihi);
-            this.panelControl1.Controls.Add(this.label1);
-            this.panelControl1.Controls.Add(this.label72);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 53);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1227, 612);
-            this.panelControl1.TabIndex = 5;
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 53);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(1227, 612);
+            this.xtraTabControl1.TabIndex = 6;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
             // 
-            // label72
+            // xtraTabPage1
             // 
-            this.label72.BackColor = System.Drawing.Color.Transparent;
-            this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label72.Location = new System.Drawing.Point(12, 7);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(93, 21);
-            this.label72.TabIndex = 1118;
-            this.label72.Text = "Talep Tarihi :";
-            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.xtraTabPage1.Controls.Add(this.txtBaslik);
+            this.xtraTabPage1.Controls.Add(this.cmbDurum);
+            this.xtraTabPage1.Controls.Add(this.memoAciklama);
+            this.xtraTabPage1.Controls.Add(this.txtDosyaEk);
+            this.xtraTabPage1.Controls.Add(this.txtDepartman);
+            this.xtraTabPage1.Controls.Add(this.label5);
+            this.xtraTabPage1.Controls.Add(this.label4);
+            this.xtraTabPage1.Controls.Add(this.label3);
+            this.xtraTabPage1.Controls.Add(this.label2);
+            this.xtraTabPage1.Controls.Add(this.dateTalepTarihi);
+            this.xtraTabPage1.Controls.Add(this.label1);
+            this.xtraTabPage1.Controls.Add(this.label72);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(1225, 588);
+            this.xtraTabPage1.Text = "Genel";
             // 
-            // dateTalepTarihi
+            // txtBaslik
             // 
-            this.dateTalepTarihi.EditValue = null;
-            this.dateTalepTarihi.Location = new System.Drawing.Point(111, 6);
-            this.dateTalepTarihi.Name = "dateTalepTarihi";
-            this.dateTalepTarihi.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateTalepTarihi.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateTalepTarihi.Size = new System.Drawing.Size(337, 22);
-            this.dateTalepTarihi.TabIndex = 1119;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(12, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 21);
-            this.label1.TabIndex = 1118;
-            this.label1.Text = "Departman :";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtDepartman
-            // 
-            this.txtDepartman.Location = new System.Drawing.Point(111, 30);
-            this.txtDepartman.Name = "txtDepartman";
-            this.txtDepartman.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtDepartman.Size = new System.Drawing.Size(336, 22);
-            this.txtDepartman.TabIndex = 1120;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(12, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 21);
-            this.label2.TabIndex = 1118;
-            this.label2.Text = "Başlık :";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // memoAciklama
-            // 
-            this.memoAciklama.Location = new System.Drawing.Point(111, 79);
-            this.memoAciklama.Name = "memoAciklama";
-            this.memoAciklama.Size = new System.Drawing.Size(336, 215);
-            this.memoAciklama.TabIndex = 1121;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(13, 79);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 21);
-            this.label3.TabIndex = 1118;
-            this.label3.Text = "Açıklama :";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(12, 298);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 21);
-            this.label4.TabIndex = 1118;
-            this.label4.Text = "Dosya Ek :";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtDosyaEk
-            // 
-            this.txtDosyaEk.Location = new System.Drawing.Point(111, 297);
-            this.txtDosyaEk.Name = "txtDosyaEk";
-            this.txtDosyaEk.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtDosyaEk.Size = new System.Drawing.Size(336, 22);
-            this.txtDosyaEk.TabIndex = 1120;
+            this.txtBaslik.Location = new System.Drawing.Point(102, 52);
+            this.txtBaslik.Name = "txtBaslik";
+            this.txtBaslik.Size = new System.Drawing.Size(336, 22);
+            this.txtBaslik.TabIndex = 1135;
             // 
             // cmbDurum
             // 
             this.cmbDurum.EditValue = "Bekliyor";
-            this.cmbDurum.Location = new System.Drawing.Point(111, 321);
+            this.cmbDurum.Location = new System.Drawing.Point(102, 318);
             this.cmbDurum.Name = "cmbDurum";
+            this.cmbDurum.Properties.Appearance.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.cmbDurum.Properties.Appearance.Options.UseFont = true;
             this.cmbDurum.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cmbDurum.Properties.Items.AddRange(new object[] {
@@ -261,47 +191,141 @@
             "Tamamlanmadı",
             "Detay Bekliyor"});
             this.cmbDurum.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cmbDurum.Size = new System.Drawing.Size(336, 22);
-            this.cmbDurum.TabIndex = 1122;
+            this.cmbDurum.Size = new System.Drawing.Size(336, 24);
+            this.cmbDurum.TabIndex = 1134;
+            // 
+            // memoAciklama
+            // 
+            this.memoAciklama.Location = new System.Drawing.Point(102, 76);
+            this.memoAciklama.Name = "memoAciklama";
+            this.memoAciklama.Size = new System.Drawing.Size(336, 215);
+            this.memoAciklama.TabIndex = 1133;
+            // 
+            // txtDosyaEk
+            // 
+            this.txtDosyaEk.Location = new System.Drawing.Point(102, 294);
+            this.txtDosyaEk.Name = "txtDosyaEk";
+            this.txtDosyaEk.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.txtDosyaEk.Size = new System.Drawing.Size(336, 22);
+            this.txtDosyaEk.TabIndex = 1131;
+            // 
+            // txtDepartman
+            // 
+            this.txtDepartman.Location = new System.Drawing.Point(102, 27);
+            this.txtDepartman.Name = "txtDepartman";
+            this.txtDepartman.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.txtDepartman.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtDepartman_Properties_ButtonClick);
+            this.txtDepartman.Size = new System.Drawing.Size(336, 22);
+            this.txtDepartman.TabIndex = 1132;
+            this.txtDepartman.TextChanged += new System.EventHandler(this.txtDepartman_TextChanged);
             // 
             // label5
             // 
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(13, 322);
+            this.label5.Location = new System.Drawing.Point(4, 319);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 21);
-            this.label5.TabIndex = 1118;
+            this.label5.TabIndex = 1124;
             this.label5.Text = "Durum :";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // textEdit1
+            // label4
             // 
-            this.textEdit1.Location = new System.Drawing.Point(111, 55);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(336, 22);
-            this.textEdit1.TabIndex = 1123;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label4.Location = new System.Drawing.Point(3, 295);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 21);
+            this.label4.TabIndex = 1125;
+            this.label4.Text = "Dosya Ek :";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label3.Location = new System.Drawing.Point(4, 76);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(93, 21);
+            this.label3.TabIndex = 1126;
+            this.label3.Text = "Açıklama :";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(3, 52);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 21);
+            this.label2.TabIndex = 1127;
+            this.label2.Text = "Başlık :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dateTalepTarihi
+            // 
+            this.dateTalepTarihi.EditValue = null;
+            this.dateTalepTarihi.Location = new System.Drawing.Point(102, 3);
+            this.dateTalepTarihi.Name = "dateTalepTarihi";
+            this.dateTalepTarihi.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateTalepTarihi.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateTalepTarihi.Size = new System.Drawing.Size(337, 22);
+            this.dateTalepTarihi.TabIndex = 1130;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(3, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 21);
+            this.label1.TabIndex = 1128;
+            this.label1.Text = "Departman :";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label72
+            // 
+            this.label72.BackColor = System.Drawing.Color.Transparent;
+            this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label72.Location = new System.Drawing.Point(3, 4);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(93, 21);
+            this.label72.TabIndex = 1129;
+            this.label72.Text = "Talep Tarihi :";
+            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(1225, 588);
+            this.xtraTabPage2.Text = "Görüşme Notları";
             // 
             // FrmTeknikDestek
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 665);
-            this.Controls.Add(this.panelControl1);
+            this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.panel3);
             this.Name = "FrmTeknikDestek";
             this.Text = "Teknik Destek İşlemleri";
             this.Load += new System.EventHandler(this.FrmTeknikDestek_Load);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepartman.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtBaslik.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbDurum.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoAciklama.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDosyaEk.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbDurum.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepartman.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateTalepTarihi.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -315,18 +339,20 @@
         private DevExpress.XtraEditors.SimpleButton btnSil;
         private DevExpress.XtraEditors.SimpleButton btnListe;
         private DevExpress.XtraEditors.SimpleButton btnKaydet;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.DateEdit dateTalepTarihi;
-        private System.Windows.Forms.Label label72;
-        private DevExpress.XtraEditors.ButtonEdit txtDepartman;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraEditors.TextEdit txtBaslik;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbDurum;
         private DevExpress.XtraEditors.MemoEdit memoAciklama;
         private DevExpress.XtraEditors.ButtonEdit txtDosyaEk;
+        private DevExpress.XtraEditors.ButtonEdit txtDepartman;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private DevExpress.XtraEditors.ComboBoxEdit cmbDurum;
-        private System.Windows.Forms.Label label5;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private System.Windows.Forms.Label label2;
+        private DevExpress.XtraEditors.DateEdit dateTalepTarihi;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label72;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
     }
 }

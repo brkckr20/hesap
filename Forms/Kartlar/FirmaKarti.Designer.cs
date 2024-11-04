@@ -36,7 +36,6 @@
             this.btnSil = new DevExpress.XtraEditors.SimpleButton();
             this.btnListe = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.txtAdres3 = new DevExpress.XtraEditors.TextEdit();
             this.label4 = new System.Windows.Forms.Label();
             this.txtAdres2 = new DevExpress.XtraEditors.TextEdit();
@@ -47,14 +46,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtFirmaKodu = new DevExpress.XtraEditors.TextEdit();
             this.label72 = new System.Windows.Forms.Label();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaKodu.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -136,25 +136,6 @@
             this.btnKaydet.TabIndex = 101;
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.txtAdres3);
-            this.panelControl1.Controls.Add(this.label4);
-            this.panelControl1.Controls.Add(this.txtAdres2);
-            this.panelControl1.Controls.Add(this.label3);
-            this.panelControl1.Controls.Add(this.txtAdres1);
-            this.panelControl1.Controls.Add(this.label2);
-            this.panelControl1.Controls.Add(this.txtFirmaUnvan);
-            this.panelControl1.Controls.Add(this.label1);
-            this.panelControl1.Controls.Add(this.txtFirmaKodu);
-            this.panelControl1.Controls.Add(this.label72);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 53);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(860, 463);
-            this.panelControl1.TabIndex = 4;
             // 
             // txtAdres3
             // 
@@ -246,6 +227,25 @@
             this.label72.Text = "Firma Kodu :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // panelControl1
+            // 
+            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.txtAdres3);
+            this.panelControl1.Controls.Add(this.label4);
+            this.panelControl1.Controls.Add(this.txtAdres2);
+            this.panelControl1.Controls.Add(this.label3);
+            this.panelControl1.Controls.Add(this.txtAdres1);
+            this.panelControl1.Controls.Add(this.label2);
+            this.panelControl1.Controls.Add(this.txtFirmaUnvan);
+            this.panelControl1.Controls.Add(this.label1);
+            this.panelControl1.Controls.Add(this.txtFirmaKodu);
+            this.panelControl1.Controls.Add(this.label72);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl1.Location = new System.Drawing.Point(0, 53);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(860, 463);
+            this.panelControl1.TabIndex = 4;
+            // 
             // FrmFirmaKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,13 +256,13 @@
             this.Name = "FrmFirmaKarti";
             this.Text = "Firma Kartı";
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaKodu.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -273,7 +273,6 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton btnListe;
         private DevExpress.XtraEditors.SimpleButton btnKaydet;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
         private System.Windows.Forms.Label label72;
         private DevExpress.XtraEditors.TextEdit txtFirmaKodu;
         private DevExpress.XtraEditors.TextEdit txtAdres1;
@@ -287,5 +286,6 @@
         private DevExpress.XtraEditors.SimpleButton btnSil;
         private DevExpress.XtraEditors.SimpleButton btnGeri;
         private DevExpress.XtraEditors.SimpleButton btnIleri;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
     }
 }
