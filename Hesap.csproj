@@ -230,6 +230,12 @@
     <Compile Include="Forms\Liste\FrmUrunReceteKartiListesi.Designer.cs">
       <DependentUpon>FrmUrunReceteKartiListesi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoGiris.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoGiris.Designer.cs">
+      <DependentUpon>FrmHamDepoGiris.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoListe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -496,6 +502,9 @@
     <EmbeddedResource Include="Forms\Liste\FrmUrunReceteKartiListesi.resx">
       <DependentUpon>FrmUrunReceteKartiListesi.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoGiris.resx">
+      <DependentUpon>FrmHamDepoGiris.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoListe.resx">
       <DependentUpon>FrmHamDepoListe.cs</DependentUpon>
     </EmbeddedResource>
@@ -633,6 +642,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BookmarkBig.ico" />
+    <None Include="Resources\Fabric Sample ham.ico" />
     <None Include="Resources\Brief.ico" />
     <None Include="Resources\YarnOut.ico" />
     <None Include="Resources\YarnIn.ico" />

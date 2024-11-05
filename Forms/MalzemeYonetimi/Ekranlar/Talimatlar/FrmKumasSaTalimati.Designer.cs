@@ -760,7 +760,7 @@
             this.dizaynKaydetToolStripMenuItem,
             this.satırİşlemleriToolStripMenuItem});
             this.contextMenu1.Name = "contextMenu1";
-            this.contextMenu1.Size = new System.Drawing.Size(203, 70);
+            this.contextMenu1.Size = new System.Drawing.Size(203, 92);
             // 
             // talimatFormuToolStripMenuItem
             // 
@@ -769,6 +769,7 @@
             this.talimatFormuToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
             this.talimatFormuToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.talimatFormuToolStripMenuItem.Text = "Talimat Formu";
+            this.talimatFormuToolStripMenuItem.Click += new System.EventHandler(this.talimatFormuToolStripMenuItem_Click);
             // 
             // dizaynKaydetToolStripMenuItem
             // 

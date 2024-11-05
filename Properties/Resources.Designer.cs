@@ -103,6 +103,16 @@ namespace Hesap.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Fabric_Sample_ham {
+            get {
+                object obj = ResourceManager.GetObject("Fabric Sample ham", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Open_Box {
             get {
                 object obj = ResourceManager.GetObject("Open Box", resourceCulture);

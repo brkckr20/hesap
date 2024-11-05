@@ -199,5 +199,11 @@ namespace Hesap
             Forms.TeknikDestek.FrmTeknikDestek frm = new Forms.TeknikDestek.FrmTeknikDestek();
             FormAc(frm);
         }
+
+        private void barButtonItem21_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Forms.MalzemeYonetimi.Ekranlar.HamDepo.FrmHamDepoGiris frm = new Forms.MalzemeYonetimi.Ekranlar.HamDepo.FrmHamDepoGiris();
+            FormAc(frm);
+        }
     }
 }

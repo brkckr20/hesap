@@ -88,7 +88,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             if (this.Id == 0)
             {
                 this.Id = cRUD.InsertRecord("HamDepo1", parameters);
-                for (int i = 0; i < gridView1.RowCount - 1; i++) 
+                for (int i = 0; i < gridView1.RowCount - 1; i++)
                 {
                     var kalemParameters = CreateKalemParameters(i);
                     var d2Id = cRUD.InsertRecord("HamDepo2", kalemParameters);
@@ -98,7 +98,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             }
             else
             {
-                cRUD.UpdateRecord("HamDepo1", parameters,this.Id);
+                cRUD.UpdateRecord("HamDepo1", parameters, this.Id);
                 for (int i = 0; i < gridView1.RowCount - 1; i++)
                 {
                     var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
@@ -175,6 +175,13 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         {
             GridView view = sender as GridView;
             view.SetRowCellValue(e.RowHandle, "D2Id", 0);
+            
+        }
+
+        private void talimatFormuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Rapor.FrmRaporSecimEkrani frm = new Rapor.FrmRaporSecimEkrani(this.Text, this.Id);
+            frm.ShowDialog();
         }
 
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
