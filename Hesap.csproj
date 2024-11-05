@@ -126,6 +126,7 @@
     <Compile Include="Context\_KumasDepoKalem.cs" />
     <Compile Include="Context\_MalzemeKalem.cs" />
     <Compile Include="Context\SiparisKalem.cs" />
+    <Compile Include="Context\_TaleplerGorusme.cs" />
     <Compile Include="Context\_UrunReceteUB.cs" />
     <Compile Include="Forms\Kartlar\FrmBoyahaneRenkKartlari.cs">
       <SubType>Form</SubType>

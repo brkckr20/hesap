@@ -1,9 +1,13 @@
 ﻿using Dapper;
+using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Hesap.Utils
 {
@@ -58,7 +62,6 @@ namespace Hesap.Utils
                 }
             }
         }
-
         public int InsertRecord(string tableName, IDictionary<string, object> parameters)
         {
             if (parameters.ContainsKey("Id"))
@@ -81,7 +84,26 @@ namespace Hesap.Utils
 
             ExecuteNonQuery(sql, parameters);
         }
-
-
+        public void GetImageFromDB(byte[] resimBytes, PictureEdit pictureEdit)
+        {
+            try
+            {
+                if (resimBytes != null && resimBytes.Length > 0)
+                {
+                    using (MemoryStream ms = new MemoryStream(resimBytes))
+                    {
+                        pictureEdit.Image = Image.FromStream(ms);
+                    }
+                }
+                else
+                {
+                    pictureEdit.Image = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Resim yükleme sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

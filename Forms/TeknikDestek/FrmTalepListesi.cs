@@ -32,7 +32,10 @@ namespace Hesap.Forms.TeknikDestek
                             ISNULL(T.Aciklama,'') Aciklama,
                             ISNULL(T.Ek,'') Ek,
                             ISNULL(T.Durum,'') Durum,
-                            ISNULL(T.GorusmeId,0) GorusmeId from Talepler T";
+                            ISNULL(T.GorusmeId,'') GorusmeId,
+                            ISNULL(T.TamamlanmaTarihi,'') TamamlanmaTarihi,
+                            CONVERT(varbinary(max), Resim) Resim
+                            from Talepler T";
             listele.Liste(sql, gridControl1);
         }
 
