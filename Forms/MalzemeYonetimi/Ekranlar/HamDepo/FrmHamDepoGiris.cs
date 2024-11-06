@@ -37,10 +37,37 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         {
             yansit.FirmaKoduVeAdiYansit(txtFirmaKodu, txtFirmaUnvan, ref this.FirmaId);
         }
-
         private void btnListe_Click(object sender, EventArgs e)
         {
-
+            FrmHamDepoListeSecimli frm = new FrmHamDepoListeSecimli("Giriş");
+            frm.ShowDialog();
+            if (frm.islemListesi.Count > 0)
+            {
+                var parts = frm.islemListesi[0].Split(';');
+                this.FirmaId = Convert.ToInt32(parts[1]);
+                txtFirmaKodu.Text = parts[2].ToString();
+                txtFirmaUnvan.Text = parts[3].ToString();
+                this.Id = Convert.ToInt32(parts[13].ToString());
+                txtKayitNo.Text = this.Id.ToString();
+            }
+            foreach (var item in frm.islemListesi)
+            {
+                gridView1.AddNewRow();
+                int newRowHandle = gridView1.FocusedRowHandle;
+                var values = item.Split(';');
+                gridView1.SetRowCellValue(newRowHandle, "KalemIslem", "Satın Alma");
+                gridView1.SetRowCellValue(newRowHandle, "TalimatNo", values[0]);
+                gridView1.SetRowCellValue(newRowHandle, "TakipNo", values[4]);
+                gridView1.SetRowCellValue(newRowHandle, "KumasId", values[5]);
+                gridView1.SetRowCellValue(newRowHandle, "KumasKodu", values[6]);
+                gridView1.SetRowCellValue(newRowHandle, "KumasAdi", values[7]);
+                gridView1.SetRowCellValue(newRowHandle, "BrutKg", values[11]); // otomatik doldurmada hesaplamada kullanılması için eklendi
+                gridView1.SetRowCellValue(newRowHandle, "Fiyat", values[9]);
+                gridView1.SetRowCellValue(newRowHandle, "DovizCinsi", values[10]);
+                gridView1.SetRowCellValue(newRowHandle, "NetKg", values[11]);
+                gridView1.SetRowCellValue(newRowHandle, "GrM2", values[12]);
+                gridView1.SetRowCellValue(newRowHandle, "D2Id", values[14]);
+            }
         }
 
         private void FrmHamDepoGiris_Load(object sender, EventArgs e)
@@ -91,6 +118,25 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
                 gridView1.SetRowCellValue(newRowHandle, "NetKg", values[11]);
                 gridView1.SetRowCellValue(newRowHandle, "GrM2", values[12]);
             }
+        }
+        void FormTemizle()
+        {
+            object[] bilgiler = { dateTarih, dateIrsaliyeTarihi,txtIrsaliyeNo,txtFirmaKodu, txtFirmaUnvan, rchAciklama };
+            yardimciAraclar.KartTemizle(bilgiler);
+            gridControl1.DataSource = new BindingList<_IplikDepoKalem>();
+            this.Id = 0;
+            this.FirmaId = 0;
+            txtKayitNo.Text = "";
+        }
+        private void btnYeni_Click(object sender, EventArgs e)
+        {
+            FormTemizle();
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            cRUD.FisVeHavuzSil("HamDepo1","HamDepo2",this.Id);
+            FormTemizle();
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)

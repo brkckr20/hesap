@@ -141,6 +141,7 @@
             this.btnYeni.Size = new System.Drawing.Size(75, 47);
             this.btnYeni.TabIndex = 9;
             this.btnYeni.Text = "Yeni";
+            this.btnYeni.Click += new System.EventHandler(this.btnYeni_Click);
             // 
             // btnSil
             // 
@@ -151,6 +152,7 @@
             this.btnSil.Size = new System.Drawing.Size(75, 47);
             this.btnSil.TabIndex = 14;
             this.btnSil.Text = "Sil";
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnIleri
             // 
@@ -445,7 +447,8 @@
             this.repoCmbKalemIslem.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repoCmbKalemIslem.Items.AddRange(new object[] {
-            "S.Alma Talimatı"});
+            "Satın Alma",
+            "Boya Ham İade"});
             this.repoCmbKalemIslem.Name = "repoCmbKalemIslem";
             this.repoCmbKalemIslem.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
