@@ -430,7 +430,7 @@ namespace Hesap.Utils
                 }
             }
         }
-        public void TasiyiciBilgileriYansit(TextEdit tu,TextEdit ta,TextEdit ts,TextEdit tt, TextEdit tp,TextEdit td,TextEdit ti,ref int Id)
+        public void TasiyiciBilgileriYansit(TextEdit tu, TextEdit ta, TextEdit ts, TextEdit tt, TextEdit tp, TextEdit td, TextEdit ti, ref int Id)
         {
             Forms.Liste.FrmTasiyiciKartiListesi frm = new Forms.Liste.FrmTasiyiciKartiListesi();
             frm.ShowDialog();
@@ -445,10 +445,12 @@ namespace Hesap.Utils
                 ti.Text = frm.Id.ToString();
                 Id = frm.Id;
             }
-            
+
         }
-        public void KumasBilgileriYansit(DevExpress.XtraGrid.Views.Grid.GridView gridView, int focusedRowHandle)
+        public void KumasBilgileriYansit(DevExpress.XtraGrid.Views.Grid.GridView gridView, int focusedRowHandle = 0)
         {
+            int rowHandle = gridView.FocusedRowHandle;
+            focusedRowHandle = rowHandle;
             Forms.Liste.FrmUrunKartiListesi frm = new Forms.Liste.FrmUrunKartiListesi();
             frm.ShowDialog();
 
