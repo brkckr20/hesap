@@ -61,7 +61,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
                 gridView1.SetRowCellValue(newRowHandle, "KumasId", values[5]);
                 gridView1.SetRowCellValue(newRowHandle, "KumasKodu", values[6]);
                 gridView1.SetRowCellValue(newRowHandle, "KumasAdi", values[7]);
-                gridView1.SetRowCellValue(newRowHandle, "BrutKg", values[11]); // otomatik doldurmada hesaplamada kullanılması için eklendi
+                gridView1.SetRowCellValue(newRowHandle, "BrutKg", values[8]);
                 gridView1.SetRowCellValue(newRowHandle, "Fiyat", values[9]);
                 gridView1.SetRowCellValue(newRowHandle, "DovizCinsi", values[10]);
                 gridView1.SetRowCellValue(newRowHandle, "NetKg", values[11]);

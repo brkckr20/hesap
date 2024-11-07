@@ -448,7 +448,9 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repoCmbKalemIslem.Items.AddRange(new object[] {
             "Satın Alma",
-            "Boya Ham İade"});
+            "Dokuma/Örme",
+            "Boya Ham İade",
+            "Ham Stok"});
             this.repoCmbKalemIslem.Name = "repoCmbKalemIslem";
             this.repoCmbKalemIslem.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 

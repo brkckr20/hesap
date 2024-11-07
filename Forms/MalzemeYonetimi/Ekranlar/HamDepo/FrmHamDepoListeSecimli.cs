@@ -94,29 +94,6 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         }
 
         public List<string> islemListesi = new List<string>();
-
-        private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        {
-            if (e.Column.FieldName == "Selected") // Checkbox sütununda değişiklik olduğunu kontrol et
-            {
-                // Seçili satırın ID'sini alıyoruz
-                var selectedId = gridView1.GetRowCellValue(e.RowHandle, "Id");
-
-                // Tüm satırlarda döngü başlatıyoruz
-                for (int i = 0; i < gridView1.RowCount; i++)
-                {
-                    var id = gridView1.GetRowCellValue(i, "Id");
-
-                    // Eğer ID'ler eşleşiyorsa, aynı checkbox değerini veriyoruz
-                    if (selectedId.Equals(id))
-                    {
-                        // Seçili satırın checkbox'ını güncelliyoruz
-                        gridView1.SetRowCellValue(i, "Selected", e.Value);
-                    }
-                }
-            }
-        }
-
         private void btnAktar_Click(object sender, EventArgs e)
         {
             int[] selectedRows = gridView1.GetSelectedRows();
