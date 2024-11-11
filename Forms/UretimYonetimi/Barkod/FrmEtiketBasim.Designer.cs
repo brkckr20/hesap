@@ -167,6 +167,7 @@
             this.btnListe.Size = new System.Drawing.Size(75, 47);
             this.btnListe.TabIndex = 11;
             this.btnListe.Text = "Liste";
+            this.btnListe.Click += new System.EventHandler(this.btnListe_Click);
             // 
             // btnKaydet
             // 

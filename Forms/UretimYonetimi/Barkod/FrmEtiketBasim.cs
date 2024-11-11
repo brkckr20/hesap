@@ -128,7 +128,7 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
             {
                 this.Id = cRUD.InsertRecord("Etiket1", parameters);
                 txtKayitNo.Text = this.Id.ToString();
-                for (int i = 0; i < gridView1.RowCount - 1; i++)
+                for (int i = 0; i < gridView1.RowCount; i++)
                 {
                     var kalemParameters = CreateKalemParameters(i);
                     var d2Id = cRUD.InsertRecord("Etiket", kalemParameters);
@@ -147,6 +147,30 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
         {
             Forms.Rapor.FrmRaporSecimEkrani frm = new Rapor.FrmRaporSecimEkrani(this.Text,this.Id);
             frm.ShowDialog();
+        }
+
+        private void btnListe_Click(object sender, EventArgs e)
+        {
+            /* -- etiket basımı için kayıtların listeleneceği bir form düzenlenecek ve ekranda listeleme işlemleri yapılacak
+             
+              HamDepo.FrmHamDepoListe frm = new HamDepo.FrmHamDepoListe("SaTal");
+            frm.ShowDialog();
+            if (frm.veriler.Count > 0)
+            {
+                this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
+                dateTarih.EditValue = (DateTime)frm.veriler[0]["Tarih"];
+                txtFirmaKodu.Text = frm.veriler[0]["FirmaKodu"].ToString();
+                txtFirmaUnvan.Text = frm.veriler[0]["FirmaUnvan"].ToString();
+                this.FirmaId = Convert.ToInt32(frm.veriler[0]["FirmaId"]);
+                rchAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
+                txtTalimatNo.Text = frm.veriler[0]["TalimatNo"].ToString();
+                txtYetkili.Text = frm.veriler[0]["Yetkili"].ToString();
+                txtVade.Text = frm.veriler[0]["Vade"].ToString();
+                comboBoxEdit1.Text = frm.veriler[0]["OdemeSekli"].ToString();
+                string[] columnNames = yansit.SorgudakiKolonIsimleriniAl(frm.sql);
+                yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
+            }
+             */
         }
     }
 }

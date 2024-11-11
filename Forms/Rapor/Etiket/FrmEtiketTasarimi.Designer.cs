@@ -132,6 +132,7 @@
             this.btnListe.Size = new System.Drawing.Size(75, 47);
             this.btnListe.TabIndex = 102;
             this.btnListe.Text = "Liste";
+            this.btnListe.Click += new System.EventHandler(this.btnListe_Click);
             // 
             // btnKaydet
             // 
@@ -247,6 +248,7 @@
             this.sorgu1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sorgu1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu1.IsReplaceMode = false;
             this.sorgu1.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu1.LeftBracket = '(';
@@ -264,7 +266,7 @@
             // 
             this.xtraSorgu2.Controls.Add(this.sorgu2);
             this.xtraSorgu2.Name = "xtraSorgu2";
-            this.xtraSorgu2.Size = new System.Drawing.Size(1430, 545);
+            this.xtraSorgu2.Size = new System.Drawing.Size(1170, 458);
             this.xtraSorgu2.Text = "Sorgu [2]";
             // 
             // sorgu2
@@ -289,6 +291,7 @@
             this.sorgu2.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu2.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sorgu2.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu2.IsReplaceMode = false;
             this.sorgu2.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu2.LeftBracket = '(';
@@ -298,7 +301,7 @@
             this.sorgu2.RightBracket = ')';
             this.sorgu2.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.sorgu2.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("sorgu2.ServiceColors")));
-            this.sorgu2.Size = new System.Drawing.Size(1430, 545);
+            this.sorgu2.Size = new System.Drawing.Size(1170, 458);
             this.sorgu2.TabIndex = 2;
             this.sorgu2.Zoom = 100;
             // 
@@ -306,7 +309,7 @@
             // 
             this.adsa.Controls.Add(this.sorgu3);
             this.adsa.Name = "adsa";
-            this.adsa.Size = new System.Drawing.Size(1430, 545);
+            this.adsa.Size = new System.Drawing.Size(1170, 458);
             this.adsa.Text = "Sorgu [3]";
             // 
             // sorgu3
@@ -331,6 +334,7 @@
             this.sorgu3.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu3.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sorgu3.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu3.IsReplaceMode = false;
             this.sorgu3.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu3.LeftBracket = '(';
@@ -340,7 +344,7 @@
             this.sorgu3.RightBracket = ')';
             this.sorgu3.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.sorgu3.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("sorgu3.ServiceColors")));
-            this.sorgu3.Size = new System.Drawing.Size(1430, 545);
+            this.sorgu3.Size = new System.Drawing.Size(1170, 458);
             this.sorgu3.TabIndex = 3;
             this.sorgu3.Zoom = 100;
             // 
@@ -348,7 +352,7 @@
             // 
             this.asd.Controls.Add(this.sorgu4);
             this.asd.Name = "asd";
-            this.asd.Size = new System.Drawing.Size(1430, 545);
+            this.asd.Size = new System.Drawing.Size(1170, 458);
             this.asd.Text = "Sorgu [4]";
             // 
             // sorgu4
@@ -373,6 +377,7 @@
             this.sorgu4.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu4.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sorgu4.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu4.IsReplaceMode = false;
             this.sorgu4.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu4.LeftBracket = '(';
@@ -382,7 +387,7 @@
             this.sorgu4.RightBracket = ')';
             this.sorgu4.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.sorgu4.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("sorgu4.ServiceColors")));
-            this.sorgu4.Size = new System.Drawing.Size(1430, 545);
+            this.sorgu4.Size = new System.Drawing.Size(1170, 458);
             this.sorgu4.TabIndex = 0;
             this.sorgu4.Zoom = 100;
             // 

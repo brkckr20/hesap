@@ -53,21 +53,20 @@ namespace Hesap.Forms.Rapor.Etiket
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-
             object baslik = new
             {
-                FormAdi = "Etiket Tasarımı",
+                FormAdi = "Etiket Basımı",
                 RaporAdi = txtRaporAdi.Text.Trim(),
-                Sorgu1 = @"WITH Numbers AS (
+                Sorgu1 = $@"WITH Numbers AS (
                         SELECT TOP (100000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
                         FROM master.dbo.spt_values
                     ),
                     KesimSayisi AS (
                         SELECT 
                             t.*,
-                            CEILING(CAST(t.miktar AS FLOAT) * 1.05 / 7) * 7 AS YuvarlanmisKesimSayisi  -- Kesim sayısını yukarı yuvarla
+                            CEILING(CAST(t.miktar AS FLOAT) * 1.05 / 7) * 7 AS YuvarlanmisKesimSayisi
                         FROM Etiket t
-                        WHERE t.RefNo = 5 AND t.OrderNo = 'EIH24-0044-32'
+                        WHERE t.RefNo = @Id -- AND t.OrderNo = 'EIH24-0044-32'
                     )
                     SELECT 
                         k.Sticker1,
@@ -118,12 +117,11 @@ namespace Hesap.Forms.Rapor.Etiket
                 }
                 else
                 {
-                    //string update = @"UPDATE Rapor
-                    //   SET [Id] = @Id,[FormAdi] = @FormAdi,[RaporAdi] = @RaporAdi,[Sorgu1] = @Sorgu1,[Sorgu2] = @Sorgu2,[Sorgu3] = @Sorgu3
-                    //,[Sorgu4] = @Sorgu4,[Sorgu5] = @Sorgu5,[Sorgu6] = @Sorgu6,[Sorgu7] = @Sorgu7,[Sorgu8] = @Sorgu8,[Sorgu9] = @Sorgu9,[FormGrubu] = @FormGrubu
-                    // WHERE KayitNo = @KayitNo";
-                    //connection.Execute(update, baslik);
-                    //bildirim.GuncellemeBasarili();
+                    string update = @"UPDATE Rapor
+                       SET [FormAdi] = @FormAdi,[RaporAdi] = @RaporAdi,[Sorgu1] = @Sorgu1
+                     WHERE KayitNo = @KayitNo";
+                    connection.Execute(update, baslik);
+                    bildirim.GuncellemeBasarili();
                 }
             }
 
@@ -228,6 +226,16 @@ namespace Hesap.Forms.Rapor.Etiket
             {
                 report1.Show();
             }
+        }
+
+        private void btnListe_Click(object sender, EventArgs e)
+        {
+            FrmRaporListesi frm = new FrmRaporListesi(true);
+            frm.ShowDialog();
+            txtRaporAdi.Text = frm.RaporAdi;
+            txtEkranAdi.Text = frm.EkranAdi;
+            sorgu1.Text = frm.Sorgu1;
+            this.Id = frm.Id;
         }
     }
 }
