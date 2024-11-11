@@ -205,5 +205,17 @@ namespace Hesap
             Forms.MalzemeYonetimi.Ekranlar.HamDepo.FrmHamDepoGiris frm = new Forms.MalzemeYonetimi.Ekranlar.HamDepo.FrmHamDepoGiris();
             FormAc(frm);
         }
+
+        private void barButtonItem22_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Forms.UretimYonetimi.Barkod.FrmEtiketBasim frm = new Forms.UretimYonetimi.Barkod.FrmEtiketBasim();
+            FormAc(frm);
+        }
+
+        private void barButtonItem23_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Forms.Rapor.Etiket.FrmEtiketTasarimi frm = new Forms.Rapor.Etiket.FrmEtiketTasarimi();
+            FormAc(frm);
+        }
     }
 }

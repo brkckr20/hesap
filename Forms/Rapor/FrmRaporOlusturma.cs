@@ -47,6 +47,33 @@ namespace Hesap.Forms.Rapor
             }
         }
 
+        string sqlEtiket = @"WITH Numbers AS (
+                        SELECT TOP (100000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
+                        FROM master.dbo.spt_values
+                    ),
+                    KesimSayisi AS (
+                        SELECT 
+                            t.*,
+                            CEILING(CAST(t.miktar AS FLOAT) * 1.05 / 7) * 7 AS YuvarlanmisKesimSayisi  -- Kesim sayısını yukarı yuvarla
+                        FROM Etiket t
+                        WHERE t.RefNo = 5 AND t.OrderNo = 'EIH24-0044-32'
+                    )
+                    SELECT 
+                        k.Sticker1,
+                        k.Sticker2,
+                        k.Sticker3,
+                        k.Sticker4,
+                        k.Sticker5,
+                        k.Sticker6,
+                        k.Sticker7,
+                        k.Sticker8,
+                        k.Sticker9,
+                        k.Sticker10,
+                        k.OrderNo,
+	                    k.Barkod
+                    FROM KesimSayisi k
+                    JOIN Numbers n ON n.n <= k.YuvarlanmisKesimSayisi";
+
         public void DizaynAc(string raporName, bool isDesing, int kayitNumarasi)
         {
             string dosyaYolu = Path.Combine(Application.StartupPath, "Rapor", raporName + ".frx");
@@ -54,6 +81,7 @@ namespace Hesap.Forms.Rapor
             string Rapor1, Rapor2, Rapor3, Rapor4;
             using (var connection = new Baglanti().GetConnection())
             {
+
                 string sql = $"select Sorgu1,Sorgu2,Sorgu3,Sorgu4 from Rapor where RaporAdi = @RaporName";
                 var parameters = new { RaporName = raporName };
                 var result = connection.QuerySingleOrDefault(sql, parameters);
@@ -61,11 +89,12 @@ namespace Hesap.Forms.Rapor
                 Rapor2 = result.Sorgu2;
                 Rapor3 = result.Sorgu3;
                 Rapor4 = result.Sorgu4;
+                VeriKaydetVeRaporuKaydet(Rapor1, report1, kayitNumarasi);
+                VeriKaydetVeRaporuKaydet(Rapor2, report1, kayitNumarasi);
+                VeriKaydetVeRaporuKaydet(Rapor3, report1, kayitNumarasi);
+                VeriKaydetVeRaporuKaydet(Rapor4, report1, kayitNumarasi);
+
             }
-            VeriKaydetVeRaporuKaydet(Rapor1, report1, kayitNumarasi);
-            VeriKaydetVeRaporuKaydet(Rapor2, report1, kayitNumarasi);
-            VeriKaydetVeRaporuKaydet(Rapor3, report1, kayitNumarasi);
-            VeriKaydetVeRaporuKaydet(Rapor4, report1, kayitNumarasi);
             if (isDesing)
             {
                 report1.Design();

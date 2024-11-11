@@ -1,6 +1,6 @@
-﻿namespace Hesap.Forms.Rapor
+﻿namespace Hesap.Forms.Rapor.Etiket
 {
-    partial class FrmRaporOlusturma
+    partial class FrmEtiketTasarimi
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRaporOlusturma));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEtiketTasarimi));
             this.panel3 = new System.Windows.Forms.Panel();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnIleri = new DevExpress.XtraEditors.SimpleButton();
@@ -80,8 +80,8 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1432, 53);
-            this.panel3.TabIndex = 4;
+            this.panel3.Size = new System.Drawing.Size(1172, 53);
+            this.panel3.TabIndex = 5;
             // 
             // simpleButton1
             // 
@@ -122,7 +122,6 @@
             this.btnSil.Size = new System.Drawing.Size(75, 47);
             this.btnSil.TabIndex = 102;
             this.btnSil.Text = "Sil";
-            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnListe
             // 
@@ -133,7 +132,6 @@
             this.btnListe.Size = new System.Drawing.Size(75, 47);
             this.btnListe.TabIndex = 102;
             this.btnListe.Text = "Liste";
-            this.btnListe.Click += new System.EventHandler(this.btnListe_Click);
             // 
             // btnKaydet
             // 
@@ -157,8 +155,8 @@
             this.groupControl1.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             this.groupControl1.Location = new System.Drawing.Point(0, 53);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1432, 96);
-            this.groupControl1.TabIndex = 5;
+            this.groupControl1.Size = new System.Drawing.Size(1172, 79);
+            this.groupControl1.TabIndex = 6;
             this.groupControl1.Text = "Rapor Bilgileri";
             // 
             // btnDizayn
@@ -209,11 +207,11 @@
             // xtraTabControl1
             // 
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 149);
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 132);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraSorgu1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1432, 569);
-            this.xtraTabControl1.TabIndex = 6;
+            this.xtraTabControl1.Size = new System.Drawing.Size(1172, 482);
+            this.xtraTabControl1.TabIndex = 7;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraSorgu1,
             this.xtraSorgu2,
@@ -224,7 +222,7 @@
             // 
             this.xtraSorgu1.Controls.Add(this.sorgu1);
             this.xtraSorgu1.Name = "xtraSorgu1";
-            this.xtraSorgu1.Size = new System.Drawing.Size(1430, 545);
+            this.xtraSorgu1.Size = new System.Drawing.Size(1170, 458);
             this.xtraSorgu1.Text = "Sorgu [1]";
             // 
             // sorgu1
@@ -249,7 +247,6 @@
             this.sorgu1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sorgu1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu1.IsReplaceMode = false;
             this.sorgu1.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu1.LeftBracket = '(';
@@ -259,7 +256,7 @@
             this.sorgu1.RightBracket = ')';
             this.sorgu1.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.sorgu1.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("sorgu1.ServiceColors")));
-            this.sorgu1.Size = new System.Drawing.Size(1430, 545);
+            this.sorgu1.Size = new System.Drawing.Size(1170, 458);
             this.sorgu1.TabIndex = 1;
             this.sorgu1.Zoom = 100;
             // 
@@ -292,7 +289,6 @@
             this.sorgu2.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu2.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sorgu2.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu2.IsReplaceMode = false;
             this.sorgu2.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu2.LeftBracket = '(';
@@ -335,7 +331,6 @@
             this.sorgu3.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu3.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sorgu3.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu3.IsReplaceMode = false;
             this.sorgu3.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu3.LeftBracket = '(';
@@ -391,17 +386,16 @@
             this.sorgu4.TabIndex = 0;
             this.sorgu4.Zoom = 100;
             // 
-            // FrmRaporOlusturma
+            // FrmEtiketTasarimi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1432, 718);
+            this.ClientSize = new System.Drawing.Size(1172, 614);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.panel3);
-            this.IconOptions.Image = global::Hesap.Properties.Resources.Bookmark;
-            this.Name = "FrmRaporOlusturma";
-            this.Text = "Rapor Oluşturma";
+            this.Name = "FrmEtiketTasarimi";
+            this.Text = "Etiket Tasarımı";
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
@@ -431,16 +425,16 @@
         private DevExpress.XtraEditors.SimpleButton btnListe;
         private DevExpress.XtraEditors.SimpleButton btnKaydet;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.TextEdit txtRaporAdi;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private DevExpress.XtraEditors.SimpleButton btnDizayn;
+        private DevExpress.XtraEditors.TextEdit txtEkranAdi;
+        private DevExpress.XtraEditors.TextEdit txtRaporAdi;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage xtraSorgu1;
-        private DevExpress.XtraTab.XtraTabPage xtraSorgu2;
         private FastColoredTextBoxNS.FastColoredTextBox sorgu1;
+        private DevExpress.XtraTab.XtraTabPage xtraSorgu2;
         private FastColoredTextBoxNS.FastColoredTextBox sorgu2;
-        private DevExpress.XtraEditors.TextEdit txtEkranAdi;
         private DevExpress.XtraTab.XtraTabPage adsa;
         private FastColoredTextBoxNS.FastColoredTextBox sorgu3;
         private DevExpress.XtraTab.XtraTabPage asd;
