@@ -17,6 +17,7 @@ namespace Hesap.Forms.TeknikDestek
     public partial class FrmTalepListesi : DevExpress.XtraEditors.XtraForm
     {
         Listele listele = new Listele();
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
         public FrmTalepListesi()
         {
             InitializeComponent();
@@ -34,9 +35,12 @@ namespace Hesap.Forms.TeknikDestek
                             ISNULL(T.Durum,'') Durum,
                             ISNULL(T.GorusmeId,'') GorusmeId,
                             ISNULL(T.TamamlanmaTarihi,'') TamamlanmaTarihi,
+                            ISNULL(T.Kullanici,'') Kullanici,
                             CONVERT(varbinary(max), Resim) Resim
                             from Talepler T";
             listele.Liste(sql, gridControl1);
+            yardimciAraclar.KolonlariGetir(gridView1,this.Text);
+
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
@@ -63,6 +67,16 @@ namespace Hesap.Forms.TeknikDestek
                 }
             }
             Close();
+        }
+
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
         }
     }
 }

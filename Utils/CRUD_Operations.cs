@@ -29,7 +29,7 @@ namespace Hesap.Utils
                 connection.Execute(sql, parameters);
             }
         }
-        public void KartSil(int Id, string TabloAdi)
+        public void KartSil(int Id, string TabloAdi, bool ResimVarMi = false, PictureEdit pe = null)
         {
             if (Id != 0)
             {
@@ -48,7 +48,7 @@ namespace Hesap.Utils
                 bildirim.Uyari("Kayıt silebilmek için öncelikle listeden bir kayıt seçmelisiniz!");
             }
         }
-        public void FisVeHavuzSil(string tableOne,string tableTwo,int Id)
+        public void FisVeHavuzSil(string tableOne, string tableTwo, int Id)
         {
             if (bildirim.SilmeOnayı())
             {
@@ -92,7 +92,14 @@ namespace Hesap.Utils
                 {
                     using (MemoryStream ms = new MemoryStream(resimBytes))
                     {
-                        pictureEdit.Image = Image.FromStream(ms);
+                        try
+                        {
+                            pictureEdit.Image = Image.FromStream(ms);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            MessageBox.Show($"Geçersiz resim formatı: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else
@@ -103,6 +110,25 @@ namespace Hesap.Utils
             catch (Exception ex)
             {
                 MessageBox.Show($"Resim yükleme sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public void ImageSelectPathAndSaveDB(Image image, string uniqueId, ButtonEdit be)
+        {
+            try
+            {
+                string folderPath = Path.Combine(Application.StartupPath, "Resim", "Talepler");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string filePath = Path.Combine(folderPath, $"{uniqueId}.png");
+                image.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
+                be.Text = filePath;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Resim kaydetme sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

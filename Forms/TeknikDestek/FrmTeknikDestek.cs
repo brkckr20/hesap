@@ -33,8 +33,18 @@ namespace Hesap.Forms.TeknikDestek
         }
         void BaslangicVerileri()
         {
+            dateTalepTarihi.Properties.EditMask = "dd.MM.yyyy";
+            dateTalepTarihi.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dateTalepTarihi.Properties.DisplayFormat.FormatString = "dd.MM.yyyy";
+            dateTalepTarihi.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+
+            dateTamamlanmaTarihi.Properties.EditMask = "dd.MM.yyyy";
+            dateTamamlanmaTarihi.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dateTamamlanmaTarihi.Properties.DisplayFormat.FormatString = "dd.MM.yyyy";
+            dateTamamlanmaTarihi.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+
             dateTalepTarihi.EditValue = DateTime.Now;
-            dateTamamlanmaTarihi.EditValue = DateTime.ParseExact("15.06.1992", "dd.MM.yyyy", null).ToString("yyyy-MM-dd");
+            dateTamamlanmaTarihi.EditValue = DateTime.Now;
             gridControl1.DataSource = new BindingList<_TaleplerGorusme>();
 
         }
@@ -55,59 +65,31 @@ namespace Hesap.Forms.TeknikDestek
         #endregion
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            MemoryStream ms = new MemoryStream();
-            pictureEdit1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-            byte[] resimBytes = ms.ToArray();
 
             var parameters = new Dictionary<string, object>
-            {
-                { "Tarih", dateTalepTarihi.EditValue },
-                { "Departman", txtDepartman.Text },
-                { "Baslik", txtBaslik.Text },
-                { "Aciklama", memoAciklama.Text },
-                { "Ek", txtDosyaEk.Text },
-                { "Durum", cmbDurum.Text },
-                { "TamamlanmaTarihi", dateTamamlanmaTarihi.Text },
-                { "Resim", resimBytes },
-                { "Kullanici", txtKullanici.Text },
+                            {
+                                { "Tarih", dateTalepTarihi.EditValue },
+                                { "Departman", txtDepartman.Text },
+                                { "Baslik", txtBaslik.Text },
+                                { "Aciklama", memoAciklama.Text },
+                                { "Ek", txtDosyaEk.Text },
+                                { "Durum", cmbDurum.Text },
+                                { "TamamlanmaTarihi", dateTamamlanmaTarihi.Text },
+                                { "Kullanici", txtKullanici.Text }
+                            };
 
-            };
             if (this.Id == 0)
             {
                 this.Id = cRUD.InsertRecord("Talepler", parameters);
-                #region kodlar
-                //for (int i = 0; i < gridView1.RowCount - 1; i++)
-                //{
-                //    var kalemParameters = CreateKalemParameters(i);
-                //    var d2Id = cRUD.InsertRecord("TaleplerGorusme", kalemParameters);
-                //    gridView1.SetRowCellValue(i, "D2Id", d2Id);
-                //}
-                #endregion
                 bildirim.Basarili();
             }
             else
             {
                 cRUD.UpdateRecord("Talepler", parameters, this.Id);
-                #region satir kodlari
-                for (int i = 0; i < gridView1.RowCount - 1; i++)
-                {
-                    var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
-                    var kalemParameters = CreateKalemParameters(i);
-                    if (d2Id > 0) // Eğer D2Id varsa güncelle
-                    {
-                        cRUD.UpdateRecord("TaleplerGorusme", kalemParameters, d2Id);
-                    }
-                    else // Yeni kayıt ekle
-                    {
-                        //kalemParameters["RefNo"] = this.Id; // RefNo ekle
-                        var yeniId = cRUD.InsertRecord("TaleplerGorusme", kalemParameters);
-                        gridView1.SetRowCellValue(i, "D2Id", yeniId); // Yeni Id'yi gridView'a set et
-                    }
-                }
-                #endregion
                 bildirim.GuncellemeBasarili();
             }
         }
+
 
         private void txtDepartman_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -128,6 +110,7 @@ namespace Hesap.Forms.TeknikDestek
         {
             FrmTalepListesi frm = new FrmTalepListesi();
             frm.ShowDialog();
+
             if (frm.veriler.Count > 0)
             {
                 this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
@@ -138,14 +121,23 @@ namespace Hesap.Forms.TeknikDestek
                 memoAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
                 txtDosyaEk.Text = frm.veriler[0]["Ek"].ToString();
                 cmbDurum.EditValue = frm.veriler[0]["Durum"].ToString();
-                byte[] resimBytes = frm.veriler[0]["Resim"] as byte[];
-                cRUD.GetImageFromDB(resimBytes, pictureEdit1);
+                txtKullanici.Text = frm.veriler[0]["Kullanici"].ToString();
+                string resimYolu = frm.veriler[0]["Ek"] as string;
+                if (!string.IsNullOrEmpty(resimYolu) && File.Exists(resimYolu))
+                {
+                    pictureEdit1.Image = Image.FromFile(resimYolu);
+                }
+                else
+                {
+                    pictureEdit1.Image = null;
+                }
             }
         }
 
+
         private void btnSil_Click(object sender, EventArgs e)
         {
-            cRUD.KartSil(this.Id, "Talepler");
+            cRUD.KartSil(this.Id, "Talepler", true, pictureEdit1); // true resim varsa
         }
         void ListeGetir(string KayitTipi)
         {
@@ -165,11 +157,18 @@ namespace Hesap.Forms.TeknikDestek
                         txtBaslik.Text = veri.Baslik.ToString();
                         memoAciklama.Text = veri.Aciklama.ToString();
                         txtDosyaEk.Text = veri.Ek.ToString();
+                        txtKullanici.Text = veri.Kullanici.ToString();
                         cmbDurum.EditValue = veri.Durum.ToString();
                         this.Id = Convert.ToInt32(veri.Id);
-                        byte[] resimBytes = veri.Resim as byte[];
-                        cRUD.GetImageFromDB(resimBytes, pictureEdit1);
-
+                        string resimYolu = veri.Ek as string;
+                        if (!string.IsNullOrEmpty(resimYolu) && File.Exists(resimYolu))
+                        {
+                            pictureEdit1.Image = Image.FromFile(resimYolu);
+                        }
+                        else
+                        {
+                            pictureEdit1.Image = null;
+                        }
                     }
                     else
                     {
@@ -198,20 +197,60 @@ namespace Hesap.Forms.TeknikDestek
             yardimciAraclar.KartTemizle(bilgiler);
             this.Id = 0;
             cmbDurum.SelectedIndex = 0;
-            dateTamamlanmaTarihi.EditValue = "01.01.1900";
+            dateTamamlanmaTarihi.EditValue = DateTime.Now;
         }
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             FormTemizle();
         }
-
-        private void btnResimSec_Click(object sender, EventArgs e)
+        private void txtDosyaEk_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                // Seçilen resmi PictureEdit kontrolünde göster
-                pictureEdit1.Image = new Bitmap(openFileDialog.FileName);
+                openFileDialog.Filter = "Resim Dosyaları (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFilePath = openFileDialog.FileName;
+                    string uniqueId = Guid.NewGuid().ToString();
+                    CopyImageToApplicationFolder(selectedFilePath, uniqueId);
+                    txtDosyaEk.Text = Path.Combine(Application.StartupPath, "Resim", "Talepler", $"{uniqueId}.png");
+                    ShowImageInPictureEdit(txtDosyaEk.Text);
+                }
+            }
+        }
+        public void CopyImageToApplicationFolder(string selectedFilePath, string uniqueId)
+        {
+            try
+            {
+                string folderPath = Path.Combine(Application.StartupPath, "Resim", "Talepler");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string destinationFilePath = Path.Combine(folderPath, $"{uniqueId}.png");
+                File.Copy(selectedFilePath, destinationFilePath, true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Resim kopyalama sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void ShowImageInPictureEdit(string imagePath)
+        {
+            try
+            {
+                if (File.Exists(imagePath))
+                {
+                    pictureEdit1.Image = Image.FromFile(imagePath);
+                }
+                else
+                {
+                    pictureEdit1.Image = null; // Dosya yoksa resmi boş bırak
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Resim gösterme sırasında hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

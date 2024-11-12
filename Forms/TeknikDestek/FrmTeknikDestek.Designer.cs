@@ -38,6 +38,8 @@
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
+            this.txtKullanici = new DevExpress.XtraEditors.TextEdit();
             this.txtBaslik = new DevExpress.XtraEditors.TextEdit();
             this.cmbDurum = new DevExpress.XtraEditors.ComboBoxEdit();
             this.memoAciklama = new DevExpress.XtraEditors.MemoEdit();
@@ -49,6 +51,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dateTamamlanmaTarihi = new DevExpress.XtraEditors.DateEdit();
             this.dateTalepTarihi = new DevExpress.XtraEditors.DateEdit();
+            this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
@@ -68,14 +71,12 @@
             this.repoBoyaRenkKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repoBtnMarka = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repoFiyatBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
-            this.btnResimSec = new DevExpress.XtraEditors.SimpleButton();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtKullanici = new DevExpress.XtraEditors.TextEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKullanici.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBaslik.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDurum.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoAciklama.Properties)).BeginInit();
@@ -95,8 +96,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoFiyatBirim)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtKullanici.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -193,7 +192,6 @@
             // 
             // xtraTabPage1
             // 
-            this.xtraTabPage1.Controls.Add(this.btnResimSec);
             this.xtraTabPage1.Controls.Add(this.pictureEdit1);
             this.xtraTabPage1.Controls.Add(this.txtKullanici);
             this.xtraTabPage1.Controls.Add(this.txtBaslik);
@@ -214,6 +212,24 @@
             this.xtraTabPage1.Name = "xtraTabPage1";
             this.xtraTabPage1.Size = new System.Drawing.Size(1225, 588);
             this.xtraTabPage1.Text = "Genel";
+            // 
+            // pictureEdit1
+            // 
+            this.pictureEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureEdit1.Location = new System.Drawing.Point(518, 3);
+            this.pictureEdit1.Name = "pictureEdit1";
+            this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            this.pictureEdit1.Size = new System.Drawing.Size(704, 582);
+            this.pictureEdit1.TabIndex = 1136;
+            // 
+            // txtKullanici
+            // 
+            this.txtKullanici.Location = new System.Drawing.Point(377, 27);
+            this.txtKullanici.Name = "txtKullanici";
+            this.txtKullanici.Size = new System.Drawing.Size(135, 22);
+            this.txtKullanici.TabIndex = 1135;
             // 
             // txtBaslik
             // 
@@ -253,7 +269,8 @@
             this.txtDosyaEk.Name = "txtDosyaEk";
             this.txtDosyaEk.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtDosyaEk.Size = new System.Drawing.Size(297, 22);
+            this.txtDosyaEk.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtDosyaEk_Properties_ButtonClick);
+            this.txtDosyaEk.Size = new System.Drawing.Size(410, 22);
             this.txtDosyaEk.TabIndex = 1131;
             // 
             // txtDepartman
@@ -332,8 +349,20 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateTalepTarihi.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateTalepTarihi.Properties.MaskSettings.Set("mask", "d");
             this.dateTalepTarihi.Size = new System.Drawing.Size(135, 22);
             this.dateTalepTarihi.TabIndex = 1130;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label7.Location = new System.Drawing.Point(243, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(128, 21);
+            this.label7.TabIndex = 1128;
+            this.label7.Text = "Kullanıcı :";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label1
             // 
@@ -531,41 +560,6 @@
             this.repoFiyatBirim.Name = "repoFiyatBirim";
             this.repoFiyatBirim.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
-            // pictureEdit1
-            // 
-            this.pictureEdit1.Location = new System.Drawing.Point(518, 3);
-            this.pictureEdit1.Name = "pictureEdit1";
-            this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            this.pictureEdit1.Size = new System.Drawing.Size(497, 339);
-            this.pictureEdit1.TabIndex = 1136;
-            // 
-            // btnResimSec
-            // 
-            this.btnResimSec.Location = new System.Drawing.Point(405, 294);
-            this.btnResimSec.Name = "btnResimSec";
-            this.btnResimSec.Size = new System.Drawing.Size(107, 23);
-            this.btnResimSec.TabIndex = 1137;
-            this.btnResimSec.Text = "Resim Seç";
-            this.btnResimSec.Click += new System.EventHandler(this.btnResimSec_Click);
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label7.Location = new System.Drawing.Point(243, 28);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 21);
-            this.label7.TabIndex = 1128;
-            this.label7.Text = "Kullanıcı :";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtKullanici
-            // 
-            this.txtKullanici.Location = new System.Drawing.Point(377, 27);
-            this.txtKullanici.Name = "txtKullanici";
-            this.txtKullanici.Size = new System.Drawing.Size(135, 22);
-            this.txtKullanici.TabIndex = 1135;
-            // 
             // FrmTeknikDestek
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -580,6 +574,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKullanici.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBaslik.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDurum.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoAciklama.Properties)).EndInit();
@@ -599,8 +595,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoFiyatBirim)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtKullanici.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -647,7 +641,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn Not3;
         private DevExpress.XtraGrid.Columns.GridColumn DosyaEk;
         private DevExpress.XtraEditors.PictureEdit pictureEdit1;
-        private DevExpress.XtraEditors.SimpleButton btnResimSec;
         private System.Windows.Forms.Label label7;
         private DevExpress.XtraEditors.TextEdit txtKullanici;
     }
