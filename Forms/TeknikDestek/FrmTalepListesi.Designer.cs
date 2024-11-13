@@ -35,6 +35,8 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dışarıAktarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.excelxlsxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -67,9 +69,10 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dizaynKaydetToolStripMenuItem,
-            this.satırİşlemleriToolStripMenuItem});
+            this.satırİşlemleriToolStripMenuItem,
+            this.dışarıAktarToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(203, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(203, 92);
             // 
             // dizaynKaydetToolStripMenuItem
             // 
@@ -92,9 +95,25 @@
             // sütunSeçimiToolStripMenuItem
             // 
             this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
-            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
+            // 
+            // dışarıAktarToolStripMenuItem
+            // 
+            this.dışarıAktarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.excelxlsxToolStripMenuItem});
+            this.dışarıAktarToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dışarıAktarToolStripMenuItem.Name = "dışarıAktarToolStripMenuItem";
+            this.dışarıAktarToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.dışarıAktarToolStripMenuItem.Text = "Dışarı Aktar";
+            // 
+            // excelxlsxToolStripMenuItem
+            // 
+            this.excelxlsxToolStripMenuItem.Name = "excelxlsxToolStripMenuItem";
+            this.excelxlsxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.excelxlsxToolStripMenuItem.Text = "Excel (.xlsx)";
+            this.excelxlsxToolStripMenuItem.Click += new System.EventHandler(this.excelxlsxToolStripMenuItem_Click);
             // 
             // FrmTalepListesi
             // 
@@ -123,5 +142,7 @@
         private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dışarıAktarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem excelxlsxToolStripMenuItem;
     }
 }

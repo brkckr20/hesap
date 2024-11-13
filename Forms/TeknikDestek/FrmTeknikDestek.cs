@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
+using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Context;
 using Hesap.Utils;
 using System;
@@ -25,11 +27,13 @@ namespace Hesap.Forms.TeknikDestek
         Bildirim bildirim = new Bildirim();
         Ayarlar ayarlar = new Ayarlar();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        HesaplaVeYansit yansit = new HesaplaVeYansit();
 
         public int Id = 0;
         private void FrmTeknikDestek_Load(object sender, EventArgs e)
         {
             BaslangicVerileri();
+            yardimciAraclar.KolonlariGetir(gridView1,this.Text);
         }
         void BaslangicVerileri()
         {
@@ -60,6 +64,7 @@ namespace Hesap.Forms.TeknikDestek
                 { "Not3", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "Not3"))},
                 { "DosyaEk", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "DosyaEk"))},
                 { "RefNo", this.Id},
+                { "GorusmeTarihi", yardimciAraclar.GetDateValue(gridView1.GetRowCellValue(rowIndex, "GorusmeTarihi"))},
             };
         }
         #endregion
@@ -81,11 +86,31 @@ namespace Hesap.Forms.TeknikDestek
             if (this.Id == 0)
             {
                 this.Id = cRUD.InsertRecord("Talepler", parameters);
+                for (int i = 0; i < gridView1.RowCount - 1; i++)
+                {
+                    var kalemParameters = CreateKalemParameters(i);
+                    var d2Id = cRUD.InsertRecord("TaleplerGorusme", kalemParameters);
+                    gridView1.SetRowCellValue(i, "D2Id", d2Id);
+                }
                 bildirim.Basarili();
             }
             else
             {
                 cRUD.UpdateRecord("Talepler", parameters, this.Id);
+                for (int i = 0; i < gridView1.RowCount - 1; i++)
+                {
+                    var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
+                    var kalemParameters = CreateKalemParameters(i);
+                    if (d2Id > 0) // Eğer D2Id varsa güncelle
+                    {
+                        cRUD.UpdateRecord("TaleplerGorusme", kalemParameters, d2Id);
+                    }
+                    else 
+                    {                        
+                        var yeniId = cRUD.InsertRecord("TaleplerGorusme", kalemParameters);
+                        gridView1.SetRowCellValue(i, "D2Id", yeniId);
+                    }
+                }
                 bildirim.GuncellemeBasarili();
             }
         }
@@ -131,6 +156,8 @@ namespace Hesap.Forms.TeknikDestek
                 {
                     pictureEdit1.Image = null;
                 }
+                string[] columnNames = yansit.SorgudakiKolonIsimleriniAl(frm.sql);
+                yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
             }
         }
 
@@ -251,6 +278,43 @@ namespace Hesap.Forms.TeknikDestek
             catch (Exception ex)
             {
                 MessageBox.Show($"Resim gösterme sırasında hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void gridView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                GridView view = gridControl1.FocusedView as GridView;
+                if (view != null)
+                {
+                    contextMenuStrip1.Show(gridControl1, e.Location);
+                }
+            }
+        }
+
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonDurumunuKaydet(gridView1, this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
+        }
+
+        private void gridView1_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            GridView view = sender as GridView;
+            view.SetRowCellValue(e.RowHandle, "D2Id", 0);
+        }
+
+        private void gridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            GridView gridView = sender as GridView;
+            if (e.KeyCode == Keys.Delete)
+            {
+                cRUD.SatirSil(gridView,"TaleplerGorusme");
             }
         }
     }

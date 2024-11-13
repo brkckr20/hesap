@@ -18,14 +18,15 @@ namespace Hesap.Forms.TeknikDestek
     {
         Listele listele = new Listele();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        public string sql;
         public FrmTalepListesi()
         {
             InitializeComponent();
         }
-        public List<Dictionary<string, object>> veriler = new List<Dictionary<string, object>>();
+        public List<Dictionary<string, object>> veriler = new List<Dictionary<string, object>>();      
         private void FrmTalepListesi_Load(object sender, EventArgs e)
         {
-            string sql = @"select 
+            sql = @"select 
                             ISNULL(T.Id,'') Id,
                             ISNULL(T.Tarih,'') Tarih,
                             ISNULL(T.Departman,'') Departman,
@@ -36,13 +37,19 @@ namespace Hesap.Forms.TeknikDestek
                             ISNULL(T.GorusmeId,'') GorusmeId,
                             ISNULL(T.TamamlanmaTarihi,'') TamamlanmaTarihi,
                             ISNULL(T.Kullanici,'') Kullanici,
-                            CONVERT(varbinary(max), Resim) Resim
-                            from Talepler T";
+                            CONVERT(varbinary(max), T.Resim) Resim,
+							ISNULL(TG.SiraNo,0) [SiraNo],
+							ISNULL(TG.GorusmeTarihi,'') [GorusmeTarihi],
+							ISNULL(TG.GorusmeNotu,'') [GorusmeNotu],
+							ISNULL(TG.Not1,'') [Not1],
+							ISNULL(TG.Not2,'') [Not2],
+							ISNULL(TG.Not3,'') [Not3],
+							ISNULL(TG.Id,'') [D2Id]
+                            from Talepler T left join TaleplerGorusme TG on T.Id = TG.RefNo";
             listele.Liste(sql, gridControl1);
             yardimciAraclar.KolonlariGetir(gridView1,this.Text);
 
         }
-
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
             GridView gridView = sender as GridView;
@@ -68,15 +75,18 @@ namespace Hesap.Forms.TeknikDestek
             }
             Close();
         }
-
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
         }
-
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             yardimciAraclar.KolonSecici(gridControl1);
+        }
+
+        private void excelxlsxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.ExcelOlarakAktar(gridControl1,"Talepler Listesi");
         }
     }
 }

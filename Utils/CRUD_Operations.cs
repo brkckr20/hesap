@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -131,5 +132,24 @@ namespace Hesap.Utils
                 MessageBox.Show($"Resim kaydetme sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        public void SatirSil(GridView gridView, string TabloAdi)
+        {
+                int rowHandle = gridView.FocusedRowHandle;
+                int Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("D2Id"));
+                if (rowHandle != -1)
+                {
+                string sql = $"DELETE FROM {TabloAdi} WHERE Id = @Id";
+                using (var connection = new Baglanti().GetConnection())
+                {
+                    if (bildirim.SilmeOnayı())
+                    {
+                        connection.Execute(sql, new { Id = Id });
+                        gridView.DeleteRow(rowHandle);
+                        bildirim.SilmeBasarili();
+                    }
+                }
+            }            
+        }
+
     }
 }

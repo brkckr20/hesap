@@ -119,6 +119,21 @@ namespace Hesap.Utils
 
             return 0;
         }
+        public DateTime GetDateValue(object value)
+        {
+            if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
+            {
+                return default(DateTime); // Varsayılan tarih değeri (01/01/0001 00:00:00)
+            }
+
+            DateTime result;
+            if (DateTime.TryParse(value.ToString(), out result))
+            {
+                return result;
+            }
+
+            return default(DateTime); // Varsayılan tarih değeri (01/01/0001 00:00:00)
+        }
 
         public void ListedenGrideYansit(GridControl gridControl, string[] columnNames, List<Dictionary<string, object>> data)
         {

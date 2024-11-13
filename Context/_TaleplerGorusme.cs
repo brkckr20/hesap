@@ -17,5 +17,6 @@ namespace Hesap.Context
         public string Not3 { get; set; }
         public string DosyaEk { get; set; }
         public int D2Id { get; set; }
+        public DateTime GorusmeTarihi { get; set; }
     }
 }
