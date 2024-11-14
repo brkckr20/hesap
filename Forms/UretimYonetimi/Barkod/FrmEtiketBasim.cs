@@ -23,6 +23,7 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         CRUD_Operations cRUD = new CRUD_Operations();
         Bildirim bildirim = new Bildirim();
+        HesaplaVeYansit yansit = new HesaplaVeYansit();
         private void txtFirmaKodu_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
 
@@ -128,11 +129,11 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
             {
                 this.Id = cRUD.InsertRecord("Etiket1", parameters);
                 txtKayitNo.Text = this.Id.ToString();
-                for (int i = 0; i < gridView1.RowCount; i++)
+                for (int i = 0; i < gridView1.RowCount ; i++)
                 {
                     var kalemParameters = CreateKalemParameters(i);
                     var d2Id = cRUD.InsertRecord("Etiket", kalemParameters);
-                    //gridView1.SetRowCellValue(i, "D2Id", d2Id);
+                    gridView1.SetRowCellValue(i, "D2Id", d2Id);
                 }
                 bildirim.Basarili();
             }
@@ -151,26 +152,23 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
 
         private void btnListe_Click(object sender, EventArgs e)
         {
-            /* -- etiket basımı için kayıtların listeleneceği bir form düzenlenecek ve ekranda listeleme işlemleri yapılacak
-             
-              HamDepo.FrmHamDepoListe frm = new HamDepo.FrmHamDepoListe("SaTal");
+            FrmEtiketBasimListesi frm = new FrmEtiketBasimListesi();
             frm.ShowDialog();
             if (frm.veriler.Count > 0)
             {
                 this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
                 dateTarih.EditValue = (DateTime)frm.veriler[0]["Tarih"];
-                txtFirmaKodu.Text = frm.veriler[0]["FirmaKodu"].ToString();
-                txtFirmaUnvan.Text = frm.veriler[0]["FirmaUnvan"].ToString();
-                this.FirmaId = Convert.ToInt32(frm.veriler[0]["FirmaId"]);
-                rchAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
-                txtTalimatNo.Text = frm.veriler[0]["TalimatNo"].ToString();
-                txtYetkili.Text = frm.veriler[0]["Yetkili"].ToString();
-                txtVade.Text = frm.veriler[0]["Vade"].ToString();
-                comboBoxEdit1.Text = frm.veriler[0]["OdemeSekli"].ToString();
+                txtAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
+                txtBasimSayisi.Text = frm.veriler[0]["BasimSayisi"].ToString();
+                txtYuzde.Text = frm.veriler[0]["Yuzde"].ToString();
                 string[] columnNames = yansit.SorgudakiKolonIsimleriniAl(frm.sql);
                 yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
             }
-             */
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            cRUD.FisVeHavuzSil("Etiket1","Etiket",this.Id);
         }
     }
 }

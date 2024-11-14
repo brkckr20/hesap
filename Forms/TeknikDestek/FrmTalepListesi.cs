@@ -45,7 +45,9 @@ namespace Hesap.Forms.TeknikDestek
 							ISNULL(TG.Not2,'') [Not2],
 							ISNULL(TG.Not3,'') [Not3],
 							ISNULL(TG.Id,'') [D2Id]
-                            from Talepler T left join TaleplerGorusme TG on T.Id = TG.RefNo";
+                            from Talepler T left join TaleplerGorusme TG on T.Id = TG.RefNo
+                            order by TG.RefNo,T.Tarih asc
+";
             listele.Liste(sql, gridControl1);
             yardimciAraclar.KolonlariGetir(gridView1,this.Text);
 

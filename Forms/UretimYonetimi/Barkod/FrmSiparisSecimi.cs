@@ -23,7 +23,7 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
 
         private void FrmSiparisSecimi_Load(object sender, EventArgs e)
         {
-            string connectionString = "Server=192.168.1.65,1433;Database=TestNakosan;User Id=sa;Password=aaBB123@;";
+            string connectionString = "Server=192.168.1.65,1433;Database=ExtremeNakosan;User Id=sa;Password=aaBB123@;";
             string sorgu = $@"select 
 isnull(W.WorkOrderNo,0) [OrderNo]
 ,isnull(I.InventoryName,'') [ModelAdi]

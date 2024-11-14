@@ -137,6 +137,7 @@
             this.btnSil.Size = new System.Drawing.Size(75, 47);
             this.btnSil.TabIndex = 14;
             this.btnSil.Text = "Sil";
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnIleri
             // 
@@ -315,7 +316,9 @@
             // 
             // gridControl1
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridControl1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.gridControl1.Location = new System.Drawing.Point(0, 119);
             this.gridControl1.MainView = this.gridView1;
@@ -328,7 +331,7 @@
             this.repoBoyaRenkKodu,
             this.repoBtnMarka,
             this.repoFiyatBirim});
-            this.gridControl1.Size = new System.Drawing.Size(1519, 635);
+            this.gridControl1.Size = new System.Drawing.Size(1519, 576);
             this.gridControl1.TabIndex = 10;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -501,6 +504,8 @@
             // Miktar
             // 
             this.Miktar.Caption = "Miktar";
+            this.Miktar.DisplayFormat.FormatString = "0.00";
+            this.Miktar.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.Miktar.FieldName = "Miktar";
             this.Miktar.Name = "Miktar";
             this.Miktar.Visible = true;

@@ -382,6 +382,12 @@
     <Compile Include="Forms\UretimYonetimi\Barkod\FrmEtiketBasim.Designer.cs">
       <DependentUpon>FrmEtiketBasim.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UretimYonetimi\Barkod\FrmEtiketBasimListesi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UretimYonetimi\Barkod\FrmEtiketBasimListesi.Designer.cs">
+      <DependentUpon>FrmEtiketBasimListesi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UretimYonetimi\Barkod\FrmSiparisSecimi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -608,6 +614,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UretimYonetimi\Barkod\FrmEtiketBasim.resx">
       <DependentUpon>FrmEtiketBasim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UretimYonetimi\Barkod\FrmEtiketBasimListesi.resx">
+      <DependentUpon>FrmEtiketBasimListesi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UretimYonetimi\Barkod\FrmSiparisSecimi.resx">
       <DependentUpon>FrmSiparisSecimi.cs</DependentUpon>

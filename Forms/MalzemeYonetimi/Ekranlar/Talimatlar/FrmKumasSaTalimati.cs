@@ -184,6 +184,11 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             frm.ShowDialog();
         }
 
+        private void btnGeri_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             int newRowHandle = gridView1.FocusedRowHandle;

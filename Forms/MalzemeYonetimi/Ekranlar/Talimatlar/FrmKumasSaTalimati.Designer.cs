@@ -171,6 +171,7 @@
             this.btnGeri.Size = new System.Drawing.Size(75, 47);
             this.btnGeri.TabIndex = 12;
             this.btnGeri.Text = "Geri";
+            this.btnGeri.Click += new System.EventHandler(this.btnGeri_Click);
             // 
             // btnListe
             // 
@@ -760,7 +761,7 @@
             this.dizaynKaydetToolStripMenuItem,
             this.satırİşlemleriToolStripMenuItem});
             this.contextMenu1.Name = "contextMenu1";
-            this.contextMenu1.Size = new System.Drawing.Size(203, 92);
+            this.contextMenu1.Size = new System.Drawing.Size(203, 70);
             // 
             // talimatFormuToolStripMenuItem
             // 

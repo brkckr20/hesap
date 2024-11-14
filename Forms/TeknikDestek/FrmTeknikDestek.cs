@@ -37,18 +37,18 @@ namespace Hesap.Forms.TeknikDestek
         }
         void BaslangicVerileri()
         {
-            dateTalepTarihi.Properties.EditMask = "dd.MM.yyyy";
-            dateTalepTarihi.Properties.Mask.UseMaskAsDisplayFormat = true;
-            dateTalepTarihi.Properties.DisplayFormat.FormatString = "dd.MM.yyyy";
-            dateTalepTarihi.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            //dateTalepTarihi.Properties.EditMask = "dd.MM.yyyy";
+            //dateTalepTarihi.Properties.Mask.UseMaskAsDisplayFormat = true;
+            //dateTalepTarihi.Properties.DisplayFormat.FormatString = "dd.MM.yyyy";
+            //dateTalepTarihi.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
 
-            dateTamamlanmaTarihi.Properties.EditMask = "dd.MM.yyyy";
-            dateTamamlanmaTarihi.Properties.Mask.UseMaskAsDisplayFormat = true;
-            dateTamamlanmaTarihi.Properties.DisplayFormat.FormatString = "dd.MM.yyyy";
-            dateTamamlanmaTarihi.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            //dateTamamlanmaTarihi.Properties.EditMask = "dd.MM.yyyy";
+            //dateTamamlanmaTarihi.Properties.Mask.UseMaskAsDisplayFormat = true;
+            //dateTamamlanmaTarihi.Properties.DisplayFormat.FormatString = "dd.MM.yyyy";
+            //dateTamamlanmaTarihi.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
 
-            dateTalepTarihi.EditValue = DateTime.Now;
-            dateTamamlanmaTarihi.EditValue = DateTime.Now;
+            //dateTalepTarihi.EditValue = DateTime.Now;
+            //dateTamamlanmaTarihi.EditValue = DateTime.Now;
             gridControl1.DataSource = new BindingList<_TaleplerGorusme>();
 
         }
@@ -79,7 +79,7 @@ namespace Hesap.Forms.TeknikDestek
                                 { "Aciklama", memoAciklama.Text },
                                 { "Ek", txtDosyaEk.Text },
                                 { "Durum", cmbDurum.Text },
-                                { "TamamlanmaTarihi", dateTamamlanmaTarihi.Text },
+                                { "TamamlanmaTarihi", dateTamamlanmaTarihi.EditValue },
                                 { "Kullanici", txtKullanici.Text }
                             };
 
@@ -187,6 +187,9 @@ namespace Hesap.Forms.TeknikDestek
                         txtKullanici.Text = veri.Kullanici.ToString();
                         cmbDurum.EditValue = veri.Durum.ToString();
                         this.Id = Convert.ToInt32(veri.Id);
+                        string fissorgu = "select * from TaleplerGorusme where RefNo = @Id";
+                        var liste = connection.Query(fissorgu, new { Id = this.Id });
+                        gridControl1.DataSource = liste.ToList();
                         string resimYolu = veri.Ek as string;
                         if (!string.IsNullOrEmpty(resimYolu) && File.Exists(resimYolu))
                         {
@@ -207,7 +210,7 @@ namespace Hesap.Forms.TeknikDestek
             {
                 bildirim.Uyari("Kayıt gösterebilmek için öncelikle listeden bir kayıt getirmelisiniz!");
             }
-
+            
         }
         private void btnGeri_Click(object sender, EventArgs e)
         {
