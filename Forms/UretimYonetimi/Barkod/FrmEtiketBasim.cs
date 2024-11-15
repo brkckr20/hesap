@@ -57,7 +57,7 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
                     gridView1.SetRowCellValue(newRowHandle, "EbatBeden", values[14]);
                     gridView1.SetRowCellValue(newRowHandle, "Varyant1", values[15]);
                     gridView1.SetRowCellValue(newRowHandle, "Miktar", Convert.ToInt32(values[16]));
-                    
+
 
 
                 }
@@ -112,7 +112,7 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
                 { "Varyant1", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "Varyant1")) },
                 { "Varyant2", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "Varyant2")) },
                 { "EbatBeden", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "EbatBeden")) },
-                { "Miktar", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "Miktar")) },
+                { "Miktar", Convert.ToInt32(gridView1.GetRowCellValue(rowIndex, "Miktar")) },
             };
         }
         private void btnKaydet_Click(object sender, EventArgs e)
@@ -129,11 +129,19 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
             {
                 this.Id = cRUD.InsertRecord("Etiket1", parameters);
                 txtKayitNo.Text = this.Id.ToString();
-                for (int i = 0; i < gridView1.RowCount ; i++)
+                for (int i = 0; i < gridView1.RowCount; i++)
                 {
-                    var kalemParameters = CreateKalemParameters(i);
-                    var d2Id = cRUD.InsertRecord("Etiket", kalemParameters);
-                    gridView1.SetRowCellValue(i, "D2Id", d2Id);
+                    var miktar = Convert.ToInt32(gridView1.GetFocusedRowCellValue("Miktar"));
+                    if (int.TryParse(gridView1.GetRowCellValue(i, "Miktar")?.ToString(), out int a))
+                    {
+                        if (a != 0)
+                        {
+                            var kalemParameters = CreateKalemParameters(i);
+                            var d2Id = cRUD.InsertRecord("Etiket", kalemParameters);
+                            gridView1.SetRowCellValue(i, "D2Id", d2Id);
+                        }
+                    }
+
                 }
                 bildirim.Basarili();
             }
@@ -146,7 +154,7 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
 
         private void barkodBasımıToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Forms.Rapor.FrmRaporSecimEkrani frm = new Rapor.FrmRaporSecimEkrani(this.Text,this.Id);
+            Forms.Rapor.FrmRaporSecimEkrani frm = new Rapor.FrmRaporSecimEkrani(this.Text, this.Id);
             frm.ShowDialog();
         }
 
@@ -168,7 +176,7 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            cRUD.FisVeHavuzSil("Etiket1","Etiket",this.Id);
+            cRUD.FisVeHavuzSil("Etiket1", "Etiket", this.Id);
         }
     }
 }
