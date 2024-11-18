@@ -30,14 +30,8 @@ isnull(W.WorkOrderNo,0) [OrderNo]
 ,isnull(WOIV.Explanation,'') [PartOrderNo]
 ,isnull(WI.OperationCode,'') [Varyant1]
 ,dbo.SubNoToSizeCode(W.RecId,W.SText,WOIV.SubNo) [Ebat] 
-,isnull(F.FWeight,0) [Gram m2]
-,isnull(WI.UD_Nakis1,'') [Nakış Adı]
 ,isnull(WOIV.Barcode,0) [Barkod]
 ,isnull(WOIV.Quantity,0) [Adet]
---,isnull((Select dbo.SubNoToSizeCode(0,W.SText,WOIV.SubNo)),'') [Beden] 
-,RISQ.Quantity [Koli içi adedi]
-,(select Explanation from MD_DataFieldValue with (nolock) where FieldId=71 and CodeValue=I.UD_KoliEbat) [Koli Ebat]
-,PRISQ.Quantity[Poşet içi adet]
 ,dbo.SubNoToSizeCode(0,WI.UD_CSSticker1+'#@#',WOIV.SubNo)[Sticker1]
 ,dbo.SubNoToSizeCode(0,WI.UD_CSSticker2+'#@#',WOIV.SubNo)[Sticker2]
 ,dbo.SubNoToSizeCode(0,WI.UD_CSSticker3+'#@#',WOIV.SubNo)[Sticker3]
@@ -62,7 +56,7 @@ left join MA_RecipeItemSizeQuantity PRISQ with (nolock) on PRISQ.RecipeItemId = 
 where /* W.WorkOrderNo='EIH24-0085-01'and*/
 WI.WorkOrderSubType = 2 and WI.ParentItemId is null
 and WOIV.SubNo < 1000 and  W.CompanyId = 1 --_ActiveCompanyId_  
-and W.WorkOrderNo not like 'KW%' order by W.WorkOrderNo
+and (W.WorkOrderNo like 'EIH%' or W.WorkOrderNo like 'TR%') and WOIV.Barcode is not null and WOIV.Quantity > 0  order by W.WorkOrderNo
 
 --MA_WorkOrder_SQLPLACEHOLDER_W
 

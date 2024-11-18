@@ -64,9 +64,9 @@ namespace Hesap.Forms.Rapor.Etiket
                     KesimSayisi AS (
                         SELECT 
                             t.*,
-                            CEILING(CAST(t.miktar AS FLOAT) * 1.05 / 7) * 7 AS YuvarlanmisKesimSayisi
-                        FROM Etiket t
-                        WHERE t.RefNo = @Id -- AND t.OrderNo = 'EIH24-0044-32'
+                            CEILING(CAST(t.miktar AS FLOAT) *  (1 + CAST(e1.Yuzde as decimal)/100) / CAST(e1.BasimSayisi as int)) * CAST(e1.BasimSayisi as int) AS YuvarlanmisKesimSayisi
+                        FROM Etiket t inner join Etiket1 e1 on t.RefNo = e1.Id
+                        WHERE e1.Id = @Id -- AND t.OrderNo = 'EIH24-0044-32'
                     )
                     SELECT 
                         k.Sticker1,

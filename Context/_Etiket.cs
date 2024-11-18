@@ -34,5 +34,6 @@ namespace Hesap.Context
         public string Varyant2 { get; set; }
         public string EbatBeden { get; set; }
         public int Miktar { get; set; }
+        public int D2Id { get; set; }
     }
 }

@@ -80,6 +80,10 @@
             this.btnTalimatlar = new DevExpress.XtraEditors.SimpleButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.barkodBasımıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.D2Id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -148,6 +152,7 @@
             this.btnIleri.Size = new System.Drawing.Size(75, 47);
             this.btnIleri.TabIndex = 13;
             this.btnIleri.Text = "İleri";
+            this.btnIleri.Click += new System.EventHandler(this.btnIleri_Click);
             // 
             // btnGeri
             // 
@@ -158,6 +163,7 @@
             this.btnGeri.Size = new System.Drawing.Size(75, 47);
             this.btnGeri.TabIndex = 12;
             this.btnGeri.Text = "Geri";
+            this.btnGeri.Click += new System.EventHandler(this.btnGeri_Click);
             // 
             // btnListe
             // 
@@ -356,7 +362,8 @@
             this.OrderNo,
             this.Barkod,
             this.Varyant1,
-            this.Miktar});
+            this.Miktar,
+            this.D2Id});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -602,9 +609,11 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.barkodBasımıToolStripMenuItem});
+            this.barkodBasımıToolStripMenuItem,
+            this.dizaynKaydetToolStripMenuItem,
+            this.satırİşlemleriToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(185, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(203, 92);
             // 
             // barkodBasımıToolStripMenuItem
             // 
@@ -614,6 +623,39 @@
             this.barkodBasımıToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.barkodBasımıToolStripMenuItem.Text = "Barkod Basımı";
             this.barkodBasımıToolStripMenuItem.Click += new System.EventHandler(this.barkodBasımıToolStripMenuItem_Click);
+            // 
+            // D2Id
+            // 
+            this.D2Id.Caption = "Depo 2 Id";
+            this.D2Id.FieldName = "D2Id";
+            this.D2Id.Name = "D2Id";
+            this.D2Id.Visible = true;
+            this.D2Id.VisibleIndex = 18;
+            // 
+            // dizaynKaydetToolStripMenuItem
+            // 
+            this.dizaynKaydetToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dizaynKaydetToolStripMenuItem.Name = "dizaynKaydetToolStripMenuItem";
+            this.dizaynKaydetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.dizaynKaydetToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.dizaynKaydetToolStripMenuItem.Text = "Dizayn Kaydet";
+            this.dizaynKaydetToolStripMenuItem.Click += new System.EventHandler(this.dizaynKaydetToolStripMenuItem_Click);
+            // 
+            // satırİşlemleriToolStripMenuItem
+            // 
+            this.satırİşlemleriToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sütunSeçimiToolStripMenuItem});
+            this.satırİşlemleriToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.satırİşlemleriToolStripMenuItem.Name = "satırİşlemleriToolStripMenuItem";
+            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.satırİşlemleriToolStripMenuItem.Text = "Satır İşlemleri";
+            // 
+            // sütunSeçimiToolStripMenuItem
+            // 
+            this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
+            this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
             // FrmEtiketBasim
             // 
@@ -707,5 +749,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn Miktar;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem barkodBasımıToolStripMenuItem;
+        private DevExpress.XtraGrid.Columns.GridColumn D2Id;
+        private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
     }
 }

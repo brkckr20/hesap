@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using Dapper;
+using DevExpress.XtraEditors;
 using Hesap.Context;
 using Hesap.Utils;
 using System;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace Hesap.Forms.UretimYonetimi.Barkod
 {
-    public partial class FrmEtiketBasim : DevExpress.XtraEditors.XtraForm
+    public partial class FrmEtiketBasim : XtraForm
     {
         public FrmEtiketBasim()
         {
@@ -24,14 +25,10 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
         CRUD_Operations cRUD = new CRUD_Operations();
         Bildirim bildirim = new Bildirim();
         HesaplaVeYansit yansit = new HesaplaVeYansit();
-        private void txtFirmaKodu_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-
-        }
-
+        
         private void btnTalimatlar_Click(object sender, EventArgs e)
         {
-            FrmSiparisSecimi frm = new FrmSiparisSecimi(); // SİPARİŞ AKTARIMINDAN DEVAM EDİLECEK
+            FrmSiparisSecimi frm = new FrmSiparisSecimi();
             frm.ShowDialog();
             if (frm.itemList.Count > 0)
             {
@@ -62,32 +59,6 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
 
                 }
             }
-            /*
-             if (frm.satinAlmaListesi.Count > 0)
-            {
-                var parts = frm.satinAlmaListesi[0].Split(';');
-                this.FirmaId = Convert.ToInt32(parts[1]);
-                txtFirmaKodu.Text = parts[2].ToString();
-                txtFirmaUnvan.Text = parts[3].ToString();
-            }
-            foreach (var item in frm.satinAlmaListesi)
-            {
-                gridView1.AddNewRow();
-                int newRowHandle = gridView1.FocusedRowHandle;
-                var values = item.Split(';');
-                gridView1.SetRowCellValue(newRowHandle, "KalemIslem", "Satın Alma");
-                gridView1.SetRowCellValue(newRowHandle, "TalimatNo", values[0]);
-                gridView1.SetRowCellValue(newRowHandle, "TakipNo", values[4]);
-                gridView1.SetRowCellValue(newRowHandle, "KumasId", values[5]);
-                gridView1.SetRowCellValue(newRowHandle, "KumasKodu", values[6]);
-                gridView1.SetRowCellValue(newRowHandle, "KumasAdi", values[7]);
-                gridView1.SetRowCellValue(newRowHandle, "BrutKg", values[11]); // otomatik doldurmada hesaplamada kullanılması için eklendi
-                gridView1.SetRowCellValue(newRowHandle, "Fiyat", values[9]);
-                gridView1.SetRowCellValue(newRowHandle, "DovizCinsi", values[10]);
-                gridView1.SetRowCellValue(newRowHandle, "NetKg", values[11]);
-                gridView1.SetRowCellValue(newRowHandle, "GrM2", values[12]);
-            }
-             */
         }
         private Dictionary<string, object> CreateKalemParameters(int rowIndex)
         {
@@ -141,15 +112,35 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
                             gridView1.SetRowCellValue(i, "D2Id", d2Id);
                         }
                     }
-
                 }
                 bildirim.Basarili();
+            }
+            else
+            {
+                cRUD.UpdateRecord("Etiket1", parameters, this.Id);
+                for (int i = 0; i < gridView1.RowCount - 1; i++)
+                {
+                    var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
+                    var kalemParameters = CreateKalemParameters(i);
+                    if (d2Id > 0)
+                    {
+                        cRUD.UpdateRecord("Etiket", kalemParameters, d2Id);
+                    }
+                    else
+                    {
+                        //kalemParameters["RefNo"] = this.Id; // RefNo ekle
+                        var yeniId = cRUD.InsertRecord("Etiket", kalemParameters);
+                        gridView1.SetRowCellValue(i, "D2Id", yeniId);
+                    }
+                }
+                bildirim.GuncellemeBasarili();
             }
         }
 
         private void FrmEtiketBasim_Load(object sender, EventArgs e)
         {
             gridControl1.DataSource = new BindingList<_Etiket>();
+            yardimciAraclar.KolonlariGetir(gridView1,this.Text);
         }
 
         private void barkodBasımıToolStripMenuItem_Click(object sender, EventArgs e)
@@ -165,6 +156,7 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
             if (frm.veriler.Count > 0)
             {
                 this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
+                txtKayitNo.Text = this.Id.ToString();
                 dateTarih.EditValue = (DateTime)frm.veriler[0]["Tarih"];
                 txtAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
                 txtBasimSayisi.Text = frm.veriler[0]["BasimSayisi"].ToString();
@@ -177,6 +169,98 @@ namespace Hesap.Forms.UretimYonetimi.Barkod
         private void btnSil_Click(object sender, EventArgs e)
         {
             cRUD.FisVeHavuzSil("Etiket1", "Etiket", this.Id);
+        }
+        public void KayitlariGetir(string OncemiSonrami)
+        {
+            int id = this.Id;
+            int? istenenId = null;
+            try
+            {
+                using (var connection = new Baglanti().GetConnection())
+                {
+                    string sql;
+                    if (OncemiSonrami == "Önceki")
+                    {
+                        sql = "SELECT MAX(Etiket1.Id) FROM Etiket1 INNER JOIN Etiket ON Etiket1.Id = Etiket.RefNo WHERE Etiket1.Id < @Id";
+                        istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+                    }
+                    else if (OncemiSonrami == "Sonraki")
+                    {
+                        sql = "SELECT MIN(Etiket1.Id) FROM Etiket1 INNER JOIN Etiket ON Etiket1.Id = Etiket.RefNo WHERE Etiket1.Id > @Id";
+                        istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+                    }
+                    string fisquery = @"select
+	                                    ISNULL(e1.Id,0) Id,
+	                                    ISNULL(e1.Tarih,'') Tarih,
+	                                    ISNULL(e1.Aciklama,'') Aciklama,
+	                                    ISNULL(e1.BasimSayisi,14) BasimSayisi,
+	                                    ISNULL(e1.Yuzde,5) Yuzde,
+	                                    ISNULL(e1.Tekli,0) Tekli
+                                    from Etiket1 e1 inner join Etiket e on e1.Id = e.RefNo WHERE e1.Id= @Id ";
+                    var fis = connection.QueryFirstOrDefault(fisquery, new { Id = istenenId });
+                    string kalemquery = @"select
+	                                    ISNULL(e.Id,0) D2Id,
+										ISNULL(e.UrunKodu,'') UrunKodu,
+										ISNULL(e.ArtNo,'') ArtNo,
+										ISNULL(e.Sticker1,'') Sticker1,
+										ISNULL(e.Sticker2,'') Sticker2,
+										ISNULL(e.Sticker3,'') Sticker3,
+										ISNULL(e.Sticker4,'') Sticker4,
+										ISNULL(e.Sticker5,'') Sticker5,
+										ISNULL(e.Sticker6,'') Sticker6,
+										ISNULL(e.Sticker7,'') Sticker7,
+										ISNULL(e.Sticker8,'') Sticker8,
+										ISNULL(e.Sticker9,'') Sticker9,
+										ISNULL(e.Sticker10,'') Sticker10,
+										ISNULL(e.MusteriOrderNo,'') MusteriOrderNo,
+										ISNULL(e.OrderNo,'') OrderNo,
+										ISNULL(e.Barkod,'') Barkod,
+										ISNULL(e.Varyant1,'') Varyant1,
+										ISNULL(e.Varyant2,'') Varyant2,
+										ISNULL(e.EbatBeden,'') EbatBeden,
+										ISNULL(e.Miktar,0) Miktar
+                                    from Etiket1 e1 inner join Etiket e on e1.Id = e.RefNo WHERE e1.Id= @Id ";
+                    var kalemler = connection.Query(kalemquery, new { Id = istenenId });
+                    if (fis != null && kalemler != null)
+                    {
+                        gridControl1.DataSource = null;
+                        this.Id = Convert.ToInt32(fis.Id);
+                        dateTarih.EditValue = (DateTime)fis.Tarih;
+                        txtAciklama.Text = fis.Aciklama.ToString();
+                        txtBasimSayisi.Text = fis.BasimSayisi.ToString();
+                        txtYuzde.Text = fis.Yuzde.ToString();
+                        chckTekli.Checked = Convert.ToBoolean(fis.Yuzde);
+                        gridControl1.DataSource = kalemler.ToList();
+                    }
+                    else
+                    {
+                        bildirim.Uyari("Gösterilecek başka kayıt bulunamadı!!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                bildirim.Uyari("Hata : " + ex.Message);
+            }
+        }
+        private void btnGeri_Click(object sender, EventArgs e)
+        {
+            KayitlariGetir("Önceki");
+        }
+
+        private void btnIleri_Click(object sender, EventArgs e)
+        {
+            KayitlariGetir("Sonraki");
+        }
+
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
         }
     }
 }
