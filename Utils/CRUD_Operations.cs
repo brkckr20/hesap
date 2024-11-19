@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Collections.Generic;
@@ -150,6 +151,71 @@ namespace Hesap.Utils
                 }
             }            
         }
+        #region düzenlenecek
+        /*
+        public void KayitlariGetir(
+                string OncemiSonrami,
+                ref int _id,
+                GridControl gridControl,
+                string dp1,
+                string dp2,
+                string fisSorgusu,
+                string kalemSorgusu,
+                DateEdit tarih = null,
+                TextEdit talimatNo = null,
+                //ref int firmaId, // ref parametre
+                TextEdit firmakodu = null,
+                TextEdit firmaunvan = null,
+                TextEdit aciklama = null
+        )
+        {
+            int id = _id;
+            int? istenenId = null;
+            try
+            {
+                using (var connection = new Baglanti().GetConnection())
+                {
+                    string sql;
+                    if (OncemiSonrami == "Önceki")
+                    {
+                        sql = $"SELECT MAX({dp1}.Id) FROM {dp1} INNER JOIN {dp2} ON {dp1}.Id = {dp2}.RefNo WHERE {dp1}.Id < @Id";
+                        istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+                    }
+                    else if (OncemiSonrami == "Sonraki")
+                    {
+                        sql = $"SELECT MIN({dp1}.Id) FROM {dp1} INNER JOIN {dp2} ON {dp1}.Id = {dp2}.RefNo WHERE {dp1}.Id > @Id";
+                        istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+                    }
+                    var fis = connection.QueryFirstOrDefault(fisSorgusu, new { Id = istenenId });
+                    var kalemler = connection.Query(kalemSorgusu, new { Id = istenenId });
+                    if (fis != null && kalemler != null)
+                    {
+                        gridControl.DataSource = null;
+                        _id = Convert.ToInt32(fis.Id);
+                        tarih.EditValue = (DateTime)fis.Tarih;
+                        talimatNo.Text = fis.TalimatNo.ToString();
+                        //firmaId = Convert.ToInt32(fis.FirmaId);
+                        firmakodu.Text = fis.FirmaKodu.ToString();
+                        firmaunvan.Text = fis.FirmaUnvan.ToString();
+                        //rchAciklama.Text = fis.Aciklama.ToString();
+                        //txtYetkili.Text = fis.Yetkili.ToString();
+                        //txtVade.Text = fis.Vade.ToString();
+                        //comboBoxEdit1.Text = fis.OdemeSekli.ToString();
+                        gridControl.DataSource = kalemler.ToList();
+                    }
+                    else
+                    {
+                        bildirim.Uyari("Gösterilecek başka kayıt bulunamadı!!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                bildirim.Uyari("Hata : " + ex.Message);
+            }
+        }
+        */
+        #endregion
 
     }
 }

@@ -486,6 +486,7 @@
     <Compile Include="Utils\CRUD_Operations.cs" />
     <Compile Include="Utils\DbConnect.cs" />
     <Compile Include="Utils\HesaplaVeYansit.cs" />
+    <Compile Include="Utils\KalemParametreleri.cs" />
     <Compile Include="Utils\Listele.cs" />
     <Compile Include="Utils\Numarator.cs" />
     <Compile Include="Utils\YardimciAraclar.cs" />

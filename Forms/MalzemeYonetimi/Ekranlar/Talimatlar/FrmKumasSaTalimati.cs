@@ -24,6 +24,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         Bildirim bildirim = new Bildirim();
         CRUD_Operations cRUD = new CRUD_Operations();
         int FirmaId = 0, Id = 0;
+        KalemParametreleri parametreler = new KalemParametreleri();
         public FrmKumasSaTalimati()
         {
             InitializeComponent();
@@ -46,32 +47,6 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             gridControl1.DataSource = new BindingList<_KumasDepoKalem>();
             txtTalimatNo.Text = numarator.NumaraVer("HamKSaTal");
         }
-        private Dictionary<string, object> CreateKalemParameters(int rowIndex)
-        {
-            return new Dictionary<string, object>
-            {
-                { "RefNo", this.Id },
-                { "KalemIslem", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "KalemIslem")) ?? "" },
-                { "KumasId", gridView1.GetRowCellValue(rowIndex, "KumasId") ?? 0 },
-                { "GrM2", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "GrM2")) },
-                { "BrutKg", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "BrutKg")) },
-                { "NetKg", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "NetKg")) },
-                { "BrutMt", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "BrutMt")) },
-                { "NetMt", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "NetMt")) },
-                { "Adet", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "Adet")) },
-                { "Fiyat", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "Fiyat")) },
-                { "FiyatBirimi", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "FiyatBirim")) },
-                { "DovizCinsi", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "DovizCinsi")) },
-                { "RenkId", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "RenkId")) },
-                { "Aciklama", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "Aciklama")) },
-                { "UUID", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "UUID")) },
-                { "SatirTutari", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "SatirTutari")) },
-                { "TakipNo", yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(rowIndex, "TakipNo")) },
-                { "DesenId", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "DesenId")) },
-                { "BoyaIslemId", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "BoyaIslemId")) }
-            };
-        }
-
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             var parameters = new Dictionary<string, object>
@@ -90,7 +65,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 this.Id = cRUD.InsertRecord("HamDepo1", parameters);
                 for (int i = 0; i < gridView1.RowCount - 1; i++)
                 {
-                    var kalemParameters = CreateKalemParameters(i);
+                    var kalemParameters = parametreler.KumasDepoParams(i, this.Id, gridView1);
                     var d2Id = cRUD.InsertRecord("HamDepo2", kalemParameters);
                     gridView1.SetRowCellValue(i, "D2Id", d2Id);
                 }
@@ -102,16 +77,15 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 for (int i = 0; i < gridView1.RowCount - 1; i++)
                 {
                     var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
-                    var kalemParameters = CreateKalemParameters(i);
-                    if (d2Id > 0) // Eğer D2Id varsa güncelle
+                    var kalemParameters = parametreler.KumasDepoParams(i, this.Id, gridView1);
+                    if (d2Id > 0)
                     {
                         cRUD.UpdateRecord("HamDepo2", kalemParameters, d2Id);
                     }
-                    else // Yeni kayıt ekle
+                    else
                     {
-                        //kalemParameters["RefNo"] = this.Id; // RefNo ekle
                         var yeniId = cRUD.InsertRecord("HamDepo2", kalemParameters);
-                        gridView1.SetRowCellValue(i, "D2Id", yeniId); // Yeni Id'yi gridView'a set et
+                        gridView1.SetRowCellValue(i, "D2Id", yeniId);
                     }
                 }
                 bildirim.GuncellemeBasarili();
@@ -175,7 +149,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         {
             GridView view = sender as GridView;
             view.SetRowCellValue(e.RowHandle, "D2Id", 0);
-            
+
         }
 
         private void talimatFormuToolStripMenuItem_Click(object sender, EventArgs e)
@@ -185,6 +159,11 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         }
 
         private void btnGeri_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnIleri_Click(object sender, EventArgs e)
         {
 
         }

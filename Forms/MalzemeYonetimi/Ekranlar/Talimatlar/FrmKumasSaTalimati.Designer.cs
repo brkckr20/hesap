@@ -161,6 +161,7 @@
             this.btnIleri.Size = new System.Drawing.Size(75, 47);
             this.btnIleri.TabIndex = 13;
             this.btnIleri.Text = "İleri";
+            this.btnIleri.Click += new System.EventHandler(this.btnIleri_Click);
             // 
             // btnGeri
             // 
