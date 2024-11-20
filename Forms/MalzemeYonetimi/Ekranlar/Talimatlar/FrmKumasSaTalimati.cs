@@ -168,6 +168,15 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
 
         }
 
+        private void gridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            GridView gridView = sender as GridView;
+            if (e.KeyCode == Keys.Delete)
+            {
+                cRUD.SatirSil(gridView, "HamDepo2");
+            }
+        }
+
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             int newRowHandle = gridView1.FocusedRowHandle;
