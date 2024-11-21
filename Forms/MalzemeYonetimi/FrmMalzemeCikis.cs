@@ -191,6 +191,7 @@ namespace Hesap.Forms.MalzemeYonetimi
             dateTarih.EditValue = DateTime.Now;
             dateSevkTarihi.EditValue = DateTime.Now;
             gridControl1.DataSource = new BindingList<_MalzemeKalem>();
+            yardimciAraclar.KolonlariGetir(gridView1,this.Text);
         }
 
         private void btnIslemBekleyenler_Click(object sender, EventArgs e)
@@ -343,6 +344,22 @@ namespace Hesap.Forms.MalzemeYonetimi
                 Rapor.FrmRaporSecimEkrani frm = new Rapor.FrmRaporSecimEkrani(this.Text, this.Id);
                 frm.ShowDialog();
             }
+        }
+
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
+        }
+
+        private void gridView1_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            GridView view = sender as GridView;
+            view.SetRowCellValue(e.RowHandle, "KayitNo", 0);
         }
     }
 }

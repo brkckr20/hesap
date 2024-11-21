@@ -45,9 +45,20 @@ namespace Hesap.Forms.MalzemeYonetimi
             yardimciAraclar.ArkaPlaniDegistir(e, "Kalan");
         }
 
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
+        }
+
         public FrmMalzemeDepoStok()
         {
             InitializeComponent();
+            yardimciAraclar.KolonlariGetir(gridView1,this.Text);
         }
         private void FrmMalzemeDepoStok_Load(object sender, EventArgs e)
         {

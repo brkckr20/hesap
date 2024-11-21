@@ -39,12 +39,14 @@
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.rchAciklama = new DevExpress.XtraEditors.MemoExEdit();
+            this.txtYetkili = new DevExpress.XtraEditors.TextEdit();
             this.txtDepoKodu = new DevExpress.XtraEditors.TextEdit();
             this.txtIrsaliyeNo = new DevExpress.XtraEditors.TextEdit();
             this.txtFirmaUnvan = new DevExpress.XtraEditors.TextEdit();
             this.dateSevkTarihi = new DevExpress.XtraEditors.DateEdit();
             this.dateTarih = new DevExpress.XtraEditors.DateEdit();
             this.txtFirmaKodu = new DevExpress.XtraEditors.ButtonEdit();
+            this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -70,12 +72,14 @@
             this.KayitNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.siparişFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtYetkili = new DevExpress.XtraEditors.TextEdit();
+            this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtYetkili.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDepoKodu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIrsaliyeNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).BeginInit();
@@ -92,7 +96,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtYetkili.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -210,6 +213,15 @@
             this.rchAciklama.Size = new System.Drawing.Size(155, 24);
             this.rchAciklama.TabIndex = 8;
             // 
+            // txtYetkili
+            // 
+            this.txtYetkili.Location = new System.Drawing.Point(364, 59);
+            this.txtYetkili.Name = "txtYetkili";
+            this.txtYetkili.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtYetkili.Properties.Appearance.Options.UseFont = true;
+            this.txtYetkili.Size = new System.Drawing.Size(155, 24);
+            this.txtYetkili.TabIndex = 3;
+            // 
             // txtDepoKodu
             // 
             this.txtDepoKodu.Location = new System.Drawing.Point(107, 111);
@@ -276,6 +288,17 @@
             this.txtFirmaKodu.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit1_Properties_ButtonClick);
             this.txtFirmaKodu.Size = new System.Drawing.Size(155, 24);
             this.txtFirmaKodu.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label4.Location = new System.Drawing.Point(265, 61);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 21);
+            this.label4.TabIndex = 1120;
+            this.label4.Text = "Yetkili :";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label9
             // 
@@ -407,6 +430,7 @@
             this.gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView1_InitNewRow);
             this.gridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView1_KeyDown);
             // 
             // KalemIslem
@@ -532,40 +556,45 @@
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Font = new System.Drawing.Font("Corbel", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.siparişFormuToolStripMenuItem});
+            this.siparişFormuToolStripMenuItem,
+            this.dizaynKaydetToolStripMenuItem,
+            this.satırİşlemleriToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 70);
             // 
             // siparişFormuToolStripMenuItem
             // 
-            this.siparişFormuToolStripMenuItem.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.siparişFormuToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.siparişFormuToolStripMenuItem.Name = "siparişFormuToolStripMenuItem";
             this.siparişFormuToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
-            this.siparişFormuToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.siparişFormuToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.siparişFormuToolStripMenuItem.Text = "Sipariş Formu";
             this.siparişFormuToolStripMenuItem.Click += new System.EventHandler(this.siparişFormuToolStripMenuItem_Click);
             // 
-            // label4
+            // dizaynKaydetToolStripMenuItem
             // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(265, 61);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 21);
-            this.label4.TabIndex = 1120;
-            this.label4.Text = "Yetkili :";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.dizaynKaydetToolStripMenuItem.Name = "dizaynKaydetToolStripMenuItem";
+            this.dizaynKaydetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.dizaynKaydetToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.dizaynKaydetToolStripMenuItem.Text = "Dizayn Kaydet";
+            this.dizaynKaydetToolStripMenuItem.Click += new System.EventHandler(this.dizaynKaydetToolStripMenuItem_Click);
             // 
-            // txtYetkili
+            // satırİşlemleriToolStripMenuItem
             // 
-            this.txtYetkili.Location = new System.Drawing.Point(364, 59);
-            this.txtYetkili.Name = "txtYetkili";
-            this.txtYetkili.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
-            this.txtYetkili.Properties.Appearance.Options.UseFont = true;
-            this.txtYetkili.Size = new System.Drawing.Size(155, 24);
-            this.txtYetkili.TabIndex = 3;
+            this.satırİşlemleriToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sütunSeçimiToolStripMenuItem});
+            this.satırİşlemleriToolStripMenuItem.Name = "satırİşlemleriToolStripMenuItem";
+            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.satırİşlemleriToolStripMenuItem.Text = "Satır İşlemleri";
+            // 
+            // sütunSeçimiToolStripMenuItem
+            // 
+            this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
+            this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
             // FrmMalzemeCikis
             // 
@@ -584,6 +613,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtYetkili.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDepoKodu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIrsaliyeNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).EndInit();
@@ -600,7 +630,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtYetkili.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -649,5 +678,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn BirimFiyat;
         private DevExpress.XtraEditors.TextEdit txtYetkili;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
     }
 }

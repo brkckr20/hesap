@@ -157,15 +157,87 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             Rapor.FrmRaporSecimEkrani frm = new Rapor.FrmRaporSecimEkrani(this.Text, this.Id);
             frm.ShowDialog();
         }
-
+        public void KayitlariGetir(string OncemiSonrami)
+        {
+            int id = this.Id;
+            int? istenenId = null;
+            try
+            {
+                using (var connection = new Baglanti().GetConnection())
+                {
+                    string sql;
+                    if (OncemiSonrami == "Önceki")
+                    {
+                        sql = "SELECT MAX(HamDepo1.Id) FROM HamDepo1 INNER JOIN HamDepo2 ON HamDepo1.Id = HamDepo2.RefNo WHERE HamDepo1.Id < @Id";
+                        istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+                    }
+                    else if (OncemiSonrami == "Sonraki")
+                    {
+                        sql = "SELECT MIN(HamDepo1.Id) FROM HamDepo1 INNER JOIN HamDepo2 ON HamDepo1.Id = HamDepo2.RefNo WHERE HamDepo1.Id > @Id";
+                        istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+                    }
+                    string fisquery = @"SELECT 
+                                        ISNULL(ID.Id,0) Id,
+                                        ISNULL(ID.Tarih,'') Tarih,
+                                        ISNULL(ID.TalimatNo,'') TalimatNo,
+                                        ISNULL(ID.FirmaId,'') FirmaId,
+                                        ISNULL(FK.FirmaKodu,'') FirmaKodu,
+                                        ISNULL(FK.FirmaUnvan,'') FirmaUnvan,
+                                        ISNULL(ID.Aciklama,'') Aciklama,
+                                        ISNULL(ID.IslemCinsi,'') IslemCinsi,
+                                        ISNULL(ID.Yetkili,'') Yetkili,
+                                        ISNULL(ID.Vade,'') Vade,
+                                        ISNULL(ID.OdemeSekli,'') OdemeSekli
+                                        FROM HamDepo1 ID inner join FirmaKarti FK on FK.Id = ID.FirmaId WHERE ID.Id= @Id and ID.IslemCinsi = 'SaTal'";
+                    var fis = connection.QueryFirstOrDefault(fisquery, new { Id = istenenId });
+                    string kalemquery = @"select
+	                                    ISNULL(D2.Id,0) TakipNo,ISNULL(D2.RefNo,0) RefNo,ISNULL(D2.KalemIslem,'') KalemIslem,
+	                                    ISNULL(D2.IplikId,0) IplikId,ISNULL(IK.IplikKodu,'') IplikKodu,ISNULL(IK.IplikAdi,'') IplikAdi,
+	                                    ISNULL(D2.BrutKg,0) BrutKg,ISNULL(D2.NetKg,0) NetKg,ISNULL(D2.Fiyat,0) Fiyat,
+	                                    ISNULL(D2.DovizCinsi,'') DovizCinsi,ISNULL(D2.DovizFiyat,0) DovizFiyat,
+	                                    ISNULL(D2.OrganikSertifikaNo,'')OrganikSertifikaNo,ISNULL(D2.Marka,'') Marka,
+	                                    ISNULL(D2.KullanimYeri,'') KullanimYeri,ISNULL(D2.IplikRenkId,0) IplikRenkId,
+	                                    ISNULL(BRK.BoyahaneRenkKodu,'') IplikRenkKodu,ISNULL(BRK.BoyahaneRenkAdi,'') IplikRenkAdi,
+	                                    ISNULL(D2.PartiNo,'') PartiNo,ISNULL(D2.Aciklama,'') SatirAciklama,ISNULL(D2.Barkod,'') Barkod,
+	                                    ISNULL(D2.TalimatNo,'') TalimatNo,ISNULL(D2.UUID,'') UUID,ISNULL(D2.SatirTutari,0) SatirTutari
+                                    from HamDepo2 D2 left join IplikKarti IK on IK.Id = D2.IplikId
+                                    left join BoyahaneRenkKartlari BRK on D2.IplikRenkId = BRK.Id
+                                    WHERE D2.RefNo = @Id";
+                    var kalemler = connection.Query(kalemquery, new { Id = istenenId });
+                    if (fis != null && kalemler != null)
+                    {
+                        gridControl1.DataSource = null;
+                        this.Id = Convert.ToInt32(fis.Id);
+                        dateTarih.EditValue = (DateTime)fis.Tarih;
+                        txtTalimatNo.Text = fis.TalimatNo.ToString();
+                        this.FirmaId = Convert.ToInt32(fis.FirmaId);
+                        txtFirmaKodu.Text = fis.FirmaKodu.ToString();
+                        txtFirmaUnvan.Text = fis.FirmaUnvan.ToString();
+                        rchAciklama.Text = fis.Aciklama.ToString();
+                        txtYetkili.Text = fis.Yetkili.ToString();
+                        txtVade.Text = fis.Vade.ToString();
+                        comboBoxEdit1.Text = fis.OdemeSekli.ToString();
+                        gridControl1.DataSource = kalemler.ToList();
+                    }
+                    else
+                    {
+                        bildirim.Uyari("Gösterilecek başka kayıt bulunamadı!!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                bildirim.Uyari("Hata : " + ex.Message);
+            }
+        }
         private void btnGeri_Click(object sender, EventArgs e)
         {
-
+            KayitlariGetir("Önceki");
         }
 
         private void btnIleri_Click(object sender, EventArgs e)
         {
-
+            KayitlariGetir("Sonraki");
         }
 
         private void gridView1_KeyDown(object sender, KeyEventArgs e)
