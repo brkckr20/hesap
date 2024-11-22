@@ -151,6 +151,7 @@
             this.btnSil.Size = new System.Drawing.Size(75, 47);
             this.btnSil.TabIndex = 14;
             this.btnSil.Text = "Sil";
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnIleri
             // 

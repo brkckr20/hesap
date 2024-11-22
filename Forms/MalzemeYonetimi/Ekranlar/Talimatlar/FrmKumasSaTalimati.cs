@@ -188,20 +188,18 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                                         ISNULL(ID.Yetkili,'') Yetkili,
                                         ISNULL(ID.Vade,'') Vade,
                                         ISNULL(ID.OdemeSekli,'') OdemeSekli
-                                        FROM HamDepo1 ID inner join FirmaKarti FK on FK.Id = ID.FirmaId WHERE ID.Id= @Id and ID.IslemCinsi = 'SaTal'";
+                                        FROM HamDepo1 ID inner join FirmaKarti FK on FK.Id = ID.FirmaId WHERE ID.Id=  @Id and ID.IslemCinsi = 'SaTal'";
                     var fis = connection.QueryFirstOrDefault(fisquery, new { Id = istenenId });
                     string kalemquery = @"select
 	                                    ISNULL(D2.Id,0) TakipNo,ISNULL(D2.RefNo,0) RefNo,ISNULL(D2.KalemIslem,'') KalemIslem,
-	                                    ISNULL(D2.IplikId,0) IplikId,ISNULL(IK.IplikKodu,'') IplikKodu,ISNULL(IK.IplikAdi,'') IplikAdi,
+	                                    ISNULL(D2.KumasId,0) KumasId,ISNULL(IK.UrunKodu,'') KumasKodu,ISNULL(IK.UrunAdi,'') KumasAdi,
 	                                    ISNULL(D2.BrutKg,0) BrutKg,ISNULL(D2.NetKg,0) NetKg,ISNULL(D2.Fiyat,0) Fiyat,
-	                                    ISNULL(D2.DovizCinsi,'') DovizCinsi,ISNULL(D2.DovizFiyat,0) DovizFiyat,
-	                                    ISNULL(D2.OrganikSertifikaNo,'')OrganikSertifikaNo,ISNULL(D2.Marka,'') Marka,
-	                                    ISNULL(D2.KullanimYeri,'') KullanimYeri,ISNULL(D2.IplikRenkId,0) IplikRenkId,
-	                                    ISNULL(BRK.BoyahaneRenkKodu,'') IplikRenkKodu,ISNULL(BRK.BoyahaneRenkAdi,'') IplikRenkAdi,
+	                                    ISNULL(D2.DovizCinsi,'') DovizCinsi,ISNULL(D2.RenkId,0) RenkId,
+	                                    ISNULL(BRK.BoyahaneRenkKodu,'') BoyahaneRenkKodu,ISNULL(BRK.BoyahaneRenkAdi,'') BoyahaneRenkAdi,
 	                                    ISNULL(D2.PartiNo,'') PartiNo,ISNULL(D2.Aciklama,'') SatirAciklama,ISNULL(D2.Barkod,'') Barkod,
-	                                    ISNULL(D2.TalimatNo,'') TalimatNo,ISNULL(D2.UUID,'') UUID,ISNULL(D2.SatirTutari,0) SatirTutari
-                                    from HamDepo2 D2 left join IplikKarti IK on IK.Id = D2.IplikId
-                                    left join BoyahaneRenkKartlari BRK on D2.IplikRenkId = BRK.Id
+	                                    ISNULL(D2.UUID,'') UUID,ISNULL(D2.SatirTutari,0) SatirTutari
+                                    from HamDepo2 D2 left join UrunKarti IK on IK.Id = D2.KumasId
+                                    left join BoyahaneRenkKartlari BRK on D2.RenkId = BRK.Id
                                     WHERE D2.RefNo = @Id";
                     var kalemler = connection.Query(kalemquery, new { Id = istenenId });
                     if (fis != null && kalemler != null)
@@ -247,6 +245,12 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             {
                 cRUD.SatirSil(gridView, "HamDepo2");
             }
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            cRUD.FisVeHavuzSil("HamDepo1", "HamDepo2", this.Id);
+            FormTemizle();
         }
 
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
