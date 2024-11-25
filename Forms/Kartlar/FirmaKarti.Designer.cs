@@ -255,6 +255,7 @@
             this.Controls.Add(this.panel3);
             this.Name = "FrmFirmaKarti";
             this.Text = "Firma Kartı";
+            this.Load += new System.EventHandler(this.FrmFirmaKarti_Load);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres2.Properties)).EndInit();

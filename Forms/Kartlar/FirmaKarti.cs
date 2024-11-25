@@ -18,51 +18,54 @@ namespace Hesap.Forms.Kartlar
         Baglanti _baglanti;
         Bildirim bildirim = new Bildirim();
         Ayarlar ayarlar = new Ayarlar();
+        CRUD_Operations cRUD = new CRUD_Operations();
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
         int Id = 0;
         public FrmFirmaKarti()
         {
             InitializeComponent();
             _baglanti = new Baglanti();
         }
+
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            object x = new
+            var parameters = new Dictionary<string, object>
             {
-                FirmaKodu = txtFirmaKodu.Text,
-                FirmaUnvan = txtFirmaUnvan.Text,
-                Adres1 = txtAdres1.Text,
-                Adres2 = txtAdres2.Text,
-                Adres3 = txtAdres3.Text,
-                Id = this.Id
+                { "FirmaKodu", txtFirmaKodu.Text },
+                { "FirmaUnvan", txtFirmaUnvan.Text },
+                { "Adres1", txtAdres1.Text},
+                { "Adres2", txtAdres2.Text},
+                { "Adres3", txtAdres3.Text},
             };
-
+            var logParams = new Dictionary<string, object>
+            {
+                { "FirmaKodu", txtFirmaKodu.Text },
+                { "FirmaUnvan", txtFirmaUnvan.Text },
+                { "Adres1", txtAdres1.Text},
+                { "Adres2", txtAdres2.Text},
+                { "Adres3", txtAdres3.Text},
+                { "RefNo", this.Id},
+                { "Tarih", DateTime.Now},
+                { "Kullanici", Properties.Settings.Default.KullaniciAdi.ToString()},
+                { "Makina", Environment.MachineName},
+                { "Islem", this.Id == 0 ? "Yeni Kayıt" : "Güncelleme"},
+                
+            };
             using (var connection = new Baglanti().GetConnection())
             {
-                if (Id == 0)
+                if (this.Id == 0)
                 {
-                    string sqliteQuery = @"INSERT INTO FirmaKarti (FirmaKodu,FirmaUnvan,Adres1,Adres2,Adres3)
-                                                VALUES(@FirmaKodu,@FirmaUnvan,@Adres1,@Adres2,@Adres3)";
-                    string sqlQuery = @"INSERT INTO FirmaKarti (FirmaKodu,FirmaUnvan,Adres1,Adres2,Adres3) OUTPUT INSERTED.Id VALUES(@FirmaKodu,@FirmaUnvan,@Adres1,@Adres2,@Adres3)";
-                    string idQuery = "SELECT last_insert_rowid();";
-                    if (ayarlar.VeritabaniTuru() == "mssql")
-                    {
-                        this.Id = connection.QuerySingle<int>(sqlQuery, x);
-                    }
-                    else
-                    {
-                        connection.Execute(sqliteQuery, x);
-                        this.Id = connection.QuerySingle<int>(idQuery);
-                    }
-                    bildirim.Basarili();
+                    this.Id = cRUD.InsertRecord("FirmaKarti", parameters);
+                    bildirim.Basarili(); 
+                    logParams["RefNo"] = this.Id;
+                    cRUD.InsertRecord("_LOG_FirmaKarti", logParams);
                 }
                 else
                 {
-                    string sql = @"UPDATE FirmaKarti SET FirmaKodu = @FirmaKodu,FirmaUnvan = @FirmaUnvan,Adres1 = @Adres1,Adres2 = @Adres2,Adres3 = @Adres3
-                                    WHERE Id = @Id";
-                    connection.Execute(sql, x);
+                    cRUD.UpdateRecord("FirmaKarti", parameters, this.Id);
                     bildirim.GuncellemeBasarili();
+                    cRUD.InsertRecord("_LOG_FirmaKarti", logParams);
                 }
-
             }
         }
         private void btnListe_Click(object sender, EventArgs e)
@@ -77,42 +80,35 @@ namespace Hesap.Forms.Kartlar
             txtAdres3.Text = frm.Adres3;
             Id = frm.Id;
         }
-        private void simpleButton2_Click(object sender, EventArgs e)
-        {
-
-        }
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             Temizle();
         }
         void Temizle()
         {
-            Id = 0;
-            txtFirmaKodu.Text = "";
-            txtFirmaUnvan.Text = "";
-            txtAdres1.Text = "";
-            txtAdres2.Text = "";
-            txtAdres3.Text = "";
+            object[] kart = { txtFirmaKodu,txtFirmaUnvan,txtAdres1,txtAdres2,txtAdres3 };
+            yardimciAraclar.KartTemizle(kart);
+            this.Id = 0;
         }
         private void btnSil_Click(object sender, EventArgs e)
         {
-            if (this.Id != 0)
+            var logParams = new Dictionary<string, object>
             {
-                string sql = "DELETE FROM FirmaKarti WHERE Id = @Id";
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    if (bildirim.SilmeOnayı())
-                    {
-                        connection.Execute(sql, new { Id = this.Id });
-                        bildirim.SilmeBasarili();
-                        Temizle();
-                    }
-                }
-            }
-            else
-            {
-                bildirim.Uyari("Kayıt silebilmek için öncelikle listeden bir kayıt seçmelisiniz!");
-            }
+                { "FirmaKodu", txtFirmaKodu.Text },
+                { "FirmaUnvan", txtFirmaUnvan.Text },
+                { "Adres1", txtAdres1.Text},
+                { "Adres2", txtAdres2.Text},
+                { "Adres3", txtAdres2.Text},
+                { "RefNo", this.Id},
+                { "Tarih", DateTime.Now},
+                { "Kullanici", Properties.Settings.Default.KullaniciAdi.ToString()},
+                { "Makina", Environment.MachineName},
+                { "Islem", "Silme"},
+
+            };
+            cRUD.KartSil(this.Id,"FirmaKarti");
+            Temizle();
+            cRUD.InsertRecord("_LOG_FirmaKarti", logParams);
         }
         void ListeGetir(string KayitTipi)
         {
@@ -153,6 +149,11 @@ namespace Hesap.Forms.Kartlar
         private void btnIleri_Click(object sender, EventArgs e)
         {
             ListeGetir("Sonraki");
+        }
+
+        private void FrmFirmaKarti_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -15,8 +15,10 @@ namespace Hesap.Forms.Kartlar
 {
     public partial class FrmDepoKarti : DevExpress.XtraEditors.XtraForm
     {
-        Ayarlar ayarlar = new Ayarlar();
         Bildirim bildirim = new Bildirim();
+        Ayarlar ayarlar = new Ayarlar();
+        CRUD_Operations cRUD = new CRUD_Operations();
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
         public FrmDepoKarti()
         {
             InitializeComponent();
@@ -40,45 +42,27 @@ namespace Hesap.Forms.Kartlar
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            var x = new DepoKarti
+            var parameters = new Dictionary<string, object>
             {
-                Kodu = txtDepoKodu.Text,
-                Adi = txtDepoAdi.Text,
-                Kullanimda = chckKullanimda.Checked,
-                KayitEden = Properties.Settings.Default.KullaniciAdi,
-                KayitTarihi = DateTime.Now,
-                GuncellemeTarihi = DateTime.Now,
-                Guncelleyen = Properties.Settings.Default.KullaniciAdi,
-                Makina = Environment.MachineName,
-                Id = this.Id
+                { "Kodu", txtDepoKodu.Text },
+                { "Adi", txtDepoAdi.Text },
+                { "Kullanimda", chckKullanimda.Checked},
+                { "KayitEden",  Properties.Settings.Default.KullaniciAdi},
+                { "KayitTarihi", DateTime.Now},
+                { "GuncellemeTarihi", DateTime.Now},
+                { "Guncelleyen",  Properties.Settings.Default.KullaniciAdi},
             };
             using (var connection = new Baglanti().GetConnection())
             {
                 if (Id == 0)
                 {
-                    string sqliteQuery = @"INSERT INTO DepoKarti (Kodu,Adi,Kullanimda)
-                                                VALUES(@Kodu,@Adi,@Kullanimda)";
-                    string sqlQuery = @"INSERT INTO DepoKarti (Kodu,Adi,Kullanimda,KayitEden,KayitTarihi) OUTPUT INSERTED.Id VALUES(@Kodu,@Adi,@Kullanimda,@KayitEden,@KayitTarihi)";
-                    string idQuery = "SELECT last_insert_rowid();";
-                    string LOG_Insert = @"INSERT INTO _LOG_DepoKarti (RefNo,Kodu,Adi,Kullanimda,KayitTarihi,KayitEden,Makina,Islem) VALUES(@Id,@Kodu,@Adi,@Kullanimda,@KayitTarihi,@KayitEden,@Makina,'Yeni Kayıt')";
-                    if (ayarlar.VeritabaniTuru() == "mssql")
-                    {
-                        this.Id = connection.QuerySingle<int>(sqlQuery, x);
-                        x.Id = this.Id; // Id'yi güncelle
-                        connection.Execute(LOG_Insert, x);
-                        
-                    }
-                    else
-                    {
-                        connection.Execute(sqliteQuery, x);
-                        this.Id = connection.QuerySingle<int>(idQuery);
-                    }
+                    this.Id = cRUD.InsertRecord("DepoKarti", parameters);
                     bildirim.Basarili();
                 }
                 else
                 {
-                    string sql = @"UPDATE DepoKarti SET Kodu = @Kodu,Adi= @Adi,Kullanimda = @Kullanimda, GuncellemeTarihi = @GuncellemeTarihi, Guncelleyen = @Guncelleyen WHERE Id = @Id";
-                    connection.Execute(sql, x);
+                    parameters.Remove("KayitTarihi"); // kayit tarihini güncellememesi için
+                    cRUD.UpdateRecord("DepoKarti", parameters, this.Id);
                     bildirim.GuncellemeBasarili();
                 }
             }
@@ -165,8 +149,6 @@ namespace Hesap.Forms.Kartlar
             if (this.Id != 0)
             {
                 string sql = "DELETE FROM DepoKarti WHERE Id = @Id";
-                string LOG_Insert = @"INSERT INTO _LOG_DepoKarti (RefNo,Kodu,Adi,Kullanimda,KayitTarihi,KayitEden,Makina,Islem) VALUES(@Id,@Kodu,@Adi,@Kullanimda,@KayitTarihi,@KayitEden,@Makina,'Silme')";
-
                 using (var connection = new Baglanti().GetConnection())
                 {
                     if (bildirim.SilmeOnayı())
