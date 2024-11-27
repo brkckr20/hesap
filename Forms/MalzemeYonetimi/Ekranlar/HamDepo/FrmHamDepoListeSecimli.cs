@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -94,6 +95,34 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         }
 
         public List<string> islemListesi = new List<string>();
+
+        private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e) // devam et - hatalı çalışmıyor
+        {
+            // Eğer checkbox sütununda (0. sütun) değişiklik olduysa
+            if (e.Column.VisibleIndex == 0)
+            {
+                // Seçilen satırdaki id'yi alıyoruz
+                int selectedId = (int)gridView1.GetRowCellValue(e.RowHandle, "Id");
+
+                // Aynı ID'ye sahip diğer satırları güncellemek için döngü başlatıyoruz
+                for (int i = 0; i < gridView1.RowCount; i++)
+                {
+                    // Satırın handle'ını alıyoruz
+                    int rowHandle = gridView1.GetRowHandle(i);
+
+                    // Aynı ID'ye sahip satırı buluyoruz
+                    int rowId = (int)gridView1.GetRowCellValue(rowHandle, "Id");
+
+                    if (rowId == selectedId)
+                    {
+                        // Checkbox'ı güncelliyoruz (e.Value burada true/false olarak gelir)
+                        gridView1.SetRowCellValue(rowHandle, e.Column, e.Value);
+                    }
+                }
+            }
+        }
+
+
         private void btnAktar_Click(object sender, EventArgs e)
         {
             int[] selectedRows = gridView1.GetSelectedRows();
