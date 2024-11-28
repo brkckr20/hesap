@@ -92,36 +92,35 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
 								                                --where d1.IslemCinsi = 'SaTal'
                                     order by d1.Id asc";
             listele.Liste(sql, gridControl1);
+
         }
 
         public List<string> islemListesi = new List<string>();
 
         private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e) // devam et - hatalı çalışmıyor
         {
-            // Eğer checkbox sütununda (0. sütun) değişiklik olduysa
-            if (e.Column.VisibleIndex == 0)
+            if (e.Column.FieldName == "IsSelected") // Checkbox sütunundaki değer değiştiğinde
             {
-                // Seçilen satırdaki id'yi alıyoruz
-                int selectedId = (int)gridView1.GetRowCellValue(e.RowHandle, "Id");
+                // Değiştirilen satırdaki ID değerini alıyoruz
+                int selectedId = Convert.ToInt32(gridView1.GetRowCellValue(e.RowHandle, "ID"));
 
-                // Aynı ID'ye sahip diğer satırları güncellemek için döngü başlatıyoruz
+                // Checkbox'ın işaretli olup olmadığını kontrol ediyoruz
+                bool isChecked = Convert.ToBoolean(e.Value);
+
+                // Tüm satırlarda aynı ID'ye sahip olanları buluyoruz
                 for (int i = 0; i < gridView1.RowCount; i++)
                 {
-                    // Satırın handle'ını alıyoruz
-                    int rowHandle = gridView1.GetRowHandle(i);
+                    // Satırdaki ID'yi alıyoruz
+                    int rowId = Convert.ToInt32(gridView1.GetRowCellValue(i, "ID"));
 
-                    // Aynı ID'ye sahip satırı buluyoruz
-                    int rowId = (int)gridView1.GetRowCellValue(rowHandle, "Id");
-
+                    // Eğer ID'ler eşleşiyorsa, checkbox'ı işaretli ya da işaretsiz yapıyoruz
                     if (rowId == selectedId)
                     {
-                        // Checkbox'ı güncelliyoruz (e.Value burada true/false olarak gelir)
-                        gridView1.SetRowCellValue(rowHandle, e.Column, e.Value);
+                        gridView1.SetRowCellValue(i, "IsSelected", isChecked); // Checkbox'ı güncelliyoruz
                     }
                 }
             }
         }
-
 
         private void btnAktar_Click(object sender, EventArgs e)
         {
@@ -149,7 +148,5 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
             }
             Close();
         }
-
-
     }
 }
