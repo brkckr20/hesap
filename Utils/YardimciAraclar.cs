@@ -447,5 +447,10 @@ namespace Hesap.Utils
                 gridView.ShowCustomization();
             }
         }
+
+        public string GetActiveUser()
+        {
+            return Properties.Settings.Default.KullaniciAdi.ToString();
+        }
     }
 }
