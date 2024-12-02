@@ -17,6 +17,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
     {
         public string sql,_islemCinsi;
         Listele listele = new Listele();
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
         public FrmHamDepoListeSecimli(string islemCinsi)
         {
             InitializeComponent();
@@ -96,6 +97,11 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
 
         public List<string> islemListesi = new List<string>();
 
+        private void gridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            yardimciAraclar.CheckSelectedRows(gridView1);
+        }
+
         private void btnAktar_Click(object sender, EventArgs e)
         {
             int[] selectedRows = gridView1.GetSelectedRows();
@@ -117,8 +123,10 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
                 int GrM2 = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "GrM2"));
                 int Id = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "Id"));
                 int D2Id = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "D2Id"));
+                string FiyatBirim = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "FiyatBirim"));
 
-                islemListesi.Add($"{TalimatNo};{FirmaId};{FirmaKodu};{FirmaUnvan};{TakipNo};{KumasId};{KumasKodu};{KumasAdi};{BrutKg};{Fiyat};{DovizCinsi};{NetKg};{GrM2};{Id};{D2Id}");
+                islemListesi.Add($"{TalimatNo};{FirmaId};{FirmaKodu};{FirmaUnvan};{TakipNo};{KumasId};{KumasKodu};{KumasAdi};{BrutKg};{Fiyat};{DovizCinsi};{NetKg};{GrM2};{Id};{D2Id};" +
+                    $"{FiyatBirim}");
             }
             Close();
         }

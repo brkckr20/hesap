@@ -217,5 +217,11 @@ namespace Hesap
             Forms.Rapor.Etiket.FrmEtiketTasarimi frm = new Forms.Rapor.Etiket.FrmEtiketTasarimi();
             FormAc(frm);
         }
+
+        private void barButtonItem24_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Forms.MalzemeYonetimi.Ekranlar.HamDepo.FrmHamDepoCikis frm = new Forms.MalzemeYonetimi.Ekranlar.HamDepo.FrmHamDepoCikis();
+            FormAc(frm);
+        }
     }
 }

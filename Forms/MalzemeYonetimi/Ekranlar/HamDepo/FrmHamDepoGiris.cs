@@ -67,6 +67,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
                 gridView1.SetRowCellValue(newRowHandle, "NetKg", values[11]);
                 gridView1.SetRowCellValue(newRowHandle, "GrM2", values[12]);
                 gridView1.SetRowCellValue(newRowHandle, "D2Id", values[14]);
+                gridView1.SetRowCellValue(newRowHandle, "FiyatBirim", values[15]);
             }
         }
 

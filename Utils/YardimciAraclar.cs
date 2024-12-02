@@ -447,10 +447,25 @@ namespace Hesap.Utils
                 gridView.ShowCustomization();
             }
         }
-
         public string GetActiveUser()
         {
             return Properties.Settings.Default.KullaniciAdi.ToString();
+        }
+        public void CheckSelectedRows(GridView gridView1)
+        {
+            int selectedId = Convert.ToInt32(gridView1.GetFocusedRowCellValue("Id"));
+            for (int i = 0; i < gridView1.RowCount; i++)
+            {
+                int rowId = Convert.ToInt32(gridView1.GetRowCellValue(i, "Id"));
+                if (rowId == selectedId)
+                {
+                    gridView1.SelectRow(i);
+                }
+                else
+                {
+                    gridView1.UnselectRow(i);
+                }
+            }
         }
     }
 }

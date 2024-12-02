@@ -65,6 +65,7 @@
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem21 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem22 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem23 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -82,7 +83,7 @@
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonItem23 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem24 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -127,9 +128,10 @@
             this.barSubItem2,
             this.barButtonItem21,
             this.barButtonItem22,
-            this.barButtonItem23});
+            this.barButtonItem23,
+            this.barButtonItem24});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 37;
+            this.ribbon.MaxItemId = 38;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -392,7 +394,8 @@
             this.barSubItem2.Id = 33;
             this.barSubItem2.ImageOptions.Image = global::Hesap.Properties.Resources.Fabric_Sample_ham;
             this.barSubItem2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem21)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem21),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem24)});
             this.barSubItem2.Name = "barSubItem2";
             this.barSubItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
@@ -413,6 +416,15 @@
             this.barButtonItem22.Name = "barButtonItem22";
             this.barButtonItem22.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.barButtonItem22.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem22_ItemClick);
+            // 
+            // barButtonItem23
+            // 
+            this.barButtonItem23.Caption = "Etiket Tasarımı";
+            this.barButtonItem23.Id = 36;
+            this.barButtonItem23.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem23.ImageOptions.Image")));
+            this.barButtonItem23.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem23.ImageOptions.LargeImage")));
+            this.barButtonItem23.Name = "barButtonItem23";
+            this.barButtonItem23.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem23_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -539,14 +551,13 @@
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Kartlar";
             // 
-            // barButtonItem23
+            // barButtonItem24
             // 
-            this.barButtonItem23.Caption = "Etiket Tasarımı";
-            this.barButtonItem23.Id = 36;
-            this.barButtonItem23.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem23.ImageOptions.Image")));
-            this.barButtonItem23.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem23.ImageOptions.LargeImage")));
-            this.barButtonItem23.Name = "barButtonItem23";
-            this.barButtonItem23.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem23_ItemClick);
+            this.barButtonItem24.Caption = "Ham Depo Çıkış";
+            this.barButtonItem24.Id = 37;
+            this.barButtonItem24.ImageOptions.Image = global::Hesap.Properties.Resources.Fabric_Sample_ham;
+            this.barButtonItem24.Name = "barButtonItem24";
+            this.barButtonItem24.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem24_ItemClick);
             // 
             // Main
             // 
@@ -625,5 +636,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem22;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbnBarkod;
         private DevExpress.XtraBars.BarButtonItem barButtonItem23;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem24;
     }
 }
