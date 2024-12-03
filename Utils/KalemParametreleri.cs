@@ -35,5 +35,13 @@ namespace Hesap.Utils
                 { "BoyaIslemId", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "BoyaIslemId")) }
             };
         }
+
+        //public Dictionary<string, object> HamDepo1Params()
+        //{
+        //    return new Dictionary<string, object>
+        //    {
+
+        //    };
+        //}
     }
 }

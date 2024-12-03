@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHamDepoCikis));
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnYeni = new DevExpress.XtraEditors.SimpleButton();
@@ -87,6 +88,24 @@
             this.D2Id = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoBtnMarka = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtNakliyeci = new DevExpress.XtraEditors.ButtonEdit();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtAd = new DevExpress.XtraEditors.TextEdit();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtSoyad = new DevExpress.XtraEditors.TextEdit();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtTC = new DevExpress.XtraEditors.TextEdit();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtPlaka = new DevExpress.XtraEditors.TextEdit();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtDorse = new DevExpress.XtraEditors.TextEdit();
+            this.label14 = new System.Windows.Forms.Label();
+            this.memoTalAciklama = new DevExpress.XtraEditors.MemoExEdit();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -110,6 +129,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNakliyeci.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoyad.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTC.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPlaka.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDorse.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoTalAciklama.Properties)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -185,20 +212,35 @@
             this.btnKaydet.Size = new System.Drawing.Size(75, 47);
             this.btnKaydet.TabIndex = 10;
             this.btnKaydet.Text = "Kaydet";
+            this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.memoTalAciklama);
             this.panelControl1.Controls.Add(this.rchAciklama);
             this.panelControl1.Controls.Add(this.txtIrsaliyeNo);
             this.panelControl1.Controls.Add(this.txtKayitNo);
+            this.panelControl1.Controls.Add(this.txtDorse);
+            this.panelControl1.Controls.Add(this.txtPlaka);
+            this.panelControl1.Controls.Add(this.txtTC);
+            this.panelControl1.Controls.Add(this.txtSoyad);
+            this.panelControl1.Controls.Add(this.txtAd);
             this.panelControl1.Controls.Add(this.txtFirmaUnvan);
             this.panelControl1.Controls.Add(this.dateIrsaliyeTarihi);
             this.panelControl1.Controls.Add(this.dateTarih);
+            this.panelControl1.Controls.Add(this.label13);
+            this.panelControl1.Controls.Add(this.txtNakliyeci);
+            this.panelControl1.Controls.Add(this.label12);
             this.panelControl1.Controls.Add(this.txtFirmaKodu);
+            this.panelControl1.Controls.Add(this.label14);
+            this.panelControl1.Controls.Add(this.label11);
             this.panelControl1.Controls.Add(this.label9);
+            this.panelControl1.Controls.Add(this.label10);
             this.panelControl1.Controls.Add(this.label4);
+            this.panelControl1.Controls.Add(this.label7);
             this.panelControl1.Controls.Add(this.label8);
             this.panelControl1.Controls.Add(this.label5);
+            this.panelControl1.Controls.Add(this.label6);
             this.panelControl1.Controls.Add(this.label2);
             this.panelControl1.Controls.Add(this.label3);
             this.panelControl1.Controls.Add(this.label1);
@@ -210,7 +252,7 @@
             // 
             // rchAciklama
             // 
-            this.rchAciklama.Location = new System.Drawing.Point(376, 8);
+            this.rchAciklama.Location = new System.Drawing.Point(625, 33);
             this.rchAciklama.Name = "rchAciklama";
             this.rchAciklama.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
             this.rchAciklama.Properties.Appearance.Options.UseFont = true;
@@ -232,7 +274,7 @@
             // txtKayitNo
             // 
             this.txtKayitNo.Enabled = false;
-            this.txtKayitNo.Location = new System.Drawing.Point(376, 33);
+            this.txtKayitNo.Location = new System.Drawing.Point(625, 83);
             this.txtKayitNo.Name = "txtKayitNo";
             this.txtKayitNo.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
             this.txtKayitNo.Properties.Appearance.Options.UseFont = true;
@@ -292,18 +334,18 @@
             // 
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label9.Location = new System.Drawing.Point(278, 10);
+            this.label9.Location = new System.Drawing.Point(527, 35);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(93, 21);
             this.label9.TabIndex = 1120;
-            this.label9.Text = "Açıklama :";
+            this.label9.Text = "İrs. Açıklama :";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(278, 35);
+            this.label4.Location = new System.Drawing.Point(527, 85);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 21);
             this.label4.TabIndex = 1120;
@@ -736,11 +778,189 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repoBtnMarka.Name = "repoBtnMarka";
             // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.Location = new System.Drawing.Point(269, 10);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 21);
+            this.label6.TabIndex = 1120;
+            this.label6.Text = "Nakliyeci:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtNakliyeci
+            // 
+            this.txtNakliyeci.Location = new System.Drawing.Point(367, 8);
+            this.txtNakliyeci.Name = "txtNakliyeci";
+            this.txtNakliyeci.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtNakliyeci.Properties.Appearance.Options.UseFont = true;
+            this.txtNakliyeci.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.txtNakliyeci.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtFirmaKodu_Properties_ButtonClick);
+            this.txtNakliyeci.Size = new System.Drawing.Size(155, 24);
+            this.txtNakliyeci.TabIndex = 2;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label7.Location = new System.Drawing.Point(269, 35);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(93, 21);
+            this.label7.TabIndex = 1120;
+            this.label7.Text = "Adı :";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtAd
+            // 
+            this.txtAd.Location = new System.Drawing.Point(367, 33);
+            this.txtAd.Name = "txtAd";
+            this.txtAd.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtAd.Properties.Appearance.Options.UseFont = true;
+            this.txtAd.Size = new System.Drawing.Size(155, 24);
+            this.txtAd.TabIndex = 9999;
+            // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label10.Location = new System.Drawing.Point(269, 60);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(93, 21);
+            this.label10.TabIndex = 1120;
+            this.label10.Text = "Soyadı :";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtSoyad
+            // 
+            this.txtSoyad.Location = new System.Drawing.Point(367, 58);
+            this.txtSoyad.Name = "txtSoyad";
+            this.txtSoyad.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtSoyad.Properties.Appearance.Options.UseFont = true;
+            this.txtSoyad.Size = new System.Drawing.Size(155, 24);
+            this.txtSoyad.TabIndex = 9999;
+            // 
+            // label11
+            // 
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label11.Location = new System.Drawing.Point(269, 85);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(93, 21);
+            this.label11.TabIndex = 1120;
+            this.label11.Text = "T.C. :";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtTC
+            // 
+            this.txtTC.Location = new System.Drawing.Point(367, 83);
+            this.txtTC.Name = "txtTC";
+            this.txtTC.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtTC.Properties.Appearance.Options.UseFont = true;
+            this.txtTC.Size = new System.Drawing.Size(155, 24);
+            this.txtTC.TabIndex = 9999;
+            // 
+            // label12
+            // 
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label12.Location = new System.Drawing.Point(269, 110);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(93, 21);
+            this.label12.TabIndex = 1120;
+            this.label12.Text = "Plaka :";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtPlaka
+            // 
+            this.txtPlaka.Location = new System.Drawing.Point(367, 108);
+            this.txtPlaka.Name = "txtPlaka";
+            this.txtPlaka.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtPlaka.Properties.Appearance.Options.UseFont = true;
+            this.txtPlaka.Size = new System.Drawing.Size(155, 24);
+            this.txtPlaka.TabIndex = 9999;
+            // 
+            // label13
+            // 
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label13.Location = new System.Drawing.Point(527, 10);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(93, 21);
+            this.label13.TabIndex = 1120;
+            this.label13.Text = "Dorse :";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtDorse
+            // 
+            this.txtDorse.Location = new System.Drawing.Point(625, 8);
+            this.txtDorse.Name = "txtDorse";
+            this.txtDorse.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtDorse.Properties.Appearance.Options.UseFont = true;
+            this.txtDorse.Size = new System.Drawing.Size(155, 24);
+            this.txtDorse.TabIndex = 9999;
+            // 
+            // label14
+            // 
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label14.Location = new System.Drawing.Point(527, 60);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(93, 21);
+            this.label14.TabIndex = 1120;
+            this.label14.Text = "Tal. Açıklama :";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // memoTalAciklama
+            // 
+            this.memoTalAciklama.Location = new System.Drawing.Point(625, 58);
+            this.memoTalAciklama.Name = "memoTalAciklama";
+            this.memoTalAciklama.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.memoTalAciklama.Properties.Appearance.Options.UseFont = true;
+            this.memoTalAciklama.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.memoTalAciklama.Size = new System.Drawing.Size(155, 24);
+            this.memoTalAciklama.TabIndex = 8;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dizaynKaydetToolStripMenuItem,
+            this.satırİşlemleriToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 48);
+            // 
+            // dizaynKaydetToolStripMenuItem
+            // 
+            this.dizaynKaydetToolStripMenuItem.Name = "dizaynKaydetToolStripMenuItem";
+            this.dizaynKaydetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.dizaynKaydetToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.dizaynKaydetToolStripMenuItem.Text = "Dizayn Kaydet";
+            this.dizaynKaydetToolStripMenuItem.Click += new System.EventHandler(this.dizaynKaydetToolStripMenuItem_Click);
+            // 
+            // satırİşlemleriToolStripMenuItem
+            // 
+            this.satırİşlemleriToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sütunSeçimiToolStripMenuItem});
+            this.satırİşlemleriToolStripMenuItem.Name = "satırİşlemleriToolStripMenuItem";
+            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.satırİşlemleriToolStripMenuItem.Text = "Satır İşlemleri";
+            // 
+            // sütunSeçimiToolStripMenuItem
+            // 
+            this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
+            this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
+            // 
             // FrmHamDepoCikis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1468, 722);
+            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.panelControl1);
@@ -748,6 +968,7 @@
             this.IconOptions.Image = global::Hesap.Properties.Resources.Bookmark;
             this.Name = "FrmHamDepoCikis";
             this.Text = "Ham Depo Çıkış";
+            this.Load += new System.EventHandler(this.FrmHamDepoCikis_Load);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
@@ -771,6 +992,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNakliyeci.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoyad.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTC.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPlaka.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDorse.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoTalAciklama.Properties)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -835,5 +1064,23 @@
         private DevExpress.XtraGrid.Columns.GridColumn D2Id;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbBirim;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnMarka;
+        private DevExpress.XtraEditors.ButtonEdit txtNakliyeci;
+        private System.Windows.Forms.Label label6;
+        private DevExpress.XtraEditors.MemoExEdit memoTalAciklama;
+        private DevExpress.XtraEditors.TextEdit txtDorse;
+        private DevExpress.XtraEditors.TextEdit txtPlaka;
+        private DevExpress.XtraEditors.TextEdit txtTC;
+        private DevExpress.XtraEditors.TextEdit txtSoyad;
+        private DevExpress.XtraEditors.TextEdit txtAd;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
     }
 }
