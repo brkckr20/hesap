@@ -19,7 +19,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         {
             InitializeComponent();
         }
-        int Id = 0, FirmaId = 0,TalimatId = 0;
+        int Id = 0, FirmaId = 0, TalimatId = 0, TasiyiciId = 0;
         CRUD_Operations cRUD = new CRUD_Operations();
         Metotlar metotlar = new Metotlar();
         Bildirim bildirim = new Bildirim();
@@ -37,12 +37,24 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+            yardimciAraclar.KolonDurumunuKaydet(gridView1, this.Text);
         }
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             yardimciAraclar.KolonSecici(gridControl1);
+        }
+
+        private void btnAciklamaGetir_Click(object sender, EventArgs e)
+        {
+            Liste.FrmAciklamaListesi frm = new Liste.FrmAciklamaListesi(this.Text);
+            frm.ShowDialog();
+            rchAciklama.EditValue = frm.Aciklama;
+        }
+
+        private void txtNakliyeci_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            yansit.TasiyiciBilgileriYansit(txtUnvan,txtAd,txtSoyad,txtTC,txtPlaka,txtDorse,txtNakliyeci,ref this.TasiyiciId);
         }
 
         void BaslangicVerileri()
