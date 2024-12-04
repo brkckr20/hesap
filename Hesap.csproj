@@ -255,6 +255,12 @@
     <Compile Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoListeSecimli.Designer.cs">
       <DependentUpon>FrmHamDepoListeSecimli.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoStok.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoStok.Designer.cs">
+      <DependentUpon>FrmHamDepoStok.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmTalimatlar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -558,6 +564,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoListeSecimli.resx">
       <DependentUpon>FrmHamDepoListeSecimli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoStok.resx">
+      <DependentUpon>FrmHamDepoStok.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmTalimatlar.resx">
       <DependentUpon>FrmTalimatlar.cs</DependentUpon>

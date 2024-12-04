@@ -52,6 +52,32 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
             rchAciklama.EditValue = frm.Aciklama;
         }
 
+        private void btnStokSecimi_Click(object sender, EventArgs e)
+        {
+            FrmHamDepoStok frm = new FrmHamDepoStok();
+            frm.ShowDialog();
+
+            foreach (var item in frm.stokListesi)
+            {
+                gridView1.AddNewRow();
+                int newRowHandle = gridView1.FocusedRowHandle;
+                var values = item.Split(';');
+                //gridView1.SetRowCellValue(newRowHandle, "KumasId", 1);
+                gridView1.SetRowCellValue(newRowHandle, "KumasKodu", values[0]);
+                gridView1.SetRowCellValue(newRowHandle, "KumasAdi", values[1]);
+                gridView1.SetRowCellValue(newRowHandle, "GrM2", values[2]);
+                //gridView1.SetRowCellValue(newRowHandle, "Organik", values[4]);
+                gridView1.SetRowCellValue(newRowHandle, "BrutKg", values[3]);
+                gridView1.SetRowCellValue(newRowHandle, "NetKg", values[4]);
+                gridView1.SetRowCellValue(newRowHandle, "NetMt", values[5]);
+                gridView1.SetRowCellValue(newRowHandle, "BoyahaneRenkId", values[6]);
+                gridView1.SetRowCellValue(newRowHandle, "BoyahaneRenkKodu", values[7]);
+                gridView1.SetRowCellValue(newRowHandle, "BoyahaneRenkAdi", values[8]);
+                gridView1.SetRowCellValue(newRowHandle, "TakipNo", values[9]);
+                gridView1.SetRowCellValue(newRowHandle, "KumasId", values[10]);
+            }
+        }
+
         private void txtNakliyeci_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             yansit.TasiyiciBilgileriYansit(txtUnvan,txtAd,txtSoyad,txtTC,txtPlaka,txtDorse,txtNakliyeci,ref this.TasiyiciId);

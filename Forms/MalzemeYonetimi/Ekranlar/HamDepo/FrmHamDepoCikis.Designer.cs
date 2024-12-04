@@ -38,10 +38,12 @@
             this.btnListe = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btnAciklamaGetir = new DevExpress.XtraEditors.SimpleButton();
             this.memoTalAciklama = new DevExpress.XtraEditors.MemoExEdit();
             this.rchAciklama = new DevExpress.XtraEditors.MemoExEdit();
             this.txtIrsaliyeNo = new DevExpress.XtraEditors.TextEdit();
             this.txtKayitNo = new DevExpress.XtraEditors.TextEdit();
+            this.txtDorse = new DevExpress.XtraEditors.TextEdit();
             this.txtUnvan = new DevExpress.XtraEditors.TextEdit();
             this.txtPlaka = new DevExpress.XtraEditors.TextEdit();
             this.txtTC = new DevExpress.XtraEditors.TextEdit();
@@ -49,6 +51,7 @@
             this.txtAd = new DevExpress.XtraEditors.TextEdit();
             this.txtFirmaUnvan = new DevExpress.XtraEditors.TextEdit();
             this.dateIrsaliyeTarihi = new DevExpress.XtraEditors.DateEdit();
+            this.label15 = new System.Windows.Forms.Label();
             this.dateTarih = new DevExpress.XtraEditors.DateEdit();
             this.label13 = new System.Windows.Forms.Label();
             this.txtNakliyeci = new DevExpress.XtraEditors.ButtonEdit();
@@ -67,7 +70,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlBottom = new DevExpress.XtraEditors.PanelControl();
-            this.btnTalimatlar = new DevExpress.XtraEditors.SimpleButton();
+            this.btnStokSecimi = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.KalemIslem = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -106,9 +109,7 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtDorse = new DevExpress.XtraEditors.TextEdit();
-            this.btnAciklamaGetir = new DevExpress.XtraEditors.SimpleButton();
+            this.btnTalimatlar = new DevExpress.XtraEditors.SimpleButton();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -116,6 +117,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIrsaliyeNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKayitNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDorse.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUnvan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPlaka.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTC.Properties)).BeginInit();
@@ -140,7 +142,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDorse.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -257,6 +258,15 @@
             this.panelControl1.Size = new System.Drawing.Size(1468, 141);
             this.panelControl1.TabIndex = 10;
             // 
+            // btnAciklamaGetir
+            // 
+            this.btnAciklamaGetir.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAciklamaGetir.ImageOptions.Image")));
+            this.btnAciklamaGetir.Location = new System.Drawing.Point(781, 58);
+            this.btnAciklamaGetir.Name = "btnAciklamaGetir";
+            this.btnAciklamaGetir.Size = new System.Drawing.Size(24, 24);
+            this.btnAciklamaGetir.TabIndex = 10004;
+            this.btnAciklamaGetir.Click += new System.EventHandler(this.btnAciklamaGetir_Click);
+            // 
             // memoTalAciklama
             // 
             this.memoTalAciklama.Location = new System.Drawing.Point(625, 83);
@@ -298,6 +308,15 @@
             this.txtKayitNo.Properties.Appearance.Options.UseFont = true;
             this.txtKayitNo.Size = new System.Drawing.Size(155, 24);
             this.txtKayitNo.TabIndex = 9999;
+            // 
+            // txtDorse
+            // 
+            this.txtDorse.Location = new System.Drawing.Point(625, 8);
+            this.txtDorse.Name = "txtDorse";
+            this.txtDorse.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtDorse.Properties.Appearance.Options.UseFont = true;
+            this.txtDorse.Size = new System.Drawing.Size(155, 24);
+            this.txtDorse.TabIndex = 9999;
             // 
             // txtUnvan
             // 
@@ -366,6 +385,17 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateIrsaliyeTarihi.Size = new System.Drawing.Size(155, 24);
             this.dateIrsaliyeTarihi.TabIndex = 1;
+            // 
+            // label15
+            // 
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label15.Location = new System.Drawing.Point(527, 10);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(93, 21);
+            this.label15.TabIndex = 1120;
+            this.label15.Text = "Dorse :";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dateTarih
             // 
@@ -562,19 +592,21 @@
             // pnlBottom
             // 
             this.pnlBottom.Controls.Add(this.btnTalimatlar);
+            this.pnlBottom.Controls.Add(this.btnStokSecimi);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBottom.Location = new System.Drawing.Point(0, 669);
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(1468, 53);
             this.pnlBottom.TabIndex = 13;
             // 
-            // btnTalimatlar
+            // btnStokSecimi
             // 
-            this.btnTalimatlar.Location = new System.Drawing.Point(5, 5);
-            this.btnTalimatlar.Name = "btnTalimatlar";
-            this.btnTalimatlar.Size = new System.Drawing.Size(134, 43);
-            this.btnTalimatlar.TabIndex = 0;
-            this.btnTalimatlar.Text = "Ham Depo Stok Seçimi";
+            this.btnStokSecimi.Location = new System.Drawing.Point(5, 5);
+            this.btnStokSecimi.Name = "btnStokSecimi";
+            this.btnStokSecimi.Size = new System.Drawing.Size(134, 43);
+            this.btnStokSecimi.TabIndex = 0;
+            this.btnStokSecimi.Text = "Ham Depo Stok Seçimi";
+            this.btnStokSecimi.Click += new System.EventHandler(this.btnStokSecimi_Click);
             // 
             // gridControl1
             // 
@@ -967,34 +999,13 @@
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
-            // label15
+            // btnTalimatlar
             // 
-            this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label15.Location = new System.Drawing.Point(527, 10);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(93, 21);
-            this.label15.TabIndex = 1120;
-            this.label15.Text = "Dorse :";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtDorse
-            // 
-            this.txtDorse.Location = new System.Drawing.Point(625, 8);
-            this.txtDorse.Name = "txtDorse";
-            this.txtDorse.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
-            this.txtDorse.Properties.Appearance.Options.UseFont = true;
-            this.txtDorse.Size = new System.Drawing.Size(155, 24);
-            this.txtDorse.TabIndex = 9999;
-            // 
-            // btnAciklamaGetir
-            // 
-            this.btnAciklamaGetir.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAciklamaGetir.ImageOptions.Image")));
-            this.btnAciklamaGetir.Location = new System.Drawing.Point(781, 58);
-            this.btnAciklamaGetir.Name = "btnAciklamaGetir";
-            this.btnAciklamaGetir.Size = new System.Drawing.Size(24, 24);
-            this.btnAciklamaGetir.TabIndex = 10004;
-            this.btnAciklamaGetir.Click += new System.EventHandler(this.btnAciklamaGetir_Click);
+            this.btnTalimatlar.Location = new System.Drawing.Point(145, 5);
+            this.btnTalimatlar.Name = "btnTalimatlar";
+            this.btnTalimatlar.Size = new System.Drawing.Size(93, 43);
+            this.btnTalimatlar.TabIndex = 0;
+            this.btnTalimatlar.Text = "Talimatlar";
             // 
             // FrmHamDepoCikis
             // 
@@ -1017,6 +1028,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIrsaliyeNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKayitNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDorse.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUnvan.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPlaka.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTC.Properties)).EndInit();
@@ -1041,7 +1053,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtDorse.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1071,7 +1082,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.PanelControl pnlBottom;
-        private DevExpress.XtraEditors.SimpleButton btnTalimatlar;
+        private DevExpress.XtraEditors.SimpleButton btnStokSecimi;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn KalemIslem;
@@ -1127,5 +1138,6 @@
         private DevExpress.XtraEditors.TextEdit txtDorse;
         private System.Windows.Forms.Label label15;
         private DevExpress.XtraEditors.SimpleButton btnAciklamaGetir;
+        private DevExpress.XtraEditors.SimpleButton btnTalimatlar;
     }
 }
