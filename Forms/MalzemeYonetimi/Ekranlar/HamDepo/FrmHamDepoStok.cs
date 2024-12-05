@@ -25,7 +25,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         private void FrmHamDepoStok_Load(object sender, EventArgs e)
         {
             string sql = @"SELECT d1.[Id] ,[Tarih] ,[FirmaId] ,[IslemCinsi] ,d1.[Aciklama] ,[IrsaliyeNo] ,[IrsaliyeTarihi] ,[FaturaNo] ,[FaturaTarihi] ,[TasiyiciId] ,[TalimatNo] ,[Kapat] ,[Yetkili] ,[Vade] ,[OdemeSekli] ,[TalimatId] ,d2.[Id] D2Id,[RefNo] ,[KalemIslem] ,[SipNo] ,[BordurKodu] ,[Bordur] ,[GrM2] ,[HamGr] ,[RenkId] ,SUM([BrutKg]) [BrutKg]
-            ,COALESCE(SUM([NetKg]) - (select sum(NetKg) from HamDepo1 x inner join HamDepo2 y on x.Id = y.RefNo where y.TakipNo = d2.Id and x.IslemCinsi = 'Çıkış'), SUM([NetKg])) AS 'Kalan Net Kg'
+            ,COALESCE(SUM([NetKg]) - (select sum(NetKg) from HamDepo1 x inner join HamDepo2 y on x.Id = y.RefNo where y.TakipNo = d2.Id and x.IslemCinsi = 'Çıkış'), SUM([NetKg])) AS [KalanNetKg]
             ,sum([BrutMt]) [BrutMt] ,sum([NetMt]) [NetMt] ,sum([Adet]) [Adet] ,[Fire] ,[CuvalSayisi] ,sum([TopSayisi]) [TopSayisi] ,d2.[Aciklama] [SatirAciklama] ,[HataId] ,[IstenenEbat] ,[BoyaOzellik] ,[BaskiId] ,[Barkod] ,[HamKod] ,[HamFasonKod] ,d2.[Id] [TakipNo] ,[PartiNo] ,[BoyaKod] ,[VaryantId] ,[Fiyat] ,[Organik] ,[DesenId] ,[BoyaIslemId] ,[DovizCinsi] ,[FiyatBirimi] ,[UUID] ,[SatirTutari],uk.[Id] [KumasId],[UrunKodu] [KumasKodu],[UrunAdi] [KumasAdi] FROM HamDepo1 d1 inner join HamDepo2 d2 on d1.Id = d2.RefNo 
 			left join UrunKarti uk on uk.Id = d2.KumasId
 				where d1.IslemCinsi = 'Giriş'
@@ -55,7 +55,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
                 string KumasAdi = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "KumasAdi"));
                 int GrM2 = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "GrM2"));
                 decimal BrutKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "BrutKg"));
-                decimal NetKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "NetKg"));
+                decimal NetKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "KalanNetKg"));
                 decimal NetMt = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "NetMt"));
                 int BoyahaneRenkId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "BoyahaneRenkId"));
                 string BoyahaneRenkKodu = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "BoyahaneRenkKodu"));

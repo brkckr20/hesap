@@ -70,6 +70,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlBottom = new DevExpress.XtraEditors.PanelControl();
+            this.btnTalimatlar = new DevExpress.XtraEditors.SimpleButton();
             this.btnStokSecimi = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -109,7 +110,6 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnTalimatlar = new DevExpress.XtraEditors.SimpleButton();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -599,6 +599,14 @@
             this.pnlBottom.Size = new System.Drawing.Size(1468, 53);
             this.pnlBottom.TabIndex = 13;
             // 
+            // btnTalimatlar
+            // 
+            this.btnTalimatlar.Location = new System.Drawing.Point(145, 5);
+            this.btnTalimatlar.Name = "btnTalimatlar";
+            this.btnTalimatlar.Size = new System.Drawing.Size(93, 43);
+            this.btnTalimatlar.TabIndex = 0;
+            this.btnTalimatlar.Text = "Talimatlar";
+            // 
             // btnStokSecimi
             // 
             this.btnStokSecimi.Location = new System.Drawing.Point(5, 5);
@@ -717,6 +725,7 @@
             this.repoBtnUrunKodu.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repoBtnUrunKodu.Name = "repoBtnUrunKodu";
+            this.repoBtnUrunKodu.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBtnUrunKodu_ButtonClick);
             // 
             // KumasAdi
             // 
@@ -998,14 +1007,6 @@
             this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
-            // 
-            // btnTalimatlar
-            // 
-            this.btnTalimatlar.Location = new System.Drawing.Point(145, 5);
-            this.btnTalimatlar.Name = "btnTalimatlar";
-            this.btnTalimatlar.Size = new System.Drawing.Size(93, 43);
-            this.btnTalimatlar.TabIndex = 0;
-            this.btnTalimatlar.Text = "Talimatlar";
             // 
             // FrmHamDepoCikis
             // 

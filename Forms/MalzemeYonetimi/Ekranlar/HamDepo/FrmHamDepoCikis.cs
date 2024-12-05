@@ -78,6 +78,12 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
             }
         }
 
+        private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            int newRowHandle = gridView1.FocusedRowHandle;
+            yansit.KumasBilgileriYansit(gridView1, newRowHandle);
+        }
+
         private void txtNakliyeci_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             yansit.TasiyiciBilgileriYansit(txtUnvan,txtAd,txtSoyad,txtTC,txtPlaka,txtDorse,txtNakliyeci,ref this.TasiyiciId);
