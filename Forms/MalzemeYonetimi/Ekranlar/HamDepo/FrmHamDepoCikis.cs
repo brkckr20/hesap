@@ -62,11 +62,9 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
                 gridView1.AddNewRow();
                 int newRowHandle = gridView1.FocusedRowHandle;
                 var values = item.Split(';');
-                //gridView1.SetRowCellValue(newRowHandle, "KumasId", 1);
                 gridView1.SetRowCellValue(newRowHandle, "KumasKodu", values[0]);
                 gridView1.SetRowCellValue(newRowHandle, "KumasAdi", values[1]);
                 gridView1.SetRowCellValue(newRowHandle, "GrM2", values[2]);
-                //gridView1.SetRowCellValue(newRowHandle, "Organik", values[4]);
                 gridView1.SetRowCellValue(newRowHandle, "BrutKg", values[3]);
                 gridView1.SetRowCellValue(newRowHandle, "NetKg", values[4]);
                 gridView1.SetRowCellValue(newRowHandle, "NetMt", values[5]);

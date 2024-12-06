@@ -352,6 +352,12 @@
     <Compile Include="Forms\MalzemeYonetimi\Kartlar\FrmKumasKarti.Designer.cs">
       <DependentUpon>FrmKumasKarti.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OrderYonetimi\FrmModelKarti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderYonetimi\FrmModelKarti.Designer.cs">
+      <DependentUpon>FrmModelKarti.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -613,6 +619,9 @@
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Kartlar\FrmKumasKarti.resx">
       <DependentUpon>FrmKumasKarti.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderYonetimi\FrmModelKarti.resx">
+      <DependentUpon>FrmModelKarti.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.resx">
       <DependentUpon>FrmEtiketTasarimi.cs</DependentUpon>
     </EmbeddedResource>
@@ -717,6 +726,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BookmarkBig.ico" />
+    <None Include="Resources\model.ico" />
     <None Include="Resources\Fabric Sample ham.ico" />
     <None Include="Resources\Brief.ico" />
     <None Include="Resources\YarnOut.ico" />

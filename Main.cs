@@ -223,5 +223,11 @@ namespace Hesap
             Forms.MalzemeYonetimi.Ekranlar.HamDepo.FrmHamDepoCikis frm = new Forms.MalzemeYonetimi.Ekranlar.HamDepo.FrmHamDepoCikis();
             FormAc(frm);
         }
+
+        private void barButtonItem25_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Forms.OrderYonetimi.FrmModelKarti frm = new Forms.OrderYonetimi.FrmModelKarti();
+            FormAc(frm);
+        }
     }
 }
