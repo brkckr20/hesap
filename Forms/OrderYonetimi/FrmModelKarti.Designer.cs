@@ -77,6 +77,7 @@
             this.txtOrjModelAdi = new DevExpress.XtraEditors.TextEdit();
             this.txtModelAdi = new DevExpress.XtraEditors.TextEdit();
             this.label2 = new System.Windows.Forms.Label();
+            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -102,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelKodu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjModelAdi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -182,6 +184,7 @@
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.panelControl3);
             this.panelControl1.Controls.Add(this.panelControl2);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 53);
@@ -600,6 +603,15 @@
             this.label2.Text = "Orj.Model Adı :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // panelControl3
+            // 
+            this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl3.Location = new System.Drawing.Point(0, 209);
+            this.panelControl3.Name = "panelControl3";
+            this.panelControl3.Size = new System.Drawing.Size(1525, 495);
+            this.panelControl3.TabIndex = 1122;
+            // 
             // FrmModelKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -635,6 +647,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelKodu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjModelAdi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -689,5 +702,6 @@
         private System.Windows.Forms.Label label15;
         private DevExpress.XtraEditors.TextEdit txtGTIP;
         private System.Windows.Forms.Label label18;
+        private DevExpress.XtraEditors.PanelControl panelControl3;
     }
 }

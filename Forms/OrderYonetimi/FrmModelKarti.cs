@@ -48,13 +48,16 @@ namespace Hesap.Forms.OrderYonetimi
                 { "AksesuarOK",chckAksesuarOK.Checked},
                 { "IplikOK",chckIplikOK.Checked},
                 { "GTIP",txtGTIP.Text},
-                //{ "GTIP",txtGTIP.Checked},
                 //{ "GTIP",txtGTIP.Text},
         };
             if (this.Id == 0)
             {
                 this.Id = cRUD.InsertRecord("ModelKarti", parameters);
                 bildirim.Basarili();
+            }
+            else
+            {
+                cRUD.UpdateRecord("ModelKarti", parameters, this.Id);
             }
         }
 
