@@ -37,6 +37,7 @@
             this.btnListe = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.picResim = new DevExpress.XtraEditors.PictureEdit();
             this.chckAksesuarOK = new DevExpress.XtraEditors.CheckEdit();
@@ -77,10 +78,12 @@
             this.txtOrjModelAdi = new DevExpress.XtraEditors.TextEdit();
             this.txtModelAdi = new DevExpress.XtraEditors.TextEdit();
             this.label2 = new System.Windows.Forms.Label();
-            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.label19 = new System.Windows.Forms.Label();
+            this.chckKullanimda = new DevExpress.XtraEditors.CheckEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picResim.Properties)).BeginInit();
@@ -103,7 +106,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelKodu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjModelAdi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -192,9 +195,19 @@
             this.panelControl1.Size = new System.Drawing.Size(1525, 704);
             this.panelControl1.TabIndex = 5;
             // 
+            // panelControl3
+            // 
+            this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl3.Location = new System.Drawing.Point(0, 209);
+            this.panelControl3.Name = "panelControl3";
+            this.panelControl3.Size = new System.Drawing.Size(1525, 495);
+            this.panelControl3.TabIndex = 1122;
+            // 
             // panelControl2
             // 
             this.panelControl2.Controls.Add(this.picResim);
+            this.panelControl2.Controls.Add(this.chckKullanimda);
             this.panelControl2.Controls.Add(this.chckAksesuarOK);
             this.panelControl2.Controls.Add(this.chckIplikOK);
             this.panelControl2.Controls.Add(this.chckNakisOK);
@@ -202,6 +215,7 @@
             this.panelControl2.Controls.Add(this.chckKumasOK);
             this.panelControl2.Controls.Add(this.txtCinsi);
             this.panelControl2.Controls.Add(this.txtKategori);
+            this.panelControl2.Controls.Add(this.label19);
             this.panelControl2.Controls.Add(this.label17);
             this.panelControl2.Controls.Add(this.txtMusteriKodu);
             this.panelControl2.Controls.Add(this.label16);
@@ -603,14 +617,25 @@
             this.label2.Text = "Orj.Model Adı :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // panelControl3
+            // label19
             // 
-            this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(0, 209);
-            this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1525, 495);
-            this.panelControl3.TabIndex = 1122;
+            this.label19.BackColor = System.Drawing.Color.Transparent;
+            this.label19.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label19.Location = new System.Drawing.Point(675, 25);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(113, 21);
+            this.label19.TabIndex = 1119;
+            this.label19.Text = "Kullanımda :";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chckKullanimda
+            // 
+            this.chckKullanimda.EditValue = true;
+            this.chckKullanimda.Location = new System.Drawing.Point(794, 25);
+            this.chckKullanimda.Name = "chckKullanimda";
+            this.chckKullanimda.Properties.Caption = "";
+            this.chckKullanimda.Size = new System.Drawing.Size(75, 20);
+            this.chckKullanimda.TabIndex = 18;
             // 
             // FrmModelKarti
             // 
@@ -625,6 +650,7 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picResim.Properties)).EndInit();
@@ -647,7 +673,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelKodu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjModelAdi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -703,5 +729,7 @@
         private DevExpress.XtraEditors.TextEdit txtGTIP;
         private System.Windows.Forms.Label label18;
         private DevExpress.XtraEditors.PanelControl panelControl3;
+        private DevExpress.XtraEditors.CheckEdit chckKullanimda;
+        private System.Windows.Forms.Label label19;
     }
 }
