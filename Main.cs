@@ -229,5 +229,11 @@ namespace Hesap
             Forms.OrderYonetimi.FrmModelKarti frm = new Forms.OrderYonetimi.FrmModelKarti();
             FormAc(frm);
         }
+
+        private void barButtonItem26_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Forms.OrderYonetimi.Kartlar.FrmOzellikKarti frm = new Forms.OrderYonetimi.Kartlar.FrmOzellikKarti("sifir");
+            FormAc(frm);
+        }
     }
 }
