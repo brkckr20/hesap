@@ -232,7 +232,7 @@ namespace Hesap
 
         private void barButtonItem26_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Forms.OrderYonetimi.Kartlar.FrmOzellikKarti frm = new Forms.OrderYonetimi.Kartlar.FrmOzellikKarti("sifir");
+            Forms.OrderYonetimi.Kartlar.FrmKategoriKarti frm = new Forms.OrderYonetimi.Kartlar.FrmKategoriKarti();
             FormAc(frm);
         }
     }

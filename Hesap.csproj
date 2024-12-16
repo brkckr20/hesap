@@ -352,17 +352,17 @@
     <Compile Include="Forms\MalzemeYonetimi\Kartlar\FrmKumasKarti.Designer.cs">
       <DependentUpon>FrmKumasKarti.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OrderYonetimi\Kartlar\FrmKategoriKarti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderYonetimi\Kartlar\FrmKategoriKarti.Designer.cs">
+      <DependentUpon>FrmKategoriKarti.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\OrderYonetimi\Kartlar\FrmModelKarti.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\OrderYonetimi\Kartlar\FrmModelKarti.Designer.cs">
       <DependentUpon>FrmModelKarti.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\OrderYonetimi\Kartlar\FrmOzellikKarti.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\OrderYonetimi\Kartlar\FrmOzellikKarti.Designer.cs">
-      <DependentUpon>FrmOzellikKarti.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.cs">
       <SubType>Form</SubType>
@@ -625,11 +625,11 @@
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Kartlar\FrmKumasKarti.resx">
       <DependentUpon>FrmKumasKarti.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderYonetimi\Kartlar\FrmKategoriKarti.resx">
+      <DependentUpon>FrmKategoriKarti.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\OrderYonetimi\Kartlar\FrmModelKarti.resx">
       <DependentUpon>FrmModelKarti.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OrderYonetimi\Kartlar\FrmOzellikKarti.resx">
-      <DependentUpon>FrmOzellikKarti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.resx">
       <DependentUpon>FrmEtiketTasarimi.cs</DependentUpon>
