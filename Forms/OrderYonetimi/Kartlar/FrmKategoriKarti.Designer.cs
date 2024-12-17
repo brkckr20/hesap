@@ -37,15 +37,17 @@
             this.btnListe = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.txtFirmaUnvan = new DevExpress.XtraEditors.TextEdit();
+            this.txtOrjAd = new DevExpress.XtraEditors.TextEdit();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtFirmaKodu = new DevExpress.XtraEditors.TextEdit();
+            this.txtAd = new DevExpress.XtraEditors.TextEdit();
             this.label72 = new System.Windows.Forms.Label();
+            this.chckKullanimda = new DevExpress.XtraEditors.CheckEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFirmaKodu.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOrjAd.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -111,6 +113,7 @@
             this.btnListe.Size = new System.Drawing.Size(75, 47);
             this.btnListe.TabIndex = 102;
             this.btnListe.Text = "Liste";
+            this.btnListe.Click += new System.EventHandler(this.btnListe_Click);
             // 
             // btnKaydet
             // 
@@ -121,13 +124,15 @@
             this.btnKaydet.Size = new System.Drawing.Size(75, 47);
             this.btnKaydet.TabIndex = 101;
             this.btnKaydet.Text = "Kaydet";
+            this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
             // 
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.txtFirmaUnvan);
+            this.panelControl1.Controls.Add(this.chckKullanimda);
+            this.panelControl1.Controls.Add(this.txtOrjAd);
             this.panelControl1.Controls.Add(this.label1);
-            this.panelControl1.Controls.Add(this.txtFirmaKodu);
+            this.panelControl1.Controls.Add(this.txtAd);
             this.panelControl1.Controls.Add(this.label72);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 53);
@@ -135,12 +140,12 @@
             this.panelControl1.Size = new System.Drawing.Size(1123, 469);
             this.panelControl1.TabIndex = 5;
             // 
-            // txtFirmaUnvan
+            // txtOrjAd
             // 
-            this.txtFirmaUnvan.Location = new System.Drawing.Point(146, 34);
-            this.txtFirmaUnvan.Name = "txtFirmaUnvan";
-            this.txtFirmaUnvan.Size = new System.Drawing.Size(206, 22);
-            this.txtFirmaUnvan.TabIndex = 2;
+            this.txtOrjAd.Location = new System.Drawing.Point(146, 34);
+            this.txtOrjAd.Name = "txtOrjAd";
+            this.txtOrjAd.Size = new System.Drawing.Size(206, 22);
+            this.txtOrjAd.TabIndex = 2;
             // 
             // label1
             // 
@@ -153,12 +158,12 @@
             this.label1.Text = "Orj.Kategori Adı :";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtFirmaKodu
+            // txtAd
             // 
-            this.txtFirmaKodu.Location = new System.Drawing.Point(146, 6);
-            this.txtFirmaKodu.Name = "txtFirmaKodu";
-            this.txtFirmaKodu.Size = new System.Drawing.Size(206, 22);
-            this.txtFirmaKodu.TabIndex = 1;
+            this.txtAd.Location = new System.Drawing.Point(146, 6);
+            this.txtAd.Name = "txtAd";
+            this.txtAd.Size = new System.Drawing.Size(206, 22);
+            this.txtAd.TabIndex = 1;
             // 
             // label72
             // 
@@ -170,6 +175,14 @@
             this.label72.TabIndex = 1118;
             this.label72.Text = "Kategori Adı :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chckKullanimda
+            // 
+            this.chckKullanimda.Location = new System.Drawing.Point(358, 7);
+            this.chckKullanimda.Name = "chckKullanimda";
+            this.chckKullanimda.Properties.Caption = "Kullanımda";
+            this.chckKullanimda.Size = new System.Drawing.Size(91, 20);
+            this.chckKullanimda.TabIndex = 1119;
             // 
             // FrmKategoriKarti
             // 
@@ -183,8 +196,9 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFirmaKodu.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOrjAd.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -199,9 +213,10 @@
         private DevExpress.XtraEditors.SimpleButton btnListe;
         private DevExpress.XtraEditors.SimpleButton btnKaydet;
         private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.TextEdit txtFirmaUnvan;
+        private DevExpress.XtraEditors.TextEdit txtOrjAd;
         private System.Windows.Forms.Label label1;
-        private DevExpress.XtraEditors.TextEdit txtFirmaKodu;
+        private DevExpress.XtraEditors.TextEdit txtAd;
         private System.Windows.Forms.Label label72;
+        private DevExpress.XtraEditors.CheckEdit chckKullanimda;
     }
 }
