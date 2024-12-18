@@ -37,17 +37,17 @@
             this.btnListe = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.chckKullanimda = new DevExpress.XtraEditors.CheckEdit();
             this.txtOrjAd = new DevExpress.XtraEditors.TextEdit();
             this.label1 = new System.Windows.Forms.Label();
             this.txtAd = new DevExpress.XtraEditors.TextEdit();
             this.label72 = new System.Windows.Forms.Label();
-            this.chckKullanimda = new DevExpress.XtraEditors.CheckEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjAd.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -83,6 +83,7 @@
             this.btnIleri.Size = new System.Drawing.Size(75, 47);
             this.btnIleri.TabIndex = 102;
             this.btnIleri.Text = "İleri";
+            this.btnIleri.Click += new System.EventHandler(this.btnIleri_Click);
             // 
             // btnGeri
             // 
@@ -93,6 +94,7 @@
             this.btnGeri.Size = new System.Drawing.Size(75, 47);
             this.btnGeri.TabIndex = 102;
             this.btnGeri.Text = "Geri";
+            this.btnGeri.Click += new System.EventHandler(this.btnGeri_Click);
             // 
             // btnSil
             // 
@@ -103,6 +105,7 @@
             this.btnSil.Size = new System.Drawing.Size(75, 47);
             this.btnSil.TabIndex = 102;
             this.btnSil.Text = "Sil";
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnListe
             // 
@@ -140,6 +143,14 @@
             this.panelControl1.Size = new System.Drawing.Size(1123, 469);
             this.panelControl1.TabIndex = 5;
             // 
+            // chckKullanimda
+            // 
+            this.chckKullanimda.Location = new System.Drawing.Point(358, 7);
+            this.chckKullanimda.Name = "chckKullanimda";
+            this.chckKullanimda.Properties.Caption = "Kullanımda";
+            this.chckKullanimda.Size = new System.Drawing.Size(91, 20);
+            this.chckKullanimda.TabIndex = 1119;
+            // 
             // txtOrjAd
             // 
             this.txtOrjAd.Location = new System.Drawing.Point(146, 34);
@@ -176,14 +187,6 @@
             this.label72.Text = "Kategori Adı :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // chckKullanimda
-            // 
-            this.chckKullanimda.Location = new System.Drawing.Point(358, 7);
-            this.chckKullanimda.Name = "chckKullanimda";
-            this.chckKullanimda.Properties.Caption = "Kullanımda";
-            this.chckKullanimda.Size = new System.Drawing.Size(91, 20);
-            this.chckKullanimda.TabIndex = 1119;
-            // 
             // FrmKategoriKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,9 +199,9 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjAd.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
