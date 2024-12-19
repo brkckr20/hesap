@@ -1,6 +1,6 @@
 ﻿namespace Hesap.Forms.OrderYonetimi.Kartlar
 {
-    partial class FrmKategoriKarti
+    partial class FrmCinsiKarti
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmKategoriKarti));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCinsiKarti));
             this.panel3 = new System.Windows.Forms.Panel();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnIleri = new DevExpress.XtraEditors.SimpleButton();
@@ -61,8 +61,8 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1123, 53);
-            this.panel3.TabIndex = 4;
+            this.panel3.Size = new System.Drawing.Size(977, 53);
+            this.panel3.TabIndex = 5;
             // 
             // simpleButton1
             // 
@@ -141,8 +141,8 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 53);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1123, 469);
-            this.panelControl1.TabIndex = 5;
+            this.panelControl1.Size = new System.Drawing.Size(977, 509);
+            this.panelControl1.TabIndex = 6;
             // 
             // chckKullanimda
             // 
@@ -188,15 +188,15 @@
             this.label72.Text = "Kategori Adı :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // FrmKategoriKarti
+            // FrmCinsiKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1123, 522);
+            this.ClientSize = new System.Drawing.Size(977, 562);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.panel3);
-            this.Name = "FrmKategoriKarti";
-            this.Text = "Kategori Kartı";
+            this.Name = "FrmCinsiKarti";
+            this.Text = "Cinsi Kartı";
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
@@ -217,10 +217,10 @@
         private DevExpress.XtraEditors.SimpleButton btnListe;
         private DevExpress.XtraEditors.SimpleButton btnKaydet;
         private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.CheckEdit chckKullanimda;
         private DevExpress.XtraEditors.TextEdit txtOrjAd;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.TextEdit txtAd;
         private System.Windows.Forms.Label label72;
-        private DevExpress.XtraEditors.CheckEdit chckKullanimda;
     }
 }

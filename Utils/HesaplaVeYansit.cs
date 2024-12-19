@@ -489,6 +489,17 @@ namespace Hesap.Utils
 
             return columnNames.ToArray();
         }
+        public void KategoriYansit(TextEdit adi, TextEdit orjAdi, ref int KategoriId, string EkranAdi)
+        {
+            Forms.OrderYonetimi.Liste.FrmListe frm = new Forms.OrderYonetimi.Liste.FrmListe(EkranAdi);
+            frm.ShowDialog();
+            if (frm.Adi != null)
+            {
+                adi.Text = frm.Adi;
+                orjAdi.Text = frm.OrjAdi;
+                KategoriId = frm.Id;
+            }
+        }
 
     }
 }

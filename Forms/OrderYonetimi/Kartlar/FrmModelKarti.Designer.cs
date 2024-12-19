@@ -38,8 +38,18 @@
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.gridBedenler = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.Beden = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.repoCmbKalemIslem = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.picResim = new DevExpress.XtraEditors.PictureEdit();
+            this.chckKullanimda = new DevExpress.XtraEditors.CheckEdit();
             this.chckAksesuarOK = new DevExpress.XtraEditors.CheckEdit();
             this.chckIplikOK = new DevExpress.XtraEditors.CheckEdit();
             this.chckNakisOK = new DevExpress.XtraEditors.CheckEdit();
@@ -47,6 +57,7 @@
             this.chckKumasOK = new DevExpress.XtraEditors.CheckEdit();
             this.txtCinsi = new DevExpress.XtraEditors.ButtonEdit();
             this.txtKategori = new DevExpress.XtraEditors.ButtonEdit();
+            this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.txtMusteriKodu = new DevExpress.XtraEditors.ButtonEdit();
             this.label16 = new System.Windows.Forms.Label();
@@ -78,19 +89,23 @@
             this.txtOrjModelAdi = new DevExpress.XtraEditors.TextEdit();
             this.txtModelAdi = new DevExpress.XtraEditors.TextEdit();
             this.label2 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.chckKullanimda = new DevExpress.XtraEditors.CheckEdit();
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridBedenler)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picResim.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chckAksesuarOK.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chckIplikOK.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chckNakisOK.Properties)).BeginInit();
@@ -110,9 +125,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelKodu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjModelAdi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -211,6 +223,100 @@
             this.panelControl3.Size = new System.Drawing.Size(1525, 495);
             this.panelControl3.TabIndex = 1122;
             // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(1525, 495);
+            this.xtraTabControl1.TabIndex = 0;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
+            // 
+            // xtraTabPage1
+            // 
+            this.xtraTabPage1.Controls.Add(this.gridBedenler);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(1523, 471);
+            this.xtraTabPage1.Text = "Beden Seti";
+            // 
+            // gridBedenler
+            // 
+            this.gridBedenler.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridBedenler.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.gridBedenler.Location = new System.Drawing.Point(0, 0);
+            this.gridBedenler.MainView = this.gridView1;
+            this.gridBedenler.Name = "gridBedenler";
+            this.gridBedenler.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repoCmbBirim,
+            this.repoBtnUrunKodu,
+            this.repoCmbKalemIslem});
+            this.gridBedenler.Size = new System.Drawing.Size(1523, 471);
+            this.gridBedenler.TabIndex = 10;
+            this.gridBedenler.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.Beden});
+            this.gridView1.GridControl = this.gridBedenler;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
+            this.gridView1.OptionsView.ColumnAutoWidth = false;
+            this.gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
+            this.gridView1.OptionsView.ShowFooter = true;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // Beden
+            // 
+            this.Beden.Caption = "Bedenler";
+            this.Beden.FieldName = "Beden";
+            this.Beden.Name = "Beden";
+            this.Beden.Visible = true;
+            this.Beden.VisibleIndex = 0;
+            this.Beden.Width = 110;
+            // 
+            // repoCmbBirim
+            // 
+            this.repoCmbBirim.AutoHeight = false;
+            this.repoCmbBirim.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repoCmbBirim.Items.AddRange(new object[] {
+            "Kg",
+            "Mt",
+            "Adet",
+            "Gr",
+            "Cm"});
+            this.repoCmbBirim.Name = "repoCmbBirim";
+            // 
+            // repoBtnUrunKodu
+            // 
+            this.repoBtnUrunKodu.AutoHeight = false;
+            this.repoBtnUrunKodu.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repoBtnUrunKodu.Name = "repoBtnUrunKodu";
+            // 
+            // repoCmbKalemIslem
+            // 
+            this.repoCmbKalemIslem.AutoHeight = false;
+            this.repoCmbKalemIslem.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repoCmbKalemIslem.Items.AddRange(new object[] {
+            "Dolum",
+            "Tamir",
+            "Stok",
+            "İşletme"});
+            this.repoCmbKalemIslem.Name = "repoCmbKalemIslem";
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(1523, 471);
+            this.xtraTabPage2.Text = "xtraTabPage2";
+            // 
             // panelControl2
             // 
             this.panelControl2.Controls.Add(this.picResim);
@@ -270,6 +376,15 @@
             this.picResim.Size = new System.Drawing.Size(204, 209);
             this.picResim.TabIndex = 1123;
             // 
+            // chckKullanimda
+            // 
+            this.chckKullanimda.EditValue = true;
+            this.chckKullanimda.Location = new System.Drawing.Point(794, 25);
+            this.chckKullanimda.Name = "chckKullanimda";
+            this.chckKullanimda.Properties.Caption = "";
+            this.chckKullanimda.Size = new System.Drawing.Size(75, 20);
+            this.chckKullanimda.TabIndex = 18;
+            // 
             // chckAksesuarOK
             // 
             this.chckAksesuarOK.Location = new System.Drawing.Point(463, 179);
@@ -316,6 +431,7 @@
             this.txtCinsi.Name = "txtCinsi";
             this.txtCinsi.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.txtCinsi.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtCinsi_Properties_ButtonClick);
             this.txtCinsi.Size = new System.Drawing.Size(206, 22);
             this.txtCinsi.TabIndex = 8;
             // 
@@ -325,8 +441,20 @@
             this.txtKategori.Name = "txtKategori";
             this.txtKategori.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.txtKategori.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtKategori_Properties_ButtonClick);
             this.txtKategori.Size = new System.Drawing.Size(206, 22);
             this.txtKategori.TabIndex = 6;
+            // 
+            // label19
+            // 
+            this.label19.BackColor = System.Drawing.Color.Transparent;
+            this.label19.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label19.Location = new System.Drawing.Point(675, 25);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(113, 21);
+            this.label19.TabIndex = 1119;
+            this.label19.Text = "Kullanımda :";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label17
             // 
@@ -624,50 +752,6 @@
             this.label2.Text = "Orj.Model Adı :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label19
-            // 
-            this.label19.BackColor = System.Drawing.Color.Transparent;
-            this.label19.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label19.Location = new System.Drawing.Point(675, 25);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(113, 21);
-            this.label19.TabIndex = 1119;
-            this.label19.Text = "Kullanımda :";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // chckKullanimda
-            // 
-            this.chckKullanimda.EditValue = true;
-            this.chckKullanimda.Location = new System.Drawing.Point(794, 25);
-            this.chckKullanimda.Name = "chckKullanimda";
-            this.chckKullanimda.Properties.Caption = "";
-            this.chckKullanimda.Size = new System.Drawing.Size(75, 20);
-            this.chckKullanimda.TabIndex = 18;
-            // 
-            // xtraTabControl1
-            // 
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1525, 495);
-            this.xtraTabControl1.TabIndex = 0;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
-            // 
-            // xtraTabPage1
-            // 
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1523, 471);
-            this.xtraTabPage1.Text = "xtraTabPage1";
-            // 
-            // xtraTabPage2
-            // 
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(298, 276);
-            this.xtraTabPage2.Text = "xtraTabPage2";
-            // 
             // FrmModelKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -678,14 +762,24 @@
             this.IconOptions.Image = global::Hesap.Properties.Resources.Bookmark;
             this.Name = "FrmModelKarti";
             this.Text = "Model Kartı";
+            this.Load += new System.EventHandler(this.FrmModelKarti_Load);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridBedenler)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picResim.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chckAksesuarOK.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chckIplikOK.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chckNakisOK.Properties)).EndInit();
@@ -705,9 +799,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelKodu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjModelAdi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -768,5 +859,11 @@
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraGrid.GridControl gridBedenler;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn Beden;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbBirim;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnUrunKodu;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbKalemIslem;
     }
 }

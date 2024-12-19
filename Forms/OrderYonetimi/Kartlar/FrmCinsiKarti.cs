@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace Hesap.Forms.OrderYonetimi.Kartlar
 {
-    public partial class FrmKategoriKarti : DevExpress.XtraEditors.XtraForm
+    public partial class FrmCinsiKarti : DevExpress.XtraEditors.XtraForm
     {
-        public FrmKategoriKarti()
+        public FrmCinsiKarti()
         {
             InitializeComponent();
         }
@@ -24,7 +24,12 @@ namespace Hesap.Forms.OrderYonetimi.Kartlar
         Bildirim bildirim = new Bildirim();
         Ayarlar ayarlar = new Ayarlar();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
-        //Tip = 0 kategoriye denk gelmektedir.
+        // Tip 1 cinsi ye denk gelmektedir.
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            Temizle();
+        }
+
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             var parameters = new Dictionary<string, object>
@@ -56,7 +61,7 @@ namespace Hesap.Forms.OrderYonetimi.Kartlar
             frm.ShowDialog();
             txtAd.Text = frm.Adi;
             txtOrjAd.Text = frm.OrjAdi;
-            chckKullanimda.Checked= frm.Kullanimda;
+            chckKullanimda.Checked = frm.Kullanimda;
             Id = frm.Id;
         }
         void ListeGetir(string KayitTipi)
@@ -88,7 +93,6 @@ namespace Hesap.Forms.OrderYonetimi.Kartlar
             }
 
         }
-
         private void btnGeri_Click(object sender, EventArgs e)
         {
             ListeGetir("Önceki");
@@ -101,18 +105,14 @@ namespace Hesap.Forms.OrderYonetimi.Kartlar
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            cRUD.KartSil(this.Id,"OzellikKarti");
+            cRUD.KartSil(this.Id, "OzellikKarti");
+            Temizle();
         }
         void Temizle()
         {
-            object[] kart = { txtAd,txtOrjAd,chckKullanimda};
+            object[] kart = { txtAd, txtOrjAd, chckKullanimda };
             yardimciAraclar.KartTemizle(kart);
             this.Id = 0;
-        }
-
-        private void simpleButton1_Click(object sender, EventArgs e)
-        {
-            Temizle();
         }
     }
 }

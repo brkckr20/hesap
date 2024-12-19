@@ -1,5 +1,7 @@
 ﻿using DevExpress.XtraEditors;
+using Hesap.Context;
 using Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo;
+using Hesap.Forms.OrderYonetimi.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,27 @@ namespace Hesap.Forms.OrderYonetimi
             InitializeComponent();
         }
         int Id = 0, FirmaId = 0, KategoriId = 0, CinsiId = 0, PazarlamaciId = 0, KullaniciId;
+
+        private void txtKategori_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            yansit.KategoriYansit(txtKategori,txtOrjKategoriAdi,ref this.KategoriId,"Kategori Kartı");
+        }
+
+        private void txtCinsi_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            yansit.KategoriYansit(txtCinsi, txtOrjCinsiAdi, ref this.CinsiId, "Cinsi Kartı");
+        }
+
+        void BaslangicVerileri()
+        {
+            gridBedenler.DataSource = new BindingList<Bedenler>();
+        }
+
+        private void FrmModelKarti_Load(object sender, EventArgs e)
+        {
+            BaslangicVerileri();
+        }
+
         HesaplaVeYansit yansit = new HesaplaVeYansit();
         CRUD_Operations cRUD = new CRUD_Operations();
         Bildirim bildirim = new Bildirim();
