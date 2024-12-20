@@ -22,10 +22,15 @@ namespace Hesap.Forms.OrderYonetimi
             InitializeComponent();
         }
         int Id = 0, FirmaId = 0, KategoriId = 0, CinsiId = 0, PazarlamaciId = 0, KullaniciId;
+        Metotlar metotlar = new Metotlar();
+        HesaplaVeYansit yansit = new HesaplaVeYansit();
+        CRUD_Operations cRUD = new CRUD_Operations();
+        Bildirim bildirim = new Bildirim();
+
 
         private void txtKategori_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            yansit.KategoriYansit(txtKategori,txtOrjKategoriAdi,ref this.KategoriId,"Kategori Kartı");
+            yansit.KategoriYansit(txtKategori, txtOrjKategoriAdi, ref this.KategoriId, "Kategori Kartı");
         }
 
         private void txtCinsi_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -37,15 +42,18 @@ namespace Hesap.Forms.OrderYonetimi
         {
             gridBedenler.DataSource = new BindingList<Bedenler>();
         }
-
+        ContextMenuStrip contextMenuTab1 = new ContextMenuStrip(); //deneme
         private void FrmModelKarti_Load(object sender, EventArgs e)
         {
+            contextMenuTab1.Items.Add("Tab1 Menü Seçeneği 1", null, Tab1MenuOption1_Click);//deneme
+            gridBedenler.ContextMenuStrip = contextMenuTab1;//deneme
             BaslangicVerileri();
         }
+        private void Tab1MenuOption1_Click(object sender, EventArgs e)//deneme
+        {
+            MessageBox.Show("Tab 1 - Menü Seçeneği 1");
+        }
 
-        HesaplaVeYansit yansit = new HesaplaVeYansit();
-        CRUD_Operations cRUD = new CRUD_Operations();
-        Bildirim bildirim = new Bildirim();
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -76,11 +84,56 @@ namespace Hesap.Forms.OrderYonetimi
             if (this.Id == 0)
             {
                 this.Id = cRUD.InsertRecord("ModelKarti", parameters);
+                BedenleriKaydet();
                 bildirim.Basarili();
             }
             else
             {
                 cRUD.UpdateRecord("ModelKarti", parameters, this.Id);
+                BedenleriGuncelle();
+                /*
+                 for (int i = 0; i < gridView1.RowCount - 1; i++)
+                {
+                    var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
+                    var kalemParameters = metotlar.CreateHameDepo2KalemParameters(i, this.Id, gridView1);
+                    if (d2Id > 0)
+                    {
+                        cRUD.UpdateRecord("HamDepo2", kalemParameters, d2Id);
+                    }
+                    else
+                    {
+                        var yeniId = cRUD.InsertRecord("HamDepo2", kalemParameters);
+                        gridView1.SetRowCellValue(i, "D2Id", yeniId);
+                    }
+                }
+                 */
+            }
+        }
+
+        void BedenleriKaydet()
+        {
+            for (int i = 0; i < gridViewBedenler.RowCount - 1; i++)
+            {
+                var parameters = metotlar.ModelBeden(i, this.Id, gridViewBedenler);
+                var BedenId = cRUD.InsertRecord("ModelBedenSeti", parameters);
+                gridViewBedenler.SetRowCellValue(i, "Id", BedenId);
+            }
+        }
+        void BedenleriGuncelle()
+        {
+            for (int i = 0; i < gridViewBedenler.RowCount - 1; i++)
+            {
+                var d2Id = Convert.ToInt32(gridViewBedenler.GetRowCellValue(i, "Id"));
+                var kalemParameters = metotlar.ModelBeden(i, this.Id, gridViewBedenler);
+                if (d2Id > 0)
+                {
+                    cRUD.UpdateRecord("ModelBedenSeti", kalemParameters, d2Id);
+                }
+                else
+                {
+                    var yeniId = cRUD.InsertRecord("ModelBedenSeti", kalemParameters);
+                    gridViewBedenler.SetRowCellValue(i, "Id", yeniId);
+                }
             }
         }
 

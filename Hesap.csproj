@@ -376,6 +376,7 @@
     <Compile Include="Forms\OrderYonetimi\Liste\FrmListe.Designer.cs">
       <DependentUpon>FrmListe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OrderYonetimi\Metotlar.cs" />
     <Compile Include="Forms\OrderYonetimi\Models\Bedenler.cs" />
     <Compile Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.cs">
       <SubType>Form</SubType>

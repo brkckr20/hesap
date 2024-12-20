@@ -41,7 +41,7 @@
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.gridBedenler = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewBedenler = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Beden = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -89,6 +89,7 @@
             this.txtOrjModelAdi = new DevExpress.XtraEditors.TextEdit();
             this.txtModelAdi = new DevExpress.XtraEditors.TextEdit();
             this.label2 = new System.Windows.Forms.Label();
+            this.BedenId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -98,7 +99,7 @@
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBedenler)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewBedenler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).BeginInit();
@@ -247,7 +248,7 @@
             this.gridBedenler.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridBedenler.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.gridBedenler.Location = new System.Drawing.Point(0, 0);
-            this.gridBedenler.MainView = this.gridView1;
+            this.gridBedenler.MainView = this.gridViewBedenler;
             this.gridBedenler.Name = "gridBedenler";
             this.gridBedenler.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repoCmbBirim,
@@ -256,19 +257,20 @@
             this.gridBedenler.Size = new System.Drawing.Size(1523, 471);
             this.gridBedenler.TabIndex = 10;
             this.gridBedenler.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gridViewBedenler});
             // 
-            // gridView1
+            // gridViewBedenler
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.Beden});
-            this.gridView1.GridControl = this.gridBedenler;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
-            this.gridView1.OptionsView.ColumnAutoWidth = false;
-            this.gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
-            this.gridView1.OptionsView.ShowFooter = true;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridViewBedenler.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.Beden,
+            this.BedenId});
+            this.gridViewBedenler.GridControl = this.gridBedenler;
+            this.gridViewBedenler.Name = "gridViewBedenler";
+            this.gridViewBedenler.NewItemRowText = "Yeni satır eklemek için tıklayınız";
+            this.gridViewBedenler.OptionsView.ColumnAutoWidth = false;
+            this.gridViewBedenler.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
+            this.gridViewBedenler.OptionsView.ShowFooter = true;
+            this.gridViewBedenler.OptionsView.ShowGroupPanel = false;
             // 
             // Beden
             // 
@@ -752,6 +754,14 @@
             this.label2.Text = "Orj.Model Adı :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // BedenId
+            // 
+            this.BedenId.Caption = "Kayıt No";
+            this.BedenId.FieldName = "Id";
+            this.BedenId.Name = "BedenId";
+            this.BedenId.Visible = true;
+            this.BedenId.VisibleIndex = 1;
+            // 
             // FrmModelKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -772,7 +782,7 @@
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridBedenler)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewBedenler)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).EndInit();
@@ -860,10 +870,11 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
         private DevExpress.XtraGrid.GridControl gridBedenler;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewBedenler;
         private DevExpress.XtraGrid.Columns.GridColumn Beden;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbBirim;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnUrunKodu;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbKalemIslem;
+        private DevExpress.XtraGrid.Columns.GridColumn BedenId;
     }
 }
