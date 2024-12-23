@@ -376,8 +376,21 @@
     <Compile Include="Forms\OrderYonetimi\Liste\FrmListe.Designer.cs">
       <DependentUpon>FrmListe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OrderYonetimi\Liste\FrmModelKartiListesi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderYonetimi\Liste\FrmModelKartiListesi.Designer.cs">
+      <DependentUpon>FrmModelKartiListesi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\OrderYonetimi\Metotlar.cs" />
     <Compile Include="Forms\OrderYonetimi\Models\Bedenler.cs" />
+    <Compile Include="Forms\OrderYonetimi\Models\ModelBilgileri.cs" />
+    <Compile Include="Forms\OrderYonetimi\OrderIslemleri\FrmOrderGirisi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderYonetimi\OrderIslemleri\FrmOrderGirisi.Designer.cs">
+      <DependentUpon>FrmOrderGirisi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -650,6 +663,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OrderYonetimi\Liste\FrmListe.resx">
       <DependentUpon>FrmListe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderYonetimi\Liste\FrmModelKartiListesi.resx">
+      <DependentUpon>FrmModelKartiListesi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderYonetimi\OrderIslemleri\FrmOrderGirisi.resx">
+      <DependentUpon>FrmOrderGirisi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.resx">
       <DependentUpon>FrmEtiketTasarimi.cs</DependentUpon>

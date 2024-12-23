@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmModelKarti));
             this.panel3 = new System.Windows.Forms.Panel();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -43,6 +44,7 @@
             this.gridBedenler = new DevExpress.XtraGrid.GridControl();
             this.gridViewBedenler = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Beden = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.BedenId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repoCmbKalemIslem = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
@@ -89,7 +91,10 @@
             this.txtOrjModelAdi = new DevExpress.XtraEditors.TextEdit();
             this.txtModelAdi = new DevExpress.XtraEditors.TextEdit();
             this.label2 = new System.Windows.Forms.Label();
-            this.BedenId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.contextBedenler = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -126,6 +131,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelKodu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjModelAdi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).BeginInit();
+            this.contextBedenler.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -280,6 +286,14 @@
             this.Beden.Visible = true;
             this.Beden.VisibleIndex = 0;
             this.Beden.Width = 110;
+            // 
+            // BedenId
+            // 
+            this.BedenId.Caption = "Kayıt No";
+            this.BedenId.FieldName = "Id";
+            this.BedenId.Name = "BedenId";
+            this.BedenId.Visible = true;
+            this.BedenId.VisibleIndex = 1;
             // 
             // repoCmbBirim
             // 
@@ -754,13 +768,36 @@
             this.label2.Text = "Orj.Model Adı :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // BedenId
+            // contextBedenler
             // 
-            this.BedenId.Caption = "Kayıt No";
-            this.BedenId.FieldName = "Id";
-            this.BedenId.Name = "BedenId";
-            this.BedenId.Visible = true;
-            this.BedenId.VisibleIndex = 1;
+            this.contextBedenler.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.contextBedenler.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dizaynKaydetToolStripMenuItem,
+            this.satırİşlemleriToolStripMenuItem});
+            this.contextBedenler.Name = "contextBedenler";
+            this.contextBedenler.Size = new System.Drawing.Size(181, 70);
+            // 
+            // dizaynKaydetToolStripMenuItem
+            // 
+            this.dizaynKaydetToolStripMenuItem.Name = "dizaynKaydetToolStripMenuItem";
+            this.dizaynKaydetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dizaynKaydetToolStripMenuItem.Text = "Dizayn Kaydet";
+            this.dizaynKaydetToolStripMenuItem.Click += new System.EventHandler(this.dizaynKaydetToolStripMenuItem_Click);
+            // 
+            // satırİşlemleriToolStripMenuItem
+            // 
+            this.satırİşlemleriToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sütunSeçimiToolStripMenuItem});
+            this.satırİşlemleriToolStripMenuItem.Name = "satırİşlemleriToolStripMenuItem";
+            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.satırİşlemleriToolStripMenuItem.Text = "Satır İşlemleri";
+            // 
+            // sütunSeçimiToolStripMenuItem
+            // 
+            this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
+            this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
             // FrmModelKarti
             // 
@@ -809,6 +846,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelKodu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjModelAdi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).EndInit();
+            this.contextBedenler.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -876,5 +914,9 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnUrunKodu;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbKalemIslem;
         private DevExpress.XtraGrid.Columns.GridColumn BedenId;
+        private System.Windows.Forms.ContextMenuStrip contextBedenler;
+        private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
     }
 }

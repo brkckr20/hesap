@@ -241,5 +241,11 @@ namespace Hesap
             Forms.OrderYonetimi.Kartlar.FrmCinsiKarti frm = new Forms.OrderYonetimi.Kartlar.FrmCinsiKarti();
             FormAc(frm);
         }
+
+        private void barButtonItem28_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Forms.OrderYonetimi.OrderIslemleri.FrmOrderGirisi frm = new Forms.OrderYonetimi.OrderIslemleri.FrmOrderGirisi();
+            FormAc(frm);
+        }
     }
 }

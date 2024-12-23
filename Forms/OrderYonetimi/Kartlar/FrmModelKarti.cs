@@ -21,12 +21,12 @@ namespace Hesap.Forms.OrderYonetimi
         {
             InitializeComponent();
         }
-        int Id = 0, FirmaId = 0, KategoriId = 0, CinsiId = 0, PazarlamaciId = 0, KullaniciId;
+        int Id = 0, FirmaId = 0, KategoriId = 0, CinsiId = 0, PazarlamaciId = Properties.Settings.Default.Id, KullaniciId;
         Metotlar metotlar = new Metotlar();
         HesaplaVeYansit yansit = new HesaplaVeYansit();
         CRUD_Operations cRUD = new CRUD_Operations();
         Bildirim bildirim = new Bildirim();
-
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
 
         private void txtKategori_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -41,18 +41,26 @@ namespace Hesap.Forms.OrderYonetimi
         void BaslangicVerileri()
         {
             gridBedenler.DataSource = new BindingList<Bedenler>();
+            yardimciAraclar.KolonlariGetir(gridViewBedenler, this.Text + " [Bedenler]");
+            gridBedenler.ContextMenuStrip = contextBedenler;
         }
-        ContextMenuStrip contextMenuTab1 = new ContextMenuStrip(); //deneme
+
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonDurumunuKaydet(gridViewBedenler,this.Text + " [Bedenler]");
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridBedenler);
+        }
+
         private void FrmModelKarti_Load(object sender, EventArgs e)
         {
-            contextMenuTab1.Items.Add("Tab1 Menü Seçeneği 1", null, Tab1MenuOption1_Click);//deneme
-            gridBedenler.ContextMenuStrip = contextMenuTab1;//deneme
+            
             BaslangicVerileri();
         }
-        private void Tab1MenuOption1_Click(object sender, EventArgs e)//deneme
-        {
-            MessageBox.Show("Tab 1 - Menü Seçeneği 1");
-        }
+        
 
 
         private void btnKaydet_Click(object sender, EventArgs e)
