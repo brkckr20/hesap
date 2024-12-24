@@ -392,6 +392,12 @@
     <Compile Include="Forms\OrderYonetimi\OrderIslemleri\FrmOrderGirisi.Designer.cs">
       <DependentUpon>FrmOrderGirisi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OrderYonetimi\OrderIslemleri\FrmRenkBedenAdetleri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderYonetimi\OrderIslemleri\FrmRenkBedenAdetleri.Designer.cs">
+      <DependentUpon>FrmRenkBedenAdetleri.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -670,6 +676,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OrderYonetimi\OrderIslemleri\FrmOrderGirisi.resx">
       <DependentUpon>FrmOrderGirisi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderYonetimi\OrderIslemleri\FrmRenkBedenAdetleri.resx">
+      <DependentUpon>FrmRenkBedenAdetleri.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.resx">
       <DependentUpon>FrmEtiketTasarimi.cs</DependentUpon>

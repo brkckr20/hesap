@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Forms.OrderYonetimi.Models;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,10 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
 
         private void repoBedenTxt_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Test");
+            FrmRenkBedenAdetleri frm = new FrmRenkBedenAdetleri();
+            frm.SecilenRenk = "Eflatun"; // devam et
+
+            frm.ShowDialog();
         }
     }
 }
