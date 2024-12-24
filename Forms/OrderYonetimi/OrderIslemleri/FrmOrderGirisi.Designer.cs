@@ -38,6 +38,18 @@
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.tabGenel = new DevExpress.XtraTab.XtraTabPage();
+            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
+            this.tabRBDetay = new DevExpress.XtraTab.XtraTabPage();
+            this.gridRBDetaylari = new DevExpress.XtraGrid.GridControl();
+            this.gridVRBDetay = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.UrunRengi = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.BedenSeti = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Miktar = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repositoryItemButtonEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.gridModelBilgi = new DevExpress.XtraGrid.GridControl();
             this.gridVModelBilgi = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -72,14 +84,22 @@
             this.txtMusteriKodu = new DevExpress.XtraEditors.ButtonEdit();
             this.label1 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
-            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
-            this.tabRBDetay = new DevExpress.XtraTab.XtraTabPage();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.repoBedenTxt = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.tabGenel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
+            this.panelControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
+            this.xtraTabControl2.SuspendLayout();
+            this.tabRBDetay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridRBDetaylari)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVRBDetay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridModelBilgi)).BeginInit();
@@ -102,11 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMusteriKodu.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
-            this.panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
-            this.xtraTabControl2.SuspendLayout();
-            this.tabRBDetay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repoBedenTxt)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -202,6 +218,132 @@
             this.tabGenel.Name = "tabGenel";
             this.tabGenel.Size = new System.Drawing.Size(1529, 678);
             this.tabGenel.Text = "Genel";
+            // 
+            // panelControl3
+            // 
+            this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl3.Controls.Add(this.xtraTabControl2);
+            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl3.Location = new System.Drawing.Point(0, 277);
+            this.panelControl3.Name = "panelControl3";
+            this.panelControl3.Size = new System.Drawing.Size(1529, 401);
+            this.panelControl3.TabIndex = 3;
+            // 
+            // xtraTabControl2
+            // 
+            this.xtraTabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl2.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl2.Name = "xtraTabControl2";
+            this.xtraTabControl2.SelectedTabPage = this.tabRBDetay;
+            this.xtraTabControl2.Size = new System.Drawing.Size(1529, 401);
+            this.xtraTabControl2.TabIndex = 0;
+            this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tabRBDetay});
+            // 
+            // tabRBDetay
+            // 
+            this.tabRBDetay.Controls.Add(this.gridRBDetaylari);
+            this.tabRBDetay.Name = "tabRBDetay";
+            this.tabRBDetay.Size = new System.Drawing.Size(1527, 377);
+            this.tabRBDetay.Text = "Renk/Beden Detayları";
+            // 
+            // gridRBDetaylari
+            // 
+            this.gridRBDetaylari.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridRBDetaylari.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.gridRBDetaylari.Location = new System.Drawing.Point(0, 0);
+            this.gridRBDetaylari.MainView = this.gridVRBDetay;
+            this.gridRBDetaylari.Name = "gridRBDetaylari";
+            this.gridRBDetaylari.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemComboBox1,
+            this.repositoryItemButtonEdit2,
+            this.repositoryItemComboBox2,
+            this.repositoryItemButtonEdit3,
+            this.repoBedenTxt});
+            this.gridRBDetaylari.Size = new System.Drawing.Size(1527, 377);
+            this.gridRBDetaylari.TabIndex = 12;
+            this.gridRBDetaylari.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridVRBDetay});
+            // 
+            // gridVRBDetay
+            // 
+            this.gridVRBDetay.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.UrunRengi,
+            this.BedenSeti,
+            this.Miktar});
+            this.gridVRBDetay.GridControl = this.gridRBDetaylari;
+            this.gridVRBDetay.Name = "gridVRBDetay";
+            this.gridVRBDetay.NewItemRowText = "Yeni satır eklemek için tıklayınız";
+            this.gridVRBDetay.OptionsView.ColumnAutoWidth = false;
+            this.gridVRBDetay.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
+            this.gridVRBDetay.OptionsView.ShowGroupPanel = false;
+            // 
+            // UrunRengi
+            // 
+            this.UrunRengi.Caption = "Ürün Rengi";
+            this.UrunRengi.ColumnEdit = this.repositoryItemButtonEdit2;
+            this.UrunRengi.FieldName = "UrunRengi";
+            this.UrunRengi.Name = "UrunRengi";
+            this.UrunRengi.Visible = true;
+            this.UrunRengi.VisibleIndex = 0;
+            this.UrunRengi.Width = 110;
+            // 
+            // repositoryItemButtonEdit2
+            // 
+            this.repositoryItemButtonEdit2.AutoHeight = false;
+            this.repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
+            // 
+            // BedenSeti
+            // 
+            this.BedenSeti.Caption = "Bedenler";
+            this.BedenSeti.ColumnEdit = this.repoBedenTxt;
+            this.BedenSeti.FieldName = "BedenSeti";
+            this.BedenSeti.Name = "BedenSeti";
+            this.BedenSeti.Visible = true;
+            this.BedenSeti.VisibleIndex = 1;
+            this.BedenSeti.Width = 147;
+            // 
+            // Miktar
+            // 
+            this.Miktar.Caption = "Miktar";
+            this.Miktar.FieldName = "Miktar";
+            this.Miktar.Name = "Miktar";
+            this.Miktar.Visible = true;
+            this.Miktar.VisibleIndex = 2;
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Items.AddRange(new object[] {
+            "Kg",
+            "Mt",
+            "Adet",
+            "Gr",
+            "Cm"});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
+            // 
+            // repositoryItemComboBox2
+            // 
+            this.repositoryItemComboBox2.AutoHeight = false;
+            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox2.Items.AddRange(new object[] {
+            "Dolum",
+            "Tamir",
+            "Stok",
+            "İşletme"});
+            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
+            // 
+            // repositoryItemButtonEdit3
+            // 
+            this.repositoryItemButtonEdit3.AutoHeight = false;
+            this.repositoryItemButtonEdit3.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEdit3.Name = "repositoryItemButtonEdit3";
             // 
             // panelControl2
             // 
@@ -603,41 +745,11 @@
             this.label72.Text = "Order No :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // panelControl3
+            // repoBedenTxt
             // 
-            this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl3.Controls.Add(this.xtraTabControl2);
-            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(0, 277);
-            this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1529, 401);
-            this.panelControl3.TabIndex = 3;
-            // 
-            // xtraTabControl2
-            // 
-            this.xtraTabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl2.Location = new System.Drawing.Point(0, 0);
-            this.xtraTabControl2.Name = "xtraTabControl2";
-            this.xtraTabControl2.SelectedTabPage = this.tabRBDetay;
-            this.xtraTabControl2.Size = new System.Drawing.Size(1529, 401);
-            this.xtraTabControl2.TabIndex = 0;
-            this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.tabRBDetay});
-            // 
-            // tabRBDetay
-            // 
-            this.tabRBDetay.Controls.Add(this.labelControl2);
-            this.tabRBDetay.Name = "tabRBDetay";
-            this.tabRBDetay.Size = new System.Drawing.Size(1527, 377);
-            this.tabRBDetay.Text = "Renk/Beden Detayları";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(573, 105);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(75, 13);
-            this.labelControl2.TabIndex = 0;
-            this.labelControl2.Text = "devam edilecek";
+            this.repoBedenTxt.AutoHeight = false;
+            this.repoBedenTxt.Name = "repoBedenTxt";
+            this.repoBedenTxt.Click += new System.EventHandler(this.repoBedenTxt_Click);
             // 
             // FrmOrderGirisi
             // 
@@ -653,6 +765,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.tabGenel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
+            this.panelControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
+            this.xtraTabControl2.ResumeLayout(false);
+            this.tabRBDetay.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridRBDetaylari)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVRBDetay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridModelBilgi)).EndInit();
@@ -675,12 +798,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMusteriKodu.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
-            this.panelControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
-            this.xtraTabControl2.ResumeLayout(false);
-            this.tabRBDetay.ResumeLayout(false);
-            this.tabRBDetay.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repoBedenTxt)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -733,6 +851,15 @@
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl2;
         private DevExpress.XtraTab.XtraTabPage tabRBDetay;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraGrid.GridControl gridRBDetaylari;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridVRBDetay;
+        private DevExpress.XtraGrid.Columns.GridColumn UrunRengi;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit2;
+        private DevExpress.XtraGrid.Columns.GridColumn BedenSeti;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit3;
+        private DevExpress.XtraGrid.Columns.GridColumn Miktar;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repoBedenTxt;
     }
 }

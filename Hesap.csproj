@@ -385,6 +385,7 @@
     <Compile Include="Forms\OrderYonetimi\Metotlar.cs" />
     <Compile Include="Forms\OrderYonetimi\Models\Bedenler.cs" />
     <Compile Include="Forms\OrderYonetimi\Models\ModelBilgileri.cs" />
+    <Compile Include="Forms\OrderYonetimi\Models\RenkBedenDetaylari.cs" />
     <Compile Include="Forms\OrderYonetimi\OrderIslemleri\FrmOrderGirisi.cs">
       <SubType>Form</SubType>
     </Compile>

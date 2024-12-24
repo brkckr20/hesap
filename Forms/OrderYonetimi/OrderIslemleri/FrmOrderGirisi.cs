@@ -42,6 +42,31 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         private void FrmOrderGirisi_Load(object sender, EventArgs e)
         {
             gridModelBilgi.DataSource = new BindingList<ModelBilgileri>();
+            //gridRBDetaylari.DataSource = new BindingList<RenkBedenDetaylari>();
+            deneme();
+        }
+        void deneme()
+        {
+            var renkler = new List<string> { "Beyaz", "Siyah", "Kırmızı" };
+            var bedenler = new Dictionary<string, List<string>>()
+                            {
+                                { "Beyaz", new List<string> { "A", "B", "C", "D" } },
+                                { "Siyah", new List<string> { "A", "B", "C", "D" } },
+                                { "Kırmızı", new List<string> { "A", "B", "C", "D" } }
+                            };
+            List<RenkBedenDetaylari> liste = new List<RenkBedenDetaylari>
+            {
+                new RenkBedenDetaylari {UrunRengi="Beyaz", BedenSeti="A",Miktar=0},
+                new RenkBedenDetaylari {UrunRengi="Beyaz", BedenSeti="B",Miktar=0},
+                new RenkBedenDetaylari {UrunRengi="Siyah", BedenSeti="A",Miktar=0},
+                new RenkBedenDetaylari {UrunRengi="Siyah", BedenSeti="B",Miktar=0},
+            };
+            gridRBDetaylari.DataSource = liste;
+        }
+
+        private void repoBedenTxt_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
         }
     }
 }
