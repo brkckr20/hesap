@@ -41,11 +41,14 @@
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
             this.tabRBDetay = new DevExpress.XtraTab.XtraTabPage();
+            this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.btnAddRow = new DevExpress.XtraEditors.SimpleButton();
             this.gridRBDetaylari = new DevExpress.XtraGrid.GridControl();
             this.gridVRBDetay = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.UrunRengi = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.repoRenkSecimi = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.BedenSeti = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoBedenTxt = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.Miktar = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
@@ -84,7 +87,7 @@
             this.txtMusteriKodu = new DevExpress.XtraEditors.ButtonEdit();
             this.label1 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
-            this.repoBedenTxt = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -94,9 +97,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
             this.xtraTabControl2.SuspendLayout();
             this.tabRBDetay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
+            this.panelControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridRBDetaylari)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVRBDetay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoRenkSecimi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoBedenTxt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit3)).BeginInit();
@@ -122,7 +128,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMusteriKodu.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoBedenTxt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
+            this.panelControl5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -242,25 +249,45 @@
             // 
             // tabRBDetay
             // 
-            this.tabRBDetay.Controls.Add(this.gridRBDetaylari);
+            this.tabRBDetay.Controls.Add(this.panelControl5);
+            this.tabRBDetay.Controls.Add(this.panelControl4);
             this.tabRBDetay.Name = "tabRBDetay";
             this.tabRBDetay.Size = new System.Drawing.Size(1527, 377);
             this.tabRBDetay.Text = "Renk/Beden Detayları";
+            // 
+            // panelControl4
+            // 
+            this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl4.Controls.Add(this.btnAddRow);
+            this.panelControl4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelControl4.Location = new System.Drawing.Point(0, 0);
+            this.panelControl4.Name = "panelControl4";
+            this.panelControl4.Size = new System.Drawing.Size(46, 377);
+            this.panelControl4.TabIndex = 13;
+            // 
+            // btnAddRow
+            // 
+            this.btnAddRow.Location = new System.Drawing.Point(9, 6);
+            this.btnAddRow.Name = "btnAddRow";
+            this.btnAddRow.Size = new System.Drawing.Size(28, 23);
+            this.btnAddRow.TabIndex = 0;
+            this.btnAddRow.Text = "+";
+            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
             // 
             // gridRBDetaylari
             // 
             this.gridRBDetaylari.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridRBDetaylari.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.gridRBDetaylari.Location = new System.Drawing.Point(0, 0);
+            this.gridRBDetaylari.Location = new System.Drawing.Point(2, 2);
             this.gridRBDetaylari.MainView = this.gridVRBDetay;
             this.gridRBDetaylari.Name = "gridRBDetaylari";
             this.gridRBDetaylari.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
-            this.repositoryItemButtonEdit2,
+            this.repoRenkSecimi,
             this.repositoryItemComboBox2,
             this.repositoryItemButtonEdit3,
             this.repoBedenTxt});
-            this.gridRBDetaylari.Size = new System.Drawing.Size(1527, 377);
+            this.gridRBDetaylari.Size = new System.Drawing.Size(1477, 373);
             this.gridRBDetaylari.TabIndex = 12;
             this.gridRBDetaylari.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridVRBDetay});
@@ -281,19 +308,20 @@
             // UrunRengi
             // 
             this.UrunRengi.Caption = "Ürün Rengi";
-            this.UrunRengi.ColumnEdit = this.repositoryItemButtonEdit2;
+            this.UrunRengi.ColumnEdit = this.repoRenkSecimi;
             this.UrunRengi.FieldName = "UrunRengi";
             this.UrunRengi.Name = "UrunRengi";
             this.UrunRengi.Visible = true;
             this.UrunRengi.VisibleIndex = 0;
             this.UrunRengi.Width = 110;
             // 
-            // repositoryItemButtonEdit2
+            // repoRenkSecimi
             // 
-            this.repositoryItemButtonEdit2.AutoHeight = false;
-            this.repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.repoRenkSecimi.AutoHeight = false;
+            this.repoRenkSecimi.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
+            this.repoRenkSecimi.Name = "repoRenkSecimi";
+            this.repoRenkSecimi.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoRenkSecimi_ButtonClick);
             // 
             // BedenSeti
             // 
@@ -304,6 +332,12 @@
             this.BedenSeti.Visible = true;
             this.BedenSeti.VisibleIndex = 1;
             this.BedenSeti.Width = 147;
+            // 
+            // repoBedenTxt
+            // 
+            this.repoBedenTxt.AutoHeight = false;
+            this.repoBedenTxt.Name = "repoBedenTxt";
+            this.repoBedenTxt.Click += new System.EventHandler(this.repoBedenTxt_Click);
             // 
             // Miktar
             // 
@@ -745,11 +779,14 @@
             this.label72.Text = "Order No :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // repoBedenTxt
+            // panelControl5
             // 
-            this.repoBedenTxt.AutoHeight = false;
-            this.repoBedenTxt.Name = "repoBedenTxt";
-            this.repoBedenTxt.Click += new System.EventHandler(this.repoBedenTxt_Click);
+            this.panelControl5.Controls.Add(this.gridRBDetaylari);
+            this.panelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl5.Location = new System.Drawing.Point(46, 0);
+            this.panelControl5.Name = "panelControl5";
+            this.panelControl5.Size = new System.Drawing.Size(1481, 377);
+            this.panelControl5.TabIndex = 14;
             // 
             // FrmOrderGirisi
             // 
@@ -770,9 +807,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
             this.xtraTabControl2.ResumeLayout(false);
             this.tabRBDetay.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
+            this.panelControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridRBDetaylari)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVRBDetay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoRenkSecimi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoBedenTxt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit3)).EndInit();
@@ -798,7 +838,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMusteriKodu.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoBedenTxt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
+            this.panelControl5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -854,12 +895,15 @@
         private DevExpress.XtraGrid.GridControl gridRBDetaylari;
         private DevExpress.XtraGrid.Views.Grid.GridView gridVRBDetay;
         private DevExpress.XtraGrid.Columns.GridColumn UrunRengi;
-        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoRenkSecimi;
         private DevExpress.XtraGrid.Columns.GridColumn BedenSeti;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit3;
         private DevExpress.XtraGrid.Columns.GridColumn Miktar;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repoBedenTxt;
+        private DevExpress.XtraEditors.PanelControl panelControl4;
+        private DevExpress.XtraEditors.SimpleButton btnAddRow;
+        private DevExpress.XtraEditors.PanelControl panelControl5;
     }
 }

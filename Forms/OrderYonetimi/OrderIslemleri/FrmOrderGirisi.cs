@@ -43,34 +43,32 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         private void FrmOrderGirisi_Load(object sender, EventArgs e)
         {
             gridModelBilgi.DataSource = new BindingList<ModelBilgileri>();
-            //gridRBDetaylari.DataSource = new BindingList<RenkBedenDetaylari>();
-            deneme();
-        }
-        void deneme()
-        {
-            var renkler = new List<string> { "Beyaz", "Siyah", "Kırmızı" };
-            var bedenler = new Dictionary<string, List<string>>()
-                            {
-                                { "Beyaz", new List<string> { "A", "B", "C", "D" } },
-                                { "Siyah", new List<string> { "A", "B", "C", "D" } },
-                                { "Kırmızı", new List<string> { "A", "B", "C", "D" } }
-                            };
-            List<RenkBedenDetaylari> liste = new List<RenkBedenDetaylari>
-            {
-                new RenkBedenDetaylari {UrunRengi="Beyaz", BedenSeti="A",Miktar=0},
-                new RenkBedenDetaylari {UrunRengi="Beyaz", BedenSeti="B",Miktar=0},
-                new RenkBedenDetaylari {UrunRengi="Siyah", BedenSeti="A",Miktar=0},
-                new RenkBedenDetaylari {UrunRengi="Siyah", BedenSeti="B",Miktar=0},
-            };
-            gridRBDetaylari.DataSource = liste;
+            gridRBDetaylari.DataSource = new BindingList<RenkBedenDetaylari>();
         }
 
+        string _SecilenRenk;
         private void repoBedenTxt_Click(object sender, EventArgs e)
         {
             FrmRenkBedenAdetleri frm = new FrmRenkBedenAdetleri();
-            frm.SecilenRenk = "Eflatun"; // devam et
-
+            frm.SecilenRenk = $" [{_SecilenRenk}]"; // devam et
             frm.ShowDialog();
+        }
+
+        private void repoRenkSecimi_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            FrmOrderRenkSecimi frm = new FrmOrderRenkSecimi();
+            frm.ShowDialog();
+            if (!string.IsNullOrEmpty(frm.selectedColor))
+            {
+                int rowHandle = gridVRBDetay.FocusedRowHandle;
+                gridVRBDetay.SetRowCellValue(rowHandle, "UrunRengi", frm.selectedColor);
+                _SecilenRenk = frm.selectedColor;
+            }
+        }
+
+        private void btnAddRow_Click(object sender, EventArgs e)
+        {
+            gridVRBDetay.AddNewRow();
         }
     }
 }
