@@ -41,8 +41,7 @@
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
             this.tabRBDetay = new DevExpress.XtraTab.XtraTabPage();
-            this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
-            this.btnAddRow = new DevExpress.XtraEditors.SimpleButton();
+            this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.gridRBDetaylari = new DevExpress.XtraGrid.GridControl();
             this.gridVRBDetay = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.UrunRengi = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -53,6 +52,8 @@
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemButtonEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.btnAddRow = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.gridModelBilgi = new DevExpress.XtraGrid.GridControl();
             this.gridVModelBilgi = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -87,7 +88,9 @@
             this.txtMusteriKodu = new DevExpress.XtraEditors.ButtonEdit();
             this.label1 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
-            this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
+            this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
+            this.btnModelEkle = new DevExpress.XtraEditors.SimpleButton();
+            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -97,8 +100,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
             this.xtraTabControl2.SuspendLayout();
             this.tabRBDetay.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
-            this.panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
+            this.panelControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridRBDetaylari)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVRBDetay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoRenkSecimi)).BeginInit();
@@ -106,6 +109,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
+            this.panelControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridModelBilgi)).BeginInit();
@@ -128,8 +133,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMusteriKodu.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
-            this.panelControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
+            this.panelControl6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
+            this.panelControl7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -255,24 +262,14 @@
             this.tabRBDetay.Size = new System.Drawing.Size(1527, 377);
             this.tabRBDetay.Text = "Renk/Beden Detayları";
             // 
-            // panelControl4
+            // panelControl5
             // 
-            this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl4.Controls.Add(this.btnAddRow);
-            this.panelControl4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelControl4.Location = new System.Drawing.Point(0, 0);
-            this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(46, 377);
-            this.panelControl4.TabIndex = 13;
-            // 
-            // btnAddRow
-            // 
-            this.btnAddRow.Location = new System.Drawing.Point(9, 6);
-            this.btnAddRow.Name = "btnAddRow";
-            this.btnAddRow.Size = new System.Drawing.Size(28, 23);
-            this.btnAddRow.TabIndex = 0;
-            this.btnAddRow.Text = "+";
-            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
+            this.panelControl5.Controls.Add(this.gridRBDetaylari);
+            this.panelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl5.Location = new System.Drawing.Point(46, 0);
+            this.panelControl5.Name = "panelControl5";
+            this.panelControl5.Size = new System.Drawing.Size(1481, 377);
+            this.panelControl5.TabIndex = 14;
             // 
             // gridRBDetaylari
             // 
@@ -329,6 +326,7 @@
             this.BedenSeti.ColumnEdit = this.repoBedenTxt;
             this.BedenSeti.FieldName = "BedenSeti";
             this.BedenSeti.Name = "BedenSeti";
+            this.BedenSeti.OptionsColumn.ReadOnly = true;
             this.BedenSeti.Visible = true;
             this.BedenSeti.VisibleIndex = 1;
             this.BedenSeti.Width = 147;
@@ -379,10 +377,30 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repositoryItemButtonEdit3.Name = "repositoryItemButtonEdit3";
             // 
+            // panelControl4
+            // 
+            this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl4.Controls.Add(this.btnAddRow);
+            this.panelControl4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelControl4.Location = new System.Drawing.Point(0, 0);
+            this.panelControl4.Name = "panelControl4";
+            this.panelControl4.Size = new System.Drawing.Size(46, 377);
+            this.panelControl4.TabIndex = 13;
+            // 
+            // btnAddRow
+            // 
+            this.btnAddRow.Location = new System.Drawing.Point(9, 6);
+            this.btnAddRow.Name = "btnAddRow";
+            this.btnAddRow.Size = new System.Drawing.Size(28, 23);
+            this.btnAddRow.TabIndex = 0;
+            this.btnAddRow.Text = "+";
+            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
+            // 
             // panelControl2
             // 
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl2.Controls.Add(this.gridModelBilgi);
+            this.panelControl2.Controls.Add(this.panelControl7);
+            this.panelControl2.Controls.Add(this.panelControl6);
             this.panelControl2.Controls.Add(this.labelControl1);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(0, 123);
@@ -394,7 +412,7 @@
             // 
             this.gridModelBilgi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridModelBilgi.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.gridModelBilgi.Location = new System.Drawing.Point(0, 17);
+            this.gridModelBilgi.Location = new System.Drawing.Point(2, 2);
             this.gridModelBilgi.MainView = this.gridVModelBilgi;
             this.gridModelBilgi.Name = "gridModelBilgi";
             this.gridModelBilgi.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -402,7 +420,7 @@
             this.repoBtnModelKodu,
             this.repoCmbKalemIslem,
             this.repositoryItemButtonEdit1});
-            this.gridModelBilgi.Size = new System.Drawing.Size(1529, 137);
+            this.gridModelBilgi.Size = new System.Drawing.Size(1479, 133);
             this.gridModelBilgi.TabIndex = 11;
             this.gridModelBilgi.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridVModelBilgi});
@@ -425,6 +443,7 @@
             this.gridVModelBilgi.OptionsView.ColumnAutoWidth = false;
             this.gridVModelBilgi.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             this.gridVModelBilgi.OptionsView.ShowGroupPanel = false;
+            this.gridVModelBilgi.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridVModelBilgi_RowCellClick);
             // 
             // ModelKodu
             // 
@@ -449,6 +468,7 @@
             this.ModelAdi.Caption = "Model Adı";
             this.ModelAdi.FieldName = "ModelAdi";
             this.ModelAdi.Name = "ModelAdi";
+            this.ModelAdi.OptionsColumn.ReadOnly = true;
             this.ModelAdi.Visible = true;
             this.ModelAdi.VisibleIndex = 1;
             this.ModelAdi.Width = 247;
@@ -779,14 +799,33 @@
             this.label72.Text = "Order No :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // panelControl5
+            // panelControl6
             // 
-            this.panelControl5.Controls.Add(this.gridRBDetaylari);
-            this.panelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl5.Location = new System.Drawing.Point(46, 0);
-            this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(1481, 377);
-            this.panelControl5.TabIndex = 14;
+            this.panelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl6.Controls.Add(this.btnModelEkle);
+            this.panelControl6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelControl6.Location = new System.Drawing.Point(0, 17);
+            this.panelControl6.Name = "panelControl6";
+            this.panelControl6.Size = new System.Drawing.Size(46, 137);
+            this.panelControl6.TabIndex = 14;
+            // 
+            // btnModelEkle
+            // 
+            this.btnModelEkle.Location = new System.Drawing.Point(9, 6);
+            this.btnModelEkle.Name = "btnModelEkle";
+            this.btnModelEkle.Size = new System.Drawing.Size(28, 23);
+            this.btnModelEkle.TabIndex = 0;
+            this.btnModelEkle.Text = "+";
+            this.btnModelEkle.Click += new System.EventHandler(this.btnModelEkle_Click);
+            // 
+            // panelControl7
+            // 
+            this.panelControl7.Controls.Add(this.gridModelBilgi);
+            this.panelControl7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl7.Location = new System.Drawing.Point(46, 17);
+            this.panelControl7.Name = "panelControl7";
+            this.panelControl7.Size = new System.Drawing.Size(1483, 137);
+            this.panelControl7.TabIndex = 15;
             // 
             // FrmOrderGirisi
             // 
@@ -807,8 +846,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
             this.xtraTabControl2.ResumeLayout(false);
             this.tabRBDetay.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
-            this.panelControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
+            this.panelControl5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridRBDetaylari)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVRBDetay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoRenkSecimi)).EndInit();
@@ -816,6 +855,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
+            this.panelControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridModelBilgi)).EndInit();
@@ -838,8 +879,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMusteriKodu.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
-            this.panelControl5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
+            this.panelControl6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
+            this.panelControl7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -905,5 +948,8 @@
         private DevExpress.XtraEditors.PanelControl panelControl4;
         private DevExpress.XtraEditors.SimpleButton btnAddRow;
         private DevExpress.XtraEditors.PanelControl panelControl5;
+        private DevExpress.XtraEditors.PanelControl panelControl7;
+        private DevExpress.XtraEditors.PanelControl panelControl6;
+        private DevExpress.XtraEditors.SimpleButton btnModelEkle;
     }
 }

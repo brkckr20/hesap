@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Forms.OrderYonetimi.Models;
+using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,9 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         {
             InitializeComponent();
         }
-
+        public int SelectedModelId = 0;
+        string _SecilenRenk;
+        Listele listele = new Listele();
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
 
@@ -31,7 +34,6 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
             frm.ShowDialog();
             if (!string.IsNullOrEmpty(frm.Kodu))
             {
-                gridVModelBilgi.AddNewRow();
                 int newRowHandle = gridVModelBilgi.FocusedRowHandle;
                 gridVModelBilgi.SetRowCellValue(newRowHandle, "ModelKodu", frm.Kodu);
                 gridVModelBilgi.SetRowCellValue(newRowHandle, "ModelAdi", frm.Adi);
@@ -46,11 +48,12 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
             gridRBDetaylari.DataSource = new BindingList<RenkBedenDetaylari>();
         }
 
-        string _SecilenRenk;
+        
         private void repoBedenTxt_Click(object sender, EventArgs e)
         {
             FrmRenkBedenAdetleri frm = new FrmRenkBedenAdetleri();
             frm.SecilenRenk = $" [{_SecilenRenk}]"; // devam et
+            frm.ModelId = SelectedModelId;
             frm.ShowDialog();
         }
 
@@ -69,6 +72,20 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         private void btnAddRow_Click(object sender, EventArgs e)
         {
             gridVRBDetay.AddNewRow();
+        }
+
+        private void gridVModelBilgi_RowCellClick(object sender, RowCellClickEventArgs e)
+        {
+            if (e.Column.FieldName == "ModelAdi")
+            {
+                var modelId = gridVModelBilgi.GetRowCellValue(e.RowHandle, "Id");
+                SelectedModelId = Convert.ToInt32(modelId);
+            }
+        }
+
+        private void btnModelEkle_Click(object sender, EventArgs e)
+        {
+            gridVModelBilgi.AddNewRow();
         }
     }
 }

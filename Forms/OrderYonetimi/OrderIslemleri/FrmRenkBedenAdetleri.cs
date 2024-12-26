@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
     public partial class FrmRenkBedenAdetleri : DevExpress.XtraEditors.XtraForm
     {
         public string SecilenRenk;
+        public int ModelId;
+        Listele listele = new Listele();
         public FrmRenkBedenAdetleri()
         {
             InitializeComponent();
@@ -23,6 +26,12 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         private void FrmRenkBedenAdetleri_Load(object sender, EventArgs e)
         {
             this.Text += " " + SecilenRenk;
+            Listele();
+        }
+        void Listele()
+        {
+            string sql = $"select Beden,Id from ModelBedenSeti where ModelId = '{ModelId}'";
+            listele.Liste(sql, gridControl1);
         }
     }
 }
