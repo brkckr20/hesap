@@ -39,6 +39,7 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
                 gridVModelBilgi.SetRowCellValue(newRowHandle, "ModelAdi", frm.Adi);
                 gridVModelBilgi.SetRowCellValue(newRowHandle, "OrjModelAdi", frm.OrjAdi);
                 gridVModelBilgi.SetRowCellValue(newRowHandle, "Id", frm.Id);
+                SelectedModelId = frm.Id;
             }
         }
 

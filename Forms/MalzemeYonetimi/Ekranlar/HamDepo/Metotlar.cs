@@ -36,5 +36,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
                 { "BoyaIslemId", yardimciAraclar.GetDecimalValue(gridView1.GetRowCellValue(rowIndex, "BoyaIslemId")) }
             };
         }
+
+        
     }
 }
