@@ -370,6 +370,12 @@
     <Compile Include="Forms\OrderYonetimi\Kartlar\FrmModelKarti.Designer.cs">
       <DependentUpon>FrmModelKarti.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OrderYonetimi\Kartlar\FrmRenkKarti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderYonetimi\Kartlar\FrmRenkKarti.Designer.cs">
+      <DependentUpon>FrmRenkKarti.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\OrderYonetimi\Liste\FrmListe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -674,6 +680,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OrderYonetimi\Kartlar\FrmModelKarti.resx">
       <DependentUpon>FrmModelKarti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderYonetimi\Kartlar\FrmRenkKarti.resx">
+      <DependentUpon>FrmRenkKarti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OrderYonetimi\Liste\FrmListe.resx">
       <DependentUpon>FrmListe.cs</DependentUpon>

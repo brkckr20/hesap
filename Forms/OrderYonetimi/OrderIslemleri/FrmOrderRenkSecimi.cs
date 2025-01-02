@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Forms.OrderYonetimi.Models;
+using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,31 +20,27 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         {
             InitializeComponent();
         }
-
+        
         private void FrmOrderRenkSecimi_Load(object sender, EventArgs e)
         {
-            deneme();
+            GetColorList();
             gridView1.DoubleClick += GridView1_DoubleClick;
         }
         public string selectedColor;
-        void deneme()
+        Listele listele = new Listele();
+        
+        void GetColorList()
         {
-            var renkler = new List<string> { "Beyaz", "Siyah", "Kırmızı" };
-            gridControl1.DataSource = renkler;
-            GridView gridView = gridControl1.MainView as GridView;
-            if (gridView != null)
-            {
-                gridView.Columns[0].Caption = "Renk";
-            }
+            string sql = @"select Kodu, Adi from RenkKarti where Kullanimda=1";
+            listele.Liste(sql,gridControl1);
         }
         private void GridView1_DoubleClick(object sender, EventArgs e)
         {
-            // Seçili satırdaki veriyi alıyoruz
             GridView gridView = sender as GridView;
             if (gridView != null)
             {
-                int rowHandle = gridView.FocusedRowHandle;  // Seçilen satırın handle'ı
-                if (rowHandle >= 0) // Satır geçerliyse
+                int rowHandle = gridView.FocusedRowHandle;
+                if (rowHandle >= 0)
                 {
                     selectedColor = gridView.GetRowCellValue(rowHandle, gridView.Columns[0]).ToString();
                     this.Close();

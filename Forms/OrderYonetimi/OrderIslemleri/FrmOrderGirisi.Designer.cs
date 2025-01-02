@@ -55,6 +55,7 @@
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
             this.btnAddRow = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
             this.gridModelBilgi = new DevExpress.XtraGrid.GridControl();
             this.gridVModelBilgi = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.ModelKodu = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -70,6 +71,8 @@
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoCmbKalemIslem = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
+            this.btnModelEkle = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.buttonEdit2 = new DevExpress.XtraEditors.ButtonEdit();
@@ -88,9 +91,6 @@
             this.txtMusteriKodu = new DevExpress.XtraEditors.ButtonEdit();
             this.label1 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
-            this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
-            this.btnModelEkle = new DevExpress.XtraEditors.SimpleButton();
-            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -113,12 +113,16 @@
             this.panelControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
+            this.panelControl7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridModelBilgi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVModelBilgi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnModelKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
+            this.panelControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonEdit2.Properties)).BeginInit();
@@ -133,10 +137,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMusteriKodu.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
-            this.panelControl6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
-            this.panelControl7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -408,6 +408,15 @@
             this.panelControl2.Size = new System.Drawing.Size(1529, 154);
             this.panelControl2.TabIndex = 2;
             // 
+            // panelControl7
+            // 
+            this.panelControl7.Controls.Add(this.gridModelBilgi);
+            this.panelControl7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl7.Location = new System.Drawing.Point(46, 17);
+            this.panelControl7.Name = "panelControl7";
+            this.panelControl7.Size = new System.Drawing.Size(1483, 137);
+            this.panelControl7.TabIndex = 15;
+            // 
             // gridModelBilgi
             // 
             this.gridModelBilgi.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -468,6 +477,7 @@
             this.ModelAdi.Caption = "Model Adı";
             this.ModelAdi.FieldName = "ModelAdi";
             this.ModelAdi.Name = "ModelAdi";
+            this.ModelAdi.OptionsColumn.AllowEdit = false;
             this.ModelAdi.OptionsColumn.ReadOnly = true;
             this.ModelAdi.Visible = true;
             this.ModelAdi.VisibleIndex = 1;
@@ -570,6 +580,25 @@
             this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
+            // 
+            // panelControl6
+            // 
+            this.panelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl6.Controls.Add(this.btnModelEkle);
+            this.panelControl6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelControl6.Location = new System.Drawing.Point(0, 17);
+            this.panelControl6.Name = "panelControl6";
+            this.panelControl6.Size = new System.Drawing.Size(46, 137);
+            this.panelControl6.TabIndex = 14;
+            // 
+            // btnModelEkle
+            // 
+            this.btnModelEkle.Location = new System.Drawing.Point(9, 6);
+            this.btnModelEkle.Name = "btnModelEkle";
+            this.btnModelEkle.Size = new System.Drawing.Size(28, 23);
+            this.btnModelEkle.TabIndex = 0;
+            this.btnModelEkle.Text = "+";
+            this.btnModelEkle.Click += new System.EventHandler(this.btnModelEkle_Click);
             // 
             // labelControl1
             // 
@@ -799,34 +828,6 @@
             this.label72.Text = "Order No :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // panelControl6
-            // 
-            this.panelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl6.Controls.Add(this.btnModelEkle);
-            this.panelControl6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelControl6.Location = new System.Drawing.Point(0, 17);
-            this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(46, 137);
-            this.panelControl6.TabIndex = 14;
-            // 
-            // btnModelEkle
-            // 
-            this.btnModelEkle.Location = new System.Drawing.Point(9, 6);
-            this.btnModelEkle.Name = "btnModelEkle";
-            this.btnModelEkle.Size = new System.Drawing.Size(28, 23);
-            this.btnModelEkle.TabIndex = 0;
-            this.btnModelEkle.Text = "+";
-            this.btnModelEkle.Click += new System.EventHandler(this.btnModelEkle_Click);
-            // 
-            // panelControl7
-            // 
-            this.panelControl7.Controls.Add(this.gridModelBilgi);
-            this.panelControl7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl7.Location = new System.Drawing.Point(46, 17);
-            this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(1483, 137);
-            this.panelControl7.TabIndex = 15;
-            // 
             // FrmOrderGirisi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -859,12 +860,16 @@
             this.panelControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
+            this.panelControl7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridModelBilgi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVModelBilgi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnModelKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
+            this.panelControl6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.buttonEdit2.Properties)).EndInit();
@@ -879,10 +884,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMusteriKodu.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
-            this.panelControl6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
-            this.panelControl7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
