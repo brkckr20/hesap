@@ -15,9 +15,11 @@ namespace Hesap.Forms.Liste
 {
     public partial class FrmMalzemeKartiListesi : DevExpress.XtraEditors.XtraForm
     {
-        public FrmMalzemeKartiListesi()
+        string _Type = "";
+        public FrmMalzemeKartiListesi(string type)
         {
             InitializeComponent();
+            _Type = type;
         }
         Listele listele = new Listele();
 

@@ -409,29 +409,29 @@ namespace Hesap.Utils
         }
         public void KolonlariGetir(GridView gridView, string EkranAdi)
         {
-            using (var connection = new Baglanti().GetConnection())
-            {
-                string selectQuery = "SELECT KolonAdi, Genişlik, Gizli, Konum FROM KolonDuzenleme WHERE KullaniciId = @KullaniciId AND EkranAdi = @EkranAdi ORDER BY Konum";
-                var kolonlar = connection.Query<KolonBilgisi>(selectQuery, new
-                {
-                    KullaniciId = Properties.Settings.Default.Id,
-                    EkranAdi = EkranAdi
-                }).ToList();
+            //using (var connection = new Baglanti().GetConnection())
+            //{
+            //    string selectQuery = "SELECT KolonAdi, Genişlik, Gizli, Konum FROM KolonDuzenleme WHERE KullaniciId = @KullaniciId AND EkranAdi = @EkranAdi ORDER BY Konum";
+            //    var kolonlar = connection.Query<KolonBilgisi>(selectQuery, new
+            //    {
+            //        KullaniciId = Properties.Settings.Default.Id,
+            //        EkranAdi = EkranAdi
+            //    }).ToList();
 
-                foreach (GridColumn kolon in gridView.Columns)
-                {
-                    var kolonBilgisi = kolonlar.FirstOrDefault(k => k.KolonAdi == kolon.FieldName);
-                    if (kolonBilgisi != null)
-                    {
-                        kolon.Visible = !kolonBilgisi.Gizli;
-                        kolon.Width = kolonBilgisi.Genişlik;
-                    }
-                    else
-                    {
-                        kolon.Visible = true;
-                    }
-                }
-            }
+            //    foreach (GridColumn kolon in gridView.Columns)
+            //    {
+            //        var kolonBilgisi = kolonlar.FirstOrDefault(k => k.KolonAdi == kolon.FieldName);
+            //        if (kolonBilgisi != null)
+            //        {
+            //            kolon.Visible = !kolonBilgisi.Gizli;
+            //            kolon.Width = kolonBilgisi.Genişlik;
+            //        }
+            //        else
+            //        {
+            //            kolon.Visible = true;
+            //        }
+            //    }
+            //}
         }
         public void KolonSecici(DevExpress.XtraGrid.GridControl grid)
         {

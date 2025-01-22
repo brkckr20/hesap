@@ -51,7 +51,8 @@ namespace Hesap.Forms.Liste
         }
         void Listele()
         {
-            string sql = "SELECT * FROM FirmaKarti";
+            string sql = @"select Id,CompanyCode [FirmaKodu],CompanyName [FirmaUnvan],
+                            ISNULL(AddressLine1,'') [Adres1],ISNULL(AddressLine2,'') [Adres2],ISNULL(AddressLine3,'') [Adres3] from Company";
             listele.Liste(sql, gridControl1);
             yardimciAraclar.KolonlariGetir(gridView1,this.Text);
         }

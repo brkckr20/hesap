@@ -17,6 +17,8 @@ namespace Hesap.Forms.MalzemeYonetimi
     {
         Ayarlar ayarlar = new Ayarlar();
         Bildirim bildirim = new Bildirim();
+        CRUD_Operations cRUD = new CRUD_Operations();
+        private readonly string TableName = "Inventory", Type = "Malzeme";
         public FrmMalzemeKarti()
         {
             InitializeComponent();
@@ -24,49 +26,32 @@ namespace Hesap.Forms.MalzemeYonetimi
         int Id = 0;
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            var fields = new
+            var parameters = new Dictionary<string, object>
             {
-                Kodu = txtKodu.Text,
-                Adi = txtAdi.Text,
-                GrupKodu = txtGrupKodu.Text,
-                Kullanimda = chckKullanimda.Checked,
-                Tip = cmbTip.SelectedIndex.ToString(),
-                Id = Id
+                { "InventoryCode", txtKodu.Text },
+                { "InventoryName", txtAdi.Text },
+                { "Unit", ""},
+                { "Type",Type},
+                { "SubType", ""},
             };
-            if (this.Id == 0)
+            using (var connection = new Baglanti().GetConnection())
             {
-                using (var connection = new Baglanti().GetConnection())
+                if (this.Id == 0)
                 {
-                    string mssql = @"INSERT INTO MalzemeKarti (Kodu,Adi,GrupKodu,Kullanimda,Tip) OUTPUT INSERTED.Id VALUES (@Kodu,@Adi,@GrupKodu,@Kullanimda,@Tip)";
-                    string sqlite = @"INSERT INTO MalzemeKarti (Kodu,Adi,GrupKodu,Kullanimda,Tip) VALUES (@Kodu,@Adi,@GrupKodu,@Kullanimda,@Tip)";
-                    string idQuery = "SELECT last_insert_rowid();";
-
-                    if (ayarlar.VeritabaniTuru() == "mssql")
-                    {
-                        Id = connection.QuerySingle<int>(mssql, fields);
-                    }
-                    else
-                    {
-                        connection.Execute(sqlite, fields);
-                        Id = connection.QuerySingle<int>(idQuery);
-                    }
+                    this.Id = cRUD.InsertRecord(TableName, parameters);
                     bildirim.Basarili();
                 }
-            }
-            else
-            {
-                using (var connection = new Baglanti().GetConnection())
+                else
                 {
-                    string update = "UPDATE MalzemeKarti SET Kodu = @Kodu,Adi = @Adi,GrupKodu = @GrupKodu,Kullanimda = @Kullanimda, Tip = @Tip WHERE Id = @Id";
-                    connection.Execute(update, fields);
+                    cRUD.UpdateRecord(TableName, parameters, this.Id);
+                    bildirim.GuncellemeBasarili();
                 }
-                bildirim.GuncellemeBasarili();
             }
         }
 
         private void grupKodlarınıGösterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pnlGrupKodlari.Visible = !pnlGrupKodlari.Visible;
+          //  pnlGrupKodlari.Visible = !pnlGrupKodlari.Visible;
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -78,17 +63,16 @@ namespace Hesap.Forms.MalzemeYonetimi
             Id = 0;
             txtKodu.Text = "";
             txtAdi.Text = "";
-            txtGrupKodu.Text = "";
+            chckKullanimda.Checked = true;
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            Liste.FrmMalzemeKartiListesi frm = new Liste.FrmMalzemeKartiListesi();
+            Liste.FrmMalzemeKartiListesi frm = new Liste.FrmMalzemeKartiListesi(Type);
             frm.ShowDialog();
             Id = frm.Id;
             txtKodu.Text = frm.Kodu;
             txtAdi.Text = frm.Adi;
-            txtGrupKodu.Text = frm.GrupKodu;
             chckKullanimda.Checked = frm.Kullanimda;
         }
 
@@ -127,7 +111,6 @@ namespace Hesap.Forms.MalzemeYonetimi
                     var urun = veri;
                     txtKodu.Text = urun.Kodu.ToString();
                     txtAdi.Text = urun.Adi.ToString();
-                    txtGrupKodu.Text = urun.GrupKodu.ToString();
                     chckKullanimda.Checked = Convert.ToBoolean(urun.Kullanimda);
                     this.Id = Convert.ToInt32(urun.Id);
                 }

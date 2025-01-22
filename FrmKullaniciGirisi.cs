@@ -67,10 +67,10 @@ namespace Hesap
             using (var connection = new Baglanti().GetConnection())
             {
                 var selectedKodu = cmbKodu.Properties.Items[cmbKodu.SelectedIndex].ToString().Split(' ')[0];
-                var query = "SELECT Sifre FROM KullaniciKarti WHERE Kodu = @Kodu";
-                var idQuery = "SELECT Id FROM KullaniciKarti WHERE Kodu = @Kodu";
-                var kullaniciSifre = connection.QuerySingleOrDefault<string>(query, new { Kodu = selectedKodu });
-                KullaniciId = connection.QuerySingleOrDefault<int>(idQuery, new { Kodu = selectedKodu });
+                var query = "SELECT Password FROM Users WHERE Code = @Code";
+                var idQuery = "SELECT Id FROM Users WHERE Code = @Code";
+                var kullaniciSifre = connection.QuerySingleOrDefault<string>(query, new { Code = selectedKodu });
+                KullaniciId = connection.QuerySingleOrDefault<int>(idQuery, new { Code = selectedKodu });
                 if (kullaniciSifre != null && kullaniciSifre == txtSifre.Text)
                 {
                     giris = true;
@@ -104,11 +104,11 @@ namespace Hesap
         {
             using (var connection = new Baglanti().GetConnection())
             {
-                var query = "SELECT Kodu, AdSoyad, Sifre FROM KullaniciKarti";
+                var query = "select Code,Name + ' ' + Surname [NameSurname], Password from Users";
                 var kullaniciKartlari = connection.Query(query).ToList();
                 foreach (var kullaniciKarti in kullaniciKartlari)
                 {
-                    string itemText = $"{kullaniciKarti.Kodu} {kullaniciKarti.AdSoyad}";
+                    string itemText = $"{kullaniciKarti.Code} {kullaniciKarti.NameSurname}";
                     cmbKodu.Properties.Items.Add(itemText);
                 }
 

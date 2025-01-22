@@ -21,6 +21,7 @@ namespace Hesap.Forms.Kartlar
         CRUD_Operations cRUD = new CRUD_Operations();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         int Id = 0;
+        private string TableName = "Company";
         public FrmFirmaKarti()
         {
             InitializeComponent();
@@ -31,40 +32,23 @@ namespace Hesap.Forms.Kartlar
         {
             var parameters = new Dictionary<string, object>
             {
-                { "FirmaKodu", txtFirmaKodu.Text },
-                { "FirmaUnvan", txtFirmaUnvan.Text },
-                { "Adres1", txtAdres1.Text},
-                { "Adres2", txtAdres2.Text},
-                { "Adres3", txtAdres3.Text},
-            };
-            var logParams = new Dictionary<string, object>
-            {
-                { "FirmaKodu", txtFirmaKodu.Text },
-                { "FirmaUnvan", txtFirmaUnvan.Text },
-                { "Adres1", txtAdres1.Text},
-                { "Adres2", txtAdres2.Text},
-                { "Adres3", txtAdres3.Text},
-                { "RefNo", this.Id},
-                { "Tarih", DateTime.Now},
-                { "Kullanici", Properties.Settings.Default.KullaniciAdi.ToString()},
-                { "Makina", Environment.MachineName},
-                { "Islem", this.Id == 0 ? "Yeni Kayıt" : "Güncelleme"},
-                
+                { "CompanyCode", txtFirmaKodu.Text },
+                { "CompanyName", txtFirmaUnvan.Text },
+                { "AddressLine1", txtAdres1.Text},
+                { "AddressLine2", txtAdres2.Text},
+                { "AddressLine3", txtAdres3.Text},
             };
             using (var connection = new Baglanti().GetConnection())
             {
                 if (this.Id == 0)
                 {
-                    this.Id = cRUD.InsertRecord("FirmaKarti", parameters);
+                    this.Id = cRUD.InsertRecord(TableName, parameters);
                     bildirim.Basarili(); 
-                    logParams["RefNo"] = this.Id;
-                    cRUD.InsertRecord("_LOG_FirmaKarti", logParams);
                 }
                 else
                 {
-                    cRUD.UpdateRecord("FirmaKarti", parameters, this.Id);
+                    cRUD.UpdateRecord(TableName, parameters, this.Id);
                     bildirim.GuncellemeBasarili();
-                    cRUD.InsertRecord("_LOG_FirmaKarti", logParams);
                 }
             }
         }
@@ -92,23 +76,8 @@ namespace Hesap.Forms.Kartlar
         }
         private void btnSil_Click(object sender, EventArgs e)
         {
-            var logParams = new Dictionary<string, object>
-            {
-                { "FirmaKodu", txtFirmaKodu.Text },
-                { "FirmaUnvan", txtFirmaUnvan.Text },
-                { "Adres1", txtAdres1.Text},
-                { "Adres2", txtAdres2.Text},
-                { "Adres3", txtAdres2.Text},
-                { "RefNo", this.Id},
-                { "Tarih", DateTime.Now},
-                { "Kullanici", Properties.Settings.Default.KullaniciAdi.ToString()},
-                { "Makina", Environment.MachineName},
-                { "Islem", "Silme"},
-
-            };
-            cRUD.KartSil(this.Id,"FirmaKarti");
+            cRUD.KartSil(this.Id,TableName);
             Temizle();
-            cRUD.InsertRecord("_LOG_FirmaKarti", logParams);
         }
         void ListeGetir(string KayitTipi)
         {
@@ -116,17 +85,17 @@ namespace Hesap.Forms.Kartlar
             {
                 using (var connection = new Baglanti().GetConnection())
                 {
-                    string mssql = $"select top 1 * from FirmaKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
-                    string sqlite = $"select * from FirmaKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")} limit 1";
+                    string mssql = $"select top 1 * from {TableName} where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
+                    string sqlite = $"select * from {TableName} where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")} limit 1";
                     var query = ayarlar.VeritabaniTuru() == "mssql" ? mssql : sqlite;
                     var veri = connection.QueryFirstOrDefault(query, new { Id = this.Id });
                     if (veri != null)
                     {
-                        txtFirmaKodu.Text = veri.FirmaKodu.ToString();
-                        txtFirmaUnvan.Text = veri.FirmaUnvan.ToString();
-                        txtAdres1.Text = veri.Adres1.ToString();
-                        txtAdres2.Text = veri.Adres2.ToString();
-                        txtAdres3.Text = veri.Adres3.ToString();
+                        txtFirmaKodu.Text = veri.CompanyCode.ToString();
+                        txtFirmaUnvan.Text = veri.CompanyName.ToString();
+                        txtAdres1.Text = veri.AddressLine1.ToString();
+                        txtAdres2.Text = veri.AddressLine2.ToString();
+                        txtAdres3.Text = veri.AddressLine3.ToString();
                         this.Id = Convert.ToInt32(veri.Id);
                     }
                     else
