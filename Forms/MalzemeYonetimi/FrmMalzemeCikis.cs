@@ -172,7 +172,7 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            Liste.FrmMalzemeKartiListesi frm = new Liste.FrmMalzemeKartiListesi();
+            Liste.FrmMalzemeKartiListesi frm = new Liste.FrmMalzemeKartiListesi("");
             frm.ShowDialog();
             if (!string.IsNullOrEmpty(frm.Kodu) && !string.IsNullOrEmpty(frm.Adi))
             {

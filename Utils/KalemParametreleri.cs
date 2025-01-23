@@ -10,7 +10,7 @@ namespace Hesap.Utils
     public class KalemParametreleri
     {
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
-        public Dictionary<string, object> KumasDepoParams(int rowIndex, int Id,GridView gridView1)
+        public Dictionary<string, object> KumasDepoParams(int rowIndex, int Id, GridView gridView1)
         {
             return new Dictionary<string, object>
             {
@@ -36,12 +36,26 @@ namespace Hesap.Utils
             };
         }
 
-        //public Dictionary<string, object> HamDepo1Params()
-        //{
-        //    return new Dictionary<string, object>
-        //    {
+        public Dictionary<string, object> GetGridViewData(int rowIndex, int id, GridView gridView, List<string> columnNames)
+        {
+            var data = new Dictionary<string, object> { { "RefNo", id } };
 
-        //    };
-        //}
+            foreach (var columnName in columnNames)
+            {
+                var cellValue = gridView.GetRowCellValue(rowIndex, columnName);
+                data[columnName] = cellValue ?? GetDefaultValue(columnName);
+            }
+
+            return data;
+        }
+        private object GetDefaultValue(string columnName)
+        {
+            // İlgili kolona göre varsayılan değerleri döndüren bir metod yazabilirsiniz.
+            // Örneğin, bazı kolonlar için 0, bazıları için boş string vb.
+            if (columnName == "KumasId" || columnName.Contains("Id") || columnName.Contains("Kg") || columnName.Contains("Mt") || columnName.Contains("Adet") || columnName.Contains("Fiyat") || columnName.Contains("RenkId") || columnName.Contains("SatirTutari") || columnName.Contains("DesenId") || columnName.Contains("BoyaIslemId"))
+                return 0;
+            return "";
+        }
     }
 }
+
