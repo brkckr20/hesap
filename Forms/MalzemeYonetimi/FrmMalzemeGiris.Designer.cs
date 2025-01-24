@@ -61,16 +61,17 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.KalemIslem = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbKalemIslem = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.MalzemeId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.MalzemeKodu = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.MalzemeAdi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Miktar = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.UUID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TakipNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.BirimFiyat = new DevExpress.XtraGrid.Columns.GridColumn();
             this.SatirTutari = new DevExpress.XtraGrid.Columns.GridColumn();
             this.D2Id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.pnlBottom = new DevExpress.XtraEditors.PanelControl();
             this.btnIslemBekleyenler = new DevExpress.XtraEditors.SimpleButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -78,7 +79,6 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MalzemeId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -482,6 +482,14 @@
             "Hizmet"});
             this.repoCmbKalemIslem.Name = "repoCmbKalemIslem";
             // 
+            // MalzemeId
+            // 
+            this.MalzemeId.Caption = "Malzeme Id";
+            this.MalzemeId.FieldName = "InventoryId";
+            this.MalzemeId.Name = "MalzemeId";
+            this.MalzemeId.Visible = true;
+            this.MalzemeId.VisibleIndex = 1;
+            // 
             // MalzemeKodu
             // 
             this.MalzemeKodu.Caption = "Malzeme Kodu";
@@ -520,19 +528,6 @@
             this.Miktar.Visible = true;
             this.Miktar.VisibleIndex = 4;
             this.Miktar.Width = 79;
-            // 
-            // repoCmbBirim
-            // 
-            this.repoCmbBirim.AutoHeight = false;
-            this.repoCmbBirim.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repoCmbBirim.Items.AddRange(new object[] {
-            "Kg",
-            "Mt",
-            "Adet",
-            "Gr",
-            "Cm"});
-            this.repoCmbBirim.Name = "repoCmbBirim";
             // 
             // UUID
             // 
@@ -573,10 +568,23 @@
             // D2Id
             // 
             this.D2Id.Caption = "Depo 2 Id";
-            this.D2Id.FieldName = "D2Id";
+            this.D2Id.FieldName = "Id";
             this.D2Id.Name = "D2Id";
             this.D2Id.Visible = true;
             this.D2Id.VisibleIndex = 9;
+            // 
+            // repoCmbBirim
+            // 
+            this.repoCmbBirim.AutoHeight = false;
+            this.repoCmbBirim.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repoCmbBirim.Items.AddRange(new object[] {
+            "Kg",
+            "Mt",
+            "Adet",
+            "Gr",
+            "Cm"});
+            this.repoCmbBirim.Name = "repoCmbBirim";
             // 
             // pnlBottom
             // 
@@ -639,14 +647,6 @@
             this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
-            // 
-            // MalzemeId
-            // 
-            this.MalzemeId.Caption = "Malzeme Id";
-            this.MalzemeId.FieldName = "InventoryId";
-            this.MalzemeId.Name = "MalzemeId";
-            this.MalzemeId.Visible = true;
-            this.MalzemeId.VisibleIndex = 1;
             // 
             // FrmMalzemeGiris
             // 

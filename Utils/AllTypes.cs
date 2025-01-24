@@ -9,5 +9,11 @@ namespace Hesap.Utils
     public enum ReceiptTypes
     {
         SatinAlmaTalimati = 0,
+        MalzemeDepoGiris = 1,
+    }
+
+    public enum InventoryTypes
+    {
+        Malzeme = 0,
     }
 }

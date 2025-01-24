@@ -38,7 +38,7 @@ namespace Hesap.Utils
 
         public Dictionary<string, object> GetGridViewData(int rowIndex, int id, GridView gridView, List<string> columnNames)
         {
-            var data = new Dictionary<string, object> { { "RefNo", id } };
+            var data = new Dictionary<string, object> { { "ReceiptId", id } };
 
             foreach (var columnName in columnNames)
             {
@@ -55,6 +55,11 @@ namespace Hesap.Utils
             if (columnName == "KumasId" || columnName.Contains("Id") || columnName.Contains("Kg") || columnName.Contains("Mt") || columnName.Contains("Adet") || columnName.Contains("Fiyat") || columnName.Contains("RenkId") || columnName.Contains("SatirTutari") || columnName.Contains("DesenId") || columnName.Contains("BoyaIslemId"))
                 return 0;
             return "";
+        }
+
+        public List<string> MalzemeDepo()
+        {
+            return new List<string> { "OperationType", "InventoryId", "Piece", "UnitPrice", "UUID", "RowAmount" };
         }
     }
 }

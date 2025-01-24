@@ -68,7 +68,7 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            Liste.FrmMalzemeKartiListesi frm = new Liste.FrmMalzemeKartiListesi(Type);
+            Liste.FrmMalzemeKartiListesi frm = new Liste.FrmMalzemeKartiListesi(Convert.ToInt32(InventoryTypes.Malzeme));
             frm.ShowDialog();
             Id = frm.Id;
             txtKodu.Text = frm.Kodu;

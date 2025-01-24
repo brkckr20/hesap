@@ -15,8 +15,8 @@ namespace Hesap.Forms.Liste
 {
     public partial class FrmMalzemeKartiListesi : DevExpress.XtraEditors.XtraForm
     {
-        string _Type = "";
-        public FrmMalzemeKartiListesi(string type)
+        int _Type;
+        public FrmMalzemeKartiListesi(int type)
         {
             InitializeComponent();
             _Type = type;
@@ -33,12 +33,11 @@ namespace Hesap.Forms.Liste
         }
         void Listele()
         {
-            string sql = @"SELECT *,case 
-			                when Tip = 0 then 'Malzeme'
-			                when Tip = 1 then 'Hizmet'
-			                when Tip = 2 then 'Sabit Kıymet'
-			                end as 'Tip Adı'
-			                FROM MalzemeKarti";
+            string sql = $@"SELECT 
+                        Id,
+	                    ISNULL(InventoryCode,'') [Kodu]
+	                    ,ISNULL(InventoryName,'') [Adi]
+                    FROM Inventory where Type = {this._Type}";
             listele.Liste(sql, gridControl1);
         }
 
@@ -48,7 +47,6 @@ namespace Hesap.Forms.Liste
             GridView gridView = sender as GridView;
             Kodu = gridView.GetFocusedRowCellValue("Kodu").ToString();
             Adi = gridView.GetFocusedRowCellValue("Adi").ToString();
-            GrupKodu = gridView.GetFocusedRowCellValue("GrupKodu").ToString();
             Kullanimda = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Kullanimda"));
             Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
             this.Close();

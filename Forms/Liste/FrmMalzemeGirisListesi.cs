@@ -24,26 +24,30 @@ namespace Hesap.Forms.Liste
 
         private void FrmMalzemeGirisListesi_Load(object sender, EventArgs e)
         {
-            string sql = @"SELECT 
-	                        M1.Id,
-	                        M1.Tarih,
-	                        ISNULL(M1.FirmaKodu,'') [FirmaKodu],
-	                        ISNULL(M1.FirmaUnvani,'') [FirmaUnvani],
-	                        ISNULL(M1.Aciklama,'') [Aciklama],
-	                        ISNULL(M1.DepoId,'') [DepoId],
-	                        ISNULL(M1.FaturaNo,'') [FaturaNo],
-	                        ISNULL(M1.FaturaTarihi,'') [FaturaTarihi],
-	                        ISNULL(M1.IrsaliyeNo,'') [IrsaliyeNo],
-	                        ISNULL(M2.TakipNo,'') [TakipNo],
-	                        ISNULL(M2.KalemIslem,'') [KalemIslem],
-	                        ISNULL(M2.MalzemeKodu,'') [MalzemeKodu],
-	                        ISNULL(M2.MalzemeAdi,'') [MalzemeAdi],
-	                        ISNULL(M2.Miktar,0) [Miktar],
-	                        ISNULL(M2.Birim,'') [Birim],
-	                        ISNULL(M2.BirimFiyat,0) [BirimFiyat],
-	                        ISNULL(M2.UUID,'') [UUID],
-							ISNULL(M2.Id,'') [D2Id]
-                        FROM MalzemeDepo1 M1 INNER JOIN MalzemeDepo2 M2 on M1.Id = M2.RefNo where M1.IslemCinsi = 'Giriş' order by M1.Tarih";
+            string sql = $@"Select
+                        ISNULL(R.Id,0) [Id],
+	                    ISNULL(R.ReceiptDate,'') [Tarih],
+	                    ISNULL(C.CompanyCode,'') [FirmaKodu],
+	                    ISNULL(C.CompanyName,'') [FirmaUnvani],
+	                    ISNULL(R.Explanation,'') [Aciklama],
+	                    --ISNULL(R.WareHouseId,'') [Depo], -- tablosu oluşturulacak
+	                    ISNULL(R.InvoiceNo,'') [FaturaNo],
+	                    ISNULL(R.InvoiceDate,'') [FaturaTarihi],
+	                    ISNULL(R.DispatchNo,'') [IrsaliyeNo],
+	                    ISNULL(R.DispatchDate,'') [IrsaliyeTarihi],
+	                    ISNULL(RI.TrackingNumber,'') [TakipNo],
+	                    ISNULL(RI.OperationType,'') [KalemIslem],
+	                    ISNULL(I.InventoryCode,'') [MalzemeKodu],
+	                    ISNULL(I.InventoryName,'') [MalzemeAdi],
+	                    ISNULL(RI.Piece,0) [Adet],
+	                    ISNULL(RI.UnitPrice,0) [BirimFiyat],
+	                    ISNULL(RI.Id,0) [D2Id]
+                    from 
+                    Receipt R with(nolock) 
+	                    inner join ReceiptItem RI on R.Id = RI.ReceiptId
+	                    left join Company C with(nolock)  on C.Id = R.CompanyId
+	                    left join Inventory I with(nolock) on RI.InventoryId = I.Id
+	                    where R.ReceiptType = {Convert.ToInt32(ReceiptTypes.MalzemeDepoGiris)}";
             listele.Liste(sql, gridControl1);
         }
         public List<Dictionary<string, object>> veriler = new List<Dictionary<string, object>>();
@@ -56,7 +60,7 @@ namespace Hesap.Forms.Liste
             veriler.Clear();
             for (int i = 0; i < gridView.DataRowCount; i++)
             {
-                int id = Convert.ToInt32(gridView.GetRowCellValue(i, "Id"));
+                int id = Convert.ToInt32(gridView.GetRowCellValue(i, "D2Id"));
 
                 if (id == secilenId)
                 {

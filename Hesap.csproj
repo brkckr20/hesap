@@ -561,7 +561,7 @@
     <Compile Include="Utils\KalemParametreleri.cs" />
     <Compile Include="Utils\Listele.cs" />
     <Compile Include="Utils\Numarator.cs" />
-    <Compile Include="Utils\ReceiptTypes.cs" />
+    <Compile Include="Utils\AllTypes.cs" />
     <Compile Include="Utils\YardimciAraclar.cs" />
     <EmbeddedResource Include="Forms\Kartlar\FrmBoyahaneRenkKartlari.resx">
       <DependentUpon>FrmBoyahaneRenkKartlari.cs</DependentUpon>

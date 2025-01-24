@@ -30,10 +30,10 @@ namespace Hesap.Forms.MalzemeYonetimi
             InitializeComponent();
         }
         int Id = 0;
-        int FirmaId=0;
+        int FirmaId = 0;
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            yansit.FirmaKoduVeAdiYansit(txtFirmaKodu,txtFirmaUnvan, ref this.FirmaId);
+            yansit.FirmaKoduVeAdiYansit(txtFirmaKodu, txtFirmaUnvan, ref this.FirmaId);
         }
         private void FrmMalzemeGiris_Load(object sender, EventArgs e)
         {
@@ -45,13 +45,13 @@ namespace Hesap.Forms.MalzemeYonetimi
             dateFaturaTarihi.EditValue = DateTime.Now;
             dateIrsaliyeTarihi.EditValue = DateTime.Now;
             gridControl1.DataSource = new BindingList<_ReceiptItem>();
-            yardimciAraclar.KolonlariGetir(gridView1,this.Text);
+            yardimciAraclar.KolonlariGetir(gridView1, this.Text);
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             var parameters = new Dictionary<string, object>
             {
-                { "ReceiptType", ReceiptTypes.SatinAlmaTalimati },
+                { "ReceiptType", ReceiptTypes.MalzemeDepoGiris },
                 { "ReceiptDate", dateTarih.EditValue },
                 { "CompanyId", this.FirmaId },
                 { "Explanation", rchAciklama.Text },
@@ -68,38 +68,29 @@ namespace Hesap.Forms.MalzemeYonetimi
 
                 for (int i = 0; i < gridView1.RowCount - 1; i++)
                 {
-                    var columnNames = new List<string>
-                                        {
-                                            "KalemIslem", "KumasId", "GrM2", "BrutKg", "NetKg", "BrutMt", "NetMt", "Adet", "Fiyat",
-                                            "FiyatBirimi", "DovizCinsi", "RenkId", "Aciklama", "UUID", "SatirTutari", "TakipNo",
-                                            "DesenId", "BoyaIslemId"
-                                        };
-                    var kalemler = parametreler.GetGridViewData(i,this.Id,gridView1,columnNames);
-                    var d2Id = cRUD.InsertRecord(TableName2,kalemler);
-                    gridView1.SetRowCellValue(i, "D2Id", d2Id); 
-                    //var kalemParameters = parametreler.KumasDepoParams(i, this.Id, gridView1);
-                    //var d2Id = cRUD.InsertRecord("HamDepo2", kalemParameters);
-                    //gridView1.SetRowCellValue(i, "D2Id", d2Id);
+                    var kalemler = parametreler.GetGridViewData(i, this.Id, gridView1, parametreler.MalzemeDepo());
+                    var d2Id = cRUD.InsertRecord(TableName2, kalemler);
+                    gridView1.SetRowCellValue(i, "Id", d2Id);
                 }
                 bildirim.Basarili();
             }
             else
             {
                 cRUD.UpdateRecord(TableName1, parameters, this.Id);
-                //for (int i = 0; i < gridView1.RowCount - 1; i++)
-                //{
-                //    var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
-                //    var kalemParameters = parametreler.KumasDepoParams(i, this.Id, gridView1);
-                //    if (d2Id > 0)
-                //    {
-                //        cRUD.UpdateRecord("HamDepo2", kalemParameters, d2Id);
-                //    }
-                //    else
-                //    {
-                //        var yeniId = cRUD.InsertRecord("HamDepo2", kalemParameters);
-                //        gridView1.SetRowCellValue(i, "D2Id", yeniId);
-                //    }
-                //}
+                for (int i = 0; i < gridView1.RowCount - 1; i++)
+                {
+                    var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "Id"));
+                    var kalemler = parametreler.GetGridViewData(i, this.Id, gridView1, parametreler.MalzemeDepo());
+                    if (d2Id > 0)
+                    {
+                        cRUD.UpdateRecord(TableName2, kalemler, d2Id);
+                    }
+                    else
+                    {
+                        var yeniId = cRUD.InsertRecord(TableName2, kalemler);
+                        gridView1.SetRowCellValue(i, "Id", yeniId);
+                    }
+                }
                 bildirim.GuncellemeBasarili();
                 #region eskikod
                 //object FisBaslik = new
@@ -231,13 +222,14 @@ namespace Hesap.Forms.MalzemeYonetimi
         }
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            Liste.FrmMalzemeKartiListesi frm = new Liste.FrmMalzemeKartiListesi("");
+            Liste.FrmMalzemeKartiListesi frm = new Liste.FrmMalzemeKartiListesi(Convert.ToInt32(InventoryTypes.Malzeme));
             frm.ShowDialog();
             if (!string.IsNullOrEmpty(frm.Kodu) && !string.IsNullOrEmpty(frm.Adi))
             {
                 int newRowHandle = gridView1.FocusedRowHandle;
-                gridView1.SetRowCellValue(newRowHandle, "MalzemeKodu", frm.Kodu);
-                gridView1.SetRowCellValue(newRowHandle, "MalzemeAdi", frm.Adi);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryId", frm.Id);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryCode", frm.Kodu);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryName", frm.Adi);
             }
         }
         private void gridView1_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
@@ -257,7 +249,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                 dateFaturaTarihi.EditValue = (DateTime)frm.veriler[0]["FaturaTarihi"];
                 txtFirmaKodu.Text = frm.veriler[0]["FirmaKodu"].ToString();
                 txtFirmaUnvan.Text = frm.veriler[0]["FirmaUnvani"].ToString();
-                txtDepoKodu.Text = frm.veriler[0]["DepoId"].ToString();
+               // txtDepoKodu.Text = frm.veriler[0]["DepoId"].ToString();
                 txtFaturaNo.Text = frm.veriler[0]["FaturaNo"].ToString();
                 txtIrsaliyeNo.Text = frm.veriler[0]["IrsaliyeNo"].ToString();
                 rchAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
@@ -384,7 +376,7 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+            yardimciAraclar.KolonDurumunuKaydet(gridView1, this.Text);
         }
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
