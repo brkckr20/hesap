@@ -27,6 +27,7 @@ namespace Hesap.Forms.Liste
             string sql = $@"Select
                         ISNULL(R.Id,0) [Id],
 	                    ISNULL(R.ReceiptDate,'') [Tarih],
+	                    ISNULL(RI.ReceiptId,'') [ReceiptId],
 	                    ISNULL(C.CompanyCode,'') [FirmaKodu],
 	                    ISNULL(C.CompanyName,'') [FirmaUnvani],
 	                    ISNULL(R.Explanation,'') [Aciklama],
@@ -60,7 +61,7 @@ namespace Hesap.Forms.Liste
             veriler.Clear();
             for (int i = 0; i < gridView.DataRowCount; i++)
             {
-                int id = Convert.ToInt32(gridView.GetRowCellValue(i, "D2Id"));
+                int id = Convert.ToInt32(gridView.GetRowCellValue(i, "ReceiptId"));
 
                 if (id == secilenId)
                 {

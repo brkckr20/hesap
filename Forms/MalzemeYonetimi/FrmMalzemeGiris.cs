@@ -239,7 +239,7 @@ namespace Hesap.Forms.MalzemeYonetimi
             view.SetRowCellValue(e.RowHandle, "UUID", uuid);
         }
 
-        private void simpleButton2_Click(object sender, EventArgs e)
+        private void simpleButton2_Click(object sender, EventArgs e) // listeleme çalışmadı - düzeltilecek
         {
             Liste.FrmMalzemeGirisListesi frm = new Liste.FrmMalzemeGirisListesi();
             frm.ShowDialog();
@@ -249,14 +249,14 @@ namespace Hesap.Forms.MalzemeYonetimi
                 dateFaturaTarihi.EditValue = (DateTime)frm.veriler[0]["FaturaTarihi"];
                 txtFirmaKodu.Text = frm.veriler[0]["FirmaKodu"].ToString();
                 txtFirmaUnvan.Text = frm.veriler[0]["FirmaUnvani"].ToString();
-               // txtDepoKodu.Text = frm.veriler[0]["DepoId"].ToString();
+                // txtDepoKodu.Text = frm.veriler[0]["DepoId"].ToString();
                 txtFaturaNo.Text = frm.veriler[0]["FaturaNo"].ToString();
                 txtIrsaliyeNo.Text = frm.veriler[0]["IrsaliyeNo"].ToString();
                 rchAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
                 Id = Convert.ToInt32(frm.veriler[0]["Id"]);
                 string[] columnNames = new string[]
                 {
-                    "KalemIslem", "MalzemeKodu", "MalzemeAdi", "Miktar", "Birim", "UUID","TakipNo","BirimFiyat","D2Id"
+                    "KalemIslem", "InventoryId" ,"InventoryCode", "InventoryName", "Piece", "UUID","TrackingNumber","UnitPrice","D2Id"
                 };
                 yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
             }
