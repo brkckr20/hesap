@@ -245,18 +245,18 @@ namespace Hesap.Forms.MalzemeYonetimi
             frm.ShowDialog();
             if (frm.veriler.Count > 0)
             {
-                dateTarih.EditValue = (DateTime)frm.veriler[0]["Tarih"];
-                dateFaturaTarihi.EditValue = (DateTime)frm.veriler[0]["FaturaTarihi"];
-                txtFirmaKodu.Text = frm.veriler[0]["FirmaKodu"].ToString();
-                txtFirmaUnvan.Text = frm.veriler[0]["FirmaUnvani"].ToString();
+                dateTarih.EditValue = (DateTime)frm.veriler[0]["ReceiptDate"];
+                dateFaturaTarihi.EditValue = (DateTime)frm.veriler[0]["InvoiceDate"];
+                txtFirmaKodu.Text = frm.veriler[0]["CompanyCode"].ToString();
+                txtFirmaUnvan.Text = frm.veriler[0]["CompanyName"].ToString();
                 // txtDepoKodu.Text = frm.veriler[0]["DepoId"].ToString();
-                txtFaturaNo.Text = frm.veriler[0]["FaturaNo"].ToString();
-                txtIrsaliyeNo.Text = frm.veriler[0]["IrsaliyeNo"].ToString();
-                rchAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
+                txtFaturaNo.Text = frm.veriler[0]["InvoiceNo"].ToString();
+                txtIrsaliyeNo.Text = frm.veriler[0]["DispatchNo"].ToString();
+                rchAciklama.Text = frm.veriler[0]["Explanation"].ToString();
                 Id = Convert.ToInt32(frm.veriler[0]["Id"]);
                 string[] columnNames = new string[]
                 {
-                    "KalemIslem", "InventoryId" ,"InventoryCode", "InventoryName", "Piece", "UUID","TrackingNumber","UnitPrice","D2Id"
+                    "OperationType", "InventoryId" ,"InventoryCode", "InventoryName", "Piece", "UUID","TrackingNumber","UnitPrice","D2Id"
                 };
                 yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
             }

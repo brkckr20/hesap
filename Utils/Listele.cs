@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Columns;
 
 namespace Hesap.Utils
 {
@@ -45,6 +47,7 @@ namespace Hesap.Utils
                     }
                 }
                 xtraGrid.DataSource = dataTable;
+                UpdateColumnHeaders(xtraGrid);
             }
         }
         public void ListeWithParams(string sql, GridControl xtraGrid, string param1)
@@ -75,5 +78,22 @@ namespace Hesap.Utils
                 xtraGrid.DataSource = dataTable;
             }
         }
+        public void UpdateColumnHeaders(GridControl xtraGrid)
+        {
+            GridView gridView = xtraGrid.MainView as GridView;
+
+            if (gridView != null)
+            {
+                foreach (GridColumn column in gridView.Columns)
+                {
+                    if (ColumnHeaders.Headers.ContainsKey(column.FieldName))
+                    {
+                        column.Caption = ColumnHeaders.Headers[column.FieldName];
+                    }
+                }
+            }
+        }
+
     }
+
 }

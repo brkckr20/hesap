@@ -62,7 +62,7 @@
             this.KalemIslem = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbKalemIslem = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.MalzemeId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.MalzemeKodu = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.InventoryCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.MalzemeAdi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Miktar = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -442,7 +442,7 @@
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.KalemIslem,
             this.MalzemeId,
-            this.MalzemeKodu,
+            this.InventoryCode,
             this.MalzemeAdi,
             this.Miktar,
             this.UUID,
@@ -490,15 +490,15 @@
             this.MalzemeId.Visible = true;
             this.MalzemeId.VisibleIndex = 1;
             // 
-            // MalzemeKodu
+            // InventoryCode
             // 
-            this.MalzemeKodu.Caption = "Malzeme Kodu";
-            this.MalzemeKodu.ColumnEdit = this.repoBtnUrunKodu;
-            this.MalzemeKodu.FieldName = "InventoryCode";
-            this.MalzemeKodu.Name = "MalzemeKodu";
-            this.MalzemeKodu.Visible = true;
-            this.MalzemeKodu.VisibleIndex = 2;
-            this.MalzemeKodu.Width = 125;
+            this.InventoryCode.Caption = "Malzeme Kodu";
+            this.InventoryCode.ColumnEdit = this.repoBtnUrunKodu;
+            this.InventoryCode.FieldName = "InventoryCode";
+            this.InventoryCode.Name = "InventoryCode";
+            this.InventoryCode.Visible = true;
+            this.InventoryCode.VisibleIndex = 2;
+            this.InventoryCode.Width = 125;
             // 
             // repoBtnUrunKodu
             // 
@@ -723,7 +723,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn KalemIslem;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnUrunKodu;
-        private DevExpress.XtraGrid.Columns.GridColumn MalzemeKodu;
+        private DevExpress.XtraGrid.Columns.GridColumn InventoryCode;
         private DevExpress.XtraGrid.Columns.GridColumn Miktar;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbBirim;
         private DevExpress.XtraGrid.Columns.GridColumn UUID;

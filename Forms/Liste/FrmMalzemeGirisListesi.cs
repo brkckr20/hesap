@@ -26,22 +26,22 @@ namespace Hesap.Forms.Liste
         {
             string sql = $@"Select
                         ISNULL(R.Id,0) [Id],
-	                    ISNULL(R.ReceiptDate,'') [Tarih],
+	                    ISNULL(R.ReceiptDate,'') [ReceiptDate],
 	                    ISNULL(RI.ReceiptId,'') [ReceiptId],
-	                    ISNULL(C.CompanyCode,'') [FirmaKodu],
-	                    ISNULL(C.CompanyName,'') [FirmaUnvani],
-	                    ISNULL(R.Explanation,'') [Aciklama],
+	                    ISNULL(C.CompanyCode,'') [CompanyCode],
+	                    ISNULL(C.CompanyName,'') [CompanyName],
+	                    ISNULL(R.Explanation,'') [Explanation],
 	                    --ISNULL(R.WareHouseId,'') [Depo], -- tablosu oluşturulacak
-	                    ISNULL(R.InvoiceNo,'') [FaturaNo],
-	                    ISNULL(R.InvoiceDate,'') [FaturaTarihi],
-	                    ISNULL(R.DispatchNo,'') [IrsaliyeNo],
-	                    ISNULL(R.DispatchDate,'') [IrsaliyeTarihi],
-	                    ISNULL(RI.TrackingNumber,'') [TakipNo],
-	                    ISNULL(RI.OperationType,'') [KalemIslem],
-	                    ISNULL(I.InventoryCode,'') [MalzemeKodu],
-	                    ISNULL(I.InventoryName,'') [MalzemeAdi],
-	                    ISNULL(RI.Piece,0) [Adet],
-	                    ISNULL(RI.UnitPrice,0) [BirimFiyat],
+	                    ISNULL(R.InvoiceNo,'') [InvoiceNo],
+	                    ISNULL(R.InvoiceDate,'') [InvoiceDate],
+	                    ISNULL(R.DispatchNo,'') [DispatchNo],
+	                    ISNULL(R.DispatchDate,'') [DispatchDate],
+	                    ISNULL(RI.TrackingNumber,'') [TrackingNumber],
+	                    ISNULL(RI.OperationType,'') [OperationType],
+	                    ISNULL(I.InventoryCode,'') [InventoryCode],
+	                    ISNULL(I.InventoryName,'') [InventoryName],
+	                    ISNULL(RI.Piece,0) [Piece],
+	                    ISNULL(RI.UnitPrice,0) [UnitPrice],
 	                    ISNULL(RI.Id,0) [D2Id]
                     from 
                     Receipt R with(nolock) 
