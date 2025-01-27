@@ -568,7 +568,7 @@
             // D2Id
             // 
             this.D2Id.Caption = "Depo 2 Id";
-            this.D2Id.FieldName = "Id";
+            this.D2Id.FieldName = "ReceiptItemId";
             this.D2Id.Name = "D2Id";
             this.D2Id.Visible = true;
             this.D2Id.VisibleIndex = 9;

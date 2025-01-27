@@ -24,7 +24,7 @@ namespace Hesap.Utils
             { "InventoryName", "Malzeme Adı" },
             { "Piece", "Adet" },
             { "UnitPrice", "Birim Fiyat" },
-            { "D2Id", "D2 Id" }
+            { "ReceiptItemId", "D2 Id" }
         };
     }
 }

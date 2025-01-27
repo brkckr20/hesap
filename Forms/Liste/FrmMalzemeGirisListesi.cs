@@ -27,8 +27,9 @@ namespace Hesap.Forms.Liste
             string sql = $@"Select
                         ISNULL(R.Id,0) [Id],
 	                    ISNULL(R.ReceiptDate,'') [ReceiptDate],
-	                    ISNULL(RI.ReceiptId,'') [ReceiptId],
-	                    ISNULL(C.CompanyCode,'') [CompanyCode],
+	                    ISNULL(RI.ReceiptId,'') [ReceiptId], -- referans numarası
+                        ISNULL(C.Id,'') [CompanyId],	                    
+                        ISNULL(C.CompanyCode,'') [CompanyCode],
 	                    ISNULL(C.CompanyName,'') [CompanyName],
 	                    ISNULL(R.Explanation,'') [Explanation],
 	                    --ISNULL(R.WareHouseId,'') [Depo], -- tablosu oluşturulacak
@@ -38,11 +39,13 @@ namespace Hesap.Forms.Liste
 	                    ISNULL(R.DispatchDate,'') [DispatchDate],
 	                    ISNULL(RI.TrackingNumber,'') [TrackingNumber],
 	                    ISNULL(RI.OperationType,'') [OperationType],
+                        ISNULL(I.Id,'') [InventoryId],
 	                    ISNULL(I.InventoryCode,'') [InventoryCode],
 	                    ISNULL(I.InventoryName,'') [InventoryName],
 	                    ISNULL(RI.Piece,0) [Piece],
 	                    ISNULL(RI.UnitPrice,0) [UnitPrice],
-	                    ISNULL(RI.Id,0) [D2Id]
+	                    ISNULL(RI.Id,0) [ReceiptItemId],
+	                    ISNULL(RI.UUID,'') [UUID]
                     from 
                     Receipt R with(nolock) 
 	                    inner join ReceiptItem RI on R.Id = RI.ReceiptId

@@ -49,6 +49,11 @@ namespace Hesap.Forms.MalzemeYonetimi
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
+            if (this.FirmaId == 0)
+            {
+                bildirim.Uyari("Firma seçilmeden kayıt işlemi gerçekleştirilemez!");
+                return;
+            }
             var parameters = new Dictionary<string, object>
             {
                 { "ReceiptType", ReceiptTypes.MalzemeDepoGiris },
@@ -70,7 +75,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                 {
                     var kalemler = parametreler.GetGridViewData(i, this.Id, gridView1, parametreler.MalzemeDepo());
                     var d2Id = cRUD.InsertRecord(TableName2, kalemler);
-                    gridView1.SetRowCellValue(i, "Id", d2Id);
+                    gridView1.SetRowCellValue(i, "ReceiptItemId", d2Id);
                 }
                 bildirim.Basarili();
             }
@@ -79,8 +84,9 @@ namespace Hesap.Forms.MalzemeYonetimi
                 cRUD.UpdateRecord(TableName1, parameters, this.Id);
                 for (int i = 0; i < gridView1.RowCount - 1; i++)
                 {
-                    var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "Id"));
+                    var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "ReceiptItemId"));
                     var kalemler = parametreler.GetGridViewData(i, this.Id, gridView1, parametreler.MalzemeDepo());
+                    kalemler.Remove("ReceiptItemId");
                     if (d2Id > 0)
                     {
                         cRUD.UpdateRecord(TableName2, kalemler, d2Id);
@@ -88,7 +94,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                     else
                     {
                         var yeniId = cRUD.InsertRecord(TableName2, kalemler);
-                        gridView1.SetRowCellValue(i, "Id", yeniId);
+                        gridView1.SetRowCellValue(i, "ReceiptItemId", yeniId); // kontrol edilmeli
                     }
                 }
                 bildirim.GuncellemeBasarili();
@@ -247,6 +253,7 @@ namespace Hesap.Forms.MalzemeYonetimi
             {
                 dateTarih.EditValue = (DateTime)frm.veriler[0]["ReceiptDate"];
                 dateFaturaTarihi.EditValue = (DateTime)frm.veriler[0]["InvoiceDate"];
+                this.FirmaId = Convert.ToInt32(frm.veriler[0]["CompanyId"]);
                 txtFirmaKodu.Text = frm.veriler[0]["CompanyCode"].ToString();
                 txtFirmaUnvan.Text = frm.veriler[0]["CompanyName"].ToString();
                 // txtDepoKodu.Text = frm.veriler[0]["DepoId"].ToString();
@@ -256,7 +263,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                 Id = Convert.ToInt32(frm.veriler[0]["Id"]);
                 string[] columnNames = new string[]
                 {
-                    "OperationType", "InventoryId" ,"InventoryCode", "InventoryName", "Piece", "UUID","TrackingNumber","UnitPrice","D2Id"
+                    "OperationType", "InventoryId" ,"InventoryCode", "InventoryName", "Piece", "UUID", "TrackingNumber","UnitPrice","ReceiptItemId"
                 };
                 yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
             }
