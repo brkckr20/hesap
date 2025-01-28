@@ -12,7 +12,7 @@ namespace Hesap.Context
         public int Id { get; set; }
         public int ReceiptId { get; set; }
         public string OperationType { get; set; }
-        public string InventoryId { get; set; }
+        public int InventoryId { get; set; }
         public string InventoryCode { get; set; }
         public string InventoryName { get; set; }
         public float Piece
@@ -29,7 +29,7 @@ namespace Hesap.Context
             }
         }
         public string UUID { get; set; }
-        public string TeslimAlan { get; set; }
+        //public string TeslimAlan { get; set; }
         public int TrackingNumber { get; set; }
         public float UnitPrice
         {

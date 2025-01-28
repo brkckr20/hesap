@@ -18,7 +18,8 @@ namespace Hesap.Forms.MalzemeYonetimi
         Ayarlar ayarlar = new Ayarlar();
         Bildirim bildirim = new Bildirim();
         CRUD_Operations cRUD = new CRUD_Operations();
-        private readonly string TableName = "Inventory", Type = "Malzeme";
+        private readonly string TableName = "Inventory";
+        int Type = Convert.ToInt32(InventoryTypes.Malzeme);
         public FrmMalzemeKarti()
         {
             InitializeComponent();

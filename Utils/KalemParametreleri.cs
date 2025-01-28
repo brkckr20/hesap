@@ -52,14 +52,14 @@ namespace Hesap.Utils
         {
             // İlgili kolona göre varsayılan değerleri döndüren bir metod yazabilirsiniz.
             // Örneğin, bazı kolonlar için 0, bazıları için boş string vb.
-            if (columnName == "KumasId" || columnName.Contains("Id") || columnName.Contains("Kg") || columnName.Contains("Mt") || columnName.Contains("Adet") || columnName.Contains("Fiyat") || columnName.Contains("RenkId") || columnName.Contains("SatirTutari") || columnName.Contains("DesenId") || columnName.Contains("BoyaIslemId"))
+            if (columnName == "KumasId" || columnName.Contains("Id") || columnName.Contains("Kg") || columnName.Contains("Mt") || columnName.Contains("Adet") || columnName.Contains("Fiyat") || columnName.Contains("RenkId") || columnName.Contains("SatirTutari") || columnName.Contains("DesenId") || columnName.Contains("BoyaIslemId") || columnName.Contains("RowAmount") || columnName.Contains("UnitPrice"))
                 return 0;
             return "";
         }
 
         public List<string> MalzemeDepo()
         {
-            return new List<string> { "OperationType", "InventoryId", "Piece", "UnitPrice", "UUID", "RowAmount", "ReceiptItemId" };
+            return new List<string> { "OperationType", "InventoryId", "Piece","UUID", "UnitPrice"/*,*/ /*"RowAmount","ReceiptItemId"*/ };
         }
     }
 }

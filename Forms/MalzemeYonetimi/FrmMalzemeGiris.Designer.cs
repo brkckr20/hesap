@@ -67,9 +67,9 @@
             this.MalzemeAdi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Miktar = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UUID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.TakipNo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.BirimFiyat = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.SatirTutari = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.TrackingNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.UnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.RowAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.D2Id = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.pnlBottom = new DevExpress.XtraEditors.PanelControl();
@@ -446,9 +446,9 @@
             this.MalzemeAdi,
             this.Miktar,
             this.UUID,
-            this.TakipNo,
-            this.BirimFiyat,
-            this.SatirTutari,
+            this.TrackingNumber,
+            this.UnitPrice,
+            this.RowAmount,
             this.D2Id});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
@@ -538,32 +538,33 @@
             this.UUID.VisibleIndex = 5;
             this.UUID.Width = 287;
             // 
-            // TakipNo
+            // TrackingNumber
             // 
-            this.TakipNo.Caption = "Takip No";
-            this.TakipNo.FieldName = "TrackingNumber";
-            this.TakipNo.Name = "TakipNo";
-            this.TakipNo.Visible = true;
-            this.TakipNo.VisibleIndex = 8;
+            this.TrackingNumber.Caption = "Takip No";
+            this.TrackingNumber.FieldName = "TrackingNumber";
+            this.TrackingNumber.Name = "TrackingNumber";
+            this.TrackingNumber.Visible = true;
+            this.TrackingNumber.VisibleIndex = 8;
             // 
-            // BirimFiyat
+            // UnitPrice
             // 
-            this.BirimFiyat.Caption = "Birim Fiyat";
-            this.BirimFiyat.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.BirimFiyat.FieldName = "UnitPrice";
-            this.BirimFiyat.Name = "BirimFiyat";
-            this.BirimFiyat.Visible = true;
-            this.BirimFiyat.VisibleIndex = 6;
+            this.UnitPrice.Caption = "Birim Fiyat";
+            this.UnitPrice.DisplayFormat.FormatString = "0.0000";
+            this.UnitPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.UnitPrice.FieldName = "UnitPrice";
+            this.UnitPrice.Name = "UnitPrice";
+            this.UnitPrice.Visible = true;
+            this.UnitPrice.VisibleIndex = 6;
             // 
-            // SatirTutari
+            // RowAmount
             // 
-            this.SatirTutari.Caption = "Satır Tutarı";
-            this.SatirTutari.DisplayFormat.FormatString = "0.00000";
-            this.SatirTutari.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.SatirTutari.FieldName = "RowAmount";
-            this.SatirTutari.Name = "SatirTutari";
-            this.SatirTutari.Visible = true;
-            this.SatirTutari.VisibleIndex = 7;
+            this.RowAmount.Caption = "Satır Tutarı";
+            this.RowAmount.DisplayFormat.FormatString = "0.00000";
+            this.RowAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.RowAmount.FieldName = "RowAmount";
+            this.RowAmount.Name = "RowAmount";
+            this.RowAmount.Visible = true;
+            this.RowAmount.VisibleIndex = 7;
             // 
             // D2Id
             // 
@@ -733,9 +734,9 @@
         private DevExpress.XtraEditors.SimpleButton btnIslemBekleyenler;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem siparişFormuToolStripMenuItem;
-        private DevExpress.XtraGrid.Columns.GridColumn TakipNo;
-        private DevExpress.XtraGrid.Columns.GridColumn BirimFiyat;
-        private DevExpress.XtraGrid.Columns.GridColumn SatirTutari;
+        private DevExpress.XtraGrid.Columns.GridColumn TrackingNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn UnitPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn RowAmount;
         private DevExpress.XtraGrid.Columns.GridColumn D2Id;
         private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
