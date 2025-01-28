@@ -51,7 +51,7 @@ namespace Hesap.Forms.MalzemeYonetimi
         {
             if (this.FirmaId == 0)
             {
-                bildirim.Uyari("Firma seçilmeden kayıt işlemi gerçekleştirilemez!");
+                bildirim.Uyari("Firma seçilmeden kayıt işlemi gerçekleştirilemez!!");
                 return;
             }
             var parameters = new Dictionary<string, object>
