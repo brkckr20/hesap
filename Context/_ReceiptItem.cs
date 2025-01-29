@@ -15,7 +15,7 @@ namespace Hesap.Context
         public int InventoryId { get; set; }
         public string InventoryCode { get; set; }
         public string InventoryName { get; set; }
-        public float Piece
+        public decimal Piece
         {
             get => _miktar;
             set
@@ -31,7 +31,7 @@ namespace Hesap.Context
         public string UUID { get; set; }
         //public string TeslimAlan { get; set; }
         public int TrackingNumber { get; set; }
-        public float UnitPrice
+        public decimal UnitPrice
         {
             get => _birimFiyat;
             set
@@ -44,7 +44,7 @@ namespace Hesap.Context
                 }
             }
         }
-        public float RowAmount
+        public decimal RowAmount
         {
             get => _satirTutari;
             private set
@@ -57,9 +57,9 @@ namespace Hesap.Context
             }
         }
 
-        private float _miktar;
-        private float _birimFiyat;
-        private float _satirTutari;
+        private decimal _miktar;
+        private decimal _birimFiyat;
+        private decimal _satirTutari;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void UpdateSatirTutari()

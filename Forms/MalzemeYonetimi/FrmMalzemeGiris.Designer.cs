@@ -549,8 +549,6 @@
             // UnitPrice
             // 
             this.UnitPrice.Caption = "Birim Fiyat";
-            this.UnitPrice.DisplayFormat.FormatString = "0.0000";
-            this.UnitPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.UnitPrice.FieldName = "UnitPrice";
             this.UnitPrice.Name = "UnitPrice";
             this.UnitPrice.Visible = true;
@@ -559,8 +557,6 @@
             // RowAmount
             // 
             this.RowAmount.Caption = "Satır Tutarı";
-            this.RowAmount.DisplayFormat.FormatString = "0.00000";
-            this.RowAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.RowAmount.FieldName = "RowAmount";
             this.RowAmount.Name = "RowAmount";
             this.RowAmount.Visible = true;

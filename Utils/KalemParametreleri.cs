@@ -59,7 +59,7 @@ namespace Hesap.Utils
 
         public List<string> MalzemeDepo()
         {
-            return new List<string> { "OperationType", "InventoryId", "Piece","UUID", "UnitPrice"/*,*/ /*"RowAmount","ReceiptItemId"*/ };
+            return new List<string> { "OperationType", "InventoryId", "Piece","UUID"/*, "UnitPrice",*//* ,"RowAmount","ReceiptItemId"*/ };
         }
     }
 }
