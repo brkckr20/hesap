@@ -386,6 +386,11 @@ namespace Hesap.Forms.MalzemeYonetimi
             yardimciAraclar.KolonDurumunuKaydet(gridView1, this.Text);
         }
 
+        private void customButton1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("custom button");
+        }
+
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             yardimciAraclar.KolonSecici(gridControl1);
