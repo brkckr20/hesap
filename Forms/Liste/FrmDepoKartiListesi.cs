@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
-using Hesap.Utils;
+using Hesap.DataAccess;
+using Hesap.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,18 +14,17 @@ using System.Windows.Forms;
 
 namespace Hesap.Forms.Liste
 {
-    public partial class FrmDepoKartiListesi : DevExpress.XtraEditors.XtraForm
+    public partial class FrmDepoKartiListesi : XtraForm
     {
-        Listele listele = new Listele();
-
+        CrudRepository crudRepository = new CrudRepository();
+        string TableName = "WareHouse";
         public FrmDepoKartiListesi()
         {
             InitializeComponent();
         }
-        public string Kodu, Adi, KayitEden, Guncelleyen;
-        public bool Kullanimda;
-        public DateTime? KayitTarihi, GuncellemeTarihi;
+        public string Kodu, Adi;
         public int Id;
+        public bool Kullanimda;
 
         private void FrmDepoKartiListesi_Load(object sender, EventArgs e)
         {
@@ -32,27 +32,16 @@ namespace Hesap.Forms.Liste
         }
         void Listele()
         {
-            string sql = "SELECT * FROM DepoKarti";
-            listele.Liste(sql, gridControl1);
-            gridView1.Columns["KayitTarihi"].Visible = false;
-            gridView1.Columns["KayitEden"].Visible = false;
-            gridView1.Columns["GuncellemeTarihi"].Visible = false;
-            gridView1.Columns["Guncelleyen"].Visible = false;
+            gridControl1.DataSource = crudRepository.GetAll<WareHouse>(this.TableName).ToList();
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
             GridView gridView = sender as GridView;
-            Kodu = gridView.GetFocusedRowCellValue("Kodu").ToString();
-            Adi = gridView.GetFocusedRowCellValue("Adi").ToString();
-            Kullanimda = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Kullanimda"));
+            Kodu = gridView.GetFocusedRowCellValue("Code").ToString();
+            Adi = gridView.GetFocusedRowCellValue("Name").ToString();
+            Kullanimda = Convert.ToBoolean(gridView.GetFocusedRowCellValue("IsUse"));
             Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
-            KayitEden= gridView.GetFocusedRowCellValue("KayitEden").ToString();
-            Guncelleyen = gridView.GetFocusedRowCellValue("Guncelleyen").ToString();
-            var kayitTarihiObj = gridView.GetFocusedRowCellValue("KayitTarihi");
-            KayitTarihi = kayitTarihiObj as DateTime?;
-            var guncellemeTarihiObj = gridView.GetFocusedRowCellValue("GuncellemeTarihi");
-            GuncellemeTarihi = guncellemeTarihiObj as DateTime?;
             this.Close();
         }
     }

@@ -1,6 +1,5 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
-using Hesap.BusinessLogic;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,6 @@ namespace Hesap.Forms.Liste
 {
     public partial class FrmKullaniciListesi : DevExpress.XtraEditors.XtraForm
     {
-        private readonly UserService _userService;
         public FrmKullaniciListesi()
         {
             InitializeComponent();
@@ -30,8 +28,6 @@ namespace Hesap.Forms.Liste
         }
         void Listele()
         {
-            var users = _userService.GetAllUsers();
-            gridControl1.DataSource = users;
             string sql = "SELECT * FROM Users";
             listele.Liste(sql, gridControl1);
         }

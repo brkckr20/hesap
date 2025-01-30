@@ -33,7 +33,7 @@ namespace Hesap.Utils
         }
         public void Uyari(string tip)
         {
-            XtraMessageBox.Show($"{tip}", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            XtraMessageBox.Show($"{tip}", "❗ Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

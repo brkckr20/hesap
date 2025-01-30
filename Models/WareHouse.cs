@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Hesap.Models
 {
-    public class User
+    public class WareHouse
     {
         public int Id { get; set; }
+
+        [Display(Name = "Depo Kodu")]
         public string Code { get; set; }
+
+        [Display(Name = "Depo Adı")]
         public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Password { get; set; }
+
+        [Display(Name = "Kullanımda")]
         public bool IsUse { get; set; }
     }
 }

@@ -1,70 +1,42 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.Kartlar
 {
-    public partial class FrmDepoKarti : DevExpress.XtraEditors.XtraForm
+    public partial class FrmDepoKarti : XtraForm
     {
         Bildirim bildirim = new Bildirim();
         Ayarlar ayarlar = new Ayarlar();
-        CRUD_Operations cRUD = new CRUD_Operations();
-        YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        CrudRepository crudRepository = new CrudRepository();
+        string TableName = "WareHouse";
         public FrmDepoKarti()
         {
             InitializeComponent();
         }
-        int Id = 0;
         private string kaydeden, guncelleyen;
         private DateTime? kayitTarihi, guncellemeTarihi;
-
-        public class DepoKarti
-        {
-            public string Kodu { get; set; }
-            public string Adi { get; set; }
-            public bool Kullanimda { get; set; }
-            public string KayitEden { get; set; }
-            public DateTime KayitTarihi { get; set; }
-            public DateTime GuncellemeTarihi { get; set; }
-            public string Guncelleyen { get; set; }
-            public string Makina { get; set; }
-            public int Id { get; set; }
-        }
-
+        int Id = 0;
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            var parameters = new Dictionary<string, object>
+            var whParams = new Dictionary<string, object>
             {
-                { "Kodu", txtDepoKodu.Text },
-                { "Adi", txtDepoAdi.Text },
-                { "Kullanimda", chckKullanimda.Checked},
-                { "KayitEden",  Properties.Settings.Default.KullaniciAdi},
-                { "KayitTarihi", DateTime.Now},
-                { "GuncellemeTarihi", DateTime.Now},
-                { "Guncelleyen",  Properties.Settings.Default.KullaniciAdi},
+                {"Code", txtDepoKodu.Text},
+                {"Name", txtDepoAdi.Text},
+                {"IsUse", chckKullanimda.Checked},
             };
-            using (var connection = new Baglanti().GetConnection())
+            if (this.Id == 0)
             {
-                if (Id == 0)
-                {
-                    this.Id = cRUD.InsertRecord("DepoKarti", parameters);
-                    bildirim.Basarili();
-                }
-                else
-                {
-                    parameters.Remove("KayitTarihi"); // kayit tarihini güncellememesi için
-                    cRUD.UpdateRecord("DepoKarti", parameters, this.Id);
-                    bildirim.GuncellemeBasarili();
-                }
+                Id = crudRepository.Insert(this.TableName, whParams);
+                bildirim.Basarili();
+            }
+            else
+            {
+                crudRepository.Update(this.TableName, this.Id, whParams);
+                bildirim.GuncellemeBasarili();
             }
         }
 
@@ -76,28 +48,13 @@ namespace Hesap.Forms.Kartlar
             txtDepoAdi.Text = frm.Adi;
             chckKullanimda.Checked = frm.Kullanimda;
             Id = frm.Id;
-            this.kaydeden = frm.KayitEden;
-            this.guncelleyen = frm.Guncelleyen;
-            this.kayitTarihi = TarihleriAta(frm.KayitTarihi);
-            this.guncellemeTarihi = TarihleriAta(frm.GuncellemeTarihi);
-        }
-        DateTime? TarihleriAta(DateTime? tarih)
-        {
-            if (tarih.HasValue)
-            {
-                return tarih.Value;
-            }
-            else
-            {
-                return DateTime.MinValue;
-            }
         }
         void Temizle()
         {
             Id = 0;
             txtDepoKodu.Text = "";
             txtDepoAdi.Text = "";
-            chckKullanimda.Checked = false;
+            chckKullanimda.Checked = true;
             this.Id = 0;
         }
         private void btnYeni_Click(object sender, EventArgs e)
@@ -110,15 +67,15 @@ namespace Hesap.Forms.Kartlar
             {
                 using (var connection = new Baglanti().GetConnection())
                 {
-                    string mssql = $"select top 1 * from DepoKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
-                    string sqlite = $"select * from DepoKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")} limit 1";
+                    string mssql = $"select top 1 * from {this.TableName} where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
+                    string sqlite = $"select * from {this.TableName} where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")} limit 1";
                     var query = ayarlar.VeritabaniTuru() == "mssql" ? mssql : sqlite;
                     var veri = connection.QueryFirstOrDefault(query, new { Id = this.Id });
                     if (veri != null)
                     {
-                        txtDepoKodu.Text = veri.Kodu.ToString();
-                        txtDepoAdi.Text = veri.Adi.ToString();
-                        chckKullanimda.Checked = Convert.ToBoolean(veri.Kullanimda);
+                        txtDepoKodu.Text = veri.Code.ToString();
+                        txtDepoAdi.Text = veri.Name.ToString();
+                        //chckKullanimda.Checked = Convert.ToBoolean(veri.Kullanimda);
                         this.Id = Convert.ToInt32(veri.Id);
                     }
                     else
@@ -131,7 +88,6 @@ namespace Hesap.Forms.Kartlar
             {
                 bildirim.Uyari("Kayıt gösterebilmek için öncelikle listeden bir kayıt getirmelisiniz!");
             }
-
         }
         private void btnGeri_Click(object sender, EventArgs e)
         {
@@ -145,18 +101,13 @@ namespace Hesap.Forms.Kartlar
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            //var deleteQ
             if (this.Id != 0)
             {
-                string sql = "DELETE FROM DepoKarti WHERE Id = @Id";
-                using (var connection = new Baglanti().GetConnection())
+                if (bildirim.SilmeOnayı())
                 {
-                    if (bildirim.SilmeOnayı())
-                    {
-                        connection.Execute(sql, new { Id = this.Id });
-                        bildirim.SilmeBasarili();
-                        Temizle();
-                    }
+                    crudRepository.Delete(this.TableName, this.Id);
+                    bildirim.SilmeBasarili();
+                    Temizle();
                 }
             }
             else
