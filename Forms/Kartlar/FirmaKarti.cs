@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
+using Hesap.DataAccess;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,7 @@ namespace Hesap.Forms.Kartlar
         Ayarlar ayarlar = new Ayarlar();
         CRUD_Operations cRUD = new CRUD_Operations();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        CrudRepository crudRepository = new CrudRepository();
         int Id = 0;
         private string TableName = "Company";
         public FrmFirmaKarti()
@@ -76,8 +79,15 @@ namespace Hesap.Forms.Kartlar
         }
         private void btnSil_Click(object sender, EventArgs e)
         {
-            cRUD.KartSil(this.Id,TableName);
-            Temizle();
+            if (this.Id != 0)
+            {
+                crudRepository.Delete(this.TableName, this.Id);
+                Temizle();
+            }
+            else
+            {
+                bildirim.Uyari("Silme işlemini gerçekleştirebilmek için bir kayıt seçiniz");
+            }
         }
         void ListeGetir(string KayitTipi)
         {
@@ -123,6 +133,11 @@ namespace Hesap.Forms.Kartlar
         private void FrmFirmaKarti_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void sonNumarayıAktarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtFirmaKodu.Text = crudRepository.GetMaxRecord<string>(this.TableName, "CompanyCode");
         }
     }
 }

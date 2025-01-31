@@ -1,4 +1,8 @@
 ﻿using Dapper;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
+using Hesap.Models;
+using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +16,7 @@ namespace Hesap.DataAccess
     public class CrudRepository
     {
         private readonly IDbConnection _dbConnection;
+        private int UserId = Properties.Settings.Default.Id;
         public CrudRepository()
         {
             _dbConnection = new SqlConnection("Server=.;Database=Hesap;Trusted_Connection=True;");
@@ -47,6 +52,54 @@ namespace Hesap.DataAccess
         {
             string query = $"DELETE FROM {TableName} WHERE Id = @Id";
             return _dbConnection.Execute(query, new { Id = id });
+        }
+
+        public T GetMaxRecord<T>(string TableName,string ColumnName)
+        {
+            string query = $"SELECT MAX({ColumnName}) FROM {TableName}";
+            return _dbConnection.ExecuteScalar<T>(query);
+        }
+
+        // kullanıcının kolonlarını listeleme işlemidir
+        public void GetUserColumns(GridView gridView, string ScreenName)
+        {
+            string query = $"Select ColumnName, Width,Hidden,Location from ColumnSelector where UserId = {UserId} and ScreenName = '{ScreenName}' order by Location";
+            var liste = _dbConnection.Query<ColumnSelector>(query).ToList();
+            foreach (GridColumn item in gridView.Columns)
+            {
+                var columnInfo = liste.FirstOrDefault(k => k.ColumnName == item.FieldName);
+                if (columnInfo != null)
+                {
+                    item.Visible = columnInfo.Hidden;
+                    item.Width = columnInfo.Width;
+                }
+                else
+                {
+                    item.Visible = true;
+                }
+            }
+        }
+
+        // kullanıcının kolonlarını kaydetme işlemidir
+        public void SaveColumnStatus(GridView gridView, string ScreenName)
+        {
+            foreach (GridColumn col in gridView.Columns)
+            {
+                string columnCheckQuery = $"select count (*) from ColumnSelector where UserId = {this.UserId} and ScreenName = '{ScreenName}' and ColumnName = '{col.FieldName}'";
+                var isExist = _dbConnection.ExecuteScalar<int>(columnCheckQuery);
+                if (isExist > 0)
+                {
+                    string updateQuery = $@"update ColumnSelector set Width = {col.Width}, Hidden = {(col.Visible ? 1 : 0)}, 
+                                            Location = {col.VisibleIndex} where UserId = {this.UserId} and ScreenName = '{ScreenName}' and ColumnName = '{col.FieldName}'";
+                    _dbConnection.Execute(updateQuery);
+                }
+                else
+                {
+                    string insertQuery = $@"INSERT INTO ColumnSelector (UserId, ScreenName, ColumnName, Width, Hidden, Location)
+                                                                VALUES ({this.UserId}, '{ScreenName}', '{col.FieldName}', {col.Width}, {(col.Visible ? 1 : 0)}, {col.VisibleIndex})";
+                    _dbConnection.Execute(insertQuery);
+                }
+            }
         }
 
         public void ExecuteInTransaction(Action<IDbTransaction> action)

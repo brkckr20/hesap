@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using Hesap.DataAccess;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,7 @@ namespace Hesap.Forms.Liste
         Baglanti _baglanti;
         Listele listele = new Listele();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        CrudRepository crudRepository = new CrudRepository();
         public string FirmaKodu, FirmaUnvan, Adres1, Adres2, Adres3;
         public int Id;
 
@@ -31,12 +34,12 @@ namespace Hesap.Forms.Liste
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonSecici(gridControl1);
+           yardimciAraclar.KolonSecici(gridControl1);
         }
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+            crudRepository.SaveColumnStatus(gridView1, this.Text);
         }
 
         public FrmFirmaKartiListesi()
@@ -51,20 +54,19 @@ namespace Hesap.Forms.Liste
         }
         void Listele()
         {
-            string sql = @"select Id,CompanyCode [FirmaKodu],CompanyName [FirmaUnvan],
-                            ISNULL(AddressLine1,'') [Adres1],ISNULL(AddressLine2,'') [Adres2],ISNULL(AddressLine3,'') [Adres3] from Company";
-            listele.Liste(sql, gridControl1);
-            yardimciAraclar.KolonlariGetir(gridView1,this.Text);
+            gridControl1.DataSource = crudRepository.GetAll<Company>("Company");
+            crudRepository.GetUserColumns(gridView1,this.Text);
+
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
             GridView gridView = sender as GridView;
-            FirmaKodu = gridView.GetFocusedRowCellValue("FirmaKodu").ToString();
-            FirmaUnvan = gridView.GetFocusedRowCellValue("FirmaUnvan").ToString();
-            Adres1 = gridView.GetFocusedRowCellValue("Adres1").ToString();
-            Adres2 = gridView.GetFocusedRowCellValue("Adres2").ToString();
-            Adres3 = gridView.GetFocusedRowCellValue("Adres3").ToString();
+            FirmaKodu = gridView.GetFocusedRowCellValue("CompanyCode").ToString();
+            FirmaUnvan = gridView.GetFocusedRowCellValue("CompanyName").ToString();
+            Adres1 = gridView.GetFocusedRowCellValue("AddressLine1").ToString();
+            Adres2 = gridView.GetFocusedRowCellValue("AddressLine2").ToString();
+            Adres3 = gridView.GetFocusedRowCellValue("AddressLine3").ToString();
             Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
             this.Close();
         }

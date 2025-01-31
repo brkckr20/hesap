@@ -12,7 +12,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using static Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo.FrmIplikCikis;
 
 namespace Hesap.Utils
 {
@@ -433,17 +432,14 @@ namespace Hesap.Utils
             //    }
             //}
         }
-        public void KolonSecici(DevExpress.XtraGrid.GridControl grid)
+        public void KolonSecici(DevExpress.XtraGrid.GridControl grid) // bir crud işlemi olmadığı için başka klasöre taşınmadı
         {
             var gridView = grid.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
             if (gridView != null)
             {
-                // Sütun Seçici'yi açın
-                gridView.OptionsCustomization.AllowColumnMoving = true; // Sütunların taşınmasına izin ver
-                gridView.OptionsCustomization.AllowFilter = true; // Filtrelemeye izin ver
+                gridView.OptionsCustomization.AllowColumnMoving = true;
+                gridView.OptionsCustomization.AllowFilter = true;
 
-
-                // Column Chooser'ı aç
                 gridView.ShowCustomization();
             }
         }

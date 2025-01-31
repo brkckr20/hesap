@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFirmaKarti));
             this.panel3 = new System.Windows.Forms.Panel();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -47,6 +48,8 @@
             this.txtFirmaKodu = new DevExpress.XtraEditors.TextEdit();
             this.label72 = new System.Windows.Forms.Label();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sonNumarayıAktarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres2.Properties)).BeginInit();
@@ -55,6 +58,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaKodu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -246,11 +250,27 @@
             this.panelControl1.Size = new System.Drawing.Size(860, 463);
             this.panelControl1.TabIndex = 4;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sonNumarayıAktarToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(193, 48);
+            // 
+            // sonNumarayıAktarToolStripMenuItem
+            // 
+            this.sonNumarayıAktarToolStripMenuItem.Name = "sonNumarayıAktarToolStripMenuItem";
+            this.sonNumarayıAktarToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.sonNumarayıAktarToolStripMenuItem.Text = "Son Numarayı Aktar";
+            this.sonNumarayıAktarToolStripMenuItem.Click += new System.EventHandler(this.sonNumarayıAktarToolStripMenuItem_Click);
+            // 
             // FrmFirmaKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 516);
+            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.panel3);
             this.Name = "FrmFirmaKarti";
@@ -264,6 +284,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaKodu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -288,5 +309,7 @@
         private DevExpress.XtraEditors.SimpleButton btnGeri;
         private DevExpress.XtraEditors.SimpleButton btnIleri;
         private DevExpress.XtraEditors.PanelControl panelControl1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem sonNumarayıAktarToolStripMenuItem;
     }
 }
