@@ -17,6 +17,7 @@ namespace Hesap.DataAccess
     {
         private readonly IDbConnection _dbConnection;
         private int UserId = Properties.Settings.Default.Id;
+        Bildirim bildirim = new Bildirim();
         public CrudRepository()
         {
             _dbConnection = new SqlConnection("Server=.;Database=Hesap;Trusted_Connection=True;");
@@ -58,6 +59,23 @@ namespace Hesap.DataAccess
         {
             string query = $"SELECT MAX({ColumnName}) FROM {TableName}";
             return _dbConnection.ExecuteScalar<T>(query);
+        }
+        
+        public void ConfirmAndDeleteCard(string TableName, int id, Action successCallback)
+        {
+            if (id != 0)
+            {
+                if (bildirim.SilmeOnayı())
+                {
+                    this.Delete(TableName, id);
+                    bildirim.SilmeBasarili();
+                    successCallback?.Invoke();
+                }
+            }
+            else
+            {
+                bildirim.Uyari("Kayıt silebilmek için öncelikle listeden bir kayıt seçmelisiniz!");
+            }
         }
 
         // kullanıcının kolonlarını listeleme işlemidir

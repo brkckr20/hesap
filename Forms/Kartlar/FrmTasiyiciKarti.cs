@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
 using FastColoredTextBoxNS;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace Hesap.Forms.Kartlar
         Ayarlar ayarlar = new Ayarlar();
         Bildirim bildirim = new Bildirim();
         CRUD_Operations cRUD = new CRUD_Operations();
+        CrudRepository crudRepository = new CrudRepository();
+        private string TableName = "Transporter";
         public FrmTasiyiciKarti()
         {
             InitializeComponent();
@@ -26,42 +29,25 @@ namespace Hesap.Forms.Kartlar
         int Id = 0;
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            object Kart = new
+            var whParams = new Dictionary<string, object>
             {
-                Unvan = txtUnvan.Text,
-                Ad = txtAd.Text,
-                Soyad = txtSoyad.Text,
-                TC = txtTC.Text,
-                Plaka = txtPlaka.Text,
-                Dorse = txtDorse.Text,
-                Id = this.Id
-            }; using (var connection = new Baglanti().GetConnection())
+                {"Title", txtUnvan.Text},
+                {"Name", txtAd.Text},
+                {"Surname", txtSoyad.Text},
+                {"TCKN", txtTC.Text},
+                {"NumberPlate", txtPlaka.Text},
+                {"TrailerNumber", txtDorse.Text},
+                {"IsUse", chckKullanimda.Checked},
+            };
+            if (this.Id == 0)
             {
-                if (Id == 0)
-                {
-                    string sqliteQuery = @"INSERT INTO TasiyiciKarti (Unvan,Ad,Soyad,TC,Plaka,Dorse)
-                                                VALUES(@Unvan,@Ad,@Soyad,@TC,@Plaka,@Dorse)";
-                    string sqlQuery = @"INSERT INTO TasiyiciKarti (Unvan,Ad,Soyad,TC,Plaka,Dorse) OUTPUT INSERTED.Id VALUES(@Unvan,@Ad,@Soyad,@TC,@Plaka,@Dorse)";
-                    string idQuery = "SELECT last_insert_rowid();";
-                    if (ayarlar.VeritabaniTuru() == "mssql")
-                    {
-                        this.Id = connection.QuerySingle<int>(sqlQuery, Kart);
-                    }
-                    else
-                    {
-                        connection.Execute(sqliteQuery, Kart);
-                        this.Id = connection.QuerySingle<int>(idQuery);
-                    }
-                    bildirim.Basarili();
-                }
-                else
-                {
-                    string sql = @"UPDATE TasiyiciKarti SET Unvan = @Unvan,Ad = @Ad,Soyad = @Soyad,TC = @TC,Plaka = @Plaka,Dorse = @Dorse
-                                    WHERE Id = @Id";
-                    connection.Execute(sql, Kart);
-                    bildirim.GuncellemeBasarili();
-                }
-
+                Id = crudRepository.Insert(this.TableName, whParams);
+                bildirim.Basarili();
+            }
+            else
+            {
+                crudRepository.Update(this.TableName, this.Id, whParams);
+                bildirim.GuncellemeBasarili();
             }
         }
 
@@ -78,6 +64,7 @@ namespace Hesap.Forms.Kartlar
             txtTC.Text = "";
             txtPlaka.Text = "";
             txtDorse.Text = "";
+            chckKullanimda.Checked = true;
         }
 
         private void btnListe_Click(object sender, EventArgs e)
@@ -96,8 +83,7 @@ namespace Hesap.Forms.Kartlar
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            cRUD.KartSil(this.Id,"TasiyiciKarti");
-            Temizle();
+            crudRepository.ConfirmAndDeleteCard(this.TableName, this.Id, Temizle);
         }
 
         private void btnGeri_Click(object sender, EventArgs e)
@@ -110,18 +96,19 @@ namespace Hesap.Forms.Kartlar
             {
                 using (var connection = new Baglanti().GetConnection())
                 {
-                    string mssql = $"select top 1 * from TasiyiciKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
+                    string mssql = $"select top 1 * from {this.TableName} where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
                     string sqlite = $"select * from TasiyiciKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")} limit 1";
                     var query = ayarlar.VeritabaniTuru() == "mssql" ? mssql : sqlite;
                     var veri = connection.QueryFirstOrDefault(query, new { Id = this.Id });
                     if (veri != null)
                     {
-                        txtUnvan.Text = veri.Unvan.ToString();
-                        txtAd.Text = veri.Ad.ToString();
-                        txtSoyad.Text = veri.Soyad.ToString();
-                        txtTC.Text = veri.TC.ToString();
-                        txtPlaka.Text = veri.Plaka.ToString();
-                        txtDorse.Text = veri.Dorse.ToString();
+                        txtUnvan.Text = veri.Title.ToString();
+                        txtAd.Text = veri.Name.ToString();
+                        txtSoyad.Text = veri.Surname.ToString();
+                        txtTC.Text = veri.TCKN.ToString();
+                        txtPlaka.Text = veri.NumberPlate.ToString();
+                        txtDorse.Text = veri.TrailerNumber.ToString();
+                        chckKullanimda.Checked = Convert.ToBoolean(veri.IsUse);
                         this.Id = Convert.ToInt32(veri.Id);
                     }
                     else

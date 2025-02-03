@@ -30,25 +30,26 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmKullaniciKarti));
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label72 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtDepartman = new DevExpress.XtraEditors.ButtonEdit();
-            this.txtSifre = new DevExpress.XtraEditors.TextEdit();
-            this.txtAdSoyad = new DevExpress.XtraEditors.TextEdit();
-            this.txtKodu = new DevExpress.XtraEditors.TextEdit();
             this.btnYeni = new DevExpress.XtraEditors.SimpleButton();
             this.btnIleri = new DevExpress.XtraEditors.SimpleButton();
             this.btnGeri = new DevExpress.XtraEditors.SimpleButton();
             this.btnSil = new DevExpress.XtraEditors.SimpleButton();
             this.btnListe = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtSifre = new DevExpress.XtraEditors.TextEdit();
+            this.txtAd = new DevExpress.XtraEditors.TextEdit();
+            this.txtKodu = new DevExpress.XtraEditors.TextEdit();
+            this.txtSoyad = new DevExpress.XtraEditors.TextEdit();
+            this.chckKullanimda = new DevExpress.XtraEditors.CheckEdit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepartman.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSifre.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAdSoyad.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKodu.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoyad.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -64,80 +65,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(778, 53);
             this.panel3.TabIndex = 4;
-            // 
-            // label72
-            // 
-            this.label72.BackColor = System.Drawing.Color.Transparent;
-            this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label72.Location = new System.Drawing.Point(14, 60);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(93, 21);
-            this.label72.TabIndex = 1120;
-            this.label72.Text = "Kodu :";
-            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(14, 84);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 21);
-            this.label1.TabIndex = 1120;
-            this.label1.Text = "Ad Soyad :";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(14, 108);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 21);
-            this.label2.TabIndex = 1120;
-            this.label2.Text = "Şifre :";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(14, 131);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 21);
-            this.label3.TabIndex = 1120;
-            this.label3.Text = "Departman :";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtDepartman
-            // 
-            this.txtDepartman.Location = new System.Drawing.Point(114, 131);
-            this.txtDepartman.Name = "txtDepartman";
-            this.txtDepartman.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtDepartman.Size = new System.Drawing.Size(206, 22);
-            this.txtDepartman.TabIndex = 1121;
-            // 
-            // txtSifre
-            // 
-            this.txtSifre.Location = new System.Drawing.Point(114, 107);
-            this.txtSifre.Name = "txtSifre";
-            this.txtSifre.Size = new System.Drawing.Size(206, 22);
-            this.txtSifre.TabIndex = 1119;
-            // 
-            // txtAdSoyad
-            // 
-            this.txtAdSoyad.Location = new System.Drawing.Point(114, 83);
-            this.txtAdSoyad.Name = "txtAdSoyad";
-            this.txtAdSoyad.Size = new System.Drawing.Size(206, 22);
-            this.txtAdSoyad.TabIndex = 1119;
-            // 
-            // txtKodu
-            // 
-            this.txtKodu.Location = new System.Drawing.Point(114, 59);
-            this.txtKodu.Name = "txtKodu";
-            this.txtKodu.Size = new System.Drawing.Size(206, 22);
-            this.txtKodu.TabIndex = 1119;
             // 
             // btnYeni
             // 
@@ -205,15 +132,84 @@
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
             // 
+            // label72
+            // 
+            this.label72.BackColor = System.Drawing.Color.Transparent;
+            this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label72.Location = new System.Drawing.Point(14, 60);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(93, 21);
+            this.label72.TabIndex = 1120;
+            this.label72.Text = "Kodu :";
+            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(14, 84);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 21);
+            this.label1.TabIndex = 1120;
+            this.label1.Text = "Ad Soyad :";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(14, 108);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 21);
+            this.label2.TabIndex = 1120;
+            this.label2.Text = "Şifre :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtSifre
+            // 
+            this.txtSifre.Location = new System.Drawing.Point(114, 107);
+            this.txtSifre.Name = "txtSifre";
+            this.txtSifre.Size = new System.Drawing.Size(206, 22);
+            this.txtSifre.TabIndex = 4;
+            // 
+            // txtAd
+            // 
+            this.txtAd.Location = new System.Drawing.Point(114, 83);
+            this.txtAd.Name = "txtAd";
+            this.txtAd.Size = new System.Drawing.Size(100, 22);
+            this.txtAd.TabIndex = 2;
+            // 
+            // txtKodu
+            // 
+            this.txtKodu.Location = new System.Drawing.Point(114, 59);
+            this.txtKodu.Name = "txtKodu";
+            this.txtKodu.Size = new System.Drawing.Size(206, 22);
+            this.txtKodu.TabIndex = 1;
+            // 
+            // txtSoyad
+            // 
+            this.txtSoyad.Location = new System.Drawing.Point(219, 83);
+            this.txtSoyad.Name = "txtSoyad";
+            this.txtSoyad.Size = new System.Drawing.Size(100, 22);
+            this.txtSoyad.TabIndex = 3;
+            // 
+            // chckKullanimda
+            // 
+            this.chckKullanimda.Location = new System.Drawing.Point(326, 60);
+            this.chckKullanimda.Name = "chckKullanimda";
+            this.chckKullanimda.Properties.Caption = "Kullanımda";
+            this.chckKullanimda.Size = new System.Drawing.Size(87, 20);
+            this.chckKullanimda.TabIndex = 5;
+            // 
             // FrmKullaniciKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 445);
-            this.Controls.Add(this.txtDepartman);
+            this.Controls.Add(this.chckKullanimda);
             this.Controls.Add(this.txtSifre);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtAdSoyad);
+            this.Controls.Add(this.txtSoyad);
+            this.Controls.Add(this.txtAd);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtKodu);
             this.Controls.Add(this.label1);
@@ -223,10 +219,11 @@
             this.Name = "FrmKullaniciKarti";
             this.Text = "Kullanıcı Kartı";
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepartman.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSifre.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAdSoyad.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKodu.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoyad.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -243,10 +240,10 @@
         private DevExpress.XtraEditors.TextEdit txtKodu;
         private System.Windows.Forms.Label label72;
         private System.Windows.Forms.Label label1;
-        private DevExpress.XtraEditors.TextEdit txtAdSoyad;
+        private DevExpress.XtraEditors.TextEdit txtAd;
         private System.Windows.Forms.Label label2;
         private DevExpress.XtraEditors.TextEdit txtSifre;
-        private System.Windows.Forms.Label label3;
-        private DevExpress.XtraEditors.ButtonEdit txtDepartman;
+        private DevExpress.XtraEditors.TextEdit txtSoyad;
+        private DevExpress.XtraEditors.CheckEdit chckKullanimda;
     }
 }

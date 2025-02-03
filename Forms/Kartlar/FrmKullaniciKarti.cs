@@ -1,16 +1,8 @@
 ﻿using Dapper;
-using DevExpress.XtraEditors;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 namespace Hesap.Forms.Kartlar
 {
     public partial class FrmKullaniciKarti : DevExpress.XtraEditors.XtraForm
@@ -23,42 +15,27 @@ namespace Hesap.Forms.Kartlar
         Ayarlar ayarlar = new Ayarlar();
         Bildirim bildirim = new Bildirim();
         CRUD_Operations _Operations = new CRUD_Operations();
+        CrudRepository crudRepository = new CrudRepository();
+        private string TableName = "Users";
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            object x = new
+            var whParams = new Dictionary<string, object>
             {
-                Kodu = txtKodu.Text,
-                AdSoyad = txtAdSoyad.Text,
-                Sifre = txtSifre.Text,
-                DepartmanId = txtDepartman.Text,
-                Id = this.Id
+                {"Code", txtKodu.Text},
+                {"Name", txtAd.Text},
+                {"Surname", txtSoyad.Text},
+                {"Password", txtSifre.Text},
+                {"IsUse", chckKullanimda.Checked},
             };
-            using (var connection = new Baglanti().GetConnection())
+            if (this.Id == 0)
             {
-                if (Id == 0)
-                {
-                    string sqliteQuery = @"INSERT INTO KullaniciKarti (Kodu,AdSoyad,Sifre,DepartmanId) VALUES((@Kodu,@AdSoyad,@Sifre,@DepartmanId)";
-                    string sqlQuery = @"INSERT INTO KullaniciKarti (Kodu,AdSoyad,Sifre,DepartmanId) OUTPUT INSERTED.Id VALUES (@Kodu,@AdSoyad,@Sifre,@DepartmanId)";
-                    string idQuery = "SELECT last_insert_rowid();";
-                    if (ayarlar.VeritabaniTuru() == "mssql")
-                    {
-                        this.Id = connection.QuerySingle<int>(sqlQuery, x);
-                    }
-                    else
-                    {
-                        connection.Execute(sqliteQuery, x);
-                        this.Id = connection.QuerySingle<int>(idQuery);
-                    }
-                    bildirim.Basarili();
-                }
-                else
-                {
-                    string sql = @"UPDATE KullaniciKarti SET FirmaKodu = @FirmaKodu,FirmaUnvan = @FirmaUnvan,Adres1 = @Adres1,Adres2 = @Adres2,Adres3 = @Adres3
-                                    WHERE Id = @Id";
-                    connection.Execute(sql, x);
-                    bildirim.GuncellemeBasarili();
-                }
-
+                Id = crudRepository.Insert(this.TableName, whParams);
+                bildirim.Basarili();
+            }
+            else
+            {
+                crudRepository.Update(this.TableName, this.Id, whParams);
+                bildirim.GuncellemeBasarili();
             }
         }
 
@@ -70,15 +47,15 @@ namespace Hesap.Forms.Kartlar
         {
             Id = 0;
             txtKodu.Text = "";
-            txtAdSoyad.Text = "";
-            txtDepartman.Text = "";
+            txtAd.Text = "";
+            txtSoyad.Text = "";
             txtSifre.Text = "";
+            chckKullanimda.Checked = true;
         }
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            _Operations.KartSil(this.Id, "KullaniciKarti");
-            Temizle();
+            crudRepository.ConfirmAndDeleteCard(this.TableName,this.Id,this.Temizle);
         }
 
         private void btnListe_Click(object sender, EventArgs e)
@@ -86,9 +63,10 @@ namespace Hesap.Forms.Kartlar
             Liste.FrmKullaniciListesi frm = new Liste.FrmKullaniciListesi();
             frm.ShowDialog();
             txtKodu.Text = frm.Kodu;
-            txtAdSoyad.Text = frm.AdSoyad;
+            txtAd.Text = frm.Ad;
+            txtSoyad.Text = frm.Soyad;
             txtSifre.Text = frm.Sifre;
-            txtDepartman.Text = frm.Departman;
+            chckKullanimda.Checked = frm.Kullanimda;
             this.Id = frm.Id;
         }
 
@@ -106,16 +84,17 @@ namespace Hesap.Forms.Kartlar
             {
                 using (var connection = new Baglanti().GetConnection())
                 {
-                    string mssql = $"select top 1 * from KullaniciKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
+                    string mssql = $"select top 1 * from {this.TableName} where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
                     string sqlite = $"select * from KullaniciKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")} limit 1";
                     var query = ayarlar.VeritabaniTuru() == "mssql" ? mssql : sqlite;
                     var veri = connection.QueryFirstOrDefault(query, new { Id = this.Id });
                     if (veri != null)
                     {
-                        txtKodu.Text = veri.Kodu.ToString();
-                        txtAdSoyad.Text = veri.AdSoyad.ToString();
-                        txtSifre.Text = veri.Sifre.ToString();
-                        txtDepartman.Text = veri.DepartmanId.ToString();
+                        txtKodu.Text = veri.Code.ToString();
+                        txtAd.Text = veri.Name.ToString();
+                        txtSoyad.Text = veri.Surname.ToString();
+                        txtSifre.Text = veri.Password.ToString();
+                        chckKullanimda.Checked = Convert.ToBoolean(veri.IsUse);
                         this.Id = Convert.ToInt32(veri.Id);
                     }
                     else

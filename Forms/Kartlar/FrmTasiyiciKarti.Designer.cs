@@ -49,6 +49,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtUnvan = new DevExpress.XtraEditors.TextEdit();
             this.label4 = new System.Windows.Forms.Label();
+            this.chckKullanimda = new DevExpress.XtraEditors.CheckEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -58,6 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtSoyad.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUnvan.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -143,6 +145,7 @@
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.chckKullanimda);
             this.panelControl1.Controls.Add(this.txtDorse);
             this.panelControl1.Controls.Add(this.label13);
             this.panelControl1.Controls.Add(this.txtPlaka);
@@ -281,6 +284,15 @@
             this.label4.Text = "Taşyc. Ünvan :";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // chckKullanimda
+            // 
+            this.chckKullanimda.EditValue = true;
+            this.chckKullanimda.Location = new System.Drawing.Point(268, 8);
+            this.chckKullanimda.Name = "chckKullanimda";
+            this.chckKullanimda.Properties.Caption = "Kullanımda";
+            this.chckKullanimda.Size = new System.Drawing.Size(132, 20);
+            this.chckKullanimda.TabIndex = 10015;
+            // 
             // FrmTasiyiciKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -301,6 +313,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtSoyad.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUnvan.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -327,5 +340,6 @@
         private System.Windows.Forms.Label label6;
         private DevExpress.XtraEditors.TextEdit txtUnvan;
         private System.Windows.Forms.Label label4;
+        private DevExpress.XtraEditors.CheckEdit chckKullanimda;
     }
 }
