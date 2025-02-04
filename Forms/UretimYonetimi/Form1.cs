@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
+using Hesap.Helpers;
 using Hesap.Utils;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -29,15 +30,53 @@ namespace Hesap
         public Form1()
         {
             InitializeComponent();
-            InitializeTextBoxEventHandlers();
-            //_connectionFactory = new DbConnect();
+            RegisterEvent();
 
-            //_yardimciAraclar = new YardimciAraclar("₺", txtAtkiMH, txtCozguMH);
-            //_yardimciAraclar = new YardimciAraclar("$", txtParcaYikamaMH, txtKonfMaliyetMH);
-            //_yardimciAraclar = new YardimciAraclar("€", txtKumasBoyamaMH);
-            //_yardimciAraclar = new YardimciAraclar("%", txtDokumaFiresiMH, txtBoyahaneFiresiMH);
+            //InitializeTextBoxEventHandlers();
 
         }
+
+        private void RegisterEvent()
+        {
+            var hesaplamalar = new List<(TextBox, TextBox, TextBox, string)>
+            {
+                // üretim bilgileri
+                    // - iplik bilgileri alanıdır
+                (txtCozgu1, txtCozgu1Bolen, lblCozgu1Uretim, "Bolme"),
+                (txtCozgu2, txtCozgu2Bolen, lblCozgu2Uretim, "Bolme"),
+                (txtAtki1, txtAtki1Bolen, lblAtki1Uretim, "Bolme"),
+                (txtAtki2, txtAtki2Bolen, lblAtki2Uretim, "Bolme"),
+                (txtAtki3, txtAtki3Bolen, lblAtki3Uretim, "Bolme"),
+                (txtAtki4, txtAtki4Bolen, lblAtki4Uretim, "Bolme"),
+                    //  - dokuma bilgileri alanıdır
+                (txtTarakNo1, txtTarakNo1Bolen, lblTarakNo1Uretim, "Carpma"),
+                (txtTarakNo2, txtTarakNo2Bolen, lblTarakNo2Uretim, "Carpma"),
+                    // - tel sayilari
+                (lblTarakNo1Uretim, txtTarakEn, txtCozgu1TelSayisi, "Carpma"),
+                (lblTarakNo2Uretim, txtTarakEn, txtCozgu2TelSayisi, "Carpma"),
+                (txtAtki1Siklik, txtHamBoy, txtAtki1TelSayisi, "Carpma"),
+            };
+            var direkYansimalar = new List<(TextBox, TextBox)>
+            {
+                (lblTarakNo1Uretim, txtCozgu1Siklik),
+                (lblTarakNo2Uretim, txtCozgu2Siklik),
+                //(txtIpMaliyetToplam, txtIplikMaliyetMH)
+            };
+            foreach (var (txt1, txt2, hedef, islem) in hesaplamalar)
+            {
+                txt1.TextChanged += (s, e) => CostCalculationHelper.TextboxAndTextboxToTextbox(txt1, txt2, hedef, islem);
+                txt2.TextChanged += (s, e) => CostCalculationHelper.TextboxAndTextboxToTextbox(txt1, txt2, hedef, islem);
+            }
+
+            foreach (var (kaynak, hedef) in direkYansimalar)
+            {
+                kaynak.TextChanged += (s, e) => CostCalculationHelper.DirectReflection(kaynak, hedef);
+            }
+
+            // ham en - tek bir textboxtan hesaplama için eklendi
+            txtTarakEn.TextChanged += (s,e) =>  CostCalculationHelper.CalculateWithStaticNumber(txtTarakEn,txtHamEn);
+        }
+
         private void InitializeTextBoxEventHandlers()
         {
             hesapla.DogrudanYansit(lblTarakNo2Uretim, txtCozgu2Siklik);
@@ -99,7 +138,8 @@ namespace Hesap
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            DolarKuruGetir("USD_ALIS");
+            // DolarKuruGetir("USD_ALIS");
+            AttachEnterKeyHandler(this);
         }
 
         private void materialLabel6_Click(object sender, EventArgs e)
@@ -405,7 +445,7 @@ namespace Hesap
             ListeAc();
         }
 
-        public void DolarKuruGetir(string Kur)
+        public void DolarKuruGetir(string Kur) // ilgili tablo oluşturulduktan sonra tekrardan kayıt işlemleri kontrol edilecek -- 04.02.2025
         {
             if (ayarlar.VeritabaniTuru() == "mssql")
             {
@@ -564,6 +604,36 @@ namespace Hesap
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             FormVerileriniTemizle();
+        }
+
+        private void TextBox_EnterKeyToTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Bip sesini engelle
+                e.Handled = true; // Varsayılan işlemi durdur
+
+                Control ctrl = sender as Control;
+                if (ctrl != null)
+                {
+                    Form form = ctrl.FindForm();
+                    form.SelectNextControl(ctrl, true, true, true, true); // Bir sonraki kontrole geç
+                }
+            }
+        }
+        private void AttachEnterKeyHandler(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                if (ctrl is TextBox textBox)
+                {
+                    textBox.KeyDown += TextBox_EnterKeyToTab;
+                }
+                else if (ctrl.HasChildren) // İç içe kontrolleri de kontrol et (örneğin Panel, GroupBox)
+                {
+                    AttachEnterKeyHandler(ctrl);
+                }
+            }
         }
     }
 }

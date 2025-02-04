@@ -548,6 +548,7 @@
     <Compile Include="FrmKullaniciGirisi.Designer.cs">
       <DependentUpon>FrmKullaniciGirisi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CostCalculationHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
