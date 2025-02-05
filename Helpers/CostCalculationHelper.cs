@@ -56,5 +56,59 @@ namespace Hesap.Helpers
                 hedef.Text = sonuc.ToString("0.##");
             }
         }
+
+        public static void CalculateGrammageCozgu1(TextBox tbTarakBoy, TextBox tbBoySacak, TextBox tbCozgu1TelSayisi,TextBox tbCozgu1,TextBox hedef)
+        {
+            if (double.TryParse(tbTarakBoy.Text, out double b16) &&
+                double.TryParse(tbBoySacak.Text, out double b17) &&
+                double.TryParse(tbCozgu1TelSayisi.Text, out double g13) &&
+                double.TryParse(tbCozgu1.Text, out double e6) &&
+                e6 != 0) // Bölme işleminde sıfıra bölmeyi önlemek için
+            {
+                double sonuc = ((b16 + b17) * g13 * (60 / e6)) / 10000000;
+                hedef.Text = sonuc.ToString("0.###"); // İki basamaklı gösterim
+            }
+        }
+        public static void CalculateGrammageCozgu2(TextBox tbHamBoy, TextBox tbCozgu2TelSayisi, TextBox tbCozgu2, TextBox hedef)
+        {
+            if (double.TryParse(tbHamBoy.Text, out double b16) &&
+                double.TryParse(tbCozgu2TelSayisi.Text, out double g14) &&
+                double.TryParse(tbCozgu2.Text, out double e7) &&
+                e7 != 0) // Bölme işleminde sıfıra bölmeyi önlemek için
+            {
+                double sonuc = (b16 * g14 * (60 / e7)) / 10000000;
+                hedef.Text = sonuc.ToString("0.###"); // Sonucu en yakın tam sayıya yuvarlama
+            }
+        }
+        public static void CalculateGrammageAtki(TextBox tbAtki1Siklik, TextBox tbTarakEn, TextBox tbEnSacak, TextBox tbHamBoy, TextBox tbAtki1Uretim, TextBox hedef)
+        {
+            if (double.TryParse(tbAtki1Siklik.Text, out double g8) &&
+                double.TryParse(tbTarakEn.Text, out double b15) &&
+                double.TryParse(tbEnSacak.Text, out double b18) &&
+                double.TryParse(tbHamBoy.Text, out double b16) &&
+                double.TryParse(tbAtki1Uretim.Text, out double e8) &&
+                e8 != 0) // Bölme işleminde sıfıra bölmeyi önlemek için
+            {
+                double sonuc = (g8 * ((b15 + b18) / 100) * (b16 / 100) * (60 / e8)) / 1000;
+                hedef.Text = sonuc.ToString("0.###"); // Sonucu en yakın tam sayıya yuvarlama
+            }
+        }
+
+        public static void CalculateGrammageSum(TextBox tbCozgu1, TextBox tbCozgu2, TextBox tbAtki1, TextBox tbAtki2, TextBox tbAtki3, TextBox tbAtki4, TextBox hedef)
+        {
+            if (double.TryParse(tbCozgu1.Text, out double j6) &&
+                double.TryParse(tbCozgu2.Text, out double j7) &&
+                double.TryParse(tbAtki1.Text, out double j8) &&
+                double.TryParse(tbAtki2.Text, out double j9) &&
+                double.TryParse(tbAtki3.Text, out double j10) &&
+                double.TryParse(tbAtki4.Text, out double j11))
+            {
+                double sonuc = j6 + j7 + j8 + j9 + j10 + j11;
+                hedef.Text = sonuc.ToString("0.###"); // Sonucu en yakın tam sayıya yuvarlama
+            }
+        }
+
+
+
     }
 }

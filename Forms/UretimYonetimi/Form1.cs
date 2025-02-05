@@ -1,22 +1,11 @@
 ﻿using Dapper;
-using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
 using Hesap.Helpers;
 using Hesap.Utils;
-using MaterialSkin;
-using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace Hesap
 {
@@ -55,6 +44,9 @@ namespace Hesap
                 (lblTarakNo1Uretim, txtTarakEn, txtCozgu1TelSayisi, "Carpma"),
                 (lblTarakNo2Uretim, txtTarakEn, txtCozgu2TelSayisi, "Carpma"),
                 (txtAtki1Siklik, txtHamBoy, txtAtki1TelSayisi, "Carpma"),
+                (txtAtki2Siklik, txtHamBoy, txtAtki2TelSayisi, "Carpma"),
+                (txtAtki3Siklik, txtHamBoy, txtAtki3TelSayisi, "Carpma"),
+                (txtAtki4Siklik, txtHamBoy, txtAtki4TelSayisi, "Carpma"),
             };
             var direkYansimalar = new List<(TextBox, TextBox)>
             {
@@ -74,7 +66,39 @@ namespace Hesap
             }
 
             // ham en - tek bir textboxtan hesaplama için eklendi
-            txtTarakEn.TextChanged += (s,e) =>  CostCalculationHelper.CalculateWithStaticNumber(txtTarakEn,txtHamEn);
+            txtTarakEn.TextChanged += (s, e) => CostCalculationHelper.CalculateWithStaticNumber(txtTarakEn, txtHamEn);
+            // Çözgü 1
+            RegisterTextChanged(new[] { txtHamBoy, txtBoySacak, txtCozgu1TelSayisi, txtCozgu1 },
+                () => CostCalculationHelper.CalculateGrammageCozgu1(txtHamBoy, txtBoySacak, txtCozgu1TelSayisi, txtCozgu1, txtCozgu1UH));
+
+            // Çözgü 2
+            RegisterTextChanged(new[] { txtHamBoy, txtCozgu2TelSayisi, lblCozgu2Uretim },
+                () => CostCalculationHelper.CalculateGrammageCozgu2(txtHamBoy, txtCozgu2TelSayisi, lblCozgu2Uretim, txtCozgu2UH));
+
+            // Atkı 1-4
+            RegisterTextChanged(new[] { txtAtki1Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki1Uretim },
+                () => CostCalculationHelper.CalculateGrammageAtki(txtAtki1Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki1Uretim, txtAtki1UH));
+
+            RegisterTextChanged(new[] { txtAtki2Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki2Uretim },
+                () => CostCalculationHelper.CalculateGrammageAtki(txtAtki2Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki2Uretim, txtAtki2UH));
+
+            RegisterTextChanged(new[] { txtAtki3Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki3Uretim },
+                () => CostCalculationHelper.CalculateGrammageAtki(txtAtki3Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki3Uretim, txtAtki3UH));
+
+            RegisterTextChanged(new[] { txtAtki4Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki4Uretim },
+                () => CostCalculationHelper.CalculateGrammageAtki(txtAtki4Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki4Uretim, txtAtki4UH));
+
+            // Gramaj Toplamı
+            RegisterTextChanged(new[] { txtCozgu1UH, txtCozgu2UH, txtAtki1UH, txtAtki2UH, txtAtki3UH, txtAtki4UH },
+                () => CostCalculationHelper.CalculateGrammageSum(txtCozgu1UH, txtCozgu2UH, txtAtki1UH, txtAtki2UH, txtAtki3UH, txtAtki4UH, txtGramajToplam));
+        }
+
+        private void RegisterTextChanged(TextBox[] textBoxes, Action action)
+        {
+            foreach (var textBox in textBoxes)
+            {
+                textBox.TextChanged += (s, e) => action();
+            }
         }
 
         private void InitializeTextBoxEventHandlers()
@@ -463,7 +487,7 @@ namespace Hesap
             }
             else
             {
-                using(var connection = new Baglanti().GetConnection())
+                using (var connection = new Baglanti().GetConnection())
                 {
                     var sorgu = $"select {Kur},USD_EUR from Kur order by TARIH desc limit 1";
                     var rate = connection.QuerySingleOrDefault(sorgu);
