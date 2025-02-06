@@ -91,6 +91,27 @@ namespace Hesap
             // Gramaj Toplamı
             RegisterTextChanged(new[] { txtCozgu1UH, txtCozgu2UH, txtAtki1UH, txtAtki2UH, txtAtki3UH, txtAtki4UH },
                 () => CostCalculationHelper.CalculateGrammageSum(txtCozgu1UH, txtCozgu2UH, txtAtki1UH, txtAtki2UH, txtAtki3UH, txtAtki4UH, txtGramajToplam));
+            //iplik boyama gr sonuç
+            txtGramajToplam.TextChanged += (s, e) => CostCalculationHelper.CalculateYarnGrammage(txtGramajToplam,txtHamEn,txtIpBoyamaSonuc);
+            txtHamEn.TextChanged += (s, e) => CostCalculationHelper.CalculateYarnGrammage(txtGramajToplam,txtHamEn,txtIpBoyamaSonuc);
+            // üretim hesaplama - iplik maliyet toplamı
+            RegisterTextChanged(new[] { txtCozgu1IM, txtCozgu2IM, txtAtki1IM, txtAtki2IM, txtAtki3IM, txtAtki4IM },
+                () => CostCalculationHelper.CalculateCostYarnAmount(txtCozgu1IM, txtCozgu2IM, txtAtki1IM, txtAtki2IM, txtAtki3IM, txtAtki4IM, txtIpMaliyetToplam));
+            //iplik maliyet hesap
+            RegisterTextChanged(new[] { txtCozgu1IB,txtCozgu1IF, txtCozgu1UH },
+                () => CostCalculationHelper.CalculateYarnAmount(txtCozgu1IB, txtCozgu1IF, txtCozgu1UH, txtCozgu1IM));
+            RegisterTextChanged(new[] { txtCozgu2IB, txtCozgu2IF, txtCozgu2UH },
+                () => CostCalculationHelper.CalculateYarnAmount(txtCozgu2IB, txtCozgu2IF, txtCozgu2UH, txtCozgu2IM));
+            RegisterTextChanged(new[] { txtAtki1IB, txtAtki1IF, txtAtki1UH},
+                () => CostCalculationHelper.CalculateYarnAmount(txtAtki1IB, txtAtki1IF, txtAtki1UH, txtAtki1IM));
+            RegisterTextChanged(new[] { txtAtki2IB, txtAtki2IF, txtAtki2UH },
+                () => CostCalculationHelper.CalculateYarnAmount(txtAtki2IB, txtAtki2IF, txtAtki2UH, txtAtki2IM));
+            RegisterTextChanged(new[] { txtAtki3IB, txtAtki3IF, txtAtki3UH },
+                () => CostCalculationHelper.CalculateYarnAmount(txtAtki3IB, txtAtki3IF, txtAtki3UH, txtAtki3IM));
+            RegisterTextChanged(new[] { txtAtki4IB, txtAtki4IF, txtAtki4UH },
+                () => CostCalculationHelper.CalculateYarnAmount(txtAtki4IB, txtAtki4IF, txtAtki4UH, txtAtki4IM));
+
+            /*maliyet hesaplama - dokuma maliyetinde kalındı*/
         }
 
         private void RegisterTextChanged(TextBox[] textBoxes, Action action)
