@@ -33,6 +33,9 @@ namespace Hesap.Helpers
                     case "BolCarp":
                         sonuc = (deger1 / deger2) * deger2;
                         break;
+                    case "CozguMaliyet":
+                        sonuc = (deger1 / 100) * deger2;
+                        break;
                     default:
                         sonuc = 0;
                         break;
@@ -126,7 +129,7 @@ namespace Hesap.Helpers
                 double.TryParse(tbAtki4.Text, out double j11))
             {
                 double sonuc = j6 + j7 + j8 + j9 + j10 + j11;
-                hedef.Text = sonuc.ToString("0.###"); // Sonucu en yakın tam sayıya yuvarlama
+                hedef.Text = sonuc.ToString("0.###");
             }
         }
         public static void CalculateYarnAmount(TextBox tb1, TextBox tb2, TextBox tb3, TextBox hedef)
@@ -150,8 +153,38 @@ namespace Hesap.Helpers
                 double.TryParse(tb7.Text, out double j7) &&
                 double.TryParse(tb8.Text, out double j8))
             {
-                double sonuc = (((j1 + j2) / 100) * (j3 + j4 + j5 + j6) * j7) / j8;                
-                hedef.Text = sonuc.ToString("0.##"); // Sonucu en yakın tam sayıya yuvarlama 
+                double sonuc = (((j1 + j2) / 100) * (j3 + j4 + j5 + j6) * j7) / j8;
+                hedef.Text = sonuc.ToString("0.##");
+            }
+        }
+        public static void CalculateCostProductionSum(TextBox tb1, TextBox tb2, TextBox tb3, TextBox hedef)
+        {
+            if (double.TryParse(tb1.Text, out double j1) &&
+                double.TryParse(tb2.Text, out double j2) &&
+                double.TryParse(tb3.Text, out double j3))
+            {
+                double sonuc = j1 + j2 + j3;
+                hedef.Text = sonuc.ToString("0.##");
+            }
+        }
+        public static void CalculateCostProductionSumWithWastage(TextBox tb1, TextBox tb2, TextBox tb3, TextBox hedef) // fireli üretim maliyeti
+        {
+            if (double.TryParse(tb1.Text, out double j1) &&
+                double.TryParse(tb2.Text, out double j2) &&
+                double.TryParse(tb3.Text, out double j3))
+            {
+                double sonuc = (j1 * (j2 / 100)) + j3;
+                hedef.Text = sonuc.ToString("0.##");
+            }
+        }
+        public static void CalculatePaintedFabric(double pariteilekumasboyamacarpimi, TextBox tb2, TextBox tb3, TextBox hedef) //Yıkama ve boyama maliyeti - boyanmış kumaş - çalışmadı tekrar kontrol edilecek
+        {
+            if (double.TryParse(pariteilekumasboyamacarpimi.ToString(), out double j1) &&
+                double.TryParse(tb2.Text, out double j2) &&
+                double.TryParse(tb3.Text, out double j3))
+            {
+                double sonuc = (pariteilekumasboyamacarpimi * j2) + j3;
+                hedef.Text = sonuc.ToString("0.##");
             }
         }
     }

@@ -3182,7 +3182,7 @@
             this.txtKurMH.Name = "txtKurMH";
             this.txtKurMH.Size = new System.Drawing.Size(62, 21);
             this.txtKurMH.TabIndex = 73;
-            this.txtKurMH.Text = "0";
+            this.txtKurMH.Text = "33";
             this.txtKurMH.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtEuro
@@ -3200,7 +3200,7 @@
             this.txtPariteMH.Name = "txtPariteMH";
             this.txtPariteMH.Size = new System.Drawing.Size(62, 21);
             this.txtPariteMH.TabIndex = 74;
-            this.txtPariteMH.Text = "0";
+            this.txtPariteMH.Text = "1,09";
             this.txtPariteMH.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtKDVMH
