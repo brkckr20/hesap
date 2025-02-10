@@ -51,7 +51,10 @@ namespace Hesap
                 (txtHamBoy, txtCozguMH, txtCozguDMMH, "CozguMaliyet"),
                 //Ham kumaş maliyeti TL karşılığı
                 (txtKurMH, txtFireliForexHKMMH, txtFireliTlHKMMH, "Carpma"),
+                //parça yıkama                
                 (txtParcaYikamaMH, txtGramajToplam, txtParcaYikama, "Carpma"),
+                //txteuro hesaplaması
+                (txtKumasBoyamaMH, txtPariteMH, txtEuro, "Carpma"),
             };
             var direkYansimalar = new List<(TextBox, TextBox)>
             {
@@ -129,6 +132,9 @@ namespace Hesap
             //ham kumaş maliyeti kârlı
             txtFireliMH.TextChanged += (s, e) => CostCalculationHelper.CalculateCostProductionSumWithWastage(txtFireliMH, txtKarMH, txtFireliMH, txtFireliForexHKMMH);
             txtKarMH.TextChanged += (s, e) => CostCalculationHelper.CalculateCostProductionSumWithWastage(txtFireliMH, txtKarMH, txtFireliMH, txtFireliForexHKMMH);
+
+            txtGramajToplam.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedFabric(txtEuro, txtGramajToplam, txtFireliMH, txtBoyanmisKumas);
+            txtFireliMH.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedFabric(txtEuro, txtGramajToplam, txtFireliMH, txtBoyanmisKumas);
         }
 
         private void RegisterTextChanged(TextBox[] textBoxes, Action action)

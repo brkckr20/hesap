@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using FastReport.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -177,15 +178,15 @@ namespace Hesap.Helpers
                 hedef.Text = sonuc.ToString("0.##");
             }
         }
-        public static void CalculatePaintedFabric(double pariteilekumasboyamacarpimi, TextBox tb2, TextBox tb3, TextBox hedef) //Yıkama ve boyama maliyeti - boyanmış kumaş - çalışmadı tekrar kontrol edilecek
+        public static void CalculatePaintedFabric(TextBox tb1, TextBox tb2, TextBox tb3, TextBox hedef)
         {
-            if (double.TryParse(pariteilekumasboyamacarpimi.ToString(), out double j1) &&
+            if (double.TryParse(tb1.Text, out double j1) &&
                 double.TryParse(tb2.Text, out double j2) &&
                 double.TryParse(tb3.Text, out double j3))
             {
-                double sonuc = (pariteilekumasboyamacarpimi * j2) + j3;
+                var sonuc = Math.Round((j1 * j2) + j3, 3); //=T6+T7+T8
                 hedef.Text = sonuc.ToString("0.##");
             }
-        }
+        }// yıkama ve boyahane maliyet - Fireli den devam edilecek
     }
 }
