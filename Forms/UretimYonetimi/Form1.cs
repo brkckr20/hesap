@@ -55,13 +55,15 @@ namespace Hesap
                 (txtParcaYikamaMH, txtGramajToplam, txtParcaYikama, "Carpma"),
                 //txteuro hesaplaması
                 (txtKumasBoyamaMH, txtPariteMH, txtEuro, "Carpma"),
+                //dik.ür-konf-maliyeti
+                (txtBoyaliKumas, txtKonfMaliyetMH, txtKonfeksiyonMaliyeti, "Topla"),
             };
             var direkYansimalar = new List<(TextBox, TextBox)>
             {
                 (lblTarakNo1Uretim, txtCozgu1Siklik),
                 (lblTarakNo2Uretim, txtCozgu2Siklik),
                 (txtIpMaliyetToplam, txtIplikMaliyetMH),
-                //(txtIpMaliyetToplam, txtIplikMaliyetMH)
+                (txtFireliYBMMH, txtBoyaliKumas),
             };
             foreach (var (txt1, txt2, hedef, islem) in hesaplamalar)
             {
@@ -135,6 +137,16 @@ namespace Hesap
 
             txtGramajToplam.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedFabric(txtEuro, txtGramajToplam, txtFireliMH, txtBoyanmisKumas);
             txtFireliMH.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedFabric(txtEuro, txtGramajToplam, txtFireliMH, txtBoyanmisKumas);
+            //yıkama ve boyahane maliyet - fireli
+            txtParcaYikamaMH.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedWastage(txtParcaYikama,txtBoyanmisKumas,txtBoyahaneFiresiMH, txtFireliYBMMH);
+            txtBoyanmisKumas.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedWastage(txtParcaYikama,txtBoyanmisKumas,txtBoyahaneFiresiMH, txtFireliYBMMH);
+            txtBoyahaneFiresiMH.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedWastage(txtParcaYikama,txtBoyanmisKumas,txtBoyahaneFiresiMH, txtFireliYBMMH);
+            //üsttekinin kârlısı
+            txtFireliYBMMH.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedBeneficial(txtFireliYBMMH, txtKarMH,txtKarliYBMMH);
+            txtKarMH.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedBeneficial(txtFireliYBMMH, txtKarMH,txtKarliYBMMH);
+            //2.kalite maliyeti dik.ür
+            txtKonfeksiyonMaliyeti.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedBeneficial(txtKonfeksiyonMaliyeti, txt2KaliteMaliyetMH, txt2KaliteMaliyeti);
+            txt2KaliteMaliyetMH.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedBeneficial(txtKonfeksiyonMaliyeti, txt2KaliteMaliyetMH, txt2KaliteMaliyeti);
         }
 
         private void RegisterTextChanged(TextBox[] textBoxes, Action action)

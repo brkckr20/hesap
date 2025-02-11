@@ -187,6 +187,27 @@ namespace Hesap.Helpers
                 var sonuc = Math.Round((j1 * j2) + j3, 3); //=T6+T7+T8
                 hedef.Text = sonuc.ToString("0.##");
             }
-        }// yıkama ve boyahane maliyet - Fireli den devam edilecek
+        }
+        public static void CalculatePaintedWastage(TextBox tb1, TextBox tb2, TextBox tb3, TextBox hedef) // yıkama ve boyahane maliyet - fireli
+        {
+            if (double.TryParse(tb1.Text, out double j1) &&
+                double.TryParse(tb2.Text, out double j2) &&
+                double.TryParse(tb3.Text, out double j3))
+            {
+                var sonuc = ((j1 + j2) * (j3 / 100)) + (j1 + j2); //=((T15+T16)*Q11)+(T15+T16)
+                hedef.Text = sonuc.ToString("0.##");
+            }
+        }
+        public static void CalculatePaintedBeneficial(TextBox tb1, TextBox tb2, TextBox hedef) // yıkama ve boyahane maliyet - Kârlı - ayrıca dikilmiş ürün 2.kalite maliyeti hesaplamada da kullanıldı
+        {
+            if (double.TryParse(tb1.Text, out double j1) &&
+                double.TryParse(tb2.Text, out double j2))
+            {
+                var sonuc = (j1 * (j2/100)) + j1; //=(T17*Q14)+T17
+                hedef.Text = sonuc.ToString("0.##");
+            }
+        }
+        //dikilmiş ürün - karlıdan devam edilecektir.
     }
 }
+
