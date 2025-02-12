@@ -57,6 +57,10 @@ namespace Hesap
                 (txtKumasBoyamaMH, txtPariteMH, txtEuro, "Carpma"),
                 //dik.ür-konf-maliyeti
                 (txtBoyaliKumas, txtKonfMaliyetMH, txtKonfeksiyonMaliyeti, "Topla"),
+                //dik.ürün karli - tl
+                (txtKarliDU, txtKurMH, txtDUKTL, "Carpma"),
+                //dik.ürün ldv dahil - tl
+                (txtKDVDahilFiyat, txtKurMH, txtKDVDUKTL, "Carpma"),
             };
             var direkYansimalar = new List<(TextBox, TextBox)>
             {
@@ -147,6 +151,13 @@ namespace Hesap
             //2.kalite maliyeti dik.ür
             txtKonfeksiyonMaliyeti.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedBeneficial(txtKonfeksiyonMaliyeti, txt2KaliteMaliyetMH, txt2KaliteMaliyeti);
             txt2KaliteMaliyetMH.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedBeneficial(txtKonfeksiyonMaliyeti, txt2KaliteMaliyetMH, txt2KaliteMaliyeti);
+            //dikilmis-urun karli
+            txt2KaliteMaliyeti.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedBeneficial(txt2KaliteMaliyeti,txtKarMH,txtKarliDU);
+            txtKarMH.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedBeneficial(txt2KaliteMaliyeti,txtKarMH,txtKarliDU);
+            //dik.ürün kdv dahil fiyat
+            txtKarliDU.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedBeneficial(txtKarliDU, txtKDVMH, txtKDVDahilFiyat);
+            txtKDVMH.TextChanged += (s, e) => CostCalculationHelper.CalculatePaintedBeneficial(txtKarliDU, txtKDVMH, txtKDVDahilFiyat);
+
         }
 
         private void RegisterTextChanged(TextBox[] textBoxes, Action action)

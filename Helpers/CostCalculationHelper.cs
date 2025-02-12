@@ -168,7 +168,7 @@ namespace Hesap.Helpers
                 hedef.Text = sonuc.ToString("0.##");
             }
         }
-        public static void CalculateCostProductionSumWithWastage(TextBox tb1, TextBox tb2, TextBox tb3, TextBox hedef) // fireli üretim maliyeti
+        public static void CalculateCostProductionSumWithWastage(TextBox tb1, TextBox tb2, TextBox tb3, TextBox hedef) // fireli üretim maliyeti - 
         {
             if (double.TryParse(tb1.Text, out double j1) &&
                 double.TryParse(tb2.Text, out double j2) &&
