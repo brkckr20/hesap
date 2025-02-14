@@ -1,16 +1,8 @@
-﻿using Dapper;
-using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraGrid.Views.Grid;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.UretimYonetimi
 {
@@ -18,11 +10,12 @@ namespace Hesap.Forms.UretimYonetimi
     {
         Listele listele = new Listele();
         Bildirim bildirim = new Bildirim();
+        CrudRepository crudRepository = new CrudRepository();
         public FrmUrunTipiSecimi()
         {
             InitializeComponent();
         }
-        public string OnEk,yeniNumaraStr;
+        public string OnEk, yeniNumaraStr;
         private void FrmUrunTipiSecimi_Load(object sender, EventArgs e)
         {
             Listele();
@@ -40,34 +33,38 @@ namespace Hesap.Forms.UretimYonetimi
 
         private void btnListeyeEkle_Click(object sender, EventArgs e)
         {
-            using (var connection = new Baglanti().GetConnection())
+            var TypeParams = new Dictionary<string, object>
             {
-                string prefix = textEdit1.Text.ToUpper().Substring(0, 3);
-                string checkQuery = "SELECT COUNT(*) FROM UrunKarti WHERE UrunKodu LIKE @Prefix";
-                int count = connection.ExecuteScalar<int>(checkQuery, new { Prefix = prefix + "%" });
-
-                if (count == 0)
-                {
-                    string insertQuery = "INSERT INTO UrunKarti (UrunKodu, Pasif) VALUES (@UrunKodu, @Pasif)";
-                    connection.Execute(insertQuery, new { UrunKodu = textEdit1.Text.ToUpper() + "000", Pasif = true });
-                }
-                else
-                {
-                    bildirim.Uyari($"{prefix} için daha önce kayıt yapılmış.");
-                }
-                Listele();
+                {"InventoryCode", textEdit1.Text.ToUpper() + "000"}, 
+                {"SubType",textEdit1.Text.ToUpper() + "000"}, 
+                {"InventoryName",""}, 
+                {"Unit",""},
+                {"IsPrefix",true},
+                {"Type" , InventoryTypes.Kumas}
+            };
+            string prefix = textEdit1.Text.ToUpper().Substring(0, 3);
+            int count = crudRepository.GetCountByPrefix("Inventory", "SubType", prefix);
+            if (count == 0)
+            {
+                crudRepository.Insert("Inventory", TypeParams);
             }
+            else
+            {
+                bildirim.Uyari($"{prefix} için daha önce kayıt yapılmış.");
+            }
+            Listele();
         }
 
         void Listele()
         {
             string sql = @"WITH CTE AS (
                         SELECT 
-                            LEFT(UrunKodu, 3) AS Ek,
-                            RIGHT(UrunKodu, 3) AS Numara,
-                            ROW_NUMBER() OVER (PARTITION BY LEFT(UrunKodu, 3) ORDER BY Id DESC) AS rn
+                            LEFT(InventoryCode, 3) AS Ek,
+                            RIGHT(InventoryCode, 3) AS Numara,
+                            ROW_NUMBER() OVER (PARTITION BY LEFT(InventoryCode, 3) ORDER BY Id DESC) AS rn
                         FROM 
-                            UrunKarti
+                            Inventory
+						where IsPrefix = 1
                     )
                     SELECT 
                         Ek,
@@ -76,7 +73,7 @@ namespace Hesap.Forms.UretimYonetimi
                     FROM 
                         CTE
                     WHERE 
-                        rn = 1;";
+                        rn = 1 AND Ek <> '';";
             listele.Liste(sql, gridControl1);
         }
     }

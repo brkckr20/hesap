@@ -816,6 +816,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BookmarkBig.ico" />
+    <Content Include="MaliyetHesaplama_orj.txt" />
+    <None Include="Resources\Towel.ico" />
     <None Include="Resources\Diversity.ico" />
     <None Include="Resources\model.ico" />
     <None Include="Resources\Fabric Sample ham.ico" />

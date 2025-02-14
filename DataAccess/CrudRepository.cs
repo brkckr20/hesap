@@ -78,6 +78,12 @@ namespace Hesap.DataAccess
             }
         }
 
+        public int GetCountByPrefix(string TableName,string ColumnName,string Prefix)
+        {
+            string checkQuery = $"SELECT COUNT(*) FROM {TableName} WHERE {ColumnName} LIKE @Prefix";
+            return _dbConnection.ExecuteScalar<int>(checkQuery, new { Prefix = Prefix + "%" });
+        }
+
         // kullanıcının kolonlarını listeleme işlemidir
         public void GetUserColumns(GridView gridView, string ScreenName)
         {

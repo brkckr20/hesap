@@ -15,5 +15,6 @@ namespace Hesap.Utils
     public enum InventoryTypes
     {
         Malzeme = 0,
+        Kumas = 1
     }
 }

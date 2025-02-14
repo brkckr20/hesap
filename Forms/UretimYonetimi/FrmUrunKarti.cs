@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dapper;
+using Hesap.DataAccess;
+using static DevExpress.XtraPrinting.Export.Pdf.PdfImageCache;
 
 namespace Hesap.Forms.UretimYonetimi
 {
@@ -23,44 +25,25 @@ namespace Hesap.Forms.UretimYonetimi
         int Id = 0;
         Bildirim bildirim = new Bildirim();
         Ayarlar ayarlar = new Ayarlar();
+        CrudRepository crudRepository = new CrudRepository();
+        string TableName = "Inventory";
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            object baslik = new
+            var InvParams = new Dictionary<string, object>
             {
-                UrunKodu = txtUrunKodu.Text,
-                UrunAdi = txtUrunAdi.EditValue,
-                Pasif = chckPasif.Checked,
-                Id = this.Id,
+                { "InventoryCode", txtUrunKodu.Text }, { "InventoryName", txtUrunAdi.Text },
+                {"Type" , InventoryTypes.Kumas}, { "IsUse", chckPasif.Checked },{ "IsPrefix" ,false }, {"Unit",""}
             };
-            if (Id == 0)
+            if (this.Id == 0)
             {
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    string sql = "INSERT INTO UrunKarti (UrunKodu ,UrunAdi ,Pasif) OUTPUT INSERTED.Id  VALUES (@UrunKodu ,@UrunAdi ,@Pasif)";
-                    string sqlite = "INSERT INTO UrunKarti (UrunKodu ,UrunAdi ,Pasif) VALUES (@UrunKodu ,@UrunAdi ,@Pasif)";
-                    string idQuery = "SELECT last_insert_rowid();";
-                    if (ayarlar.VeritabaniTuru() == "mssql")
-                    {
-                        this.Id = connection.QuerySingle<int>(sql, baslik);
-                    }
-                    else
-                    {
-                        connection.Execute(sqlite, baslik);
-                        this.Id = connection.QuerySingle<int>(idQuery);
-                    }
-
-                    bildirim.Basarili();
-                }
+                Id = crudRepository.Insert(TableName, InvParams);
+                bildirim.Basarili();
             }
             else
             {
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    string sql = "UPDATE UrunKarti SET [UrunKodu] = @UrunKodu ,[UrunAdi] = @UrunAdi ,[Pasif] = @Pasif WHERE Id = @Id";
-                    connection.Execute(sql, baslik);
-                    bildirim.GuncellemeBasarili();
-                }
+                crudRepository.Update(this.TableName, this.Id, InvParams);
+                bildirim.GuncellemeBasarili();
             }
         }
         private void simpleButton2_Click(object sender, EventArgs e)

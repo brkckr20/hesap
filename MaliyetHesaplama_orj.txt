@@ -1,0 +1,59 @@
+﻿private void InitializeTextBoxEventHandlers()
+        {
+            hesapla.DogrudanYansit(lblTarakNo2Uretim, txtCozgu2Siklik);
+            hesapla.DogrudanYansit(txtIpMaliyetToplam, txtIplikMaliyetMH);
+            hesapla.TextboxAndTextboxToTextbox(txtCozgu1, txtCozgu1Bolen, lblCozgu1Uretim, "Bolme");
+            hesapla.TextboxAndTextboxToTextbox(txtCozgu2, txtCozgu2Bolen, lblCozgu2Uretim, "Bolme");
+            hesapla.TextboxAndTextboxToTextbox(txtAtki1, txtAtki1Bolen, lblAtki1Uretim, "Bolme");
+            hesapla.TextboxAndTextboxToTextbox(txtAtki2, txtAtki2Bolen, lblAtki2Uretim, "Bolme");
+            hesapla.TextboxAndTextboxToTextbox(txtAtki3, txtAtki3Bolen, lblAtki3Uretim, "Bolme");
+            hesapla.TextboxAndTextboxToTextbox(txtAtki4, txtAtki4Bolen, lblAtki4Uretim, "Bolme");
+            hesapla.TextboxAndTextboxToTextbox(txtTarakNo1, txtTarakNo1Bolen, lblTarakNo1Uretim, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtTarakNo2, txtTarakNo2Bolen, lblTarakNo2Uretim, "Carpma");
+            hesapla.TextboxAndNumToTextbox(txtTarakEn, 1.05, txtHamEn);
+            hesapla.TextboxAndTextboxToTextbox(txtTarakEn, lblTarakNo1Uretim, txtCozgu1TelSayisi, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtHamBoy, txtAtki1Siklik, txtAtki1TelSayisi, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtTarakNo1, txtTarakNo1Bolen, txtCozgu1Siklik, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtTarakNo2, txtTarakNo2Bolen, txtCozgu2Siklik, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtHamBoy, txtAtki2Siklik, txtAtki2TelSayisi, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtHamBoy, txtAtki3Siklik, txtAtki3TelSayisi, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtHamBoy, txtAtki4Siklik, txtAtki4TelSayisi, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(lblTarakNo2Uretim, txtTarakEn, txtCozgu2TelSayisi, "Carpma");
+            hesapla.Cozgu1UHYansit(txtHamBoy, txtBoySacak, txtCozgu1TelSayisi, lblCozgu1Uretim, txtCozgu1UH);
+            hesapla.Cozgu2UHYansit(txtHamBoy, txtCozgu2TelSayisi, lblCozgu2Uretim, txtCozgu2UH);
+            hesapla.AtkiUHYansit(txtAtki1Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki1Uretim, txtAtki1UH);
+            hesapla.AtkiUHYansit(txtAtki2Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki2Uretim, txtAtki2UH);
+            hesapla.AtkiUHYansit(txtAtki3Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki3Uretim, txtAtki3UH);
+            hesapla.AtkiUHYansit(txtAtki4Siklik, txtTarakEn, txtEnSacak, txtHamBoy, lblAtki4Uretim, txtAtki4UH);
+            hesapla.GramajToplamYansit(txtCozgu1UH, txtCozgu2UH, txtAtki1UH, txtAtki2UH, txtAtki3UH, txtAtki4UH, txtGramajToplam);
+            hesapla.TextboxAndTextboxToTextbox(txtGramajToplam, txtHamEn, txtIpBoyamaSonuc, "BolCarp");
+            hesapla.TextboxAndTextboxAndTextboxToTextbox(txtCozgu1IB, txtCozgu1IF, txtCozgu1UH, txtCozgu1IM);
+            hesapla.TextboxAndTextboxAndTextboxToTextbox(txtCozgu2IB, txtCozgu2IF, txtCozgu2UH, txtCozgu2IM);
+            hesapla.TextboxAndTextboxAndTextboxToTextbox(txtAtki1IB, txtAtki1IF, txtAtki1UH, txtAtki1IM);
+            hesapla.TextboxAndTextboxAndTextboxToTextbox(txtAtki2IB, txtAtki2IF, txtAtki2UH, txtAtki2IM);
+            hesapla.TextboxAndTextboxAndTextboxToTextbox(txtAtki3IB, txtAtki3IF, txtAtki3UH, txtAtki3IM);
+            hesapla.TextboxAndTextboxAndTextboxToTextbox(txtAtki4IB, txtAtki4IF, txtAtki4UH, txtAtki4IM);
+            hesapla.GramajToplamYansit(txtCozgu1IM, txtCozgu2IM, txtAtki1IM, txtAtki2IM, txtAtki3IM, txtAtki4IM, txtIpMaliyetToplam);
+            hesapla.EightTextbox(txtHamBoy, txtBoySacak, txtAtki1Siklik, txtAtki2Siklik, txtAtki3Siklik, txtAtki4Siklik, txtAtkiMH, txtKurMH, txtDokumaMH);
+            hesapla.CozguMaliyetHesapla(txtHamBoy, txtCozguMH, txtCozguDMMH);
+            hesapla.Sum3Texbox(txtDokumaMH, txtCozguDMMH, txtIplikMaliyetMH, txtToplamUMMH);
+            hesapla.FireliUretimMaliyetiToplami(txtToplamUMMH, txtDokumaFiresiMH, txtToplamUMMH, txtFireliMH);
+            hesapla.TextboxAndTextboxToTextbox(txtParcaYikamaMH, txtGramajToplam, txtParcaYikama, "Carpma");
+            hesapla.FireliUretimMaliyetiToplami(txtFireliMH, txtKarMH, txtFireliMH, txtFireliForexHKMMH); // karli maliyette de kullanildi
+            hesapla.FireliYikamaMaliyetiToplami(txtParcaYikama, txtBoyanmisKumas, txtBoyahaneFiresiMH, txtFireliYBMMH);
+            hesapla.FireliUretimMaliyetiToplami(txtFireliYBMMH, txtKarMH, txtFireliYBMMH, txtKarliYBMMH);
+            hesapla.DogrudanYansit(txtFireliYBMMH, txtBoyaliKumas);
+            hesapla.TextboxAndTextboxToTextbox(txtBoyaliKumas, txtKonfMaliyetMH, txtKonfeksiyonMaliyeti, "Topla");
+            hesapla.FireliUretimMaliyetiToplami(txtKonfeksiyonMaliyeti, txt2KaliteMaliyetMH, txtKonfeksiyonMaliyeti, txt2KaliteMaliyeti);
+            hesapla.FireliUretimMaliyetiToplami(txt2KaliteMaliyeti, txtKarMH, txt2KaliteMaliyeti, txtKarliDU);
+            hesapla.FireliUretimMaliyetiToplami(txtKarliDU, txtKDVMH, txtKarliDU, txtKDVDahilFiyat);
+            hesapla.FireliUretimMaliyetiToplami(txtBelirliFiyatForex, txtKDVMH, txtBelirliFiyatForex, txtKDVliFiyatForex);
+            hesapla.TextboxAndTextboxToTextbox(txtKumasBoyamaMH, txtPariteMH, txtEuro, "Carpma");
+            hesapla.BoyanmisKumas(txtEuro, txtGramajToplam, txtFireliMH, txtBoyanmisKumas);
+            hesapla.TextboxAndTextboxToTextbox(txtKurMH, txtFireliForexHKMMH, txtFireliTlHKMMH, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtKurMH, txtKarliDU, txtDUKTL, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtKurMH, txtKDVDahilFiyat, txtKDVDUKTL, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtKurMH, txtBelirliFiyatForex, txtbelirliFiyatTl, "Carpma");
+            hesapla.TextboxAndTextboxToTextbox(txtKurMH, txtKDVliFiyatForex, txtKDVliFiyatTl, "Carpma");
+
+        }

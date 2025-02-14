@@ -30,18 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUrunKarti));
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label72 = new System.Windows.Forms.Label();
-            this.txtUrunKodu = new DevExpress.XtraEditors.ButtonEdit();
-            this.chckPasif = new DevExpress.XtraEditors.CheckEdit();
-            this.txtUrunAdi = new DevExpress.XtraEditors.TextEdit();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
             this.btnIleri = new DevExpress.XtraEditors.SimpleButton();
             this.btnGeri = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.txtUrunKodu = new DevExpress.XtraEditors.ButtonEdit();
+            this.chckPasif = new DevExpress.XtraEditors.CheckEdit();
+            this.txtUrunAdi = new DevExpress.XtraEditors.TextEdit();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -63,70 +63,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1272, 53);
             this.panel3.TabIndex = 4;
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.Controls.Add(this.txtUrunKodu);
-            this.panelControl1.Controls.Add(this.chckPasif);
-            this.panelControl1.Controls.Add(this.txtUrunAdi);
-            this.panelControl1.Controls.Add(this.label1);
-            this.panelControl1.Controls.Add(this.label72);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 53);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1272, 82);
-            this.panelControl1.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(12, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 21);
-            this.label1.TabIndex = 1120;
-            this.label1.Text = "Ürün Adı :";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label72
-            // 
-            this.label72.BackColor = System.Drawing.Color.Transparent;
-            this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label72.Location = new System.Drawing.Point(12, 8);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(93, 21);
-            this.label72.TabIndex = 1120;
-            this.label72.Text = "Ürün Kodu :";
-            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtUrunKodu
-            // 
-            this.txtUrunKodu.Location = new System.Drawing.Point(111, 8);
-            this.txtUrunKodu.Name = "txtUrunKodu";
-            this.txtUrunKodu.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtUrunKodu.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit1_Properties_ButtonClick_1);
-            this.txtUrunKodu.Size = new System.Drawing.Size(169, 22);
-            this.txtUrunKodu.TabIndex = 1126;
-            // 
-            // chckPasif
-            // 
-            this.chckPasif.Location = new System.Drawing.Point(286, 8);
-            this.chckPasif.Name = "chckPasif";
-            this.chckPasif.Properties.Appearance.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.chckPasif.Properties.Appearance.Options.UseFont = true;
-            this.chckPasif.Properties.Caption = "Pasif ?";
-            this.chckPasif.Size = new System.Drawing.Size(75, 20);
-            this.chckPasif.TabIndex = 1125;
-            // 
-            // txtUrunAdi
-            // 
-            this.txtUrunAdi.Location = new System.Drawing.Point(111, 36);
-            this.txtUrunAdi.Name = "txtUrunAdi";
-            this.txtUrunAdi.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
-            this.txtUrunAdi.Properties.Appearance.Options.UseFont = true;
-            this.txtUrunAdi.Size = new System.Drawing.Size(494, 24);
-            this.txtUrunAdi.TabIndex = 1123;
             // 
             // simpleButton1
             // 
@@ -193,6 +129,70 @@
             this.btnKaydet.TabIndex = 101;
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.txtUrunKodu);
+            this.panelControl1.Controls.Add(this.chckPasif);
+            this.panelControl1.Controls.Add(this.txtUrunAdi);
+            this.panelControl1.Controls.Add(this.label1);
+            this.panelControl1.Controls.Add(this.label72);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl1.Location = new System.Drawing.Point(0, 53);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(1272, 82);
+            this.panelControl1.TabIndex = 5;
+            // 
+            // txtUrunKodu
+            // 
+            this.txtUrunKodu.Location = new System.Drawing.Point(111, 8);
+            this.txtUrunKodu.Name = "txtUrunKodu";
+            this.txtUrunKodu.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.txtUrunKodu.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit1_Properties_ButtonClick_1);
+            this.txtUrunKodu.Size = new System.Drawing.Size(169, 22);
+            this.txtUrunKodu.TabIndex = 1126;
+            // 
+            // chckPasif
+            // 
+            this.chckPasif.Location = new System.Drawing.Point(286, 8);
+            this.chckPasif.Name = "chckPasif";
+            this.chckPasif.Properties.Appearance.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.chckPasif.Properties.Appearance.Options.UseFont = true;
+            this.chckPasif.Properties.Caption = "Pasif ?";
+            this.chckPasif.Size = new System.Drawing.Size(75, 20);
+            this.chckPasif.TabIndex = 1125;
+            // 
+            // txtUrunAdi
+            // 
+            this.txtUrunAdi.Location = new System.Drawing.Point(111, 36);
+            this.txtUrunAdi.Name = "txtUrunAdi";
+            this.txtUrunAdi.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtUrunAdi.Properties.Appearance.Options.UseFont = true;
+            this.txtUrunAdi.Size = new System.Drawing.Size(169, 24);
+            this.txtUrunAdi.TabIndex = 1123;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(12, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 21);
+            this.label1.TabIndex = 1120;
+            this.label1.Text = "Ürün Adı :";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label72
+            // 
+            this.label72.BackColor = System.Drawing.Color.Transparent;
+            this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label72.Location = new System.Drawing.Point(12, 8);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(93, 21);
+            this.label72.TabIndex = 1120;
+            this.label72.Text = "Ürün Kodu :";
+            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // FrmUrunKarti
             // 

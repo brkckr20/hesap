@@ -253,5 +253,11 @@ namespace Hesap
             Forms.OrderYonetimi.Kartlar.FrmRenkKarti frm = new Forms.OrderYonetimi.Kartlar.FrmRenkKarti();
             FormAc(frm);
         }
+
+        private void barBtnKumasKarti_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Forms.UretimYonetimi.FrmUrunKarti frm = new Forms.UretimYonetimi.FrmUrunKarti();
+            FormAc(frm);
+        }
     }
 }

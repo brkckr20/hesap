@@ -198,8 +198,9 @@ namespace Hesap.Helpers
                 hedef.Text = sonuc.ToString("0.##");
             }
         }
+        //alt kısımdaki metot KDV dahil belirlenen fiyatta kullanıldı
         public static void CalculatePaintedBeneficial(TextBox tb1, TextBox tb2, TextBox hedef) // yıkama ve boyahane maliyet - Kârlı - ayrıca dikilmiş ürün 2.kalite maliyeti hesaplamada da kullanıldı
-        {
+        {   // 
             if (double.TryParse(tb1.Text, out double j1) &&
                 double.TryParse(tb2.Text, out double j2))
             {
@@ -207,7 +208,6 @@ namespace Hesap.Helpers
                 hedef.Text = sonuc.ToString("0.##");
             }
         }
-        //dikilmiş ürün - karlıdan devam edilecektir.
     }
 }
 

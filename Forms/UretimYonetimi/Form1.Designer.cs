@@ -321,6 +321,8 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.maliyetFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kayıtNumarasınıGösterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label160 = new System.Windows.Forms.Label();
+            this.lblFisNo = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -3425,6 +3427,8 @@
             this.panelControl1.Controls.Add(this.lblUrunAdi);
             this.panelControl1.Controls.Add(this.lblReceteAd);
             this.panelControl1.Controls.Add(this.lblFirmaAdi);
+            this.panelControl1.Controls.Add(this.lblFisNo);
+            this.panelControl1.Controls.Add(this.label160);
             this.panelControl1.Controls.Add(this.label75);
             this.panelControl1.Controls.Add(this.label74);
             this.panelControl1.Controls.Add(this.label73);
@@ -3432,7 +3436,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 53);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1450, 122);
+            this.panelControl1.Size = new System.Drawing.Size(1450, 126);
             this.panelControl1.TabIndex = 1117;
             // 
             // dateTimePicker1
@@ -3449,7 +3453,7 @@
             // 
             // txtReceteNo
             // 
-            this.txtReceteNo.Location = new System.Drawing.Point(111, 93);
+            this.txtReceteNo.Location = new System.Drawing.Point(111, 76);
             this.txtReceteNo.Name = "txtReceteNo";
             this.txtReceteNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -3459,17 +3463,17 @@
             // 
             // txtUrun
             // 
-            this.txtUrun.Location = new System.Drawing.Point(111, 65);
+            this.txtUrun.Location = new System.Drawing.Point(111, 53);
             this.txtUrun.Name = "txtUrun";
             this.txtUrun.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtUrun.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit1_Properties_ButtonClick_1);
+            this.txtUrun.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtUrun_Properties_ButtonClick);
             this.txtUrun.Size = new System.Drawing.Size(157, 22);
             this.txtUrun.TabIndex = 97;
             // 
             // txtFirmaKodu
             // 
-            this.txtFirmaKodu.Location = new System.Drawing.Point(111, 37);
+            this.txtFirmaKodu.Location = new System.Drawing.Point(111, 30);
             this.txtFirmaKodu.Name = "txtFirmaKodu";
             this.txtFirmaKodu.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -3481,7 +3485,7 @@
             // 
             this.lblUrunAdi.BackColor = System.Drawing.Color.Transparent;
             this.lblUrunAdi.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblUrunAdi.Location = new System.Drawing.Point(270, 65);
+            this.lblUrunAdi.Location = new System.Drawing.Point(270, 53);
             this.lblUrunAdi.Name = "lblUrunAdi";
             this.lblUrunAdi.Size = new System.Drawing.Size(503, 22);
             this.lblUrunAdi.TabIndex = 1117;
@@ -3490,7 +3494,7 @@
             // 
             this.lblReceteAd.BackColor = System.Drawing.Color.Transparent;
             this.lblReceteAd.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblReceteAd.Location = new System.Drawing.Point(274, 93);
+            this.lblReceteAd.Location = new System.Drawing.Point(274, 76);
             this.lblReceteAd.Name = "lblReceteAd";
             this.lblReceteAd.Size = new System.Drawing.Size(527, 22);
             this.lblReceteAd.TabIndex = 1117;
@@ -3499,7 +3503,7 @@
             // 
             this.lblFirmaAdi.BackColor = System.Drawing.Color.Transparent;
             this.lblFirmaAdi.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblFirmaAdi.Location = new System.Drawing.Point(274, 37);
+            this.lblFirmaAdi.Location = new System.Drawing.Point(274, 30);
             this.lblFirmaAdi.Name = "lblFirmaAdi";
             this.lblFirmaAdi.Size = new System.Drawing.Size(527, 22);
             this.lblFirmaAdi.TabIndex = 1117;
@@ -3508,7 +3512,7 @@
             // 
             this.label75.BackColor = System.Drawing.Color.Transparent;
             this.label75.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label75.Location = new System.Drawing.Point(10, 94);
+            this.label75.Location = new System.Drawing.Point(10, 77);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(93, 21);
             this.label75.TabIndex = 1117;
@@ -3530,7 +3534,7 @@
             // 
             this.label73.BackColor = System.Drawing.Color.Transparent;
             this.label73.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label73.Location = new System.Drawing.Point(11, 66);
+            this.label73.Location = new System.Drawing.Point(11, 54);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(93, 21);
             this.label73.TabIndex = 1117;
@@ -3541,7 +3545,7 @@
             // 
             this.label72.BackColor = System.Drawing.Color.Transparent;
             this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label72.Location = new System.Drawing.Point(12, 38);
+            this.label72.Location = new System.Drawing.Point(12, 31);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(93, 21);
             this.label72.TabIndex = 1117;
@@ -3635,6 +3639,28 @@
             this.kayıtNumarasınıGösterToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.kayıtNumarasınıGösterToolStripMenuItem.Text = "Kayıt Bilgisi";
             this.kayıtNumarasınıGösterToolStripMenuItem.Click += new System.EventHandler(this.kayıtNumarasınıGösterToolStripMenuItem_Click);
+            // 
+            // label160
+            // 
+            this.label160.BackColor = System.Drawing.Color.Transparent;
+            this.label160.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label160.Location = new System.Drawing.Point(10, 101);
+            this.label160.Name = "label160";
+            this.label160.Size = new System.Drawing.Size(93, 21);
+            this.label160.TabIndex = 1117;
+            this.label160.Text = "Fiş No :";
+            this.label160.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblFisNo
+            // 
+            this.lblFisNo.BackColor = System.Drawing.Color.Transparent;
+            this.lblFisNo.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblFisNo.Location = new System.Drawing.Point(109, 101);
+            this.lblFisNo.Name = "lblFisNo";
+            this.lblFisNo.Size = new System.Drawing.Size(159, 21);
+            this.lblFisNo.TabIndex = 1117;
+            this.lblFisNo.Text = "00000001";
+            this.lblFisNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 
@@ -3970,6 +3996,8 @@
         private System.Windows.Forms.Label lblReceteAd;
         private System.Windows.Forms.ToolStripMenuItem kayıtNumarasınıGösterToolStripMenuItem;
         private DevExpress.XtraEditors.SimpleButton btnSil;
+        private System.Windows.Forms.Label lblFisNo;
+        private System.Windows.Forms.Label label160;
     }
 }
 
