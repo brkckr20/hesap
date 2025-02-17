@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,6 +83,16 @@ namespace Hesap.DataAccess
         {
             string checkQuery = $"SELECT COUNT(*) FROM {TableName} WHERE {ColumnName} LIKE @Prefix";
             return _dbConnection.ExecuteScalar<int>(checkQuery, new { Prefix = Prefix + "%" });
+        }
+        public int IfExistRecord(string tableName, string columnName, string columnValue)
+        {
+            string checkQuery = $"SELECT COUNT(1) FROM {tableName} WHERE {columnName} = @Value";
+            return _dbConnection.ExecuteScalar<int>(checkQuery, new { Value = columnValue });
+        }
+        public string GetByCode(string ColumnName,string TableName, string ConditionName)
+        {
+            string query = $"SELECT {ColumnName} FROM {TableName} WHERE CombinedCode = @CombinedCode";
+            return _dbConnection.ExecuteScalar<string>(query, new { CombinedCode = ConditionName });
         }
 
         // kullanıcının kolonlarını listeleme işlemidir

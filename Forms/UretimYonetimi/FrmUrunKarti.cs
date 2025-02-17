@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using Dapper;
 using Hesap.DataAccess;
 using static DevExpress.XtraPrinting.Export.Pdf.PdfImageCache;
+using Hesap.Helpers;
+using System.Drawing.Drawing2D;
 
 namespace Hesap.Forms.UretimYonetimi
 {
@@ -30,14 +32,25 @@ namespace Hesap.Forms.UretimYonetimi
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
+            string CombinedCode = btnCinsiId.Text;
+            string Invent = crudRepository.GetByCode("InventoryName", this.TableName, CombinedCode);
+            string InventoryName = Invent + " " + lblCinsiAciklama.Text; // kumaş adı için kontrol et
+            if (crudRepository.IfExistRecord(TableName, "CombinedCode", CombinedCode) > 0)
+            {
+                string code = crudRepository.GetByCode("InventoryCode", this.TableName, CombinedCode);
+                bildirim.Uyari($"Seçtiğiniz özelliklere ait bir kayıt bulunmaktadır.\nLütfen {code} numaralı kaydı kontrol ediniz!!");
+                return;
+            }
+           
             var InvParams = new Dictionary<string, object>
             {
-                { "InventoryCode", txtUrunKodu.Text }, { "InventoryName", txtUrunAdi.Text },
-                {"Type" , InventoryTypes.Kumas}, { "IsUse", chckPasif.Checked },{ "IsPrefix" ,false }, {"Unit",""}
+                { "InventoryCode", txtUrunKodu.Text }, { "InventoryName", InventoryName },
+                {"Type" , InventoryTypes.Kumas}, { "IsUse", chckPasif.Checked }, {"Unit",""},{"CombinedCode",btnCinsiId.Text}
             };
             if (this.Id == 0)
             {
                 Id = crudRepository.Insert(TableName, InvParams);
+                txtUrunAdi.Text = InventoryName;
                 bildirim.Basarili();
             }
             else
@@ -103,25 +116,46 @@ namespace Hesap.Forms.UretimYonetimi
         {
             ListeGetir("Sonraki");
         }
-
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             txtUrunKodu.Text = "";
             txtUrunAdi.Text = "";
             chckPasif.Checked = false;
+            btnCinsiId.Text = "";
+            lblCinsiAciklama.Text = "";
             this.Id = 0;
         }
-
         private void FrmUrunKarti_Load(object sender, EventArgs e)
         {
 
         }
-
         private void buttonEdit1_Properties_ButtonClick_1(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             FrmUrunTipiSecimi frm = new FrmUrunTipiSecimi();
             frm.ShowDialog();
             txtUrunKodu.Text = frm.OnEk + frm.yeniNumaraStr;
+        }
+        private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            OzellikSecikEkrani(lblCinsi.Text);
+        }
+        void OzellikSecikEkrani(string labelName)
+        {
+            FrmOzellikSecimi frm = new FrmOzellikSecimi(SemiColonHelper.RemoveSemiColon(labelName), this.Name);
+            frm.ShowDialog();
+            if (frm.id == null)
+            {
+                return;
+            }
+            switch (SemiColonHelper.RemoveSemiColon(labelName).Trim())
+            {
+                case "Cinsi":
+                    btnCinsiId.Text = frm.id;
+                    lblCinsiAciklama.Text = frm.aciklama;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

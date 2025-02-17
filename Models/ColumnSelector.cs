@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hesap.Models
 {
-    internal class ColumnSelector
+    public class ColumnSelector
     {
         public int Id { get; set; }
 

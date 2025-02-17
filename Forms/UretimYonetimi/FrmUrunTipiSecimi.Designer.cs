@@ -34,6 +34,9 @@
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.btnListeyeEkle = new DevExpress.XtraEditors.SimpleButton();
+            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -41,6 +44,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -75,6 +79,9 @@
             // panelControl2
             // 
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl2.Controls.Add(this.labelControl2);
+            this.panelControl2.Controls.Add(this.labelControl1);
+            this.panelControl2.Controls.Add(this.textEdit2);
             this.panelControl2.Controls.Add(this.textEdit1);
             this.panelControl2.Controls.Add(this.btnListeyeEkle);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -85,10 +92,10 @@
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(12, 7);
+            this.textEdit1.Location = new System.Drawing.Point(44, 7);
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Properties.AutoHeight = false;
-            this.textEdit1.Size = new System.Drawing.Size(247, 30);
+            this.textEdit1.Size = new System.Drawing.Size(96, 30);
             this.textEdit1.TabIndex = 1;
             // 
             // btnListeyeEkle
@@ -99,6 +106,30 @@
             this.btnListeyeEkle.TabIndex = 0;
             this.btnListeyeEkle.Text = "Listeye Ekle";
             this.btnListeyeEkle.Click += new System.EventHandler(this.btnListeyeEkle_Click);
+            // 
+            // textEdit2
+            // 
+            this.textEdit2.Location = new System.Drawing.Point(172, 7);
+            this.textEdit2.Name = "textEdit2";
+            this.textEdit2.Properties.AutoHeight = false;
+            this.textEdit2.Size = new System.Drawing.Size(82, 30);
+            this.textEdit2.TabIndex = 1;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(13, 16);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(25, 13);
+            this.labelControl1.TabIndex = 2;
+            this.labelControl1.Text = "Kod :";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(147, 16);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(19, 13);
+            this.labelControl2.TabIndex = 2;
+            this.labelControl2.Text = "Ad :";
             // 
             // FrmUrunTipiSecimi
             // 
@@ -118,7 +149,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
+            this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -131,5 +164,8 @@
         private DevExpress.XtraEditors.SimpleButton btnListeyeEkle;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.TextEdit textEdit2;
     }
 }

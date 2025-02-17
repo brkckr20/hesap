@@ -37,7 +37,7 @@ namespace Hesap.Forms.UretimYonetimi
             {
                 {"InventoryCode", textEdit1.Text.ToUpper() + "000"}, 
                 {"SubType",textEdit1.Text.ToUpper() + "000"}, 
-                {"InventoryName",""}, 
+                {"InventoryName",textEdit2.Text}, 
                 {"Unit",""},
                 {"IsPrefix",true},
                 {"Type" , InventoryTypes.Kumas}
@@ -64,7 +64,7 @@ namespace Hesap.Forms.UretimYonetimi
                             ROW_NUMBER() OVER (PARTITION BY LEFT(InventoryCode, 3) ORDER BY Id DESC) AS rn
                         FROM 
                             Inventory
-						where IsPrefix = 1
+						--where IsPrefix = 1
                     )
                     SELECT 
                         Ek,
@@ -73,7 +73,7 @@ namespace Hesap.Forms.UretimYonetimi
                     FROM 
                         CTE
                     WHERE 
-                        rn = 1 AND Ek <> '';";
+                        rn = 1;";
             listele.Liste(sql, gridControl1);
         }
     }

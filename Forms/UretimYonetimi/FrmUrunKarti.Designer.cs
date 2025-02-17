@@ -42,12 +42,16 @@
             this.txtUrunAdi = new DevExpress.XtraEditors.TextEdit();
             this.label1 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
+            this.lblCinsi = new System.Windows.Forms.Label();
+            this.btnCinsiId = new DevExpress.XtraEditors.ButtonEdit();
+            this.lblCinsiAciklama = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtUrunKodu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chckPasif.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUrunAdi.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCinsiId.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -132,15 +136,18 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.btnCinsiId);
             this.panelControl1.Controls.Add(this.txtUrunKodu);
             this.panelControl1.Controls.Add(this.chckPasif);
+            this.panelControl1.Controls.Add(this.lblCinsiAciklama);
+            this.panelControl1.Controls.Add(this.lblCinsi);
             this.panelControl1.Controls.Add(this.txtUrunAdi);
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Controls.Add(this.label72);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 53);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1272, 82);
+            this.panelControl1.Size = new System.Drawing.Size(1272, 100);
             this.panelControl1.TabIndex = 5;
             // 
             // txtUrunKodu
@@ -155,17 +162,19 @@
             // 
             // chckPasif
             // 
+            this.chckPasif.EditValue = true;
             this.chckPasif.Location = new System.Drawing.Point(286, 8);
             this.chckPasif.Name = "chckPasif";
             this.chckPasif.Properties.Appearance.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.chckPasif.Properties.Appearance.Options.UseFont = true;
-            this.chckPasif.Properties.Caption = "Pasif ?";
-            this.chckPasif.Size = new System.Drawing.Size(75, 20);
+            this.chckPasif.Properties.Caption = "Kullanımda ?";
+            this.chckPasif.Size = new System.Drawing.Size(99, 20);
             this.chckPasif.TabIndex = 1125;
             // 
             // txtUrunAdi
             // 
-            this.txtUrunAdi.Location = new System.Drawing.Point(111, 36);
+            this.txtUrunAdi.Enabled = false;
+            this.txtUrunAdi.Location = new System.Drawing.Point(111, 33);
             this.txtUrunAdi.Name = "txtUrunAdi";
             this.txtUrunAdi.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
             this.txtUrunAdi.Properties.Appearance.Options.UseFont = true;
@@ -176,23 +185,54 @@
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(12, 38);
+            this.label1.Location = new System.Drawing.Point(12, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 21);
             this.label1.TabIndex = 1120;
-            this.label1.Text = "Ürün Adı :";
+            this.label1.Text = "Kumaş Adı :";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label72
             // 
             this.label72.BackColor = System.Drawing.Color.Transparent;
             this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label72.Location = new System.Drawing.Point(12, 8);
+            this.label72.Location = new System.Drawing.Point(12, 9);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(93, 21);
             this.label72.TabIndex = 1120;
-            this.label72.Text = "Ürün Kodu :";
+            this.label72.Text = "Kumaş Kodu :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblCinsi
+            // 
+            this.lblCinsi.BackColor = System.Drawing.Color.Transparent;
+            this.lblCinsi.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblCinsi.Location = new System.Drawing.Point(12, 61);
+            this.lblCinsi.Name = "lblCinsi";
+            this.lblCinsi.Size = new System.Drawing.Size(93, 21);
+            this.lblCinsi.TabIndex = 1120;
+            this.lblCinsi.Text = "Cinsi :";
+            this.lblCinsi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnCinsiId
+            // 
+            this.btnCinsiId.Location = new System.Drawing.Point(111, 60);
+            this.btnCinsiId.Name = "btnCinsiId";
+            this.btnCinsiId.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.btnCinsiId.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit1_Properties_ButtonClick);
+            this.btnCinsiId.Size = new System.Drawing.Size(169, 22);
+            this.btnCinsiId.TabIndex = 1126;
+            // 
+            // lblCinsiAciklama
+            // 
+            this.lblCinsiAciklama.BackColor = System.Drawing.Color.Transparent;
+            this.lblCinsiAciklama.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblCinsiAciklama.Location = new System.Drawing.Point(286, 61);
+            this.lblCinsiAciklama.Name = "lblCinsiAciklama";
+            this.lblCinsiAciklama.Size = new System.Drawing.Size(396, 21);
+            this.lblCinsiAciklama.TabIndex = 1120;
+            this.lblCinsiAciklama.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FrmUrunKarti
             // 
@@ -212,6 +252,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUrunKodu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chckPasif.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUrunAdi.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCinsiId.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -231,5 +272,8 @@
         private DevExpress.XtraEditors.TextEdit txtUrunAdi;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.ButtonEdit txtUrunKodu;
+        private System.Windows.Forms.Label lblCinsi;
+        private DevExpress.XtraEditors.ButtonEdit btnCinsiId;
+        private System.Windows.Forms.Label lblCinsiAciklama;
     }
 }

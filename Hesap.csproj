@@ -549,6 +549,7 @@
       <DependentUpon>FrmKullaniciGirisi.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CostCalculationHelper.cs" />
+    <Compile Include="Helpers\SemiColonHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -557,6 +558,7 @@
     </Compile>
     <Compile Include="Models\ColumnSelector.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\FeatureCoding.cs" />
     <Compile Include="Models\Transporter.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\WareHouse.cs" />
