@@ -309,6 +309,8 @@
             this.lblUrunAdi = new System.Windows.Forms.Label();
             this.lblReceteAd = new System.Windows.Forms.Label();
             this.lblFirmaAdi = new System.Windows.Forms.Label();
+            this.lblFisNo = new System.Windows.Forms.Label();
+            this.label160 = new System.Windows.Forms.Label();
             this.label75 = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
@@ -321,8 +323,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.maliyetFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kayıtNumarasınıGösterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label160 = new System.Windows.Forms.Label();
-            this.lblFisNo = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -3485,7 +3485,7 @@
             // 
             this.lblUrunAdi.BackColor = System.Drawing.Color.Transparent;
             this.lblUrunAdi.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblUrunAdi.Location = new System.Drawing.Point(270, 53);
+            this.lblUrunAdi.Location = new System.Drawing.Point(274, 53);
             this.lblUrunAdi.Name = "lblUrunAdi";
             this.lblUrunAdi.Size = new System.Drawing.Size(503, 22);
             this.lblUrunAdi.TabIndex = 1117;
@@ -3507,6 +3507,28 @@
             this.lblFirmaAdi.Name = "lblFirmaAdi";
             this.lblFirmaAdi.Size = new System.Drawing.Size(527, 22);
             this.lblFirmaAdi.TabIndex = 1117;
+            // 
+            // lblFisNo
+            // 
+            this.lblFisNo.BackColor = System.Drawing.Color.Transparent;
+            this.lblFisNo.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblFisNo.Location = new System.Drawing.Point(109, 101);
+            this.lblFisNo.Name = "lblFisNo";
+            this.lblFisNo.Size = new System.Drawing.Size(159, 21);
+            this.lblFisNo.TabIndex = 1117;
+            this.lblFisNo.Text = "00000001";
+            this.lblFisNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label160
+            // 
+            this.label160.BackColor = System.Drawing.Color.Transparent;
+            this.label160.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label160.Location = new System.Drawing.Point(10, 101);
+            this.label160.Name = "label160";
+            this.label160.Size = new System.Drawing.Size(93, 21);
+            this.label160.TabIndex = 1117;
+            this.label160.Text = "Fiş No :";
+            this.label160.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label75
             // 
@@ -3639,28 +3661,6 @@
             this.kayıtNumarasınıGösterToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.kayıtNumarasınıGösterToolStripMenuItem.Text = "Kayıt Bilgisi";
             this.kayıtNumarasınıGösterToolStripMenuItem.Click += new System.EventHandler(this.kayıtNumarasınıGösterToolStripMenuItem_Click);
-            // 
-            // label160
-            // 
-            this.label160.BackColor = System.Drawing.Color.Transparent;
-            this.label160.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label160.Location = new System.Drawing.Point(10, 101);
-            this.label160.Name = "label160";
-            this.label160.Size = new System.Drawing.Size(93, 21);
-            this.label160.TabIndex = 1117;
-            this.label160.Text = "Fiş No :";
-            this.label160.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblFisNo
-            // 
-            this.lblFisNo.BackColor = System.Drawing.Color.Transparent;
-            this.lblFisNo.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblFisNo.Location = new System.Drawing.Point(109, 101);
-            this.lblFisNo.Name = "lblFisNo";
-            this.lblFisNo.Size = new System.Drawing.Size(159, 21);
-            this.lblFisNo.TabIndex = 1117;
-            this.lblFisNo.Text = "00000001";
-            this.lblFisNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 

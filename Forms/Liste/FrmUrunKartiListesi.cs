@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using DevExpress.XtraGrid.Views.Grid;
+using Hesap.DataAccess;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -18,12 +20,14 @@ namespace Hesap.Forms.Liste
     {
         Listele listele = new Listele();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        CrudRepository crudRepository = new CrudRepository();
         public string UrunKodu, UrunAdi;
         public bool Pasif;
-        public int Id;
-        public FrmUrunKartiListesi()
+        public int Id,InventoryType;
+        public FrmUrunKartiListesi(int inv_type)
         {
             InitializeComponent();
+            this.InventoryType = inv_type;
         }
 
         private void FrmUrunKartiListesi_Load(object sender, EventArgs e)
@@ -32,8 +36,10 @@ namespace Hesap.Forms.Liste
         }
         void Listele()
         {
-            string sql = "SELECT Id,UrunKodu,UrunAdi,Pasif FROM UrunKarti where Pasif = 0";
-            listele.Liste(sql, gridControl1);
+            gridControl1.DataSource = crudRepository.GetAll<Inventory>("Inventory")
+                .Where(inv => inv.IsPrefix == false && inv.Type == InventoryType)
+                .Select(inv => new { inv.InventoryCode, inv.InventoryName, inv.Id })
+                .ToList();
         }
 
         private void excelDosyasıToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,9 +51,8 @@ namespace Hesap.Forms.Liste
         {
 
             GridView gridView = sender as GridView;
-            UrunKodu = gridView.GetFocusedRowCellValue("UrunKodu").ToString();
-            UrunAdi = gridView.GetFocusedRowCellValue("UrunAdi").ToString();
-            Pasif = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Pasif"));
+            UrunKodu = gridView.GetFocusedRowCellValue("InventoryCode").ToString();
+            UrunAdi = gridView.GetFocusedRowCellValue("InventoryName").ToString();
             Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
             this.Close();
         }

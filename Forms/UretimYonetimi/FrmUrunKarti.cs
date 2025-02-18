@@ -28,24 +28,23 @@ namespace Hesap.Forms.UretimYonetimi
         Bildirim bildirim = new Bildirim();
         Ayarlar ayarlar = new Ayarlar();
         CrudRepository crudRepository = new CrudRepository();
-        string TableName = "Inventory";
+        string TableName = "Inventory", KumasAdiOzellik = "";
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            string CombinedCode = btnCinsiId.Text;
-            string Invent = crudRepository.GetByCode("InventoryName", this.TableName, CombinedCode);
-            string InventoryName = Invent + " " + lblCinsiAciklama.Text; // kumaş adı için kontrol et
+            string CombinedCode = txtUrunKodu.Text.Substring(0, 3) + btnCinsiId.Text;
+            string InventoryName = KumasAdiOzellik + " " + lblCinsiAciklama.Text;
             if (crudRepository.IfExistRecord(TableName, "CombinedCode", CombinedCode) > 0)
             {
                 string code = crudRepository.GetByCode("InventoryCode", this.TableName, CombinedCode);
                 bildirim.Uyari($"Seçtiğiniz özelliklere ait bir kayıt bulunmaktadır.\nLütfen {code} numaralı kaydı kontrol ediniz!!");
                 return;
             }
-           
+
             var InvParams = new Dictionary<string, object>
             {
                 { "InventoryCode", txtUrunKodu.Text }, { "InventoryName", InventoryName },
-                {"Type" , InventoryTypes.Kumas}, { "IsUse", chckPasif.Checked }, {"Unit",""},{"CombinedCode",btnCinsiId.Text}
+                {"Type" , InventoryTypes.Kumas}, { "IsUse", chckPasif.Checked }, {"Unit",""},{"CombinedCode",CombinedCode},{"SubType" , KumasAdiOzellik},{"IsPrefix" , false}
             };
             if (this.Id == 0)
             {
@@ -70,20 +69,7 @@ namespace Hesap.Forms.UretimYonetimi
         }
         private void simpleButton5_Click(object sender, EventArgs e)
         {
-            if (bildirim.SilmeOnayı())
-            {
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    string sql = "delete from UrunKarti where Id = @Id";
-                    connection.Execute(sql, new { Id = this.Id });
-                    bildirim.SilmeBasarili();
-                    txtUrunKodu.Text = "";
-                    txtUrunAdi.Text = "";
-                    chckPasif.Checked = false;
-                    this.Id = 0;
-                }
-            }
-
+            crudRepository.ConfirmAndDeleteCard(this.TableName, this.Id, null);
         }
         private void btnGeri_Click(object sender, EventArgs e)
         {
@@ -134,6 +120,7 @@ namespace Hesap.Forms.UretimYonetimi
             FrmUrunTipiSecimi frm = new FrmUrunTipiSecimi();
             frm.ShowDialog();
             txtUrunKodu.Text = frm.OnEk + frm.yeniNumaraStr;
+            KumasAdiOzellik = frm.KumasAdiOzellik;
         }
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {

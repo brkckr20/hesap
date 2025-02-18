@@ -28,23 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.btnListeyeEkle = new DevExpress.XtraEditors.SimpleButton();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -90,6 +96,30 @@
             this.panelControl2.Size = new System.Drawing.Size(365, 49);
             this.panelControl2.TabIndex = 1;
             // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(147, 16);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(19, 13);
+            this.labelControl2.TabIndex = 2;
+            this.labelControl2.Text = "Ad :";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(13, 16);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(25, 13);
+            this.labelControl1.TabIndex = 2;
+            this.labelControl1.Text = "Kod :";
+            // 
+            // textEdit2
+            // 
+            this.textEdit2.Location = new System.Drawing.Point(172, 7);
+            this.textEdit2.Name = "textEdit2";
+            this.textEdit2.Properties.AutoHeight = false;
+            this.textEdit2.Size = new System.Drawing.Size(82, 30);
+            this.textEdit2.TabIndex = 1;
+            // 
             // textEdit1
             // 
             this.textEdit1.Location = new System.Drawing.Point(44, 7);
@@ -107,35 +137,44 @@
             this.btnListeyeEkle.Text = "Listeye Ekle";
             this.btnListeyeEkle.Click += new System.EventHandler(this.btnListeyeEkle_Click);
             // 
-            // textEdit2
+            // contextMenuStrip1
             // 
-            this.textEdit2.Location = new System.Drawing.Point(172, 7);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Properties.AutoHeight = false;
-            this.textEdit2.Size = new System.Drawing.Size(82, 30);
-            this.textEdit2.TabIndex = 1;
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Inter", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dizaynKaydetToolStripMenuItem,
+            this.satırİşlemleriToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 70);
             // 
-            // labelControl1
+            // dizaynKaydetToolStripMenuItem
             // 
-            this.labelControl1.Location = new System.Drawing.Point(13, 16);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(25, 13);
-            this.labelControl1.TabIndex = 2;
-            this.labelControl1.Text = "Kod :";
+            this.dizaynKaydetToolStripMenuItem.Name = "dizaynKaydetToolStripMenuItem";
+            this.dizaynKaydetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.dizaynKaydetToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.dizaynKaydetToolStripMenuItem.Text = "Dizayn Kaydet";
+            this.dizaynKaydetToolStripMenuItem.Click += new System.EventHandler(this.dizaynKaydetToolStripMenuItem_Click);
             // 
-            // labelControl2
+            // satırİşlemleriToolStripMenuItem
             // 
-            this.labelControl2.Location = new System.Drawing.Point(147, 16);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(19, 13);
-            this.labelControl2.TabIndex = 2;
-            this.labelControl2.Text = "Ad :";
+            this.satırİşlemleriToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sütunSeçimiToolStripMenuItem});
+            this.satırİşlemleriToolStripMenuItem.Name = "satırİşlemleriToolStripMenuItem";
+            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.satırİşlemleriToolStripMenuItem.Text = "Satır İşlemleri";
+            // 
+            // sütunSeçimiToolStripMenuItem
+            // 
+            this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
+            this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
             // FrmUrunTipiSecimi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(365, 314);
+            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
             this.IconOptions.Image = global::Hesap.Properties.Resources.Bookmark;
@@ -150,8 +189,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -167,5 +207,9 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit textEdit2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
     }
 }

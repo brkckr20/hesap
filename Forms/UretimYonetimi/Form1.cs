@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
 using Hesap.DataAccess;
+using Hesap.Forms.Liste;
 using Hesap.Helpers;
 using Hesap.Utils;
 using System;
@@ -18,7 +19,7 @@ namespace Hesap
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         Ayarlar ayarlar = new Ayarlar();
         CrudRepository crudRepository = new CrudRepository();
-        int Id = 0, CompanyId = 0, InventoryId = 0,RecipeId=0;
+        int Id = 0, CompanyId = 0, InventoryId = 0,RecipeId=0,InventoryType = Convert.ToInt32(InventoryTypes.Kumas);
         string TableName1 = "Cost";
         public Form1()
         {
@@ -646,7 +647,11 @@ namespace Hesap
 
         private void txtUrun_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-
+            FrmUrunKartiListesi frm = new FrmUrunKartiListesi(InventoryType);
+            frm.ShowDialog();
+            InventoryId = frm.Id;
+            txtUrun.Text = frm.UrunKodu;
+            lblUrunAdi.Text = frm.UrunAdi;
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)

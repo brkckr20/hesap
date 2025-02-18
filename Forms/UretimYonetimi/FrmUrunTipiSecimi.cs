@@ -11,11 +11,12 @@ namespace Hesap.Forms.UretimYonetimi
         Listele listele = new Listele();
         Bildirim bildirim = new Bildirim();
         CrudRepository crudRepository = new CrudRepository();
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
         public FrmUrunTipiSecimi()
         {
             InitializeComponent();
         }
-        public string OnEk, yeniNumaraStr;
+        public string OnEk, yeniNumaraStr,KumasAdiOzellik;
         private void FrmUrunTipiSecimi_Load(object sender, EventArgs e)
         {
             Listele();
@@ -28,7 +29,18 @@ namespace Hesap.Forms.UretimYonetimi
             string strNum = gridView.GetFocusedRowCellValue("YeniNumara").ToString();
             int num = Convert.ToInt32(strNum);
             yeniNumaraStr = num.ToString("D3");
+            KumasAdiOzellik = gridView.GetFocusedRowCellValue("KumasAdiOzellik").ToString();
             this.Close();
+        }
+
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            crudRepository.SaveColumnStatus(gridView1,this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
         }
 
         private void btnListeyeEkle_Click(object sender, EventArgs e)
@@ -36,8 +48,8 @@ namespace Hesap.Forms.UretimYonetimi
             var TypeParams = new Dictionary<string, object>
             {
                 {"InventoryCode", textEdit1.Text.ToUpper() + "000"}, 
-                {"SubType",textEdit1.Text.ToUpper() + "000"}, 
-                {"InventoryName",textEdit2.Text}, 
+                {"SubType",textEdit2.Text}, 
+                {"InventoryName",""},
                 {"Unit",""},
                 {"IsPrefix",true},
                 {"Type" , InventoryTypes.Kumas}
@@ -61,6 +73,7 @@ namespace Hesap.Forms.UretimYonetimi
                         SELECT 
                             LEFT(InventoryCode, 3) AS Ek,
                             RIGHT(InventoryCode, 3) AS Numara,
+							ISNULL(SubType,'') [KumasAdiOzellik],
                             ROW_NUMBER() OVER (PARTITION BY LEFT(InventoryCode, 3) ORDER BY Id DESC) AS rn
                         FROM 
                             Inventory
@@ -68,13 +81,15 @@ namespace Hesap.Forms.UretimYonetimi
                     )
                     SELECT 
                         Ek,
-                        RIGHT('000' + CAST(CAST(Numara AS INT) + 1 AS VARCHAR(3)), 3) AS YeniNumara
+                        RIGHT('000' + CAST(CAST(Numara AS INT) + 1 AS VARCHAR(3)), 3) AS YeniNumara,
+						KumasAdiOzellik
 
                     FROM 
                         CTE
                     WHERE 
                         rn = 1;";
             listele.Liste(sql, gridControl1);
+            crudRepository.GetUserColumns(gridView1,this.Text);
         }
     }
 }
