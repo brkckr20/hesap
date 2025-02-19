@@ -560,6 +560,7 @@
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\FeatureCoding.cs" />
     <Compile Include="Models\Inventory.cs" />
+    <Compile Include="Models\InventoryReceipt.cs" />
     <Compile Include="Models\Transporter.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\WareHouse.cs" />

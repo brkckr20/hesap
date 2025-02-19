@@ -69,6 +69,9 @@
             this.Doviz = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoDoviz = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.DovizFiyat = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.txtMamulGrM2 = new DevExpress.XtraEditors.TextEdit();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtReceteAciklama = new DevExpress.XtraEditors.TextEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -91,6 +94,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoIplikKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoDoviz)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMamulGrM2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReceteAciklama.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -174,27 +179,30 @@
             this.panelControl1.Controls.Add(this.chckIpligiBoyali);
             this.panelControl1.Controls.Add(this.txtMamulBoy);
             this.panelControl1.Controls.Add(this.txtHamBoy);
+            this.panelControl1.Controls.Add(this.txtMamulGrM2);
             this.panelControl1.Controls.Add(this.txtGrm2);
             this.panelControl1.Controls.Add(this.txtMamulEn);
             this.panelControl1.Controls.Add(this.label5);
             this.panelControl1.Controls.Add(this.label4);
             this.panelControl1.Controls.Add(this.txtHamEn);
             this.panelControl1.Controls.Add(this.label3);
+            this.panelControl1.Controls.Add(this.txtReceteAciklama);
             this.panelControl1.Controls.Add(this.txtReceteNo);
             this.panelControl1.Controls.Add(this.label2);
             this.panelControl1.Controls.Add(this.txtUrun);
+            this.panelControl1.Controls.Add(this.label6);
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Controls.Add(this.lblUrunAdi);
             this.panelControl1.Controls.Add(this.label73);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 53);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1316, 164);
+            this.panelControl1.Size = new System.Drawing.Size(1316, 189);
             this.panelControl1.TabIndex = 5;
             // 
             // chckIpligiBoyali
             // 
-            this.chckIpligiBoyali.Location = new System.Drawing.Point(122, 126);
+            this.chckIpligiBoyali.Location = new System.Drawing.Point(151, 126);
             this.chckIpligiBoyali.Name = "chckIpligiBoyali";
             this.chckIpligiBoyali.Properties.Caption = "";
             this.chckIpligiBoyali.Size = new System.Drawing.Size(75, 20);
@@ -202,28 +210,28 @@
             // 
             // txtMamulBoy
             // 
-            this.txtMamulBoy.Location = new System.Drawing.Point(201, 78);
+            this.txtMamulBoy.Location = new System.Drawing.Point(230, 78);
             this.txtMamulBoy.Name = "txtMamulBoy";
             this.txtMamulBoy.Size = new System.Drawing.Size(77, 22);
             this.txtMamulBoy.TabIndex = 6;
             // 
             // txtHamBoy
             // 
-            this.txtHamBoy.Location = new System.Drawing.Point(201, 54);
+            this.txtHamBoy.Location = new System.Drawing.Point(230, 54);
             this.txtHamBoy.Name = "txtHamBoy";
             this.txtHamBoy.Size = new System.Drawing.Size(77, 22);
             this.txtHamBoy.TabIndex = 4;
             // 
             // txtGrm2
             // 
-            this.txtGrm2.Location = new System.Drawing.Point(121, 102);
+            this.txtGrm2.Location = new System.Drawing.Point(150, 102);
             this.txtGrm2.Name = "txtGrm2";
-            this.txtGrm2.Size = new System.Drawing.Size(157, 22);
+            this.txtGrm2.Size = new System.Drawing.Size(77, 22);
             this.txtGrm2.TabIndex = 7;
             // 
             // txtMamulEn
             // 
-            this.txtMamulEn.Location = new System.Drawing.Point(121, 78);
+            this.txtMamulEn.Location = new System.Drawing.Point(150, 78);
             this.txtMamulEn.Name = "txtMamulEn";
             this.txtMamulEn.Size = new System.Drawing.Size(77, 22);
             this.txtMamulEn.TabIndex = 5;
@@ -232,7 +240,7 @@
             // 
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(5, 126);
+            this.label5.Location = new System.Drawing.Point(34, 126);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 21);
             this.label5.TabIndex = 1120;
@@ -245,14 +253,14 @@
             this.label4.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label4.Location = new System.Drawing.Point(5, 103);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 21);
+            this.label4.Size = new System.Drawing.Size(139, 21);
             this.label4.TabIndex = 1120;
-            this.label4.Text = "Gr/M2 :";
+            this.label4.Text = "Ham / Mamül Gr/M2 :";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtHamEn
             // 
-            this.txtHamEn.Location = new System.Drawing.Point(121, 54);
+            this.txtHamEn.Location = new System.Drawing.Point(150, 54);
             this.txtHamEn.Name = "txtHamEn";
             this.txtHamEn.Size = new System.Drawing.Size(77, 22);
             this.txtHamEn.TabIndex = 3;
@@ -261,7 +269,7 @@
             // 
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(5, 79);
+            this.label3.Location = new System.Drawing.Point(34, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 21);
             this.label3.TabIndex = 1120;
@@ -270,7 +278,7 @@
             // 
             // txtReceteNo
             // 
-            this.txtReceteNo.Location = new System.Drawing.Point(121, 6);
+            this.txtReceteNo.Location = new System.Drawing.Point(150, 6);
             this.txtReceteNo.Name = "txtReceteNo";
             this.txtReceteNo.Size = new System.Drawing.Size(157, 22);
             this.txtReceteNo.TabIndex = 1;
@@ -279,7 +287,7 @@
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(5, 55);
+            this.label2.Location = new System.Drawing.Point(34, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 21);
             this.label2.TabIndex = 1120;
@@ -288,7 +296,7 @@
             // 
             // txtUrun
             // 
-            this.txtUrun.Location = new System.Drawing.Point(121, 30);
+            this.txtUrun.Location = new System.Drawing.Point(150, 30);
             this.txtUrun.Name = "txtUrun";
             this.txtUrun.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -300,7 +308,7 @@
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(5, 6);
+            this.label1.Location = new System.Drawing.Point(34, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 21);
             this.label1.TabIndex = 1120;
@@ -311,7 +319,7 @@
             // 
             this.lblUrunAdi.BackColor = System.Drawing.Color.Transparent;
             this.lblUrunAdi.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblUrunAdi.Location = new System.Drawing.Point(280, 34);
+            this.lblUrunAdi.Location = new System.Drawing.Point(309, 30);
             this.lblUrunAdi.Name = "lblUrunAdi";
             this.lblUrunAdi.Size = new System.Drawing.Size(503, 22);
             this.lblUrunAdi.TabIndex = 1119;
@@ -320,7 +328,7 @@
             // 
             this.label73.BackColor = System.Drawing.Color.Transparent;
             this.label73.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label73.Location = new System.Drawing.Point(5, 31);
+            this.label73.Location = new System.Drawing.Point(34, 31);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(110, 21);
             this.label73.TabIndex = 1120;
@@ -332,7 +340,7 @@
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl2.Controls.Add(this.xtraTabControl1);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl2.Location = new System.Drawing.Point(0, 217);
+            this.panelControl2.Location = new System.Drawing.Point(0, 242);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(1316, 403);
             this.panelControl2.TabIndex = 6;
@@ -518,6 +526,31 @@
             this.DovizFiyat.VisibleIndex = 7;
             this.DovizFiyat.Width = 71;
             // 
+            // txtMamulGrM2
+            // 
+            this.txtMamulGrM2.Location = new System.Drawing.Point(230, 102);
+            this.txtMamulGrM2.Name = "txtMamulGrM2";
+            this.txtMamulGrM2.Size = new System.Drawing.Size(77, 22);
+            this.txtMamulGrM2.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.Location = new System.Drawing.Point(34, 148);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(110, 21);
+            this.label6.TabIndex = 1120;
+            this.label6.Text = "Açıklama :";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtReceteAciklama
+            // 
+            this.txtReceteAciklama.Location = new System.Drawing.Point(150, 147);
+            this.txtReceteAciklama.Name = "txtReceteAciklama";
+            this.txtReceteAciklama.Size = new System.Drawing.Size(552, 22);
+            this.txtReceteAciklama.TabIndex = 1;
+            // 
             // FrmUrunReceteKarti
             // 
             this.Appearance.Options.UseFont = true;
@@ -553,6 +586,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoIplikKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBirim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoDoviz)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMamulGrM2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReceteAciklama.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -599,5 +634,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoIplikKodu;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoBirim;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoDoviz;
+        private DevExpress.XtraEditors.TextEdit txtMamulGrM2;
+        private DevExpress.XtraEditors.TextEdit txtReceteAciklama;
+        private System.Windows.Forms.Label label6;
     }
 }

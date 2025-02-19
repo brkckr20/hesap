@@ -447,11 +447,11 @@ namespace Hesap.Utils
             }
 
         }
-        public void KumasBilgileriYansit(DevExpress.XtraGrid.Views.Grid.GridView gridView, int focusedRowHandle = 0)
+        public void KumasBilgileriYansit(GridView gridView, int focusedRowHandle = 0)
         {
             int rowHandle = gridView.FocusedRowHandle;
             focusedRowHandle = rowHandle;
-            Forms.Liste.FrmUrunKartiListesi frm = new Forms.Liste.FrmUrunKartiListesi();
+            Forms.Liste.FrmUrunKartiListesi frm = new Forms.Liste.FrmUrunKartiListesi(Convert.ToInt32(InventoryTypes.Kumas));
             frm.ShowDialog();
 
             if (frm.Id != 0)

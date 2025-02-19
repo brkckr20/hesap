@@ -1,5 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using Hesap.DataAccess;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,16 +17,16 @@ namespace Hesap.Forms.Liste
 {
     public partial class FrmUrunReceteKartiListesi : DevExpress.XtraEditors.XtraForm
     {
-        Listele listele = new Listele();
-        public int Id;
-        public float Gr_M2, HamEn, HamBoy, MamulEn, MamulBoy;
+        public int Id,InventoryId;
+        public float HamGr_M2, HamEn, HamBoy, MamulEn, MamulBoy,MamulGr_M2;
         public bool IpligiBoyali;
         public string ReceteNo;
-        private string _UrunKodu;
-        public FrmUrunReceteKartiListesi(string UrunKodu)
+        private string TableName = "InventoryReceipt";
+        CrudRepository crudRepository = new CrudRepository();
+        public FrmUrunReceteKartiListesi(int _InventoryId)
         {
             InitializeComponent();
-            this._UrunKodu = UrunKodu;
+            this.InventoryId = _InventoryId;
         }
         private void FrmUrunReceteKartiListesi_Load(object sender, EventArgs e)
         {
@@ -32,18 +34,18 @@ namespace Hesap.Forms.Liste
         }
         void Listele()
         {
-            string sql = $"select * from UrunRecete where UrunKodu = @UrunKodu";
-            listele.ListeWithParams(sql, gridControl1,_UrunKodu);
+            gridControl1.DataSource = crudRepository.GetAll<InventoryReceipt>(this.TableName).Where(rec => rec.InventoryId == this.InventoryId);
         }
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
             GridView gridView = sender as GridView;
-            ReceteNo = gridView.GetFocusedRowCellValue("ReceteNo").ToString();
-            Gr_M2 = Convert.ToSingle(gridView.GetFocusedRowCellValue("Gr_M2"));
-            HamEn = Convert.ToSingle(gridView.GetFocusedRowCellValue("HamEn"));
-            HamBoy = Convert.ToSingle(gridView.GetFocusedRowCellValue("HamBoy"));
-            MamulEn = Convert.ToSingle(gridView.GetFocusedRowCellValue("MamulEn"));
-            MamulBoy = Convert.ToSingle(gridView.GetFocusedRowCellValue("MamulBoy"));
+            ReceteNo = gridView.GetFocusedRowCellValue("ReceiptNo").ToString();
+            HamGr_M2 = Convert.ToSingle(gridView.GetFocusedRowCellValue("RawGrammage"));
+            MamulGr_M2 = Convert.ToSingle(gridView.GetFocusedRowCellValue("ProductGrammage"));
+            HamEn = Convert.ToSingle(gridView.GetFocusedRowCellValue("RawWidth"));
+            HamBoy = Convert.ToSingle(gridView.GetFocusedRowCellValue("RawHeight"));
+            MamulEn = Convert.ToSingle(gridView.GetFocusedRowCellValue("ProductWidth"));
+            MamulBoy = Convert.ToSingle(gridView.GetFocusedRowCellValue("ProductHeight"));
             Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
             this.Close();
         }

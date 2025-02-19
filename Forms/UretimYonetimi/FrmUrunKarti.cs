@@ -24,7 +24,7 @@ namespace Hesap.Forms.UretimYonetimi
             InitializeComponent();
         }
 
-        int Id = 0;
+        int Id = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas);
         Bildirim bildirim = new Bildirim();
         Ayarlar ayarlar = new Ayarlar();
         CrudRepository crudRepository = new CrudRepository();
@@ -60,7 +60,7 @@ namespace Hesap.Forms.UretimYonetimi
         }
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            Liste.FrmUrunKartiListesi frm = new Liste.FrmUrunKartiListesi();
+            Liste.FrmUrunKartiListesi frm = new Liste.FrmUrunKartiListesi(InventoryType);
             frm.ShowDialog();
             txtUrunKodu.Text = frm.UrunKodu;
             txtUrunAdi.Text = frm.UrunAdi;

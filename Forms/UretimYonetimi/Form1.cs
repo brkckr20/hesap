@@ -19,8 +19,9 @@ namespace Hesap
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         Ayarlar ayarlar = new Ayarlar();
         CrudRepository crudRepository = new CrudRepository();
-        int Id = 0, CompanyId = 0, InventoryId = 0,RecipeId=0,InventoryType = Convert.ToInt32(InventoryTypes.Kumas);
-        string TableName1 = "Cost";
+        Numarator numarator = new Numarator();
+        int Id = 0, CompanyId = 0, InventoryId = 0, RecipeId = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas);
+        string TableName1 = "Cost", TableName2 = "CostProductionInformation";
         public Form1()
         {
             InitializeComponent();
@@ -180,8 +181,8 @@ namespace Hesap
             // DolarKuruGetir("USD_ALIS");
             AttachEnterKeyHandler(this);
             dateTimePicker1.EditValue = DateTime.Now;
+            lblFisNo.Text = numarator.NumaraVer("Maliyet");
         }
-
         private void materialLabel6_Click(object sender, EventArgs e)
         {
 
@@ -213,11 +214,16 @@ namespace Hesap
                 {"Date", dateTimePicker1.EditValue},
                 {"InventoryId", InventoryId},
                 {"RecipeId", RecipeId},
-                {"OrderNo", "00000001"},
+                {"OrderNo", lblFisNo.Text},
+            };
+            var CPI_params = new Dictionary<string, object> // Üretim Bilgileri - İplik Bilgileri - 19.2.2025 - diğer alanların eklenmesi gerekmektedir.
+            {
+                {"CostId", this.Id},{"YI_Warp1", txtCozgu1.Text},{"YI_Warp1Divider", txtCozgu1Bolen.Text},{"YI_Warp1Result", lblCozgu1Uretim.Text},{"YI_Warp2", txtCozgu2.Text},{"YI_Warp2Divider", txtCozgu2Bolen.Text},    {"YI_Warp2Result", lblCozgu2Uretim.Text},{"YI_Scarf1", txtAtki1.Text},{"YI_Scarf1Divider", txtAtki1Bolen.Text},{"YI_Scarf1Result", lblAtki1Uretim.Text},{"YI_Scarf2", txtAtki2.Text},{"YI_Scarf2Divider", txtAtki2Bolen.Text},{"YI_Scarf2Result", lblAtki2Uretim.Text},{"YI_Scarf3", txtAtki3.Text},{"YI_Scarf3Divider", txtAtki3Bolen.Text},{"YI_Scarf3Result", lblAtki3Uretim.Text},{"YI_Scarf4", txtAtki4.Text},    {"YI_Scarf4Divider", txtAtki4Bolen.Text},{"YI_Scarf4Result", lblAtki4Uretim.Text}
             };
             if (this.Id == 0)
             {
                 Id = crudRepository.Insert(this.TableName1, costParams);
+                crudRepository.Insert(this.TableName2, CPI_params);
                 bildirim.Basarili();
             }
             else
@@ -225,6 +231,7 @@ namespace Hesap
                 crudRepository.Update(this.TableName1, this.Id, costParams);
                 bildirim.GuncellemeBasarili();
             }
+
             #region eskisi
             //if (this.Id == 0)
             //{
@@ -548,7 +555,7 @@ namespace Hesap
         }
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            Forms.Liste.FrmFirmaKartiListesi frm = new Forms.Liste.FrmFirmaKartiListesi();
+            FrmFirmaKartiListesi frm = new FrmFirmaKartiListesi();
             frm.ShowDialog();
             txtFirmaKodu.Text = frm.FirmaKodu;
             lblFirmaAdi.Text = frm.FirmaUnvan;
@@ -572,12 +579,13 @@ namespace Hesap
         }
         private void txtReceteNo_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            Forms.Liste.FrmUrunReceteKartiListesi frm = new Forms.Liste.FrmUrunReceteKartiListesi(txtUrun.Text);
+            FrmUrunReceteKartiListesi frm = new FrmUrunReceteKartiListesi(InventoryId);
             frm.ShowDialog();
             if (frm.ReceteNo != null)
             {
                 txtReceteNo.Text = frm.ReceteNo;
-                lblReceteAd.Text = $"Ham En: {frm.HamEn}, Ham Boy: {frm.HamBoy}, Gr/M2: {frm.Gr_M2}";
+                lblReceteAd.Text = $"Ham En: {frm.HamEn}, Ham Boy: {frm.HamBoy}, Ham Gr/M2: {frm.HamGr_M2}";
+                RecipeId = frm.Id;
                 if (frm.MamulEn != 0 && frm.MamulBoy != 0)
                 {
                     lblReceteAd.Text += $" Mamül En: {frm.MamulEn}, Mamül Boy: {frm.MamulBoy}";
@@ -644,7 +652,6 @@ namespace Hesap
             };
             yardimciAraclar.Y1(objects1);
         }
-
         private void txtUrun_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             FrmUrunKartiListesi frm = new FrmUrunKartiListesi(InventoryType);
@@ -653,7 +660,6 @@ namespace Hesap
             txtUrun.Text = frm.UrunKodu;
             lblUrunAdi.Text = frm.UrunAdi;
         }
-
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             FormVerileriniTemizle();

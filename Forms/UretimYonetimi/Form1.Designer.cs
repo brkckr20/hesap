@@ -3444,6 +3444,8 @@
             this.dateTimePicker1.EditValue = null;
             this.dateTimePicker1.Location = new System.Drawing.Point(111, 7);
             this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Properties.Appearance.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dateTimePicker1.Properties.Appearance.Options.UseFont = true;
             this.dateTimePicker1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateTimePicker1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -3455,6 +3457,8 @@
             // 
             this.txtReceteNo.Location = new System.Drawing.Point(111, 76);
             this.txtReceteNo.Name = "txtReceteNo";
+            this.txtReceteNo.Properties.Appearance.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtReceteNo.Properties.Appearance.Options.UseFont = true;
             this.txtReceteNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.txtReceteNo.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtReceteNo_Properties_ButtonClick);
@@ -3465,6 +3469,8 @@
             // 
             this.txtUrun.Location = new System.Drawing.Point(111, 53);
             this.txtUrun.Name = "txtUrun";
+            this.txtUrun.Properties.Appearance.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtUrun.Properties.Appearance.Options.UseFont = true;
             this.txtUrun.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.txtUrun.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtUrun_Properties_ButtonClick);
@@ -3475,6 +3481,8 @@
             // 
             this.txtFirmaKodu.Location = new System.Drawing.Point(111, 30);
             this.txtFirmaKodu.Name = "txtFirmaKodu";
+            this.txtFirmaKodu.Properties.Appearance.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtFirmaKodu.Properties.Appearance.Options.UseFont = true;
             this.txtFirmaKodu.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.txtFirmaKodu.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEdit1_Properties_ButtonClick);
@@ -3484,7 +3492,7 @@
             // lblUrunAdi
             // 
             this.lblUrunAdi.BackColor = System.Drawing.Color.Transparent;
-            this.lblUrunAdi.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblUrunAdi.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblUrunAdi.Location = new System.Drawing.Point(274, 53);
             this.lblUrunAdi.Name = "lblUrunAdi";
             this.lblUrunAdi.Size = new System.Drawing.Size(503, 22);
@@ -3493,7 +3501,7 @@
             // lblReceteAd
             // 
             this.lblReceteAd.BackColor = System.Drawing.Color.Transparent;
-            this.lblReceteAd.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblReceteAd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblReceteAd.Location = new System.Drawing.Point(274, 76);
             this.lblReceteAd.Name = "lblReceteAd";
             this.lblReceteAd.Size = new System.Drawing.Size(527, 22);
@@ -3502,7 +3510,7 @@
             // lblFirmaAdi
             // 
             this.lblFirmaAdi.BackColor = System.Drawing.Color.Transparent;
-            this.lblFirmaAdi.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblFirmaAdi.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblFirmaAdi.Location = new System.Drawing.Point(274, 30);
             this.lblFirmaAdi.Name = "lblFirmaAdi";
             this.lblFirmaAdi.Size = new System.Drawing.Size(527, 22);
@@ -3511,7 +3519,7 @@
             // lblFisNo
             // 
             this.lblFisNo.BackColor = System.Drawing.Color.Transparent;
-            this.lblFisNo.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblFisNo.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblFisNo.Location = new System.Drawing.Point(109, 101);
             this.lblFisNo.Name = "lblFisNo";
             this.lblFisNo.Size = new System.Drawing.Size(159, 21);
@@ -3522,7 +3530,7 @@
             // label160
             // 
             this.label160.BackColor = System.Drawing.Color.Transparent;
-            this.label160.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label160.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label160.Location = new System.Drawing.Point(10, 101);
             this.label160.Name = "label160";
             this.label160.Size = new System.Drawing.Size(93, 21);
@@ -3533,7 +3541,7 @@
             // label75
             // 
             this.label75.BackColor = System.Drawing.Color.Transparent;
-            this.label75.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label75.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label75.Location = new System.Drawing.Point(10, 77);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(93, 21);
@@ -3544,7 +3552,7 @@
             // label74
             // 
             this.label74.BackColor = System.Drawing.Color.Transparent;
-            this.label74.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label74.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label74.Location = new System.Drawing.Point(13, 8);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(93, 21);
@@ -3555,7 +3563,7 @@
             // label73
             // 
             this.label73.BackColor = System.Drawing.Color.Transparent;
-            this.label73.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label73.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label73.Location = new System.Drawing.Point(11, 54);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(93, 21);
@@ -3566,7 +3574,7 @@
             // label72
             // 
             this.label72.BackColor = System.Drawing.Color.Transparent;
-            this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label72.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label72.Location = new System.Drawing.Point(12, 31);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(93, 21);

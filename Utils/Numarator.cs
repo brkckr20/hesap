@@ -91,12 +91,12 @@ namespace Hesap.Utils
                     }
                 }
             }
-            else if (fisMiSipMi == "UrunRecete")
+            else if (fisMiSipMi == "UrunRecete") // düzenlenme tarihi : 19.02.2025
             {
                 string sorgum;
                 using (var connection = new Baglanti().GetConnection())
                 {
-                    string mssql = "select top 1 ReceteNo from UrunRecete order by ReceteNo desc";
+                    string mssql = "select top 1 ReceiptNo from InventoryReceipt order by ReceiptNo desc"; // değiştirilen satır
                     string sqlite = "select ReceteNo from UrunRecete order by ReceteNo desc limit 1";
                     sorgum = ayarlar.DbTuruneGoreSorgu(mssql, sqlite);
 
@@ -137,6 +137,26 @@ namespace Hesap.Utils
                 using (var connection = new Baglanti().GetConnection())
                 {
                     string sql = "SELECT top 1 TalimatNo FROM HamDepo1 ORDER BY TalimatNo desc";
+                    string sqlite = "SELECT TalimatNo FROM HamDepo1 ORDER BY TalimatNo desc LIMIT 1";
+                    sorgum = ayarlar.DbTuruneGoreSorgu(sql, sqlite);
+                    var fisNo = connection.QuerySingleOrDefault<string>(sorgum);
+                    if (fisNo != null)
+                    {
+                        return string.Format("{0:D8}", Convert.ToInt32(fisNo) + 1);
+                    }
+                    else
+                    {
+                        return "00000001";
+                    }
+
+                }
+            }
+            else if (fisMiSipMi == "Maliyet")
+            {
+                string sorgum;
+                using (var connection = new Baglanti().GetConnection())
+                {
+                    string sql = "SELECT top 1 OrderNo FROM Cost ORDER BY OrderNo desc"; // 19.02.2025 tarihinde table adı değştirildi
                     string sqlite = "SELECT TalimatNo FROM HamDepo1 ORDER BY TalimatNo desc LIMIT 1";
                     sorgum = ayarlar.DbTuruneGoreSorgu(sql, sqlite);
                     var fisNo = connection.QuerySingleOrDefault<string>(sorgum);

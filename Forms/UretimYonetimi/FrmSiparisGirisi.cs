@@ -25,7 +25,7 @@ namespace Hesap.Forms.UretimYonetimi
         {
             InitializeComponent();
         }
-        int Id = 0;
+        int Id = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas);
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             Liste.FrmFirmaKartiListesi frm = new Liste.FrmFirmaKartiListesi();
@@ -200,7 +200,7 @@ namespace Hesap.Forms.UretimYonetimi
         }
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            Liste.FrmUrunKartiListesi frm = new Liste.FrmUrunKartiListesi();
+            Liste.FrmUrunKartiListesi frm = new Liste.FrmUrunKartiListesi(InventoryType);
             frm.ShowDialog();
             if (!string.IsNullOrEmpty(frm.UrunKodu) && !string.IsNullOrEmpty(frm.UrunAdi))
             {
@@ -339,14 +339,14 @@ namespace Hesap.Forms.UretimYonetimi
 
         private void repoBtnReceteNo_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            int newRowHandle = gridView1.FocusedRowHandle;
-            string kod = gridView1.GetFocusedRowCellValue("UrunKodu").ToString();
-            Liste.FrmUrunReceteKartiListesi frm = new Liste.FrmUrunReceteKartiListesi(kod);
-            frm.ShowDialog();
-            if (frm.ReceteNo != null)
-            {
-                gridView1.SetRowCellValue(newRowHandle, "MalzemeKodu", frm.ReceteNo);
-            }
+            //int newRowHandle = gridView1.FocusedRowHandle;
+            //string kod = gridView1.GetFocusedRowCellValue("UrunKodu").ToString();
+            //Liste.FrmUrunReceteKartiListesi frm = new Liste.FrmUrunReceteKartiListesi(kod);
+            //frm.ShowDialog();
+            //if (frm.ReceteNo != null)
+            //{
+            //    gridView1.SetRowCellValue(newRowHandle, "MalzemeKodu", frm.ReceteNo);
+            //}
         }
     }
 }
