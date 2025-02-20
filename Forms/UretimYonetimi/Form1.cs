@@ -21,7 +21,7 @@ namespace Hesap
         CrudRepository crudRepository = new CrudRepository();
         Numarator numarator = new Numarator();
         int Id = 0, CompanyId = 0, InventoryId = 0, RecipeId = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas);
-        string TableName1 = "Cost", TableName2 = "CostProductionInformation";
+        string TableName1 = "Cost", TableName2 = "CostProductionInformation",TableName3 = "CostProductionCalculate";
         public Form1()
         {
             InitializeComponent();
@@ -216,14 +216,19 @@ namespace Hesap
                 {"RecipeId", RecipeId},
                 {"OrderNo", lblFisNo.Text},
             };
-            var CPI_params = new Dictionary<string, object> // Üretim Bilgileri - İplik Bilgileri - 19.2.2025 - diğer alanların eklenmesi gerekmektedir.
-            {
-                {"CostId", this.Id},{"YI_Warp1", txtCozgu1.Text},{"YI_Warp1Divider", txtCozgu1Bolen.Text},{"YI_Warp1Result", lblCozgu1Uretim.Text},{"YI_Warp2", txtCozgu2.Text},{"YI_Warp2Divider", txtCozgu2Bolen.Text},    {"YI_Warp2Result", lblCozgu2Uretim.Text},{"YI_Scarf1", txtAtki1.Text},{"YI_Scarf1Divider", txtAtki1Bolen.Text},{"YI_Scarf1Result", lblAtki1Uretim.Text},{"YI_Scarf2", txtAtki2.Text},{"YI_Scarf2Divider", txtAtki2Bolen.Text},{"YI_Scarf2Result", lblAtki2Uretim.Text},{"YI_Scarf3", txtAtki3.Text},{"YI_Scarf3Divider", txtAtki3Bolen.Text},{"YI_Scarf3Result", lblAtki3Uretim.Text},{"YI_Scarf4", txtAtki4.Text},    {"YI_Scarf4Divider", txtAtki4Bolen.Text},{"YI_Scarf4Result", lblAtki4Uretim.Text}
-            };
             if (this.Id == 0)
             {
                 Id = crudRepository.Insert(this.TableName1, costParams);
+                var CPI_params = new Dictionary<string, object> // Üretim Bilgileri - İplik Bilgileri - 20.2.2025 - diğer alanların eklenmesi gerekmektedir.
+                {
+                    {"CostId", this.Id},{"YI_Warp1", txtCozgu1.Text},{"YI_Warp1Divider", txtCozgu1Bolen.Text},{"YI_Warp1Result", lblCozgu1Uretim.Text},{"YI_Warp2", txtCozgu2.Text},{"YI_Warp2Divider", txtCozgu2Bolen.Text},{"YI_Warp2Result", lblCozgu2Uretim.Text},{"YI_Scarf1", txtAtki1.Text},{"YI_Scarf1Divider", txtAtki1Bolen.Text},{"YI_Scarf1Result", lblAtki1Uretim.Text},{"YI_Scarf2", txtAtki2.Text},{"YI_Scarf2Divider", txtAtki2Bolen.Text},{"YI_Scarf2Result", lblAtki2Uretim.Text},{"YI_Scarf3", txtAtki3.Text},{"YI_Scarf3Divider", txtAtki3Bolen.Text},{"YI_Scarf3Result", lblAtki3Uretim.Text},{"YI_Scarf4", txtAtki4.Text},{"YI_Scarf4Divider", txtAtki4Bolen.Text},{"YI_Scarf4Result", lblAtki4Uretim.Text},{"WI_CombNo1",txtTarakNo1.Text},{"WI_CombNo1Multiplier",txtTarakNo1Bolen.Text},{"WI_CombNo1Result",lblTarakNo1Uretim.Text},{"WI_CombNo2",txtTarakNo2.Text},{"WI_CombNo2Multiplier",txtTarakNo2Bolen.Text},{"WI_CombNo2Result",lblTarakNo2Uretim.Text},{"WI_CombWidth",txtTarakEn.Text},{"WI_RawHeight",txtHamBoy.Text},{"WI_HeightEaves",VirgulKaldir(txtBoySacak)},{"WI_WidthEaves",VirgulKaldir(txtEnSacak)},{"WI_RawWidth",txtHamEn.Text},{"WI_ProductHeight",txtMamulBoy.Text},{"WI_ProductWidth",txtMamulEn.Text},{"D_Warp1",txtCozgu1Siklik.Text},{"D_Warp2",txtCozgu2Siklik.Text},{"D_Scarf1",txtAtki1Siklik.Text},{"D_Scarf2",txtAtki2Siklik.Text},{"D_Scarf3",txtAtki3Siklik.Text},{"D_Scarf4",txtAtki4Siklik.Text},{"NW_Warp1",txtCozgu1TelSayisi.Text},{"NW_Warp2",txtCozgu2TelSayisi.Text},{"NW_Scarf1",txtAtki1TelSayisi.Text},{"NW_Scarf2",txtAtki2TelSayisi.Text},{"NW_Scarf3",txtAtki3TelSayisi.Text},{"NW_Scarf4",txtAtki4TelSayisi.Text}
+                };
                 crudRepository.Insert(this.TableName2, CPI_params);
+                var CPC_params = new Dictionary<string, object>
+                {
+                    {"CostId",this.Id },{"WC_Warp1",VirgulKaldir(txtCozgu1UH) },{"WC_Warp2",VirgulKaldir(txtCozgu2UH) },{"WC_Scarf1",VirgulKaldir(txtAtki1UH) },{"WC_Scarf2",VirgulKaldir(txtAtki2UH) },{"WC_Scarf3",VirgulKaldir(txtAtki3UH) },{"WC_Scarf4",VirgulKaldir(txtAtki4UH) },{"WC_Total",VirgulKaldir(txtGramajToplam) },{"YP_Warp1",VirgulKaldir(txtCozgu1IF) },{"YP_Warp2",VirgulKaldir(txtCozgu2IF) },{"YP_Scarf1",VirgulKaldir(txtAtki1IF) },{"YP_Scarf2",VirgulKaldir(txtAtki2IF) },{"YP_Scarf3",VirgulKaldir(txtAtki3IF) },{"YP_Scarf4",VirgulKaldir(txtAtki4IF) } // iplik boyamadan devam edilecek
+                };
+                crudRepository.Insert(TableName3,CPC_params);
                 bildirim.Basarili();
             }
             else
