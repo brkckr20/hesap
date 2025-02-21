@@ -21,7 +21,7 @@ namespace Hesap
         CrudRepository crudRepository = new CrudRepository();
         Numarator numarator = new Numarator();
         int Id = 0, CompanyId = 0, InventoryId = 0, RecipeId = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas);
-        string TableName1 = "Cost", TableName2 = "CostProductionInformation",TableName3 = "CostProductionCalculate";
+        string TableName1 = "Cost", TableName2 = "CostProductionInformation", TableName3 = "CostProductionCalculate", TableName4 = "CostCostCalculate";
         public Form1()
         {
             InitializeComponent();
@@ -219,16 +219,21 @@ namespace Hesap
             if (this.Id == 0)
             {
                 Id = crudRepository.Insert(this.TableName1, costParams);
-                var CPI_params = new Dictionary<string, object> // Üretim Bilgileri - İplik Bilgileri - 20.2.2025 - diğer alanların eklenmesi gerekmektedir.
-                {
+                var CPI_params = new Dictionary<string, object>
+                { // ilgili alanlara ihtiyaç olması durumunda VirgulKaldır metodu eklenebilir
                     {"CostId", this.Id},{"YI_Warp1", txtCozgu1.Text},{"YI_Warp1Divider", txtCozgu1Bolen.Text},{"YI_Warp1Result", lblCozgu1Uretim.Text},{"YI_Warp2", txtCozgu2.Text},{"YI_Warp2Divider", txtCozgu2Bolen.Text},{"YI_Warp2Result", lblCozgu2Uretim.Text},{"YI_Scarf1", txtAtki1.Text},{"YI_Scarf1Divider", txtAtki1Bolen.Text},{"YI_Scarf1Result", lblAtki1Uretim.Text},{"YI_Scarf2", txtAtki2.Text},{"YI_Scarf2Divider", txtAtki2Bolen.Text},{"YI_Scarf2Result", lblAtki2Uretim.Text},{"YI_Scarf3", txtAtki3.Text},{"YI_Scarf3Divider", txtAtki3Bolen.Text},{"YI_Scarf3Result", lblAtki3Uretim.Text},{"YI_Scarf4", txtAtki4.Text},{"YI_Scarf4Divider", txtAtki4Bolen.Text},{"YI_Scarf4Result", lblAtki4Uretim.Text},{"WI_CombNo1",txtTarakNo1.Text},{"WI_CombNo1Multiplier",txtTarakNo1Bolen.Text},{"WI_CombNo1Result",lblTarakNo1Uretim.Text},{"WI_CombNo2",txtTarakNo2.Text},{"WI_CombNo2Multiplier",txtTarakNo2Bolen.Text},{"WI_CombNo2Result",lblTarakNo2Uretim.Text},{"WI_CombWidth",txtTarakEn.Text},{"WI_RawHeight",txtHamBoy.Text},{"WI_HeightEaves",VirgulKaldir(txtBoySacak)},{"WI_WidthEaves",VirgulKaldir(txtEnSacak)},{"WI_RawWidth",txtHamEn.Text},{"WI_ProductHeight",txtMamulBoy.Text},{"WI_ProductWidth",txtMamulEn.Text},{"D_Warp1",txtCozgu1Siklik.Text},{"D_Warp2",txtCozgu2Siklik.Text},{"D_Scarf1",txtAtki1Siklik.Text},{"D_Scarf2",txtAtki2Siklik.Text},{"D_Scarf3",txtAtki3Siklik.Text},{"D_Scarf4",txtAtki4Siklik.Text},{"NW_Warp1",txtCozgu1TelSayisi.Text},{"NW_Warp2",txtCozgu2TelSayisi.Text},{"NW_Scarf1",txtAtki1TelSayisi.Text},{"NW_Scarf2",txtAtki2TelSayisi.Text},{"NW_Scarf3",txtAtki3TelSayisi.Text},{"NW_Scarf4",txtAtki4TelSayisi.Text}
                 };
                 crudRepository.Insert(this.TableName2, CPI_params);
                 var CPC_params = new Dictionary<string, object>
                 {
-                    {"CostId",this.Id },{"WC_Warp1",VirgulKaldir(txtCozgu1UH) },{"WC_Warp2",VirgulKaldir(txtCozgu2UH) },{"WC_Scarf1",VirgulKaldir(txtAtki1UH) },{"WC_Scarf2",VirgulKaldir(txtAtki2UH) },{"WC_Scarf3",VirgulKaldir(txtAtki3UH) },{"WC_Scarf4",VirgulKaldir(txtAtki4UH) },{"WC_Total",VirgulKaldir(txtGramajToplam) },{"YP_Warp1",VirgulKaldir(txtCozgu1IF) },{"YP_Warp2",VirgulKaldir(txtCozgu2IF) },{"YP_Scarf1",VirgulKaldir(txtAtki1IF) },{"YP_Scarf2",VirgulKaldir(txtAtki2IF) },{"YP_Scarf3",VirgulKaldir(txtAtki3IF) },{"YP_Scarf4",VirgulKaldir(txtAtki4IF) } // iplik boyamadan devam edilecek
+                    {"CostId",this.Id},{"WC_Warp1",VirgulKaldir(txtCozgu1UH)},{"WC_Warp2",VirgulKaldir(txtCozgu2UH)},{"WC_Scarf1",VirgulKaldir(txtAtki1UH)},{"WC_Scarf2",VirgulKaldir(txtAtki2UH) },{"WC_Scarf3",VirgulKaldir(txtAtki3UH)},{"WC_Scarf4",VirgulKaldir(txtAtki4UH) },{"WC_Total",VirgulKaldir(txtGramajToplam) },{"YP_Warp1",VirgulKaldir(txtCozgu1IF) },{"YP_Warp2",VirgulKaldir(txtCozgu2IF)},{"YP_Scarf1",VirgulKaldir(txtAtki1IF) },{"YP_Scarf2",VirgulKaldir(txtAtki2IF) },{"YP_Scarf3",VirgulKaldir(txtAtki3IF) },{"YP_Scarf4",VirgulKaldir(txtAtki4IF) },{"YD_Warp1",VirgulKaldir(txtCozgu1IB) },{"YD_Warp2",VirgulKaldir(txtCozgu2IB) },{"YD_Scarf1",VirgulKaldir(txtAtki1IB) },{"YD_Scarf2",VirgulKaldir(txtAtki2IB) },{"YD_Scarf3",VirgulKaldir(txtAtki3IB)},{"YD_Scarf4",VirgulKaldir(txtAtki4IB) },{"YD_Result",VirgulKaldir(txtIpBoyamaSonuc) },{"YC_Warp1",VirgulKaldir(txtCozgu1IM)},{"YC_Warp2",VirgulKaldir(txtCozgu2IM)},{"YC_Scarf1",VirgulKaldir(txtAtki1IM)},{"YC_Scarf2",VirgulKaldir(txtAtki2IM)},{"YC_Scarf3",VirgulKaldir(txtAtki3IM)},{"YC_Scarf4",VirgulKaldir(txtAtki4IM)},{"YC_Result",VirgulKaldir(txtIpMaliyetToplam)}
                 };
-                crudRepository.Insert(TableName3,CPC_params);
+                crudRepository.Insert(TableName3, CPC_params);
+                var CCC_params = new Dictionary<string, object> //Maliyet Hesaplama - CostCostCalculate
+                {
+                    {"CostId",this.Id},{"PP_Scarf",VirgulKaldir(txtAtkiMH)},{"PP_Warp",VirgulKaldir(txtCozguMH)},{"PP_PartsWashing",VirgulKaldir(txtParcaYikamaMH)},{"PP_FabricWashing",VirgulKaldir(txtKumasBoyamaMH)},{"PP_WeavingWaste",VirgulKaldir(txtDokumaFiresiMH)},{"PP_DyehouseWaster",VirgulKaldir(txtBoyahaneFiresiMH)},{"PP_GarmentCost",VirgulKaldir(txtKonfMaliyetMH)},{"PP_2QualityCost",VirgulKaldir(txt2KaliteMaliyetMH)},{"PP_Profit",VirgulKaldir(txtKarMH)},{"PP_Vat",VirgulKaldir(txtKDVMH)},{"PP_Currency",VirgulKaldir(txtKurMH)},{"PP_Parity",VirgulKaldir(txtPariteMH)},{"PP_Euro",VirgulKaldir(txtEuro)},{"WC_Weaving",VirgulKaldir(txtDokumaMH)},{"WC_Warp",VirgulKaldir(txtCozguDMMH)},{"WC_YarnCost",VirgulKaldir(txtIplikMaliyetMH)},{"PC_Total",VirgulKaldir(txtToplamUMMH)},{"PC_Wasted",VirgulKaldir(txtFireliMH)},{"RFC_ProfitableForex",VirgulKaldir(txtFireliForexHKMMH)},{"RFC_Profitable",VirgulKaldir(txtFireliTlHKMMH)},{"WDC_PartsWashing",VirgulKaldir(txtParcaYikama)},{"WDC_DyedFabric",VirgulKaldir(txtBoyanmisKumas)},{"WDC_Wasted",VirgulKaldir(txtFireliYBMMH)},{"WDC_ProfitableForex",VirgulKaldir(txtKarliYBMMH)},{"SP_DyedFabric",VirgulKaldir(txtBoyaliKumas)},{"SP_GarmentCost",VirgulKaldir(txtKonfeksiyonMaliyeti)},{"SP_2QualityCost",VirgulKaldir(txt2KaliteMaliyeti)},{"SP_ProfitableForex",VirgulKaldir(txtKarliDU)},{"SP_Profitable",VirgulKaldir(txtDUKTL)},{"SP_VatIncludeForex",VirgulKaldir(txtKDVDahilFiyat)},{"SP_VatInclude",VirgulKaldir(txtKDVDUKTL)},{"PriceDeterminedForex",VirgulKaldir(txtBelirliFiyatForex)},{"PriceDetermined",VirgulKaldir(txtbelirliFiyatTl)},{"VatIncludedPriceForex",VirgulKaldir(txtKDVliFiyatForex)},{"VatIncluded",VirgulKaldir(txtKDVliFiyatTl)}
+                };
+                crudRepository.Insert(TableName4,CCC_params);
                 bildirim.Basarili();
             }
             else
@@ -236,189 +241,6 @@ namespace Hesap
                 crudRepository.Update(this.TableName1, this.Id, costParams);
                 bildirim.GuncellemeBasarili();
             }
-
-            #region eskisi
-            //if (this.Id == 0)
-            //{
-            //    using (var connection = new Baglanti().GetConnection())
-            //    {
-            //        string sqlBaslik = "INSERT INTO UretimBaslik ([FirmaKodu], [Tarih], [UrunKodu], [SiparisNo]) OUTPUT INSERTED.Id VALUES (@FirmaKodu, @Tarih, @UrunKodu, @SiparisNo)";
-            //        string sqlBaslikSQLite = "INSERT INTO UretimBaslik ([FirmaKodu], [Tarih], [UrunKodu], [SiparisNo]) VALUES (@FirmaKodu, @Tarih, @UrunKodu, @SiparisNo)";
-            //        string idQuery = "SELECT last_insert_rowid();";
-            //        if (ayarlar.VeritabaniTuru() == "mssql")
-            //        {
-            //            Id = connection.QuerySingle<int>(sqlBaslik, new
-            //            {
-            //                FirmaKodu = txtFirmaKodu.Text,
-            //                Tarih = dateTimePicker1.EditValue,
-            //                UrunKodu = txtUrun.Text,
-            //                SiparisNo = txtReceteNo.Text
-            //            });
-            //        }
-            //        else
-            //        {
-            //            connection.Execute(sqlBaslikSQLite, new
-            //            {
-            //                FirmaKodu = txtFirmaKodu.Text,
-            //                Tarih = dateTimePicker1.EditValue,
-            //                UrunKodu = txtUrun.Text,
-            //                SiparisNo = txtReceteNo.Text
-            //            });
-            //            Id = connection.QuerySingle<int>(idQuery);
-            //        }
-            //        #region Önceki kayit - sqlite öncesi
-            //        //refNo =connection.QuerySingle<int>(query, new
-            //        //{
-            //        //    FirmaKodu = txtFirmaKodu.Text,
-            //        //    Tarih = dateTimePicker1.EditValue,
-            //        //    UrunKodu = txtUrun.Text,
-            //        //    SiparisNo = txtReceteNo.Text
-            //        //});
-            //        #endregion
-            //        string sqlUB = "INSERT INTO UretimBilgileri (RefNo, Cozgu1, Cozgu1Bolen, Cozgu2, Cozgu2Bolen, Atki1, Atki1Bolen, Atki2, Atki2Bolen,Atki3,Atki3Bolen,Atki4,Atki4Bolen,TarakNo1," +
-            //                                                    "TarakNo1Bolen, TarakNo1Uretim,TarakNo2,TarakNo2Bolen,TarakNo2Uretim,TarakEn,HamBoy,BoySacak,EnSacak,HamEn,MamulBoy,MamulEn," +
-            //                                                    "Cozgu1Siklik,Cozgu2Siklik,Atki1Siklik,Atki2Siklik,Atki3Siklik,Atki4Siklik,Cozgu1TelSayisi,Cozgu2TelSayisi," +
-            //                                                    "Atki1TelSayisi,Atki2TelSayisi,Atki3TelSayisi,Atki4TelSayisi,Cozgu1Uretim,Cozgu2Uretim,Atki1Uretim,Atki2Uretim,Atki3Uretim,Atki4Uretim) VALUES " +
-            //                                                 "(@RefNo, @Cozgu1, @Cozgu1Bolen, @Cozgu2, @Cozgu2Bolen, @Atki1, @Atki1Bolen, @Atki2, @Atki2Bolen, @Atki3,@Atki3Bolen, @Atki4, @Atki4Bolen,@TarakNo1," +
-            //                                                    "@TarakNo1Bolen,@TarakNo1Uretim,@TarakNo2,@TarakNo2Bolen,@TarakNo2Uretim,@TarakEn,@HamBoy,@BoySacak,@EnSacak,@HamEn,@MamulBoy,@MamulEn," +
-            //                                                    "@Cozgu1Siklik,@Cozgu2Siklik,@Atki1Siklik,@Atki2Siklik,@Atki3Siklik,@Atki4Siklik,@Cozgu1TelSayisi,@Cozgu2TelSayisi," +
-            //                                                    "@Atki1TelSayisi,@Atki2TelSayisi,@Atki3TelSayisi,@Atki4TelSayisi,@Cozgu1Uretim,@Cozgu2Uretim,@Atki1Uretim,@Atki2Uretim,@Atki3Uretim,@Atki4Uretim)";
-            //        string sqlUH = @"INSERT INTO UretimHesaplama
-            //                       (RefNo,Cozgu1,Cozgu2,Atki1,Atki2,Atki3,Atki4,Cozgu1IF,Cozgu2IF,Atki1IF,Atki2IF,Atki3IF,Atki4IF,Cozgu1IB,Cozgu2IB,Atki1IB
-            //                        ,Atki2IB,Atki3IB,Atki4IB,Cozgu1IM,Cozgu2IM,Atki1IM,Atki2IM,Atki3IM,Atki4IM,ToplamMtul,ToplamIplikMaliyet,ToplamGRM2)
-            //                        VALUES
-            //                       (@RefNo, @Cozgu1, @Cozgu2, @Atki1, @Atki2, @Atki3, @Atki4, @Cozgu1IF, @Cozgu2IF, @Atki1IF, @Atki2IF, @Atki3IF, @Atki4IF, @Cozgu1IB, @Cozgu2IB, 
-            //                        @Atki1IB, @Atki2IB, @Atki3IB, @Atki4IB, @Cozgu1IM, @Cozgu2IM, @Atki1IM, @Atki2IM, @Atki3IM, @Atki4IM, @ToplamMtul, @ToplamIplikMaliyet,@ToplamGRM2)
-            //                        ";
-            //        string sqlMH = @"INSERT INTO MaliyetHesaplama
-            //                   (RefNo,Atki,Cozgu,ParcaYikama,KumasBoyama,DokumaFiresi,BoyahaneFiresi,KonfeksiyonMaliyeti,Ikinci_K_Maliyeti,Kar,KDV,Kur,Parite,Euro,DokumaDM,CozguDM,IplikMaliyetDM,ToplamUM,FireliUM,KarliHKMForex
-            //                ,KarliHKM,ParcaYikamaYBM,BoyanmisKumasYBM,FireliYBM,KarliYBM,BoyaliKumasDU,KonfeksiyonMaliyetiDU,Ikinci_K_MaliyetiDU,KarliDUForex,KarliDU,KDVliDUForex,KDVliDU,BelirlenenFiyatForex,BelirleneFiyat,KDVliBelirlenenFiyatForex
-            //                ,KDVliBelirleneFiyat)
-            //                VALUES
-            //                           (@RefNo,@Atki,@Cozgu,@ParcaYikama,@KumasBoyama,@DokumaFiresi,@BoyahaneFiresi,@KonfeksiyonMaliyeti,@Ikinci_K_Maliyeti,@Kar,@KDV,@Kur,@Parite,@Euro,@DokumaDM,@CozguDM,@IplikMaliyetDM,@ToplamUM
-            //                ,@FireliUM,@KarliHKMForex,@KarliHKM,@ParcaYikamaYBM,@BoyanmisKumasYBM,@FireliYBM,@KarliYBM,@BoyaliKumasDU,@KonfeksiyonMaliyetiDU,@Ikinci_K_MaliyetiDU,@KarliDUForex,@KarliDU,@KDVliDUForex,@KDVliDU,@BelirlenenFiyatForex
-            //                ,@BelirleneFiyat,@KDVliBelirlenenFiyatForex,@KDVliBelirleneFiyat)";
-            //        connection.Execute(sqlUB, new
-            //        {
-            //            RefNo = Id,
-            //            Cozgu1 = txtCozgu1.Text,
-            //            Cozgu1Bolen = txtCozgu1Bolen.Text,
-            //            Cozgu2 = txtCozgu2.Text,
-            //            Cozgu2Bolen = txtCozgu2Bolen.Text,
-            //            Atki1 = txtAtki1.Text,
-            //            Atki1Bolen = txtAtki1Bolen.Text,
-            //            Atki2 = txtAtki2.Text,
-            //            Atki2Bolen = txtAtki2Bolen.Text,
-            //            Atki3 = txtAtki3.Text,
-            //            Atki3Bolen = txtAtki3Bolen.Text,
-            //            Atki4 = txtAtki4.Text,
-            //            Atki4Bolen = txtAtki4Bolen.Text,
-            //            TarakNo1 = txtTarakNo1.Text,
-            //            TarakNo1Bolen = txtTarakNo1Bolen.Text,
-            //            TarakNo1Uretim = lblTarakNo1Uretim.Text,
-            //            TarakNo2 = txtTarakNo2.Text,
-            //            TarakNo2Bolen = txtTarakNo2Bolen.Text,
-            //            TarakNo2Uretim = lblTarakNo2Uretim.Text,
-            //            TarakEn = txtTarakEn.Text,
-            //            HamBoy = txtHamBoy.Text,
-            //            BoySacak = VirgulKaldir(txtBoySacak), //KAYITTA PROBLEM OLURSA VİRGUL REPLACE EDİLECEK
-            //            EnSacak = VirgulKaldir(txtEnSacak),  //KAYITTA PROBLEM OLURSA VİRGUL REPLACE EDİLECEK
-            //            HamEn = txtHamEn.Text,
-            //            MamulBoy = txtMamulBoy.Text,
-            //            MamulEn = txtMamulEn.Text,
-            //            Cozgu1Siklik = txtCozgu1Siklik.Text,
-            //            Cozgu2Siklik = txtCozgu2Siklik.Text,
-            //            Atki1Siklik = txtAtki1Siklik.Text,
-            //            Atki2Siklik = txtAtki2Siklik.Text,
-            //            Atki3Siklik = txtAtki3Siklik.Text,
-            //            Atki4Siklik = txtAtki4Siklik.Text,
-            //            Cozgu1TelSayisi = txtCozgu1TelSayisi.Text,
-            //            Cozgu2TelSayisi = txtCozgu2TelSayisi.Text,
-            //            Atki1TelSayisi = txtAtki1TelSayisi.Text,
-            //            Atki2TelSayisi = txtAtki2TelSayisi.Text,
-            //            Atki3TelSayisi = txtAtki3TelSayisi.Text,
-            //            Atki4TelSayisi = txtAtki4TelSayisi.Text,
-            //            Cozgu1Uretim = lblCozgu1Uretim.Text,
-            //            Cozgu2Uretim = lblCozgu2Uretim.Text,
-            //            Atki1Uretim = lblAtki1Uretim.Text,
-            //            Atki2Uretim = lblAtki2Uretim.Text,
-            //            Atki3Uretim = lblAtki3Uretim.Text,
-            //            Atki4Uretim = lblAtki4Uretim.Text,
-            //        });
-            //        connection.Execute(sqlUH, new
-            //        {
-            //            RefNo = Id,
-            //            Cozgu1 = VirgulKaldir(txtCozgu1UH),
-            //            Cozgu2 = VirgulKaldir(txtCozgu2UH),
-            //            Atki1 = VirgulKaldir(txtAtki1UH),
-            //            Atki2 = VirgulKaldir(txtAtki2UH),
-            //            Atki3 = VirgulKaldir(txtAtki3UH),
-            //            Atki4 = VirgulKaldir(txtAtki4UH),
-            //            Cozgu1IF = VirgulKaldir(txtCozgu1IF),
-            //            Cozgu2IF = VirgulKaldir(txtCozgu2IF),
-            //            Atki1IF = VirgulKaldir(txtAtki1IF),
-            //            Atki2IF = VirgulKaldir(txtAtki2IF),
-            //            Atki3IF = VirgulKaldir(txtAtki3IF),
-            //            Atki4IF = VirgulKaldir(txtAtki4IF),
-            //            Cozgu1IB = VirgulKaldir(txtCozgu1IB),
-            //            Cozgu2IB = VirgulKaldir(txtCozgu2IB),
-            //            Atki1IB = VirgulKaldir(txtAtki1IB),
-            //            Atki2IB = VirgulKaldir(txtAtki2IB),
-            //            Atki3IB = VirgulKaldir(txtAtki3IB),
-            //            Atki4IB = VirgulKaldir(txtAtki4IB),
-            //            Cozgu1IM = VirgulKaldir(txtCozgu1IM),
-            //            Cozgu2IM = VirgulKaldir(txtCozgu2IM),
-            //            Atki1IM = VirgulKaldir(txtAtki1IM),
-            //            Atki2IM = VirgulKaldir(txtAtki2IM),
-            //            Atki3IM = VirgulKaldir(txtAtki3IM),
-            //            Atki4IM = VirgulKaldir(txtAtki4IM),
-            //            ToplamMtul = VirgulKaldir(txtGramajToplam),
-            //            ToplamIplikMaliyet = VirgulKaldir(txtIpMaliyetToplam),
-            //            ToplamGRM2 = VirgulKaldir(txtIpBoyamaSonuc)
-            //        });
-            //        connection.Execute(sqlMH, new
-            //        {
-            //            RefNo = Id,
-            //            Atki = VirgulKaldir(txtAtkiMH),
-            //            Cozgu = VirgulKaldir(txtCozguMH),
-            //            ParcaYikama = VirgulKaldir(txtParcaYikamaMH),
-            //            KumasBoyama = VirgulKaldir(txtKumasBoyamaMH),
-            //            DokumaFiresi = VirgulKaldir(txtDokumaFiresiMH),
-            //            BoyahaneFiresi = VirgulKaldir(txtBoyahaneFiresiMH),
-            //            KonfeksiyonMaliyeti = VirgulKaldir(txtKonfMaliyetMH),
-            //            Ikinci_K_Maliyeti = VirgulKaldir(txt2KaliteMaliyetMH),
-            //            Kar = VirgulKaldir(txtKarMH),
-            //            KDV = VirgulKaldir(txtKDVMH),
-            //            Kur = VirgulKaldir(txtKurMH),
-            //            Parite = VirgulKaldir(txtPariteMH),
-            //            Euro = VirgulKaldir(txtEuro),
-            //            DokumaDM = VirgulKaldir(txtDokumaMH),
-            //            CozguDM = VirgulKaldir(txtCozguDMMH),
-            //            IplikMaliyetDM = VirgulKaldir(txtIplikMaliyetMH),
-            //            ToplamUM = VirgulKaldir(txtToplamUMMH),
-            //            FireliUM = VirgulKaldir(txtFireliMH),
-            //            KarliHKMForex = VirgulKaldir(txtFireliForexHKMMH),
-            //            KarliHKM = VirgulKaldir(txtFireliTlHKMMH),
-            //            ParcaYikamaYBM = VirgulKaldir(txtParcaYikama),
-            //            BoyanmisKumasYBM = VirgulKaldir(txtBoyanmisKumas),
-            //            FireliYBM = VirgulKaldir(txtFireliYBMMH),
-            //            KarliYBM = VirgulKaldir(txtKarliYBMMH),
-            //            BoyaliKumasDU = VirgulKaldir(txtBoyaliKumas),
-            //            KonfeksiyonMaliyetiDU = VirgulKaldir(txtKonfeksiyonMaliyeti),
-            //            Ikinci_K_MaliyetiDU = VirgulKaldir(txt2KaliteMaliyeti),
-            //            KarliDUForex = VirgulKaldir(txtKarliDU),
-            //            KarliDU = VirgulKaldir(txtDUKTL),
-            //            KDVliDUForex = VirgulKaldir(txtKDVDahilFiyat),
-            //            KDVliDU = VirgulKaldir(txtKDVDUKTL),
-            //            BelirlenenFiyatForex = VirgulKaldir(txtBelirliFiyatForex),
-            //            BelirleneFiyat = VirgulKaldir(txtbelirliFiyatTl),
-            //            KDVliBelirlenenFiyatForex = VirgulKaldir(txtKDVliFiyatForex),
-            //            KDVliBelirleneFiyat = VirgulKaldir(txtKDVliFiyatTl),
-            //        });
-            //        bildirim.Basarili();
-            //    }
-            //}
-            #endregion
         }
         void ListeAc()
         {
