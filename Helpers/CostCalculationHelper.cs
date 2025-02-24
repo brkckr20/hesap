@@ -1,5 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using FastReport.Data;
+using Hesap.DataAccess;
+using Hesap.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,41 +62,46 @@ namespace Hesap.Helpers
                 hedef.Text = sonuc.ToString("0.##");
             }
         }
-
         public static void CalculateGrammageCozgu1(TextBox tbTarakBoy, TextBox tbBoySacak, TextBox tbCozgu1TelSayisi, TextBox tbCozgu1, TextBox hedef)
         {
+            CrudRepository crudRepository = new CrudRepository();
+            var result = crudRepository.GetAll<ProductionManagementParams>("ProductionManagementParams").FirstOrDefault();
             if (double.TryParse(tbTarakBoy.Text, out double b16) &&
                 double.TryParse(tbBoySacak.Text, out double b17) &&
                 double.TryParse(tbCozgu1TelSayisi.Text, out double g13) &&
                 double.TryParse(tbCozgu1.Text, out double e6) &&
                 e6 != 0)
             {
-                double sonuc = ((b16 + b17) * g13 * (60 / e6)) / 10000000;
+                double sonuc = ((b16 + b17) * g13 * (60 / e6) * (1 + Convert.ToDouble(result.KasmaPayi) / 100)) / 10000000;
                 hedef.Text = sonuc.ToString("0.###");
             }
         }
         public static void CalculateGrammageCozgu2(TextBox tbHamBoy, TextBox tbCozgu2TelSayisi, TextBox tbCozgu2, TextBox hedef)
         {
+            CrudRepository crudRepository = new CrudRepository();
+            var result = crudRepository.GetAll<ProductionManagementParams>("ProductionManagementParams").FirstOrDefault();
             if (double.TryParse(tbHamBoy.Text, out double b16) &&
                 double.TryParse(tbCozgu2TelSayisi.Text, out double g14) &&
                 double.TryParse(tbCozgu2.Text, out double e7) &&
-                e7 != 0) // Bölme işleminde sıfıra bölmeyi önlemek için
+                e7 != 0)
             {
-                double sonuc = (b16 * g14 * (60 / e7)) / 10000000;
-                hedef.Text = sonuc.ToString("0.###"); // Sonucu en yakın tam sayıya yuvarlama
+                double sonuc = (b16 * g14 * (60 / e7) * (1 + Convert.ToDouble(result.KasmaPayi) / 100)) / 10000000;
+                hedef.Text = sonuc.ToString("0.###");
             }
         }
         public static void CalculateGrammageAtki(TextBox tbAtki1Siklik, TextBox tbTarakEn, TextBox tbEnSacak, TextBox tbHamBoy, TextBox tbAtki1Uretim, TextBox hedef)
         {
+            CrudRepository crudRepository = new CrudRepository();
+            var result = crudRepository.GetAll<ProductionManagementParams>("ProductionManagementParams").FirstOrDefault();
             if (double.TryParse(tbAtki1Siklik.Text, out double g8) &&
                 double.TryParse(tbTarakEn.Text, out double b15) &&
                 double.TryParse(tbEnSacak.Text, out double b18) &&
                 double.TryParse(tbHamBoy.Text, out double b16) &&
                 double.TryParse(tbAtki1Uretim.Text, out double e8) &&
-                e8 != 0) // Bölme işleminde sıfıra bölmeyi önlemek için
+                e8 != 0)
             {
-                double sonuc = (g8 * ((b15 + b18) / 100) * (b16 / 100) * (60 / e8)) / 1000;
-                hedef.Text = sonuc.ToString("0.###"); // Sonucu en yakın tam sayıya yuvarlama
+                double sonuc = (g8 * ((b15 + b18) / 100) * (b16 / 100) * ((60 / e8) * (1 + Convert.ToDouble(result.KasmaPayi) / 100)) / 1000);
+                hedef.Text = sonuc.ToString("0.###");
             }
         }
 
@@ -108,7 +115,7 @@ namespace Hesap.Helpers
                 double.TryParse(tbAtki4.Text, out double j11))
             {
                 double sonuc = j6 + j7 + j8 + j9 + j10 + j11;
-                hedef.Text = sonuc.ToString("0.###"); // Sonucu en yakın tam sayıya yuvarlama
+                hedef.Text = sonuc.ToString("0.###");
             }
         }
         public static void CalculateYarnGrammage(TextBox tb1, TextBox tb2, TextBox hedef)
@@ -145,6 +152,8 @@ namespace Hesap.Helpers
         }
         public static void CalculateCostWeaving(TextBox tb1, TextBox tb2, TextBox tb3, TextBox tb4, TextBox tb5, TextBox tb6, TextBox tb7, TextBox tb8, TextBox hedef)
         {
+            CrudRepository crudRepository = new CrudRepository();
+            var result = crudRepository.GetAll<ProductionManagementParams>("ProductionManagementParams").FirstOrDefault();
             if (double.TryParse(tb1.Text, out double j1) &&
                 double.TryParse(tb2.Text, out double j2) &&
                 double.TryParse(tb3.Text, out double j3) &&
@@ -154,7 +163,7 @@ namespace Hesap.Helpers
                 double.TryParse(tb7.Text, out double j7) &&
                 double.TryParse(tb8.Text, out double j8))
             {
-                double sonuc = (((j1 + j2) / 100) * (j3 + j4 + j5 + j6) * j7) / j8;
+                double sonuc = (((j1 + j2) / 100) * ((j3 + j4 + j5 + j6) * (1 + Convert.ToDouble(result.KasmaPayi) / 100)) * j7) / j8;
                 hedef.Text = sonuc.ToString("0.##");
             }
         }

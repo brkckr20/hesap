@@ -93,6 +93,8 @@
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rbnParams = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItem30 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -144,9 +146,10 @@
             this.barButtonItem27,
             this.barButtonItem28,
             this.barButtonItem29,
-            this.barBtnKumasKarti});
+            this.barBtnKumasKarti,
+            this.barButtonItem30});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 44;
+            this.ribbon.MaxItemId = 45;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -509,7 +512,8 @@
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup3,
             this.ribbonPageGroup5,
-            this.ribbonPageGroup9});
+            this.ribbonPageGroup9,
+            this.rbnParams});
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "Ayarlar";
             // 
@@ -653,6 +657,21 @@
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Kartlar";
             // 
+            // rbnParams
+            // 
+            this.rbnParams.ItemLinks.Add(this.barButtonItem30);
+            this.rbnParams.Name = "rbnParams";
+            this.rbnParams.Text = "Parametreler";
+            // 
+            // barButtonItem30
+            // 
+            this.barButtonItem30.Caption = "Üretim Yönetimi Parametreleri";
+            this.barButtonItem30.Id = 44;
+            this.barButtonItem30.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem30.ImageOptions.Image")));
+            this.barButtonItem30.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem30.ImageOptions.LargeImage")));
+            this.barButtonItem30.Name = "barButtonItem30";
+            this.barButtonItem30.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem30_ItemClick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -740,5 +759,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbnOrderGiris;
         private DevExpress.XtraBars.BarButtonItem barButtonItem29;
         private DevExpress.XtraBars.BarButtonItem barBtnKumasKarti;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem30;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbnParams;
     }
 }

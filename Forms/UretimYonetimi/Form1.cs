@@ -3,10 +3,12 @@ using DevExpress.XtraEditors;
 using Hesap.DataAccess;
 using Hesap.Forms.Liste;
 using Hesap.Helpers;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using static DevExpress.XtraPrinting.Export.Pdf.PdfImageCache;
 
@@ -178,7 +180,7 @@ namespace Hesap
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            // DolarKuruGetir("USD_ALIS");
+            DolarKuruGetir("USD_ALIS");
             AttachEnterKeyHandler(this);
             dateTimePicker1.EditValue = DateTime.Now;
             lblFisNo.Text = numarator.NumaraVer("Maliyet");
@@ -333,21 +335,17 @@ namespace Hesap
         {
             ListeAc();
         }
-        public void DolarKuruGetir(string Kur) // ilgili tablo oluşturulduktan sonra tekrardan kayıt işlemleri kontrol edilecek -- 04.02.2025
+        public void DolarKuruGetir(string Kur)
         {
-            if (ayarlar.VeritabaniTuru() == "mssql")
+            if (ayarlar.VeritabaniTuru() == "mssql") // ilgili tablo mssql için oluşturuldu ve görev zamanlayıcı ile birlikte kayıt işlemi gerçekleştirildi
             {
-                using (var connection = new Baglanti().GetConnection())
+                var currency =crudRepository.GetAll<Currency>("Currency").OrderByDescending(c => c.TARIH).FirstOrDefault();
+                if (currency != null)
                 {
-                    var sorgu = $"select top 1 {Kur},USD_EUR from Kur order by TARIH desc";
-                    var rate = connection.QuerySingleOrDefault(sorgu);
-                    if (rate != null)
-                    {
-                        txtKurMH.Text = rate.USD_ALIS.ToString();
-                        txtPariteMH.Text = Math.Round(rate.USD_EUR, 2).ToString();
-                    }
-                    else { txtKurMH.Text = ""; txtPariteMH.Text = ""; }
+                    txtKurMH.Text = currency.USD_ALIS.ToString();
+                    txtPariteMH.Text = currency.USD_EUR.ToString();
                 }
+                else { txtKurMH.Text = ""; txtPariteMH.Text = ""; }
             }
             else
             {
@@ -363,22 +361,7 @@ namespace Hesap
                     else { txtKurMH.Text = ""; txtPariteMH.Text = ""; }
 
                 }
-                //try
-                //{
-                //    XmlDocument xmlVerisi = new XmlDocument();
-                //    xmlVerisi.Load("http://www.tcmb.gov.tr/kurlar/today.xml");
-                //    decimal dolar = Convert.ToDecimal(xmlVerisi.SelectSingleNode(string.Format("Tarih_Date/Currency[@Kod='{0}']/ForexSelling", "USD")).InnerText.Replace('.', ','));
-                //    decimal EUR = Convert.ToDecimal(xmlVerisi.SelectSingleNode(string.Format("Tarih_Date/Currency[@Kod='{0}']/ForexSelling", "EUR")).InnerText.Replace('.', ','));
-                //    txtKurMH.Text = dolar.ToString();
-                //    txtPariteMH.Text = Math.Round((EUR / dolar), 2).ToString();
-                //}
-                //catch (Exception)
-                //{
-                //    throw;
-                //}
             }
-
-
         }
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {

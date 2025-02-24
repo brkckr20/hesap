@@ -416,6 +416,12 @@
     <Compile Include="Forms\OrderYonetimi\OrderIslemleri\FrmRenkBedenAdetleri.Designer.cs">
       <DependentUpon>FrmRenkBedenAdetleri.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Parametreler\frmUretimYonetimiParams.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Parametreler\frmUretimYonetimiParams.Designer.cs">
+      <DependentUpon>frmUretimYonetimiParams.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -558,6 +564,8 @@
     </Compile>
     <Compile Include="Models\ColumnSelector.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\ProductionManagementParams.cs" />
+    <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\FeatureCoding.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\InventoryReceipt.cs" />
@@ -715,6 +723,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OrderYonetimi\OrderIslemleri\FrmRenkBedenAdetleri.resx">
       <DependentUpon>FrmRenkBedenAdetleri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Parametreler\frmUretimYonetimiParams.resx">
+      <DependentUpon>frmUretimYonetimiParams.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Rapor\Etiket\FrmEtiketTasarimi.resx">
       <DependentUpon>FrmEtiketTasarimi.cs</DependentUpon>
