@@ -17,11 +17,12 @@ namespace Hesap.Forms.Liste
 {
     public partial class FrmUrunReceteKartiListesi : DevExpress.XtraEditors.XtraForm
     {
-        public int Id,InventoryId;
-        public float HamGr_M2, HamEn, HamBoy, MamulEn, MamulBoy,MamulGr_M2;
+        public int Id, InventoryId;
+        public float HamGr_M2, HamEn, HamBoy, MamulEn, MamulBoy, MamulGr_M2;
         public bool IpligiBoyali;
         public string ReceteNo;
         private string TableName = "InventoryReceipt";
+        public byte[] UrunResmi;
         CrudRepository crudRepository = new CrudRepository();
         public FrmUrunReceteKartiListesi(int _InventoryId)
         {
@@ -34,7 +35,14 @@ namespace Hesap.Forms.Liste
         }
         void Listele()
         {
-            gridControl1.DataSource = crudRepository.GetAll<InventoryReceipt>(this.TableName).Where(rec => rec.InventoryId == this.InventoryId);
+            if (this.InventoryId != 0)
+            {
+                gridControl1.DataSource = crudRepository.GetAll<InventoryReceipt>(this.TableName).Where(rec => rec.InventoryId == this.InventoryId);
+            }
+            else
+            {
+                gridControl1.DataSource = crudRepository.GetAll<InventoryReceipt>(this.TableName);
+            }
         }
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
@@ -46,6 +54,7 @@ namespace Hesap.Forms.Liste
             HamBoy = Convert.ToSingle(gridView.GetFocusedRowCellValue("RawHeight"));
             MamulEn = Convert.ToSingle(gridView.GetFocusedRowCellValue("ProductWidth"));
             MamulBoy = Convert.ToSingle(gridView.GetFocusedRowCellValue("ProductHeight"));
+            UrunResmi = (byte[])gridView.GetFocusedRowCellValue("ReceiptImage1");
             Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
             this.Close();
         }

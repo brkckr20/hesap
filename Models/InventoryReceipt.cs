@@ -44,5 +44,11 @@ namespace Hesap.Models
         [Display(Name = "Malzeme Id")]
         public int InventoryId { get; set; }
 
+        [Display(Name = "Ürün Resmi")]
+        public byte[] ReceiptImage1 { get; set; }
+
+        //[Display(Name = "Dosya Adı")]
+        //public string ImageFileName { get; set; }
+
     }
 }
