@@ -323,6 +323,9 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.maliyetFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kayıtNumarasınıGösterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grpUrunResim = new DevExpress.XtraEditors.GroupControl();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnUrunResmiSec = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -337,6 +340,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpUrunResim)).BeginInit();
+            this.grpUrunResim.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -3420,6 +3426,7 @@
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.grpUrunResim);
             this.panelControl1.Controls.Add(this.dateTimePicker1);
             this.panelControl1.Controls.Add(this.txtReceteNo);
             this.panelControl1.Controls.Add(this.txtUrun);
@@ -3495,7 +3502,7 @@
             this.lblUrunAdi.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblUrunAdi.Location = new System.Drawing.Point(274, 53);
             this.lblUrunAdi.Name = "lblUrunAdi";
-            this.lblUrunAdi.Size = new System.Drawing.Size(503, 22);
+            this.lblUrunAdi.Size = new System.Drawing.Size(340, 22);
             this.lblUrunAdi.TabIndex = 1117;
             // 
             // lblReceteAd
@@ -3504,7 +3511,7 @@
             this.lblReceteAd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblReceteAd.Location = new System.Drawing.Point(274, 76);
             this.lblReceteAd.Name = "lblReceteAd";
-            this.lblReceteAd.Size = new System.Drawing.Size(527, 22);
+            this.lblReceteAd.Size = new System.Drawing.Size(340, 22);
             this.lblReceteAd.TabIndex = 1117;
             // 
             // lblFirmaAdi
@@ -3513,7 +3520,7 @@
             this.lblFirmaAdi.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblFirmaAdi.Location = new System.Drawing.Point(274, 30);
             this.lblFirmaAdi.Name = "lblFirmaAdi";
-            this.lblFirmaAdi.Size = new System.Drawing.Size(527, 22);
+            this.lblFirmaAdi.Size = new System.Drawing.Size(340, 22);
             this.lblFirmaAdi.TabIndex = 1117;
             // 
             // lblFisNo
@@ -3670,6 +3677,35 @@
             this.kayıtNumarasınıGösterToolStripMenuItem.Text = "Kayıt Bilgisi";
             this.kayıtNumarasınıGösterToolStripMenuItem.Click += new System.EventHandler(this.kayıtNumarasınıGösterToolStripMenuItem_Click);
             // 
+            // grpUrunResim
+            // 
+            this.grpUrunResim.Controls.Add(this.pictureBox1);
+            this.grpUrunResim.Controls.Add(this.btnUrunResmiSec);
+            this.grpUrunResim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.grpUrunResim.Location = new System.Drawing.Point(659, 3);
+            this.grpUrunResim.Name = "grpUrunResim";
+            this.grpUrunResim.Size = new System.Drawing.Size(298, 119);
+            this.grpUrunResim.TabIndex = 1122;
+            this.grpUrunResim.Text = "Ürün Resmi";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(6, 48);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(287, 66);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
+            // 
+            // btnUrunResmiSec
+            // 
+            this.btnUrunResmiSec.Location = new System.Drawing.Point(5, 25);
+            this.btnUrunResmiSec.Name = "btnUrunResmiSec";
+            this.btnUrunResmiSec.Size = new System.Drawing.Size(288, 20);
+            this.btnUrunResmiSec.TabIndex = 0;
+            this.btnUrunResmiSec.Text = "Resim Seç";
+            this.btnUrunResmiSec.Click += new System.EventHandler(this.btnUrunResmiSec_Click);
+            // 
             // Form1
             // 
             this.Appearance.Options.UseFont = true;
@@ -3688,6 +3724,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maliyet Hesaplama";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -3707,6 +3744,9 @@
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grpUrunResim)).EndInit();
+            this.grpUrunResim.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -4006,6 +4046,9 @@
         private DevExpress.XtraEditors.SimpleButton btnSil;
         private System.Windows.Forms.Label lblFisNo;
         private System.Windows.Forms.Label label160;
+        private DevExpress.XtraEditors.GroupControl grpUrunResim;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private DevExpress.XtraEditors.SimpleButton btnUrunResmiSec;
     }
 }
 

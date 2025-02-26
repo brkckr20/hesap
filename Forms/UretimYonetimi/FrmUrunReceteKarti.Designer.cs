@@ -38,6 +38,9 @@
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.chckIpligiBoyali = new DevExpress.XtraEditors.CheckEdit();
+            this.grpUrunResim = new DevExpress.XtraEditors.GroupControl();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnUrunResmiSec = new DevExpress.XtraEditors.SimpleButton();
             this.txtMamulBoy = new DevExpress.XtraEditors.TextEdit();
             this.txtHamBoy = new DevExpress.XtraEditors.TextEdit();
             this.txtMamulGrM2 = new DevExpress.XtraEditors.TextEdit();
@@ -72,13 +75,13 @@
             this.Doviz = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoDoviz = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.DovizFiyat = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.grpUrunResim = new DevExpress.XtraEditors.GroupControl();
-            this.btnUrunResmiSec = new DevExpress.XtraEditors.SimpleButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chckIpligiBoyali.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grpUrunResim)).BeginInit();
+            this.grpUrunResim.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMamulBoy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtHamBoy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMamulGrM2.Properties)).BeginInit();
@@ -99,9 +102,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoIplikKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoDoviz)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grpUrunResim)).BeginInit();
-            this.grpUrunResim.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -215,6 +215,35 @@
             this.chckIpligiBoyali.Properties.Caption = "";
             this.chckIpligiBoyali.Size = new System.Drawing.Size(75, 20);
             this.chckIpligiBoyali.TabIndex = 8;
+            // 
+            // grpUrunResim
+            // 
+            this.grpUrunResim.Controls.Add(this.pictureBox1);
+            this.grpUrunResim.Controls.Add(this.btnUrunResmiSec);
+            this.grpUrunResim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.grpUrunResim.Location = new System.Drawing.Point(726, 7);
+            this.grpUrunResim.Name = "grpUrunResim";
+            this.grpUrunResim.Size = new System.Drawing.Size(298, 176);
+            this.grpUrunResim.TabIndex = 1121;
+            this.grpUrunResim.Text = "Ürün Resmi";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(6, 48);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(287, 123);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
+            // 
+            // btnUrunResmiSec
+            // 
+            this.btnUrunResmiSec.Location = new System.Drawing.Point(5, 25);
+            this.btnUrunResmiSec.Name = "btnUrunResmiSec";
+            this.btnUrunResmiSec.Size = new System.Drawing.Size(288, 20);
+            this.btnUrunResmiSec.TabIndex = 0;
+            this.btnUrunResmiSec.Text = "Resim Seç";
+            this.btnUrunResmiSec.Click += new System.EventHandler(this.btnUrunResmiSec_Click);
             // 
             // txtMamulBoy
             // 
@@ -559,35 +588,6 @@
             this.DovizFiyat.VisibleIndex = 7;
             this.DovizFiyat.Width = 71;
             // 
-            // grpUrunResim
-            // 
-            this.grpUrunResim.Controls.Add(this.pictureBox1);
-            this.grpUrunResim.Controls.Add(this.btnUrunResmiSec);
-            this.grpUrunResim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.grpUrunResim.Location = new System.Drawing.Point(726, 7);
-            this.grpUrunResim.Name = "grpUrunResim";
-            this.grpUrunResim.Size = new System.Drawing.Size(298, 176);
-            this.grpUrunResim.TabIndex = 1121;
-            this.grpUrunResim.Text = "Ürün Resmi";
-            // 
-            // btnUrunResmiSec
-            // 
-            this.btnUrunResmiSec.Location = new System.Drawing.Point(5, 25);
-            this.btnUrunResmiSec.Name = "btnUrunResmiSec";
-            this.btnUrunResmiSec.Size = new System.Drawing.Size(288, 20);
-            this.btnUrunResmiSec.TabIndex = 0;
-            this.btnUrunResmiSec.Text = "Resim Seç";
-            this.btnUrunResmiSec.Click += new System.EventHandler(this.btnUrunResmiSec_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(6, 48);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(287, 123);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
-            // 
             // FrmUrunReceteKarti
             // 
             this.Appearance.Options.UseFont = true;
@@ -600,11 +600,15 @@
             this.Font = new System.Drawing.Font("Corbel", 8.25F);
             this.Name = "FrmUrunReceteKarti";
             this.Text = "Ürün Reçete Kartı";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmUrunReceteKarti_FormClosing);
             this.Load += new System.EventHandler(this.FrmUrunReceteKarti_Load);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chckIpligiBoyali.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grpUrunResim)).EndInit();
+            this.grpUrunResim.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMamulBoy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtHamBoy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMamulGrM2.Properties)).EndInit();
@@ -625,9 +629,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoIplikKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBirim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoDoviz)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grpUrunResim)).EndInit();
-            this.grpUrunResim.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

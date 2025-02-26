@@ -7,7 +7,9 @@ using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using static DevExpress.XtraPrinting.Export.Pdf.PdfImageCache;
@@ -210,120 +212,131 @@ namespace Hesap
         }
         void Kaydet()
         {
-            var costParams = new Dictionary<string, object>
+            try
             {
-                {"CompanyId",CompanyId},
-                {"Date", dateTimePicker1.EditValue},
-                {"InventoryId", InventoryId},
-                {"RecipeId", RecipeId},
-                {"OrderNo", lblFisNo.Text},
-            };
-            if (this.Id == 0)
-            {
-                Id = crudRepository.Insert(this.TableName1, costParams);
-                var CPI_params = new Dictionary<string, object>
+                byte[] resimData = yardimciAraclar.GetPictureData(pictureBox1);
+                var costParams = new Dictionary<string, object>
+                {
+                    {"CompanyId",CompanyId},
+                    {"Date", dateTimePicker1.EditValue},
+                    {"InventoryId", InventoryId},
+                    {"RecipeId", RecipeId},
+                    {"OrderNo", lblFisNo.Text},
+                }; if (resimData != null && resimData.Length > 0)
+                {
+                    costParams.Add("ProductImage", resimData);
+                }
+                if (this.Id == 0)
+                {
+                    Id = crudRepository.Insert(this.TableName1, costParams);
+                    var CPI_params = new Dictionary<string, object>
                 { // ilgili alanlara ihtiyaç olması durumunda VirgulKaldır metodu eklenebilir
                     {"CostId", this.Id},{"YI_Warp1", txtCozgu1.Text},{"YI_Warp1Divider", txtCozgu1Bolen.Text},{"YI_Warp1Result", lblCozgu1Uretim.Text},{"YI_Warp2", txtCozgu2.Text},{"YI_Warp2Divider", txtCozgu2Bolen.Text},{"YI_Warp2Result", lblCozgu2Uretim.Text},{"YI_Scarf1", txtAtki1.Text},{"YI_Scarf1Divider", txtAtki1Bolen.Text},{"YI_Scarf1Result", lblAtki1Uretim.Text},{"YI_Scarf2", txtAtki2.Text},{"YI_Scarf2Divider", txtAtki2Bolen.Text},{"YI_Scarf2Result", lblAtki2Uretim.Text},{"YI_Scarf3", txtAtki3.Text},{"YI_Scarf3Divider", txtAtki3Bolen.Text},{"YI_Scarf3Result", lblAtki3Uretim.Text},{"YI_Scarf4", txtAtki4.Text},{"YI_Scarf4Divider", txtAtki4Bolen.Text},{"YI_Scarf4Result", lblAtki4Uretim.Text},{"WI_CombNo1",txtTarakNo1.Text},{"WI_CombNo1Multiplier",txtTarakNo1Bolen.Text},{"WI_CombNo1Result",lblTarakNo1Uretim.Text},{"WI_CombNo2",txtTarakNo2.Text},{"WI_CombNo2Multiplier",txtTarakNo2Bolen.Text},{"WI_CombNo2Result",lblTarakNo2Uretim.Text},{"WI_CombWidth",txtTarakEn.Text},{"WI_RawHeight",txtHamBoy.Text},{"WI_HeightEaves",VirgulKaldir(txtBoySacak)},{"WI_WidthEaves",VirgulKaldir(txtEnSacak)},{"WI_RawWidth",txtHamEn.Text},{"WI_ProductHeight",txtMamulBoy.Text},{"WI_ProductWidth",txtMamulEn.Text},{"D_Warp1",txtCozgu1Siklik.Text},{"D_Warp2",txtCozgu2Siklik.Text},{"D_Scarf1",txtAtki1Siklik.Text},{"D_Scarf2",txtAtki2Siklik.Text},{"D_Scarf3",txtAtki3Siklik.Text},{"D_Scarf4",txtAtki4Siklik.Text},{"NW_Warp1",txtCozgu1TelSayisi.Text},{"NW_Warp2",txtCozgu2TelSayisi.Text},{"NW_Scarf1",txtAtki1TelSayisi.Text},{"NW_Scarf2",txtAtki2TelSayisi.Text},{"NW_Scarf3",txtAtki3TelSayisi.Text},{"NW_Scarf4",txtAtki4TelSayisi.Text}
                 };
-                crudRepository.Insert(this.TableName2, CPI_params);
-                var CPC_params = new Dictionary<string, object>
+                    crudRepository.Insert(this.TableName2, CPI_params);
+                    var CPC_params = new Dictionary<string, object>
                 {
                     {"CostId",this.Id},{"WC_Warp1",VirgulKaldir(txtCozgu1UH)},{"WC_Warp2",VirgulKaldir(txtCozgu2UH)},{"WC_Scarf1",VirgulKaldir(txtAtki1UH)},{"WC_Scarf2",VirgulKaldir(txtAtki2UH) },{"WC_Scarf3",VirgulKaldir(txtAtki3UH)},{"WC_Scarf4",VirgulKaldir(txtAtki4UH) },{"WC_Total",VirgulKaldir(txtGramajToplam) },{"YP_Warp1",VirgulKaldir(txtCozgu1IF) },{"YP_Warp2",VirgulKaldir(txtCozgu2IF)},{"YP_Scarf1",VirgulKaldir(txtAtki1IF) },{"YP_Scarf2",VirgulKaldir(txtAtki2IF) },{"YP_Scarf3",VirgulKaldir(txtAtki3IF) },{"YP_Scarf4",VirgulKaldir(txtAtki4IF) },{"YD_Warp1",VirgulKaldir(txtCozgu1IB) },{"YD_Warp2",VirgulKaldir(txtCozgu2IB) },{"YD_Scarf1",VirgulKaldir(txtAtki1IB) },{"YD_Scarf2",VirgulKaldir(txtAtki2IB) },{"YD_Scarf3",VirgulKaldir(txtAtki3IB)},{"YD_Scarf4",VirgulKaldir(txtAtki4IB) },{"YD_Result",VirgulKaldir(txtIpBoyamaSonuc) },{"YC_Warp1",VirgulKaldir(txtCozgu1IM)},{"YC_Warp2",VirgulKaldir(txtCozgu2IM)},{"YC_Scarf1",VirgulKaldir(txtAtki1IM)},{"YC_Scarf2",VirgulKaldir(txtAtki2IM)},{"YC_Scarf3",VirgulKaldir(txtAtki3IM)},{"YC_Scarf4",VirgulKaldir(txtAtki4IM)},{"YC_Result",VirgulKaldir(txtIpMaliyetToplam)}
                 };
-                crudRepository.Insert(TableName3, CPC_params);
-                var CCC_params = new Dictionary<string, object> //Maliyet Hesaplama - CostCostCalculate
+                    crudRepository.Insert(TableName3, CPC_params);
+                    var CCC_params = new Dictionary<string, object> //Maliyet Hesaplama - CostCostCalculate
                 {
                     {"CostId",this.Id},{"PP_Scarf",VirgulKaldir(txtAtkiMH)},{"PP_Warp",VirgulKaldir(txtCozguMH)},{"PP_PartsWashing",VirgulKaldir(txtParcaYikamaMH)},{"PP_FabricWashing",VirgulKaldir(txtKumasBoyamaMH)},{"PP_WeavingWaste",VirgulKaldir(txtDokumaFiresiMH)},{"PP_DyehouseWaster",VirgulKaldir(txtBoyahaneFiresiMH)},{"PP_GarmentCost",VirgulKaldir(txtKonfMaliyetMH)},{"PP_2QualityCost",VirgulKaldir(txt2KaliteMaliyetMH)},{"PP_Profit",VirgulKaldir(txtKarMH)},{"PP_Vat",VirgulKaldir(txtKDVMH)},{"PP_Currency",VirgulKaldir(txtKurMH)},{"PP_Parity",VirgulKaldir(txtPariteMH)},{"PP_Euro",VirgulKaldir(txtEuro)},{"WC_Weaving",VirgulKaldir(txtDokumaMH)},{"WC_Warp",VirgulKaldir(txtCozguDMMH)},{"WC_YarnCost",VirgulKaldir(txtIplikMaliyetMH)},{"PC_Total",VirgulKaldir(txtToplamUMMH)},{"PC_Wasted",VirgulKaldir(txtFireliMH)},{"RFC_ProfitableForex",VirgulKaldir(txtFireliForexHKMMH)},{"RFC_Profitable",VirgulKaldir(txtFireliTlHKMMH)},{"WDC_PartsWashing",VirgulKaldir(txtParcaYikama)},{"WDC_DyedFabric",VirgulKaldir(txtBoyanmisKumas)},{"WDC_Wasted",VirgulKaldir(txtFireliYBMMH)},{"WDC_ProfitableForex",VirgulKaldir(txtKarliYBMMH)},{"SP_DyedFabric",VirgulKaldir(txtBoyaliKumas)},{"SP_GarmentCost",VirgulKaldir(txtKonfeksiyonMaliyeti)},{"SP_2QualityCost",VirgulKaldir(txt2KaliteMaliyeti)},{"SP_ProfitableForex",VirgulKaldir(txtKarliDU)},{"SP_Profitable",VirgulKaldir(txtDUKTL)},{"SP_VatIncludeForex",VirgulKaldir(txtKDVDahilFiyat)},{"SP_VatInclude",VirgulKaldir(txtKDVDUKTL)},{"PriceDeterminedForex",VirgulKaldir(txtBelirliFiyatForex)},{"PriceDetermined",VirgulKaldir(txtbelirliFiyatTl)},{"VatIncludedPriceForex",VirgulKaldir(txtKDVliFiyatForex)},{"VatIncluded",VirgulKaldir(txtKDVliFiyatTl)}
                 };
-                crudRepository.Insert(TableName4,CCC_params);
-                bildirim.Basarili();
+                    crudRepository.Insert(TableName4, CCC_params);
+                    bildirim.Basarili();
+                }
+                else
+                {
+                    crudRepository.Update(this.TableName1, this.Id, costParams);
+                    bildirim.GuncellemeBasarili();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                crudRepository.Update(this.TableName1, this.Id, costParams);
-                bildirim.GuncellemeBasarili();
+                bildirim.Uyari($"Hata : {ex.Message}");
             }
         }
         void ListeAc()
         {
-            Forms.Liste.FrmMaliyetHesaplamaListesi frm = new Forms.Liste.FrmMaliyetHesaplamaListesi();
+            FrmMaliyetHesaplamaListesi frm = new FrmMaliyetHesaplamaListesi();
             frm.ShowDialog();
             if (frm.veriler.Count > 0)
             {
                 this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
                 dateTimePicker1.EditValue = (DateTime)frm.veriler[0]["Tarih"];
-                txtFirmaKodu.Text = frm.veriler[0]["FirmaKodu"].ToString();
-                lblFirmaAdi.Text = frm.veriler[0]["FirmaUnvan"].ToString();
-                txtUrun.Text = frm.veriler[0]["UrunKodu"].ToString();
-                txtReceteNo.Text = frm.veriler[0]["SiparisNo"].ToString(); // aslında reçete no alanında tekabül ediyor.
-                txtCozgu1.Text = frm.veriler[0]["Cozgu1"].ToString();
-                txtCozgu1Bolen.Text = frm.veriler[0]["Cozgu1Bolen"].ToString();
-                txtCozgu2.Text = frm.veriler[0]["Cozgu2"].ToString();
-                txtAtki1.Text = frm.veriler[0]["Atki1"].ToString();
-                txtAtki1Bolen.Text = frm.veriler[0]["Atki1Bolen"].ToString();
-                txtAtki2.Text = frm.veriler[0]["Atki2"].ToString();
-                txtAtki2Bolen.Text = frm.veriler[0]["Atki2Bolen"].ToString();
-                txtAtki3.Text = frm.veriler[0]["Atki3"].ToString();
-                txtAtki3Bolen.Text = frm.veriler[0]["Atki3Bolen"].ToString();
-                txtAtki4.Text = frm.veriler[0]["Atki4"].ToString();
-                txtAtki4Bolen.Text = frm.veriler[0]["Atki4Bolen"].ToString();
-                txtTarakNo1.Text = frm.veriler[0]["TarakNo1"].ToString();
-                txtTarakNo1Bolen.Text = frm.veriler[0]["TarakNo1Bolen"].ToString();
-                txtTarakNo2.Text = frm.veriler[0]["TarakNo2"].ToString();
-                txtTarakNo2Bolen.Text = frm.veriler[0]["TarakNo2Bolen"].ToString();
-                txtTarakEn.Text = frm.veriler[0]["TarakEn"].ToString();
-                txtHamBoy.Text = frm.veriler[0]["HamBoy"].ToString();
-                txtBoySacak.Text = frm.veriler[0]["BoySacak"].ToString();
-                txtEnSacak.Text = frm.veriler[0]["EnSacak"].ToString();
-                txtHamEn.Text = frm.veriler[0]["HamEn"].ToString();
-                txtMamulBoy.Text = frm.veriler[0]["MamulBoy"].ToString();
-                txtMamulEn.Text = frm.veriler[0]["MamulEn"].ToString();
-                txtCozgu1Siklik.Text = frm.veriler[0]["Cozgu1Siklik"].ToString();
-                txtCozgu2Siklik.Text = frm.veriler[0]["Cozgu2Siklik"].ToString();
-                txtAtki1Siklik.Text = frm.veriler[0]["Atki1Siklik"].ToString();
-                txtAtki2Siklik.Text = frm.veriler[0]["Atki2Siklik"].ToString();
-                txtAtki3Siklik.Text = frm.veriler[0]["Atki3Siklik"].ToString();
-                txtAtki4Siklik.Text = frm.veriler[0]["Atki4Siklik"].ToString();
-                txtCozgu1TelSayisi.Text = frm.veriler[0]["Cozgu1TelSayisi"].ToString();
-                txtCozgu2TelSayisi.Text = frm.veriler[0]["Cozgu2TelSayisi"].ToString();
-                txtAtki1TelSayisi.Text = frm.veriler[0]["Atki1TelSayisi"].ToString();
-                txtAtki2TelSayisi.Text = frm.veriler[0]["Atki2TelSayisi"].ToString();
-                txtAtki3TelSayisi.Text = frm.veriler[0]["Atki3TelSayisi"].ToString();
-                txtAtki4TelSayisi.Text = frm.veriler[0]["Atki4TelSayisi"].ToString();
-                lblCozgu1Uretim.Text = frm.veriler[0]["Cozgu1Uretim"].ToString();
-                lblCozgu2Uretim.Text = frm.veriler[0]["Cozgu2Uretim"].ToString();
-                lblAtki1Uretim.Text = frm.veriler[0]["Atki1Uretim"].ToString();
-                lblAtki2Uretim.Text = frm.veriler[0]["Atki2Uretim"].ToString();
-                lblAtki3Uretim.Text = frm.veriler[0]["Atki3Uretim"].ToString();
-                lblAtki4Uretim.Text = frm.veriler[0]["Atki4Uretim"].ToString();
-                lblTarakNo1Uretim.Text = frm.veriler[0]["TarakNo1Uretim"].ToString();
-                lblTarakNo2Uretim.Text = frm.veriler[0]["TarakNo2Uretim"].ToString();
-                txtCozgu1IF.Text = frm.veriler[0]["Cozgu1IF"].ToString();
-                txtCozgu2IF.Text = frm.veriler[0]["Cozgu2IF"].ToString();
-                txtAtki1IF.Text = frm.veriler[0]["Atki1IF"].ToString();
-                txtAtki2IF.Text = frm.veriler[0]["Atki2IF"].ToString();
-                txtAtki3IF.Text = frm.veriler[0]["Atki3IF"].ToString();
-                txtAtki4IF.Text = frm.veriler[0]["Atki4IF"].ToString();
-                txtCozgu1IB.Text = frm.veriler[0]["Cozgu1IB"].ToString();
-                txtCozgu2IB.Text = frm.veriler[0]["Cozgu2IB"].ToString();
-                txtAtki1IB.Text = frm.veriler[0]["Atki1IB"].ToString();
-                txtAtki2IB.Text = frm.veriler[0]["Atki2IB"].ToString();
-                txtAtki3IB.Text = frm.veriler[0]["Atki3IB"].ToString();
-                txtAtki4IB.Text = frm.veriler[0]["Atki4IB"].ToString();
-                txtAtkiMH.Text = frm.veriler[0]["Atki"].ToString();
-                txtCozguMH.Text = frm.veriler[0]["Cozgu"].ToString();
-                txtParcaYikamaMH.Text = frm.veriler[0]["ParcaYikama"].ToString();
-                txtKumasBoyamaMH.Text = frm.veriler[0]["KumasBoyama"].ToString();
-                txtDokumaFiresiMH.Text = frm.veriler[0]["DokumaFiresi"].ToString();
-                txtBoyahaneFiresiMH.Text = frm.veriler[0]["BoyahaneFiresi"].ToString();
-                txtKonfMaliyetMH.Text = frm.veriler[0]["KonfeksiyonMaliyeti"].ToString();
-                txtKarMH.Text = frm.veriler[0]["Kar"].ToString();
-                txtKDVMH.Text = frm.veriler[0]["KDV"].ToString();
-                txtKurMH.Text = frm.veriler[0]["Kur"].ToString();
-                txtPariteMH.Text = frm.veriler[0]["Parite"].ToString();
-                txtEuro.Text = frm.veriler[0]["Euro"].ToString();
-                txtBelirliFiyatForex.Text = frm.veriler[0]["BelirlenenFiyatForex"].ToString();
-                txtKDVliFiyatForex.Text = frm.veriler[0]["KDVliBelirlenenFiyatForex"].ToString();
+                txtFirmaKodu.Text = frm.veriler[0]["Firma Kodu"].ToString();
+                //lblFirmaAdi.Text = frm.veriler[0]["FirmaUnvan"].ToString();
+                //txtUrun.Text = frm.veriler[0]["UrunKodu"].ToString();
+                //txtReceteNo.Text = frm.veriler[0]["SiparisNo"].ToString(); // aslında reçete no alanında tekabül ediyor.
+                //txtCozgu1.Text = frm.veriler[0]["Cozgu1"].ToString();
+                //txtCozgu1Bolen.Text = frm.veriler[0]["Cozgu1Bolen"].ToString();
+                //txtCozgu2.Text = frm.veriler[0]["Cozgu2"].ToString();
+                //txtAtki1.Text = frm.veriler[0]["Atki1"].ToString();
+                //txtAtki1Bolen.Text = frm.veriler[0]["Atki1Bolen"].ToString();
+                //txtAtki2.Text = frm.veriler[0]["Atki2"].ToString();
+                //txtAtki2Bolen.Text = frm.veriler[0]["Atki2Bolen"].ToString();
+                //txtAtki3.Text = frm.veriler[0]["Atki3"].ToString();
+                //txtAtki3Bolen.Text = frm.veriler[0]["Atki3Bolen"].ToString();
+                //txtAtki4.Text = frm.veriler[0]["Atki4"].ToString();
+                //txtAtki4Bolen.Text = frm.veriler[0]["Atki4Bolen"].ToString();
+                //txtTarakNo1.Text = frm.veriler[0]["TarakNo1"].ToString();
+                //txtTarakNo1Bolen.Text = frm.veriler[0]["TarakNo1Bolen"].ToString();
+                //txtTarakNo2.Text = frm.veriler[0]["TarakNo2"].ToString();
+                //txtTarakNo2Bolen.Text = frm.veriler[0]["TarakNo2Bolen"].ToString();
+                //txtTarakEn.Text = frm.veriler[0]["TarakEn"].ToString();
+                //txtHamBoy.Text = frm.veriler[0]["HamBoy"].ToString();
+                //txtBoySacak.Text = frm.veriler[0]["BoySacak"].ToString();
+                //txtEnSacak.Text = frm.veriler[0]["EnSacak"].ToString();
+                //txtHamEn.Text = frm.veriler[0]["HamEn"].ToString();
+                //txtMamulBoy.Text = frm.veriler[0]["MamulBoy"].ToString();
+                //txtMamulEn.Text = frm.veriler[0]["MamulEn"].ToString();
+                //txtCozgu1Siklik.Text = frm.veriler[0]["Cozgu1Siklik"].ToString();
+                //txtCozgu2Siklik.Text = frm.veriler[0]["Cozgu2Siklik"].ToString();
+                //txtAtki1Siklik.Text = frm.veriler[0]["Atki1Siklik"].ToString();
+                //txtAtki2Siklik.Text = frm.veriler[0]["Atki2Siklik"].ToString();
+                //txtAtki3Siklik.Text = frm.veriler[0]["Atki3Siklik"].ToString();
+                //txtAtki4Siklik.Text = frm.veriler[0]["Atki4Siklik"].ToString();
+                //txtCozgu1TelSayisi.Text = frm.veriler[0]["Cozgu1TelSayisi"].ToString();
+                //txtCozgu2TelSayisi.Text = frm.veriler[0]["Cozgu2TelSayisi"].ToString();
+                //txtAtki1TelSayisi.Text = frm.veriler[0]["Atki1TelSayisi"].ToString();
+                //txtAtki2TelSayisi.Text = frm.veriler[0]["Atki2TelSayisi"].ToString();
+                //txtAtki3TelSayisi.Text = frm.veriler[0]["Atki3TelSayisi"].ToString();
+                //txtAtki4TelSayisi.Text = frm.veriler[0]["Atki4TelSayisi"].ToString();
+                //lblCozgu1Uretim.Text = frm.veriler[0]["Cozgu1Uretim"].ToString();
+                //lblCozgu2Uretim.Text = frm.veriler[0]["Cozgu2Uretim"].ToString();
+                //lblAtki1Uretim.Text = frm.veriler[0]["Atki1Uretim"].ToString();
+                //lblAtki2Uretim.Text = frm.veriler[0]["Atki2Uretim"].ToString();
+                //lblAtki3Uretim.Text = frm.veriler[0]["Atki3Uretim"].ToString();
+                //lblAtki4Uretim.Text = frm.veriler[0]["Atki4Uretim"].ToString();
+                //lblTarakNo1Uretim.Text = frm.veriler[0]["TarakNo1Uretim"].ToString();
+                //lblTarakNo2Uretim.Text = frm.veriler[0]["TarakNo2Uretim"].ToString();
+                //txtCozgu1IF.Text = frm.veriler[0]["Cozgu1IF"].ToString();
+                //txtCozgu2IF.Text = frm.veriler[0]["Cozgu2IF"].ToString();
+                //txtAtki1IF.Text = frm.veriler[0]["Atki1IF"].ToString();
+                //txtAtki2IF.Text = frm.veriler[0]["Atki2IF"].ToString();
+                //txtAtki3IF.Text = frm.veriler[0]["Atki3IF"].ToString();
+                //txtAtki4IF.Text = frm.veriler[0]["Atki4IF"].ToString();
+                //txtCozgu1IB.Text = frm.veriler[0]["Cozgu1IB"].ToString();
+                //txtCozgu2IB.Text = frm.veriler[0]["Cozgu2IB"].ToString();
+                //txtAtki1IB.Text = frm.veriler[0]["Atki1IB"].ToString();
+                //txtAtki2IB.Text = frm.veriler[0]["Atki2IB"].ToString();
+                //txtAtki3IB.Text = frm.veriler[0]["Atki3IB"].ToString();
+                //txtAtki4IB.Text = frm.veriler[0]["Atki4IB"].ToString();
+                //txtAtkiMH.Text = frm.veriler[0]["Atki"].ToString();
+                //txtCozguMH.Text = frm.veriler[0]["Cozgu"].ToString();
+                //txtParcaYikamaMH.Text = frm.veriler[0]["ParcaYikama"].ToString();
+                //txtKumasBoyamaMH.Text = frm.veriler[0]["KumasBoyama"].ToString();
+                //txtDokumaFiresiMH.Text = frm.veriler[0]["DokumaFiresi"].ToString();
+                //txtBoyahaneFiresiMH.Text = frm.veriler[0]["BoyahaneFiresi"].ToString();
+                //txtKonfMaliyetMH.Text = frm.veriler[0]["KonfeksiyonMaliyeti"].ToString();
+                //txtKarMH.Text = frm.veriler[0]["Kar"].ToString();
+                //txtKDVMH.Text = frm.veriler[0]["KDV"].ToString();
+                //txtKurMH.Text = frm.veriler[0]["Kur"].ToString();
+                //txtPariteMH.Text = frm.veriler[0]["Parite"].ToString();
+                //txtEuro.Text = frm.veriler[0]["Euro"].ToString();
+                //txtBelirliFiyatForex.Text = frm.veriler[0]["BelirlenenFiyatForex"].ToString();
+                //txtKDVliFiyatForex.Text = frm.veriler[0]["KDVliBelirlenenFiyatForex"].ToString();
             }
 
         }
@@ -339,7 +352,7 @@ namespace Hesap
         {
             if (ayarlar.VeritabaniTuru() == "mssql") // ilgili tablo mssql için oluşturuldu ve görev zamanlayıcı ile birlikte kayıt işlemi gerçekleştirildi
             {
-                var currency =crudRepository.GetAll<Currency>("Currency").OrderByDescending(c => c.TARIH).FirstOrDefault();
+                var currency = crudRepository.GetAll<Currency>("Currency").OrderByDescending(c => c.TARIH).FirstOrDefault();
                 if (currency != null)
                 {
                     txtKurMH.Text = currency.USD_ALIS.ToString();
@@ -384,7 +397,7 @@ namespace Hesap
             }
             else
             {
-                bildirim.Uyari("Form alabilmek için bir kayıt seçmeniz gerekmektedir.");
+                bildirim.Uyari("Form alabilmek için bir kayıt seçmeniz veya formu kaydetmeniz gerekmektedir.");
             }
         }
         private void txtReceteNo_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -396,11 +409,34 @@ namespace Hesap
                 txtReceteNo.Text = frm.ReceteNo;
                 lblReceteAd.Text = $"Ham En: {frm.HamEn}, Ham Boy: {frm.HamBoy}, Ham Gr/M2: {frm.HamGr_M2}";
                 RecipeId = frm.Id;
+                if (frm.UrunResmi != null)
+                {
+                    using (MemoryStream memoryStream = new MemoryStream(frm.UrunResmi))
+                    {
+                        pictureBox1.Image = Image.FromStream(memoryStream);
+                    }
+                    string tempFilePath = Path.GetTempFileName() + ".png";
+                    File.WriteAllBytes(tempFilePath, frm.UrunResmi);
+                    pictureBox1.Tag = tempFilePath;
+
+                }
                 if (frm.MamulEn != 0 && frm.MamulBoy != 0)
                 {
                     lblReceteAd.Text += $" Mamül En: {frm.MamulEn}, Mamül Boy: {frm.MamulBoy}";
                 }
             }
+        }
+        private void btnUrunResmiSec_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.SelectImage(pictureBox1);
+        }
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            yardimciAraclar.OpenPicture(pictureBox1);
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            yardimciAraclar.DeleteTempFile(pictureBox1);
         }
         private void kayıtNumarasınıGösterToolStripMenuItem_Click(object sender, EventArgs e)
         {

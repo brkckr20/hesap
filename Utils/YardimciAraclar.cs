@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -19,6 +20,7 @@ namespace Hesap.Utils
     {
         private readonly string _forex;
         private readonly TextBox[] _textBoxes;
+        Bildirim bildirim = new Bildirim();
 
         public YardimciAraclar(string forex = "$", params TextBox[] textBoxes)
         {
@@ -432,9 +434,9 @@ namespace Hesap.Utils
             //    }
             //}
         }
-        public void KolonSecici(DevExpress.XtraGrid.GridControl grid) // bir crud işlemi olmadığı için başka klasöre taşınmadı
+        public void KolonSecici(GridControl grid) // bir crud işlemi olmadığı için başka klasöre taşınmadı
         {
-            var gridView = grid.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
+            var gridView = grid.MainView as GridView;
             if (gridView != null)
             {
                 gridView.OptionsCustomization.AllowColumnMoving = true;
@@ -462,6 +464,75 @@ namespace Hesap.Utils
                     gridView1.UnselectRow(i);
                 }
             }
+        }
+        public void DeleteTempFile(PictureBox pictureBox1)
+        {
+            if (pictureBox1.Tag is string tempFilePath && File.Exists(tempFilePath))
+            {
+                try
+                {
+                    File.Delete(tempFilePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Geçici dosya silinemedi: " + ex.Message);
+                }
+            }
+        }
+        public void OpenPicture(PictureBox pictureBox1)
+        {
+            if (pictureBox1.Image != null)
+            {
+                string dosyaYolu = pictureBox1.Tag?.ToString();
+
+                if (!string.IsNullOrEmpty(dosyaYolu))
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(dosyaYolu);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Resim açılamadı: " + ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Resmin dosya yolu bulunamadı.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Görüntülenecek bir resim yok.");
+            }
+        }
+        public void SelectImage(PictureBox pictureBox1)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.bmp";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox1.Image = Image.FromFile(ofd.FileName);
+                    pictureBox1.Tag = ofd.FileName;
+                }
+            }
+
+        }
+        public byte[] GetPictureData(PictureBox pictureBox)
+        {
+            if (pictureBox.Tag == null || !(pictureBox.Tag is string filePath) || string.IsNullOrEmpty(filePath))
+            {
+                return null;
+                //throw new Exception("Resim yolu alınamadı.");
+            }
+
+            if (!File.Exists(filePath))
+            {
+                throw new Exception("Dosya bulunamadı.");
+            }
+
+            return File.ReadAllBytes(filePath);
         }
     }
 }

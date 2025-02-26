@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
+using DevExpress.XtraLayout;
 using Hesap.Context;
 using Hesap.DataAccess;
 using Hesap.Forms.Liste;
@@ -43,34 +44,40 @@ namespace Hesap.Forms.UretimYonetimi
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null)
-            {
-                bildirim.Uyari("Lütfen bir resim seçin.");
-                return;
-            }
+            //if (pictureBox1.Image == null) // resim zorunlu olmayabilir o yüzden pasife çekildi
+            //{
+            //    bildirim.Uyari("Lütfen bir resim seçin.");
+            //    return;
+            //}
 
-            string filePath = pictureBox1.Tag?.ToString();
-            if (string.IsNullOrEmpty(filePath))
+            try
             {
-                bildirim.Uyari("Resim yolu alınamadı.");
-                return;
-            }
-            byte[] resimData = File.ReadAllBytes(filePath);
-
-            var _params = new Dictionary<string, object>
+                byte[] resimData = yardimciAraclar.GetPictureData(pictureBox1);
+                var _params = new Dictionary<string, object>
             {
-                {"ReceiptNo",txtReceteNo.Text},{"RawWidth",txtHamEn.Text},{"RawHeight",txtHamBoy.Text},{"ProductWidth",txtMamulEn.Text},{"ProductHeight",txtMamulBoy.Text},{"RawGrammage",txtGrm2.Text},{"ProductGrammage",txtMamulGrM2.Text},{"YarnDyed ",chckIpligiBoyali.Checked},{"Explanation ",txtReceteAciklama.Text},{"ReceiptType ",Convert.ToInt32(InventoryTypes.Kumas)},{"InventoryId ",InventoryId},{"ReceiptImage1", resimData}
+                {"ReceiptNo",txtReceteNo.Text},{"RawWidth",txtHamEn.Text},{"RawHeight",txtHamBoy.Text},{"ProductWidth",txtMamulEn.Text},{"ProductHeight",txtMamulBoy.Text},{"RawGrammage",txtGrm2.Text},{"ProductGrammage",txtMamulGrM2.Text},{"YarnDyed ",chckIpligiBoyali.Checked},{"Explanation ",txtReceteAciklama.Text},{"ReceiptType ",Convert.ToInt32(InventoryTypes.Kumas)},{"InventoryId ",InventoryId}
             };
-            if (this.Id == 0)
-            {
-                Id = crudRepository.Insert(this.TableName, _params);
-                bildirim.Basarili();
+                if (resimData != null && resimData.Length > 0)
+                {
+                    _params.Add("ReceiptImage1", resimData);
+                }
+                if (this.Id == 0)
+                {
+                    Id = crudRepository.Insert(this.TableName, _params);
+                    bildirim.Basarili();
+                }
+                else
+                {
+                    crudRepository.Update(this.TableName, this.Id, _params);
+                    bildirim.GuncellemeBasarili();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                crudRepository.Update(this.TableName, this.Id, _params);
-                bildirim.GuncellemeBasarili();
+                bildirim.Uyari(ex.Message);
             }
+
+
         }
 
         private void FrmUrunReceteKarti_Load(object sender, EventArgs e)
@@ -81,7 +88,6 @@ namespace Hesap.Forms.UretimYonetimi
         {
             txtReceteNo.Text = numarator.NumaraVer("UrunRecete");
             // gridControl1.DataSource = new BindingList<_UrunReceteUB>();
-
         }
 
         private void repoKalemIslem_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -91,44 +97,11 @@ namespace Hesap.Forms.UretimYonetimi
 
         private void btnUrunResmiSec_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.bmp";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    pictureBox1.Image = Image.FromFile(ofd.FileName);
-                    pictureBox1.Tag = ofd.FileName;
-                }
-            }
+            yardimciAraclar.SelectImage(pictureBox1);
         }
-        byte[] imageData;
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-
-            if (pictureBox1.Image != null)
-            {
-                string dosyaYolu = pictureBox1.Tag?.ToString();
-
-                if (!string.IsNullOrEmpty(dosyaYolu))
-                {
-                    try
-                    {
-                        System.Diagnostics.Process.Start(dosyaYolu);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Resim açılamadı: " + ex.Message);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Resmin dosya yolu bulunamadı.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Görüntülenecek bir resim yok.");
-            }
+            yardimciAraclar.OpenPicture(pictureBox1);
         }
         private void simpleButton2_Click(object sender, EventArgs e)
         {
@@ -136,13 +109,25 @@ namespace Hesap.Forms.UretimYonetimi
             frm.ShowDialog();
             if (frm.ReceteNo != null)
             {
-                using (MemoryStream memoryStream = new MemoryStream(frm.UrunResmi))
+                if (frm.UrunResmi != null)
                 {
-                    pictureBox1.Image = Image.FromStream(memoryStream);
+                    using (MemoryStream memoryStream = new MemoryStream(frm.UrunResmi))
+                    {
+                        pictureBox1.Image = Image.FromStream(memoryStream);
+                    }
+                    string tempFilePath = Path.GetTempFileName() + ".png";
+                    File.WriteAllBytes(tempFilePath, frm.UrunResmi);
+                    pictureBox1.Tag = tempFilePath;
+
                 }
-                pictureBox1.Tag = imageData;
             }
         }
+
+        private void FrmUrunReceteKarti_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            yardimciAraclar.DeleteTempFile(pictureBox1);
+        }
+
         private void repoIplikKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             FrmIplikKartiListesi frm = new FrmIplikKartiListesi();
