@@ -12,7 +12,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using static DevExpress.XtraPrinting.Export.Pdf.PdfImageCache;
 
 namespace Hesap
 {
@@ -24,7 +23,7 @@ namespace Hesap
         Ayarlar ayarlar = new Ayarlar();
         CrudRepository crudRepository = new CrudRepository();
         Numarator numarator = new Numarator();
-        int Id = 0, CompanyId = 0, InventoryId = 0, RecipeId = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas);
+        int Id = 0, CompanyId = 0, InventoryId = 0, RecipeId = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas), UretimBilgileriId = 0, UretimHesaplamaId = 0, MaliyetHesaplamaId = 0;
         string TableName1 = "Cost", TableName2 = "CostProductionInformation", TableName3 = "CostProductionCalculate", TableName4 = "CostCostCalculate";
         public Form1()
         {
@@ -265,21 +264,33 @@ namespace Hesap
             {
                 this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
                 dateTimePicker1.EditValue = (DateTime)frm.veriler[0]["Tarih"];
+                this.CompanyId = Convert.ToInt32(frm.veriler[0]["Firma Id"]);
                 txtFirmaKodu.Text = frm.veriler[0]["Firma Kodu"].ToString();
-                //lblFirmaAdi.Text = frm.veriler[0]["FirmaUnvan"].ToString();
-                //txtUrun.Text = frm.veriler[0]["UrunKodu"].ToString();
-                //txtReceteNo.Text = frm.veriler[0]["SiparisNo"].ToString(); // aslında reçete no alanında tekabül ediyor.
-                //txtCozgu1.Text = frm.veriler[0]["Cozgu1"].ToString();
-                //txtCozgu1Bolen.Text = frm.veriler[0]["Cozgu1Bolen"].ToString();
-                //txtCozgu2.Text = frm.veriler[0]["Cozgu2"].ToString();
-                //txtAtki1.Text = frm.veriler[0]["Atki1"].ToString();
-                //txtAtki1Bolen.Text = frm.veriler[0]["Atki1Bolen"].ToString();
-                //txtAtki2.Text = frm.veriler[0]["Atki2"].ToString();
-                //txtAtki2Bolen.Text = frm.veriler[0]["Atki2Bolen"].ToString();
-                //txtAtki3.Text = frm.veriler[0]["Atki3"].ToString();
-                //txtAtki3Bolen.Text = frm.veriler[0]["Atki3Bolen"].ToString();
-                //txtAtki4.Text = frm.veriler[0]["Atki4"].ToString();
-                //txtAtki4Bolen.Text = frm.veriler[0]["Atki4Bolen"].ToString();
+                lblFirmaAdi.Text = frm.veriler[0]["Firma Adı"].ToString();
+                this.InventoryId = Convert.ToInt32(frm.veriler[0]["Malzeme Id"]);
+                txtUrun.Text = frm.veriler[0]["Malzeme Kodu"].ToString();
+                lblUrunAdi.Text = frm.veriler[0]["Malzeme Adı"].ToString();
+                this.RecipeId = Convert.ToInt32(frm.veriler[0]["Reçete Id"]);
+                txtReceteNo.Text = frm.veriler[0]["Reçete No"].ToString();
+                lblReceteAd.Text = frm.veriler[0]["Reçete Açıklama"].ToString();
+                lblFisNo.Text = frm.veriler[0]["Fiş No"].ToString(); // aslında reçete no alanında tekabül ediyor.
+                this.UretimBilgileriId = Convert.ToInt32(frm.veriler[0]["Uretim Bilgileri Id"]);
+                txtCozgu1.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 1 İp.Bil."]).ToString("0");
+                txtCozgu1Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 1 Bölen İp.Bil."]).ToString("0");
+                //lblCozgu1Uretim.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 1 Sonuç İp.Bil."]).ToString("0"); // change olayı ile otomatik olarak gelmektedir.
+                txtCozgu2.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 2 İp.Bil."]).ToString("0");
+                txtCozgu2Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 2 Bölen İp.Bil."]).ToString("0");
+                //lblCozgu2Uretim.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 2 Sonuç İp.Bil."]).ToString("0"); // change olayı ile otomatik olarak gelmektedir.
+                txtAtki1.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 1 İp.Bil."]).ToString("0");
+                txtAtki1Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 1 Bölen İp.Bil."]).ToString("0");
+                //lblAtki1Uretim.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 1 Sonuç İp.Bil."]).ToString("0"); // change olayı ile otomatik olarak gelmektedir.
+                txtAtki2.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 2 İp.Bil."]).ToString("0");
+                txtAtki2Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 2 Bölen İp.Bil."]).ToString("0");
+                //lblAtki2Uretim.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 2 Sonuç İp.Bil."]).ToString("0"); // change olayı ile otomatik olarak gelmektedir.
+                txtAtki3.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 3 İp.Bil."]).ToString("0");
+                txtAtki3Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 3 Bölen İp.Bil."]).ToString("0");
+                txtAtki4.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 4 İp.Bil."]).ToString("0");
+                txtAtki4Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 4 Bölen İp.Bil."]).ToString("0");
                 //txtTarakNo1.Text = frm.veriler[0]["TarakNo1"].ToString();
                 //txtTarakNo1Bolen.Text = frm.veriler[0]["TarakNo1Bolen"].ToString();
                 //txtTarakNo2.Text = frm.veriler[0]["TarakNo2"].ToString();
