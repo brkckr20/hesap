@@ -120,8 +120,8 @@ namespace Hesap.Forms.Kartlar
         {
             if (this.Id != 0)
             {
-                Liste.FrmKayitNoGoster frm = new Liste.FrmKayitNoGoster(this.Id, this.kaydeden, this.kayitTarihi, this.guncelleyen, this.guncellemeTarihi);
-                frm.ShowDialog();
+                //Liste.FrmKayitNoGoster frm = new Liste.FrmKayitNoGoster(this.Id, this.kaydeden, this.kayitTarihi, this.guncelleyen, this.guncellemeTarihi);
+                //frm.ShowDialog();
             }
             else
             {

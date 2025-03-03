@@ -28,5 +28,17 @@ namespace Hesap.Models
         [Display(Name = "Resim")]
         public byte[] ProductImage{ get; set; }
 
+        [Display(Name = "Kayıt Eden")]
+        public string InsertedBy { get; set; }
+
+        [Display(Name = "Kayıt Tarihi")]
+        public DateTime InsertedDate { get; set; }
+
+        [Display(Name = "Güncelleyen")]
+        public string UpdatedBy { get; set; }
+
+        [Display(Name = "Güncelleme Tarihi")]
+        public DateTime UpdatedDate { get; set; }
+
     }
 }

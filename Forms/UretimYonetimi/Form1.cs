@@ -221,33 +221,44 @@ namespace Hesap
                     {"InventoryId", InventoryId},
                     {"RecipeId", RecipeId},
                     {"OrderNo", lblFisNo.Text},
-                }; if (resimData != null && resimData.Length > 0)
+                };
+                if (resimData != null && resimData.Length > 0)
                 {
                     costParams.Add("ProductImage", resimData);
                 }
+                var CPI_params = new Dictionary<string, object>
+                { // ilgili alanlara ihtiyaç olması durumunda VirgulKaldır metodu eklenebilir
+                     {"YI_Warp1", txtCozgu1.Text},{"YI_Warp1Divider", txtCozgu1Bolen.Text},{"YI_Warp1Result", lblCozgu1Uretim.Text},{"YI_Warp2", txtCozgu2.Text},{"YI_Warp2Divider", txtCozgu2Bolen.Text},{"YI_Warp2Result", lblCozgu2Uretim.Text},{"YI_Scarf1", txtAtki1.Text},{"YI_Scarf1Divider", txtAtki1Bolen.Text},{"YI_Scarf1Result", lblAtki1Uretim.Text},{"YI_Scarf2", txtAtki2.Text},{"YI_Scarf2Divider", txtAtki2Bolen.Text},{"YI_Scarf2Result", lblAtki2Uretim.Text},{"YI_Scarf3", txtAtki3.Text},{"YI_Scarf3Divider", txtAtki3Bolen.Text},{"YI_Scarf3Result", lblAtki3Uretim.Text},{"YI_Scarf4", txtAtki4.Text},{"YI_Scarf4Divider", txtAtki4Bolen.Text},{"YI_Scarf4Result", lblAtki4Uretim.Text},{"WI_CombNo1",txtTarakNo1.Text},{"WI_CombNo1Multiplier",txtTarakNo1Bolen.Text},{"WI_CombNo1Result",lblTarakNo1Uretim.Text},{"WI_CombNo2",txtTarakNo2.Text},{"WI_CombNo2Multiplier",txtTarakNo2Bolen.Text},{"WI_CombNo2Result",lblTarakNo2Uretim.Text},{"WI_CombWidth",txtTarakEn.Text},{"WI_RawHeight",txtHamBoy.Text},{"WI_HeightEaves",VirgulKaldir(txtBoySacak)},{"WI_WidthEaves",VirgulKaldir(txtEnSacak)},{"WI_RawWidth",txtHamEn.Text},{"WI_ProductHeight",txtMamulBoy.Text},{"WI_ProductWidth",txtMamulEn.Text},{"D_Warp1",txtCozgu1Siklik.Text},{"D_Warp2",txtCozgu2Siklik.Text},{"D_Scarf1",txtAtki1Siklik.Text},{"D_Scarf2",txtAtki2Siklik.Text},{"D_Scarf3",txtAtki3Siklik.Text},{"D_Scarf4",txtAtki4Siklik.Text},{"NW_Warp1",txtCozgu1TelSayisi.Text},{"NW_Warp2",txtCozgu2TelSayisi.Text},{"NW_Scarf1",txtAtki1TelSayisi.Text},{"NW_Scarf2",txtAtki2TelSayisi.Text},{"NW_Scarf3",txtAtki3TelSayisi.Text},{"NW_Scarf4",txtAtki4TelSayisi.Text}
+                };
+                var CPC_params = new Dictionary<string, object>
+                {
+                     {"WC_Warp1",VirgulKaldir(txtCozgu1UH)},{"WC_Warp2",VirgulKaldir(txtCozgu2UH)},{"WC_Scarf1",VirgulKaldir(txtAtki1UH)},{"WC_Scarf2",VirgulKaldir(txtAtki2UH) },{"WC_Scarf3",VirgulKaldir(txtAtki3UH)},{"WC_Scarf4",VirgulKaldir(txtAtki4UH) },{"WC_Total",VirgulKaldir(txtGramajToplam) },{"YP_Warp1",VirgulKaldir(txtCozgu1IF) },{"YP_Warp2",VirgulKaldir(txtCozgu2IF)},{"YP_Scarf1",VirgulKaldir(txtAtki1IF) },{"YP_Scarf2",VirgulKaldir(txtAtki2IF) },{"YP_Scarf3",VirgulKaldir(txtAtki3IF) },{"YP_Scarf4",VirgulKaldir(txtAtki4IF) },{"YD_Warp1",VirgulKaldir(txtCozgu1IB) },{"YD_Warp2",VirgulKaldir(txtCozgu2IB) },{"YD_Scarf1",VirgulKaldir(txtAtki1IB) },{"YD_Scarf2",VirgulKaldir(txtAtki2IB) },{"YD_Scarf3",VirgulKaldir(txtAtki3IB)},{"YD_Scarf4",VirgulKaldir(txtAtki4IB) },{"YD_Result",VirgulKaldir(txtIpBoyamaSonuc) },{"YC_Warp1",VirgulKaldir(txtCozgu1IM)},{"YC_Warp2",VirgulKaldir(txtCozgu2IM)},{"YC_Scarf1",VirgulKaldir(txtAtki1IM)},{"YC_Scarf2",VirgulKaldir(txtAtki2IM)},{"YC_Scarf3",VirgulKaldir(txtAtki3IM)},{"YC_Scarf4",VirgulKaldir(txtAtki4IM)},{"YC_Result",VirgulKaldir(txtIpMaliyetToplam)}
+                };
+                var CCC_params = new Dictionary<string, object> //Maliyet Hesaplama - CostCostCalculate
+                {
+                    {"PP_Scarf",VirgulKaldir(txtAtkiMH)},{"PP_Warp",VirgulKaldir(txtCozguMH)},{"PP_PartsWashing",VirgulKaldir(txtParcaYikamaMH)},{"PP_FabricWashing",VirgulKaldir(txtKumasBoyamaMH)},{"PP_WeavingWaste",VirgulKaldir(txtDokumaFiresiMH)},{"PP_DyehouseWaster",VirgulKaldir(txtBoyahaneFiresiMH)},{"PP_GarmentCost",VirgulKaldir(txtKonfMaliyetMH)},{"PP_2QualityCost",VirgulKaldir(txt2KaliteMaliyetMH)},{"PP_Profit",VirgulKaldir(txtKarMH)},{"PP_Vat",VirgulKaldir(txtKDVMH)},{"PP_Currency",VirgulKaldir(txtKurMH)},{"PP_Parity",VirgulKaldir(txtPariteMH)},{"PP_Euro",VirgulKaldir(txtEuro)},{"WC_Weaving",VirgulKaldir(txtDokumaMH)},{"WC_Warp",VirgulKaldir(txtCozguDMMH)},{"WC_YarnCost",VirgulKaldir(txtIplikMaliyetMH)},{"PC_Total",VirgulKaldir(txtToplamUMMH)},{"PC_Wasted",VirgulKaldir(txtFireliMH)},{"RFC_ProfitableForex",VirgulKaldir(txtFireliForexHKMMH)},{"RFC_Profitable",VirgulKaldir(txtFireliTlHKMMH)},{"WDC_PartsWashing",VirgulKaldir(txtParcaYikama)},{"WDC_DyedFabric",VirgulKaldir(txtBoyanmisKumas)},{"WDC_Wasted",VirgulKaldir(txtFireliYBMMH)},{"WDC_ProfitableForex",VirgulKaldir(txtKarliYBMMH)},{"SP_DyedFabric",VirgulKaldir(txtBoyaliKumas)},{"SP_GarmentCost",VirgulKaldir(txtKonfeksiyonMaliyeti)},{"SP_2QualityCost",VirgulKaldir(txt2KaliteMaliyeti)},{"SP_ProfitableForex",VirgulKaldir(txtKarliDU)},{"SP_Profitable",VirgulKaldir(txtDUKTL)},{"SP_VatIncludeForex",VirgulKaldir(txtKDVDahilFiyat)},{"SP_VatInclude",VirgulKaldir(txtKDVDUKTL)},{"PriceDeterminedForex",VirgulKaldir(txtBelirliFiyatForex)},{"PriceDetermined",VirgulKaldir(txtbelirliFiyatTl)},{"VatIncludedPriceForex",VirgulKaldir(txtKDVliFiyatForex)},{"VatIncluded",VirgulKaldir(txtKDVliFiyatTl)}
+                };
                 if (this.Id == 0)
                 {
+                    costParams.Add("InsertedBy",Properties.Settings.Default.Id);
+                    costParams.Add("InsertedDate",DateTime.Now);
                     Id = crudRepository.Insert(this.TableName1, costParams);
-                    var CPI_params = new Dictionary<string, object>
-                { // ilgili alanlara ihtiyaç olması durumunda VirgulKaldır metodu eklenebilir
-                    {"CostId", this.Id},{"YI_Warp1", txtCozgu1.Text},{"YI_Warp1Divider", txtCozgu1Bolen.Text},{"YI_Warp1Result", lblCozgu1Uretim.Text},{"YI_Warp2", txtCozgu2.Text},{"YI_Warp2Divider", txtCozgu2Bolen.Text},{"YI_Warp2Result", lblCozgu2Uretim.Text},{"YI_Scarf1", txtAtki1.Text},{"YI_Scarf1Divider", txtAtki1Bolen.Text},{"YI_Scarf1Result", lblAtki1Uretim.Text},{"YI_Scarf2", txtAtki2.Text},{"YI_Scarf2Divider", txtAtki2Bolen.Text},{"YI_Scarf2Result", lblAtki2Uretim.Text},{"YI_Scarf3", txtAtki3.Text},{"YI_Scarf3Divider", txtAtki3Bolen.Text},{"YI_Scarf3Result", lblAtki3Uretim.Text},{"YI_Scarf4", txtAtki4.Text},{"YI_Scarf4Divider", txtAtki4Bolen.Text},{"YI_Scarf4Result", lblAtki4Uretim.Text},{"WI_CombNo1",txtTarakNo1.Text},{"WI_CombNo1Multiplier",txtTarakNo1Bolen.Text},{"WI_CombNo1Result",lblTarakNo1Uretim.Text},{"WI_CombNo2",txtTarakNo2.Text},{"WI_CombNo2Multiplier",txtTarakNo2Bolen.Text},{"WI_CombNo2Result",lblTarakNo2Uretim.Text},{"WI_CombWidth",txtTarakEn.Text},{"WI_RawHeight",txtHamBoy.Text},{"WI_HeightEaves",VirgulKaldir(txtBoySacak)},{"WI_WidthEaves",VirgulKaldir(txtEnSacak)},{"WI_RawWidth",txtHamEn.Text},{"WI_ProductHeight",txtMamulBoy.Text},{"WI_ProductWidth",txtMamulEn.Text},{"D_Warp1",txtCozgu1Siklik.Text},{"D_Warp2",txtCozgu2Siklik.Text},{"D_Scarf1",txtAtki1Siklik.Text},{"D_Scarf2",txtAtki2Siklik.Text},{"D_Scarf3",txtAtki3Siklik.Text},{"D_Scarf4",txtAtki4Siklik.Text},{"NW_Warp1",txtCozgu1TelSayisi.Text},{"NW_Warp2",txtCozgu2TelSayisi.Text},{"NW_Scarf1",txtAtki1TelSayisi.Text},{"NW_Scarf2",txtAtki2TelSayisi.Text},{"NW_Scarf3",txtAtki3TelSayisi.Text},{"NW_Scarf4",txtAtki4TelSayisi.Text}
-                };
-                    crudRepository.Insert(this.TableName2, CPI_params);
-                    var CPC_params = new Dictionary<string, object>
-                {
-                    {"CostId",this.Id},{"WC_Warp1",VirgulKaldir(txtCozgu1UH)},{"WC_Warp2",VirgulKaldir(txtCozgu2UH)},{"WC_Scarf1",VirgulKaldir(txtAtki1UH)},{"WC_Scarf2",VirgulKaldir(txtAtki2UH) },{"WC_Scarf3",VirgulKaldir(txtAtki3UH)},{"WC_Scarf4",VirgulKaldir(txtAtki4UH) },{"WC_Total",VirgulKaldir(txtGramajToplam) },{"YP_Warp1",VirgulKaldir(txtCozgu1IF) },{"YP_Warp2",VirgulKaldir(txtCozgu2IF)},{"YP_Scarf1",VirgulKaldir(txtAtki1IF) },{"YP_Scarf2",VirgulKaldir(txtAtki2IF) },{"YP_Scarf3",VirgulKaldir(txtAtki3IF) },{"YP_Scarf4",VirgulKaldir(txtAtki4IF) },{"YD_Warp1",VirgulKaldir(txtCozgu1IB) },{"YD_Warp2",VirgulKaldir(txtCozgu2IB) },{"YD_Scarf1",VirgulKaldir(txtAtki1IB) },{"YD_Scarf2",VirgulKaldir(txtAtki2IB) },{"YD_Scarf3",VirgulKaldir(txtAtki3IB)},{"YD_Scarf4",VirgulKaldir(txtAtki4IB) },{"YD_Result",VirgulKaldir(txtIpBoyamaSonuc) },{"YC_Warp1",VirgulKaldir(txtCozgu1IM)},{"YC_Warp2",VirgulKaldir(txtCozgu2IM)},{"YC_Scarf1",VirgulKaldir(txtAtki1IM)},{"YC_Scarf2",VirgulKaldir(txtAtki2IM)},{"YC_Scarf3",VirgulKaldir(txtAtki3IM)},{"YC_Scarf4",VirgulKaldir(txtAtki4IM)},{"YC_Result",VirgulKaldir(txtIpMaliyetToplam)}
-                };
-                    crudRepository.Insert(TableName3, CPC_params);
-                    var CCC_params = new Dictionary<string, object> //Maliyet Hesaplama - CostCostCalculate
-                {
-                    {"CostId",this.Id},{"PP_Scarf",VirgulKaldir(txtAtkiMH)},{"PP_Warp",VirgulKaldir(txtCozguMH)},{"PP_PartsWashing",VirgulKaldir(txtParcaYikamaMH)},{"PP_FabricWashing",VirgulKaldir(txtKumasBoyamaMH)},{"PP_WeavingWaste",VirgulKaldir(txtDokumaFiresiMH)},{"PP_DyehouseWaster",VirgulKaldir(txtBoyahaneFiresiMH)},{"PP_GarmentCost",VirgulKaldir(txtKonfMaliyetMH)},{"PP_2QualityCost",VirgulKaldir(txt2KaliteMaliyetMH)},{"PP_Profit",VirgulKaldir(txtKarMH)},{"PP_Vat",VirgulKaldir(txtKDVMH)},{"PP_Currency",VirgulKaldir(txtKurMH)},{"PP_Parity",VirgulKaldir(txtPariteMH)},{"PP_Euro",VirgulKaldir(txtEuro)},{"WC_Weaving",VirgulKaldir(txtDokumaMH)},{"WC_Warp",VirgulKaldir(txtCozguDMMH)},{"WC_YarnCost",VirgulKaldir(txtIplikMaliyetMH)},{"PC_Total",VirgulKaldir(txtToplamUMMH)},{"PC_Wasted",VirgulKaldir(txtFireliMH)},{"RFC_ProfitableForex",VirgulKaldir(txtFireliForexHKMMH)},{"RFC_Profitable",VirgulKaldir(txtFireliTlHKMMH)},{"WDC_PartsWashing",VirgulKaldir(txtParcaYikama)},{"WDC_DyedFabric",VirgulKaldir(txtBoyanmisKumas)},{"WDC_Wasted",VirgulKaldir(txtFireliYBMMH)},{"WDC_ProfitableForex",VirgulKaldir(txtKarliYBMMH)},{"SP_DyedFabric",VirgulKaldir(txtBoyaliKumas)},{"SP_GarmentCost",VirgulKaldir(txtKonfeksiyonMaliyeti)},{"SP_2QualityCost",VirgulKaldir(txt2KaliteMaliyeti)},{"SP_ProfitableForex",VirgulKaldir(txtKarliDU)},{"SP_Profitable",VirgulKaldir(txtDUKTL)},{"SP_VatIncludeForex",VirgulKaldir(txtKDVDahilFiyat)},{"SP_VatInclude",VirgulKaldir(txtKDVDUKTL)},{"PriceDeterminedForex",VirgulKaldir(txtBelirliFiyatForex)},{"PriceDetermined",VirgulKaldir(txtbelirliFiyatTl)},{"VatIncludedPriceForex",VirgulKaldir(txtKDVliFiyatForex)},{"VatIncluded",VirgulKaldir(txtKDVliFiyatTl)}
-                };
-                    crudRepository.Insert(TableName4, CCC_params);
+                    CPI_params.Add("CostId", this.Id);
+                    CPC_params.Add("CostId", this.Id);
+                    CCC_params.Add("CostId", this.Id);
+                    UretimBilgileriId = crudRepository.Insert(TableName2, CPI_params);
+                    UretimHesaplamaId = crudRepository.Insert(TableName3, CPC_params);
+                    MaliyetHesaplamaId = crudRepository.Insert(TableName4, CCC_params);
                     bildirim.Basarili();
                 }
                 else
                 {
+                    costParams.Add("UpdatedBy", Properties.Settings.Default.Id);
+                    costParams.Add("UpdatedDate", DateTime.Now);
                     crudRepository.Update(this.TableName1, this.Id, costParams);
+                    crudRepository.Update(TableName2, this.UretimBilgileriId, CPI_params);
+                    crudRepository.Update(TableName3, this.UretimHesaplamaId, CPC_params);
+                    crudRepository.Update(TableName4, this.MaliyetHesaplamaId, CCC_params);
                     bildirim.GuncellemeBasarili();
                 }
             }
@@ -277,16 +288,12 @@ namespace Hesap
                 this.UretimBilgileriId = Convert.ToInt32(frm.veriler[0]["Uretim Bilgileri Id"]);
                 txtCozgu1.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 1 İp.Bil."]).ToString("0");
                 txtCozgu1Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 1 Bölen İp.Bil."]).ToString("0");
-                //lblCozgu1Uretim.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 1 Sonuç İp.Bil."]).ToString("0"); // change olayı ile otomatik olarak gelmektedir.
                 txtCozgu2.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 2 İp.Bil."]).ToString("0");
                 txtCozgu2Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 2 Bölen İp.Bil."]).ToString("0");
-                //lblCozgu2Uretim.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 2 Sonuç İp.Bil."]).ToString("0"); // change olayı ile otomatik olarak gelmektedir.
                 txtAtki1.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 1 İp.Bil."]).ToString("0");
                 txtAtki1Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 1 Bölen İp.Bil."]).ToString("0");
-                //lblAtki1Uretim.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 1 Sonuç İp.Bil."]).ToString("0"); // change olayı ile otomatik olarak gelmektedir.
                 txtAtki2.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 2 İp.Bil."]).ToString("0");
                 txtAtki2Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 2 Bölen İp.Bil."]).ToString("0");
-                //lblAtki2Uretim.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 2 Sonuç İp.Bil."]).ToString("0"); // change olayı ile otomatik olarak gelmektedir.
                 txtAtki3.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 3 İp.Bil."]).ToString("0");
                 txtAtki3Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 3 Bölen İp.Bil."]).ToString("0");
                 txtAtki4.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 4 İp.Bil."]).ToString("0");
@@ -302,26 +309,10 @@ namespace Hesap
                 txtHamEn.Text = Convert.ToDecimal(frm.veriler[0]["Ham En"]).ToString("0");
                 txtMamulBoy.Text = Convert.ToDecimal(frm.veriler[0]["Mamul Boy"]).ToString("0");
                 txtMamulEn.Text = Convert.ToDecimal(frm.veriler[0]["Mamul En"]).ToString("0");
-                //txtCozgu1Siklik.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 1 Sıklık"]).ToString("0"); -- tarak no verisine göre otomatik olarak gelmektedir.
-                //txtCozgu2Siklik.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 2 Sıklık"]).ToString("0"); -- istenildiği taktirde yorum satırından kaldırılabilir.
                 txtAtki1Siklik.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 1 Sıklık"]).ToString("0");
                 txtAtki2Siklik.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 2 Sıklık"]).ToString("0");
                 txtAtki3Siklik.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 3 Sıklık"]).ToString("0");
                 txtAtki4Siklik.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 4 Sıklık"]).ToString("0");
-                //txtCozgu1TelSayisi.Text = frm.veriler[0]["Cozgu1TelSayisi"].ToString(); --
-                //txtCozgu2TelSayisi.Text = frm.veriler[0]["Cozgu2TelSayisi"].ToString();   --
-                //txtAtki1TelSayisi.Text = frm.veriler[0]["Atki1TelSayisi"].ToString();         --
-                //txtAtki2TelSayisi.Text = frm.veriler[0]["Atki2TelSayisi"].ToString();         -- bu alanlar mevcutta onchange olayı ile tetiklenmektedir. o yüzden eklenmedi fakat eklenilebilir.
-                //txtAtki3TelSayisi.Text = frm.veriler[0]["Atki3TelSayisi"].ToString();     --
-                //txtAtki4TelSayisi.Text = frm.veriler[0]["Atki4TelSayisi"].ToString(); --
-                //lblCozgu1Uretim.Text = frm.veriler[0]["Cozgu1Uretim"].ToString(); ###
-                //lblCozgu2Uretim.Text = frm.veriler[0]["Cozgu2Uretim"].ToString();    #
-                //lblAtki1Uretim.Text = frm.veriler[0]["Atki1Uretim"].ToString();       # --> onchange olayı ile gelmektedir.
-                //lblAtki2Uretim.Text = frm.veriler[0]["Atki2Uretim"].ToString();      #
-                //lblAtki3Uretim.Text = frm.veriler[0]["Atki3Uretim"].ToString();     #
-                //lblAtki4Uretim.Text = frm.veriler[0]["Atki4Uretim"].ToString();   
-                //lblTarakNo1Uretim.Text = frm.veriler[0]["TarakNo1Uretim"].ToString();
-                //lblTarakNo2Uretim.Text = frm.veriler[0]["TarakNo2Uretim"].ToString();###
                 txtCozgu1IF.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 1 İp.Fiy"]).ToString("0.###");
                 txtCozgu2IF.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 2 İp.Fiy"]).ToString("0.###");
                 txtAtki1IF.Text = Convert.ToDecimal(frm.veriler[0]["Atkı 1 İp.Fiy"]).ToString("0.###");
@@ -337,17 +328,39 @@ namespace Hesap
                 txtAtkiMH.Text = Convert.ToDecimal(frm.veriler[0]["Atkı"]).ToString("0.###");
                 txtCozguMH.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü"]).ToString("0.###");
                 txtParcaYikamaMH.Text = Convert.ToDecimal(frm.veriler[0]["Parça Yıkama"]).ToString("0.###");
-                //txtKumasBoyamaMH.Text = frm.veriler[0]["KumasBoyama"].ToString();
-                //txtDokumaFiresiMH.Text = frm.veriler[0]["DokumaFiresi"].ToString();
-                //txtBoyahaneFiresiMH.Text = frm.veriler[0]["BoyahaneFiresi"].ToString();
-                //txtKonfMaliyetMH.Text = frm.veriler[0]["KonfeksiyonMaliyeti"].ToString();
-                //txtKarMH.Text = frm.veriler[0]["Kar"].ToString();
-                //txtKDVMH.Text = frm.veriler[0]["KDV"].ToString();
-                //txtKurMH.Text = frm.veriler[0]["Kur"].ToString();
-                //txtPariteMH.Text = frm.veriler[0]["Parite"].ToString();
-                //txtEuro.Text = frm.veriler[0]["Euro"].ToString();
-                //txtBelirliFiyatForex.Text = frm.veriler[0]["BelirlenenFiyatForex"].ToString();
-                //txtKDVliFiyatForex.Text = frm.veriler[0]["KDVliBelirlenenFiyatForex"].ToString();
+                txtKumasBoyamaMH.Text = Convert.ToDecimal(frm.veriler[0]["Kumaş Boyama"]).ToString("0.###");
+                txtDokumaFiresiMH.Text = Convert.ToDecimal(frm.veriler[0]["Dokuma Firesi"]).ToString("0.###");
+                txtBoyahaneFiresiMH.Text = Convert.ToDecimal(frm.veriler[0]["Boyahane Boyama"]).ToString("0.###");
+                txtKonfMaliyetMH.Text = Convert.ToDecimal(frm.veriler[0]["Konf.Maliyeti"]).ToString("0.###");
+                txt2KaliteMaliyetMH.Text = Convert.ToDecimal(frm.veriler[0]["2.Kalite Maliyet"]).ToString("0.###");
+                txtKarMH.Text = Convert.ToDecimal(frm.veriler[0]["Kâr"]).ToString("0.###");
+                txtKDVMH.Text = Convert.ToDecimal(frm.veriler[0]["KDV"]).ToString("0.###");
+                txtKurMH.Text = Convert.ToDecimal(frm.veriler[0]["Kur"]).ToString("0.###");
+                txtPariteMH.Text = Convert.ToDecimal(frm.veriler[0]["Parite"]).ToString("0.###");
+                txtEuro.Text = Convert.ToDecimal(frm.veriler[0]["Euro"]).ToString("0.###");
+                txtBelirliFiyatForex.Text = Convert.ToDecimal(frm.veriler[0]["Belirlenen Fiyat Döviz"]).ToString("0.###");
+                txtKDVliFiyatForex.Text = Convert.ToDecimal(frm.veriler[0]["KDVli Belirlenen Fiyat Döviz"]).ToString("0.###");
+                if (frm.veriler[0]["Ürün Resmi"] != DBNull.Value && frm.veriler[0]["Ürün Resmi"] is byte[])
+                {
+                    byte[] imageData = (byte[])frm.veriler[0]["Ürün Resmi"];
+                    if (imageData.Length > 0)
+                    {
+                        using (MemoryStream memoryStream = new MemoryStream(imageData))
+                        {
+                            pictureBox1.Image = Image.FromStream(memoryStream);
+                        }
+
+                        string tempFilePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".png");
+                        File.WriteAllBytes(tempFilePath, imageData);
+                        pictureBox1.Tag = tempFilePath;
+                    }
+                }
+                else
+                {
+                    pictureBox1.Image = null;
+                    pictureBox1.Tag = null;
+                }
+
             }
 
         }
@@ -453,7 +466,7 @@ namespace Hesap
         {
             if (this.Id != 0)
             {
-                Forms.Liste.FrmKayitNoGoster frm = new Forms.Liste.FrmKayitNoGoster(this.Id);
+                FrmKayitNoGoster frm = new FrmKayitNoGoster(this.Id,this.TableName1);
                 frm.ShowDialog();
             }
             else

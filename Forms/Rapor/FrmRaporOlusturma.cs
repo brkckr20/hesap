@@ -16,6 +16,8 @@ using DevExpress.LookAndFeel;
 using DevExpress.XtraRichEdit.Model;
 using Dapper;
 using System.IO;
+using Hesap.Models;
+using Hesap.DataAccess;
 
 namespace Hesap.Forms.Rapor
 {
@@ -24,7 +26,9 @@ namespace Hesap.Forms.Rapor
         Ayarlar ayarlar = new Ayarlar();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         Bildirim bildirim = new Bildirim();
+        CrudRepository crudRepository = new CrudRepository();
         int Id = 0;
+        string TableName1 = "Report";
         public FrmRaporOlusturma()
         {
             InitializeComponent();
@@ -34,7 +38,7 @@ namespace Hesap.Forms.Rapor
         {
             if (this.Id != 0)
             {
-                DizaynAc(txtRaporAdi.Text, true, 4);
+                DizaynAc(txtRaporAdi.Text, true, 1);
             }
             else
             {
@@ -82,13 +86,13 @@ namespace Hesap.Forms.Rapor
             using (var connection = new Baglanti().GetConnection())
             {
 
-                string sql = $"select Sorgu1,Sorgu2,Sorgu3,Sorgu4 from Rapor where RaporAdi = @RaporName";
+                string sql = $"select Query1,Query2,Query3,Query4 from Report where ReportName = @RaporName";
                 var parameters = new { RaporName = raporName };
                 var result = connection.QuerySingleOrDefault(sql, parameters);
-                Rapor1 = result.Sorgu1;
-                Rapor2 = result.Sorgu2;
-                Rapor3 = result.Sorgu3;
-                Rapor4 = result.Sorgu4;
+                Rapor1 = result.Query1;
+                Rapor2 = result.Query2;
+                Rapor3 = result.Query3;
+                Rapor4 = result.Query4;
                 VeriKaydetVeRaporuKaydet(Rapor1, report1, kayitNumarasi);
                 VeriKaydetVeRaporuKaydet(Rapor2, report1, kayitNumarasi);
                 VeriKaydetVeRaporuKaydet(Rapor3, report1, kayitNumarasi);
@@ -175,62 +179,83 @@ namespace Hesap.Forms.Rapor
         int kayitSayi;
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-
-            object baslik = new
-            {
-                FormAdi = txtEkranAdi.Text.Trim(),
-                RaporAdi = txtRaporAdi.Text.Trim(),
-                Sorgu1 = sorgu1.Text.Trim(),
-                Sorgu2 = sorgu2.Text.Trim(),
-                Sorgu3 = sorgu3.Text.Trim(),
-                Sorgu4 = sorgu4.Text.Trim(),
-                Sorgu5 = "",
-                Sorgu6 = "",
-                Sorgu7 = "",
-                Sorgu8 = "",
-                Sorgu9 = "",
-                FormGrubu = "",
-                Id = this.Id,
-                KayitNo = this.Id
-            };
-            using (var connection = new Baglanti().GetConnection())
-            {
-                if (this.Id == 0)
+            var reportParams = new Dictionary<string, object>
                 {
-                    string mssql = @"
-                                    INSERT INTO Rapor
-                                           (FormAdi, RaporAdi, Sorgu1, Sorgu2, Sorgu3, Sorgu4, Sorgu5, Sorgu6, Sorgu7, Sorgu8, Sorgu9, FormGrubu)
-                                    OUTPUT INSERTED.KayitNo
-                                    VALUES (@FormAdi, @RaporAdi, @Sorgu1, @Sorgu2, @Sorgu3, @Sorgu4, @Sorgu5, @Sorgu6, @Sorgu7, @Sorgu8, @Sorgu9, @FormGrubu)";
-
-                    string sqlite = @"INSERT INTO Rapor
-                               (FormAdi,RaporAdi,Sorgu1,Sorgu2,Sorgu3,Sorgu4,Sorgu5,Sorgu6,Sorgu7,Sorgu8,Sorgu9,FormGrubu)
-                         VALUES (@FormAdi,@RaporAdi,@Sorgu1,@Sorgu2,@Sorgu3,@Sorgu4,@Sorgu5,@Sorgu6,@Sorgu7,@Sorgu8,@Sorgu9,@FormGrubu)";
-                    string idQuery = "SELECT last_insert_rowid();";
-                    string kayitSayisi = "select COUNT(*) from Rapor";
-                    kayitSayi = connection.QuerySingle<int>(kayitSayisi);
-                    if (ayarlar.VeritabaniTuru() == "mssql")
-                    {
-                        this.Id = connection.QuerySingle<int>(mssql, baslik);
-                    }
-                    else
-                    {
-                        connection.Execute(sqlite, baslik);
-                        this.Id = connection.QuerySingle<int>(idQuery);
-                    }
-                    RaporDosyasiOlustur(txtRaporAdi.Text.Trim());
-                    bildirim.Basarili();
-                }
-                else
-                {
-                    string update = @"UPDATE Rapor
-                       SET [Id] = @Id,[FormAdi] = @FormAdi,[RaporAdi] = @RaporAdi,[Sorgu1] = @Sorgu1,[Sorgu2] = @Sorgu2,[Sorgu3] = @Sorgu3
-                    ,[Sorgu4] = @Sorgu4,[Sorgu5] = @Sorgu5,[Sorgu6] = @Sorgu6,[Sorgu7] = @Sorgu7,[Sorgu8] = @Sorgu8,[Sorgu9] = @Sorgu9,[FormGrubu] = @FormGrubu
-                     WHERE KayitNo = @KayitNo";
-                    connection.Execute(update, baslik);
-                    bildirim.GuncellemeBasarili();
-                }
+                    {"FormName",txtEkranAdi.Text.Trim()},
+                    {"ReportName", txtRaporAdi.Text.Trim()},
+                    {"Query1", sorgu1.Text.Trim()},
+                    {"Query2", sorgu2.Text.Trim()},
+                    {"Query3", sorgu3.Text.Trim()},
+                    {"Query4", sorgu4.Text.Trim()},
+                    {"Query5", ""},
+                    //{"Id", this.Id}
+                };
+            if (this.Id == 0)
+            {
+                this.Id = crudRepository.Insert(TableName1, reportParams);
+                RaporDosyasiOlustur(txtRaporAdi.Text.Trim());
+                bildirim.Basarili();
             }
+            else
+            {
+                crudRepository.Update(TableName1, this.Id, reportParams);
+                bildirim.GuncellemeBasarili();
+            }
+            //object baslik = new
+            //{
+            //    FormAdi = txtEkranAdi.Text.Trim(),
+            //    RaporAdi = txtRaporAdi.Text.Trim(),
+            //    Sorgu1 = sorgu1.Text.Trim(),
+            //    Sorgu2 = sorgu2.Text.Trim(),
+            //    Sorgu3 = sorgu3.Text.Trim(),
+            //    Sorgu4 = sorgu4.Text.Trim(),
+            //    Sorgu5 = "",
+            //    Sorgu6 = "",
+            //    Sorgu7 = "",
+            //    Sorgu8 = "",
+            //    Sorgu9 = "",
+            //    FormGrubu = "",
+            //    Id = this.Id,
+            //    KayitNo = this.Id
+            //};
+            //using (var connection = new Baglanti().GetConnection())
+            //{
+            //    if (this.Id == 0)
+            //    {
+            //        string mssql = @"
+            //                        INSERT INTO Rapor
+            //                               (FormAdi, RaporAdi, Sorgu1, Sorgu2, Sorgu3, Sorgu4, Sorgu5, Sorgu6, Sorgu7, Sorgu8, Sorgu9, FormGrubu)
+            //                        OUTPUT INSERTED.KayitNo
+            //                        VALUES (@FormAdi, @RaporAdi, @Sorgu1, @Sorgu2, @Sorgu3, @Sorgu4, @Sorgu5, @Sorgu6, @Sorgu7, @Sorgu8, @Sorgu9, @FormGrubu)";
+
+            //        string sqlite = @"INSERT INTO Rapor
+            //                   (FormAdi,RaporAdi,Sorgu1,Sorgu2,Sorgu3,Sorgu4,Sorgu5,Sorgu6,Sorgu7,Sorgu8,Sorgu9,FormGrubu)
+            //             VALUES (@FormAdi,@RaporAdi,@Sorgu1,@Sorgu2,@Sorgu3,@Sorgu4,@Sorgu5,@Sorgu6,@Sorgu7,@Sorgu8,@Sorgu9,@FormGrubu)";
+            //        string idQuery = "SELECT last_insert_rowid();";
+            //        string kayitSayisi = "select COUNT(*) from Rapor";
+            //        kayitSayi = connection.QuerySingle<int>(kayitSayisi);
+            //        if (ayarlar.VeritabaniTuru() == "mssql")
+            //        {
+            //            this.Id = connection.QuerySingle<int>(mssql, baslik);
+            //        }
+            //        else
+            //        {
+            //            connection.Execute(sqlite, baslik);
+            //            this.Id = connection.QuerySingle<int>(idQuery);
+            //        }
+            //        RaporDosyasiOlustur(txtRaporAdi.Text.Trim());
+            //        bildirim.Basarili();
+            //    }
+            //    else
+            //    {
+            //        string update = @"UPDATE Rapor
+            //           SET [Id] = @Id,[FormAdi] = @FormAdi,[RaporAdi] = @RaporAdi,[Sorgu1] = @Sorgu1,[Sorgu2] = @Sorgu2,[Sorgu3] = @Sorgu3
+            //        ,[Sorgu4] = @Sorgu4,[Sorgu5] = @Sorgu5,[Sorgu6] = @Sorgu6,[Sorgu7] = @Sorgu7,[Sorgu8] = @Sorgu8,[Sorgu9] = @Sorgu9,[FormGrubu] = @FormGrubu
+            //         WHERE KayitNo = @KayitNo";
+            //        connection.Execute(update, baslik);
+            //        bildirim.GuncellemeBasarili();
+            //    }
+            //}
 
         }
 

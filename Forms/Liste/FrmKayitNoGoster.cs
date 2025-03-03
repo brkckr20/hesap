@@ -1,29 +1,48 @@
-﻿using DevExpress.XtraEditors;
+﻿using Dapper;
+using DevExpress.XtraEditors;
+using Hesap.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.Liste
 {
-    public partial class FrmKayitNoGoster : DevExpress.XtraEditors.XtraForm
+    public partial class FrmKayitNoGoster : XtraForm
     {
         int _id;
-        string _kaydeden,_guncelleyen;
-        DateTime _kayitTarihi, _guncellemeTarihi;
-        public FrmKayitNoGoster(int id,string kaydeden=null,DateTime? kayitTarihi = null,string guncelleyen = null,DateTime? guncellemeTarihi = null)
+        CRUD_Operations cRUD = new CRUD_Operations();
+        string _kaydeden, _guncelleyen, _tableName;
+        string _kayitTarihi, _guncellemeTarihi;
+        public FrmKayitNoGoster(int id, string TableName)
         {
             InitializeComponent();
             _id = id;
-            this._kaydeden = kaydeden;
-            this._kayitTarihi = (DateTime)kayitTarihi;
-            this._guncelleyen = guncelleyen;
-            this._guncellemeTarihi = (DateTime)guncellemeTarihi;
+            _tableName = TableName;
+            using (var conn = new Baglanti().GetConnection())
+            {
+                string query = $@"
+                                select 
+	                            U.Name + ' ' +U.Surname [NameSurname],
+	                            C.InsertedDate InsertedDate ,
+	                            UU.Name + ' ' +UU.Surname [UpdateNameSurname],
+	                            C.UpdatedDate UpdatedDate
+	                            from 
+	                            {TableName} C left join Users U on U.Id = C.InsertedBy
+	                            left join Users UU on UU.Id = C.UpdatedBy
+	                            where C.Id = {id}";
+                var liste = conn.QueryFirstOrDefault(query);
+                this._kaydeden = liste.NameSurname.ToString();
+                this._kayitTarihi = liste.InsertedDate.ToString();
+                if (liste.UpdateNameSurname != null && liste.UpdatedDate != null)
+                {
+                    this._guncelleyen = liste.UpdateNameSurname.ToString();
+                    this._guncellemeTarihi = ((DateTime)liste.UpdatedDate).ToString();
+                }
+                else
+                {
+                    this._guncelleyen = "";
+                    this._guncellemeTarihi = "";
+                }
+
+            }
         }
 
         private void FrmKayitNoGoster_Load(object sender, EventArgs e)

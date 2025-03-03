@@ -15,9 +15,9 @@ using Dapper;
 
 namespace Hesap.Forms.Rapor
 {
-    public partial class FrmRaporSecimEkrani : DevExpress.XtraEditors.XtraForm
+    public partial class FrmRaporSecimEkrani : XtraForm
     {
-        SqlConnection bg = new SqlConnection("Server=.; Database=Hesap; Integrated Security=True;");
+        //SqlConnection bg = new SqlConnection("Server=.; Database=Hesap; Integrated Security=True;");
         string _formAdi;
         int _kayitNo;
         FrmRaporOlusturma raporOlusturma = new FrmRaporOlusturma();
@@ -50,20 +50,20 @@ namespace Hesap.Forms.Rapor
             //}
             #endregion;
         }
-        public DataSet goster(string sql, string tabloismi)
-        {
-            DataSet ds = new DataSet();
-            if (bg.State != ConnectionState.Closed)
-            {
-                bg.Close();
-            }
-            bg.Open();
-            SqlDataAdapter adapter = new SqlDataAdapter(sql, bg);
-            adapter.SelectCommand.CommandTimeout = 5000;
-            adapter.Fill(ds, tabloismi);
-            bg.Close();
-            return ds;
-        }
+        //public DataSet goster(string sql, string tabloismi)
+        //{
+        //    DataSet ds = new DataSet();
+        //    if (bg.State != ConnectionState.Closed)
+        //    {
+        //        bg.Close();
+        //    }
+        //    bg.Open();
+        //    SqlDataAdapter adapter = new SqlDataAdapter(sql, bg);
+        //    adapter.SelectCommand.CommandTimeout = 5000;
+        //    adapter.Fill(ds, tabloismi);
+        //    bg.Close();
+        //    return ds;
+        //}
 
         private void FrmRaporSecimEkrani_Load(object sender, EventArgs e)
         {
@@ -73,11 +73,11 @@ namespace Hesap.Forms.Rapor
         {
             using (var connection = new Baglanti().GetConnection())
             {
-                string query = "SELECT DISTINCT RaporAdi FROM Rapor WHERE FormAdi = @FormAdi";
+                string query = "SELECT DISTINCT ReportName FROM Report WHERE FormName = @FormAdi";
                 var liste = connection.Query(query, new { FormAdi = this._formAdi });
                 foreach (var item in liste.ToList())
                 {
-                    var raporAdi = (string)item.RaporAdi;
+                    var raporAdi = (string)item.ReportName;
                     comboBoxEdit1.Properties.Items.Add(raporAdi);
                 }
             }

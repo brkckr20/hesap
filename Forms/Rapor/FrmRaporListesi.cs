@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Hesap.Forms.Rapor
 {
-    public partial class FrmRaporListesi : DevExpress.XtraEditors.XtraForm
+    public partial class FrmRaporListesi : XtraForm
     {
         public FrmRaporListesi(bool etiketMi = false)
         {
@@ -39,26 +39,21 @@ namespace Hesap.Forms.Rapor
             }
             else
             {
-                sql = "SELECT * FROM Rapor";
+                sql = "SELECT * FROM Report";
             listele.Liste(sql, gridControl1);
             }
         }
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
             GridView gridView = sender as GridView;
-            RaporAdi = gridView.GetFocusedRowCellValue("RaporAdi").ToString();
-            EkranAdi = gridView.GetFocusedRowCellValue("FormAdi").ToString();
-            Sorgu1 = gridView.GetFocusedRowCellValue("Sorgu1").ToString();
-            Sorgu2 = gridView.GetFocusedRowCellValue("Sorgu2").ToString();
-            Sorgu3 = gridView.GetFocusedRowCellValue("Sorgu3").ToString();
-            Sorgu4 = gridView.GetFocusedRowCellValue("Sorgu4").ToString();
-            Sorgu5 = gridView.GetFocusedRowCellValue("Sorgu5").ToString();
-            Sorgu6 = gridView.GetFocusedRowCellValue("Sorgu6").ToString();
-            Sorgu7 = gridView.GetFocusedRowCellValue("Sorgu7").ToString();
-            Sorgu8 = gridView.GetFocusedRowCellValue("Sorgu8").ToString();
-            Sorgu9 = gridView.GetFocusedRowCellValue("Sorgu9").ToString();
-            FormGrubu = gridView.GetFocusedRowCellValue("FormGrubu").ToString();
-            Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("KayitNo"));
+            RaporAdi = gridView.GetFocusedRowCellValue("ReportName").ToString();
+            EkranAdi = gridView.GetFocusedRowCellValue("FormName").ToString();
+            Sorgu1 = gridView.GetFocusedRowCellValue("Query1").ToString();
+            Sorgu2 = gridView.GetFocusedRowCellValue("Query2").ToString();
+            Sorgu3 = gridView.GetFocusedRowCellValue("Query1").ToString();
+            Sorgu4 = gridView.GetFocusedRowCellValue("Query4").ToString();
+            FormGrubu = gridView.GetFocusedRowCellValue("FormGroup").ToString();
+            Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
             this.Close();
         }
     }
