@@ -38,7 +38,7 @@ namespace Hesap.Forms.Rapor
         {
             if (this.Id != 0)
             {
-                DizaynAc(txtRaporAdi.Text, true, 1);
+                DizaynAc(txtRaporAdi.Text, true, this.Id);
             }
             else
             {

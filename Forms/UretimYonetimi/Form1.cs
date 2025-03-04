@@ -286,6 +286,8 @@ namespace Hesap
                 lblReceteAd.Text = frm.veriler[0]["Reçete Açıklama"].ToString();
                 lblFisNo.Text = frm.veriler[0]["Fiş No"].ToString(); // aslında reçete no alanında tekabül ediyor.
                 this.UretimBilgileriId = Convert.ToInt32(frm.veriler[0]["Uretim Bilgileri Id"]);
+                this.UretimHesaplamaId = Convert.ToInt32(frm.veriler[0]["Uretim Hesaplama Id"]);
+                this.MaliyetHesaplamaId = Convert.ToInt32(frm.veriler[0]["Maliyet Hesaplama Id"]);
                 txtCozgu1.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 1 İp.Bil."]).ToString("0");
                 txtCozgu1Bolen.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 1 Bölen İp.Bil."]).ToString("0");
                 txtCozgu2.Text = Convert.ToDecimal(frm.veriler[0]["Çözgü 2 İp.Bil."]).ToString("0");

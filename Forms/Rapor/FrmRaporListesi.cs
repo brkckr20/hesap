@@ -50,7 +50,7 @@ namespace Hesap.Forms.Rapor
             EkranAdi = gridView.GetFocusedRowCellValue("FormName").ToString();
             Sorgu1 = gridView.GetFocusedRowCellValue("Query1").ToString();
             Sorgu2 = gridView.GetFocusedRowCellValue("Query2").ToString();
-            Sorgu3 = gridView.GetFocusedRowCellValue("Query1").ToString();
+            Sorgu3 = gridView.GetFocusedRowCellValue("Query3").ToString();
             Sorgu4 = gridView.GetFocusedRowCellValue("Query4").ToString();
             FormGrubu = gridView.GetFocusedRowCellValue("FormGroup").ToString();
             Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
