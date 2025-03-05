@@ -92,6 +92,7 @@
             this.simpleButton1.Size = new System.Drawing.Size(75, 47);
             this.simpleButton1.TabIndex = 100;
             this.simpleButton1.Text = "Yeni";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // btnIleri
             // 
@@ -249,7 +250,6 @@
             this.sorgu1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sorgu1.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu1.IsReplaceMode = false;
             this.sorgu1.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu1.LeftBracket = '(';
@@ -292,7 +292,6 @@
             this.sorgu2.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu2.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sorgu2.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu2.IsReplaceMode = false;
             this.sorgu2.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu2.LeftBracket = '(';
@@ -335,7 +334,6 @@
             this.sorgu3.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu3.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sorgu3.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu3.IsReplaceMode = false;
             this.sorgu3.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu3.LeftBracket = '(';
@@ -378,6 +376,7 @@
             this.sorgu4.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sorgu4.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.sorgu4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sorgu4.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.sorgu4.IsReplaceMode = false;
             this.sorgu4.Language = FastColoredTextBoxNS.Language.SQL;
             this.sorgu4.LeftBracket = '(';

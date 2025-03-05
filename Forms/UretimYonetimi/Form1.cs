@@ -523,6 +523,15 @@ namespace Hesap
 
             };
             yardimciAraclar.Y1(objects1);
+            dateTimePicker1.EditValue = DateTime.Now;
+            txtFirmaKodu.Text = "";
+            lblFirmaAdi.Text = "";
+            txtUrun.Text = "";
+            lblUrunAdi.Text = "";
+            txtReceteNo.Text = "";
+            lblReceteAd.Text = "";
+            lblFisNo.Text = numarator.NumaraVer("Maliyet");
+            DolarKuruGetir("USD_ALIS");
         }
         private void txtUrun_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {

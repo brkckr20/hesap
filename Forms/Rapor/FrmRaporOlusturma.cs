@@ -28,7 +28,7 @@ namespace Hesap.Forms.Rapor
         Bildirim bildirim = new Bildirim();
         CrudRepository crudRepository = new CrudRepository();
         int Id = 0;
-        string TableName1 = "Report";
+        string TableName1 = "Report",EskiDosyaAdi;
         public FrmRaporOlusturma()
         {
             InitializeComponent();
@@ -159,6 +159,7 @@ namespace Hesap.Forms.Rapor
             sorgu2.Text = frm.Sorgu2;
             sorgu3.Text = frm.Sorgu3;
             sorgu4.Text = frm.Sorgu4;
+            EskiDosyaAdi = frm.RaporAdi;
             this.Id = frm.Id;
         }
         public void VeriKaydetVeRaporuKaydet(string sorgu, Report report, int kayitNumarasi)
@@ -199,74 +200,24 @@ namespace Hesap.Forms.Rapor
             else
             {
                 crudRepository.Update(TableName1, this.Id, reportParams);
+                RaporDosyasiAdiniGuncelle(EskiDosyaAdi,txtRaporAdi.Text);
                 bildirim.GuncellemeBasarili();
             }
-            //object baslik = new
-            //{
-            //    FormAdi = txtEkranAdi.Text.Trim(),
-            //    RaporAdi = txtRaporAdi.Text.Trim(),
-            //    Sorgu1 = sorgu1.Text.Trim(),
-            //    Sorgu2 = sorgu2.Text.Trim(),
-            //    Sorgu3 = sorgu3.Text.Trim(),
-            //    Sorgu4 = sorgu4.Text.Trim(),
-            //    Sorgu5 = "",
-            //    Sorgu6 = "",
-            //    Sorgu7 = "",
-            //    Sorgu8 = "",
-            //    Sorgu9 = "",
-            //    FormGrubu = "",
-            //    Id = this.Id,
-            //    KayitNo = this.Id
-            //};
-            //using (var connection = new Baglanti().GetConnection())
-            //{
-            //    if (this.Id == 0)
-            //    {
-            //        string mssql = @"
-            //                        INSERT INTO Rapor
-            //                               (FormAdi, RaporAdi, Sorgu1, Sorgu2, Sorgu3, Sorgu4, Sorgu5, Sorgu6, Sorgu7, Sorgu8, Sorgu9, FormGrubu)
-            //                        OUTPUT INSERTED.KayitNo
-            //                        VALUES (@FormAdi, @RaporAdi, @Sorgu1, @Sorgu2, @Sorgu3, @Sorgu4, @Sorgu5, @Sorgu6, @Sorgu7, @Sorgu8, @Sorgu9, @FormGrubu)";
-
-            //        string sqlite = @"INSERT INTO Rapor
-            //                   (FormAdi,RaporAdi,Sorgu1,Sorgu2,Sorgu3,Sorgu4,Sorgu5,Sorgu6,Sorgu7,Sorgu8,Sorgu9,FormGrubu)
-            //             VALUES (@FormAdi,@RaporAdi,@Sorgu1,@Sorgu2,@Sorgu3,@Sorgu4,@Sorgu5,@Sorgu6,@Sorgu7,@Sorgu8,@Sorgu9,@FormGrubu)";
-            //        string idQuery = "SELECT last_insert_rowid();";
-            //        string kayitSayisi = "select COUNT(*) from Rapor";
-            //        kayitSayi = connection.QuerySingle<int>(kayitSayisi);
-            //        if (ayarlar.VeritabaniTuru() == "mssql")
-            //        {
-            //            this.Id = connection.QuerySingle<int>(mssql, baslik);
-            //        }
-            //        else
-            //        {
-            //            connection.Execute(sqlite, baslik);
-            //            this.Id = connection.QuerySingle<int>(idQuery);
-            //        }
-            //        RaporDosyasiOlustur(txtRaporAdi.Text.Trim());
-            //        bildirim.Basarili();
-            //    }
-            //    else
-            //    {
-            //        string update = @"UPDATE Rapor
-            //           SET [Id] = @Id,[FormAdi] = @FormAdi,[RaporAdi] = @RaporAdi,[Sorgu1] = @Sorgu1,[Sorgu2] = @Sorgu2,[Sorgu3] = @Sorgu3
-            //        ,[Sorgu4] = @Sorgu4,[Sorgu5] = @Sorgu5,[Sorgu6] = @Sorgu6,[Sorgu7] = @Sorgu7,[Sorgu8] = @Sorgu8,[Sorgu9] = @Sorgu9,[FormGrubu] = @FormGrubu
-            //         WHERE KayitNo = @KayitNo";
-            //        connection.Execute(update, baslik);
-            //        bildirim.GuncellemeBasarili();
-            //    }
-            //}
-
         }
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            //string idQuery = "drop table Rapor";
-            //using (var connection = new Baglanti().GetConnection())
-            //{
-            //    connection.Execute(idQuery);
-            //    MessageBox.Show("Tablo silindi");
-            //}
+            crudRepository.ConfirmAndDeleteCard(TableName1,this.Id, FormVerileriniTemizle);
+            RaporDosyasiniSil(EskiDosyaAdi);
+        }
+        void FormVerileriniTemizle()
+        {
+            txtRaporAdi.Text = "";
+            txtEkranAdi.Text = "";
+            sorgu1.Text = "";
+            sorgu2.Text = "";
+            sorgu3.Text = "";
+            sorgu4.Text = "";
         }
         void RaporDosyasiOlustur(string yeniRaporAdi)
         {
@@ -291,5 +242,54 @@ namespace Hesap.Forms.Rapor
                 bildirim.Uyari("Dosya oluşturulurken veya yüklenirken bir hata oluştu: " + ex.Message);
             }
         }
+        void RaporDosyasiAdiniGuncelle(string mevcutDosyaAdi, string yeniDosyaAdi)
+        {
+            string mevcutDosyaYolu = Path.Combine(Application.StartupPath, "Rapor", mevcutDosyaAdi + ".frx");
+            string yeniDosyaYolu = Path.Combine(Application.StartupPath, "Rapor", yeniDosyaAdi + ".frx");
+
+            try
+            {
+                if (!File.Exists(mevcutDosyaYolu))
+                {
+                    throw new FileNotFoundException("Güncellenecek dosya mevcut değil", mevcutDosyaYolu);
+                }
+
+                if (File.Exists(yeniDosyaYolu))
+                {
+                    throw new IOException("Yeni dosya adı zaten mevcut");
+                }
+
+                File.Move(mevcutDosyaYolu, yeniDosyaYolu);
+            }
+            catch (Exception ex)
+            {
+                bildirim.Uyari("Dosya adı güncellenirken bir hata oluştu: " + ex.Message);
+            }
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            FormVerileriniTemizle();
+        }
+
+        void RaporDosyasiniSil(string dosyaAdi)
+        {
+            string dosyaYolu = Path.Combine(Application.StartupPath, "Rapor", dosyaAdi + ".frx");
+
+            try
+            {
+                if (!File.Exists(dosyaYolu))
+                {
+                    throw new FileNotFoundException("Silinecek dosya mevcut değil", dosyaYolu);
+                }
+
+                File.Delete(dosyaYolu);
+            }
+            catch (Exception ex)
+            {
+                bildirim.Uyari("Dosya silinirken bir hata oluştu: " + ex.Message);
+            }
+        }
+
     }
 }

@@ -302,6 +302,9 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.grpUrunResim = new DevExpress.XtraEditors.GroupControl();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnUrunResmiSec = new DevExpress.XtraEditors.SimpleButton();
             this.dateTimePicker1 = new DevExpress.XtraEditors.DateEdit();
             this.txtReceteNo = new DevExpress.XtraEditors.ButtonEdit();
             this.txtUrun = new DevExpress.XtraEditors.ButtonEdit();
@@ -323,15 +326,15 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.maliyetFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kayıtNumarasınıGösterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.grpUrunResim = new DevExpress.XtraEditors.GroupControl();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnUrunResmiSec = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpUrunResim)).BeginInit();
+            this.grpUrunResim.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimePicker1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimePicker1.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReceteNo.Properties)).BeginInit();
@@ -340,9 +343,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grpUrunResim)).BeginInit();
-            this.grpUrunResim.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -3446,6 +3446,35 @@
             this.panelControl1.Size = new System.Drawing.Size(1450, 126);
             this.panelControl1.TabIndex = 1117;
             // 
+            // grpUrunResim
+            // 
+            this.grpUrunResim.Controls.Add(this.pictureBox1);
+            this.grpUrunResim.Controls.Add(this.btnUrunResmiSec);
+            this.grpUrunResim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.grpUrunResim.Location = new System.Drawing.Point(659, 3);
+            this.grpUrunResim.Name = "grpUrunResim";
+            this.grpUrunResim.Size = new System.Drawing.Size(298, 119);
+            this.grpUrunResim.TabIndex = 1122;
+            this.grpUrunResim.Text = "Ürün Resmi";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(6, 48);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(287, 66);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
+            // 
+            // btnUrunResmiSec
+            // 
+            this.btnUrunResmiSec.Location = new System.Drawing.Point(5, 25);
+            this.btnUrunResmiSec.Name = "btnUrunResmiSec";
+            this.btnUrunResmiSec.Size = new System.Drawing.Size(288, 20);
+            this.btnUrunResmiSec.TabIndex = 0;
+            this.btnUrunResmiSec.Text = "Resim Seç";
+            this.btnUrunResmiSec.Click += new System.EventHandler(this.btnUrunResmiSec_Click);
+            // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.EditValue = null;
@@ -3502,7 +3531,7 @@
             this.lblUrunAdi.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblUrunAdi.Location = new System.Drawing.Point(274, 53);
             this.lblUrunAdi.Name = "lblUrunAdi";
-            this.lblUrunAdi.Size = new System.Drawing.Size(340, 22);
+            this.lblUrunAdi.Size = new System.Drawing.Size(379, 22);
             this.lblUrunAdi.TabIndex = 1117;
             // 
             // lblReceteAd
@@ -3511,7 +3540,7 @@
             this.lblReceteAd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblReceteAd.Location = new System.Drawing.Point(274, 76);
             this.lblReceteAd.Name = "lblReceteAd";
-            this.lblReceteAd.Size = new System.Drawing.Size(340, 22);
+            this.lblReceteAd.Size = new System.Drawing.Size(379, 22);
             this.lblReceteAd.TabIndex = 1117;
             // 
             // lblFirmaAdi
@@ -3520,7 +3549,7 @@
             this.lblFirmaAdi.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblFirmaAdi.Location = new System.Drawing.Point(274, 30);
             this.lblFirmaAdi.Name = "lblFirmaAdi";
-            this.lblFirmaAdi.Size = new System.Drawing.Size(340, 22);
+            this.lblFirmaAdi.Size = new System.Drawing.Size(379, 22);
             this.lblFirmaAdi.TabIndex = 1117;
             // 
             // lblFisNo
@@ -3677,35 +3706,6 @@
             this.kayıtNumarasınıGösterToolStripMenuItem.Text = "Kayıt Bilgisi";
             this.kayıtNumarasınıGösterToolStripMenuItem.Click += new System.EventHandler(this.kayıtNumarasınıGösterToolStripMenuItem_Click);
             // 
-            // grpUrunResim
-            // 
-            this.grpUrunResim.Controls.Add(this.pictureBox1);
-            this.grpUrunResim.Controls.Add(this.btnUrunResmiSec);
-            this.grpUrunResim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.grpUrunResim.Location = new System.Drawing.Point(659, 3);
-            this.grpUrunResim.Name = "grpUrunResim";
-            this.grpUrunResim.Size = new System.Drawing.Size(298, 119);
-            this.grpUrunResim.TabIndex = 1122;
-            this.grpUrunResim.Text = "Ürün Resmi";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(6, 48);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(287, 66);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
-            // 
-            // btnUrunResmiSec
-            // 
-            this.btnUrunResmiSec.Location = new System.Drawing.Point(5, 25);
-            this.btnUrunResmiSec.Name = "btnUrunResmiSec";
-            this.btnUrunResmiSec.Size = new System.Drawing.Size(288, 20);
-            this.btnUrunResmiSec.TabIndex = 0;
-            this.btnUrunResmiSec.Text = "Resim Seç";
-            this.btnUrunResmiSec.Click += new System.EventHandler(this.btnUrunResmiSec_Click);
-            // 
             // Form1
             // 
             this.Appearance.Options.UseFont = true;
@@ -3735,6 +3735,9 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grpUrunResim)).EndInit();
+            this.grpUrunResim.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimePicker1.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimePicker1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReceteNo.Properties)).EndInit();
@@ -3744,9 +3747,6 @@
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grpUrunResim)).EndInit();
-            this.grpUrunResim.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
