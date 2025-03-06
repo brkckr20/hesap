@@ -41,20 +41,17 @@
             this.chckBitti = new DevExpress.XtraEditors.CheckEdit();
             this.chckOnayli = new DevExpress.XtraEditors.CheckEdit();
             this.rchAciklama = new DevExpress.XtraEditors.MemoExEdit();
-            this.txtDoviz = new DevExpress.XtraEditors.TextEdit();
             this.txtSiparisNo = new DevExpress.XtraEditors.TextEdit();
             this.txtFisNo = new DevExpress.XtraEditors.TextEdit();
             this.txtVade = new DevExpress.XtraEditors.TextEdit();
             this.txtMusteriSipNo = new DevExpress.XtraEditors.TextEdit();
             this.txtYetkili = new DevExpress.XtraEditors.TextEdit();
-            this.cmbDovizBirim = new DevExpress.XtraEditors.ComboBoxEdit();
             this.dateTermin = new DevExpress.XtraEditors.DateEdit();
             this.dateTarih = new DevExpress.XtraEditors.DateEdit();
             this.label2 = new System.Windows.Forms.Label();
             this.txtFirmaKodu = new DevExpress.XtraEditors.ButtonEdit();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lblFirmaAdi = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -86,13 +83,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.chckBitti.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chckOnayli.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDoviz.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSiparisNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFisNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVade.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMusteriSipNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYetkili.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbDovizBirim.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTermin.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTermin.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties)).BeginInit();
@@ -193,20 +188,17 @@
             this.panelControl1.Controls.Add(this.chckBitti);
             this.panelControl1.Controls.Add(this.chckOnayli);
             this.panelControl1.Controls.Add(this.rchAciklama);
-            this.panelControl1.Controls.Add(this.txtDoviz);
             this.panelControl1.Controls.Add(this.txtSiparisNo);
             this.panelControl1.Controls.Add(this.txtFisNo);
             this.panelControl1.Controls.Add(this.txtVade);
             this.panelControl1.Controls.Add(this.txtMusteriSipNo);
             this.panelControl1.Controls.Add(this.txtYetkili);
-            this.panelControl1.Controls.Add(this.cmbDovizBirim);
             this.panelControl1.Controls.Add(this.dateTermin);
             this.panelControl1.Controls.Add(this.dateTarih);
             this.panelControl1.Controls.Add(this.label2);
             this.panelControl1.Controls.Add(this.txtFirmaKodu);
             this.panelControl1.Controls.Add(this.label9);
             this.panelControl1.Controls.Add(this.label8);
-            this.panelControl1.Controls.Add(this.label6);
             this.panelControl1.Controls.Add(this.label7);
             this.panelControl1.Controls.Add(this.lblFirmaAdi);
             this.panelControl1.Controls.Add(this.label4);
@@ -251,15 +243,6 @@
             this.rchAciklama.Size = new System.Drawing.Size(155, 24);
             this.rchAciklama.TabIndex = 1124;
             // 
-            // txtDoviz
-            // 
-            this.txtDoviz.Location = new System.Drawing.Point(175, 140);
-            this.txtDoviz.Name = "txtDoviz";
-            this.txtDoviz.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
-            this.txtDoviz.Properties.Appearance.Options.UseFont = true;
-            this.txtDoviz.Size = new System.Drawing.Size(90, 24);
-            this.txtDoviz.TabIndex = 1123;
-            // 
             // txtSiparisNo
             // 
             this.txtSiparisNo.Location = new System.Drawing.Point(111, 6);
@@ -289,7 +272,7 @@
             // 
             // txtMusteriSipNo
             // 
-            this.txtMusteriSipNo.Location = new System.Drawing.Point(366, 142);
+            this.txtMusteriSipNo.Location = new System.Drawing.Point(110, 142);
             this.txtMusteriSipNo.Name = "txtMusteriSipNo";
             this.txtMusteriSipNo.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
             this.txtMusteriSipNo.Properties.Appearance.Options.UseFont = true;
@@ -304,23 +287,6 @@
             this.txtYetkili.Properties.Appearance.Options.UseFont = true;
             this.txtYetkili.Size = new System.Drawing.Size(155, 24);
             this.txtYetkili.TabIndex = 1123;
-            // 
-            // cmbDovizBirim
-            // 
-            this.cmbDovizBirim.EditValue = "TRY";
-            this.cmbDovizBirim.Location = new System.Drawing.Point(111, 140);
-            this.cmbDovizBirim.Name = "cmbDovizBirim";
-            this.cmbDovizBirim.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
-            this.cmbDovizBirim.Properties.Appearance.Options.UseFont = true;
-            this.cmbDovizBirim.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbDovizBirim.Properties.Items.AddRange(new object[] {
-            "TRY",
-            "EUR",
-            "USD"});
-            this.cmbDovizBirim.Size = new System.Drawing.Size(59, 24);
-            this.cmbDovizBirim.TabIndex = 1122;
-            this.cmbDovizBirim.SelectedIndexChanged += new System.EventHandler(this.cmbDovizBirim_SelectedIndexChanged);
             // 
             // dateTermin
             // 
@@ -396,17 +362,6 @@
             this.label8.Text = "Fiş No :";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label6.Location = new System.Drawing.Point(11, 142);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(93, 21);
-            this.label6.TabIndex = 1120;
-            this.label6.Text = "Döviz :";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label7
             // 
             this.label7.BackColor = System.Drawing.Color.Transparent;
@@ -432,7 +387,7 @@
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(268, 144);
+            this.label4.Location = new System.Drawing.Point(12, 144);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 21);
             this.label4.TabIndex = 1120;
@@ -694,13 +649,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.chckBitti.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chckOnayli.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDoviz.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSiparisNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFisNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVade.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMusteriSipNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYetkili.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbDovizBirim.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTermin.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTermin.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTarih.Properties.CalendarTimeProperties)).EndInit();
@@ -737,9 +690,6 @@
         private System.Windows.Forms.Label lblFirmaAdi;
         private System.Windows.Forms.Label label3;
         private DevExpress.XtraEditors.TextEdit txtYetkili;
-        private DevExpress.XtraEditors.TextEdit txtDoviz;
-        private DevExpress.XtraEditors.ComboBoxEdit cmbDovizBirim;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private DevExpress.XtraEditors.TextEdit txtVade;
         private System.Windows.Forms.Label label7;

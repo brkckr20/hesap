@@ -18,14 +18,14 @@ namespace Hesap.Utils
             _dbTuru = ayarlar.VeritabaniTuru();
         }
 
-        public string NumaraVer(string fisMiSipMi)
+        public string NumaraVer(string fisMiSipMi, int ReceiptType=0)
         {
             if (fisMiSipMi == "Fiş")
             {
                 string sorgum;
                 using (var connection = new Baglanti().GetConnection())
                 {
-                    string sql = "SELECT top 1 FisNo FROM Siparis ORDER BY FisNo desc";
+                    string sql = $"SELECT top 1 ReceiptNo FROM Receipt where ReceiptType = {ReceiptType} ORDER BY ReceiptNo desc";
                     string sqlite = "SELECT FisNo FROM Siparis ORDER BY FisNo desc LIMIT 1";
                     sorgum = ayarlar.DbTuruneGoreSorgu(sql, sqlite);
                     var fisNo = connection.QuerySingleOrDefault<string>(sorgum);

@@ -2,6 +2,7 @@
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Context;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,13 @@ namespace Hesap.Forms.UretimYonetimi
         Numarator numarator = new Numarator();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         Ayarlar ayarlar = new Ayarlar();
+        CrudRepository crudRepository = new CrudRepository();
+        private string TableName1 = "Receipt";
         public FrmSiparisGirisi()
         {
             InitializeComponent();
         }
-        int Id = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas);
+        int Id = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas), CompanyId = 0;
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             Liste.FrmFirmaKartiListesi frm = new Liste.FrmFirmaKartiListesi();
@@ -39,129 +42,161 @@ namespace Hesap.Forms.UretimYonetimi
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            object baslik = new
+            /*
+             var parameters = new Dictionary<string, object>
             {
-                SiparisNo = txtSiparisNo.Text,
-                Tarih = Convert.ToDateTime(dateTarih.EditValue),
-                Termin = Convert.ToDateTime(dateTermin.EditValue),
-                FirmaKodu = txtFirmaKodu.Text,
-                FirmaUnvan = lblFirmaAdi.Text,
-                Yetkili = txtYetkili.Text,
-                DovizBirim = cmbDovizBirim.Text,
-                Doviz = Convert.ToDecimal(txtDoviz.Text),
-                Vade = txtVade.Text,
-                FisNo = txtFisNo.Text,
-                Aciklama = rchAciklama.Text,
-                Onayli = false,
-                Bitti = false,
-                MusteriSipNo = txtMusteriSipNo.Text,
-                Id = this.Id,
+                { "CompanyCode", txtFirmaKodu.Text },
+                { "CompanyName", txtFirmaUnvan.Text },
+                { "AddressLine1", txtAdres1.Text},
+                { "AddressLine2", txtAdres2.Text},
+                { "AddressLine3", txtAdres3.Text},
             };
-            int refNo;
-            if (this.Id == 0)
+            */
+            var receiptParameters = new Dictionary<string, object>
             {
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    string sqlBaslik = @"INSERT INTO Siparis
-                                   (SiparisNo,Tarih,Termin,FirmaKodu,FirmaUnvan,Yetkili,DovizBirim,Doviz,Vade,FisNo,Aciklama,Onayli,Bitti,MusteriSipNo) OUTPUT INSERTED.Id
-                             VALUES (@SiparisNo,@Tarih,@Termin,@FirmaKodu,@FirmaUnvan,@Yetkili,@DovizBirim,@Doviz,@Vade,@FisNo,@Aciklama,@Onayli,@Bitti,@MusteriSipNo)";
-                    string sqlBaslikSqlite = @"INSERT INTO Siparis
-                                   (SiparisNo,Tarih,Termin,FirmaKodu,FirmaUnvan,Yetkili,DovizBirim,Doviz,Vade,FisNo,Aciklama,Onayli,Bitti,MusteriSipNo)
-                             VALUES (@SiparisNo,@Tarih,@Termin,@FirmaKodu,@FirmaUnvan,@Yetkili,@DovizBirim,@Doviz,@Vade,@FisNo,@Aciklama,@Onayli,@Bitti,@MusteriSipNo)";
-                    string idQuery = "SELECT last_insert_rowid();";
-                    if (ayarlar.VeritabaniTuru() == "mssql")
-                    {
-                        refNo = connection.QuerySingle<int>(sqlBaslik, baslik);
-                    }
-                    else
-                    {
-                        connection.Execute(sqlBaslikSqlite, baslik);
-                        refNo = connection.QuerySingle<int>(idQuery);
-                    }
-                    string sqlFis = @"INSERT INTO SiparisKalem
-                                       (RefNo ,UrunKodu ,UrunAdi  ,Varyant ,Birim ,PesinFiyat ,VadeFiyat ,VadeSuresi ,UUID,Miktar)
-                                 VALUES
-                                       (@RefNo ,@UrunKodu ,@UrunAdi  ,@Varyant ,@Birim ,@PesinFiyat ,@VadeFiyat ,@VadeSuresi ,@UUID,@Miktar)";
-                    for (int i = 0; i < gridView1.RowCount - 1; i++)
-                    {
-                        connection.Execute(sqlFis, new
-                        {
-                            RefNo = refNo,
-                            UrunKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunKodu")),
-                            UrunAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunAdi")),
-                            Varyant = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Varyant")),
-                            Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
-                            PesinFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "PesinFiyat")),
-                            VadeFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "VadeFiyat")),
-                            VadeSuresi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "VadeSuresi")),
-                            UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
-                            Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
-                        });
-                    }
-                    bildirim.Basarili();
-                }
-            }
-            else
+                {"ReceiptNo",txtFisNo.Text },
+                {"ReceiptType",Convert.ToInt32(ReceiptTypes.MusteriSiparisi)},
+                {"ReceiptDate",Convert.ToDateTime(dateTarih.EditValue)},
+                {"DuaDate",Convert.ToDateTime(dateTermin.EditValue)},
+                {"CompanyId",this.CompanyId},
+                {"Authorized",txtYetkili.Text},
+                {"Explanation",rchAciklama.Text},
+                {"Approved",false},
+                {"IsFinished",false},
+                {"CustomerOrderNo",txtMusteriSipNo.Text},
+                {"OrderNo",txtSiparisNo.Text},
+                {"Maturity",txtVade.Text},
+
+            };
+            if (this.Id ==0)
             {
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    var query = @"select Id from Siparis where Id = @Id";
-                    var sonuc = connection.QueryFirstOrDefault<int>(query, new { Id = this.Id });
-                    if (sonuc != 0)
-                    {
-                        string updateQueryD1 = @"UPDATE Siparis SET SiparisNo = @SiparisNo,Tarih = @Tarih,Termin = @Termin,FirmaKodu = @FirmaKodu,FirmaUnvan = @FirmaUnvan
-                                            ,Yetkili = @Yetkili,DovizBirim = @DovizBirim,Doviz = @Doviz,Vade = @Vade,FisNo = @FisNo,Aciklama = @Aciklama
-                                            ,MusteriSipNo = @MusteriSipNo WHERE Id = @Id";
-                        connection.Execute(updateQueryD1, baslik);
-                        for (int i = 0; i < gridView1.RowCount - 1; i++)
-                        {
-                            string uuid = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID"));
-                            var sqlKalem = @"select * from SiparisKalem where UUID = @UUID";
-                            var kalem = connection.QueryFirstOrDefault(sqlKalem, new { UUID = uuid });
-                            if (kalem != null)
-                            {
-                                string updateKalem = @"UPDATE SiparisKalem
-                                                SET UrunKodu = @UrunKodu,UrunAdi = @UrunAdi,Varyant = @Varyant,Birim = @Birim
-                                               ,PesinFiyat = @PesinFiyat,VadeFiyat = @VadeFiyat,VadeSuresi = @VadeSuresi,Miktar = @Miktar
-                                               WHERE UUID = @UUID";
-                                connection.Execute(updateKalem, new
-                                {
-                                    UrunKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunKodu")),
-                                    UrunAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunAdi")),
-                                    Varyant = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Varyant")),
-                                    Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
-                                    PesinFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "PesinFiyat")),
-                                    VadeFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "VadeFiyat")),
-                                    VadeSuresi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "VadeSuresi")),
-                                    UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
-                                    Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
-                                });
-                            }
-                            else
-                            {
-                                string sqlFis = @"INSERT INTO SiparisKalem
-                                       (RefNo ,UrunKodu ,UrunAdi  ,Varyant ,Birim ,PesinFiyat ,VadeFiyat ,VadeSuresi ,UUID,Miktar)
-                                 VALUES
-                                       (@RefNo ,@UrunKodu ,@UrunAdi  ,@Varyant ,@Birim ,@PesinFiyat ,@VadeFiyat ,@VadeSuresi ,@UUID,@Miktar)";
-                                connection.Execute(sqlFis, new
-                                {
-                                    RefNo = this.Id,
-                                    UrunKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunKodu")),
-                                    UrunAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunAdi")),
-                                    Varyant = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Varyant")),
-                                    Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
-                                    PesinFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "PesinFiyat")),
-                                    VadeFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "VadeFiyat")),
-                                    VadeSuresi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "VadeSuresi")),
-                                    UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
-                                    Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
-                                });
-                            }
-                        }
-                    }
-                    bildirim.GuncellemeBasarili();
-                }
+                this.Id = crudRepository.Insert(TableName1, receiptParameters);
+                bildirim.Basarili();
+                //satırların eklenmesinden devam edilecek
             }
+            //object baslik = new
+            //{
+            //    SiparisNo = txtSiparisNo.Text,
+            //    Tarih = Convert.ToDateTime(dateTarih.EditValue),
+            //    Termin = Convert.ToDateTime(dateTermin.EditValue),
+            //    FirmaKodu = txtFirmaKodu.Text,
+            //    FirmaUnvan = lblFirmaAdi.Text,
+            //    Yetkili = txtYetkili.Text,
+            //    DovizBirim = cmbDovizBirim.Text,
+            //    Doviz = Convert.ToDecimal(txtDoviz.Text),
+            //    Vade = txtVade.Text,
+            //    FisNo = txtFisNo.Text,
+            //    Aciklama = rchAciklama.Text,
+            //    Onayli = false,
+            //    Bitti = false,
+            //    MusteriSipNo = txtMusteriSipNo.Text,
+            //    Id = this.Id,
+            //};
+            //int refNo;
+            //if (this.Id == 0)
+            //{
+            //    using (var connection = new Baglanti().GetConnection())
+            //    {
+            //        string sqlBaslik = @"INSERT INTO Siparis
+            //                       (SiparisNo,Tarih,Termin,FirmaKodu,FirmaUnvan,Yetkili,DovizBirim,Doviz,Vade,FisNo,Aciklama,Onayli,Bitti,MusteriSipNo) OUTPUT INSERTED.Id
+            //                 VALUES (@SiparisNo,@Tarih,@Termin,@FirmaKodu,@FirmaUnvan,@Yetkili,@DovizBirim,@Doviz,@Vade,@FisNo,@Aciklama,@Onayli,@Bitti,@MusteriSipNo)";
+            //        string sqlBaslikSqlite = @"INSERT INTO Siparis
+            //                       (SiparisNo,Tarih,Termin,FirmaKodu,FirmaUnvan,Yetkili,DovizBirim,Doviz,Vade,FisNo,Aciklama,Onayli,Bitti,MusteriSipNo)
+            //                 VALUES (@SiparisNo,@Tarih,@Termin,@FirmaKodu,@FirmaUnvan,@Yetkili,@DovizBirim,@Doviz,@Vade,@FisNo,@Aciklama,@Onayli,@Bitti,@MusteriSipNo)";
+            //        string idQuery = "SELECT last_insert_rowid();";
+            //        if (ayarlar.VeritabaniTuru() == "mssql")
+            //        {
+            //            refNo = connection.QuerySingle<int>(sqlBaslik, baslik);
+            //        }
+            //        else
+            //        {
+            //            connection.Execute(sqlBaslikSqlite, baslik);
+            //            refNo = connection.QuerySingle<int>(idQuery);
+            //        }
+            //        string sqlFis = @"INSERT INTO SiparisKalem
+            //                           (RefNo ,UrunKodu ,UrunAdi  ,Varyant ,Birim ,PesinFiyat ,VadeFiyat ,VadeSuresi ,UUID,Miktar)
+            //                     VALUES
+            //                           (@RefNo ,@UrunKodu ,@UrunAdi  ,@Varyant ,@Birim ,@PesinFiyat ,@VadeFiyat ,@VadeSuresi ,@UUID,@Miktar)";
+            //        for (int i = 0; i < gridView1.RowCount - 1; i++)
+            //        {
+            //            connection.Execute(sqlFis, new
+            //            {
+            //                RefNo = refNo,
+            //                UrunKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunKodu")),
+            //                UrunAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunAdi")),
+            //                Varyant = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Varyant")),
+            //                Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
+            //                PesinFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "PesinFiyat")),
+            //                VadeFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "VadeFiyat")),
+            //                VadeSuresi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "VadeSuresi")),
+            //                UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
+            //                Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
+            //            });
+            //        }
+            //        bildirim.Basarili();
+            //    }
+            //}
+            //else
+            //{
+            //    using (var connection = new Baglanti().GetConnection())
+            //    {
+            //        var query = @"select Id from Siparis where Id = @Id";
+            //        var sonuc = connection.QueryFirstOrDefault<int>(query, new { Id = this.Id });
+            //        if (sonuc != 0)
+            //        {
+            //            string updateQueryD1 = @"UPDATE Siparis SET SiparisNo = @SiparisNo,Tarih = @Tarih,Termin = @Termin,FirmaKodu = @FirmaKodu,FirmaUnvan = @FirmaUnvan
+            //                                ,Yetkili = @Yetkili,DovizBirim = @DovizBirim,Doviz = @Doviz,Vade = @Vade,FisNo = @FisNo,Aciklama = @Aciklama
+            //                                ,MusteriSipNo = @MusteriSipNo WHERE Id = @Id";
+            //            connection.Execute(updateQueryD1, baslik);
+            //            for (int i = 0; i < gridView1.RowCount - 1; i++)
+            //            {
+            //                string uuid = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID"));
+            //                var sqlKalem = @"select * from SiparisKalem where UUID = @UUID";
+            //                var kalem = connection.QueryFirstOrDefault(sqlKalem, new { UUID = uuid });
+            //                if (kalem != null)
+            //                {
+            //                    string updateKalem = @"UPDATE SiparisKalem
+            //                                    SET UrunKodu = @UrunKodu,UrunAdi = @UrunAdi,Varyant = @Varyant,Birim = @Birim
+            //                                   ,PesinFiyat = @PesinFiyat,VadeFiyat = @VadeFiyat,VadeSuresi = @VadeSuresi,Miktar = @Miktar
+            //                                   WHERE UUID = @UUID";
+            //                    connection.Execute(updateKalem, new
+            //                    {
+            //                        UrunKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunKodu")),
+            //                        UrunAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunAdi")),
+            //                        Varyant = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Varyant")),
+            //                        Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
+            //                        PesinFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "PesinFiyat")),
+            //                        VadeFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "VadeFiyat")),
+            //                        VadeSuresi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "VadeSuresi")),
+            //                        UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
+            //                        Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
+            //                    });
+            //                }
+            //                else
+            //                {
+            //                    string sqlFis = @"INSERT INTO SiparisKalem
+            //                           (RefNo ,UrunKodu ,UrunAdi  ,Varyant ,Birim ,PesinFiyat ,VadeFiyat ,VadeSuresi ,UUID,Miktar)
+            //                     VALUES
+            //                           (@RefNo ,@UrunKodu ,@UrunAdi  ,@Varyant ,@Birim ,@PesinFiyat ,@VadeFiyat ,@VadeSuresi ,@UUID,@Miktar)";
+            //                    connection.Execute(sqlFis, new
+            //                    {
+            //                        RefNo = this.Id,
+            //                        UrunKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunKodu")),
+            //                        UrunAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UrunAdi")),
+            //                        Varyant = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Varyant")),
+            //                        Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
+            //                        PesinFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "PesinFiyat")),
+            //                        VadeFiyat = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "VadeFiyat")),
+            //                        VadeSuresi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "VadeSuresi")),
+            //                        UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
+            //                        Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
+            //                    });
+            //                }
+            //            }
+            //        }
+            //        bildirim.GuncellemeBasarili();
+            //    }
+            //}
         }
         private void FrmSiparisGirisi_Load(object sender, EventArgs e)
         {
@@ -169,8 +204,8 @@ namespace Hesap.Forms.UretimYonetimi
         }
         void BaslangicVerileri()
         {
-            txtFisNo.Text = numarator.NumaraVer("Fiş");
-            txtSiparisNo.Text = numarator.NumaraVer("Sipariş");
+            txtFisNo.Text = numarator.NumaraVer("Fiş", Convert.ToInt32(ReceiptTypes.MusteriSiparisi));
+            //txtSiparisNo.Text = numarator.NumaraVer("Sipariş");
             dateTarih.EditValue = DateTime.Now;
             dateTermin.EditValue = DateTime.Now;
             KurBilgisiYansit();
@@ -178,25 +213,25 @@ namespace Hesap.Forms.UretimYonetimi
         }
         void KurBilgisiYansit()
         {
-            if (cmbDovizBirim.SelectedIndex == 0)
-            {
-                txtDoviz.Text = "1";
-            }
+            //if (cmbDovizBirim.SelectedIndex == 0)
+            //{
+            //    txtDoviz.Text = "1";
+            //}
         }
         private void cmbDovizBirim_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbDovizBirim.SelectedIndex == 1)
-            {
-                txtDoviz.Text = yardimciAraclar.KurBilgisiniYansit("EUR_ALIS").ToString();
-            }
-            else if (cmbDovizBirim.SelectedIndex == 2)
-            {
-                txtDoviz.Text = yardimciAraclar.KurBilgisiniYansit("USD_ALIS").ToString();
-            }
-            else
-            {
-                txtDoviz.Text = "1";
-            }
+            //if (cmbDovizBirim.SelectedIndex == 1)
+            //{
+            //    txtDoviz.Text = yardimciAraclar.KurBilgisiniYansit("EUR_ALIS").ToString();
+            //}
+            //else if (cmbDovizBirim.SelectedIndex == 2)
+            //{
+            //    txtDoviz.Text = yardimciAraclar.KurBilgisiniYansit("USD_ALIS").ToString();
+            //}
+            //else
+            //{
+            //    txtDoviz.Text = "1";
+            //}
         }
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -243,8 +278,8 @@ namespace Hesap.Forms.UretimYonetimi
                 txtFirmaKodu.Text = frm.veriler[0]["FirmaKodu"].ToString();
                 lblFirmaAdi.Text = frm.veriler[0]["FirmaUnvan"].ToString();
                 txtYetkili.Text = frm.veriler[0]["Yetkili"].ToString();
-                cmbDovizBirim.Text = frm.veriler[0]["DovizBirim"].ToString();
-                txtDoviz.Text = frm.veriler[0]["Doviz"].ToString();
+                //cmbDovizBirim.Text = frm.veriler[0]["DovizBirim"].ToString();
+                //txtDoviz.Text = frm.veriler[0]["Doviz"].ToString();
                 txtVade.Text = frm.veriler[0]["Vade"].ToString();
                 txtFisNo.Text = frm.veriler[0]["FisNo"].ToString();
                 rchAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
@@ -264,7 +299,7 @@ namespace Hesap.Forms.UretimYonetimi
             chckBitti.Checked = false;
             chckOnayli.Checked = false;
             this.Id = 0;
-            object[] bilgiler = { dateTarih, dateTermin, txtFirmaKodu, lblFirmaAdi, txtYetkili, cmbDovizBirim, txtDoviz, txtVade, rchAciklama, txtMusteriSipNo };
+            object[] bilgiler = { dateTarih, dateTermin, txtFirmaKodu, lblFirmaAdi, txtYetkili, /*cmbDovizBirim, txtDoviz,*/ txtVade, rchAciklama, txtMusteriSipNo };
             yardimciAraclar.FisVeHavuzuTemizle(bilgiler, gridControl1);
         }
         private void simpleButton3_Click(object sender, EventArgs e)
@@ -305,8 +340,8 @@ namespace Hesap.Forms.UretimYonetimi
                         txtFirmaKodu.Text = fis.FirmaKodu.ToString();
                         lblFirmaAdi.Text = fis.FirmaUnvan.ToString();
                         txtYetkili.Text = fis.Yetkili.ToString();
-                        cmbDovizBirim.Text = fis.DovizBirim.ToString();
-                        txtDoviz.Text = fis.Doviz.ToString();
+                        //cmbDovizBirim.Text = fis.DovizBirim.ToString();
+                        //txtDoviz.Text = fis.Doviz.ToString();
                         txtVade.Text = fis.Vade.ToString();
                         txtFisNo.Text = fis.FisNo.ToString();
                         rchAciklama.Text = fis.Aciklama.ToString();
