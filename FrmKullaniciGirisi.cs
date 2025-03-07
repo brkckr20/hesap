@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
+using Hesap.DataAccess;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
 namespace Hesap
 {
@@ -23,6 +26,7 @@ namespace Hesap
         Bildirim bildirim = new Bildirim();
         bool giris;
         int KullaniciId;
+        CrudRepository crudRepository = new CrudRepository();
 
         void BilgileriGetir()
         {
@@ -49,7 +53,7 @@ namespace Hesap
                 Properties.Settings.Default.Sifre = txtSifre.Text;
                 Properties.Settings.Default.KullaniciAdi = cmbKodu.SelectedItem.ToString();
                 Properties.Settings.Default.BeniHatirla = true;
-                Properties.Settings.Default.Id= KullaniciId;
+                Properties.Settings.Default.Id = KullaniciId;
                 Properties.Settings.Default.Save();
             }
             else
@@ -102,16 +106,12 @@ namespace Hesap
 
         private void FrmKullaniciGirisi_Load(object sender, EventArgs e)
         {
-            using (var connection = new Baglanti().GetConnection())
+            var users = crudRepository.GetAll<User>("Users").ToList();
+            
+            foreach (var item in users)
             {
-                var query = "select Code,Name + ' ' + Surname [NameSurname], Password from Users";
-                var kullaniciKartlari = connection.Query(query).ToList();
-                foreach (var kullaniciKarti in kullaniciKartlari)
-                {
-                    string itemText = $"{kullaniciKarti.Code} {kullaniciKarti.NameSurname}";
-                    cmbKodu.Properties.Items.Add(itemText);
-                }
-
+                string itemText = $"{item.Code} {item.Name + " " +  item.Surname}";
+                cmbKodu.Properties.Items.Add(itemText);
             }
         }
     }

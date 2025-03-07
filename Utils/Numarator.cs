@@ -18,7 +18,7 @@ namespace Hesap.Utils
             _dbTuru = ayarlar.VeritabaniTuru();
         }
 
-        public string NumaraVer(string fisMiSipMi, int ReceiptType=0)
+        public string NumaraVer(string fisMiSipMi, int ReceiptType = 0)
         {
             if (fisMiSipMi == "Fiş")
             {
@@ -72,7 +72,7 @@ namespace Hesap.Utils
                 {
                     string mssql = "select top 1 IplikKodu from IplikKarti order by IplikKodu desc";
                     string sqlite = "select IplikKodu from IplikKarti order by IplikKodu desc limit 1";
-                    sorgum = ayarlar.DbTuruneGoreSorgu(mssql,sqlite);
+                    sorgum = ayarlar.DbTuruneGoreSorgu(mssql, sqlite);
 
                     var sipNo = connection.QuerySingleOrDefault<string>(sorgum);
                     if (sipNo != null)
@@ -111,53 +111,53 @@ namespace Hesap.Utils
                     }
                 }
             }
-            else if (fisMiSipMi == "IpSaTal")
-            {
-                string sorgum;
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    string sql = "SELECT top 1 TalimatNo FROM IplikDepo1 ORDER BY TalimatNo desc";
-                    string sqlite = "SELECT TalimatNo FROM IplikDepo1 ORDER BY TalimatNo desc LIMIT 1";
-                    sorgum = ayarlar.DbTuruneGoreSorgu(sql, sqlite);
-                    var fisNo = connection.QuerySingleOrDefault<string>(sorgum);
-                    if (fisNo != null)
-                    {
-                        return string.Format("{0:D8}", Convert.ToInt32(fisNo) + 1);
-                    }
-                    else
-                    {
-                        return "00000001";
-                    }
+            //else if (fisMiSipMi == "IpSaTal")
+            //{
+            //    string sorgum;
+            //    using (var connection = new Baglanti().GetConnection())
+            //    {
+            //        string sql = "SELECT top 1 TalimatNo FROM IplikDepo1 ORDER BY TalimatNo desc";
+            //        string sqlite = "SELECT TalimatNo FROM IplikDepo1 ORDER BY TalimatNo desc LIMIT 1";
+            //        sorgum = ayarlar.DbTuruneGoreSorgu(sql, sqlite);
+            //        var fisNo = connection.QuerySingleOrDefault<string>(sorgum);
+            //        if (fisNo != null)
+            //        {
+            //            return string.Format("{0:D8}", Convert.ToInt32(fisNo) + 1);
+            //        }
+            //        else
+            //        {
+            //            return "00000001";
+            //        }
 
-                }
-            }
-            else if (fisMiSipMi == "HamKSaTal")
-            {
-                string sorgum;
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    string sql = "SELECT top 1 TalimatNo FROM HamDepo1 ORDER BY TalimatNo desc";
-                    string sqlite = "SELECT TalimatNo FROM HamDepo1 ORDER BY TalimatNo desc LIMIT 1";
-                    sorgum = ayarlar.DbTuruneGoreSorgu(sql, sqlite);
-                    var fisNo = connection.QuerySingleOrDefault<string>(sorgum);
-                    if (fisNo != null)
-                    {
-                        return string.Format("{0:D8}", Convert.ToInt32(fisNo) + 1);
-                    }
-                    else
-                    {
-                        return "00000001";
-                    }
+            //    }
+            //}
+            //else if (fisMiSipMi == "HamKSaTal")
+            //{
+            //    string sorgum;
+            //    using (var connection = new Baglanti().GetConnection())
+            //    {
+            //        string sql = "SELECT top 1 TalimatNo FROM HamDepo1 ORDER BY TalimatNo desc";
+            //        string sqlite = "SELECT TalimatNo FROM HamDepo1 ORDER BY TalimatNo desc LIMIT 1";
+            //        sorgum = ayarlar.DbTuruneGoreSorgu(sql, sqlite);
+            //        var fisNo = connection.QuerySingleOrDefault<string>(sorgum);
+            //        if (fisNo != null)
+            //        {
+            //            return string.Format("{0:D8}", Convert.ToInt32(fisNo) + 1);
+            //        }
+            //        else
+            //        {
+            //            return "00000001";
+            //        }
 
-                }
-            }
+            //    }
+            //}
             else if (fisMiSipMi == "Maliyet")
             {
                 string sorgum;
                 using (var connection = new Baglanti().GetConnection())
                 {
                     string sql = "SELECT top 1 OrderNo FROM Cost ORDER BY OrderNo desc"; // 19.02.2025 tarihinde table adı değştirildi
-                    string sqlite = "SELECT TalimatNo FROM HamDepo1 ORDER BY TalimatNo desc LIMIT 1";
+                    string sqlite = "SELECT OrderNo FROM Cost ORDER BY OrderNo desc LIMIT 1";
                     sorgum = ayarlar.DbTuruneGoreSorgu(sql, sqlite);
                     var fisNo = connection.QuerySingleOrDefault<string>(sorgum);
                     if (fisNo != null)
@@ -172,6 +172,28 @@ namespace Hesap.Utils
                 }
             }
             return "";
+        }
+
+        public string GetNumaratorNotCondition(string TableName, string FieldName)
+        {
+            string sorgum;
+            using (var connection = new Baglanti().GetConnection())
+            {
+                string sql = $"SELECT top 1 {FieldName} FROM {TableName} ORDER BY OrderNo desc"; // 19.02.2025 tarihinde table adı değştirildi
+                string sqlite = $"SELECT {FieldName} FROM {TableName} ORDER BY OrderNo desc LIMIT 1";
+                sorgum = ayarlar.DbTuruneGoreSorgu(sql, sqlite);
+                var fisNo = connection.QuerySingleOrDefault<string>(sorgum);
+                if (fisNo != null)
+                {
+                    return string.Format("{0:D8}", Convert.ToInt32(fisNo) + 1);
+                }
+                else
+                {
+                    return "00000001";
+                }
+
+            }
+            //return "";
         }
     }
 }

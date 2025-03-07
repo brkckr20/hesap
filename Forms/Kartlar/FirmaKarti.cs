@@ -41,18 +41,15 @@ namespace Hesap.Forms.Kartlar
                 { "AddressLine2", txtAdres2.Text},
                 { "AddressLine3", txtAdres3.Text},
             };
-            using (var connection = new Baglanti().GetConnection())
+            if (this.Id == 0)
             {
-                if (this.Id == 0)
-                {
-                    this.Id = cRUD.InsertRecord(TableName, parameters);
-                    bildirim.Basarili(); 
-                }
-                else
-                {
-                    cRUD.UpdateRecord(TableName, parameters, this.Id);
-                    bildirim.GuncellemeBasarili();
-                }
+                this.Id = crudRepository.Insert(this.TableName, parameters);
+                bildirim.Basarili();
+            }
+            else
+            {
+                crudRepository.Update(this.TableName, this.Id, parameters);
+                bildirim.GuncellemeBasarili();
             }
         }
         private void btnListe_Click(object sender, EventArgs e)

@@ -42,16 +42,6 @@ namespace Hesap.Forms.UretimYonetimi
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            /*
-             var parameters = new Dictionary<string, object>
-            {
-                { "CompanyCode", txtFirmaKodu.Text },
-                { "CompanyName", txtFirmaUnvan.Text },
-                { "AddressLine1", txtAdres1.Text},
-                { "AddressLine2", txtAdres2.Text},
-                { "AddressLine3", txtAdres3.Text},
-            };
-            */
             var receiptParameters = new Dictionary<string, object>
             {
                 {"ReceiptNo",txtFisNo.Text },

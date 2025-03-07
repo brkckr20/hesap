@@ -1,16 +1,19 @@
 ﻿using Dapper;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using FastReport.Utils;
 using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Hesap.DataAccess
 {
@@ -19,9 +22,20 @@ namespace Hesap.DataAccess
         private readonly IDbConnection _dbConnection;
         private int UserId = Properties.Settings.Default.Id;
         Bildirim bildirim = new Bildirim();
+        Ayarlar ayarlar = new Ayarlar();
+        string databaseTuru;
         public CrudRepository()
         {
-            _dbConnection = new SqlConnection("Server=.;Database=Hesap;Trusted_Connection=True;");
+            if (ayarlar.VeritabaniTuru() == "mssql")
+            {
+                _dbConnection = new SqlConnection(ayarlar.MssqlConnStr());
+                databaseTuru = "mssql";
+            }
+            else
+            {
+                _dbConnection = new SQLiteConnection(ayarlar.SqliteConnStr());
+                databaseTuru = "sqlite";
+            }
         }
 
         public T GetById<T>(string TableName, object id)
@@ -37,9 +51,18 @@ namespace Hesap.DataAccess
         }
         public int Insert(string TableName, Dictionary<string, object> parameters)
         {
+            string query;
             string columns = string.Join(", ", parameters.Keys);
             string values = string.Join(", ", parameters.Keys.Select(k => "@" + k));
-            string query = $"INSERT INTO {TableName} ({columns}) VALUES ({values}); SELECT SCOPE_IDENTITY();";
+            if (this.databaseTuru == "mssql")
+            {
+                query = $"INSERT INTO {TableName} ({columns}) VALUES ({values}); SELECT SCOPE_IDENTITY();";
+            }
+            else
+            {
+                query = $"INSERT INTO {TableName} ({columns}) VALUES ({values}); SELECT last_insert_rowid();";
+            }
+
             return _dbConnection.ExecuteScalar<int>(query, parameters);
         }
         public int Update(string TableName, object id, Dictionary<string, object> parameters)
@@ -56,12 +79,12 @@ namespace Hesap.DataAccess
             return _dbConnection.Execute(query, new { Id = id });
         }
 
-        public T GetMaxRecord<T>(string TableName,string ColumnName)
+        public T GetMaxRecord<T>(string TableName, string ColumnName)
         {
             string query = $"SELECT MAX({ColumnName}) FROM {TableName}";
             return _dbConnection.ExecuteScalar<T>(query);
         }
-        
+
         public void ConfirmAndDeleteCard(string TableName, int id, Action successCallback)
         {
             if (id != 0)
@@ -79,7 +102,7 @@ namespace Hesap.DataAccess
             }
         }
 
-        public int GetCountByPrefix(string TableName,string ColumnName,string Prefix)
+        public int GetCountByPrefix(string TableName, string ColumnName, string Prefix)
         {
             string checkQuery = $"SELECT COUNT(*) FROM {TableName} WHERE {ColumnName} LIKE @Prefix";
             return _dbConnection.ExecuteScalar<int>(checkQuery, new { Prefix = Prefix + "%" });
@@ -89,12 +112,32 @@ namespace Hesap.DataAccess
             string checkQuery = $"SELECT COUNT(1) FROM {tableName} WHERE {columnName} = @Value";
             return _dbConnection.ExecuteScalar<int>(checkQuery, new { Value = columnValue });
         }
-        public string GetByCode(string ColumnName,string TableName, string ConditionName)
+        public string GetByCode(string ColumnName, string TableName, string ConditionName)
         {
             string query = $"SELECT {ColumnName} FROM {TableName} WHERE CombinedCode = @CombinedCode";
             return _dbConnection.ExecuteScalar<string>(query, new { CombinedCode = ConditionName });
         }
-
+        public string GetNumaratorNotCondition(string FieldName,string TableName)
+        {
+            string query;
+            if (this.databaseTuru == "mssql")
+            {
+                query = $"SELECT top 1 {FieldName} FROM {TableName} ORDER BY OrderNo desc";
+            }
+            else
+            {
+                query = $"SELECT {FieldName} FROM {TableName} ORDER BY OrderNo desc LIMIT 1";
+            }
+            var numarator = _dbConnection.QuerySingleOrDefault<string>(query);
+            if (numarator != null)
+            {
+                return string.Format("{0:D8}", Convert.ToInt32(numarator) + 1);
+            }
+            else
+            {
+                return "00000001";
+            }
+        }
         // kullanıcının kolonlarını listeleme işlemidir
         public void GetUserColumns(GridView gridView, string ScreenName)
         {

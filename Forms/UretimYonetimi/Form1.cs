@@ -184,7 +184,7 @@ namespace Hesap
             DolarKuruGetir("USD_ALIS");
             AttachEnterKeyHandler(this);
             dateTimePicker1.EditValue = DateTime.Now;
-            lblFisNo.Text = numarator.NumaraVer("Maliyet");
+            lblFisNo.Text = numarator.GetNumaratorNotCondition(TableName1,"OrderNo");
         }
         private void materialLabel6_Click(object sender, EventArgs e)
         {
@@ -274,7 +274,7 @@ namespace Hesap
             if (frm.veriler.Count > 0)
             {
                 this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
-                dateTimePicker1.EditValue = (DateTime)frm.veriler[0]["Tarih"];
+                dateTimePicker1.EditValue = (DateTime)frm.veriler[0]["Tarih"]; //sqlite için listeleme esnasında hata verdi düzeltilecek
                 this.CompanyId = Convert.ToInt32(frm.veriler[0]["Firma Id"]);
                 txtFirmaKodu.Text = frm.veriler[0]["Firma Kodu"].ToString();
                 lblFirmaAdi.Text = frm.veriler[0]["Firma Adı"].ToString();
@@ -390,7 +390,7 @@ namespace Hesap
             {
                 using (var connection = new Baglanti().GetConnection())
                 {
-                    var sorgu = $"select {Kur},USD_EUR from Kur order by TARIH desc limit 1";
+                    var sorgu = $"select {Kur},USD_EUR from Currency order by TARIH desc limit 1";
                     var rate = connection.QuerySingleOrDefault(sorgu);
                     if (rate != null)
                     {
