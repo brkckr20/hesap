@@ -555,6 +555,7 @@
       <DependentUpon>FrmKullaniciGirisi.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CostCalculationHelper.cs" />
+    <Compile Include="Helpers\DateConvertHelper.cs" />
     <Compile Include="Helpers\SemiColonHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>

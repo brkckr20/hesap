@@ -191,9 +191,7 @@ namespace Hesap.Utils
                 {
                     return "00000001";
                 }
-
             }
-            //return "";
         }
     }
 }

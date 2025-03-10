@@ -23,6 +23,7 @@ namespace Hesap
         Ayarlar ayarlar = new Ayarlar();
         CrudRepository crudRepository = new CrudRepository();
         Numarator numarator = new Numarator();
+        DateConvertHelper dch = new DateConvertHelper();
         int Id = 0, CompanyId = 0, InventoryId = 0, RecipeId = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas), UretimBilgileriId = 0, UretimHesaplamaId = 0, MaliyetHesaplamaId = 0;
         string TableName1 = "Cost", TableName2 = "CostProductionInformation", TableName3 = "CostProductionCalculate", TableName4 = "CostCostCalculate";
         public Form1()
@@ -217,7 +218,7 @@ namespace Hesap
                 var costParams = new Dictionary<string, object>
                 {
                     {"CompanyId",CompanyId},
-                    {"Date", dateTimePicker1.EditValue},
+                    {"Date", dch.SaveFormattedDate(dateTimePicker1)},
                     {"InventoryId", InventoryId},
                     {"RecipeId", RecipeId},
                     {"OrderNo", lblFisNo.Text},
@@ -274,7 +275,7 @@ namespace Hesap
             if (frm.veriler.Count > 0)
             {
                 this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
-                dateTimePicker1.EditValue = (DateTime)frm.veriler[0]["Tarih"]; //sqlite için listeleme esnasında hata verdi düzeltilecek
+                dch.ConvertDateForDbType(dateTimePicker1, frm.veriler[0]["Tarih"].ToString());
                 this.CompanyId = Convert.ToInt32(frm.veriler[0]["Firma Id"]);
                 txtFirmaKodu.Text = frm.veriler[0]["Firma Kodu"].ToString();
                 lblFirmaAdi.Text = frm.veriler[0]["Firma Adı"].ToString();
@@ -486,18 +487,11 @@ namespace Hesap
             {
                 if (bildirim.SilmeOnayı())
                 {
-                    using (var connection = new Baglanti().GetConnection())
-                    {
-                        string t1 = "delete from UretimBaslik where Id = @Id";
-                        string t2 = "delete from UretimBilgileri where RefNo = @Id";
-                        string t3 = "delete from UretimHesaplama where RefNo = @Id";
-                        string t4 = "delete from MaliyetHesaplama where RefNo = @Id";
-                        connection.Execute(t1, new { Id = this.Id });
-                        connection.Execute(t2, new { Id = this.Id });
-                        connection.Execute(t3, new { Id = this.Id });
-                        connection.Execute(t4, new { Id = this.Id });
-                    }
-                    bildirim.Basarili();
+                    crudRepository.Delete(this.TableName1,this.Id);
+                    crudRepository.Delete(this.TableName2,this.UretimBilgileriId);
+                    crudRepository.Delete(this.TableName3,this.UretimHesaplamaId);
+                    crudRepository.Delete(this.TableName4,this.MaliyetHesaplamaId);
+                    bildirim.SilmeBasarili();
                     FormVerileriniTemizle();
                 }
             }
@@ -532,6 +526,7 @@ namespace Hesap
             lblReceteAd.Text = "";
             lblFisNo.Text = numarator.NumaraVer("Maliyet");
             DolarKuruGetir("USD_ALIS");
+            pictureBox1.Image = null;
         }
         private void txtUrun_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {

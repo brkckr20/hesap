@@ -12,6 +12,7 @@ namespace Hesap.Forms.UretimYonetimi
         Bildirim bildirim = new Bildirim();
         CrudRepository crudRepository = new CrudRepository();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        Ayarlar ayarlar = new Ayarlar();
         public FrmUrunTipiSecimi()
         {
             InitializeComponent();
@@ -88,8 +89,36 @@ namespace Hesap.Forms.UretimYonetimi
                         CTE
                     WHERE 
                         rn = 1;";
-            listele.Liste(sql, gridControl1);
-            crudRepository.GetUserColumns(gridView1,this.Text);
+            string sqlite = @"
+                WITH CTE AS (
+                    SELECT 
+                        substr(InventoryCode, 1, 3) AS Ek,  -- LEFT(InventoryCode, 3)
+                        substr(InventoryCode, -3) AS Numara,  -- RIGHT(InventoryCode, 3)
+                        COALESCE(SubType, '') AS KumasAdiOzellik,
+                        (SELECT COUNT(*) FROM Inventory AS I WHERE substr(I.InventoryCode, 1, 3) = substr(Inventory.InventoryCode, 1, 3) AND I.Id >= Inventory.Id) AS rn
+                    FROM 
+                        Inventory
+                    -- WHERE IsPrefix = 1  -- SQLite desteklemiyorsa burayı manuel filtrelemelisin
+                )
+                SELECT 
+                    Ek,
+                    printf('%03d', CAST(Numara AS INT) + 1) AS YeniNumara,  -- RIGHT('000' + CAST(CAST(Numara AS INT) + 1 AS VARCHAR(3)), 3)
+                    KumasAdiOzellik
+                FROM 
+                    CTE
+                WHERE 
+                    rn = 1;";
+            if (ayarlar.VeritabaniTuru() == "sqlite")
+            {
+                listele.Liste(sqlite, gridControl1);
+                crudRepository.GetUserColumns(gridView1, this.Text);
+            }
+            else
+            {
+                listele.Liste(sql, gridControl1);
+                crudRepository.GetUserColumns(gridView1, this.Text);
+            }
+            
         }
     }
 }
