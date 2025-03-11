@@ -179,8 +179,8 @@ namespace Hesap.Utils
             string sorgum;
             using (var connection = new Baglanti().GetConnection())
             {
-                string sql = $"SELECT top 1 {FieldName} FROM {TableName} ORDER BY OrderNo desc"; // 19.02.2025 tarihinde table adı değştirildi
-                string sqlite = $"SELECT {FieldName} FROM {TableName} ORDER BY OrderNo desc LIMIT 1";
+                string sql = $"SELECT top 1 {FieldName} FROM {TableName} ORDER BY {FieldName} desc"; // 19.02.2025 tarihinde table adı değştirildi
+                string sqlite = $"SELECT {FieldName} FROM {TableName} ORDER BY {FieldName} desc LIMIT 1";
                 sorgum = ayarlar.DbTuruneGoreSorgu(sql, sqlite);
                 var fisNo = connection.QuerySingleOrDefault<string>(sorgum);
                 if (fisNo != null)

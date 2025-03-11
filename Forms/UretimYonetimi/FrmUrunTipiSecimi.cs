@@ -90,15 +90,17 @@ namespace Hesap.Forms.UretimYonetimi
                     WHERE 
                         rn = 1;";
             string sqlite = @"
-                WITH CTE AS (
+                    WITH CTE AS (
                     SELECT 
                         substr(InventoryCode, 1, 3) AS Ek,  -- LEFT(InventoryCode, 3)
                         substr(InventoryCode, -3) AS Numara,  -- RIGHT(InventoryCode, 3)
-                        COALESCE(SubType, '') AS KumasAdiOzellik,
-                        (SELECT COUNT(*) FROM Inventory AS I WHERE substr(I.InventoryCode, 1, 3) = substr(Inventory.InventoryCode, 1, 3) AND I.Id >= Inventory.Id) AS rn
+                        COALESCE(SubType, '') AS KumasAdiOzellik,  -- ISNULL yerine COALESCE kullanıldı
+                        (SELECT COUNT(*) 
+                         FROM Inventory AS I 
+                         WHERE substr(I.InventoryCode, 1, 3) = substr(Inventory.InventoryCode, 1, 3) 
+                         AND I.Id >= Inventory.Id) AS rn
                     FROM 
                         Inventory
-                    -- WHERE IsPrefix = 1  -- SQLite desteklemiyorsa burayı manuel filtrelemelisin
                 )
                 SELECT 
                     Ek,
@@ -107,8 +109,9 @@ namespace Hesap.Forms.UretimYonetimi
                 FROM 
                     CTE
                 WHERE 
-                    rn = 1;";
-            if (ayarlar.VeritabaniTuru() == "sqlite")
+                    rn = 1;
+";
+            if (ayarlar.VeritabaniTuru() != "sqlite")
             {
                 listele.Liste(sqlite, gridControl1);
                 crudRepository.GetUserColumns(gridView1, this.Text);

@@ -85,7 +85,6 @@ namespace Hesap.Forms.UretimYonetimi
                 var veri = connection.QueryFirstOrDefault(query, new { Id = this.Id });
                 if (veri != null)
                 {
-                    // Veri nesnesini beklenen türe dönüştürüyoruz
                     var urun = veri;
                     txtUrunKodu.Text = urun.UrunKodu.ToString();
                     txtUrunAdi.Text = urun.UrunAdi.ToString();

@@ -1,21 +1,11 @@
-﻿using Dapper;
-using DevExpress.XtraEditors;
-using DevExpress.XtraLayout;
-using Hesap.Context;
-using Hesap.DataAccess;
+﻿using Hesap.DataAccess;
 using Hesap.Forms.Liste;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DevExpress.XtraPrinting.Export.Pdf.PdfImageCache;
 
 namespace Hesap.Forms.UretimYonetimi
 {
@@ -41,21 +31,14 @@ namespace Hesap.Forms.UretimYonetimi
             lblUrunAdi.Text = frm.UrunAdi;
             InventoryId = frm.Id;
         }
-
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            //if (pictureBox1.Image == null) // resim zorunlu olmayabilir o yüzden pasife çekildi
-            //{
-            //    bildirim.Uyari("Lütfen bir resim seçin.");
-            //    return;
-            //}
-
             try
             {
                 byte[] resimData = yardimciAraclar.GetPictureData(pictureBox1);
                 var _params = new Dictionary<string, object>
             {
-                {"ReceiptNo",txtReceteNo.Text},{"RawWidth",txtHamEn.Text},{"RawHeight",txtHamBoy.Text},{"ProductWidth",txtMamulEn.Text},{"ProductHeight",txtMamulBoy.Text},{"RawGrammage",txtGrm2.Text},{"ProductGrammage",txtMamulGrM2.Text},{"YarnDyed ",chckIpligiBoyali.Checked},{"Explanation ",txtReceteAciklama.Text},{"ReceiptType ",Convert.ToInt32(InventoryTypes.Kumas)},{"InventoryId ",InventoryId}
+                {"ReceiptNo",txtReceteNo.Text},{"RawWidth",txtHamEn.Text},{"RawHeight",txtHamBoy.Text},{"ProductWidth",txtMamulEn.Text},{"ProductHeight",txtMamulBoy.Text},{"RawGrammage",txtGrm2.Text},{"ProductGrammage",txtMamulGrM2.Text},{"YarnDyed",chckIpligiBoyali.Checked},{"Explanation",txtReceteAciklama.Text},{"ReceiptType",Convert.ToInt32(InventoryTypes.Kumas)},{"InventoryId",InventoryId}
             };
                 if (resimData != null && resimData.Length > 0)
                 {
@@ -79,22 +62,19 @@ namespace Hesap.Forms.UretimYonetimi
 
 
         }
-
         private void FrmUrunReceteKarti_Load(object sender, EventArgs e)
         {
             BaslangicVerileri();
         }
         void BaslangicVerileri()
         {
-            txtReceteNo.Text = numarator.NumaraVer("UrunRecete");
+            txtReceteNo.Text = numarator.GetNumaratorNotCondition(this.TableName, "ReceiptNo");
             // gridControl1.DataSource = new BindingList<_UrunReceteUB>();
         }
-
         private void repoKalemIslem_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
 
         }
-
         private void btnUrunResmiSec_Click(object sender, EventArgs e)
         {
             yardimciAraclar.SelectImage(pictureBox1);
@@ -122,12 +102,10 @@ namespace Hesap.Forms.UretimYonetimi
                 }
             }
         }
-
         private void FrmUrunReceteKarti_FormClosing(object sender, FormClosingEventArgs e)
         {
             yardimciAraclar.DeleteTempFile(pictureBox1);
         }
-
         private void repoIplikKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             FrmIplikKartiListesi frm = new FrmIplikKartiListesi();
