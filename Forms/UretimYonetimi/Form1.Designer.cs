@@ -326,6 +326,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.maliyetFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kayıtNumarasınıGösterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -3686,9 +3687,10 @@
             this.contextMenuStrip1.Font = new System.Drawing.Font("Corbel", 10F);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.maliyetFormuToolStripMenuItem,
-            this.kayıtNumarasınıGösterToolStripMenuItem});
+            this.kayıtNumarasınıGösterToolStripMenuItem,
+            this.alertToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 92);
             // 
             // maliyetFormuToolStripMenuItem
             // 
@@ -3705,6 +3707,13 @@
             this.kayıtNumarasınıGösterToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.kayıtNumarasınıGösterToolStripMenuItem.Text = "Kayıt Bilgisi";
             this.kayıtNumarasınıGösterToolStripMenuItem.Click += new System.EventHandler(this.kayıtNumarasınıGösterToolStripMenuItem_Click);
+            // 
+            // alertToolStripMenuItem
+            // 
+            this.alertToolStripMenuItem.Name = "alertToolStripMenuItem";
+            this.alertToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.alertToolStripMenuItem.Text = "Alert";
+            this.alertToolStripMenuItem.Click += new System.EventHandler(this.alertToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -4049,6 +4058,7 @@
         private DevExpress.XtraEditors.GroupControl grpUrunResim;
         private System.Windows.Forms.PictureBox pictureBox1;
         private DevExpress.XtraEditors.SimpleButton btnUrunResmiSec;
+        private System.Windows.Forms.ToolStripMenuItem alertToolStripMenuItem;
     }
 }
 

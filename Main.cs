@@ -23,6 +23,7 @@ namespace Hesap
         private const string DatabaseFileName = "Hesap.db";
         private string _connectionString;
         Ayarlar ayarlar = new Ayarlar();
+        UpdaterHelper updaterHelper = new UpdaterHelper();
 
         public Main()
         {
@@ -44,6 +45,7 @@ namespace Hesap
             SqliteDatabaseOlustur();
             barStVeritabani.Caption = ayarlar.VeritabaniTuru() == "mssql" ? "MSSQL" : "SQLite";
             barKullanici.Caption = Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[1] + " " + Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[2];
+            updaterHelper.CheckForUpdate(this);
         }
 
         void SqliteDatabaseOlustur()

@@ -125,7 +125,7 @@
             this.simpleButton1.Location = new System.Drawing.Point(3, 3);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(75, 47);
-            this.simpleButton1.TabIndex = 9;
+            this.simpleButton1.TabIndex = 99;
             this.simpleButton1.Text = "Yeni";
             // 
             // simpleButton5
@@ -135,7 +135,7 @@
             this.simpleButton5.Location = new System.Drawing.Point(406, 3);
             this.simpleButton5.Name = "simpleButton5";
             this.simpleButton5.Size = new System.Drawing.Size(75, 47);
-            this.simpleButton5.TabIndex = 14;
+            this.simpleButton5.TabIndex = 104;
             this.simpleButton5.Text = "Sil";
             // 
             // simpleButton4
@@ -145,7 +145,7 @@
             this.simpleButton4.Location = new System.Drawing.Point(325, 3);
             this.simpleButton4.Name = "simpleButton4";
             this.simpleButton4.Size = new System.Drawing.Size(75, 47);
-            this.simpleButton4.TabIndex = 13;
+            this.simpleButton4.TabIndex = 103;
             this.simpleButton4.Text = "İleri";
             // 
             // simpleButton3
@@ -155,7 +155,7 @@
             this.simpleButton3.Location = new System.Drawing.Point(244, 3);
             this.simpleButton3.Name = "simpleButton3";
             this.simpleButton3.Size = new System.Drawing.Size(75, 47);
-            this.simpleButton3.TabIndex = 12;
+            this.simpleButton3.TabIndex = 102;
             this.simpleButton3.Text = "Geri";
             // 
             // simpleButton2
@@ -165,7 +165,7 @@
             this.simpleButton2.Location = new System.Drawing.Point(163, 3);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(75, 47);
-            this.simpleButton2.TabIndex = 11;
+            this.simpleButton2.TabIndex = 101;
             this.simpleButton2.Text = "Liste";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
@@ -176,7 +176,7 @@
             this.btnKaydet.Location = new System.Drawing.Point(84, 3);
             this.btnKaydet.Name = "btnKaydet";
             this.btnKaydet.Size = new System.Drawing.Size(75, 47);
-            this.btnKaydet.TabIndex = 10;
+            this.btnKaydet.TabIndex = 100;
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
             // 
@@ -214,7 +214,7 @@
             this.chckIpligiBoyali.Name = "chckIpligiBoyali";
             this.chckIpligiBoyali.Properties.Caption = "";
             this.chckIpligiBoyali.Size = new System.Drawing.Size(75, 20);
-            this.chckIpligiBoyali.TabIndex = 8;
+            this.chckIpligiBoyali.TabIndex = 9;
             // 
             // grpUrunResim
             // 
@@ -264,7 +264,7 @@
             this.txtMamulGrM2.Location = new System.Drawing.Point(230, 102);
             this.txtMamulGrM2.Name = "txtMamulGrM2";
             this.txtMamulGrM2.Size = new System.Drawing.Size(77, 22);
-            this.txtMamulGrM2.TabIndex = 7;
+            this.txtMamulGrM2.TabIndex = 8;
             // 
             // txtGrm2
             // 
@@ -325,7 +325,7 @@
             this.txtReceteAciklama.Location = new System.Drawing.Point(150, 147);
             this.txtReceteAciklama.Name = "txtReceteAciklama";
             this.txtReceteAciklama.Size = new System.Drawing.Size(552, 22);
-            this.txtReceteAciklama.TabIndex = 1;
+            this.txtReceteAciklama.TabIndex = 10;
             // 
             // txtReceteNo
             // 
