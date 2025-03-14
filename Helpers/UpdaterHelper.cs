@@ -7,6 +7,7 @@ using System.Diagnostics;
 using DevExpress.XtraEditors;
 using System.Web.UI;
 using Hesap.Forms.Diger;
+using System.Threading.Tasks;
 
 public class UpdaterHelper
 {
@@ -35,7 +36,10 @@ public class UpdaterHelper
                         string tempPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "MaliyetProgramiSetup.exe");
 
                         Hesap.Forms.Diger.UpdateProgress updateProgress = new Hesap.Forms.Diger.UpdateProgress();
-                        updateProgress.Show();
+                        Task.Run(() =>
+                        {
+                            updateProgress.ShowDialog();  // Modal olarak aç
+                        });
 
                         client.DownloadFileAsync(new Uri(downloadUrl), tempPath);
 

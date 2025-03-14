@@ -18,8 +18,24 @@ namespace Hesap.Forms.Diger
         }
         public void UpdateProgressF(int progress, string status)
         {
-            progressBar1.Value = progress;
-            labelStatus.Text = status;
+            if (progressBar1.InvokeRequired || labelStatus.InvokeRequired)
+            {
+                progressBar1.Invoke(new Action(() =>
+                {
+                    progressBar1.Value = progress;
+                    labelStatus.Text = status;
+                }));
+            }
+            else
+            {
+                progressBar1.Value = progress;
+                labelStatus.Text = status;
+            }
+        }
+
+        private void UpdateProgress_Load(object sender, EventArgs e)
+        {
+            lblNameSurname.Text += " - " + DateTime.Now.Year.ToString();
         }
     }
 }
