@@ -45,7 +45,7 @@ namespace Hesap
             SqliteDatabaseOlustur();
             barStVeritabani.Caption = ayarlar.VeritabaniTuru() == "mssql" ? "MSSQL" : "SQLite";
             barKullanici.Caption = Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[1] + " " + Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[2];
-            //updaterHelper.CheckForUpdate(this);
+            updaterHelper.CheckForUpdate(this);
         }
 
         void SqliteDatabaseOlustur()

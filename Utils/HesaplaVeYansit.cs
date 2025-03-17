@@ -1,14 +1,9 @@
 ﻿using DevExpress.XtraEditors;
-using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraExport.Helpers;
 using System.Text.RegularExpressions;
 
 namespace Hesap.Utils

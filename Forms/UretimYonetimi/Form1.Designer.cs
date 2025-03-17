@@ -113,17 +113,10 @@
             this.txtAtki2 = new System.Windows.Forms.TextBox();
             this.txtAtki1 = new System.Windows.Forms.TextBox();
             this.txtCozgu2 = new System.Windows.Forms.TextBox();
-            this.materialLabel21 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel17 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel15 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
             this.txtKDVliFiyatTl = new System.Windows.Forms.TextBox();
             this.txtbelirliFiyatTl = new System.Windows.Forms.TextBox();
             this.txtKDVliFiyatForex = new System.Windows.Forms.TextBox();
             this.txtBelirliFiyatForex = new System.Windows.Forms.TextBox();
-            this.materialLabel109 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel108 = new MaterialSkin.Controls.MaterialLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label65 = new System.Windows.Forms.Label();
             this.label66 = new System.Windows.Forms.Label();
@@ -327,6 +320,8 @@
             this.maliyetFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kayıtNumarasınıGösterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label161 = new System.Windows.Forms.Label();
+            this.label162 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -431,11 +426,6 @@
             this.groupBox1.Controls.Add(this.txtAtki2);
             this.groupBox1.Controls.Add(this.txtAtki1);
             this.groupBox1.Controls.Add(this.txtCozgu2);
-            this.groupBox1.Controls.Add(this.materialLabel21);
-            this.groupBox1.Controls.Add(this.materialLabel19);
-            this.groupBox1.Controls.Add(this.materialLabel17);
-            this.groupBox1.Controls.Add(this.materialLabel15);
-            this.groupBox1.Controls.Add(this.materialLabel13);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.groupBox1.Location = new System.Drawing.Point(3, 198);
             this.groupBox1.Name = "groupBox1";
@@ -1269,81 +1259,6 @@
             this.txtCozgu2.Text = "1";
             this.txtCozgu2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // materialLabel21
-            // 
-            this.materialLabel21.BackColor = System.Drawing.Color.White;
-            this.materialLabel21.Depth = 0;
-            this.materialLabel21.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel21.Location = new System.Drawing.Point(134, 138);
-            this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel21.Name = "materialLabel21";
-            this.materialLabel21.Size = new System.Drawing.Size(9, 20);
-            this.materialLabel21.TabIndex = 0;
-            this.materialLabel21.Text = "/";
-            this.materialLabel21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.materialLabel21.Click += new System.EventHandler(this.materialLabel6_Click);
-            // 
-            // materialLabel19
-            // 
-            this.materialLabel19.BackColor = System.Drawing.Color.White;
-            this.materialLabel19.Depth = 0;
-            this.materialLabel19.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel19.Location = new System.Drawing.Point(134, 118);
-            this.materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel19.Name = "materialLabel19";
-            this.materialLabel19.Size = new System.Drawing.Size(9, 20);
-            this.materialLabel19.TabIndex = 0;
-            this.materialLabel19.Text = "/";
-            this.materialLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.materialLabel19.Click += new System.EventHandler(this.materialLabel6_Click);
-            // 
-            // materialLabel17
-            // 
-            this.materialLabel17.BackColor = System.Drawing.Color.White;
-            this.materialLabel17.Depth = 0;
-            this.materialLabel17.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel17.Location = new System.Drawing.Point(134, 98);
-            this.materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel17.Name = "materialLabel17";
-            this.materialLabel17.Size = new System.Drawing.Size(9, 20);
-            this.materialLabel17.TabIndex = 0;
-            this.materialLabel17.Text = "/";
-            this.materialLabel17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.materialLabel17.Click += new System.EventHandler(this.materialLabel6_Click);
-            // 
-            // materialLabel15
-            // 
-            this.materialLabel15.BackColor = System.Drawing.Color.White;
-            this.materialLabel15.Depth = 0;
-            this.materialLabel15.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel15.Location = new System.Drawing.Point(134, 77);
-            this.materialLabel15.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel15.Name = "materialLabel15";
-            this.materialLabel15.Size = new System.Drawing.Size(9, 20);
-            this.materialLabel15.TabIndex = 0;
-            this.materialLabel15.Text = "/";
-            this.materialLabel15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.materialLabel15.Click += new System.EventHandler(this.materialLabel6_Click);
-            // 
-            // materialLabel13
-            // 
-            this.materialLabel13.BackColor = System.Drawing.Color.White;
-            this.materialLabel13.Depth = 0;
-            this.materialLabel13.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel13.Location = new System.Drawing.Point(134, 57);
-            this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel13.Name = "materialLabel13";
-            this.materialLabel13.Size = new System.Drawing.Size(9, 20);
-            this.materialLabel13.TabIndex = 0;
-            this.materialLabel13.Text = "/";
-            this.materialLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.materialLabel13.Click += new System.EventHandler(this.materialLabel6_Click);
-            // 
             // txtKDVliFiyatTl
             // 
             this.txtKDVliFiyatTl.Font = new System.Drawing.Font("Calibri", 8.25F);
@@ -1383,34 +1298,6 @@
             this.txtBelirliFiyatForex.TabIndex = 92;
             this.txtBelirliFiyatForex.Text = "0";
             this.txtBelirliFiyatForex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // materialLabel109
-            // 
-            this.materialLabel109.BackColor = System.Drawing.Color.Yellow;
-            this.materialLabel109.Depth = 0;
-            this.materialLabel109.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel109.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel109.Location = new System.Drawing.Point(29, 28);
-            this.materialLabel109.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel109.Name = "materialLabel109";
-            this.materialLabel109.Size = new System.Drawing.Size(222, 20);
-            this.materialLabel109.TabIndex = 0;
-            this.materialLabel109.Text = "KDV Dahil Belirlenen Fiyat";
-            this.materialLabel109.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // materialLabel108
-            // 
-            this.materialLabel108.BackColor = System.Drawing.Color.Yellow;
-            this.materialLabel108.Depth = 0;
-            this.materialLabel108.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel108.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel108.Location = new System.Drawing.Point(29, 7);
-            this.materialLabel108.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel108.Name = "materialLabel108";
-            this.materialLabel108.Size = new System.Drawing.Size(222, 20);
-            this.materialLabel108.TabIndex = 0;
-            this.materialLabel108.Text = "Belirlenen Fiyat";
-            this.materialLabel108.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox2
             // 
@@ -3623,9 +3510,7 @@
             // 
             this.panelControl2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl2.Controls.Add(this.materialLabel108);
             this.panelControl2.Controls.Add(this.txtKDVliFiyatTl);
-            this.panelControl2.Controls.Add(this.materialLabel109);
             this.panelControl2.Controls.Add(this.txtBelirliFiyatForex);
             this.panelControl2.Controls.Add(this.txtbelirliFiyatTl);
             this.panelControl2.Controls.Add(this.txtKDVliFiyatForex);
@@ -3633,6 +3518,8 @@
             this.panelControl2.Controls.Add(this.label157);
             this.panelControl2.Controls.Add(this.label158);
             this.panelControl2.Controls.Add(this.label159);
+            this.panelControl2.Controls.Add(this.label162);
+            this.panelControl2.Controls.Add(this.label161);
             this.panelControl2.Location = new System.Drawing.Point(653, 610);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(451, 60);
@@ -3690,7 +3577,7 @@
             this.kayıtNumarasınıGösterToolStripMenuItem,
             this.alertToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 70);
             // 
             // maliyetFormuToolStripMenuItem
             // 
@@ -3714,6 +3601,28 @@
             this.alertToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.alertToolStripMenuItem.Text = "Alert";
             this.alertToolStripMenuItem.Click += new System.EventHandler(this.alertToolStripMenuItem_Click);
+            // 
+            // label161
+            // 
+            this.label161.BackColor = System.Drawing.Color.Yellow;
+            this.label161.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label161.Location = new System.Drawing.Point(12, 7);
+            this.label161.Name = "label161";
+            this.label161.Size = new System.Drawing.Size(229, 21);
+            this.label161.TabIndex = 1130;
+            this.label161.Text = "Belirlenen Fiyat";
+            this.label161.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label162
+            // 
+            this.label162.BackColor = System.Drawing.Color.Yellow;
+            this.label162.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label162.Location = new System.Drawing.Point(12, 27);
+            this.label162.Name = "label162";
+            this.label162.Size = new System.Drawing.Size(229, 21);
+            this.label162.TabIndex = 1130;
+            this.label162.Text = "KDV DAHİL BELİRLENEN FİYAT";
+            this.label162.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -3763,11 +3672,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel21;
-        private MaterialSkin.Controls.MaterialLabel materialLabel19;
-        private MaterialSkin.Controls.MaterialLabel materialLabel17;
-        private MaterialSkin.Controls.MaterialLabel materialLabel15;
-        private MaterialSkin.Controls.MaterialLabel materialLabel13;
         private System.Windows.Forms.TextBox txtCozgu1;
         private System.Windows.Forms.TextBox txtCozgu1Bolen;
         private System.Windows.Forms.TextBox txtAtki1Bolen;
@@ -3868,12 +3772,10 @@
         private System.Windows.Forms.TextBox txtKarliDU;
         private System.Windows.Forms.TextBox txt2KaliteMaliyeti;
         private System.Windows.Forms.TextBox txtKonfeksiyonMaliyeti;
-        private MaterialSkin.Controls.MaterialLabel materialLabel108;
         private System.Windows.Forms.TextBox txtKDVliFiyatTl;
         private System.Windows.Forms.TextBox txtbelirliFiyatTl;
         private System.Windows.Forms.TextBox txtKDVliFiyatForex;
         private System.Windows.Forms.TextBox txtBelirliFiyatForex;
-        private MaterialSkin.Controls.MaterialLabel materialLabel109;
         private System.Windows.Forms.TextBox txtEuro;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -4059,6 +3961,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private DevExpress.XtraEditors.SimpleButton btnUrunResmiSec;
         private System.Windows.Forms.ToolStripMenuItem alertToolStripMenuItem;
+        private System.Windows.Forms.Label label162;
+        private System.Windows.Forms.Label label161;
     }
 }
 
