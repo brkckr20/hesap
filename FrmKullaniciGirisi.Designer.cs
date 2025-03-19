@@ -133,6 +133,7 @@
             this.MinimizeBox = false;
             this.Name = "FrmKullaniciGirisi";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Tag = "form";
             this.Text = "Kullanıcı Girişi";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmKullaniciGirisi_FormClosing);
             this.Load += new System.EventHandler(this.FrmKullaniciGirisi_Load);

@@ -68,23 +68,25 @@ namespace Hesap
 
         private void btnTamam_Click(object sender, EventArgs e)
         {
-            using (var connection = new Baglanti().GetConnection())
+            string selectedKodu = cmbKodu.Properties.Items[cmbKodu.SelectedIndex].ToString().Split(' ')[0];
+            var user = crudRepository.GetAll<User>("Users")
+                .Where(u => u.Code == selectedKodu)
+                .Select(u => new
+                    {
+                        u.Id,u.Code,u.Password,u.Name,u.Surname
+                    }
+                ).FirstOrDefault();
+            if (user.Password != null && user.Password == txtSifre.Text)
             {
-                var selectedKodu = cmbKodu.Properties.Items[cmbKodu.SelectedIndex].ToString().Split(' ')[0];
-                var query = "SELECT Password FROM Users WHERE Code = @Code";
-                var idQuery = "SELECT Id FROM Users WHERE Code = @Code";
-                var kullaniciSifre = connection.QuerySingleOrDefault<string>(query, new { Code = selectedKodu });
-                KullaniciId = connection.QuerySingleOrDefault<int>(idQuery, new { Code = selectedKodu });
-                if (kullaniciSifre != null && kullaniciSifre == txtSifre.Text)
-                {
-                    giris = true;
-                    BilgileriKaydet();
-                    this.Close();
-                }
-                else
-                {
-                    bildirim.Uyari("Geçersiz şifre!\nLütfen şifrenizi kontrol ederek tekrar deneyin");
-                }
+                CurrentUser.UserId = user.Id;
+                CurrentUser.Username = user.Name + " " + user.Surname;
+                giris = true;
+                BilgileriKaydet();
+                this.Close();
+            }
+            else
+            {
+                bildirim.Uyari("Geçersiz şifre!\nLütfen şifrenizi kontrol ederek tekrar deneyin");
             }
         }
 

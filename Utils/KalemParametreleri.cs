@@ -59,7 +59,23 @@ namespace Hesap.Utils
 
         public List<string> MalzemeDepo()
         {
-            return new List<string> { "OperationType", "InventoryId", "Piece","UUID"/*, "UnitPrice",*//* ,"RowAmount","ReceiptItemId"*/ };
+            return new List<string> { "OperationType", "InventoryId", "Piece", "UUID"/*, "UnitPrice",*//* ,"RowAmount","ReceiptItemId"*/ };
+        }
+        public Dictionary<string, object> GetYetki(int rowIndex, int id, GridView gridView, List<string> columnNames)
+        {
+            var data = new Dictionary<string, object> { { "Id", id } };
+
+            foreach (var columnName in columnNames)
+            {
+                var cellValue = gridView.GetRowCellValue(rowIndex, columnName);
+                data[columnName] = cellValue ?? GetDefaultValue(columnName);
+            }
+
+            return data;
+        }
+        public List<string> Yetkiler()
+        {
+            return new List<string> { "CanAccess", "CanSave", "CanDelete" };
         }
     }
 }

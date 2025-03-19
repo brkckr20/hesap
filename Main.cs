@@ -2,17 +2,16 @@
 using DevExpress.XtraEditors;
 using Hesap.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SQLite;
 using Dapper;
+using Hesap.DataAccess;
+using Hesap.Models;
+using System.Linq;
+using System.Windows.Forms;
+using System.Reflection;
+using System.Collections.Generic;
 
 
 namespace Hesap
@@ -24,7 +23,8 @@ namespace Hesap
         private string _connectionString;
         Ayarlar ayarlar = new Ayarlar();
         UpdaterHelper updaterHelper = new UpdaterHelper();
-
+        CrudRepository crudRepository = new CrudRepository();
+        Bildirim bildirim = new Bildirim();
         public Main()
         {
             InitializeComponent();
@@ -32,26 +32,71 @@ namespace Hesap
             FrmKullaniciGirisi frm = new FrmKullaniciGirisi();
             frm.ShowDialog();
         }
-
         void FormAc(XtraForm form)
         {
             XtraForm newForm = (XtraForm)Activator.CreateInstance(form.GetType());
             newForm.MdiParent = this;
             newForm.Show();
         }
+        void EksikFormlariKaydet()
+        {
+            var formTypes = Assembly.GetExecutingAssembly().GetTypes()
+                                    .Where(t => t.IsSubclassOf(typeof(Form)) && !t.IsAbstract)
+                                    .ToList();
+
+            foreach (var formType in formTypes)
+            {
+                string screenName = formType.Name;
+
+                var existingScreen = crudRepository.GetAll<Authorization>("[Authorization]")
+                                                   .Where(a => a.ScreenName == screenName && a.UserId == CurrentUser.UserId)
+                                                   .FirstOrDefault();
+                if (existingScreen == null)
+                {
+                    var parameters = new Dictionary<string, object>
+            {
+                { "ScreenName", screenName },
+                { "CanAccess", true },
+                { "CanSave", true },
+                { "CanDelete", true },
+                { "UserId", CurrentUser.UserId }
+            };
+
+                    // Authorization tablosuna yeni kayıt ekleyin
+                    crudRepository.Insert("[Authorization]", parameters);
+                }
+            }
+        }
 
         private void Main_Load(object sender, EventArgs e)
         {
             SqliteDatabaseOlustur();
+            EksikFormlariKaydet();
             barStVeritabani.Caption = ayarlar.VeritabaniTuru() == "mssql" ? "MSSQL" : "SQLite";
-            barKullanici.Caption = Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[1] + " " + Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[2];
-            updaterHelper.CheckForUpdate(this);
+            string nameSurname;
+            if (Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[1] != null || Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[2] != null)
+            {
+                nameSurname = Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[1] + " " + Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[2];
+            }
+            else
+            {
+                nameSurname = "";
+            }
+            if (nameSurname != null)
+            {
+                barKullanici.Caption = nameSurname;
+            }
+            else
+            {
+                barKullanici.Caption = "";
+            }
         }
 
         void SqliteDatabaseOlustur()
         {
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string dataDirectory = Path.Combine(baseDirectory, "Data\\sqlite");
+            //string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            //string dataDirectory = Path.Combine(baseDirectory, "Data\\sqlite");
+            string dataDirectory = "C:\\Hesaplama\\Data\\sqlite";
             if (!Directory.Exists(dataDirectory))
             {
                 Directory.CreateDirectory(dataDirectory);
@@ -86,6 +131,7 @@ namespace Hesap
 
         private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
         {
+            //FormAc(new Forms.Kartlar.FrmFirmaKarti(), "barFirmaKartlari"); daha sonra gözden geçirilecek
             Forms.Kartlar.FrmFirmaKarti frm = new Forms.Kartlar.FrmFirmaKarti();
             FormAc(frm);
         }

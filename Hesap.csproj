@@ -585,6 +585,7 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\ColumnSelector.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Cost.cs" />
@@ -603,6 +604,7 @@
     <Compile Include="Utils\Bildirim.cs" />
     <Compile Include="Utils\ColumnHeaders.cs" />
     <Compile Include="Utils\CRUD_Operations.cs" />
+    <Compile Include="Utils\CurrentUser.cs" />
     <Compile Include="Utils\DbConnect.cs" />
     <Compile Include="Utils\HesaplaVeYansit.cs" />
     <Compile Include="Utils\KalemParametreleri.cs" />

@@ -384,7 +384,6 @@ namespace Hesap
                 {
                     txtKurMH.Text = currency.USD_ALIS.ToString();
                     txtPariteMH.Text = currency.USD_EUR.ToString();
-                    //deneme
                 }
                 else { txtKurMH.Text = ""; txtPariteMH.Text = ""; }
             }
