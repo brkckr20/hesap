@@ -23,7 +23,7 @@ namespace Hesap.Forms.Kartlar
         private string TableName = "Users";
         KalemParametreleri parametreler = new KalemParametreleri();
         CRUD_Operations cRUD = new CRUD_Operations();
-        bool kayitYetki;
+        bool kayitYetki,guncellemeYetki;
         void UpdateAccessing()
         {
             for (int i = 0; i < gridView1.RowCount - 1; i++)
@@ -36,6 +36,11 @@ namespace Hesap.Forms.Kartlar
                     cRUD.UpdateRecord("[Authorization]", kalemler, d2Id);
                 }
             }
+            foreach (var item in (BindingList<AuthVisibleItems>)grdButtons.DataSource)
+            {
+                var updatedValues = new Dictionary<string, object> { { "IsVisible",item.IsVisible } };
+                cRUD.UpdateRecord("AuthVisibleItems", updatedValues, item.Id); //menu grubu gizlenmeye devam edilecek
+            }
         }
 
         void YetkileriGetir()
@@ -44,11 +49,7 @@ namespace Hesap.Forms.Kartlar
                                          .Where(a => a.UserId == CurrentUser.UserId && a.ScreenName == this.Name)
                                          .FirstOrDefault();
             kayitYetki = userPermissions.CanSave;
-            //if (userPermissions != null)
-            //{
-            //    btnKaydet.Enabled = userPermissions.CanSave;
-            //    btnSil.Enabled = userPermissions.CanDelete;
-            //}
+            guncellemeYetki = userPermissions.CanUpdate;
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)
@@ -77,9 +78,17 @@ namespace Hesap.Forms.Kartlar
             }
             else
             {
+                if (guncellemeYetki)
+                {
                 crudRepository.Update(this.TableName, this.Id, whParams);
                 UpdateAccessing();
                 bildirim.GuncellemeBasarili();
+                }
+                else
+                {
+                    bildirim.Uyari("Güncelleme yetkiniz bulunmamaktadır.\nYetki açılması için lütfen Sistem Yöneticisi ile iletişime geçiniz");
+                    return;
+                }
             }
         }
 
@@ -157,18 +166,6 @@ namespace Hesap.Forms.Kartlar
             }
 
         }
-        //void YetkiListesi()
-        //{
-        //    grdKullaniciYetkileri.DataSource = crudRepository.GetAll<Authorization>("[Authorization]").Where(c => c.UserId == CurrentUser.UserId).Select(u => new
-        //    {
-        //        u.Id,
-        //        EkranAdi = u.ScreenName,
-        //        Giriş = u.CanAccess,
-        //        Kayıt = u.CanSave,
-        //        Silme = u.CanDelete
-        //    }).ToList();
-        //    gridView1.Columns["Id"].Visible = false;
-        //}
         void YetkiListesi()
         {
             var yetkiler = crudRepository.GetAll<Authorization>("[Authorization]")
@@ -177,7 +174,17 @@ namespace Hesap.Forms.Kartlar
 
             grdKullaniciYetkileri.DataSource = new BindingList<Authorization>(yetkiler);
             gridView1.Columns["Id"].Visible = false;
+
+            var buttonlar = crudRepository.GetAll<AuthVisibleItems>("AuthVisibleItems")
+                .Where(c => !c.ButtonName.Contains("barButton") && !string.IsNullOrEmpty(c.ButtonName))
+                .Where(c => c.UserId == CurrentUser.UserId)
+                .ToList();
+            grdButtons.DataSource = new BindingList<AuthVisibleItems>(buttonlar);
+            gridView2.Columns["Id"].Visible = false;
+            gridView2.Columns["ButtonName"].Visible = false;
+
         }
+
         private void FrmKullaniciKarti_Load(object sender, EventArgs e)
         {
             YetkiListesi();

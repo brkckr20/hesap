@@ -67,11 +67,60 @@ namespace Hesap
                 }
             }
         }
+        void EksikRibbonItemlariKaydet()
+        {
+            var authorizedItems = crudRepository.GetAll<AuthVisibleItems>("AuthVisibleItems")
+                                                .Where(a => a.UserId == CurrentUser.UserId)
+                                                .ToList();
+            foreach (var item in ribbon.Items)
+            {
+                if (item is BarButtonItem button)
+                {
+                    string buttonName = button.Name;
+                    string buttonText = button.Caption;
+
+                    if (!authorizedItems.Any(a => a.ButtonName == buttonName))
+                    {
+                        var parameters = new Dictionary<string, object>
+                        {
+                            { "ButtonName", buttonName },
+                            { "ButtonText", buttonText},
+                            { "IsVisible", true },
+                            { "UserId", CurrentUser.UserId }
+                        };
+                        crudRepository.Insert("AuthVisibleItems", parameters);
+                    }
+                }
+            }
+        }
+        private List<string> GetVisibleButtons()
+        {
+            return crudRepository.GetAll<AuthVisibleItems>("AuthVisibleItems")
+                                 .Where(a => a.UserId == CurrentUser.UserId && a.IsVisible)
+                                 .Select(a => a.ButtonName)
+                                 .ToList();
+        }
+        private void UpdateButtonVisibility()
+        {
+            var visibleButtons = GetVisibleButtons();
+
+            foreach (var item in ribbon.Items)
+            {
+                if (item is BarButtonItem button)
+                {
+                    button.Visibility = visibleButtons.Contains(button.Name)
+                        ? DevExpress.XtraBars.BarItemVisibility.Always
+                        : DevExpress.XtraBars.BarItemVisibility.Never;
+                }
+            }
+        }
 
         private void Main_Load(object sender, EventArgs e)
         {
             SqliteDatabaseOlustur();
             EksikFormlariKaydet();
+            EksikRibbonItemlariKaydet();
+            UpdateButtonVisibility();
             barStVeritabani.Caption = ayarlar.VeritabaniTuru() == "mssql" ? "MSSQL" : "SQLite";
             string nameSurname;
             if (Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[1] != null || Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[2] != null)
@@ -122,7 +171,6 @@ namespace Hesap
                 dbConnection.Execute(createTableQuery);
             }
         }
-
         private void barBtnUM_ItemClick(object sender, ItemClickEventArgs e)
         {
             Form1 frm = new Form1();

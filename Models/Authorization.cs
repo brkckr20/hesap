@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+
 
 namespace Hesap.Models
 {
@@ -28,5 +24,11 @@ namespace Hesap.Models
 
         [Display(Name = "Tag")]
         public string Tag{ get; set; }
+
+        [Display(Name = "Güncelleme")]
+        public bool CanUpdate { get; set; }
+
+        [Display(Name = "Açan Button Adı")]
+        public string OpenButtonName { get; set; }
     }
 }

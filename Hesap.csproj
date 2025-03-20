@@ -586,6 +586,7 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Authorization.cs" />
+    <Compile Include="Models\AuthVisibleItems.cs" />
     <Compile Include="Models\ColumnSelector.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Cost.cs" />

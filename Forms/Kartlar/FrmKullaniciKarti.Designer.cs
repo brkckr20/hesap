@@ -45,14 +45,24 @@
             this.txtKodu = new DevExpress.XtraEditors.TextEdit();
             this.label1 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.grdKullaniciYetkileri = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.RecId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ScreenName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CanAccess = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CanSave = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.CanUpdate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CanDelete = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Tag = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.grdButtons = new DevExpress.XtraGrid.GridControl();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.ButtonId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ButtonName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ButtonText = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.IsVisible = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -61,10 +71,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtSoyad.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKodu.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdKullaniciYetkileri)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
+            this.xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdButtons)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -233,22 +247,13 @@
             this.label72.Text = "Kodu :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // panelControl2
-            // 
-            this.panelControl2.Controls.Add(this.grdKullaniciYetkileri);
-            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(0, 144);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1123, 517);
-            this.panelControl2.TabIndex = 6;
-            // 
             // grdKullaniciYetkileri
             // 
             this.grdKullaniciYetkileri.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdKullaniciYetkileri.Location = new System.Drawing.Point(2, 2);
+            this.grdKullaniciYetkileri.Location = new System.Drawing.Point(0, 0);
             this.grdKullaniciYetkileri.MainView = this.gridView1;
             this.grdKullaniciYetkileri.Name = "grdKullaniciYetkileri";
-            this.grdKullaniciYetkileri.Size = new System.Drawing.Size(1119, 513);
+            this.grdKullaniciYetkileri.Size = new System.Drawing.Size(1121, 493);
             this.grdKullaniciYetkileri.TabIndex = 0;
             this.grdKullaniciYetkileri.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -260,7 +265,9 @@
             this.ScreenName,
             this.CanAccess,
             this.CanSave,
-            this.CanDelete});
+            this.CanUpdate,
+            this.CanDelete,
+            this.Tag});
             this.gridView1.GridControl = this.grdKullaniciYetkileri;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
@@ -297,6 +304,14 @@
             this.CanSave.Visible = true;
             this.CanSave.VisibleIndex = 3;
             // 
+            // CanUpdate
+            // 
+            this.CanUpdate.Caption = "Güncelleme";
+            this.CanUpdate.FieldName = "CanUpdate";
+            this.CanUpdate.Name = "CanUpdate";
+            this.CanUpdate.Visible = true;
+            this.CanUpdate.VisibleIndex = 5;
+            // 
             // CanDelete
             // 
             this.CanDelete.Caption = "Sime";
@@ -305,12 +320,103 @@
             this.CanDelete.Visible = true;
             this.CanDelete.VisibleIndex = 4;
             // 
+            // Tag
+            // 
+            this.Tag.Caption = "Etiket";
+            this.Tag.FieldName = "Tag";
+            this.Tag.Name = "Tag";
+            this.Tag.Visible = true;
+            this.Tag.VisibleIndex = 6;
+            // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 144);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(1123, 517);
+            this.xtraTabControl1.TabIndex = 7;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
+            // 
+            // xtraTabPage1
+            // 
+            this.xtraTabPage1.Controls.Add(this.grdKullaniciYetkileri);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(1121, 493);
+            this.xtraTabPage1.Text = "Kayıt Yetkileri";
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Controls.Add(this.grdButtons);
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(1121, 493);
+            this.xtraTabPage2.Text = "Ekran Görünürlük Yetkileri";
+            // 
+            // grdButtons
+            // 
+            this.grdButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdButtons.Location = new System.Drawing.Point(0, 0);
+            this.grdButtons.MainView = this.gridView2;
+            this.grdButtons.Name = "grdButtons";
+            this.grdButtons.Size = new System.Drawing.Size(1121, 493);
+            this.grdButtons.TabIndex = 1;
+            this.grdButtons.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView2});
+            // 
+            // gridView2
+            // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.ButtonId,
+            this.ButtonName,
+            this.ButtonText,
+            this.IsVisible});
+            this.gridView2.GridControl = this.grdButtons;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsView.ColumnAutoWidth = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // ButtonId
+            // 
+            this.ButtonId.Caption = "Kayıt No";
+            this.ButtonId.FieldName = "Id";
+            this.ButtonId.Name = "ButtonId";
+            this.ButtonId.Visible = true;
+            this.ButtonId.VisibleIndex = 0;
+            // 
+            // ButtonName
+            // 
+            this.ButtonName.Caption = "Button Name";
+            this.ButtonName.FieldName = "ButtonName";
+            this.ButtonName.Name = "ButtonName";
+            this.ButtonName.Visible = true;
+            this.ButtonName.VisibleIndex = 1;
+            // 
+            // ButtonText
+            // 
+            this.ButtonText.Caption = "Button Yazısı";
+            this.ButtonText.FieldName = "ButtonText";
+            this.ButtonText.Name = "ButtonText";
+            this.ButtonText.Visible = true;
+            this.ButtonText.VisibleIndex = 3;
+            this.ButtonText.Width = 374;
+            // 
+            // IsVisible
+            // 
+            this.IsVisible.Caption = "Gizle / Göster ?";
+            this.IsVisible.FieldName = "IsVisible";
+            this.IsVisible.Name = "IsVisible";
+            this.IsVisible.Visible = true;
+            this.IsVisible.VisibleIndex = 2;
+            this.IsVisible.Width = 117;
+            // 
             // FrmKullaniciKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1123, 661);
-            this.Controls.Add(this.panelControl2);
+            this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.panel3);
             this.IconOptions.Image = global::Hesap.Properties.Resources.Bookmark;
@@ -325,10 +431,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtSoyad.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKodu.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdKullaniciYetkileri)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
+            this.xtraTabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdButtons)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -351,7 +461,6 @@
         private DevExpress.XtraEditors.TextEdit txtKodu;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label72;
-        private DevExpress.XtraEditors.PanelControl panelControl2;
         private DevExpress.XtraGrid.GridControl grdKullaniciYetkileri;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn RecId;
@@ -359,5 +468,16 @@
         private DevExpress.XtraGrid.Columns.GridColumn CanAccess;
         private DevExpress.XtraGrid.Columns.GridColumn CanSave;
         private DevExpress.XtraGrid.Columns.GridColumn CanDelete;
+        private DevExpress.XtraGrid.Columns.GridColumn CanUpdate;
+        private DevExpress.XtraGrid.Columns.GridColumn Tag;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraGrid.GridControl grdButtons;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Columns.GridColumn ButtonId;
+        private DevExpress.XtraGrid.Columns.GridColumn ButtonName;
+        private DevExpress.XtraGrid.Columns.GridColumn IsVisible;
+        private DevExpress.XtraGrid.Columns.GridColumn ButtonText;
     }
 }
