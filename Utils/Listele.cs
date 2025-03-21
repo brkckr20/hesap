@@ -43,7 +43,7 @@ namespace Hesap.Utils
                 {
                     using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, sqliteString))
                     {
-                        adapter.Fill(dataTable);
+                        adapter.Fill(dataTable); // maliyet hesaplama ekranı listesi için sqlite da view oluşturulacak
                     }
                 }
                 xtraGrid.DataSource = dataTable;

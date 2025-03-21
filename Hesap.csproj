@@ -36,12 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>BookmarkBig.ico</ApplicationIcon>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CustomButton">
-      <HintPath>..\..\..\..\yenii\CustomButton\CustomButton\bin\Debug\CustomButton.dll</HintPath>
-    </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.1.35\lib\net461\Dapper.dll</HintPath>
     </Reference>
@@ -609,6 +606,7 @@
     <Compile Include="Utils\DbConnect.cs" />
     <Compile Include="Utils\HesaplaVeYansit.cs" />
     <Compile Include="Utils\KalemParametreleri.cs" />
+    <Compile Include="Utils\KayitGetir.cs" />
     <Compile Include="Utils\Listele.cs" />
     <Compile Include="Utils\Numarator.cs" />
     <Compile Include="Utils\AllTypes.cs" />
@@ -860,8 +858,10 @@
     <None Include="Resources\Fabric Sample.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppIcon.ico" />
     <Content Include="BookmarkBig.ico" />
     <Content Include="MaliyetHesaplama_orj.txt" />
+    <None Include="Resources\AppIcon.ico" />
     <None Include="Resources\Towel.ico" />
     <None Include="Resources\Diversity.ico" />
     <None Include="Resources\model.ico" />
@@ -873,9 +873,7 @@
     <None Include="Resources\BookmarkBig.ico" />
     <None Include="Resources\Yarn Emoji.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -56,13 +56,15 @@ namespace Hesap.Forms.Kartlar
         {
             Liste.FrmFirmaKartiListesi frm = new Liste.FrmFirmaKartiListesi();
             frm.ShowDialog();
-
-            txtFirmaKodu.Text = frm.FirmaKodu;
-            txtFirmaUnvan.Text = frm.FirmaUnvan;
-            txtAdres1.Text = frm.Adres1;
-            txtAdres2.Text = frm.Adres2;
-            txtAdres3.Text = frm.Adres3;
-            Id = frm.Id;
+            if (frm.FirmaKodu != null)
+            {
+                txtFirmaKodu.Text = frm.FirmaKodu;
+                txtFirmaUnvan.Text = frm.FirmaUnvan;
+                txtAdres1.Text = frm.Adres1;
+                txtAdres2.Text = frm.Adres2;
+                txtAdres3.Text = frm.Adres3;
+                Id = frm.Id;
+            }
         }
         private void simpleButton1_Click(object sender, EventArgs e)
         {
@@ -70,7 +72,7 @@ namespace Hesap.Forms.Kartlar
         }
         void Temizle()
         {
-            object[] kart = { txtFirmaKodu,txtFirmaUnvan,txtAdres1,txtAdres2,txtAdres3 };
+            object[] kart = { txtFirmaKodu, txtFirmaUnvan, txtAdres1, txtAdres2, txtAdres3 };
             yardimciAraclar.KartTemizle(kart);
             this.Id = 0;
         }
@@ -78,8 +80,7 @@ namespace Hesap.Forms.Kartlar
         {
             if (this.Id != 0)
             {
-                crudRepository.Delete(this.TableName, this.Id);
-                Temizle();
+                crudRepository.ConfirmAndDeleteCard(this.TableName, this.Id, Temizle);
             }
             else
             {
@@ -90,32 +91,26 @@ namespace Hesap.Forms.Kartlar
         {
             if (this.Id != 0)
             {
-                using (var connection = new Baglanti().GetConnection())
+                var list = crudRepository.GetByList<Company>(this.TableName, KayitTipi, this.Id);
+                if (list != null)
                 {
-                    string mssql = $"select top 1 * from {TableName} where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
-                    string sqlite = $"select * from {TableName} where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")} limit 1";
-                    var query = ayarlar.VeritabaniTuru() == "mssql" ? mssql : sqlite;
-                    var veri = connection.QueryFirstOrDefault(query, new { Id = this.Id });
-                    if (veri != null)
-                    {
-                        txtFirmaKodu.Text = veri.CompanyCode.ToString();
-                        txtFirmaUnvan.Text = veri.CompanyName.ToString();
-                        txtAdres1.Text = veri.AddressLine1.ToString();
-                        txtAdres2.Text = veri.AddressLine2.ToString();
-                        txtAdres3.Text = veri.AddressLine3.ToString();
-                        this.Id = Convert.ToInt32(veri.Id);
-                    }
-                    else
-                    {
-                        bildirim.Uyari("Gösterilecek herhangi bir kayıt bulunamadı!");
-                    }
+                    this.Id = list.Id;
+                    txtFirmaKodu.Text = list.CompanyCode;
+                    txtFirmaUnvan.Text = list.CompanyName;
+                    txtAdres1.Text = list.AddressLine1;
+                    txtAdres2.Text = list.AddressLine2;
+                    txtAdres3.Text = list.AddressLine3;
+                }
+                else
+                {
+                    bildirim.Uyari("Gösterilecek herhangi bir kayıt bulunamadı!");
                 }
             }
             else
             {
                 bildirim.Uyari("Kayıt gösterebilmek için öncelikle listeden bir kayıt getirmelisiniz!");
             }
-           
+
         }
         private void btnGeri_Click(object sender, EventArgs e)
         {

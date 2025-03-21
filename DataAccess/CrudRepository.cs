@@ -44,6 +44,14 @@ namespace Hesap.DataAccess
             return _dbConnection.QueryFirstOrDefault<T>(query, new { Id = id });
         }
 
+        public T GetByList<T>(string TableName,string KayitTipi,int id) //iler geri butonları için init edildi.
+        {
+            string query = this.databaseTuru == "mssql"
+            ? $"SELECT TOP 1 * FROM {TableName} WHERE Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id ORDER BY Id {(KayitTipi == "Önceki" ? "DESC" : "ASC")}"
+            : $"SELECT * FROM {TableName} WHERE Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id ORDER BY Id {(KayitTipi == "Önceki" ? "DESC" : "ASC")} LIMIT 1";
+            return _dbConnection.QueryFirstOrDefault<T>(query, new { Id = id });
+        }
+
         public IEnumerable<T> GetAll<T>(string TableName)
         {
             string query = $"SELECT * FROM {TableName}";

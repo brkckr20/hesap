@@ -12,6 +12,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Collections.Generic;
+using DevExpress.XtraBars.Ribbon;
 
 
 namespace Hesap
@@ -59,7 +60,8 @@ namespace Hesap
                 { "CanAccess", true },
                 { "CanSave", true },
                 { "CanDelete", true },
-                { "UserId", CurrentUser.UserId }
+                { "UserId", CurrentUser.UserId },
+                { "CanUpdate", true },
             };
 
                     // Authorization tablosuna yeni kayıt ekleyin
@@ -112,6 +114,22 @@ namespace Hesap
                         ? DevExpress.XtraBars.BarItemVisibility.Always
                         : DevExpress.XtraBars.BarItemVisibility.Never;
                 }
+            }
+            foreach (RibbonPage page in ribbon.Pages)
+            {
+                foreach (RibbonPageGroup group in page.Groups)
+                {
+                    bool anyVisible = group.ItemLinks
+                                           .OfType<BarButtonItemLink>()
+                                           .Any(link => link.Item.Visibility == DevExpress.XtraBars.BarItemVisibility.Always);
+
+                    group.Visible = anyVisible;
+                }
+            }
+            foreach (RibbonPage page in ribbon.Pages)
+            {
+                bool anyGroupVisible = page.Groups.Any(group => group.Visible);
+                page.Visible = anyGroupVisible;
             }
         }
 

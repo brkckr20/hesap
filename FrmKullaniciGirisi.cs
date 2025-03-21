@@ -109,7 +109,23 @@ namespace Hesap
         private void FrmKullaniciGirisi_Load(object sender, EventArgs e)
         {
             var users = crudRepository.GetAll<User>("Users").ToList();
-            
+
+            if (!users.Any())
+            {
+                var defaultUser = new Dictionary<string, object>
+                {
+                    {"Code", "00"},
+                    {"Name", "Sistem"},
+                    {"Surname", "Yöneticisi"},
+                    {"Password", 1234},
+                    {"IsUse", 1},
+                };
+                crudRepository.Insert("Users", defaultUser);
+
+                // Tekrar kullanıcı listesini çekiyoruz
+                users = crudRepository.GetAll<User>("Users").ToList();
+            }
+
             foreach (var item in users)
             {
                 string itemText = $"{item.Code} {item.Name + " " +  item.Surname}";

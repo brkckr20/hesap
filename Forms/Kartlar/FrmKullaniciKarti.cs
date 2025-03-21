@@ -29,17 +29,22 @@ namespace Hesap.Forms.Kartlar
             for (int i = 0; i < gridView1.RowCount - 1; i++)
             {
                 var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "Id"));
-                var kalemler = parametreler.GetYetki(i, this.Id, gridView1, parametreler.Yetkiler());
-                kalemler.Remove("Id");
-                if (d2Id > 0)
-                {
-                    cRUD.UpdateRecord("[Authorization]", kalemler, d2Id);
-                }
+                var updateAccess = new Dictionary<string, object> { 
+                    { "CanAccess", gridView1.GetRowCellValue(i, "CanAccess").ToString() },
+                    { "CanDelete", gridView1.GetRowCellValue(i, "CanDelete").ToString() },
+                    { "CanUpdate", gridView1.GetRowCellValue(i, "CanUpdate").ToString() },
+                    { "CanSave", gridView1.GetRowCellValue(i, "CanSave").ToString() },
+                };
+                crudRepository.Update("[Authorization]", d2Id, updateAccess);
             }
-            foreach (var item in (BindingList<AuthVisibleItems>)grdButtons.DataSource)
+
+            var authVisibleItemsList = (BindingList<AuthVisibleItems>)grdButtons.DataSource;
+
+            for (int i = 0; i < authVisibleItemsList.Count; i++)
             {
-                var updatedValues = new Dictionary<string, object> { { "IsVisible",item.IsVisible } };
-                cRUD.UpdateRecord("AuthVisibleItems", updatedValues, item.Id); //menu grubu gizlenmeye devam edilecek
+                var item = authVisibleItemsList[i];
+                var updatedValues = new Dictionary<string, object> { { "IsVisible", item.IsVisible } };
+                crudRepository.Update("AuthVisibleItems",item.Id,updatedValues);
             }
         }
 

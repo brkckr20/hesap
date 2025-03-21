@@ -30,7 +30,14 @@ namespace Hesap.Forms.Parametreler
         void VerileriGetir()
         {
             var data = crudRepository.GetAll<ProductionManagementParams>("ProductionManagementParams").FirstOrDefault();
-            txtKasmaPayi.Text = data.KasmaPayi.ToString();
+            if (data == null)
+            {
+                crudRepository.Insert("ProductionManagementParams", new Dictionary<string, object> { { "KasmaPayi", 0 } });
+            }
+            else
+            {
+                txtKasmaPayi.Text = data.KasmaPayi.ToString();
+            }
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)

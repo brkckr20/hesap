@@ -678,7 +678,7 @@
             this.ClientSize = new System.Drawing.Size(1473, 750);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
-            this.IconOptions.Image = global::Hesap.Properties.Resources.BookmarkBig;
+            this.IconOptions.Image = global::Hesap.Properties.Resources.AppIcon;
             this.IsMdiContainer = true;
             this.Name = "Main";
             this.Ribbon = this.ribbon;
