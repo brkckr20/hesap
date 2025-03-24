@@ -1,5 +1,6 @@
 ﻿using Hesap.DataAccess;
 using Hesap.Forms.Liste;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -100,12 +101,100 @@ namespace Hesap.Forms.UretimYonetimi
                     pictureBox1.Tag = tempFilePath;
 
                 }
+                txtReceteNo.Text = frm.ReceteNo;
+                this.InventoryId = frm.InventoryId;
+                var item = crudRepository.GetById<Inventory>("Inventory", this.InventoryId);
+                txtUrun.Text = item.InventoryCode;
+                lblUrunAdi.Text = item.InventoryName;
+                txtHamEn.Text = frm.HamEn.ToString();
+                txtHamBoy.Text = frm.HamBoy.ToString();
+                txtMamulEn.Text = frm.MamulEn.ToString();
+                txtGrm2.Text = frm.HamGr_M2.ToString();
+                txtMamulGrM2.Text = frm.MamulGr_M2.ToString();
+                chckIpligiBoyali.Checked = Convert.ToBoolean(frm.IpligiBoyali);
+                txtReceteAciklama.Text = frm.Aciklama;
+                this.Id = frm.Id;
             }
         }
         private void FrmUrunReceteKarti_FormClosing(object sender, FormClosingEventArgs e)
         {
             yardimciAraclar.DeleteTempFile(pictureBox1);
         }
+
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+            crudRepository.ConfirmAndDeleteCard(this.TableName,this.Id, Temizle);
+        }
+        void Temizle()
+        {
+            object[] kart = { txtReceteNo, txtUrun,lblUrunAdi, txtHamEn, txtHamBoy, txtMamulEn,txtMamulBoy,txtGrm2,txtMamulGrM2,chckIpligiBoyali,txtReceteAciklama};
+            yardimciAraclar.KartTemizle(kart);
+            pictureBox1.Image = null;
+            this.Id = 0;
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            ListeGetir("Önceki");
+        }
+        void ListeGetir(string KayitTipi)
+        {
+            if (this.Id != 0)
+            {
+                var list = crudRepository.GetByList<InventoryReceipt>(this.TableName, KayitTipi, this.Id);
+                if (list != null)
+                {
+                    this.Id = list.Id;
+                    txtReceteNo.Text = list.ReceiptNo;
+                    this.InventoryId = list.InventoryId;
+                    var item = crudRepository.GetById<Inventory>("Inventory", this.InventoryId);
+                    txtUrun.Text = item.InventoryCode;
+                    lblUrunAdi.Text = item.InventoryName;
+                    txtHamEn.Text = list.RawWidth.ToString();
+                    txtHamBoy.Text = list.RawHeight.ToString();
+                    txtMamulEn.Text = list.ProductWidth.ToString();
+                    txtMamulBoy.Text = list.ProductHeight.ToString();
+                    txtGrm2.Text = list.RawGrammage.ToString();
+                    txtMamulGrM2.Text = list.ProductGrammage.ToString();
+                    chckIpligiBoyali.Checked = list.YarnDyed;
+                    txtReceteAciklama.Text = list.Explanation;
+                    if (list.ReceiptImage1 != null)
+                    {
+                        using (MemoryStream memoryStream = new MemoryStream(list.ReceiptImage1))
+                        {
+                            pictureBox1.Image = Image.FromStream(memoryStream);
+                        }
+                        string tempFilePath = Path.GetTempFileName() + ".png";
+                        File.WriteAllBytes(tempFilePath, list.ReceiptImage1);
+                        pictureBox1.Tag = tempFilePath;
+                    }
+                    else
+                    {
+                        pictureBox1.Image = null;
+                    }
+                }
+                else
+                {
+                    bildirim.Uyari("Gösterilecek herhangi bir kayıt bulunamadı!");
+                }
+            }
+            else
+            {
+                bildirim.Uyari("Kayıt gösterebilmek için öncelikle listeden bir kayıt getirmelisiniz!");
+            }
+
+        }
+
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+            ListeGetir("Sonraki");
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            Temizle();
+        }
+
         private void repoIplikKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             FrmIplikKartiListesi frm = new FrmIplikKartiListesi();

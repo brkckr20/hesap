@@ -14,6 +14,7 @@ using Hesap.DataAccess;
 using static DevExpress.XtraPrinting.Export.Pdf.PdfImageCache;
 using Hesap.Helpers;
 using System.Drawing.Drawing2D;
+using Hesap.Models;
 
 namespace Hesap.Forms.UretimYonetimi
 {
@@ -77,25 +78,31 @@ namespace Hesap.Forms.UretimYonetimi
         }
         void ListeGetir(string KayitTipi)
         {
-            using (var connection = new Baglanti().GetConnection())
+            if (this.Id != 0)
             {
-                string mssql = $"select top 1 * from UrunKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")}";
-                string sqlite = $"select * from UrunKarti where Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id order by Id {(KayitTipi == "Önceki" ? "desc" : "asc")} limit 1";
-                var query = ayarlar.VeritabaniTuru() == "mssql" ? mssql : sqlite;
-                var veri = connection.QueryFirstOrDefault(query, new { Id = this.Id });
-                if (veri != null)
+                var list = crudRepository.GetByList<Inventory>(this.TableName, KayitTipi, this.Id);
+
+                if (list != null && list.Type == this.InventoryType && !list.IsPrefix)
                 {
-                    var urun = veri;
-                    txtUrunKodu.Text = urun.UrunKodu.ToString();
-                    txtUrunAdi.Text = urun.UrunAdi.ToString();
-                    chckPasif.Checked = Convert.ToBoolean(urun.Pasif);
-                    this.Id = Convert.ToInt32(urun.Id);
+                    this.Id = list.Id;
+                    txtUrunKodu.Text = list.InventoryCode;
+                    txtUrunAdi.Text = list.InventoryName;
+                    chckPasif.Checked = list.IsUse;
+                    //btnCinsiId.Text = list.AddressLine2; --> ihtiyaca göre eklenebilir
+                    //lblCinsi.Text = list.AddressLine3; ---->
+                    // kayıtların bazılarını listelemede problem var kontrol edilip düzeltilecek
                 }
                 else
                 {
                     bildirim.Uyari("Gösterilecek herhangi bir kayıt bulunamadı!");
                 }
+
             }
+            else
+            {
+                bildirim.Uyari("Kayıt gösterebilmek için öncelikle listeden bir kayıt getirmelisiniz!");
+            }
+
         }
         private void btnIleri_Click(object sender, EventArgs e)
         {

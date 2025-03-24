@@ -20,10 +20,28 @@ namespace Hesap.Forms.Liste
         public int Id, InventoryId;
         public float HamGr_M2, HamEn, HamBoy, MamulEn, MamulBoy, MamulGr_M2;
         public bool IpligiBoyali;
-        public string ReceteNo;
+        public string ReceteNo,Aciklama;
         private string TableName = "InventoryReceipt";
         public byte[] UrunResmi;
         CrudRepository crudRepository = new CrudRepository();
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
+
+        private void excelAktarxlsxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.ExcelOlarakAktar(gridControl1,"Ürün Reçete Listesi");
+        }
+
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            crudRepository.SaveColumnStatus(gridView1, this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
+        }
+
+
         public FrmUrunReceteKartiListesi(int _InventoryId)
         {
             InitializeComponent();
@@ -32,6 +50,7 @@ namespace Hesap.Forms.Liste
         private void FrmUrunReceteKartiListesi_Load(object sender, EventArgs e)
         {
             Listele();
+            crudRepository.GetUserColumns(gridView1,this.Text);
         }
         void Listele()
         {
@@ -56,6 +75,9 @@ namespace Hesap.Forms.Liste
             MamulBoy = Convert.ToSingle(gridView.GetFocusedRowCellValue("ProductHeight"));
             UrunResmi = (byte[])gridView.GetFocusedRowCellValue("ReceiptImage1");
             Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
+            InventoryId = Convert.ToInt32(gridView.GetFocusedRowCellValue("InventoryId"));
+            Aciklama = gridView.GetFocusedRowCellValue("Explanation").ToString();
+            IpligiBoyali = Convert.ToBoolean(gridView.GetFocusedRowCellValue("YarnDyed"));
             this.Close();
         }
     }

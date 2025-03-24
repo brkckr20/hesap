@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Hesap.Models
 {
@@ -49,6 +44,9 @@ namespace Hesap.Models
 
         //[Display(Name = "Dosya Adı")]
         //public string ImageFileName { get; set; }
+
+        // Navigation property to Inventory
+        //public Inventory Inventory { get; set; }
 
     }
 }

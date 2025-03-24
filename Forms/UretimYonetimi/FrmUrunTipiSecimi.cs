@@ -17,7 +17,7 @@ namespace Hesap.Forms.UretimYonetimi
         {
             InitializeComponent();
         }
-        public string OnEk, yeniNumaraStr,KumasAdiOzellik;
+        public string OnEk, yeniNumaraStr, KumasAdiOzellik;
         private void FrmUrunTipiSecimi_Load(object sender, EventArgs e)
         {
             Listele();
@@ -36,7 +36,7 @@ namespace Hesap.Forms.UretimYonetimi
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            crudRepository.SaveColumnStatus(gridView1,this.Text);
+            crudRepository.SaveColumnStatus(gridView1, this.Text);
         }
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -48,8 +48,8 @@ namespace Hesap.Forms.UretimYonetimi
         {
             var TypeParams = new Dictionary<string, object>
             {
-                {"InventoryCode", textEdit1.Text.ToUpper() + "000"}, 
-                {"SubType",textEdit2.Text}, 
+                {"InventoryCode", textEdit1.Text.ToUpper() + "000"},
+                {"SubType",textEdit2.Text},
                 {"InventoryName",""},
                 {"Unit",""},
                 {"IsPrefix",true},
@@ -70,7 +70,7 @@ namespace Hesap.Forms.UretimYonetimi
 
         void Listele()
         {
-            string sql = @"WITH CTE AS (
+            string sql = $@"WITH CTE AS (
                         SELECT 
                             LEFT(InventoryCode, 3) AS Ek,
                             RIGHT(InventoryCode, 3) AS Numara,
@@ -78,7 +78,7 @@ namespace Hesap.Forms.UretimYonetimi
                             ROW_NUMBER() OVER (PARTITION BY LEFT(InventoryCode, 3) ORDER BY Id DESC) AS rn
                         FROM 
                             Inventory
-						--where IsPrefix = 1
+						where Type = {Convert.ToInt32(InventoryTypes.Kumas)}
                     )
                     SELECT 
                         Ek,
@@ -89,39 +89,39 @@ namespace Hesap.Forms.UretimYonetimi
                         CTE
                     WHERE 
                         rn = 1;";
-            string sqlite = @"
-                    WITH CTE AS (
-                    SELECT 
-                        substr(InventoryCode, 1, 3) AS Ek,  -- LEFT(InventoryCode, 3)
-                        substr(InventoryCode, -3) AS Numara,  -- RIGHT(InventoryCode, 3)
-                        COALESCE(SubType, '') AS KumasAdiOzellik,  -- ISNULL yerine COALESCE kullanıldı
-                        (SELECT COUNT(*) 
-                         FROM Inventory AS I 
-                         WHERE substr(I.InventoryCode, 1, 3) = substr(Inventory.InventoryCode, 1, 3) 
-                         AND I.Id >= Inventory.Id) AS rn
-                    FROM 
-                        Inventory
-                )
-                SELECT 
-                    Ek,
-                    printf('%03d', CAST(Numara AS INT) + 1) AS YeniNumara,  -- RIGHT('000' + CAST(CAST(Numara AS INT) + 1 AS VARCHAR(3)), 3)
-                    KumasAdiOzellik
-                FROM 
-                    CTE
-                WHERE 
-                    rn = 1;
-";
-            if (ayarlar.VeritabaniTuru() != "sqlite")
-            {
-                listele.Liste(sqlite, gridControl1);
-                crudRepository.GetUserColumns(gridView1, this.Text);
-            }
-            else
-            {
-                listele.Liste(sql, gridControl1);
-                crudRepository.GetUserColumns(gridView1, this.Text);
-            }
-            
+            //            string sqlite = @"
+            //                    WITH CTE AS (
+            //                    SELECT 
+            //                        substr(InventoryCode, 1, 3) AS Ek,  -- LEFT(InventoryCode, 3)
+            //                        substr(InventoryCode, -3) AS Numara,  -- RIGHT(InventoryCode, 3)
+            //                        COALESCE(SubType, '') AS KumasAdiOzellik,  -- ISNULL yerine COALESCE kullanıldı
+            //                        (SELECT COUNT(*) 
+            //                         FROM Inventory AS I 
+            //                         WHERE substr(I.InventoryCode, 1, 3) = substr(Inventory.InventoryCode, 1, 3) 
+            //                         AND I.Id >= Inventory.Id) AS rn
+            //                    FROM 
+            //                        Inventory
+            //                )
+            //                SELECT 
+            //                    Ek,
+            //                    printf('%03d', CAST(Numara AS INT) + 1) AS YeniNumara,  -- RIGHT('000' + CAST(CAST(Numara AS INT) + 1 AS VARCHAR(3)), 3)
+            //                    KumasAdiOzellik
+            //                FROM 
+            //                    CTE
+            //                WHERE 
+            //                    rn = 1;
+            //";
+            //            if (ayarlar.VeritabaniTuru() != "sqlite")
+            //            {
+            //                listele.Liste(sqlite, gridControl1);
+            //                crudRepository.GetUserColumns(gridView1, this.Text);
+            //            }
+            //            else
+            //            {
+            listele.Liste(sql, gridControl1);
+            crudRepository.GetUserColumns(gridView1, this.Text);
+            //}
+
         }
     }
 }

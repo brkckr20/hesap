@@ -135,7 +135,7 @@ namespace Hesap
 
         private void Main_Load(object sender, EventArgs e)
         {
-            SqliteDatabaseOlustur();
+            ////SqliteDatabaseOlustur();
             EksikFormlariKaydet();
             EksikRibbonItemlariKaydet();
             UpdateButtonVisibility();

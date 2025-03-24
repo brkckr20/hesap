@@ -20,7 +20,8 @@ namespace Hesap.DataAccess
     public class CrudRepository
     {
         private readonly IDbConnection _dbConnection;
-        private int UserId = Properties.Settings.Default.Id;
+        private int UserId = CurrentUser.UserId;
+        //private int UserId = Properties.Settings.Default.Id;
         Bildirim bildirim = new Bildirim();
         Ayarlar ayarlar = new Ayarlar();
         string databaseTuru;
@@ -37,13 +38,11 @@ namespace Hesap.DataAccess
                 databaseTuru = "sqlite";
             }
         }
-
         public T GetById<T>(string TableName, object id)
         {
             string query = $"SELECT * FROM {TableName} WHERE Id = @Id";
             return _dbConnection.QueryFirstOrDefault<T>(query, new { Id = id });
         }
-
         public T GetByList<T>(string TableName,string KayitTipi,int id) //iler geri butonları için init edildi.
         {
             string query = this.databaseTuru == "mssql"
@@ -51,7 +50,6 @@ namespace Hesap.DataAccess
             : $"SELECT * FROM {TableName} WHERE Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id ORDER BY Id {(KayitTipi == "Önceki" ? "DESC" : "ASC")} LIMIT 1";
             return _dbConnection.QueryFirstOrDefault<T>(query, new { Id = id });
         }
-
         public IEnumerable<T> GetAll<T>(string TableName)
         {
             string query = $"SELECT * FROM {TableName}";
@@ -80,19 +78,16 @@ namespace Hesap.DataAccess
             parameters["Id"] = id;
             return _dbConnection.Execute(query, parameters);
         }
-
         public int Delete(string TableName, object id)
         {
             string query = $"DELETE FROM {TableName} WHERE Id = @Id";
             return _dbConnection.Execute(query, new { Id = id });
         }
-
         public T GetMaxRecord<T>(string TableName, string ColumnName)
         {
             string query = $"SELECT MAX({ColumnName}) FROM {TableName}";
             return _dbConnection.ExecuteScalar<T>(query);
         }
-
         public void ConfirmAndDeleteCard(string TableName, int id, Action successCallback)
         {
             if (id != 0)
@@ -109,7 +104,6 @@ namespace Hesap.DataAccess
                 bildirim.Uyari("Kayıt silebilmek için öncelikle listeden bir kayıt seçmelisiniz!");
             }
         }
-
         public int GetCountByPrefix(string TableName, string ColumnName, string Prefix)
         {
             string checkQuery = $"SELECT COUNT(*) FROM {TableName} WHERE {ColumnName} LIKE @Prefix";
@@ -165,7 +159,6 @@ namespace Hesap.DataAccess
                 }
             }
         }
-
         // kullanıcının kolonlarını kaydetme işlemidir
         public void SaveColumnStatus(GridView gridView, string ScreenName)
         {
@@ -187,7 +180,6 @@ namespace Hesap.DataAccess
                 }
             }
         }
-
         public void ExecuteInTransaction(Action<IDbTransaction> action)
         {
             using (var transaction = _dbConnection.BeginTransaction())
