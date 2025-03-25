@@ -34,6 +34,9 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dışarıAktarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excelDosyasıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.satırİşlemleriToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -61,25 +64,51 @@
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Montserrat", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dışarıAktarToolStripMenuItem});
+            this.dışarıAktarToolStripMenuItem,
+            this.satırİşlemleriToolStripMenuItem,
+            this.satırİşlemleriToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(205, 92);
             // 
             // dışarıAktarToolStripMenuItem
             // 
             this.dışarıAktarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.excelDosyasıToolStripMenuItem});
             this.dışarıAktarToolStripMenuItem.Name = "dışarıAktarToolStripMenuItem";
-            this.dışarıAktarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dışarıAktarToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.dışarıAktarToolStripMenuItem.Text = "Dışarı Aktar";
             // 
             // excelDosyasıToolStripMenuItem
             // 
             this.excelDosyasıToolStripMenuItem.Name = "excelDosyasıToolStripMenuItem";
-            this.excelDosyasıToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.excelDosyasıToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.excelDosyasıToolStripMenuItem.Text = "Excel Dosyası";
             this.excelDosyasıToolStripMenuItem.Click += new System.EventHandler(this.excelDosyasıToolStripMenuItem_Click);
+            // 
+            // satırİşlemleriToolStripMenuItem
+            // 
+            this.satırİşlemleriToolStripMenuItem.Name = "satırİşlemleriToolStripMenuItem";
+            this.satırİşlemleriToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.satırİşlemleriToolStripMenuItem.Text = "Dizayn Kaydet";
+            this.satırİşlemleriToolStripMenuItem.Click += new System.EventHandler(this.satırİşlemleriToolStripMenuItem_Click);
+            // 
+            // satırİşlemleriToolStripMenuItem1
+            // 
+            this.satırİşlemleriToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sütunSeçimiToolStripMenuItem});
+            this.satırİşlemleriToolStripMenuItem1.Name = "satırİşlemleriToolStripMenuItem1";
+            this.satırİşlemleriToolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
+            this.satırİşlemleriToolStripMenuItem1.Text = "Satır İşlemleri";
+            // 
+            // sütunSeçimiToolStripMenuItem
+            // 
+            this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
+            this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
             // FrmUrunKartiListesi
             // 
@@ -107,5 +136,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem dışarıAktarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem excelDosyasıToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
     }
 }

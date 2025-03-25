@@ -50,6 +50,7 @@ namespace Hesap.Forms.UretimYonetimi
             if (this.Id == 0)
             {
                 Id = crudRepository.Insert(TableName, InvParams);
+                crudRepository.Update("FeatureCoding", Convert.ToInt32(btnCinsiId.Text), new Dictionary<string, object> { { "InventoryId", this.Id } });
                 txtUrunAdi.Text = InventoryName;
                 bildirim.Basarili();
             }
@@ -63,14 +64,23 @@ namespace Hesap.Forms.UretimYonetimi
         {
             Liste.FrmUrunKartiListesi frm = new Liste.FrmUrunKartiListesi(InventoryType);
             frm.ShowDialog();
-            txtUrunKodu.Text = frm.UrunKodu;
-            txtUrunAdi.Text = frm.UrunAdi;
-            chckPasif.Checked = frm.Pasif;
-            this.Id = frm.Id;
+            if (txtUrunKodu.Text != null)
+            {
+                txtUrunKodu.Text = frm.UrunKodu;
+                txtUrunAdi.Text = frm.UrunAdi;
+                chckPasif.Checked = frm.Pasif;
+                this.Id = frm.Id;
+                var item = crudRepository.GetByOtherCondition<FeatureCoding>("FeatureCoding", "InventoryId", this.Id);
+                if (item != null)
+                {
+                    btnCinsiId.Text = item.Id.ToString() ?? "";
+                    lblCinsiAciklama.Text = item.Explanation ?? "";
+                }
+            }
         }
         private void simpleButton5_Click(object sender, EventArgs e)
         {
-            crudRepository.ConfirmAndDeleteCard(this.TableName, this.Id, null);
+            crudRepository.ConfirmAndDeleteCard(this.TableName, this.Id, Temizle);
         }
         private void btnGeri_Click(object sender, EventArgs e)
         {
@@ -88,9 +98,12 @@ namespace Hesap.Forms.UretimYonetimi
                     txtUrunKodu.Text = list.InventoryCode;
                     txtUrunAdi.Text = list.InventoryName;
                     chckPasif.Checked = list.IsUse;
-                    //btnCinsiId.Text = list.AddressLine2; --> ihtiyaca göre eklenebilir
-                    //lblCinsi.Text = list.AddressLine3; ---->
-                    // kayıtların bazılarını listelemede problem var kontrol edilip düzeltilecek
+                    var cinsiKod = crudRepository.GetByOtherCondition<FeatureCoding>("FeatureCoding", "InventoryId", this.Id);
+                    if (cinsiKod != null)
+                    {
+                        btnCinsiId.Text = cinsiKod.Id.ToString();
+                        lblCinsiAciklama.Text = cinsiKod.Explanation;
+                    }
                 }
                 else
                 {
@@ -108,7 +121,7 @@ namespace Hesap.Forms.UretimYonetimi
         {
             ListeGetir("Sonraki");
         }
-        private void simpleButton1_Click(object sender, EventArgs e)
+        void Temizle()
         {
             txtUrunKodu.Text = "";
             txtUrunAdi.Text = "";
@@ -116,6 +129,10 @@ namespace Hesap.Forms.UretimYonetimi
             btnCinsiId.Text = "";
             lblCinsiAciklama.Text = "";
             this.Id = 0;
+        }
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            Temizle();
         }
         private void FrmUrunKarti_Load(object sender, EventArgs e)
         {

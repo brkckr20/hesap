@@ -33,13 +33,28 @@ namespace Hesap.Forms.Liste
         private void FrmUrunKartiListesi_Load(object sender, EventArgs e)
         {
             Listele();
+            crudRepository.GetUserColumns(gridView1,this.Text);
         }
         void Listele()
         {
             gridControl1.DataSource = crudRepository.GetAll<Inventory>("Inventory")
                 .Where(inv => inv.IsPrefix == false && inv.Type == InventoryType)
-                .Select(inv => new { inv.InventoryCode, inv.InventoryName, inv.Id })
+                .Select(inv => new { 
+                    UrunKodu =inv.InventoryCode, 
+                    UrunAdi =inv.InventoryName,
+                    Kullanimda = inv.IsUse,
+                    inv.Id })
                 .ToList();
+        }
+
+        private void satırİşlemleriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            crudRepository.SaveColumnStatus(gridView1,this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
         }
 
         private void excelDosyasıToolStripMenuItem_Click(object sender, EventArgs e)
@@ -51,8 +66,9 @@ namespace Hesap.Forms.Liste
         {
 
             GridView gridView = sender as GridView;
-            UrunKodu = gridView.GetFocusedRowCellValue("InventoryCode").ToString();
-            UrunAdi = gridView.GetFocusedRowCellValue("InventoryName").ToString();
+            UrunKodu = gridView.GetFocusedRowCellValue("UrunKodu").ToString();
+            UrunAdi = gridView.GetFocusedRowCellValue("UrunAdi").ToString();
+            Pasif = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Kullanimda"));
             Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
             this.Close();
         }

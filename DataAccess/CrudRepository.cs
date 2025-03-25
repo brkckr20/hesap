@@ -196,5 +196,10 @@ namespace Hesap.DataAccess
                 }
             }
         }
+        public T GetByOtherCondition<T>(string TableName,string ConditionField, object id)
+        {
+            string query = $"SELECT * FROM {TableName} WHERE {ConditionField} = @Id";
+            return _dbConnection.QueryFirstOrDefault<T>(query, new { Id = id });
+        }
     }
 }
