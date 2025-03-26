@@ -29,7 +29,7 @@ namespace Hesap.Forms.Kartlar
             for (int i = 0; i < gridView1.RowCount - 1; i++)
             {
                 var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "Id"));
-                var updateAccess = new Dictionary<string, object> { 
+                var updateAccess = new Dictionary<string, object> {
                     { "CanAccess", gridView1.GetRowCellValue(i, "CanAccess").ToString() },
                     { "CanDelete", gridView1.GetRowCellValue(i, "CanDelete").ToString() },
                     { "CanUpdate", gridView1.GetRowCellValue(i, "CanUpdate").ToString() },
@@ -44,7 +44,7 @@ namespace Hesap.Forms.Kartlar
             {
                 var item = authVisibleItemsList[i];
                 var updatedValues = new Dictionary<string, object> { { "IsVisible", item.IsVisible } };
-                crudRepository.Update("AuthVisibleItems",item.Id,updatedValues);
+                crudRepository.Update("AuthVisibleItems", item.Id, updatedValues);
             }
         }
 

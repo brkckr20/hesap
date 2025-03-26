@@ -43,7 +43,7 @@ namespace Hesap.Utils
                 {
                     using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, sqliteString))
                     {
-                        adapter.Fill(dataTable);
+                        adapter.Fill(dataTable); // kumaş kodu seçerken isnull hatası veriyor. kontrol edilecek
                     }
                 }
                 xtraGrid.DataSource = dataTable;

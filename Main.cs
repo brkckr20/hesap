@@ -135,7 +135,7 @@ namespace Hesap
 
         private void Main_Load(object sender, EventArgs e)
         {
-            ////SqliteDatabaseOlustur();
+            SqliteDatabaseOlustur();
             EksikFormlariKaydet();
             EksikRibbonItemlariKaydet();
             UpdateButtonVisibility();
@@ -161,13 +161,7 @@ namespace Hesap
 
         void SqliteDatabaseOlustur()
         {
-            //string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            //string dataDirectory = Path.Combine(baseDirectory, "Data\\sqlite");
-            string dataDirectory = "C:\\Hesaplama\\Data\\sqlite";
-            if (!Directory.Exists(dataDirectory))
-            {
-                Directory.CreateDirectory(dataDirectory);
-            }
+            string dataDirectory = "C:\\Data";
             string databasePath = Path.Combine(dataDirectory, DatabaseFileName);
 
             _connectionString = $"Data Source={databasePath};Version=3;";
@@ -197,7 +191,6 @@ namespace Hesap
 
         private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //FormAc(new Forms.Kartlar.FrmFirmaKarti(), "barFirmaKartlari"); daha sonra gözden geçirilecek
             Forms.Kartlar.FrmFirmaKarti frm = new Forms.Kartlar.FrmFirmaKarti();
             FormAc(frm);
         }
@@ -222,7 +215,7 @@ namespace Hesap
 
         private void barButtonItem6_ItemClick(object sender, ItemClickEventArgs e)
         {
-            
+
         }
 
         private void barBtnRapor_ItemClick(object sender, ItemClickEventArgs e)
@@ -286,7 +279,7 @@ namespace Hesap
 
         private void barButtonItem16_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Forms.MalzemeYonetimi.Ekranlar.Talimatlar.FrmIplikSaTalimati frm = new Forms.MalzemeYonetimi.Ekranlar.Talimatlar.FrmIplikSaTalimati(); 
+            Forms.MalzemeYonetimi.Ekranlar.Talimatlar.FrmIplikSaTalimati frm = new Forms.MalzemeYonetimi.Ekranlar.Talimatlar.FrmIplikSaTalimati();
             FormAc(frm);
         }
 

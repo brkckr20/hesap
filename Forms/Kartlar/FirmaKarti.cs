@@ -17,10 +17,7 @@ namespace Hesap.Forms.Kartlar
 {
     public partial class FrmFirmaKarti : XtraForm
     {
-        Baglanti _baglanti;
         Bildirim bildirim = new Bildirim();
-        Ayarlar ayarlar = new Ayarlar();
-        CRUD_Operations cRUD = new CRUD_Operations();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         CrudRepository crudRepository = new CrudRepository();
         int Id = 0;
@@ -28,9 +25,7 @@ namespace Hesap.Forms.Kartlar
         public FrmFirmaKarti()
         {
             InitializeComponent();
-            _baglanti = new Baglanti();
         }
-
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             var parameters = new Dictionary<string, object>
@@ -43,8 +38,16 @@ namespace Hesap.Forms.Kartlar
             };
             if (this.Id == 0)
             {
-                this.Id = crudRepository.Insert(this.TableName, parameters);
-                bildirim.Basarili();
+                if (!string.IsNullOrEmpty(txtFirmaKodu.Text))
+                {
+                    this.Id = crudRepository.Insert(this.TableName, parameters);
+                    bildirim.Basarili();
+                }
+                else
+                {
+                    bildirim.Uyari("Firma kodu girmeden kayıt yapılamaz!");
+                }
+                
             }
             else
             {
@@ -116,17 +119,14 @@ namespace Hesap.Forms.Kartlar
         {
             ListeGetir("Önceki");
         }
-
         private void btnIleri_Click(object sender, EventArgs e)
         {
             ListeGetir("Sonraki");
         }
-
         private void FrmFirmaKarti_Load(object sender, EventArgs e)
         {
 
         }
-
         private void sonNumarayıAktarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             txtFirmaKodu.Text = crudRepository.GetMaxRecord<string>(this.TableName, "CompanyCode");
