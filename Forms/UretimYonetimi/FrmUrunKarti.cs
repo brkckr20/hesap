@@ -33,31 +33,38 @@ namespace Hesap.Forms.UretimYonetimi
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            string CombinedCode = txtUrunKodu.Text.Substring(0, 3) + btnCinsiId.Text;
-            string InventoryName = KumasAdiOzellik + " " + lblCinsiAciklama.Text;
-            if (crudRepository.IfExistRecord(TableName, "CombinedCode", CombinedCode) > 0)
+            if (!string.IsNullOrEmpty(txtUrunKodu.Text) && btnCinsiId.Text != null)
             {
-                string code = crudRepository.GetByCode("InventoryCode", this.TableName, CombinedCode);
-                bildirim.Uyari($"Seçtiğiniz özelliklere ait bir kayıt bulunmaktadır.\nLütfen {code} numaralı kaydı kontrol ediniz!!");
-                return;
-            }
+                string CombinedCode = txtUrunKodu.Text.Substring(0, 3) + btnCinsiId.Text;
+                string InventoryName = KumasAdiOzellik + " " + lblCinsiAciklama.Text;
+                if (crudRepository.IfExistRecord(TableName, "CombinedCode", CombinedCode) > 0)
+                {
+                    string code = crudRepository.GetByCode("InventoryCode", this.TableName, CombinedCode);
+                    bildirim.Uyari($"Seçtiğiniz özelliklere ait bir kayıt bulunmaktadır.\nLütfen {code} numaralı kaydı kontrol ediniz!!");
+                    return;
+                }
 
-            var InvParams = new Dictionary<string, object>
+                var InvParams = new Dictionary<string, object>
             {
                 { "InventoryCode", txtUrunKodu.Text }, { "InventoryName", InventoryName },
                 {"Type" , InventoryTypes.Kumas}, { "IsUse", chckPasif.Checked }, {"Unit",""},{"CombinedCode",CombinedCode},{"SubType" , KumasAdiOzellik},{"IsPrefix" , false}
             };
-            if (this.Id == 0)
-            {
-                Id = crudRepository.Insert(TableName, InvParams);
-                crudRepository.Update("FeatureCoding", Convert.ToInt32(btnCinsiId.Text), new Dictionary<string, object> { { "InventoryId", this.Id } });
-                txtUrunAdi.Text = InventoryName;
-                bildirim.Basarili();
+                if (this.Id == 0)
+                {
+                    Id = crudRepository.Insert(TableName, InvParams);
+                    crudRepository.Update("FeatureCoding", Convert.ToInt32(btnCinsiId.Text), new Dictionary<string, object> { { "InventoryId", this.Id } });
+                    txtUrunAdi.Text = InventoryName;
+                    bildirim.Basarili();
+                }
+                else
+                {
+                    crudRepository.Update(this.TableName, this.Id, InvParams);
+                    bildirim.GuncellemeBasarili();
+                }
             }
             else
             {
-                crudRepository.Update(this.TableName, this.Id, InvParams);
-                bildirim.GuncellemeBasarili();
+                bildirim.Uyari("Kumaş kodu veya kumaş özelliği boş bırakılamaz!");
             }
         }
         private void simpleButton2_Click(object sender, EventArgs e)

@@ -83,6 +83,11 @@ namespace Hesap.DataAccess
             string query = $"DELETE FROM {TableName} WHERE Id = @Id";
             return _dbConnection.Execute(query, new { Id = id });
         }
+        public int DeleteRows(string TableName, object id)
+        {
+            string query = $"DELETE FROM {TableName} WHERE ReceiptId = @Id";
+            return _dbConnection.Execute(query, new { Id = id });
+        }
         public T GetMaxRecord<T>(string TableName, string ColumnName)
         {
             string query = $"SELECT MAX({ColumnName}) FROM {TableName}";

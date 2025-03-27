@@ -316,12 +316,11 @@
             this.label157 = new System.Windows.Forms.Label();
             this.label158 = new System.Windows.Forms.Label();
             this.label159 = new System.Windows.Forms.Label();
+            this.label162 = new System.Windows.Forms.Label();
+            this.label161 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.maliyetFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kayıtNumarasınıGösterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label161 = new System.Windows.Forms.Label();
-            this.label162 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -3569,13 +3568,34 @@
             this.label159.Text = "₺";
             this.label159.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label162
+            // 
+            this.label162.BackColor = System.Drawing.Color.Yellow;
+            this.label162.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label162.Location = new System.Drawing.Point(12, 27);
+            this.label162.Name = "label162";
+            this.label162.Size = new System.Drawing.Size(229, 21);
+            this.label162.TabIndex = 1130;
+            this.label162.Text = "KDV DAHİL BELİRLENEN FİYAT";
+            this.label162.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label161
+            // 
+            this.label161.BackColor = System.Drawing.Color.Yellow;
+            this.label161.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label161.Location = new System.Drawing.Point(12, 7);
+            this.label161.Name = "label161";
+            this.label161.Size = new System.Drawing.Size(229, 21);
+            this.label161.TabIndex = 1130;
+            this.label161.Text = "Belirlenen Fiyat";
+            this.label161.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Font = new System.Drawing.Font("Corbel", 10F);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.maliyetFormuToolStripMenuItem,
-            this.kayıtNumarasınıGösterToolStripMenuItem,
-            this.alertToolStripMenuItem});
+            this.kayıtNumarasınıGösterToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(190, 70);
             // 
@@ -3593,36 +3613,8 @@
             this.kayıtNumarasınıGösterToolStripMenuItem.Name = "kayıtNumarasınıGösterToolStripMenuItem";
             this.kayıtNumarasınıGösterToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.kayıtNumarasınıGösterToolStripMenuItem.Text = "Kayıt Bilgisi";
+            this.kayıtNumarasınıGösterToolStripMenuItem.Visible = false;
             this.kayıtNumarasınıGösterToolStripMenuItem.Click += new System.EventHandler(this.kayıtNumarasınıGösterToolStripMenuItem_Click);
-            // 
-            // alertToolStripMenuItem
-            // 
-            this.alertToolStripMenuItem.Name = "alertToolStripMenuItem";
-            this.alertToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.alertToolStripMenuItem.Text = "Alert";
-            this.alertToolStripMenuItem.Click += new System.EventHandler(this.alertToolStripMenuItem_Click);
-            // 
-            // label161
-            // 
-            this.label161.BackColor = System.Drawing.Color.Yellow;
-            this.label161.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label161.Location = new System.Drawing.Point(12, 7);
-            this.label161.Name = "label161";
-            this.label161.Size = new System.Drawing.Size(229, 21);
-            this.label161.TabIndex = 1130;
-            this.label161.Text = "Belirlenen Fiyat";
-            this.label161.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label162
-            // 
-            this.label162.BackColor = System.Drawing.Color.Yellow;
-            this.label162.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label162.Location = new System.Drawing.Point(12, 27);
-            this.label162.Name = "label162";
-            this.label162.Size = new System.Drawing.Size(229, 21);
-            this.label162.TabIndex = 1130;
-            this.label162.Text = "KDV DAHİL BELİRLENEN FİYAT";
-            this.label162.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -3960,7 +3952,6 @@
         private DevExpress.XtraEditors.GroupControl grpUrunResim;
         private System.Windows.Forms.PictureBox pictureBox1;
         private DevExpress.XtraEditors.SimpleButton btnUrunResmiSec;
-        private System.Windows.Forms.ToolStripMenuItem alertToolStripMenuItem;
         private System.Windows.Forms.Label label162;
         private System.Windows.Forms.Label label161;
     }

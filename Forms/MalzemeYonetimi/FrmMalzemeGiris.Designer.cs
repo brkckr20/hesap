@@ -79,6 +79,7 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Vat = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -449,7 +450,8 @@
             this.TrackingNumber,
             this.UnitPrice,
             this.RowAmount,
-            this.D2Id});
+            this.D2Id,
+            this.Vat});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -645,6 +647,14 @@
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
+            // Vat
+            // 
+            this.Vat.Caption = "KDV %";
+            this.Vat.FieldName = "Vat";
+            this.Vat.Name = "Vat";
+            this.Vat.Visible = true;
+            this.Vat.VisibleIndex = 10;
+            // 
             // FrmMalzemeGiris
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -738,5 +748,6 @@
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
         private DevExpress.XtraGrid.Columns.GridColumn MalzemeId;
+        private DevExpress.XtraGrid.Columns.GridColumn Vat;
     }
 }
