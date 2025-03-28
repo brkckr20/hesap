@@ -95,6 +95,8 @@
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup12 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -147,9 +149,10 @@
             this.barOrderGirisi,
             this.barRenkKarti,
             this.barBtnKumasKarti,
-            this.barUretimYonetimiParametreleri});
+            this.barUretimYonetimiParametreleri,
+            this.barButtonItem3});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 45;
+            this.ribbon.MaxItemId = 46;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -522,7 +525,8 @@
             this.ribbonPageGroup3,
             this.ribbonPageGroup5,
             this.ribbonPageGroup9,
-            this.rbnParams});
+            this.rbnParams,
+            this.ribbonPageGroup12});
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "Ayarlar";
             // 
@@ -671,6 +675,21 @@
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Kartlar";
             // 
+            // ribbonPageGroup12
+            // 
+            this.ribbonPageGroup12.ItemLinks.Add(this.barButtonItem3);
+            this.ribbonPageGroup12.Name = "ribbonPageGroup12";
+            this.ribbonPageGroup12.Text = "Numaratör";
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "Numaratör";
+            this.barButtonItem3.Id = 45;
+            this.barButtonItem3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
+            this.barButtonItem3.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick_1);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -760,5 +779,7 @@
         private DevExpress.XtraBars.BarButtonItem barBtnKumasKarti;
         private DevExpress.XtraBars.BarButtonItem barUretimYonetimiParametreleri;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbnParams;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup12;
     }
 }

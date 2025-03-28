@@ -3,6 +3,7 @@ using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Hesap.Forms.UretimYonetimi
 {
@@ -42,6 +43,12 @@ namespace Hesap.Forms.UretimYonetimi
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             yardimciAraclar.KolonSecici(gridControl1);
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            int Id = Convert.ToInt32(gridView1.GetFocusedRowCellValue("Id"));
+            crudRepository.ConfirmAndDeleteCard("Inventory", Id, Listele);
         }
 
         private void btnListeyeEkle_Click(object sender, EventArgs e)
@@ -92,6 +99,7 @@ namespace Hesap.Forms.UretimYonetimi
             string sqlite = @"
                                 WITH CTE AS (
                                 SELECT 
+									Id,
                                     substr(InventoryCode, 1, 3) AS Ek,  -- LEFT(InventoryCode, 3)
                                     substr(InventoryCode, -3) AS Numara,  -- RIGHT(InventoryCode, 3)
                                     COALESCE(SubType, '') AS KumasAdiOzellik,  -- ISNULL yerine COALESCE kullanıldı
@@ -103,6 +111,7 @@ namespace Hesap.Forms.UretimYonetimi
                                     Inventory
                             )
                             SELECT 
+								Id,
                                 Ek,
                                 printf('%03d', CAST(Numara AS INT) + 1) AS YeniNumara,  -- RIGHT('000' + CAST(CAST(Numara AS INT) + 1 AS VARCHAR(3)), 3)
                                 KumasAdiOzellik
@@ -119,9 +128,9 @@ namespace Hesap.Forms.UretimYonetimi
             else
             {
                 listele.Liste(sql, gridControl1);
-            crudRepository.GetUserColumns(gridView1, this.Text);
-        }
+                crudRepository.GetUserColumns(gridView1, this.Text);
+            }
 
-    }
+        }
     }
 }

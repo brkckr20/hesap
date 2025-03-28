@@ -372,5 +372,11 @@ namespace Hesap
             Forms.Parametreler.frmUretimYonetimiParams frm = new Forms.Parametreler.frmUretimYonetimiParams();
             FormAc(frm);
         }
+
+        private void barButtonItem3_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            Forms.Diger.FrmNumerator frm = new Forms.Diger.FrmNumerator();
+            FormAc(frm);
+        }
     }
 }

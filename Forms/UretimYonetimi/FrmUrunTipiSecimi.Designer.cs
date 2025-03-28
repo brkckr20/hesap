@@ -42,6 +42,7 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSil = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -89,6 +90,7 @@
             this.panelControl2.Controls.Add(this.labelControl1);
             this.panelControl2.Controls.Add(this.textEdit2);
             this.panelControl2.Controls.Add(this.textEdit1);
+            this.panelControl2.Controls.Add(this.btnSil);
             this.panelControl2.Controls.Add(this.btnListeyeEkle);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(0, 265);
@@ -130,11 +132,11 @@
             // 
             // btnListeyeEkle
             // 
-            this.btnListeyeEkle.Location = new System.Drawing.Point(265, 7);
+            this.btnListeyeEkle.Location = new System.Drawing.Point(260, 7);
             this.btnListeyeEkle.Name = "btnListeyeEkle";
-            this.btnListeyeEkle.Size = new System.Drawing.Size(88, 31);
+            this.btnListeyeEkle.Size = new System.Drawing.Size(43, 31);
             this.btnListeyeEkle.TabIndex = 0;
-            this.btnListeyeEkle.Text = "Listeye Ekle";
+            this.btnListeyeEkle.Text = "Ekle";
             this.btnListeyeEkle.Click += new System.EventHandler(this.btnListeyeEkle_Click);
             // 
             // contextMenuStrip1
@@ -144,7 +146,7 @@
             this.dizaynKaydetToolStripMenuItem,
             this.satırİşlemleriToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 48);
             // 
             // dizaynKaydetToolStripMenuItem
             // 
@@ -165,9 +167,20 @@
             // sütunSeçimiToolStripMenuItem
             // 
             this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
-            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
+            // 
+            // btnSil
+            // 
+            this.btnSil.Appearance.BackColor = System.Drawing.Color.Maroon;
+            this.btnSil.Appearance.Options.UseBackColor = true;
+            this.btnSil.Location = new System.Drawing.Point(310, 7);
+            this.btnSil.Name = "btnSil";
+            this.btnSil.Size = new System.Drawing.Size(43, 31);
+            this.btnSil.TabIndex = 0;
+            this.btnSil.Text = "Sil";
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // FrmUrunTipiSecimi
             // 
@@ -211,5 +224,6 @@
         private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
+        private DevExpress.XtraEditors.SimpleButton btnSil;
     }
 }

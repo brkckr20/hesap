@@ -124,16 +124,16 @@ namespace Hesap.DataAccess
             string query = $"SELECT {ColumnName} FROM {TableName} WHERE CombinedCode = @CombinedCode";
             return _dbConnection.ExecuteScalar<string>(query, new { CombinedCode = ConditionName });
         }
-        public string GetNumaratorNotCondition(string FieldName,string TableName)
+        public string GetNumaratorWithCondition(string TableName,string FieldName)
         {
             string query;
             if (this.databaseTuru == "mssql")
             {
-                query = $"SELECT top 1 {FieldName} FROM {TableName} ORDER BY OrderNo desc";
+                query = $"SELECT top 1 {FieldName} FROM {TableName} ORDER BY {FieldName} desc";
             }
             else
             {
-                query = $"SELECT {FieldName} FROM {TableName} ORDER BY OrderNo desc LIMIT 1";
+                query = $"SELECT {FieldName} FROM {TableName} ORDER BY {FieldName} desc LIMIT 1";
             }
             var numarator = _dbConnection.QuerySingleOrDefault<string>(query);
             if (numarator != null)

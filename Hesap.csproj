@@ -146,6 +146,12 @@
     <Compile Include="Context\_TaleplerGorusme.cs" />
     <Compile Include="Context\_UrunReceteUB.cs" />
     <Compile Include="DataAccess\CrudRepository.cs" />
+    <Compile Include="Forms\Diger\FrmNumerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Diger\FrmNumerator.Designer.cs">
+      <DependentUpon>FrmNumerator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Diger\UpdateProgress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -613,6 +619,9 @@
     <Compile Include="Utils\Numarator.cs" />
     <Compile Include="Utils\AllTypes.cs" />
     <Compile Include="Utils\YardimciAraclar.cs" />
+    <EmbeddedResource Include="Forms\Diger\FrmNumerator.resx">
+      <DependentUpon>FrmNumerator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Diger\UpdateProgress.resx">
       <DependentUpon>UpdateProgress.cs</DependentUpon>
     </EmbeddedResource>
