@@ -130,6 +130,7 @@
             this.panelControl3.Name = "panelControl3";
             this.panelControl3.Size = new System.Drawing.Size(321, 39);
             this.panelControl3.TabIndex = 2;
+            this.panelControl3.Visible = false;
             // 
             // btnSil
             // 
@@ -147,7 +148,7 @@
             this.dizaynKaydetToolStripMenuItem,
             this.satırİşlemleriToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(189, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(189, 48);
             // 
             // dizaynKaydetToolStripMenuItem
             // 
@@ -168,7 +169,7 @@
             // sütunSeçitimToolStripMenuItem
             // 
             this.sütunSeçitimToolStripMenuItem.Name = "sütunSeçitimToolStripMenuItem";
-            this.sütunSeçitimToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçitimToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.sütunSeçitimToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçitimToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçitimToolStripMenuItem_Click);
             // 

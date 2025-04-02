@@ -25,9 +25,8 @@ namespace Hesap.Forms.UretimYonetimi
             InitializeComponent();
         }
 
-        int Id = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas);
+        int Id = 0, InventoryType = Convert.ToInt32(InventoryTypes.Kumas), InventoryNumeratorId=0;
         Bildirim bildirim = new Bildirim();
-        Ayarlar ayarlar = new Ayarlar();
         CrudRepository crudRepository = new CrudRepository();
         string TableName = "Inventory", KumasAdiOzellik = "";
 
@@ -54,6 +53,8 @@ namespace Hesap.Forms.UretimYonetimi
                     Id = crudRepository.Insert(TableName, InvParams);
                     crudRepository.Update("FeatureCoding", Convert.ToInt32(btnCinsiId.Text), new Dictionary<string, object> { { "InventoryId", this.Id } });
                     txtUrunAdi.Text = InventoryName;
+                    var item = crudRepository.GetById<Numerator>("Numerator", InventoryNumeratorId);
+                    crudRepository.Update("Numerator", item.Id, new Dictionary<string, object> { { "Number", item.Number + 1 } });
                     bildirim.Basarili();
                 }
                 else
@@ -151,6 +152,7 @@ namespace Hesap.Forms.UretimYonetimi
             frm.ShowDialog();
             txtUrunKodu.Text = frm.OnEk + frm.yeniNumaraStr;
             KumasAdiOzellik = frm.KumasAdiOzellik;
+            InventoryNumeratorId = frm.Id;
         }
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -158,7 +160,7 @@ namespace Hesap.Forms.UretimYonetimi
         }
         void OzellikSecikEkrani(string labelName)
         {
-            FrmOzellikSecimi frm = new FrmOzellikSecimi(SemiColonHelper.RemoveSemiColon(labelName), this.Name);
+            FrmOzellikSecimi frm = new FrmOzellikSecimi(SemiColonHelper.RemoveSemiColon(labelName), this.Name, txtUrunKodu.Text.Substring(0,3));
             frm.ShowDialog();
             if (frm.id == null)
             {

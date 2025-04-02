@@ -37,12 +37,12 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.btnSil = new DevExpress.XtraEditors.SimpleButton();
             this.btnListeyeEkle = new DevExpress.XtraEditors.SimpleButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSil = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -97,6 +97,7 @@
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(365, 49);
             this.panelControl2.TabIndex = 1;
+            this.panelControl2.Visible = false;
             // 
             // labelControl2
             // 
@@ -129,6 +130,17 @@
             this.textEdit1.Properties.AutoHeight = false;
             this.textEdit1.Size = new System.Drawing.Size(96, 30);
             this.textEdit1.TabIndex = 1;
+            // 
+            // btnSil
+            // 
+            this.btnSil.Appearance.BackColor = System.Drawing.Color.Maroon;
+            this.btnSil.Appearance.Options.UseBackColor = true;
+            this.btnSil.Location = new System.Drawing.Point(310, 7);
+            this.btnSil.Name = "btnSil";
+            this.btnSil.Size = new System.Drawing.Size(43, 31);
+            this.btnSil.TabIndex = 0;
+            this.btnSil.Text = "Sil";
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnListeyeEkle
             // 
@@ -170,17 +182,6 @@
             this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
-            // 
-            // btnSil
-            // 
-            this.btnSil.Appearance.BackColor = System.Drawing.Color.Maroon;
-            this.btnSil.Appearance.Options.UseBackColor = true;
-            this.btnSil.Location = new System.Drawing.Point(310, 7);
-            this.btnSil.Name = "btnSil";
-            this.btnSil.Size = new System.Drawing.Size(43, 31);
-            this.btnSil.TabIndex = 0;
-            this.btnSil.Text = "Sil";
-            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // FrmUrunTipiSecimi
             // 

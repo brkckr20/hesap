@@ -11,7 +11,7 @@ namespace Hesap.Forms.UretimYonetimi
 {
     public partial class FrmOzellikSecimi : XtraForm
     {
-        string _kullaniciSecimi, _ekranAdi, TableName = "FeatureCoding";
+        string _kullaniciSecimi, _ekranAdi,_inventoryPrefix, TableName = "FeatureCoding";
         public string aciklama, id, islemTipi;
         Bildirim bildirim = new Bildirim();
         CrudRepository crudRepository = new CrudRepository();
@@ -44,7 +44,7 @@ namespace Hesap.Forms.UretimYonetimi
 
             var _params = new Dictionary<string, object>
             {
-                { "Type", _kullaniciSecimi },{ "Explanation", txtAciklama.Text },{ "PlaceOfUse", InventoryType.ToString() }, {"UsageScreen", _ekranAdi}
+                { "Type", _kullaniciSecimi },{ "Explanation", txtAciklama.Text },{ "PlaceOfUse", InventoryType.ToString() }, {"UsageScreen", _ekranAdi}, {"InventoryPrefix", _inventoryPrefix}
             };
 
             bool exist = crudRepository.IfExistRecord(TableName, "Explanation", txtAciklama.Text) > 0;
@@ -59,11 +59,12 @@ namespace Hesap.Forms.UretimYonetimi
                 bildirim.Uyari($"{txtAciklama.Text} daha önce kayıt edilmiş. Aynı kaydı tekrar yapmazsınız!");
             }
         }
-        public FrmOzellikSecimi(string kullaniciSecimi, string ekranAdi)
+        public FrmOzellikSecimi(string kullaniciSecimi, string ekranAdi,string inventoryPrefix = null)
         {
             InitializeComponent();
             _kullaniciSecimi = kullaniciSecimi;
             _ekranAdi = ekranAdi;
+            _inventoryPrefix = inventoryPrefix;
             this.Text = "Özellik Seçimi [ " + _kullaniciSecimi.Trim() + " ]";
         }
         private void FrmOzellikSecimi_Load(object sender, EventArgs e)
@@ -72,7 +73,7 @@ namespace Hesap.Forms.UretimYonetimi
         }
         void Yukle()
         {
-            gridControl1.DataSource = crudRepository.GetAll<FeatureCoding>(this.TableName).Where(fc => fc.PlaceOfUse == InventoryType.ToString() && fc.UsageScreen == _ekranAdi && fc.Type == _kullaniciSecimi);
+            gridControl1.DataSource = crudRepository.GetAll<FeatureCoding>(this.TableName).Where(fc => fc.PlaceOfUse == InventoryType.ToString() && fc.UsageScreen == _ekranAdi && fc.Type == _kullaniciSecimi && fc.InventoryPrefix == _inventoryPrefix);
             crudRepository.GetUserColumns(gridView1,this.Text);
         }
     }

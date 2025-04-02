@@ -1,9 +1,11 @@
 ﻿using DevExpress.XtraGrid.Views.Grid;
 using Hesap.DataAccess;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Hesap.Forms.UretimYonetimi
 {
@@ -19,19 +21,22 @@ namespace Hesap.Forms.UretimYonetimi
             InitializeComponent();
         }
         public string OnEk, yeniNumaraStr, KumasAdiOzellik;
+        public int Id;
         private void FrmUrunTipiSecimi_Load(object sender, EventArgs e)
         {
-            Listele();
+            // Listele();
+            NumeratorListele();
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
             GridView gridView = sender as GridView;
-            OnEk = gridView.GetFocusedRowCellValue("Ek").ToString();
-            string strNum = gridView.GetFocusedRowCellValue("YeniNumara").ToString();
+            OnEk = gridView.GetFocusedRowCellValue("ÖnEk").ToString();
+            string strNum = gridView.GetFocusedRowCellValue("SonNumara").ToString();
             int num = Convert.ToInt32(strNum);
             yeniNumaraStr = num.ToString("D3");
-            KumasAdiOzellik = gridView.GetFocusedRowCellValue("KumasAdiOzellik").ToString();
+            KumasAdiOzellik = gridView.GetFocusedRowCellValue("İsim").ToString();
+            Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
             this.Close();
         }
 
@@ -48,7 +53,7 @@ namespace Hesap.Forms.UretimYonetimi
         private void btnSil_Click(object sender, EventArgs e)
         {
             int Id = Convert.ToInt32(gridView1.GetFocusedRowCellValue("Id"));
-            crudRepository.ConfirmAndDeleteCard("Inventory", Id, Listele);
+            crudRepository.ConfirmAndDeleteCard("Inventory", Id, null);
         }
 
         private void btnListeyeEkle_Click(object sender, EventArgs e)
@@ -72,9 +77,22 @@ namespace Hesap.Forms.UretimYonetimi
             {
                 bildirim.Uyari($"{prefix} için daha önce kayıt yapılmış.");
             }
-            Listele();
+            //Listele();
         }
 
+        void NumeratorListele()
+        {
+            gridControl1.DataSource = crudRepository.GetAll<Numerator>("Numerator")
+                .Where(s => s.InventoryType == Convert.ToInt32(InventoryTypes.Kumas))
+                .Select(s => new
+                {
+                    s.Id,
+                    ÖnEk =s.Prefix,
+                    SonNumara = s.Number.ToString("D3"),
+                    İsim = s.Name
+                });
+            gridView1.Columns["Id"].Visible = false;
+        }
         void Listele()
         {
             string sql = $@"WITH CTE AS (

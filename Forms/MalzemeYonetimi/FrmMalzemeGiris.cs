@@ -42,7 +42,7 @@ namespace Hesap.Forms.MalzemeYonetimi
             dateFaturaTarihi.EditValue = DateTime.Now;
             dateIrsaliyeTarihi.EditValue = DateTime.Now;
             gridControl1.DataSource = new BindingList<ReceiptItem>();
-            crudRepository.GetUserColumns(gridView1,this.Text);
+            crudRepository.GetUserColumns(gridView1, this.Text);
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -65,7 +65,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                 for (int i = 0; i < itemList.Count; i++)
                 {
                     var item = itemList[i];
-                    var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "Piece", item.Piece }, { "UnitPrice",item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, {"RowAmount", item.RowAmount }, { "Vat", item.Vat } };
+                    var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "Piece", item.Piece }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat } };
                     var rec_id = crudRepository.Insert(TableName2, values);
                     gridView1.SetRowCellValue(i, "ReceiptItemId", rec_id);
                 }
@@ -85,9 +85,9 @@ namespace Hesap.Forms.MalzemeYonetimi
                     var item = itemList[i];
                     var rec_id = Convert.ToInt32(gridView1.GetRowCellValue(i, "ReceiptItemId"));
                     var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "Piece", item.Piece }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat } };
-                    if (rec_id>0)
+                    if (rec_id > 0)
                     {
-                        crudRepository.Update(TableName2,rec_id,values);
+                        crudRepository.Update(TableName2, rec_id, values);
                     }
                     else
                     {
@@ -136,7 +136,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                 Id = Convert.ToInt32(frm.veriler[0]["Id"]);
                 string[] columnNames = new string[]
                 {
-                    "OperationType", "InventoryId" ,"InventoryCode", "InventoryName", "Piece", "UUID", "TrackingNumber","UnitPrice","ReceiptItemId"
+                    "OperationType", "InventoryId" ,"InventoryCode", "InventoryName", "Piece", "UUID", "TrackingNumber","UnitPrice","ReceiptItemId","RowAmount","Vat"
                 };
                 yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
             }
@@ -218,8 +218,8 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void simpleButton5_Click(object sender, EventArgs e)
         {
-            crudRepository.ConfirmAndDeleteCard(TableName1,Id,null);
-            crudRepository.DeleteRows(TableName2,this.Id);
+            crudRepository.ConfirmAndDeleteCard(TableName1, Id, null);
+            crudRepository.DeleteRows(TableName2, this.Id);
             FormTemizle();
         }
         private void siparişFormuToolStripMenuItem_Click(object sender, EventArgs e)
@@ -246,7 +246,7 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            crudRepository.SaveColumnStatus(gridView1,this.Text);
+            crudRepository.SaveColumnStatus(gridView1, this.Text);
         }
 
         private void customButton1_Click(object sender, EventArgs e)

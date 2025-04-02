@@ -45,7 +45,9 @@ namespace Hesap.Forms.Liste
 	                    ISNULL(RI.Piece,0) [Piece],
 	                    ISNULL(RI.UnitPrice,0) [UnitPrice],
 	                    ISNULL(RI.Id,0) [ReceiptItemId],
-	                    ISNULL(RI.UUID,'') [UUID]
+	                    ISNULL(RI.UUID,'') [UUID],
+                        ISNULL(RI.RowAmount,0) [RowAmount],
+                        ISNULL(RI.Vat,0) Vat
                     from 
                     Receipt R with(nolock) 
 	                    inner join ReceiptItem RI on R.Id = RI.ReceiptId

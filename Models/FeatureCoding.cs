@@ -22,5 +22,8 @@ namespace Hesap.Models
 
         [Display(Name = "Tip")]
         public string Type { get; set; }
+
+        [Display(Name = "Malzeme Ön Ek")]
+        public string InventoryPrefix { get; set; }
     }
 }
