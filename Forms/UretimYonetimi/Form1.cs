@@ -456,7 +456,7 @@ namespace Hesap
 
         private void alertToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bildirim.Uyari("deneme amaçlı oluşturuldu");
+           // bildirim.Uyari("deneme amaçlı oluşturuldu");
         }
 
         private void btnUrunResmiSec_Click(object sender, EventArgs e)

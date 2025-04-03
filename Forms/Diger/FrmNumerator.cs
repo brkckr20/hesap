@@ -14,6 +14,7 @@ namespace Hesap.Forms.Diger
     {
         CrudRepository crudRepository = new CrudRepository();
         Bildirim bildirim = new Bildirim();
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
 
         int Id = 0;
         private string TableName = "Numerator";
@@ -36,10 +37,15 @@ namespace Hesap.Forms.Diger
                 InventoryType = GetInventoryName((InventoryTypes)s.InventoryType)
             });            
         }
+        void Temizle()
+        {
+            object[] kart = { txtOnEk,txtNumara,txtIsim,cmbType,chckIsActive };
+            yardimciAraclar.KartTemizle(kart);
+        }
 
         private void btnYeni_Click(object sender, EventArgs e)
         {
-            gridView1.AddNewRow();
+            Temizle();
         }
         private void gridView1_InitNewRow(object sender, InitNewRowEventArgs e)
         {
@@ -61,7 +67,7 @@ namespace Hesap.Forms.Diger
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            var numerator_params = new Dictionary<string, object> { { "Prefix", txtOnEk.Text }, { "Number", txtNumara.Text }, { "Name", txtIsim.Text }, { "IsActive", true }, { "InventoryType", cmbType.SelectedIndex } };
+            var numerator_params = new Dictionary<string, object> { { "Prefix", txtOnEk.Text }, { "Number", txtNumara.Text }, { "Name", txtIsim.Text }, { "IsActive", chckIsActive.Checked }, { "InventoryType", cmbType.SelectedIndex } };
             if (this.Id == 0)
             {
                 Id = crudRepository.Insert(TableName, numerator_params);

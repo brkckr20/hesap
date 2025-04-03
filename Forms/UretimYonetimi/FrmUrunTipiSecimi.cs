@@ -83,7 +83,7 @@ namespace Hesap.Forms.UretimYonetimi
         void NumeratorListele()
         {
             gridControl1.DataSource = crudRepository.GetAll<Numerator>("Numerator")
-                .Where(s => s.InventoryType == Convert.ToInt32(InventoryTypes.Kumas))
+                .Where(s => s.InventoryType == Convert.ToInt32(InventoryTypes.Kumas) && s.IsActive)
                 .Select(s => new
                 {
                     s.Id,
