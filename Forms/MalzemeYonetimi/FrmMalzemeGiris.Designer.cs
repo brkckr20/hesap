@@ -71,6 +71,7 @@
             this.UnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.RowAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.D2Id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Vat = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.pnlBottom = new DevExpress.XtraEditors.PanelControl();
             this.btnIslemBekleyenler = new DevExpress.XtraEditors.SimpleButton();
@@ -79,7 +80,6 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Vat = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -536,6 +536,7 @@
             this.UUID.Caption = "UUID";
             this.UUID.FieldName = "UUID";
             this.UUID.Name = "UUID";
+            this.UUID.OptionsColumn.AllowEdit = false;
             this.UUID.Visible = true;
             this.UUID.VisibleIndex = 5;
             this.UUID.Width = 287;
@@ -545,6 +546,7 @@
             this.TrackingNumber.Caption = "Takip No";
             this.TrackingNumber.FieldName = "TrackingNumber";
             this.TrackingNumber.Name = "TrackingNumber";
+            this.TrackingNumber.OptionsColumn.AllowEdit = false;
             this.TrackingNumber.Visible = true;
             this.TrackingNumber.VisibleIndex = 8;
             // 
@@ -571,6 +573,14 @@
             this.D2Id.Name = "D2Id";
             this.D2Id.Visible = true;
             this.D2Id.VisibleIndex = 9;
+            // 
+            // Vat
+            // 
+            this.Vat.Caption = "KDV %";
+            this.Vat.FieldName = "Vat";
+            this.Vat.Name = "Vat";
+            this.Vat.Visible = true;
+            this.Vat.VisibleIndex = 10;
             // 
             // repoCmbBirim
             // 
@@ -646,14 +656,6 @@
             this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
-            // 
-            // Vat
-            // 
-            this.Vat.Caption = "KDV %";
-            this.Vat.FieldName = "Vat";
-            this.Vat.Name = "Vat";
-            this.Vat.Visible = true;
-            this.Vat.VisibleIndex = 10;
             // 
             // FrmMalzemeGiris
             // 

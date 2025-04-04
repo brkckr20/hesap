@@ -46,11 +46,11 @@
             this.txtNumara = new DevExpress.XtraEditors.TextEdit();
             this.label2 = new System.Windows.Forms.Label();
             this.txtOnEk = new DevExpress.XtraEditors.TextEdit();
+            this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -92,6 +92,7 @@
             // 
             // btnIleri
             // 
+            this.btnIleri.Enabled = false;
             this.btnIleri.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnIleri.ImageOptions.Image")));
             this.btnIleri.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.btnIleri.Location = new System.Drawing.Point(325, 3);
@@ -102,6 +103,7 @@
             // 
             // btnGeri
             // 
+            this.btnGeri.Enabled = false;
             this.btnGeri.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnGeri.ImageOptions.Image")));
             this.btnGeri.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.btnGeri.Location = new System.Drawing.Point(244, 3);
@@ -112,6 +114,7 @@
             // 
             // btnSil
             // 
+            this.btnSil.Enabled = false;
             this.btnSil.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSil.ImageOptions.Image")));
             this.btnSil.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.btnSil.Location = new System.Drawing.Point(406, 3);
@@ -122,6 +125,7 @@
             // 
             // btnListe
             // 
+            this.btnListe.Enabled = false;
             this.btnListe.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnListe.ImageOptions.Image")));
             this.btnListe.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.btnListe.Location = new System.Drawing.Point(163, 3);
@@ -255,6 +259,18 @@
             this.txtOnEk.Size = new System.Drawing.Size(155, 24);
             this.txtOnEk.TabIndex = 1;
             // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(267, 14);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(95, 21);
+            this.label6.TabIndex = 1121;
+            this.label6.Text = "** 3 Harf olmalı";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
@@ -295,18 +311,6 @@
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView1_RowClick);
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(267, 14);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(95, 21);
-            this.label6.TabIndex = 1121;
-            this.label6.Text = "** 3 Harf olmalı";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // FrmNumerator
             // 

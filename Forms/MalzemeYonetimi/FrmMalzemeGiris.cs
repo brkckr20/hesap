@@ -73,29 +73,45 @@ namespace Hesap.Forms.MalzemeYonetimi
             }
             else
             {
+
                 crudRepository.Update(TableName1, Id, parameters);
-                var itemList = gridControl1.DataSource as BindingList<ReceiptItem>; // hata veriyor burdan devam edilecek
-                if (itemList == null)
+                for (int i = 0; i < gridView1.RowCount; i++)
                 {
-                    bildirim.Uyari("Veri kaynağı boş veya hatalı.");
-                    return;
-                }
-                for (int i = 0; i < itemList.Count; i++)
-                {
-                    var item = itemList[i];
-                    var rec_id = Convert.ToInt32(gridView1.GetRowCellValue(i, "ReceiptItemId"));
-                    var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "Piece", item.Piece }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat } };
-                    if (rec_id > 0)
+                    if (gridView1.GetRowCellValue(i, "ReceiptItemId") != null)
                     {
+                        int rec_id = Convert.ToInt32(gridView1.GetRowCellValue(i, "ReceiptItemId"));
+                        MessageBox.Show(rec_id.ToString());
+                        var values = new Dictionary<string, object> { { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", gridView1.GetRowCellValue(i, "InventoryId") }, { "Piece", gridView1.GetRowCellValue(i, "Piece") }, { "UnitPrice", Convert.ToDecimal(gridView1.GetRowCellValue(i, "UnitPrice")) }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }/*, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat }*/ };
                         crudRepository.Update(TableName2, rec_id, values);
                     }
-                    else
-                    {
-                        var new_record = crudRepository.Insert(TableName2, values);
-                        gridView1.SetRowCellValue(i, "ReceiptItemId", new_record);
-                    }
                 }
-                bildirim.GuncellemeBasarili();
+                //var itemList = gridControl1.DataSource as BindingList<ReceiptItem>;
+                //if (itemList.Count == 0)
+                //{
+                //    bildirim.Uyari("Liste boş, güncelleme işlemi yapılamaz.");
+                //    return;
+                //}
+                //if (itemList == null)
+                //{
+                //    bildirim.Uyari("Veri kaynağı boş veya hatalı.");
+                //    return;
+                //}
+                //for (int i = 0; i < itemList.Count; i++)
+                //{
+                //    var item = itemList[i];
+                //    var rec_id = Convert.ToInt32(gridView1.GetRowCellValue(i, "ReceiptItemId"));
+                //    var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "Piece", item.Piece }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat } };
+                //    if (rec_id > 0)
+                //    {
+                //        crudRepository.Update(TableName2, rec_id, values);
+                //    }
+                //    else
+                //    {
+                //        var new_record = crudRepository.Insert(TableName2, values);
+                //        gridView1.SetRowCellValue(i, "ReceiptItemId", new_record);
+                //    }
+                //}
+                //bildirim.GuncellemeBasarili();
             }
         }
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -121,7 +137,6 @@ namespace Hesap.Forms.MalzemeYonetimi
         {
             Liste.FrmMalzemeGirisListesi frm = new Liste.FrmMalzemeGirisListesi();
             frm.ShowDialog();
-            gridControl1.DataSource = new BindingList<ReceiptItem>();
             if (frm.veriler.Count > 0)
             {
                 dateTarih.EditValue = (DateTime)frm.veriler[0]["ReceiptDate"];

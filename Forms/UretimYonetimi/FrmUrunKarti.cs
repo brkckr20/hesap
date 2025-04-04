@@ -72,7 +72,7 @@ namespace Hesap.Forms.UretimYonetimi
         {
             Liste.FrmUrunKartiListesi frm = new Liste.FrmUrunKartiListesi(InventoryType);
             frm.ShowDialog();
-            if (txtUrunKodu.Text != null)
+            if (frm.UrunKodu != null && frm.UrunAdi != null)
             {
                 txtUrunKodu.Text = frm.UrunKodu;
                 txtUrunAdi.Text = frm.UrunAdi;
