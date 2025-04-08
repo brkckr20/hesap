@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraRichEdit.Model;
 using Hesap.Context;
 using Hesap.DataAccess;
 using Hesap.Models;
@@ -7,6 +8,7 @@ using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -44,6 +46,21 @@ namespace Hesap.Forms.MalzemeYonetimi
             gridControl1.DataSource = new BindingList<ReceiptItem>();
             crudRepository.GetUserColumns(gridView1, this.Text);
         }
+        private decimal? UpdateUnitPrice(int rowIndex, string fieldName)
+        {
+            var value = gridView1.GetRowCellValue(rowIndex, fieldName);
+            string valueString = value.ToString().Replace(",", ".");
+            if (decimal.TryParse(valueString, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal unitPrice))
+            {
+                MessageBox.Show(unitPrice.ToString());
+                return unitPrice;
+            }
+            else
+            {
+                return null; // Dönüşüm başarısızsa null döndürüyoruz
+            }
+        }
+
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             if (this.FirmaId == 0)
@@ -80,8 +97,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                     if (gridView1.GetRowCellValue(i, "ReceiptItemId") != null)
                     {
                         int rec_id = Convert.ToInt32(gridView1.GetRowCellValue(i, "ReceiptItemId"));
-                        MessageBox.Show(rec_id.ToString());
-                        var values = new Dictionary<string, object> { { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", gridView1.GetRowCellValue(i, "InventoryId") }, { "Piece", gridView1.GetRowCellValue(i, "Piece") }, { "UnitPrice", Convert.ToDecimal(gridView1.GetRowCellValue(i, "UnitPrice")) }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }/*, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat }*/ };
+                        var values = new Dictionary<string, object> { { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "Piece", Convert.ToInt32(gridView1.GetRowCellValue(i, "Piece")) }, { "UnitPrice", UpdateUnitPrice(i, "UnitPrice") }/*{ "RowAmount", Convert.ToDouble(gridView1.GetRowCellValue(i, "RowAmount")) }*/ }; // decimal değerler hata veriyor
                         crudRepository.Update(TableName2, rec_id, values);
                     }
                 }
