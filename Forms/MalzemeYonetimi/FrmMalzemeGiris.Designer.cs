@@ -66,6 +66,7 @@
             this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.MalzemeAdi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Miktar = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoPiece = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.UUID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TrackingNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -101,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoPiece)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlBottom)).BeginInit();
             this.pnlBottom.SuspendLayout();
@@ -432,7 +434,8 @@
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repoCmbBirim,
             this.repoBtnUrunKodu,
-            this.repoCmbKalemIslem});
+            this.repoCmbKalemIslem,
+            this.repoPiece});
             this.gridControl1.Size = new System.Drawing.Size(1363, 418);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -523,13 +526,24 @@
             // Miktar
             // 
             this.Miktar.Caption = "Adet";
-            this.Miktar.DisplayFormat.FormatString = "0.0000";
+            this.Miktar.DisplayFormat.FormatString = "0,0000";
             this.Miktar.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.Miktar.FieldName = "Piece";
             this.Miktar.Name = "Miktar";
             this.Miktar.Visible = true;
             this.Miktar.VisibleIndex = 4;
             this.Miktar.Width = 79;
+            // 
+            // repoPiece
+            // 
+            this.repoPiece.AutoHeight = false;
+            this.repoPiece.DisplayFormat.FormatString = "0,0000";
+            this.repoPiece.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.repoPiece.EditFormat.FormatString = "0,0000";
+            this.repoPiece.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.repoPiece.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.repoPiece.MaskSettings.Set("mask", "0,0000");
+            this.repoPiece.Name = "repoPiece";
             // 
             // UUID
             // 
@@ -693,6 +707,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoPiece)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlBottom)).EndInit();
             this.pnlBottom.ResumeLayout(false);
@@ -753,5 +768,6 @@
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
         private DevExpress.XtraGrid.Columns.GridColumn MalzemeId;
         private DevExpress.XtraGrid.Columns.GridColumn Vat;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repoPiece;
     }
 }

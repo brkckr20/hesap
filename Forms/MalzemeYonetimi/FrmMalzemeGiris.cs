@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraRichEdit.Model;
 using Hesap.Context;
@@ -61,46 +62,64 @@ namespace Hesap.Forms.MalzemeYonetimi
             }
         }
 
+        decimal ConvertDecimal(string strVal)
+        {
+            if (decimal.TryParse(strVal, NumberStyles.Any, CultureInfo.GetCultureInfo("tr-TR"), out decimal unitPriceValue))
+            {
+                return unitPriceValue;
+            }
+            return 0;
+        }
+
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            if (this.FirmaId == 0)
+            try
             {
-                bildirim.Uyari("Firma seçilmeden kayıt işlemi gerçekleştirilemez!!");
-                return;
-            }
-            var parameters = new Dictionary<string, object>
+                if (this.FirmaId == 0)
+                {
+                    bildirim.Uyari("Firma seçilmeden kayıt işlemi gerçekleştirilemez!!");
+                    return;
+                }
+                var parameters = new Dictionary<string, object>
             {
                 { "ReceiptType", ReceiptTypes.MalzemeDepoGiris }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },
                 { "Explanation", rchAciklama.Text }, { "WareHouseId", txtDepoKodu.Text }, { "InvoiceNo", txtFaturaNo.Text },
                 { "InvoiceDate", dateFaturaTarihi.EditValue },{ "DispatchNo", txtIrsaliyeNo.Text },{ "DispatchDate", dateIrsaliyeTarihi.EditValue},
             };
 
-            if (this.Id == 0)
-            {
-                this.Id = crudRepository.Insert(TableName1, parameters);
-                var itemList = (BindingList<ReceiptItem>)gridControl1.DataSource;
-                for (int i = 0; i < itemList.Count; i++)
+                if (this.Id == 0)
                 {
-                    var item = itemList[i];
-                    var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "Piece", item.Piece }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat } };           
-                    var rec_id = crudRepository.Insert(TableName2, values);
-                    gridView1.SetRowCellValue(i, "ReceiptItemId", rec_id);
-                }
-                bildirim.Basarili();
-            }
-            else
-            {
-
-                crudRepository.Update(TableName1, Id, parameters);
-                for (int i = 0; i < gridView1.RowCount; i++)
-                {
-                    if (gridView1.GetRowCellValue(i, "ReceiptItemId") != null)
+                    this.Id = crudRepository.Insert(TableName1, parameters);
+                    var itemList = (BindingList<ReceiptItem>)gridControl1.DataSource;
+                    for (int i = 0; i < itemList.Count; i++)
                     {
-                        int rec_id = Convert.ToInt32(gridView1.GetRowCellValue(i, "ReceiptItemId"));
-                        var values = new Dictionary<string, object> { { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "Piece", Convert.ToInt32(gridView1.GetRowCellValue(i, "Piece")) }, { "UnitPrice", UpdateUnitPrice(i, "UnitPrice") }/*{ "RowAmount", Convert.ToDouble(gridView1.GetRowCellValue(i, "RowAmount")) }*/ }; // decimal değerler hata veriyor
-                        crudRepository.Update(TableName2, rec_id, values);
+                        var item = itemList[i];
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "Piece", item.Piece }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat } };
+                        var rec_id = crudRepository.Insert(TableName2, values);
+                        gridView1.SetRowCellValue(i, "ReceiptItemId", rec_id);
                     }
+                    bildirim.Basarili();
                 }
+                else
+                {
+
+                    crudRepository.Update(TableName1, Id, parameters);
+                    for (int i = 0; i < gridView1.RowCount; i++)
+                    {
+                        if (gridView1.GetRowCellValue(i, "ReceiptItemId") != null)
+                        {
+                            int rec_id = Convert.ToInt32(gridView1.GetRowCellValue(i, "ReceiptItemId"));
+                            var unitPriceStr = gridView1.GetRowCellValue(i, "Piece").ToString();
+                            var values = new Dictionary<string, object> { { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "Piece", ConvertDecimal(gridView1.GetRowCellValue(i, "Piece").ToString()) }, { "UnitPrice", ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) } };
+                            crudRepository.Update(TableName2, rec_id, values);
+                        }
+                    }
+                    bildirim.GuncellemeBasarili();
+                }
+            }
+            catch (Exception ex)
+            {
+                bildirim.Uyari("Bir hata oluştu : " + ex.Message);
             }
         }
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
