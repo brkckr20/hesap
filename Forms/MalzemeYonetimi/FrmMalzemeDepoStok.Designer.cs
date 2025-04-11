@@ -97,7 +97,7 @@
             this.dizaynKaydetToolStripMenuItem,
             this.satırİşlemleriToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 70);
             // 
             // dışarıAktarToolStripMenuItem
             // 
@@ -133,7 +133,7 @@
             // sütunSeçimiToolStripMenuItem
             // 
             this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
-            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 

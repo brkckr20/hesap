@@ -11,6 +11,7 @@ namespace Hesap.Utils
         SatinAlmaTalimati = 0,
         MalzemeDepoGiris = 1,
         MusteriSiparisi = 2,
+        MalzemeDepoCikis = 3,
     }
 
     public enum InventoryTypes

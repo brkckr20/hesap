@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Hesap.Forms.MalzemeYonetimi
         public string MalzemeKodu, MalzemeAdi, UUID, Birim;
         public List<string> malzemeBilgileri = new List<string>();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        CrudRepository crudRepository = new CrudRepository();
         private void btnAktar_Click(object sender, EventArgs e)
         {
             int[] selectedRows = gridView1.GetSelectedRows();
@@ -42,12 +44,12 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void gridView1_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
-            yardimciAraclar.ArkaPlaniDegistir(e, "Kalan");
+            yardimciAraclar.ArkaPlaniDegistir(e, "Kalan Adet");
         }
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+            crudRepository.SaveColumnStatus(gridView1,this.Text);
         }
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,41 +60,46 @@ namespace Hesap.Forms.MalzemeYonetimi
         public FrmMalzemeDepoStok()
         {
             InitializeComponent();
-            yardimciAraclar.KolonlariGetir(gridView1,this.Text);
+            crudRepository.GetUserColumns(gridView1,this.Text);
         }
         private void FrmMalzemeDepoStok_Load(object sender, EventArgs e)
         {
             string sql = @"SELECT
                         d1.Id as Id,
-                        d1.Tarih,
-                        d1.FirmaKodu,
-						d2.MalzemeKodu,
-						d2.MalzemeAdi,
-                        ISNULL(SUM(d2.Miktar) - COALESCE((
-                            SELECT SUM(y.Miktar)
-                            FROM MalzemeDepo1 x
-                            INNER JOIN MalzemeDepo2 y ON x.Id = y.RefNo
-                            WHERE y.UUID = d2.UUID AND x.IslemCinsi = 'Çıkış'
-                        ), 0), 0) AS Kalan,
-                        d2.Birim,
+                        d1.ReceiptDate,
+						d2.OperationType,
+                        d1.CompanyId,
+						C.CompanyName,
+						d2.InventoryId,
+						MK.InventoryCode,
+						MK.InventoryName,
+                        ISNULL(SUM(d2.Piece) - COALESCE((
+                            SELECT SUM(y.Piece)
+                            FROM Receipt x
+                            INNER JOIN ReceiptItem y ON x.Id = y.ReceiptId
+                            WHERE y.UUID = d2.UUID AND x.ReceiptType = 3
+                        ), 0), 0) AS [Kalan Adet],
                         d2.UUID
-                    FROM MalzemeDepo1 d1
-                    INNER JOIN MalzemeDepo2 d2 ON d1.Id = d2.RefNo
-					left join MalzemeKarti MK on MK.Kodu = d2.MalzemeKodu
-                    WHERE d1.IslemCinsi = 'Giriş' and MK.Tip <> 1
+                    FROM Receipt d1
+                    INNER JOIN ReceiptItem d2 ON d1.Id = d2.ReceiptId
+					left join Inventory MK on MK.Id = d2.InventoryId
+					left join Company C on C.Id = d1.CompanyId
+                    WHERE d1.ReceiptType = 1
                     GROUP BY
                         d1.Id,
-                        d1.Tarih,
-                        d1.FirmaKodu,
-						d2.MalzemeKodu,
-						d2.MalzemeAdi,
-                        d2.Birim,
+                        d1.ReceiptDate,
+						d2.OperationType,
+                        d1.CompanyId,
+						d2.InventoryId,
+						MK.InventoryCode,
+						MK.InventoryName,
+						C.CompanyName,
                         d2.UUID
-					having ISNULL(SUM(d2.Miktar) - COALESCE((
-                            SELECT SUM(y.Miktar)
-                            FROM MalzemeDepo1 x
-                            INNER JOIN MalzemeDepo2 y ON x.Id = y.RefNo
-                            WHERE y.UUID = d2.UUID AND x.IslemCinsi = 'Çıkış'
+					having ISNULL(SUM(d2.Piece) - COALESCE((
+                            SELECT SUM(y.Piece)
+                            FROM Receipt x
+                            INNER JOIN ReceiptItem y ON x.Id = y.ReceiptId
+                            WHERE y.UUID = d2.UUID AND x.ReceiptType = 3
                         ), 0), 0) <> 0";
             listele.Liste(sql, gridControl1);
         }

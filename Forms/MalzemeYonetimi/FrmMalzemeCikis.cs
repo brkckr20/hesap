@@ -2,6 +2,8 @@
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Context;
+using Hesap.DataAccess;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,7 @@ using System.Windows.Forms;
 
 namespace Hesap.Forms.MalzemeYonetimi
 {
-    public partial class FrmMalzemeCikis : DevExpress.XtraEditors.XtraForm
+    public partial class FrmMalzemeCikis : XtraForm
     {
         public FrmMalzemeCikis()
         {
@@ -24,13 +26,16 @@ namespace Hesap.Forms.MalzemeYonetimi
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         Ayarlar ayarlar = new Ayarlar();
         Bildirim bildirim = new Bildirim();
-        int Id = 0;
+        int Id = 0,FirmaId = 0;
+        CrudRepository crudRepository = new CrudRepository();
+        private const string TableName1 = "Receipt";
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             Liste.FrmFirmaKartiListesi frm = new Liste.FrmFirmaKartiListesi();
             frm.ShowDialog();
             txtFirmaKodu.Text = frm.FirmaKodu;
             txtFirmaUnvan.Text = frm.FirmaUnvan;
+            this.FirmaId = frm.Id;
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -47,127 +52,162 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            object FisBaslik = new
+            try
             {
-                IslemCinsi = "Çıkış",
-                Tarih = dateTarih.EditValue,
-                SevkTarihi = dateSevkTarihi.EditValue,
-                FirmaKodu = txtFirmaKodu.Text,
-                FirmaUnvani = txtFirmaUnvan.Text,
-                Aciklama = rchAciklama.Text,
-                DepoId = txtDepoKodu.Text,
-                IrsaliyeNo = txtIrsaliyeNo.Text,
-                KayitEden = "",
-                KayitTarihi = DateTime.Now,
-                Duzenleyen = "",
-                DuzenlemeTarihi = DateTime.Now,
-                Yetkili = txtYetkili.Text,
-                Id = Id,
-            };
-            if (this.Id == 0)
-            {
-                using (var connection = new Baglanti().GetConnection())
+                if (this.FirmaId == 0)
                 {
-                    string mssql = @"INSERT INTO MalzemeDepo1
-                                       (IslemCinsi,Tarih,FirmaKodu,FirmaUnvani,Aciklama,DepoId,IrsaliyeNo
-                            ,KayitEden,KayitTarihi,Duzenleyen,DuzenlemeTarihi,SevkTarihi,Yetkili) OUTPUT INSERTED.Id
-                                 VALUES (@IslemCinsi,@Tarih,@FirmaKodu,@FirmaUnvani,@Aciklama,@DepoId,@IrsaliyeNo
-                            ,@KayitEden,@KayitTarihi,@Duzenleyen,@DuzenlemeTarihi,@SevkTarihi,@Yetkili)";
-                    string sqlite = @"INSERT INTO MalzemeDepo1
-                                       (IslemCinsi,Tarih,FirmaKodu,FirmaUnvani,Aciklama,DepoId,FaturaNo,FaturaTarihi,IrsaliyeNo
-                            ,KayitEden,KayitTarihi,Duzenleyen,DuzenlemeTarihi,SevkTarihi,Yetkili)
-                                 VALUES (@IslemCinsi,@Tarih,@FirmaKodu,@FirmaUnvani,@Aciklama,@DepoId,@FaturaNo,@FaturaTarihi,@IrsaliyeNo
-                            ,@KayitEden,@KayitTarihi,@Duzenleyen,@DuzenlemeTarihi,@SevkTarihi,@Yetkili)";
-                    string idQuery = "SELECT last_insert_rowid();";
-                    if (ayarlar.VeritabaniTuru() == "mssql")
+                    bildirim.Uyari("Firma seçilmeden kayıt işlemi gerçekleştirilemez!!");
+                    return;
+                }
+                var out_params = new Dictionary<string, object>
+                                    { 
+                                    { "ReceiptType", ReceiptTypes.MalzemeDepoCikis }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "WareHouseId", txtDepoKodu.Text },{ "DispatchNo", txtIrsaliyeNo.Text },{ "DispatchDate", dateSevkTarihi.EditValue} /*yetkili eklenecek*/
+                                    };
+                if (this.Id == 0)
+                {
+                    this.Id = crudRepository.Insert(TableName1,out_params);
+                }
+                /*
+                 if (this.Id == 0)
+                {
+                    this.Id = crudRepository.Insert(TableName1, parameters);
+                    var itemList = (BindingList<ReceiptItem>)gridControl1.DataSource;
+                    for (int i = 0; i < itemList.Count; i++)
                     {
-                        this.Id = connection.QuerySingle<int>(mssql, FisBaslik);
-                    }
-                    else
-                    {
-                        connection.Execute(sqlite, FisBaslik);
-                        this.Id = connection.QuerySingle<int>(idQuery);
-                    }
-                    string sql = @"INSERT INTO MalzemeDepo2
-                                   (RefNo,KalemIslem,MalzemeKodu,MalzemeAdi,Miktar,Birim,UUID,TeslimAlan) OUTPUT INSERTED.Id
-                             VALUES (@RefNo,@KalemIslem,@MalzemeKodu,@MalzemeAdi,@Miktar,@Birim,@UUID,@TeslimAlan)";
-                    for (int i = 0; i < gridView1.RowCount - 1; i++)
-                    {
-                        int newId = connection.ExecuteScalar<int>(sql, new
-                        {
-                            RefNo = this.Id,
-                            KalemIslem = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "KalemIslem")),
-                            MalzemeKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeKodu")),
-                            MalzemeAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeAdi")),
-                            Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
-                            Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
-                            UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
-                            TeslimAlan = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "TeslimAlan")),
-                        });
-                        gridView1.SetRowCellValue(i, "KayitNo", newId); // "KayitNo" sütununun adı veritabanınızdaki adla uyuşmalıdır
-
+                        var item = itemList[i];
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "Piece", item.Piece }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat } };
+                        var rec_id = crudRepository.Insert(TableName2, values);
+                        gridView1.SetRowCellValue(i, "ReceiptItemId", rec_id);
                     }
                     bildirim.Basarili();
                 }
+                 */
             }
-            else
+            catch (Exception ex)
             {
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    var query = @"select Id from MalzemeDepo1 where Id = @Id";
-                    var sonuc = connection.QueryFirstOrDefault<int>(query, new { Id = this.Id });
-                    if (sonuc != 0)
-                    {
-                        string updateQueryD1 = @"UPDATE dbo.MalzemeDepo1
-                            SET IslemCinsi = @IslemCinsi,Tarih = @Tarih,FirmaKodu = @FirmaKodu,FirmaUnvani = @FirmaUnvani,Aciklama = @Aciklama,DepoId = @DepoId
-                        ,SevkTarihi = @SevkTarihi,IrsaliyeNo = @IrsaliyeNo,KayitEden = @KayitEden,KayitTarihi = @KayitTarihi
-                        ,Duzenleyen = @Duzenleyen,DuzenlemeTarihi = @DuzenlemeTarihi, Yetkili=@Yetkili WHERE Id = @Id";
-                        connection.Execute(updateQueryD1, FisBaslik);
-                        for (int i = 0; i < gridView1.RowCount - 1; i++)
-                        {
-                            int KayitNo = Convert.ToInt32(gridView1.GetRowCellValue(i, "KayitNo"));
-                            var sqlKalem = @"select * from MalzemeDepo2 where Id = @KayitNo";
-                            var kalem = connection.QueryFirstOrDefault(sqlKalem, new { KayitNo = KayitNo });
-                            if (kalem != null)
-                            {
-                                string updateKalem = @"UPDATE MalzemeDepo2
-                                                SET KalemIslem = @KalemIslem, MalzemeKodu = @MalzemeKodu,MalzemeAdi= @MalzemeAdi,Miktar= @Miktar,Birim = @Birim,TeslimAlan = @TeslimAlan
-                                               WHERE Id = @KayitNo";
-                                connection.Execute(updateKalem, new
-                                {
-                                    KalemIslem = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "KalemIslem")),
-                                    MalzemeKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeKodu")),
-                                    MalzemeAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeAdi")),
-                                    Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
-                                    Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
-                                    UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
-                                    TeslimAlan = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "TeslimAlan")),
-                                    KayitNo = KayitNo
-                                });
-                            }
-                            else
-                            {
-                                string sql = @"INSERT INTO MalzemeDepo2
-                                   (RefNo,KalemIslem,MalzemeKodu,MalzemeAdi,Miktar,Birim,UUID)
-                                VALUES (@RefNo,@KalemIslem,@MalzemeKodu,@MalzemeAdi,@Miktar,@Birim,@UUID)";
-                                int newId = connection.ExecuteScalar<int>(sql, new
-                                {
-                                    RefNo = this.Id,
-                                    KalemIslem = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "KalemIslem")),
-                                    MalzemeKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeKodu")),
-                                    MalzemeAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeAdi")),
-                                    Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
-                                    Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
-                                    UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
-                                    TeslimAlan = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "TeslimAlan")),
-                                });
-                                gridView1.SetRowCellValue(i, "KayitNo", newId);
-                            }
-                        }
-                        bildirim.GuncellemeBasarili();
-                    }
-                }
+                bildirim.Uyari("Hata : " + ex.Message);
             }
+            //object FisBaslik = new
+            //{
+            //    IslemCinsi = "Çıkış",
+            //    Tarih = dateTarih.EditValue,
+            //    SevkTarihi = dateSevkTarihi.EditValue,
+            //    FirmaKodu = txtFirmaKodu.Text,
+            //    FirmaUnvani = txtFirmaUnvan.Text,
+            //    Aciklama = rchAciklama.Text,
+            //    DepoId = txtDepoKodu.Text,
+            //    IrsaliyeNo = txtIrsaliyeNo.Text,
+            //    KayitEden = "",
+            //    KayitTarihi = DateTime.Now,
+            //    Duzenleyen = "",
+            //    DuzenlemeTarihi = DateTime.Now,
+            //    Yetkili = txtYetkili.Text,
+            //    Id = Id,
+            //};
+            //if (this.Id == 0)
+            //{
+            //    using (var connection = new Baglanti().GetConnection())
+            //    {
+            //        string mssql = @"INSERT INTO MalzemeDepo1
+            //                           (IslemCinsi,Tarih,FirmaKodu,FirmaUnvani,Aciklama,DepoId,IrsaliyeNo
+            //                ,KayitEden,KayitTarihi,Duzenleyen,DuzenlemeTarihi,SevkTarihi,Yetkili) OUTPUT INSERTED.Id
+            //                     VALUES (@IslemCinsi,@Tarih,@FirmaKodu,@FirmaUnvani,@Aciklama,@DepoId,@IrsaliyeNo
+            //                ,@KayitEden,@KayitTarihi,@Duzenleyen,@DuzenlemeTarihi,@SevkTarihi,@Yetkili)";
+            //        string sqlite = @"INSERT INTO MalzemeDepo1
+            //                           (IslemCinsi,Tarih,FirmaKodu,FirmaUnvani,Aciklama,DepoId,FaturaNo,FaturaTarihi,IrsaliyeNo
+            //                ,KayitEden,KayitTarihi,Duzenleyen,DuzenlemeTarihi,SevkTarihi,Yetkili)
+            //                     VALUES (@IslemCinsi,@Tarih,@FirmaKodu,@FirmaUnvani,@Aciklama,@DepoId,@FaturaNo,@FaturaTarihi,@IrsaliyeNo
+            //                ,@KayitEden,@KayitTarihi,@Duzenleyen,@DuzenlemeTarihi,@SevkTarihi,@Yetkili)";
+            //        string idQuery = "SELECT last_insert_rowid();";
+            //        if (ayarlar.VeritabaniTuru() == "mssql")
+            //        {
+            //            this.Id = connection.QuerySingle<int>(mssql, FisBaslik);
+            //        }
+            //        else
+            //        {
+            //            connection.Execute(sqlite, FisBaslik);
+            //            this.Id = connection.QuerySingle<int>(idQuery);
+            //        }
+            //        string sql = @"INSERT INTO MalzemeDepo2
+            //                       (RefNo,KalemIslem,MalzemeKodu,MalzemeAdi,Miktar,Birim,UUID,TeslimAlan) OUTPUT INSERTED.Id
+            //                 VALUES (@RefNo,@KalemIslem,@MalzemeKodu,@MalzemeAdi,@Miktar,@Birim,@UUID,@TeslimAlan)";
+            //        for (int i = 0; i < gridView1.RowCount - 1; i++)
+            //        {
+            //            int newId = connection.ExecuteScalar<int>(sql, new
+            //            {
+            //                RefNo = this.Id,
+            //                KalemIslem = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "KalemIslem")),
+            //                MalzemeKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeKodu")),
+            //                MalzemeAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeAdi")),
+            //                Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
+            //                Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
+            //                UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
+            //                TeslimAlan = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "TeslimAlan")),
+            //            });
+            //            gridView1.SetRowCellValue(i, "KayitNo", newId); // "KayitNo" sütununun adı veritabanınızdaki adla uyuşmalıdır
+
+            //        }
+            //        bildirim.Basarili();
+            //    }
+            //}
+            //else
+            //{
+            //    using (var connection = new Baglanti().GetConnection())
+            //    {
+            //        var query = @"select Id from MalzemeDepo1 where Id = @Id";
+            //        var sonuc = connection.QueryFirstOrDefault<int>(query, new { Id = this.Id });
+            //        if (sonuc != 0)
+            //        {
+            //            string updateQueryD1 = @"UPDATE dbo.MalzemeDepo1
+            //                SET IslemCinsi = @IslemCinsi,Tarih = @Tarih,FirmaKodu = @FirmaKodu,FirmaUnvani = @FirmaUnvani,Aciklama = @Aciklama,DepoId = @DepoId
+            //            ,SevkTarihi = @SevkTarihi,IrsaliyeNo = @IrsaliyeNo,KayitEden = @KayitEden,KayitTarihi = @KayitTarihi
+            //            ,Duzenleyen = @Duzenleyen,DuzenlemeTarihi = @DuzenlemeTarihi, Yetkili=@Yetkili WHERE Id = @Id";
+            //            connection.Execute(updateQueryD1, FisBaslik);
+            //            for (int i = 0; i < gridView1.RowCount - 1; i++)
+            //            {
+            //                int KayitNo = Convert.ToInt32(gridView1.GetRowCellValue(i, "KayitNo"));
+            //                var sqlKalem = @"select * from MalzemeDepo2 where Id = @KayitNo";
+            //                var kalem = connection.QueryFirstOrDefault(sqlKalem, new { KayitNo = KayitNo });
+            //                if (kalem != null)
+            //                {
+            //                    string updateKalem = @"UPDATE MalzemeDepo2
+            //                                    SET KalemIslem = @KalemIslem, MalzemeKodu = @MalzemeKodu,MalzemeAdi= @MalzemeAdi,Miktar= @Miktar,Birim = @Birim,TeslimAlan = @TeslimAlan
+            //                                   WHERE Id = @KayitNo";
+            //                    connection.Execute(updateKalem, new
+            //                    {
+            //                        KalemIslem = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "KalemIslem")),
+            //                        MalzemeKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeKodu")),
+            //                        MalzemeAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeAdi")),
+            //                        Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
+            //                        Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
+            //                        UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
+            //                        TeslimAlan = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "TeslimAlan")),
+            //                        KayitNo = KayitNo
+            //                    });
+            //                }
+            //                else
+            //                {
+            //                    string sql = @"INSERT INTO MalzemeDepo2
+            //                       (RefNo,KalemIslem,MalzemeKodu,MalzemeAdi,Miktar,Birim,UUID)
+            //                    VALUES (@RefNo,@KalemIslem,@MalzemeKodu,@MalzemeAdi,@Miktar,@Birim,@UUID)";
+            //                    int newId = connection.ExecuteScalar<int>(sql, new
+            //                    {
+            //                        RefNo = this.Id,
+            //                        KalemIslem = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "KalemIslem")),
+            //                        MalzemeKodu = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeKodu")),
+            //                        MalzemeAdi = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "MalzemeAdi")),
+            //                        Miktar = yardimciAraclar.GetDoubleValue(gridView1.GetRowCellValue(i, "Miktar")),
+            //                        Birim = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "Birim")),
+            //                        UUID = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "UUID")),
+            //                        TeslimAlan = yardimciAraclar.GetStringValue(gridView1.GetRowCellValue(i, "TeslimAlan")),
+            //                    });
+            //                    gridView1.SetRowCellValue(i, "KayitNo", newId);
+            //                }
+            //            }
+            //            bildirim.GuncellemeBasarili();
+            //        }
+            //    }
+            //}
         }
 
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

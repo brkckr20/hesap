@@ -526,7 +526,7 @@
             // Miktar
             // 
             this.Miktar.Caption = "Adet";
-            this.Miktar.DisplayFormat.FormatString = "0,0000";
+            this.Miktar.DisplayFormat.FormatString = "0.0000";
             this.Miktar.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.Miktar.FieldName = "Piece";
             this.Miktar.Name = "Miktar";
@@ -537,12 +537,6 @@
             // repoPiece
             // 
             this.repoPiece.AutoHeight = false;
-            this.repoPiece.DisplayFormat.FormatString = "0,0000";
-            this.repoPiece.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.repoPiece.EditFormat.FormatString = "0,0000";
-            this.repoPiece.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.repoPiece.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.repoPiece.MaskSettings.Set("mask", "0,0000");
             this.repoPiece.Name = "repoPiece";
             // 
             // UUID
