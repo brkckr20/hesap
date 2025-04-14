@@ -55,6 +55,8 @@ namespace Hesap.Models
         public int TrackingNumber { get; set; }
         public int PatternId { get; set; }
         public int ProcessId { get; set; }
+        public string Authorized { get; set; }
+        public string Receiver { get; set; }
         public decimal RowAmount
         {
             get => _rowAmount;

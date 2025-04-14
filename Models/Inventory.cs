@@ -30,5 +30,8 @@ namespace Hesap.Models
         [Display(Name = "Birleşik Kod")]
         public string CombinedCode { get; set; }
 
+        [Display(Name = "Stok Mu?")]
+        public bool IsStock { get; set; }
+
     }
 }

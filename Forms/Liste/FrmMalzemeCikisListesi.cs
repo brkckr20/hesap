@@ -1,23 +1,21 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hesap.Forms.Liste
 {
-    public partial class FrmMalzemeCikisListesi : DevExpress.XtraEditors.XtraForm
+    public partial class FrmMalzemeCikisListesi : XtraForm
     {
         Listele listele = new Listele();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        public List<string> liste = new List<string>();
+        CrudRepository crudRepository = new CrudRepository();
         public FrmMalzemeCikisListesi()
         {
             InitializeComponent();
@@ -27,48 +25,49 @@ namespace Hesap.Forms.Liste
         {
             string sql = @"
                         select 
-                        d1.Id [Id]
-                        ,Tarih
-                        ,FirmaKodu
-                        ,FirmaUnvani
-                        ,DepoId
-                        ,IrsaliyeNo
-                        ,Aciklama
-                        ,Yetkili
-                        ,KalemIslem
-                        ,MalzemeKodu
-                        ,MalzemeAdi
-                        ,Miktar
-                        ,Birim
-                        ,UUID
-                        ,d2.Id [KayitNo]
-                        ,d2.TeslimAlan
-                         from MalzemeDepo1 d1 left join MalzemeDepo2 d2 on d1.Id = RefNo where d1.IslemCinsi = 'Çıkış' order by d1.Id";
+	                        ISNULL(R.Id,0) [Fiş Id]
+	                        ,ISNULL(R.ReceiptDate,'') [Tarih]
+	                        ,ISNULL(C.Id,'') [Firma Id]
+	                        ,ISNULL(C.CompanyCode,'') [Firma Kodu]
+	                        ,ISNULL(C.CompanyName,'') [Firma Adı]
+	                        ,ISNULL(R.WareHouseId,'') [Depo Id]
+	                        ,ISNULL(R.ReceiptNo,'') [Irsaliye No]
+	                        ,ISNULL(R.Explanation,'') [Açıklama]
+	                        ,ISNULL(R.Authorized,'') [Yetkili]
+	                        ,ISNULL(RI.OperationType,'') [İşlem Tipi]
+	                        ,ISNULL(RI.InventoryId,'') [Malzeme Id]
+	                        ,ISNULL(I.InventoryCode,'') [Malzeme Kodu]
+	                        ,ISNULL(I.InventoryName,'') [Malzeme Adı]
+	                        ,ISNULL(RI.Piece,0) [Adet]
+	                        ,ISNULL(RI.UUID,'') [UUID]
+                            ,ISNULL(RI.Receiver,'') [Teslim Alan]
+	                        ,ISNULL(RI.Id,'') [Kalem Kayıt No]
+                        from Receipt R 
+                        left join ReceiptItem RI on R.Id = RI.ReceiptId
+                        left join Company C on C.Id = R.CompanyId
+                        left join Inventory I on I.Id = RI.InventoryId
+                        where R.ReceiptType = 3";
             listele.Liste(sql, gridControl1);
-            yardimciAraclar.KolonlariGetir(gridView1, this.Text);
+            crudRepository.GetUserColumns(gridView1, this.Text);
         }
         public List<Dictionary<string, object>> veriler = new List<Dictionary<string, object>>();
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
             GridView gridView = sender as GridView;
-            if (gridView == null)
-                return;
-            int secilenId = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
-            veriler.Clear();
+            int clickedId = Convert.ToInt32(gridView.GetFocusedRowCellValue("Fiş Id"));
             for (int i = 0; i < gridView.DataRowCount; i++)
             {
-                int id = Convert.ToInt32(gridView.GetRowCellValue(i, "Id"));
-
-                if (id == secilenId)
+                int currentId = Convert.ToInt32(gridView.GetRowCellValue(i, "Fiş Id"));
+                if (currentId == clickedId)
                 {
-                    var rowData = new Dictionary<string, object>();
-                    foreach (GridColumn column in gridView.Columns)
-                    {
-                        var columnName = column.FieldName;
-                        var cellValue = gridView.GetRowCellValue(i, columnName);
-                        rowData[columnName] = cellValue;
-                    }
-                    veriler.Add(rowData);
+                    string MalzemeKodu = Convert.ToString(gridView.GetRowCellValue(i, "Malzeme Kodu"));
+                    string MalzemeAdi = Convert.ToString(gridView.GetRowCellValue(i, "Malzeme Adı"));
+                    int kalanAdet = Convert.ToInt32(gridView.GetRowCellValue(i, "Adet"));
+                    string IslemTipi = Convert.ToString(gridView.GetRowCellValue(i, "İşlem Tipi"));
+                    string UUID = Convert.ToString(gridView.GetRowCellValue(i, "UUID"));
+                    int MalzemeId = Convert.ToInt32(gridView.GetRowCellValue(i, "Malzeme Id"));
+                    string TeslimAlan= Convert.ToString(gridView.GetRowCellValue(i, "Teslim Alan"));
+                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};");
                 }
             }
             Close();
@@ -81,7 +80,7 @@ namespace Hesap.Forms.Liste
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+            crudRepository.SaveColumnStatus(gridView1,this.Text);
         }
     }
 }

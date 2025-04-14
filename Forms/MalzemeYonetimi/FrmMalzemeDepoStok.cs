@@ -1,24 +1,16 @@
 ﻿using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid;
 using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.MalzemeYonetimi
 {
-    public partial class FrmMalzemeDepoStok : DevExpress.XtraEditors.XtraForm
+    public partial class FrmMalzemeDepoStok : XtraForm
     {
         Listele listele = new Listele();
-        public string MalzemeKodu, MalzemeAdi, UUID, Birim;
+        //public string MalzemeKodu, MalzemeAdi, UUID, Birim;
+        public int MalzemeId;
         public List<string> malzemeBilgileri = new List<string>();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         CrudRepository crudRepository = new CrudRepository();
@@ -28,11 +20,12 @@ namespace Hesap.Forms.MalzemeYonetimi
            
             foreach (int rowHandle in selectedRows)
             {
-                string MalzemeKodu = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "MalzemeKodu"));
-                string MalzemeAdi = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "MalzemeAdi"));
+                string MalzemeKodu = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "InventoryCode"));
+                string MalzemeAdi = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "InventoryName"));
                 string UUID = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "UUID"));
-                string birim = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "Birim"));
-                malzemeBilgileri.Add($"{MalzemeKodu};{MalzemeAdi};{UUID};{birim}");
+                int kalanAdet = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle,"Kalan Adet"));
+                int MalzemeId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle,"InventoryId"));
+                malzemeBilgileri.Add($"{MalzemeKodu};{MalzemeAdi};{UUID};{kalanAdet};{MalzemeId}");
             }
             Close();
         }
@@ -84,7 +77,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                     INNER JOIN ReceiptItem d2 ON d1.Id = d2.ReceiptId
 					left join Inventory MK on MK.Id = d2.InventoryId
 					left join Company C on C.Id = d1.CompanyId
-                    WHERE d1.ReceiptType = 1
+                    WHERE d1.ReceiptType = 1 and ISNULL(MK.IsStock,0) = 1
                     GROUP BY
                         d1.Id,
                         d1.ReceiptDate,
@@ -106,15 +99,16 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
-            GridView gridView = sender as GridView;
-            int focusedRowHandle = gridView.FocusedRowHandle;
-            if (focusedRowHandle < 0)
-                return;
-            MalzemeKodu = gridView.GetRowCellValue(focusedRowHandle, "MalzemeKodu").ToString();
-            MalzemeAdi = gridView.GetRowCellValue(focusedRowHandle, "MalzemeAdi").ToString();
-            UUID = gridView.GetRowCellValue(focusedRowHandle, "UUID").ToString();
-            Birim = gridView.GetRowCellValue(focusedRowHandle, "Birim").ToString();
-            Close();
+            //GridView gridView = sender as GridView;
+            //int focusedRowHandle = gridView.FocusedRowHandle;
+            //if (focusedRowHandle < 0)
+            //    return;
+            //MalzemeKodu = gridView.GetRowCellValue(focusedRowHandle, "MalzemeKodu").ToString();
+            //MalzemeAdi = gridView.GetRowCellValue(focusedRowHandle, "MalzemeAdi").ToString();
+            //UUID = gridView.GetRowCellValue(focusedRowHandle, "UUID").ToString();
+            //Birim = gridView.GetRowCellValue(focusedRowHandle, "Birim").ToString();
+            //MalzemeId = Convert.ToInt32(gridView.GetRowCellValue(focusedRowHandle, "MalzemeId"));
+            //Close();
         }
     }
 }

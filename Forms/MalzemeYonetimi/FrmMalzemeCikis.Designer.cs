@@ -64,12 +64,11 @@
             this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.MalzemeAdi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Miktar = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Birim = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.BirimFiyat = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UUID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TeslimAlan = new DevExpress.XtraGrid.Columns.GridColumn();
             this.KayitNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.InventoryId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.siparişFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -418,11 +417,10 @@
             this.MalzemeKodu,
             this.MalzemeAdi,
             this.Miktar,
-            this.Birim,
-            this.BirimFiyat,
             this.UUID,
             this.TeslimAlan,
-            this.KayitNo});
+            this.KayitNo,
+            this.InventoryId});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -438,7 +436,7 @@
             this.KalemIslem.Caption = "Kalem İşlem";
             this.KalemIslem.ColumnEdit = this.repoCmbKalemIslem;
             this.KalemIslem.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.KalemIslem.FieldName = "KalemIslem";
+            this.KalemIslem.FieldName = "OperationType";
             this.KalemIslem.Name = "KalemIslem";
             this.KalemIslem.Visible = true;
             this.KalemIslem.VisibleIndex = 0;
@@ -460,7 +458,7 @@
             // 
             this.MalzemeKodu.Caption = "Malzeme Kodu";
             this.MalzemeKodu.ColumnEdit = this.repoBtnUrunKodu;
-            this.MalzemeKodu.FieldName = "MalzemeKodu";
+            this.MalzemeKodu.FieldName = "InventoryCode";
             this.MalzemeKodu.Name = "MalzemeKodu";
             this.MalzemeKodu.Visible = true;
             this.MalzemeKodu.VisibleIndex = 1;
@@ -477,7 +475,7 @@
             // MalzemeAdi
             // 
             this.MalzemeAdi.Caption = "Malzeme Adı";
-            this.MalzemeAdi.FieldName = "MalzemeAdi";
+            this.MalzemeAdi.FieldName = "InventoryName";
             this.MalzemeAdi.Name = "MalzemeAdi";
             this.MalzemeAdi.OptionsColumn.AllowEdit = false;
             this.MalzemeAdi.Visible = true;
@@ -486,24 +484,48 @@
             // 
             // Miktar
             // 
-            this.Miktar.Caption = "Miktar";
+            this.Miktar.Caption = "Adet";
             this.Miktar.DisplayFormat.FormatString = "0.0000";
             this.Miktar.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.Miktar.FieldName = "Miktar";
+            this.Miktar.FieldName = "Piece";
             this.Miktar.Name = "Miktar";
             this.Miktar.Visible = true;
             this.Miktar.VisibleIndex = 3;
             this.Miktar.Width = 79;
             // 
-            // Birim
+            // UUID
             // 
-            this.Birim.Caption = "Birim";
-            this.Birim.ColumnEdit = this.repoCmbBirim;
-            this.Birim.FieldName = "Birim";
-            this.Birim.Name = "Birim";
-            this.Birim.Visible = true;
-            this.Birim.VisibleIndex = 4;
-            this.Birim.Width = 61;
+            this.UUID.Caption = "UUID";
+            this.UUID.FieldName = "UUID";
+            this.UUID.Name = "UUID";
+            this.UUID.Visible = true;
+            this.UUID.VisibleIndex = 4;
+            this.UUID.Width = 287;
+            // 
+            // TeslimAlan
+            // 
+            this.TeslimAlan.Caption = "Teslim Alan";
+            this.TeslimAlan.FieldName = "Receiver";
+            this.TeslimAlan.Name = "TeslimAlan";
+            this.TeslimAlan.Visible = true;
+            this.TeslimAlan.VisibleIndex = 5;
+            this.TeslimAlan.Width = 104;
+            // 
+            // KayitNo
+            // 
+            this.KayitNo.Caption = "Kayıt No";
+            this.KayitNo.FieldName = "KayitNo";
+            this.KayitNo.Name = "KayitNo";
+            this.KayitNo.Visible = true;
+            this.KayitNo.VisibleIndex = 6;
+            // 
+            // InventoryId
+            // 
+            this.InventoryId.Caption = "Malzeme Id";
+            this.InventoryId.FieldName = "InventoryId";
+            this.InventoryId.Name = "InventoryId";
+            this.InventoryId.Visible = true;
+            this.InventoryId.VisibleIndex = 7;
             // 
             // repoCmbBirim
             // 
@@ -517,42 +539,6 @@
             "Gr",
             "Cm"});
             this.repoCmbBirim.Name = "repoCmbBirim";
-            // 
-            // BirimFiyat
-            // 
-            this.BirimFiyat.Caption = "Birim Fiyat";
-            this.BirimFiyat.DisplayFormat.FormatString = "0.0000";
-            this.BirimFiyat.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.BirimFiyat.FieldName = "BirimFiyat";
-            this.BirimFiyat.Name = "BirimFiyat";
-            this.BirimFiyat.Visible = true;
-            this.BirimFiyat.VisibleIndex = 5;
-            // 
-            // UUID
-            // 
-            this.UUID.Caption = "UUID";
-            this.UUID.FieldName = "UUID";
-            this.UUID.Name = "UUID";
-            this.UUID.Visible = true;
-            this.UUID.VisibleIndex = 6;
-            this.UUID.Width = 287;
-            // 
-            // TeslimAlan
-            // 
-            this.TeslimAlan.Caption = "Teslim Alan";
-            this.TeslimAlan.FieldName = "TeslimAlan";
-            this.TeslimAlan.Name = "TeslimAlan";
-            this.TeslimAlan.Visible = true;
-            this.TeslimAlan.VisibleIndex = 7;
-            this.TeslimAlan.Width = 104;
-            // 
-            // KayitNo
-            // 
-            this.KayitNo.Caption = "Kayıt No";
-            this.KayitNo.FieldName = "KayitNo";
-            this.KayitNo.Name = "KayitNo";
-            this.KayitNo.Visible = true;
-            this.KayitNo.VisibleIndex = 8;
             // 
             // contextMenuStrip1
             // 
@@ -592,7 +578,7 @@
             // sütunSeçimiToolStripMenuItem
             // 
             this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
-            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
@@ -668,18 +654,17 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnUrunKodu;
         private DevExpress.XtraGrid.Columns.GridColumn MalzemeAdi;
         private DevExpress.XtraGrid.Columns.GridColumn Miktar;
-        private DevExpress.XtraGrid.Columns.GridColumn Birim;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbBirim;
         private DevExpress.XtraGrid.Columns.GridColumn UUID;
         private DevExpress.XtraGrid.Columns.GridColumn TeslimAlan;
         private DevExpress.XtraGrid.Columns.GridColumn KayitNo;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem siparişFormuToolStripMenuItem;
-        private DevExpress.XtraGrid.Columns.GridColumn BirimFiyat;
         private DevExpress.XtraEditors.TextEdit txtYetkili;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
+        private DevExpress.XtraGrid.Columns.GridColumn InventoryId;
     }
 }
