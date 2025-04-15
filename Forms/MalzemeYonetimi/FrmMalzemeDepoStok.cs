@@ -9,7 +9,6 @@ namespace Hesap.Forms.MalzemeYonetimi
     public partial class FrmMalzemeDepoStok : XtraForm
     {
         Listele listele = new Listele();
-        //public string MalzemeKodu, MalzemeAdi, UUID, Birim;
         public int MalzemeId;
         public List<string> malzemeBilgileri = new List<string>();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
@@ -99,16 +98,6 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
-            //GridView gridView = sender as GridView;
-            //int focusedRowHandle = gridView.FocusedRowHandle;
-            //if (focusedRowHandle < 0)
-            //    return;
-            //MalzemeKodu = gridView.GetRowCellValue(focusedRowHandle, "MalzemeKodu").ToString();
-            //MalzemeAdi = gridView.GetRowCellValue(focusedRowHandle, "MalzemeAdi").ToString();
-            //UUID = gridView.GetRowCellValue(focusedRowHandle, "UUID").ToString();
-            //Birim = gridView.GetRowCellValue(focusedRowHandle, "Birim").ToString();
-            //MalzemeId = Convert.ToInt32(gridView.GetRowCellValue(focusedRowHandle, "MalzemeId"));
-            //Close();
         }
     }
 }

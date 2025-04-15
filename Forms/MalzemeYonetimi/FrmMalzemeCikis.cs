@@ -170,18 +170,18 @@ namespace Hesap.Forms.MalzemeYonetimi
 
             if (e.KeyCode == Keys.Delete)
             {
-                if (bildirim.SilmeOnayı())
-                {
-                    int selectedRowHandle = gridView.FocusedRowHandle;
-                    int kayitNo = Convert.ToInt32(gridView.GetRowCellValue(selectedRowHandle, "KayitNo"));
-                    using (var connection = new Baglanti().GetConnection())
-                    {
-                        string sql = "delete from MalzemeDepo2 where Id = @Id";
-                        connection.Execute(sql, new { Id = kayitNo });
-                        gridView.DeleteRow(selectedRowHandle);
-                        bildirim.SilmeBasarili();
-                    }
-                }
+                //if (bildirim.SilmeOnayı())
+                //{
+                //    int selectedRowHandle = gridView.FocusedRowHandle;
+                //    int kayitNo = Convert.ToInt32(gridView.GetRowCellValue(selectedRowHandle, "KayitNo"));
+                //    using (var connection = new Baglanti().GetConnection())
+                //    {
+                //        string sql = "delete from MalzemeDepo2 where Id = @Id";
+                //        connection.Execute(sql, new { Id = kayitNo });
+                //        gridView.DeleteRow(selectedRowHandle);
+                //        bildirim.SilmeBasarili();
+                //    }
+                //}
             }
         }
 

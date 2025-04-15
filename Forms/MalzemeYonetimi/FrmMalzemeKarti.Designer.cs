@@ -42,12 +42,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtKodu = new DevExpress.XtraEditors.TextEdit();
             this.label1 = new System.Windows.Forms.Label();
+            this.chckStokMu = new DevExpress.XtraEditors.CheckEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKodu.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckStokMu.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -132,6 +134,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.chckStokMu);
             this.panelControl1.Controls.Add(this.chckKullanimda);
             this.panelControl1.Controls.Add(this.txtAdi);
             this.panelControl1.Controls.Add(this.label2);
@@ -192,6 +195,15 @@
             this.label1.Text = "Malzeme Kodu :";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // chckStokMu
+            // 
+            this.chckStokMu.EditValue = true;
+            this.chckStokMu.Location = new System.Drawing.Point(385, 8);
+            this.chckStokMu.Name = "chckStokMu";
+            this.chckStokMu.Properties.Caption = "Stok Mu?";
+            this.chckStokMu.Size = new System.Drawing.Size(75, 20);
+            this.chckStokMu.TabIndex = 1126;
+            // 
             // FrmMalzemeKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -207,6 +219,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKodu.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chckStokMu.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -226,5 +239,6 @@
         private System.Windows.Forms.Label label2;
         private DevExpress.XtraEditors.TextEdit txtKodu;
         private System.Windows.Forms.Label label1;
+        private DevExpress.XtraEditors.CheckEdit chckStokMu;
     }
 }

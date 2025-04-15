@@ -25,7 +25,7 @@ namespace Hesap.Forms.Liste
 
 
         public string Kodu, Adi, GrupKodu;
-        public bool Kullanimda;
+        public bool Kullanimda,Stok;
 
         private void FrmMalzemeKartiListesi_Load(object sender, EventArgs e)
         {
@@ -37,6 +37,8 @@ namespace Hesap.Forms.Liste
                         Id,
 	                    ISNULL(InventoryCode,'') [Kodu]
 	                    ,ISNULL(InventoryName,'') [Adi]
+						,ISNULL(IsUse,'') [Kullanimda]						
+						,ISNULL(IsStock,'') [Stok]
                     FROM Inventory where Type = {this._Type}";
             listele.Liste(sql, gridControl1);
         }
@@ -48,6 +50,7 @@ namespace Hesap.Forms.Liste
             Kodu = gridView.GetFocusedRowCellValue("Kodu").ToString();
             Adi = gridView.GetFocusedRowCellValue("Adi").ToString();
             Kullanimda = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Kullanimda"));
+            Stok = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Stok"));
             Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
             this.Close();
         }

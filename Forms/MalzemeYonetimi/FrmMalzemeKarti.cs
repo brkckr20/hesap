@@ -1,15 +1,9 @@
 ﻿using Dapper;
 using DevExpress.XtraEditors;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.MalzemeYonetimi
 {
@@ -18,6 +12,7 @@ namespace Hesap.Forms.MalzemeYonetimi
         Ayarlar ayarlar = new Ayarlar();
         Bildirim bildirim = new Bildirim();
         CRUD_Operations cRUD = new CRUD_Operations();
+        CrudRepository crudRepository = new CrudRepository();
         private readonly string TableName = "Inventory";
         int Type = Convert.ToInt32(InventoryTypes.Malzeme);
         public FrmMalzemeKarti()
@@ -34,6 +29,8 @@ namespace Hesap.Forms.MalzemeYonetimi
                 { "Unit", ""},
                 { "Type",Type},
                 { "SubType", ""},
+                { "IsUse", chckKullanimda.Checked},
+                { "IsStock", chckStokMu.Checked},
             };
             using (var connection = new Baglanti().GetConnection())
             {
@@ -65,6 +62,7 @@ namespace Hesap.Forms.MalzemeYonetimi
             txtKodu.Text = "";
             txtAdi.Text = "";
             chckKullanimda.Checked = true;
+            chckStokMu.Checked = true;
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -75,28 +73,12 @@ namespace Hesap.Forms.MalzemeYonetimi
             txtKodu.Text = frm.Kodu;
             txtAdi.Text = frm.Adi;
             chckKullanimda.Checked = frm.Kullanimda;
+            chckStokMu.Checked = frm.Stok;
         }
 
         private void simpleButton5_Click(object sender, EventArgs e)
         {
-            if (Id != 0)
-            {
-                if (bildirim.SilmeOnayı())
-                {
-                    string sql = "delete from MalzemeKarti where Id = @Id";
-                    using (var connection = new Baglanti().GetConnection())
-                    {
-                        connection.Execute(sql, new { Id = Id });
-                    }
-                    bildirim.SilmeBasarili();
-                    Temizle();
-                }
-
-            }
-            else
-            {
-                bildirim.Uyari("Silme işlemini gerçekleştirebilmek için bir kayıt seçiniz!!");
-            }
+            crudRepository.ConfirmAndDeleteCard(TableName,this.Id,Temizle);
         }
         void ListeGetir(string KayitTipi)
         {

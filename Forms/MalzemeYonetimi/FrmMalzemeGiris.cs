@@ -134,7 +134,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                 gridView1.SetRowCellValue(newRowHandle, "InventoryName", frm.Adi);
             }
         }
-        private void gridView1_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        private void gridView1_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             GridView view = sender as GridView;
             string uuid = Guid.NewGuid().ToString();
@@ -163,6 +163,27 @@ namespace Hesap.Forms.MalzemeYonetimi
                 };
                 yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
             }
+            /*
+             Liste.FrmMalzemeCikisListesi frm = new Liste.FrmMalzemeCikisListesi();
+            frm.ShowDialog();
+            if (frm.liste.Count > 0)
+            {
+                foreach (var item in frm.liste)
+                {
+                    gridView1.AddNewRow();
+                    int newRowHandle = gridView1.FocusedRowHandle;
+                    var values = item.Split(';');
+                    gridView1.SetRowCellValue(newRowHandle, "InventoryCode", values[0]);
+                    gridView1.SetRowCellValue(newRowHandle, "InventoryName", values[1]);
+                    gridView1.SetRowCellValue(newRowHandle, "Piece", values[2]);
+                    gridView1.SetRowCellValue(newRowHandle, "OperationType", values[3]);
+                    gridView1.SetRowCellValue(newRowHandle, "UUID", values[4]);
+                    gridView1.SetRowCellValue(newRowHandle, "InventoryId", values[5]);
+                    this.Id = Convert.ToInt32(values[6]);
+                    gridView1.SetRowCellValue(newRowHandle, "Receiver", values[7]);
+                }
+            }
+             */
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
