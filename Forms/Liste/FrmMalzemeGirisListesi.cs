@@ -11,12 +11,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Hesap.DataAccess;
 
 namespace Hesap.Forms.Liste
 {
-    public partial class FrmMalzemeGirisListesi : DevExpress.XtraEditors.XtraForm
+    public partial class FrmMalzemeGirisListesi : XtraForm
     {
         Listele listele = new Listele();
+        CrudRepository crudRepository = new CrudRepository();
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        
         public FrmMalzemeGirisListesi()
         {
             InitializeComponent();
@@ -26,7 +30,7 @@ namespace Hesap.Forms.Liste
         {
             string sql = $@"Select
                         ISNULL(R.Id,0) [Fiş Id],
-	                    ISNULL(R.ReceiptDate,'') [Fiş Tari],
+	                    ISNULL(R.ReceiptDate,'') [Fiş Tarihi],
 	                    --ISNULL(RI.ReceiptId,'') [ReceiptId], -- referans numarası
                         ISNULL(C.Id,'') [Firma Id],	                    
                         ISNULL(C.CompanyCode,'') [Firma Kodu],
@@ -55,6 +59,7 @@ namespace Hesap.Forms.Liste
 	                    left join Inventory I with(nolock) on RI.InventoryId = I.Id
 	                    where R.ReceiptType = {Convert.ToInt32(ReceiptTypes.MalzemeDepoGiris)}";
             listele.Liste(sql, gridControl1);
+            crudRepository.GetUserColumns(gridView1,this.Text);
         }
         public List<Dictionary<string, object>> veriler = new List<Dictionary<string, object>>();
         public List<string> liste = new List<string>();
@@ -68,6 +73,7 @@ namespace Hesap.Forms.Liste
                 int currentId = Convert.ToInt32(gridView.GetRowCellValue(i, "Fiş Id"));
                 if (currentId == clickedId)
                 {
+                    DateTime Tarih = (DateTime)gridView1.GetRowCellValue(i,"Fiş Tarihi");
                     string MalzemeKodu = Convert.ToString(gridView.GetRowCellValue(i, "Malzeme Kodu"));
                     string MalzemeAdi = Convert.ToString(gridView.GetRowCellValue(i, "Malzeme Adı"));
                     int kalanAdet = Convert.ToInt32(gridView.GetRowCellValue(i, "Adet"));
@@ -75,32 +81,35 @@ namespace Hesap.Forms.Liste
                     string UUID = Convert.ToString(gridView.GetRowCellValue(i, "UUID"));
                     int MalzemeId = Convert.ToInt32(gridView.GetRowCellValue(i, "Malzeme Id"));
                     string TeslimAlan = Convert.ToString(gridView.GetRowCellValue(i, "Teslim Alan"));
-                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};");
+                    int FirmaId = Convert.ToInt32(gridView.GetRowCellValue(i, "Firma Id"));
+                    string FirmaKodu = Convert.ToString(gridView.GetRowCellValue(i, "Firma Kodu"));
+                    string FirmaAdi = Convert.ToString(gridView.GetRowCellValue(i, "Firma Adı"));
+                    DateTime FaturaTarihi = (DateTime)gridView1.GetRowCellValue(i, "Fatura Tarihi");
+                    string FaturaNo = Convert.ToString(gridView.GetRowCellValue(i, "Fatura No"));
+                    DateTime IrsaliyeTarihi = (DateTime)gridView1.GetRowCellValue(i, "Irsaliye Tarihi");
+                    string IrsaliyeNo = Convert.ToString(gridView.GetRowCellValue(i, "Irsaliye No"));
+                    string Aciklama = Convert.ToString(gridView.GetRowCellValue(i, "Açıklama"));
+                    decimal BirimFiyat = Convert.ToDecimal(gridView.GetRowCellValue(i, "Birim Fiyat"));
+                    int Kdv = Convert.ToInt32(gridView.GetRowCellValue(i, "KDV %"));
+                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};");
                 }
             }
             Close();
-            //GridView gridView = sender as GridView;
-            //if (gridView == null)
-            //    return;
-            //int secilenId = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
-            //veriler.Clear();
-            //for (int i = 0; i < gridView.DataRowCount; i++)
-            //{
-            //    int id = Convert.ToInt32(gridView.GetRowCellValue(i, "ReceiptId"));
+        }
 
-            //    if (id == secilenId)
-            //    {
-            //        var rowData = new Dictionary<string, object>();
-            //        foreach (GridColumn column in gridView.Columns)
-            //        {
-            //            var columnName = column.FieldName;
-            //            var cellValue = gridView.GetRowCellValue(i, columnName);
-            //            rowData[columnName] = cellValue;
-            //        }
-            //        veriler.Add(rowData);
-            //    }
-            //}
-            //Close();
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            crudRepository.SaveColumnStatus(gridView1, this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
+        }
+
+        private void excelOlarakAktarxlsxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.ExcelOlarakAktar(gridControl1,"Malzeme Giriş İşlemleri Listesi");
         }
     }
 }

@@ -141,33 +141,27 @@ namespace Hesap.Forms.MalzemeYonetimi
             view.SetRowCellValue(e.RowHandle, "UUID", uuid);
         }
 
-        private void simpleButton2_Click(object sender, EventArgs e) // listeleme çalışmadı - düzeltilecek
+        private void simpleButton2_Click(object sender, EventArgs e)
         {
             Liste.FrmMalzemeGirisListesi frm = new Liste.FrmMalzemeGirisListesi();
             frm.ShowDialog();
-            if (frm.veriler.Count > 0)
-            {
-                dateTarih.EditValue = (DateTime)frm.veriler[0]["ReceiptDate"];
-                dateFaturaTarihi.EditValue = (DateTime)frm.veriler[0]["InvoiceDate"];
-                this.FirmaId = Convert.ToInt32(frm.veriler[0]["CompanyId"]);
-                txtFirmaKodu.Text = frm.veriler[0]["CompanyCode"].ToString();
-                txtFirmaUnvan.Text = frm.veriler[0]["CompanyName"].ToString();
-                // txtDepoKodu.Text = frm.veriler[0]["DepoId"].ToString();
-                txtFaturaNo.Text = frm.veriler[0]["InvoiceNo"].ToString();
-                txtIrsaliyeNo.Text = frm.veriler[0]["DispatchNo"].ToString();
-                rchAciklama.Text = frm.veriler[0]["Explanation"].ToString();
-                Id = Convert.ToInt32(frm.veriler[0]["Id"]);
-                string[] columnNames = new string[]
-                {
-                    "OperationType", "InventoryId" ,"InventoryCode", "InventoryName", "Piece", "UUID", "TrackingNumber","UnitPrice","ReceiptItemId","RowAmount","Vat"
-                };
-                yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
-            }
-            /*
-             Liste.FrmMalzemeCikisListesi frm = new Liste.FrmMalzemeCikisListesi();
-            frm.ShowDialog();
+            DateTime tarih = DateTime.MinValue;
             if (frm.liste.Count > 0)
             {
+                var firstItem = frm.liste[0];
+                var values1 = firstItem.Split(';');
+                this.Id = Convert.ToInt32(values1[6]);
+                tarih = Convert.ToDateTime(values1[8]);
+                dateTarih.EditValue = (DateTime)tarih;
+                this.FirmaId = Convert.ToInt32(values1[9]);
+                txtFirmaKodu.Text = values1[10];
+                txtFirmaUnvan.Text = values1[11];
+                dateFaturaTarihi.EditValue= (DateTime)Convert.ToDateTime(values1[12]);
+                txtFaturaNo.Text = values1[13];
+                dateIrsaliyeTarihi.EditValue= (DateTime)Convert.ToDateTime(values1[14]);
+                txtIrsaliyeNo.Text = values1[15];
+                rchAciklama.Text = values1[16];
+                //depo eklenecek
                 foreach (var item in frm.liste)
                 {
                     gridView1.AddNewRow();
@@ -179,11 +173,10 @@ namespace Hesap.Forms.MalzemeYonetimi
                     gridView1.SetRowCellValue(newRowHandle, "OperationType", values[3]);
                     gridView1.SetRowCellValue(newRowHandle, "UUID", values[4]);
                     gridView1.SetRowCellValue(newRowHandle, "InventoryId", values[5]);
-                    this.Id = Convert.ToInt32(values[6]);
-                    gridView1.SetRowCellValue(newRowHandle, "Receiver", values[7]);
+                    gridView1.SetRowCellValue(newRowHandle, "UnitPrice", values[17]);
+                    gridView1.SetRowCellValue(newRowHandle, "Vat", values[18]);
                 }
             }
-             */
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
