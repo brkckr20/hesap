@@ -23,14 +23,13 @@ namespace Hesap.Forms.MalzemeYonetimi
         HesaplaVeYansit yansit = new HesaplaVeYansit();
         CRUD_Operations cRUD = new CRUD_Operations();
         KalemParametreleri parametreler = new KalemParametreleri();
-        private string TableName1 = "Receipt", TableName2 = "ReceiptItem";
+        private readonly string TableName1 = "Receipt", TableName2 = "ReceiptItem";
         CrudRepository crudRepository = new CrudRepository();
         public FrmMalzemeGiris()
         {
             InitializeComponent();
         }
-        int Id = 0;
-        int FirmaId = 0;
+        int Id = 0, FirmaId = 0;
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             yansit.FirmaKoduVeAdiYansit(txtFirmaKodu, txtFirmaUnvan, ref this.FirmaId);
@@ -47,21 +46,6 @@ namespace Hesap.Forms.MalzemeYonetimi
             gridControl1.DataSource = new BindingList<ReceiptItem>();
             crudRepository.GetUserColumns(gridView1, this.Text);
         }
-        private decimal? UpdateUnitPrice(int rowIndex, string fieldName)
-        {
-            var value = gridView1.GetRowCellValue(rowIndex, fieldName);
-            string valueString = value.ToString().Replace(",", ".");
-            if (decimal.TryParse(valueString, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal unitPrice))
-            {
-                MessageBox.Show(unitPrice.ToString());
-                return unitPrice;
-            }
-            else
-            {
-                return null; // Dönüşüm başarısızsa null döndürüyoruz
-            }
-        }
-
         decimal ConvertDecimal(string strVal)
         {
             if (decimal.TryParse(strVal, NumberStyles.Any, CultureInfo.GetCultureInfo("tr-TR"), out decimal unitPriceValue))
@@ -70,7 +54,6 @@ namespace Hesap.Forms.MalzemeYonetimi
             }
             return 0;
         }
-
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             try
@@ -143,11 +126,14 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
+            
+
             Liste.FrmMalzemeGirisListesi frm = new Liste.FrmMalzemeGirisListesi();
             frm.ShowDialog();
             DateTime tarih = DateTime.MinValue;
             if (frm.liste.Count > 0)
             {
+                yardimciAraclar.ClearGridViewRows(gridView1);
                 var firstItem = frm.liste[0];
                 var values1 = firstItem.Split(';');
                 this.Id = Convert.ToInt32(values1[6]);
@@ -187,7 +173,7 @@ namespace Hesap.Forms.MalzemeYonetimi
         {
             object[] bilgiler = { dateTarih, dateFaturaTarihi, txtFirmaKodu, txtFirmaUnvan, txtDepoKodu, txtFaturaNo, txtIrsaliyeNo, rchAciklama };
             yardimciAraclar.KartTemizle(bilgiler);
-            gridControl1.DataSource = new BindingList<_MalzemeKalem>();
+            gridControl1.DataSource = new BindingList<ReceiptItem>();
             this.Id = 0;
         }
 
@@ -195,57 +181,81 @@ namespace Hesap.Forms.MalzemeYonetimi
         {
             KayitlariGetir("Önceki");
         }
-        public void KayitlariGetir(string OncemiSonrami)
+        public void KayitlariGetir(string KayitTipi)
         {
             int id = this.Id;
             int? istenenId = null;
-
-            try
+            istenenId = crudRepository.GetIdForAfterOrBeforeRecord(KayitTipi, TableName1, id);
+            string query = $@"select 
+                            R.Id Id,R.ReceiptDate,R.CompanyId,R.InvoiceDate,R.InvoiceNo,R.DispatchDate,R.DispatchNo,R.Explanation,
+                            RI.Id [ReceiptItemId],RI.OperationType,RI.InventoryId,RI.Piece,RI.UnitPrice,RI.UUID,RI.RowAmount,RI.Vat
+                            ,C.CompanyCode,C.CompanyName
+                            ,I.InventoryCode,I.InventoryName
+                             from Receipt R inner join ReceiptItem RI on R.Id = RI.ReceiptId 
+                            left join Company C on C.Id = R.CompanyId
+                            left join Inventory I on I.Id = RI.InventoryId
+                            where R.ReceiptType = 1 and R.Id = @Id";
+            var liste = crudRepository.GetAfterOrBeforeRecord(query, istenenId ?? 0);
+            if (liste != null)
             {
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    string sql;
-
-                    if (OncemiSonrami == "Önceki")
-                    {
-                        sql = "SELECT MAX(MalzemeDepo1.Id) FROM MalzemeDepo1 INNER JOIN MalzemeDepo2 ON MalzemeDepo1.Id = MalzemeDepo2.RefNo WHERE MalzemeDepo1.Id < @Id";
-                        istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
-                    }
-                    else if (OncemiSonrami == "Sonraki")
-                    {
-                        sql = "SELECT MIN(MalzemeDepo1.Id) FROM MalzemeDepo1 INNER JOIN MalzemeDepo2 ON MalzemeDepo1.Id = MalzemeDepo2.RefNo WHERE MalzemeDepo1.Id > @Id";
-                        istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
-                    }
-                    string fisquery = "SELECT * FROM MalzemeDepo1  WHERE Id = @Id";
-                    string kalemquery = "SELECT * FROM MalzemeDepo2  WHERE RefNo = @Id";
-                    var fis = connection.QueryFirstOrDefault(fisquery, new { Id = istenenId });
-                    var kalemler = connection.Query(kalemquery, new { Id = istenenId });
-                    if (fis != null && kalemler != null)
-                    {
-                        gridControl1.DataSource = null;
-                        dateTarih.EditValue = (DateTime)fis.Tarih;
-                        dateFaturaTarihi.EditValue = (DateTime)fis.FaturaTarihi;
-                        txtFirmaKodu.Text = fis.FirmaKodu.ToString();
-                        txtFirmaUnvan.Text = fis.FirmaUnvani.ToString();
-                        txtDepoKodu.Text = fis.DepoId.ToString();
-                        txtFaturaNo.Text = fis.FaturaNo.ToString();
-                        txtIrsaliyeNo.Text = fis.IrsaliyeNo.ToString();
-                        rchAciklama.Text = fis.Aciklama.ToString();
-                        this.Id = Convert.ToInt32(fis.Id);
-                        gridControl1.DataSource = kalemler.ToList();
-
-                    }
-                    else
-                    {
-                        bildirim.Uyari("Gösterilecek herhangi bir kayıt bulunamadı!");
-                    }
-
-                }
+                yardimciAraclar.ClearGridViewRows(gridView1);
+                var item = liste[0]; // liste null olması durumu için hatalar kontrol edilecek, ayrıca tarih listeleme için Tekrardan kontrol edilecek. hata veriyor.
+                this.Id = Convert.ToInt32(item.Id);
+                this.FirmaId = Convert.ToInt32(item.CompanyId);
+                txtFirmaKodu.Text = item.CompanyCode.ToString();
+                txtFirmaUnvan.Text = item.CompanyName.ToString();
+                gridControl1.DataSource = liste;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+            //int id = this.Id;
+            //int? istenenId = null;
+
+            //try
+            //{
+            //    using (var connection = new Baglanti().GetConnection())
+            //    {
+            //        string sql;
+
+            //        if (OncemiSonrami == "Önceki")
+            //        {
+            //            sql = "SELECT MAX(MalzemeDepo1.Id) FROM MalzemeDepo1 INNER JOIN MalzemeDepo2 ON MalzemeDepo1.Id = MalzemeDepo2.RefNo WHERE MalzemeDepo1.Id < @Id";
+            //            istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+            //        }
+            //        else if (OncemiSonrami == "Sonraki")
+            //        {
+            //            sql = "SELECT MIN(MalzemeDepo1.Id) FROM MalzemeDepo1 INNER JOIN MalzemeDepo2 ON MalzemeDepo1.Id = MalzemeDepo2.RefNo WHERE MalzemeDepo1.Id > @Id";
+            //            istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+            //        }
+            //        string fisquery = "SELECT * FROM MalzemeDepo1  WHERE Id = @Id";
+            //        string kalemquery = "SELECT * FROM MalzemeDepo2  WHERE RefNo = @Id";
+            //        var fis = connection.QueryFirstOrDefault(fisquery, new { Id = istenenId });
+            //        var kalemler = connection.Query(kalemquery, new { Id = istenenId });
+            //        if (fis != null && kalemler != null)
+            //        {
+            //            gridControl1.DataSource = null;
+            //            dateTarih.EditValue = (DateTime)fis.Tarih;
+            //            dateFaturaTarihi.EditValue = (DateTime)fis.FaturaTarihi;
+            //            txtFirmaKodu.Text = fis.FirmaKodu.ToString();
+            //            txtFirmaUnvan.Text = fis.FirmaUnvani.ToString();
+            //            txtDepoKodu.Text = fis.DepoId.ToString();
+            //            txtFaturaNo.Text = fis.FaturaNo.ToString();
+            //            txtIrsaliyeNo.Text = fis.IrsaliyeNo.ToString();
+            //            rchAciklama.Text = fis.Aciklama.ToString();
+            //            this.Id = Convert.ToInt32(fis.Id);
+            //            gridControl1.DataSource = kalemler.ToList();
+
+            //        }
+            //        else
+            //        {
+            //            bildirim.Uyari("Gösterilecek herhangi bir kayıt bulunamadı!");
+            //        }
+
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void simpleButton4_Click(object sender, EventArgs e)

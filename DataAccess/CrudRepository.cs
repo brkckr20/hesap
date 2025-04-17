@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
-using FastReport.Utils;
 using Hesap.Models;
 using Hesap.Utils;
 using System;
@@ -9,11 +8,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SQLite;
-using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace Hesap.DataAccess
 {
@@ -43,7 +39,7 @@ namespace Hesap.DataAccess
             string query = $"SELECT * FROM {TableName} WHERE Id = @Id";
             return _dbConnection.QueryFirstOrDefault<T>(query, new { Id = id });
         }
-        public T GetByList<T>(string TableName,string KayitTipi,int id) //iler geri butonları için init edildi.
+        public T GetByList<T>(string TableName,string KayitTipi,int id) //iler geri butonları için init edildi. (kartlar ve fiş başlık alanları için)
         {
             string query = this.databaseTuru == "mssql"
             ? $"SELECT TOP 1 * FROM {TableName} WHERE Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id ORDER BY Id {(KayitTipi == "Önceki" ? "DESC" : "ASC")}"
@@ -206,5 +202,18 @@ namespace Hesap.DataAccess
             string query = $"SELECT * FROM {TableName} WHERE {ConditionField} = @Id";
             return _dbConnection.QueryFirstOrDefault<T>(query, new { Id = id });
         }
+        public List<dynamic> GetAfterOrBeforeRecord(string query,int id)
+        {
+            return _dbConnection.Query(query, new { Id = id }).ToList();
+        }
+        public int? GetIdForAfterOrBeforeRecord(string KayitTipi, string TableName, int id)
+        {
+            string sql = KayitTipi == "Önceki"
+                ? $"SELECT MAX(Id) FROM {TableName} WHERE Id < @Id"
+                : $"SELECT MIN(Id) FROM {TableName} WHERE Id > @Id";
+
+            return _dbConnection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+        }
+
     }
 }

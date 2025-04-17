@@ -534,5 +534,15 @@ namespace Hesap.Utils
 
             return File.ReadAllBytes(filePath);
         }
+        public void ClearGridViewRows(GridView gridView1)
+        {
+            gridView1.BeginUpdate();
+            gridView1.FocusedRowHandle = -1;
+            for (int i = gridView1.RowCount - 1; i >= 0; i--)
+            {
+                gridView1.DeleteRow(i);
+            }
+            gridView1.EndUpdate();
+        }
     }
 }
