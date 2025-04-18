@@ -39,7 +39,7 @@ namespace Hesap.DataAccess
             string query = $"SELECT * FROM {TableName} WHERE Id = @Id";
             return _dbConnection.QueryFirstOrDefault<T>(query, new { Id = id });
         }
-        public T GetByList<T>(string TableName,string KayitTipi,int id) //iler geri butonları için init edildi. (kartlar ve fiş başlık alanları için)
+        public T GetByList<T>(string TableName, string KayitTipi, int id) //iler geri butonları için init edildi. (kartlar ve fiş başlık alanları için)
         {
             string query = this.databaseTuru == "mssql"
             ? $"SELECT TOP 1 * FROM {TableName} WHERE Id {(KayitTipi == "Önceki" ? "<" : ">")} @Id ORDER BY Id {(KayitTipi == "Önceki" ? "DESC" : "ASC")}"
@@ -120,7 +120,7 @@ namespace Hesap.DataAccess
             string query = $"SELECT {ColumnName} FROM {TableName} WHERE CombinedCode = @CombinedCode";
             return _dbConnection.ExecuteScalar<string>(query, new { CombinedCode = ConditionName });
         }
-        public string GetNumaratorWithCondition(string TableName,string FieldName)
+        public string GetNumaratorWithCondition(string TableName, string FieldName)
         {
             string query;
             if (this.databaseTuru == "mssql")
@@ -197,20 +197,20 @@ namespace Hesap.DataAccess
                 }
             }
         }
-        public T GetByOtherCondition<T>(string TableName,string ConditionField, object id)
+        public T GetByOtherCondition<T>(string TableName, string ConditionField, object id)
         {
             string query = $"SELECT * FROM {TableName} WHERE {ConditionField} = @Id";
             return _dbConnection.QueryFirstOrDefault<T>(query, new { Id = id });
         }
-        public List<dynamic> GetAfterOrBeforeRecord(string query,int id)
+        public List<dynamic> GetAfterOrBeforeRecord(string query, int id)
         {
             return _dbConnection.Query(query, new { Id = id }).ToList();
         }
-        public int? GetIdForAfterOrBeforeRecord(string KayitTipi, string TableName, int id)
+        public int? GetIdForAfterOrBeforeRecord(string KayitTipi, string TableName, int id, string TableName2, string TableName2Ref ,int ReceiptType)
         {
             string sql = KayitTipi == "Önceki"
-                ? $"SELECT MAX(Id) FROM {TableName} WHERE Id < @Id"
-                : $"SELECT MIN(Id) FROM {TableName} WHERE Id > @Id";
+                ? $"SELECT MAX(t1.Id) FROM {TableName} t1 inner join {TableName2} t2 on t1.Id=t2.{TableName2Ref} WHERE t1.Id < @Id and ReceiptType = {ReceiptType}"
+                : $"SELECT MIN(t1.Id) FROM {TableName} t1 inner join {TableName2} t2 on t1.Id=t2.{TableName2Ref} WHERE t1.Id > @Id and ReceiptType = {ReceiptType}";
 
             return _dbConnection.QueryFirstOrDefault<int?>(sql, new { Id = id });
         }
