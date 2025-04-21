@@ -51,7 +51,8 @@ namespace Hesap.Forms.Liste
 	                    ISNULL(RI.Id,0) [Kalem Kayıt No],
 	                    ISNULL(RI.UUID,'') [UUID],
                         ISNULL(RI.RowAmount,0) [Satır Tutarı],
-                        ISNULL(RI.Vat,0) [KDV %]
+                        ISNULL(RI.Vat,0) [KDV %],
+                        ISNULL(RI.Explanation,0) [Satır Açıklama]
                     from 
                     Receipt R with(nolock) 
 	                    inner join ReceiptItem RI on R.Id = RI.ReceiptId
@@ -91,7 +92,9 @@ namespace Hesap.Forms.Liste
                     string Aciklama = Convert.ToString(gridView.GetRowCellValue(i, "Açıklama"));
                     decimal BirimFiyat = Convert.ToDecimal(gridView.GetRowCellValue(i, "Birim Fiyat"));
                     int Kdv = Convert.ToInt32(gridView.GetRowCellValue(i, "KDV %"));
-                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};");
+                    int KalemKayitNo = Convert.ToInt32(gridView.GetRowCellValue(i,"Kalem Kayıt No"));
+                    string SatirAciklama = Convert.ToString(gridView.GetRowCellValue(i, "Satır Açıklama"));
+                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama}");
                 }
             }
             Close();

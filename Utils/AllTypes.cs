@@ -19,4 +19,9 @@ namespace Hesap.Utils
         Malzeme = 0,
         Kumas = 1
     }
+
+    public enum WareHouseTypes
+    {
+        Malzeme = 0,
+    }
 }

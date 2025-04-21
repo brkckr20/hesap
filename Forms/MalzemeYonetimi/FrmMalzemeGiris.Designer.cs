@@ -39,7 +39,6 @@
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.rchAciklama = new DevExpress.XtraEditors.MemoExEdit();
-            this.txtDepoKodu = new DevExpress.XtraEditors.TextEdit();
             this.txtIrsaliyeNo = new DevExpress.XtraEditors.TextEdit();
             this.txtFaturaNo = new DevExpress.XtraEditors.TextEdit();
             this.txtFirmaUnvan = new DevExpress.XtraEditors.TextEdit();
@@ -48,7 +47,6 @@
             this.dateTarih = new DevExpress.XtraEditors.DateEdit();
             this.txtFirmaKodu = new DevExpress.XtraEditors.ButtonEdit();
             this.label9 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -66,14 +64,15 @@
             this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.MalzemeAdi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Miktar = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repoPiece = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.UUID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TrackingNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.RowAmount = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.D2Id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Vat = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Explanation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repoPiece = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.pnlBottom = new DevExpress.XtraEditors.PanelControl();
             this.btnIslemBekleyenler = new DevExpress.XtraEditors.SimpleButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -81,11 +80,12 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtDepoKodu = new DevExpress.XtraEditors.TextEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepoKodu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIrsaliyeNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFaturaNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).BeginInit();
@@ -102,11 +102,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoPiece)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoPiece)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlBottom)).BeginInit();
             this.pnlBottom.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepoKodu.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -226,15 +227,6 @@
             this.rchAciklama.Size = new System.Drawing.Size(155, 24);
             this.rchAciklama.TabIndex = 8;
             // 
-            // txtDepoKodu
-            // 
-            this.txtDepoKodu.Location = new System.Drawing.Point(107, 85);
-            this.txtDepoKodu.Name = "txtDepoKodu";
-            this.txtDepoKodu.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
-            this.txtDepoKodu.Properties.Appearance.Options.UseFont = true;
-            this.txtDepoKodu.Size = new System.Drawing.Size(155, 24);
-            this.txtDepoKodu.TabIndex = 3;
-            // 
             // txtIrsaliyeNo
             // 
             this.txtIrsaliyeNo.Location = new System.Drawing.Point(371, 85);
@@ -326,17 +318,6 @@
             this.label9.TabIndex = 1120;
             this.label9.Text = "Açıklama :";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label6.Location = new System.Drawing.Point(8, 87);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(93, 21);
-            this.label6.TabIndex = 1120;
-            this.label6.Text = "Depo :";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label7
             // 
@@ -453,8 +434,9 @@
             this.TrackingNumber,
             this.UnitPrice,
             this.RowAmount,
-            this.D2Id,
-            this.Vat});
+            this.ReceiptItemId,
+            this.Vat,
+            this.Explanation});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -534,11 +516,6 @@
             this.Miktar.VisibleIndex = 4;
             this.Miktar.Width = 79;
             // 
-            // repoPiece
-            // 
-            this.repoPiece.AutoHeight = false;
-            this.repoPiece.Name = "repoPiece";
-            // 
             // UUID
             // 
             this.UUID.Caption = "UUID";
@@ -576,13 +553,13 @@
             this.RowAmount.Visible = true;
             this.RowAmount.VisibleIndex = 7;
             // 
-            // D2Id
+            // ReceiptItemId
             // 
-            this.D2Id.Caption = "Depo 2 Id";
-            this.D2Id.FieldName = "ReceiptItemId";
-            this.D2Id.Name = "D2Id";
-            this.D2Id.Visible = true;
-            this.D2Id.VisibleIndex = 9;
+            this.ReceiptItemId.Caption = "Depo 2 Id";
+            this.ReceiptItemId.FieldName = "ReceiptItemId";
+            this.ReceiptItemId.Name = "ReceiptItemId";
+            this.ReceiptItemId.Visible = true;
+            this.ReceiptItemId.VisibleIndex = 9;
             // 
             // Vat
             // 
@@ -591,6 +568,14 @@
             this.Vat.Name = "Vat";
             this.Vat.Visible = true;
             this.Vat.VisibleIndex = 10;
+            // 
+            // Explanation
+            // 
+            this.Explanation.Caption = "Açıklama";
+            this.Explanation.FieldName = "Explanation";
+            this.Explanation.Name = "Explanation";
+            this.Explanation.Visible = true;
+            this.Explanation.VisibleIndex = 11;
             // 
             // repoCmbBirim
             // 
@@ -604,6 +589,11 @@
             "Gr",
             "Cm"});
             this.repoCmbBirim.Name = "repoCmbBirim";
+            // 
+            // repoPiece
+            // 
+            this.repoPiece.AutoHeight = false;
+            this.repoPiece.Name = "repoPiece";
             // 
             // pnlBottom
             // 
@@ -667,6 +657,26 @@
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.Location = new System.Drawing.Point(8, 87);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 21);
+            this.label6.TabIndex = 1120;
+            this.label6.Text = "Depo :";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtDepoKodu
+            // 
+            this.txtDepoKodu.Location = new System.Drawing.Point(107, 85);
+            this.txtDepoKodu.Name = "txtDepoKodu";
+            this.txtDepoKodu.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtDepoKodu.Properties.Appearance.Options.UseFont = true;
+            this.txtDepoKodu.Size = new System.Drawing.Size(155, 24);
+            this.txtDepoKodu.TabIndex = 3;
+            // 
             // FrmMalzemeGiris
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -684,7 +694,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepoKodu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIrsaliyeNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFaturaNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).EndInit();
@@ -701,11 +710,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoPiece)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoPiece)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlBottom)).EndInit();
             this.pnlBottom.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepoKodu.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -721,14 +731,12 @@
         private DevExpress.XtraEditors.SimpleButton btnKaydet;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraEditors.MemoExEdit rchAciklama;
-        private DevExpress.XtraEditors.TextEdit txtDepoKodu;
         private DevExpress.XtraEditors.TextEdit txtIrsaliyeNo;
         private DevExpress.XtraEditors.TextEdit txtFaturaNo;
         private DevExpress.XtraEditors.TextEdit txtFirmaUnvan;
         private DevExpress.XtraEditors.DateEdit dateTarih;
         private DevExpress.XtraEditors.ButtonEdit txtFirmaKodu;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -756,12 +764,15 @@
         private DevExpress.XtraGrid.Columns.GridColumn TrackingNumber;
         private DevExpress.XtraGrid.Columns.GridColumn UnitPrice;
         private DevExpress.XtraGrid.Columns.GridColumn RowAmount;
-        private DevExpress.XtraGrid.Columns.GridColumn D2Id;
+        private DevExpress.XtraGrid.Columns.GridColumn ReceiptItemId;
         private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
         private DevExpress.XtraGrid.Columns.GridColumn MalzemeId;
         private DevExpress.XtraGrid.Columns.GridColumn Vat;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repoPiece;
+        private DevExpress.XtraGrid.Columns.GridColumn Explanation;
+        private DevExpress.XtraEditors.TextEdit txtDepoKodu;
+        private System.Windows.Forms.Label label6;
     }
 }

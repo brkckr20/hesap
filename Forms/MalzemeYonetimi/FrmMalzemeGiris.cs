@@ -59,11 +59,11 @@ namespace Hesap.Forms.MalzemeYonetimi
                     return;
                 }
                 var parameters = new Dictionary<string, object>
-            {
-                { "ReceiptType", ReceiptTypes.MalzemeDepoGiris }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },
-                { "Explanation", rchAciklama.Text }, { "WareHouseId", txtDepoKodu.Text }, { "InvoiceNo", txtFaturaNo.Text },
-                { "InvoiceDate", dateFaturaTarihi.EditValue },{ "DispatchNo", txtIrsaliyeNo.Text },{ "DispatchDate", dateIrsaliyeTarihi.EditValue},
-            };
+                {
+                    { "ReceiptType", ReceiptTypes.MalzemeDepoGiris }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },
+                    { "Explanation", rchAciklama.Text }, { "WareHouseId", txtDepoKodu.Text }, { "InvoiceNo", txtFaturaNo.Text },
+                    { "InvoiceDate", dateFaturaTarihi.EditValue },{ "DispatchNo", txtIrsaliyeNo.Text },{ "DispatchDate", dateIrsaliyeTarihi.EditValue},{ "WareHouseId", Convert.ToInt32(WareHouseTypes.Malzeme)},
+                };
 
                 if (this.Id == 0)
                 {
@@ -80,20 +80,20 @@ namespace Hesap.Forms.MalzemeYonetimi
                 }
                 else
                 {
-
                     crudRepository.Update(TableName1, Id, parameters);
-                    for (int i = 0; i < gridView1.RowCount; i++)
+                    for (int i = 0; i < gridView1.RowCount - 1; i++)
                     {
-                        if (gridView1.GetRowCellValue(i, "ReceiptItemId") != null)
+                        var recIdObj = gridView1.GetRowCellValue(i, "ReceiptItemId");
+                        int rec_id = recIdObj != null ? Convert.ToInt32(recIdObj) : 0;
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "Piece", ConvertDecimal(gridView1.GetRowCellValue(i, "Piece").ToString()) }, { "UnitPrice", ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) }, { "Vat", Convert.ToInt32(gridView1.GetRowCellValue(i, "Vat")) }, { "UUID", gridView1.GetRowCellValue(i, "UUID") }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") } };
+                        if (rec_id != 0)
                         {
-                            int rec_id = Convert.ToInt32(gridView1.GetRowCellValue(i, "ReceiptItemId"));
-                            var unitPriceStr = gridView1.GetRowCellValue(i, "Piece").ToString();
-                            var values = new Dictionary<string, object> { { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "Piece", ConvertDecimal(gridView1.GetRowCellValue(i, "Piece").ToString()) }, { "UnitPrice", ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) } };
                             crudRepository.Update(TableName2, rec_id, values);
                         }
                         else
                         {
-                            // else bloğu için eğer yeni satır eklenirse ihtimali için insert sorgusu düzenlenecek
+                            var new_rec_id =crudRepository.Insert(TableName2, values);
+                            gridView1.SetRowCellValue(i, "ReceiptItemId", new_rec_id);
                         }
                     }
                     bildirim.GuncellemeBasarili();
@@ -125,8 +125,6 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            
-
             Liste.FrmMalzemeGirisListesi frm = new Liste.FrmMalzemeGirisListesi();
             frm.ShowDialog();
             DateTime tarih = DateTime.MinValue;
@@ -160,6 +158,8 @@ namespace Hesap.Forms.MalzemeYonetimi
                     gridView1.SetRowCellValue(newRowHandle, "InventoryId", values[5]);
                     gridView1.SetRowCellValue(newRowHandle, "UnitPrice", values[17]);
                     gridView1.SetRowCellValue(newRowHandle, "Vat", values[18]);
+                    gridView1.SetRowCellValue(newRowHandle, "ReceiptItemId", values[19]);
+                    gridView1.SetRowCellValue(newRowHandle, "Explanation", values[20]);
                 }
             }
         }
@@ -196,10 +196,10 @@ namespace Hesap.Forms.MalzemeYonetimi
                 string query = $@"SELECT 
                     ISNULL(R.Id,0) Id, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,
                     ISNULL(R.InvoiceDate,'') InvoiceDate, ISNULL(R.InvoiceNo,'') InvoiceNo, ISNULL(R.DispatchDate,'') DispatchDate,
-                    ISNULL(R.DispatchNo,'') DispatchNo, ISNULL(R.Explanation,'') Explanation,
+                    ISNULL(R.DispatchNo,'') DispatchNo, ISNULL(R.Explanation,'') ExplanationFis,
                     ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
                     ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.Piece,0) Piece, ISNULL(RI.UnitPrice,0) UnitPrice,
-                    ISNULL(RI.UUID,'') UUID, ISNULL(RI.RowAmount,0) RowAmount, ISNULL(RI.Vat,0) Vat,
+                    ISNULL(RI.UUID,'') UUID, ISNULL(RI.RowAmount,0) RowAmount, ISNULL(RI.Vat,0) Vat, ISNULL(RI.Explanation,'') Explanation,
                     ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
                     ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName
                     FROM Receipt R
@@ -223,7 +223,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                     txtFaturaNo.Text = item.InvoiceNo.ToString();
                     dateIrsaliyeTarihi.Text = item.DispatchDate.ToString();
                     txtIrsaliyeNo.Text = item.DispatchNo.ToString();
-                    rchAciklama.Text = item.Explanation.ToString();
+                    rchAciklama.Text = item.ExplanationFis.ToString();
                     gridControl1.DataSource = liste;
                 }
                 else

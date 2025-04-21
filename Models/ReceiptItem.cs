@@ -10,6 +10,7 @@ namespace Hesap.Models
         private int _vat;
 
         public int Id { get; set; }
+        public int ReceiptItemId { get; set; }
         public int ReceiptId { get; set; }
         public string OperationType { get; set; }
         public int InventoryId { get; set; }
