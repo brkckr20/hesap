@@ -107,8 +107,9 @@ namespace Hesap.Forms.MalzemeYonetimi
             if (!string.IsNullOrEmpty(frm.Kodu) && !string.IsNullOrEmpty(frm.Adi))
             {
                 int newRowHandle = gridView1.FocusedRowHandle;
-                gridView1.SetRowCellValue(newRowHandle, "MalzemeKodu", frm.Kodu);
-                gridView1.SetRowCellValue(newRowHandle, "MalzemeAdi", frm.Adi);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryCode", frm.Kodu);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryName", frm.Adi);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryId", frm.Id);
             }
         }
 

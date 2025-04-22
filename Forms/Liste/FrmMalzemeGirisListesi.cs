@@ -94,7 +94,8 @@ namespace Hesap.Forms.Liste
                     int Kdv = Convert.ToInt32(gridView.GetRowCellValue(i, "KDV %"));
                     int KalemKayitNo = Convert.ToInt32(gridView.GetRowCellValue(i,"Kalem Kayıt No"));
                     string SatirAciklama = Convert.ToString(gridView.GetRowCellValue(i, "Satır Açıklama"));
-                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama}");
+                    int TakipNo = Convert.ToInt32(gridView.GetRowCellValue(i,"Takip No"));
+                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama};{TakipNo}");
                 }
             }
             Close();

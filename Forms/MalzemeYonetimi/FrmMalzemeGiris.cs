@@ -61,7 +61,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                 var parameters = new Dictionary<string, object>
                 {
                     { "ReceiptType", ReceiptTypes.MalzemeDepoGiris }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },
-                    { "Explanation", rchAciklama.Text }, { "WareHouseId", txtDepoKodu.Text }, { "InvoiceNo", txtFaturaNo.Text },
+                    { "Explanation", rchAciklama.Text }, { "InvoiceNo", txtFaturaNo.Text },
                     { "InvoiceDate", dateFaturaTarihi.EditValue },{ "DispatchNo", txtIrsaliyeNo.Text },{ "DispatchDate", dateIrsaliyeTarihi.EditValue},{ "WareHouseId", Convert.ToInt32(WareHouseTypes.Malzeme)},
                 };
 
@@ -72,7 +72,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                     for (int i = 0; i < itemList.Count; i++)
                     {
                         var item = itemList[i];
-                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "Piece", item.Piece }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat } };
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "Piece", item.Piece }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat }, { "TrackingNumber", item.TrackingNumber } };
                         var rec_id = crudRepository.Insert(TableName2, values);
                         gridView1.SetRowCellValue(i, "ReceiptItemId", rec_id);
                     }
@@ -92,7 +92,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                         }
                         else
                         {
-                            var new_rec_id =crudRepository.Insert(TableName2, values);
+                            var new_rec_id = crudRepository.Insert(TableName2, values);
                             gridView1.SetRowCellValue(i, "ReceiptItemId", new_rec_id);
                         }
                     }
@@ -160,6 +160,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                     gridView1.SetRowCellValue(newRowHandle, "Vat", values[18]);
                     gridView1.SetRowCellValue(newRowHandle, "ReceiptItemId", values[19]);
                     gridView1.SetRowCellValue(newRowHandle, "Explanation", values[20]);
+                    gridView1.SetRowCellValue(newRowHandle, "TrackingNumber", values[21]);
                 }
             }
         }
@@ -199,7 +200,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                     ISNULL(R.DispatchNo,'') DispatchNo, ISNULL(R.Explanation,'') ExplanationFis,
                     ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
                     ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.Piece,0) Piece, ISNULL(RI.UnitPrice,0) UnitPrice,
-                    ISNULL(RI.UUID,'') UUID, ISNULL(RI.RowAmount,0) RowAmount, ISNULL(RI.Vat,0) Vat, ISNULL(RI.Explanation,'') Explanation,
+                    ISNULL(RI.UUID,'') UUID, ISNULL(RI.RowAmount,0) RowAmount, ISNULL(RI.Vat,0) Vat, ISNULL(RI.Explanation,'') Explanation, ISNULL(RI.TrackingNumber,'') TrackingNumber,
                     ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
                     ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName
                     FROM Receipt R
@@ -265,11 +266,12 @@ namespace Hesap.Forms.MalzemeYonetimi
                 gridView1.AddNewRow();
                 int newRowHandle = gridView1.FocusedRowHandle;
                 var values = item.Split(';');
-                gridView1.SetRowCellValue(newRowHandle, "KalemIslem", values[0]);
-                gridView1.SetRowCellValue(newRowHandle, "MalzemeKodu", values[1]);
-                gridView1.SetRowCellValue(newRowHandle, "MalzemeAdi", values[2]);
-                gridView1.SetRowCellValue(newRowHandle, "Birim", values[3]);
-                gridView1.SetRowCellValue(newRowHandle, "TakipNo", values[4]);
+                gridView1.SetRowCellValue(newRowHandle, "OperationType", values[0]);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryCode", values[1]);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryName", values[2]);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryId", values[3]);
+                gridView1.SetRowCellValue(newRowHandle, "Piece", values[4]);
+                gridView1.SetRowCellValue(newRowHandle, "TrackingNumber", values[5]);
             }
         }
 
