@@ -70,7 +70,7 @@ namespace Hesap.Utils
                 string sorgum;
                 using (var connection = new Baglanti().GetConnection())
                 {
-                    string mssql = "select top 1 IplikKodu from IplikKarti order by IplikKodu desc";
+                    string mssql = "select top 1 InventoryCode from Inventory where Type = 4 order by InventoryCode desc";
                     string sqlite = "select IplikKodu from IplikKarti order by IplikKodu desc limit 1";
                     sorgum = ayarlar.DbTuruneGoreSorgu(mssql, sqlite);
 

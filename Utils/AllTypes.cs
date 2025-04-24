@@ -12,12 +12,14 @@ namespace Hesap.Utils
         MalzemeDepoGiris = 1,
         MusteriSiparisi = 2,
         MalzemeDepoCikis = 3,
+        IplikSatinAlmaTalimati=4,
     }
 
     public enum InventoryTypes
     {
         Malzeme = 0,
-        Kumas = 1
+        Kumas = 1,
+        Iplik = 2,
     }
 
     public enum WareHouseTypes

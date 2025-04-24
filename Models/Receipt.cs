@@ -26,5 +26,6 @@ namespace Hesap.Models
         public string CustomerOrderNo { get; set; }
         public string OrderNo { get; set; }
         public int Maturity { get; set; }
+        public string PaymentType{ get; set; }
     }
 }

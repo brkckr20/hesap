@@ -66,7 +66,7 @@
             this.Miktar = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UUID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TeslimAlan = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.KayitNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.InventoryId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -419,7 +419,7 @@
             this.Miktar,
             this.UUID,
             this.TeslimAlan,
-            this.KayitNo,
+            this.ReceiptItemId,
             this.InventoryId});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
@@ -451,7 +451,8 @@
             "Dolum",
             "Tamir",
             "Stok",
-            "İşletme"});
+            "İşletme",
+            "Geri Dönüşüm"});
             this.repoCmbKalemIslem.Name = "repoCmbKalemIslem";
             // 
             // MalzemeKodu
@@ -511,13 +512,13 @@
             this.TeslimAlan.VisibleIndex = 5;
             this.TeslimAlan.Width = 104;
             // 
-            // KayitNo
+            // ReceiptItemId
             // 
-            this.KayitNo.Caption = "Kayıt No";
-            this.KayitNo.FieldName = "KayitNo";
-            this.KayitNo.Name = "KayitNo";
-            this.KayitNo.Visible = true;
-            this.KayitNo.VisibleIndex = 6;
+            this.ReceiptItemId.Caption = "Kayıt No";
+            this.ReceiptItemId.FieldName = "ReceiptItemId";
+            this.ReceiptItemId.Name = "ReceiptItemId";
+            this.ReceiptItemId.Visible = true;
+            this.ReceiptItemId.VisibleIndex = 6;
             // 
             // InventoryId
             // 
@@ -587,7 +588,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 707);
-            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.panelControl1);
@@ -657,7 +657,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbBirim;
         private DevExpress.XtraGrid.Columns.GridColumn UUID;
         private DevExpress.XtraGrid.Columns.GridColumn TeslimAlan;
-        private DevExpress.XtraGrid.Columns.GridColumn KayitNo;
+        private DevExpress.XtraGrid.Columns.GridColumn ReceiptItemId;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem siparişFormuToolStripMenuItem;
         private DevExpress.XtraEditors.TextEdit txtYetkili;

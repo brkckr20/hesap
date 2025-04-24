@@ -185,7 +185,7 @@ namespace Hesap
             DolarKuruGetir("USD_ALIS");
             AttachEnterKeyHandler(this);
             dateTimePicker1.EditValue = DateTime.Now;
-            lblFisNo.Text = crudRepository.GetNumaratorWithCondition("Cost","OrderNo");
+            lblFisNo.Text = crudRepository.GetNumaratorWithCondition("Cost","OrderNo",1); // 1 sayısı numaratör hata vermemesi için ekledi şuan için bir anlamı yok
         }
         private void materialLabel6_Click(object sender, EventArgs e)
         {

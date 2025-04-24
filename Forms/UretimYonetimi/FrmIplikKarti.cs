@@ -1,25 +1,20 @@
 ﻿using Dapper;
-using DevExpress.LookAndFeel;
-using DevExpress.XtraEditors;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hesap.Forms.UretimYonetimi
 {
     public partial class FrmIplikKarti : DevExpress.XtraEditors.XtraForm
     {
-        Numarator numarator = new Numarator();
         Bildirim bildirim = new Bildirim();
         private int Id = 0;
+        private string TableName = "Inventory", IplikAdiOzellik="İplik";
         Ayarlar ayarlar = new Ayarlar();
+        CrudRepository crudRepository = new CrudRepository();
+        
         public FrmIplikKarti()
         {
             InitializeComponent();
@@ -71,73 +66,51 @@ namespace Hesap.Forms.UretimYonetimi
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            int kayitId;
-            
-            using (var connection = new Baglanti().GetConnection())
+            string CombinedCode = txtIplikNo.Text + txtIplikCinsi.Text;
+            string InventoryName = IplikAdiOzellik + " " + lblIplikNoAciklama.Text + " " + lblIplikCinsiAciklama.Text + (checkEdit1.Checked ? "Organik" : "");
+            if (crudRepository.IfExistRecord(TableName,"CombinedCode",CombinedCode)>0)
             {
-                string _birlesikKod = txtIplikNo.Text + txtIplikCinsi.Text + (checkEdit1.Checked ? "1" : "0");
-                string _iplikAdi = lblIplikNoAciklama.Text + " " + lblIplikCinsiAciklama.Text + " " + (checkEdit1.Checked ? "Organik" : "");
-                string kontrol = "SELECT COUNT(1) FROM IplikKarti WHERE BirlesikKod = @BirlesikKod";
-                bool exists = connection.ExecuteScalar<int>(kontrol, new { BirlesikKod = _birlesikKod }) > 0;
-                object veriler = new
-                {
-                    IplikKodu = txtIplikKodu.Text,
-                    IplikAdi = _iplikAdi,
-                    IplikCinsi = txtIplikCinsi.Text,
-                    IplikNo = txtIplikNo.Text,
-                    Numara = txtNumara.Text,
-                    Organik = checkEdit1.Checked,
-                    BirlesikKod = _birlesikKod
-                };
-                if (!exists)
-                {
-                    string insertQuerymssql = @"INSERT INTO IplikKarti 
-                                           (IplikKodu,IplikAdi,IplikNo,IplikCinsi,Numara,Organik,BirlesikKod) OUTPUT INSERTED.Id
-                                     VALUES (@IplikKodu,@IplikAdi,@IplikNo,@IplikCinsi,@Numara,@Organik,@BirlesikKod)";
-                    string insertQuerySqlite = @"INSERT INTO IplikKarti 
-                                           (IplikKodu,IplikAdi,IplikNo,IplikCinsi,Numara,Organik,BirlesikKod)
-                                     VALUES (@IplikKodu,@IplikAdi,@IplikNo,@IplikCinsi,@Numara,@Organik,@BirlesikKod)";
-                    string idQuery = "SELECT last_insert_rowid();";
-                    if (ayarlar.VeritabaniTuru() == "mssql")
-                    {
-                        kayitId = connection.QuerySingle<int>(insertQuerymssql, veriler);
-                    }
-                    else
-                    {
-                        connection.Execute(insertQuerySqlite, veriler);
-                        kayitId = connection.QuerySingle<int>(idQuery);
-                    }
-                    lblIplikAdi.Text = _iplikAdi;
-                    this.Id = kayitId;
-                    bildirim.Basarili();
-                }
-                else
-                {
-                    MessageBox.Show("kayit var");
-                }
+                string code = crudRepository.GetByCode("InventoryCode", TableName, CombinedCode);
+                bildirim.Uyari($"Seçtiğiniz özelliklere ait bir kayıt bulunmaktadır.\nLütfen {code} numaralı kaydı kontrol ediniz!!");
+                return;
+            }
+            var InvParams = new Dictionary<string, object>
+            {
+                { "InventoryCode", txtIplikKodu.Text }, { "InventoryName", InventoryName },
+                {"Type" , InventoryTypes.Iplik}, { "IsUse", checkEdit2.Checked }, {"Unit",""},{"CombinedCode",CombinedCode},{"SubType" , IplikAdiOzellik},{"IsPrefix" , false}
+            };
+            if (this.Id == 0)
+            {
+                Id = crudRepository.Insert(TableName, InvParams);
+                lblIplikAdi.Text = InventoryName;
+                bildirim.Basarili();
+            }
+            else
+            {
+                crudRepository.Update(TableName, this.Id, InvParams);
+                bildirim.GuncellemeBasarili();
             }
         }
 
         private void FrmIplikKarti_Load(object sender, EventArgs e)
         {
-            txtIplikKodu.Text = numarator.NumaraVer("İplik");
+            txtIplikKodu.Text = crudRepository.GetInventoryNumerator(TableName,"InventoryCode",Convert.ToInt32(InventoryTypes.Iplik),"IPL");
         }
-
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            Liste.FrmIplikKartiListesi frm = new Liste.FrmIplikKartiListesi();
-            frm.ShowDialog();
-            if (frm.IplikKodu != null)
-            {
-                this.Id = frm.Id;
-                txtIplikKodu.Text = frm.IplikKodu;
-                lblIplikAdi.Text = frm.IplikAdi;
-                txtIplikNo.Text = frm.IplikNo;
-                lblIplikNoAciklama.Text = frm.IplikNoAciklama;
-                txtIplikCinsi.Text = frm.IplikCinsi;
-                lblIplikCinsiAciklama.Text = frm.IplikCinsiAciklama;
-                checkEdit1.Checked = frm.Organik;
-            }
+            //Liste.FrmIplikKartiListesi frm = new Liste.FrmIplikKartiListesi();
+            //frm.ShowDialog();
+            //if (frm.IplikKodu != null)
+            //{
+            //    this.Id = frm.Id;
+            //    txtIplikKodu.Text = frm.IplikKodu;
+            //    lblIplikAdi.Text = frm.IplikAdi;
+            //    txtIplikNo.Text = frm.IplikNo;
+            //    lblIplikNoAciklama.Text = frm.IplikNoAciklama;
+            //    txtIplikCinsi.Text = frm.IplikCinsi;
+            //    lblIplikCinsiAciklama.Text = frm.IplikCinsiAciklama;
+            //    checkEdit1.Checked = frm.Organik;
+            //}
         }
     }
 }

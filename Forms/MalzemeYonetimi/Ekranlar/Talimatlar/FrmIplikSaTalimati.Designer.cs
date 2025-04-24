@@ -56,7 +56,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.KalemIslem = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.OperationType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbKalemIslem = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.IplikId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IplikKodu = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -78,7 +78,7 @@
             this.SatirAciklama = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UUID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.SatirTutari = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.TakipNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.TrackingNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.satınAlmaTalimatFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -412,7 +412,7 @@
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.KalemIslem,
+            this.OperationType,
             this.IplikId,
             this.IplikKodu,
             this.IplikAdi,
@@ -429,7 +429,7 @@
             this.SatirAciklama,
             this.UUID,
             this.SatirTutari,
-            this.TakipNo});
+            this.TrackingNumber});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -439,15 +439,15 @@
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView1_InitNewRow);
             // 
-            // KalemIslem
+            // OperationType
             // 
-            this.KalemIslem.Caption = "Kalem İşlem";
-            this.KalemIslem.ColumnEdit = this.repoCmbKalemIslem;
-            this.KalemIslem.FieldName = "KalemIslem";
-            this.KalemIslem.Name = "KalemIslem";
-            this.KalemIslem.Visible = true;
-            this.KalemIslem.VisibleIndex = 0;
-            this.KalemIslem.Width = 91;
+            this.OperationType.Caption = "Kalem İşlem";
+            this.OperationType.ColumnEdit = this.repoCmbKalemIslem;
+            this.OperationType.FieldName = "OperationType";
+            this.OperationType.Name = "OperationType";
+            this.OperationType.Visible = true;
+            this.OperationType.VisibleIndex = 0;
+            this.OperationType.Width = 91;
             // 
             // repoCmbKalemIslem
             // 
@@ -640,13 +640,13 @@
             this.SatirTutari.Visible = true;
             this.SatirTutari.VisibleIndex = 13;
             // 
-            // TakipNo
+            // TrackingNumber
             // 
-            this.TakipNo.Caption = "Takip No";
-            this.TakipNo.FieldName = "TakipNo";
-            this.TakipNo.Name = "TakipNo";
-            this.TakipNo.Visible = true;
-            this.TakipNo.VisibleIndex = 14;
+            this.TrackingNumber.Caption = "Takip No";
+            this.TrackingNumber.FieldName = "TrackingNumber";
+            this.TrackingNumber.Name = "TrackingNumber";
+            this.TrackingNumber.Visible = true;
+            this.TrackingNumber.VisibleIndex = 14;
             // 
             // repoCmbBirim
             // 
@@ -738,7 +738,7 @@
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn KalemIslem;
+        private DevExpress.XtraGrid.Columns.GridColumn OperationType;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbKalemIslem;
         private DevExpress.XtraGrid.Columns.GridColumn IplikId;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnUrunKodu;
@@ -769,6 +769,6 @@
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem satınAlmaTalimatFormuToolStripMenuItem;
-        private DevExpress.XtraGrid.Columns.GridColumn TakipNo;
+        private DevExpress.XtraGrid.Columns.GridColumn TrackingNumber;
     }
 }

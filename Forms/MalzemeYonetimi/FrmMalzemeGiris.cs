@@ -23,6 +23,7 @@ namespace Hesap.Forms.MalzemeYonetimi
         public FrmMalzemeGiris()
         {
             InitializeComponent();
+            gridControl1.ContextMenuStrip = contextMenuStrip1;
         }
         int Id = 0, FirmaId = 0;
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -175,6 +176,7 @@ namespace Hesap.Forms.MalzemeYonetimi
             yardimciAraclar.KartTemizle(bilgiler);
             gridControl1.DataSource = new BindingList<ReceiptItem>();
             this.Id = 0;
+            this.FirmaId = 0;
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
@@ -254,7 +256,7 @@ namespace Hesap.Forms.MalzemeYonetimi
         }
         private void siparişFormuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            yardimciAraclar.OpenFormSelectScreen(this.Id,this.Text);            
         }
 
         private void btnIslemBekleyenler_Click(object sender, EventArgs e)

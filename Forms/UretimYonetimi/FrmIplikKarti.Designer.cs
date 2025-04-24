@@ -37,6 +37,7 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.checkEdit2 = new DevExpress.XtraEditors.CheckEdit();
             this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
             this.txtNumara = new DevExpress.XtraEditors.TextEdit();
             this.txtIplikKodu = new DevExpress.XtraEditors.TextEdit();
@@ -45,6 +46,7 @@
             this.lblIplikCinsiAciklama = new System.Windows.Forms.Label();
             this.txtIplikNo = new DevExpress.XtraEditors.ButtonEdit();
             this.lblIplikNoAciklama = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblIplikCinsi = new System.Windows.Forms.Label();
@@ -53,6 +55,7 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumara.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIplikKodu.Properties)).BeginInit();
@@ -139,6 +142,7 @@
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.checkEdit2);
             this.panelControl1.Controls.Add(this.checkEdit1);
             this.panelControl1.Controls.Add(this.txtNumara);
             this.panelControl1.Controls.Add(this.txtIplikKodu);
@@ -147,6 +151,7 @@
             this.panelControl1.Controls.Add(this.lblIplikCinsiAciklama);
             this.panelControl1.Controls.Add(this.txtIplikNo);
             this.panelControl1.Controls.Add(this.lblIplikNoAciklama);
+            this.panelControl1.Controls.Add(this.label2);
             this.panelControl1.Controls.Add(this.label5);
             this.panelControl1.Controls.Add(this.label4);
             this.panelControl1.Controls.Add(this.lblIplikCinsi);
@@ -155,12 +160,20 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 53);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1217, 139);
+            this.panelControl1.Size = new System.Drawing.Size(1217, 164);
             this.panelControl1.TabIndex = 6;
+            // 
+            // checkEdit2
+            // 
+            this.checkEdit2.Location = new System.Drawing.Point(111, 124);
+            this.checkEdit2.Name = "checkEdit2";
+            this.checkEdit2.Properties.Caption = "";
+            this.checkEdit2.Size = new System.Drawing.Size(29, 20);
+            this.checkEdit2.TabIndex = 1122;
             // 
             // checkEdit1
             // 
-            this.checkEdit1.Location = new System.Drawing.Point(111, 103);
+            this.checkEdit1.Location = new System.Drawing.Point(111, 102);
             this.checkEdit1.Name = "checkEdit1";
             this.checkEdit1.Properties.Caption = "";
             this.checkEdit1.Size = new System.Drawing.Size(29, 20);
@@ -168,13 +181,14 @@
             // 
             // txtNumara
             // 
-            this.txtNumara.Location = new System.Drawing.Point(111, 80);
+            this.txtNumara.Location = new System.Drawing.Point(111, 78);
             this.txtNumara.Name = "txtNumara";
             this.txtNumara.Size = new System.Drawing.Size(65, 22);
             this.txtNumara.TabIndex = 1121;
             // 
             // txtIplikKodu
             // 
+            this.txtIplikKodu.Enabled = false;
             this.txtIplikKodu.Location = new System.Drawing.Point(111, 6);
             this.txtIplikKodu.Name = "txtIplikKodu";
             this.txtIplikKodu.Size = new System.Drawing.Size(65, 22);
@@ -182,7 +196,7 @@
             // 
             // txtIplikCinsi
             // 
-            this.txtIplikCinsi.Location = new System.Drawing.Point(111, 55);
+            this.txtIplikCinsi.Location = new System.Drawing.Point(111, 54);
             this.txtIplikCinsi.Name = "txtIplikCinsi";
             this.txtIplikCinsi.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -210,7 +224,7 @@
             // 
             // txtIplikNo
             // 
-            this.txtIplikNo.Location = new System.Drawing.Point(111, 31);
+            this.txtIplikNo.Location = new System.Drawing.Point(111, 30);
             this.txtIplikNo.Name = "txtIplikNo";
             this.txtIplikNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -228,11 +242,22 @@
             this.lblIplikNoAciklama.TabIndex = 1119;
             this.lblIplikNoAciklama.TextChanged += new System.EventHandler(this.lblIplikNoAciklama_TextChanged);
             // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(12, 122);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 21);
+            this.label2.TabIndex = 1120;
+            this.label2.Text = "Kullanımda :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label5
             // 
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(12, 103);
+            this.label5.Location = new System.Drawing.Point(12, 99);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 21);
             this.label5.TabIndex = 1120;
@@ -243,7 +268,7 @@
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(12, 81);
+            this.label4.Location = new System.Drawing.Point(12, 76);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 21);
             this.label4.TabIndex = 1120;
@@ -254,7 +279,7 @@
             // 
             this.lblIplikCinsi.BackColor = System.Drawing.Color.Transparent;
             this.lblIplikCinsi.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblIplikCinsi.Location = new System.Drawing.Point(12, 56);
+            this.lblIplikCinsi.Location = new System.Drawing.Point(12, 53);
             this.lblIplikCinsi.Name = "lblIplikCinsi";
             this.lblIplikCinsi.Size = new System.Drawing.Size(93, 21);
             this.lblIplikCinsi.TabIndex = 1120;
@@ -276,7 +301,7 @@
             // 
             this.lblIplikNo.BackColor = System.Drawing.Color.Transparent;
             this.lblIplikNo.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblIplikNo.Location = new System.Drawing.Point(12, 32);
+            this.lblIplikNo.Location = new System.Drawing.Point(12, 30);
             this.lblIplikNo.Name = "lblIplikNo";
             this.lblIplikNo.Size = new System.Drawing.Size(93, 21);
             this.lblIplikNo.TabIndex = 1120;
@@ -296,6 +321,7 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumara.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIplikKodu.Properties)).EndInit();
@@ -328,5 +354,7 @@
         private DevExpress.XtraEditors.CheckEdit checkEdit1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblIplikAdi;
+        private System.Windows.Forms.Label label2;
+        private DevExpress.XtraEditors.CheckEdit checkEdit2;
     }
 }

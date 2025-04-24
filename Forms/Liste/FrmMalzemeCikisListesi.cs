@@ -67,7 +67,16 @@ namespace Hesap.Forms.Liste
                     string UUID = Convert.ToString(gridView.GetRowCellValue(i, "UUID"));
                     int MalzemeId = Convert.ToInt32(gridView.GetRowCellValue(i, "Malzeme Id"));
                     string TeslimAlan= Convert.ToString(gridView.GetRowCellValue(i, "Teslim Alan"));
-                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};");
+                    int KalemKayitNo = Convert.ToInt32(gridView1.GetRowCellValue(i, "Kalem Kayıt No"));
+                    DateTime Tarih = (DateTime)gridView1.GetRowCellValue(i, "Tarih");
+                    int FirmaId = Convert.ToInt32(gridView1.GetRowCellValue(i, "Firma Id"));
+                    string FirmaKodu= Convert.ToString(gridView.GetRowCellValue(i, "Firma Kodu"));
+                    string FirmaAdi= Convert.ToString(gridView.GetRowCellValue(i, "Firma Adı"));
+                    int DepoId = Convert.ToInt32(gridView1.GetRowCellValue(i, "Depo Id"));
+                    string IrsaliyeNo= Convert.ToString(gridView.GetRowCellValue(i, "Irsaliye No"));
+                    string Aciklama= Convert.ToString(gridView.GetRowCellValue(i, "Açıklama"));
+                    string Yetkili= Convert.ToString(gridView.GetRowCellValue(i, "Yetkili"));
+                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{KalemKayitNo};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{DepoId};{IrsaliyeNo};{Aciklama};{Yetkili};");
                 }
             }
             Close();

@@ -544,5 +544,17 @@ namespace Hesap.Utils
             }
             gridView1.EndUpdate();
         }
+        public void OpenFormSelectScreen(int Id,string Text)
+        {
+            if (Id == 0)
+            {
+                bildirim.Uyari("Rapor alabilmek için bir kayıt seçmelisiniz!");
+            }
+            else
+            {
+                Forms.Rapor.FrmRaporSecimEkrani frm = new Forms.Rapor.FrmRaporSecimEkrani(Text, Id);
+                frm.ShowDialog();
+            }
+        }
     }
 }

@@ -111,8 +111,8 @@ namespace Hesap
                 if (item is BarButtonItem button)
                 {
                     button.Visibility = visibleButtons.Contains(button.Name)
-                        ? DevExpress.XtraBars.BarItemVisibility.Always
-                        : DevExpress.XtraBars.BarItemVisibility.Never;
+                        ? BarItemVisibility.Always
+                        : BarItemVisibility.Never;
                 }
             }
             foreach (RibbonPage page in ribbon.Pages)
@@ -121,7 +121,7 @@ namespace Hesap
                 {
                     bool anyVisible = group.ItemLinks
                                            .OfType<BarButtonItemLink>()
-                                           .Any(link => link.Item.Visibility == DevExpress.XtraBars.BarItemVisibility.Always);
+                                           .Any(link => link.Item.Visibility == BarItemVisibility.Always);
 
                     group.Visible = anyVisible;
                 }
@@ -136,9 +136,9 @@ namespace Hesap
         private void Main_Load(object sender, EventArgs e)
         {
             SqliteDatabaseOlustur();
-            EksikFormlariKaydet();
-            EksikRibbonItemlariKaydet();
-            UpdateButtonVisibility();
+            //EksikFormlariKaydet();
+            //EksikRibbonItemlariKaydet();
+            //UpdateButtonVisibility();
             barStVeritabani.Caption = ayarlar.VeritabaniTuru() == "mssql" ? "MSSQL" : "SQLite";
             string nameSurname;
             if (Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[1] != null || Properties.Settings.Default.KullaniciAdi.ToString().Split(' ')[2] != null)

@@ -39,6 +39,7 @@
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.rchAciklama = new DevExpress.XtraEditors.MemoExEdit();
+            this.txtDepoKodu = new DevExpress.XtraEditors.TextEdit();
             this.txtIrsaliyeNo = new DevExpress.XtraEditors.TextEdit();
             this.txtFaturaNo = new DevExpress.XtraEditors.TextEdit();
             this.txtFirmaUnvan = new DevExpress.XtraEditors.TextEdit();
@@ -47,6 +48,7 @@
             this.dateTarih = new DevExpress.XtraEditors.DateEdit();
             this.txtFirmaKodu = new DevExpress.XtraEditors.ButtonEdit();
             this.label9 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -80,12 +82,11 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtDepoKodu = new DevExpress.XtraEditors.TextEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepoKodu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIrsaliyeNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFaturaNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).BeginInit();
@@ -107,7 +108,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnlBottom)).BeginInit();
             this.pnlBottom.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepoKodu.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -227,6 +227,15 @@
             this.rchAciklama.Size = new System.Drawing.Size(155, 24);
             this.rchAciklama.TabIndex = 8;
             // 
+            // txtDepoKodu
+            // 
+            this.txtDepoKodu.Location = new System.Drawing.Point(107, 85);
+            this.txtDepoKodu.Name = "txtDepoKodu";
+            this.txtDepoKodu.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
+            this.txtDepoKodu.Properties.Appearance.Options.UseFont = true;
+            this.txtDepoKodu.Size = new System.Drawing.Size(155, 24);
+            this.txtDepoKodu.TabIndex = 3;
+            // 
             // txtIrsaliyeNo
             // 
             this.txtIrsaliyeNo.Location = new System.Drawing.Point(371, 85);
@@ -318,6 +327,17 @@
             this.label9.TabIndex = 1120;
             this.label9.Text = "Açıklama :";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.Location = new System.Drawing.Point(8, 87);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 21);
+            this.label6.TabIndex = 1120;
+            this.label6.Text = "Depo :";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label7
             // 
@@ -657,32 +677,11 @@
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label6.Location = new System.Drawing.Point(8, 87);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(93, 21);
-            this.label6.TabIndex = 1120;
-            this.label6.Text = "Depo :";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtDepoKodu
-            // 
-            this.txtDepoKodu.Location = new System.Drawing.Point(107, 85);
-            this.txtDepoKodu.Name = "txtDepoKodu";
-            this.txtDepoKodu.Properties.Appearance.Font = new System.Drawing.Font("Calibri", 10F);
-            this.txtDepoKodu.Properties.Appearance.Options.UseFont = true;
-            this.txtDepoKodu.Size = new System.Drawing.Size(155, 24);
-            this.txtDepoKodu.TabIndex = 3;
-            // 
             // FrmMalzemeGiris
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 596);
-            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
@@ -694,6 +693,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepoKodu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIrsaliyeNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFaturaNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).EndInit();
@@ -715,7 +715,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnlBottom)).EndInit();
             this.pnlBottom.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepoKodu.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

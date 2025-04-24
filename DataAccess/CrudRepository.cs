@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using Hesap.Context;
 using Hesap.Models;
 using Hesap.Utils;
 using System;
@@ -9,6 +10,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace Hesap.DataAccess
@@ -120,16 +122,16 @@ namespace Hesap.DataAccess
             string query = $"SELECT {ColumnName} FROM {TableName} WHERE CombinedCode = @CombinedCode";
             return _dbConnection.ExecuteScalar<string>(query, new { CombinedCode = ConditionName });
         }
-        public string GetNumaratorWithCondition(string TableName, string FieldName)
+        public string GetNumaratorWithCondition(string TableName, string FieldName, int Type)
         {
             string query;
             if (this.databaseTuru == "mssql")
             {
-                query = $"SELECT top 1 {FieldName} FROM {TableName} ORDER BY {FieldName} desc";
+                query = $"SELECT top 1 {FieldName} FROM {TableName} WHERE Type = {Type} ORDER BY {FieldName} desc";
             }
             else
             {
-                query = $"SELECT {FieldName} FROM {TableName} ORDER BY {FieldName} desc LIMIT 1";
+                query = $"SELECT {FieldName} FROM {TableName} WHERE Type = {Type} ORDER BY {FieldName} desc LIMIT 1";
             }
             var numarator = _dbConnection.QuerySingleOrDefault<string>(query);
             if (numarator != null)
@@ -140,6 +142,58 @@ namespace Hesap.DataAccess
             {
                 return "00000001";
             }
+        }
+        public string GetInventoryNumerator(string TableName,string FieldName,int Type,string Prefix)
+        {
+            string query;
+            if (this.databaseTuru == "mssql")
+            {
+                query = $"select top 1 {FieldName} from {TableName} where Type = {Type} order by {FieldName} desc";
+            }
+            else
+            {
+                query = $"select {FieldName} from {TableName} where Type = {Type} order by {FieldName} desc limit 1"; ;
+            }
+            var numarator = _dbConnection.QuerySingleOrDefault<string>(query);
+            if (numarator != null)
+            {
+                string prefix = numarator.Substring(0, 3);
+                string numberPart = numarator.Substring(3);
+                int number = Convert.ToInt32(numberPart);
+                int newNumber = number + 1;
+                string newNumberPart = string.Format("{0:D3}", newNumber);
+                string new_num = prefix + newNumberPart;
+                return new_num;
+            }
+            else
+            {
+                return $"{Prefix}001";
+            }
+            /*
+             string sorgum;
+                using (var connection = new Baglanti().GetConnection())
+                {
+                    string mssql = "select top 1 InventoryCode from Inventory where Type = 4 order by InventoryCode desc";
+                    string sqlite = "select IplikKodu from IplikKarti order by IplikKodu desc limit 1";
+                    sorgum = ayarlar.DbTuruneGoreSorgu(mssql, sqlite);
+
+                    var sipNo = connection.QuerySingleOrDefault<string>(sorgum);
+                    if (sipNo != null)
+                    {
+                        string prefix = sipNo.Substring(0, 3);
+                        string numberPart = sipNo.Substring(3);
+                        int number = Convert.ToInt32(numberPart);
+                        int newNumber = number + 1;
+                        string newNumberPart = string.Format("{0:D3}", newNumber);
+                        string newSiparisNo = prefix + newNumberPart;
+                        return newSiparisNo;
+                    }
+                    else
+                    {
+                        return "IPL001";
+                    }
+                }
+             */
         }
         // kullanıcının kolonlarını listeleme işlemidir
         public void GetUserColumns(GridView gridView, string ScreenName)

@@ -60,6 +60,8 @@ namespace Hesap.Forms.Diger
                     return "Malzeme";
                 case InventoryTypes.Kumas:
                     return "Kumaş";
+                case InventoryTypes.Iplik:
+                    return "İplik";
                 default:
                     return "";
             }

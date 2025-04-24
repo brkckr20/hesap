@@ -256,7 +256,7 @@ namespace Hesap.Forms.Rapor
 
                 if (File.Exists(yeniDosyaYolu))
                 {
-                    throw new IOException("Yeni dosya adı zaten mevcut");
+                    //throw new IOException("Yeni dosya adı zaten mevcut"); aynı isimde dosya olduğu için hata fırlatıyor güncellemede
                 }
 
                 File.Move(mevcutDosyaYolu, yeniDosyaYolu);
