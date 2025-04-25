@@ -5,10 +5,12 @@ namespace Hesap.Models
     public class ReceiptItem : INotifyPropertyChanged
     {
         private decimal _piece;
+        private decimal _grossWeight;
+        private decimal _netWeight;
         private decimal _unitPrice;
         private decimal _rowAmount;
         private int _vat;
-
+        private string _measurementUnit;
         public int Id { get; set; }
         public int ReceiptItemId { get; set; }
         public int ReceiptId { get; set; }
@@ -17,8 +19,32 @@ namespace Hesap.Models
         public string InventoryCode { get; set; }
         public string InventoryName { get; set; }
         public int GrM2 { get; set; }
-        public decimal GrossWeight { get; set; }
-        public decimal NetWeight { get; set; }
+        public decimal GrossWeight
+        {
+            get => _grossWeight;
+            set
+            {
+                if (_grossWeight != value)
+                {
+                    _grossWeight = value;
+                    OnPropertyChanged(nameof(GrossWeight));
+                    UpdateRowAmount();
+                }
+            }
+        }
+        public decimal NetWeight
+        {
+            get => _netWeight;
+            set
+            {
+                if (_netWeight != value)
+                {
+                    _netWeight = value;
+                    OnPropertyChanged(nameof(NetWeight));
+                    UpdateRowAmount();
+                }
+            }
+        }
         public decimal GrossMeter { get; set; }
         public decimal NetMeter { get; set; }
         public decimal Piece
@@ -30,7 +56,7 @@ namespace Hesap.Models
                 {
                     _piece = value;
                     OnPropertyChanged(nameof(Piece));
-                    UpdateRowAmount();  // Piece değiştiğinde RowAmount güncellensin
+                    UpdateRowAmount();
                 }
             }
         }
@@ -45,7 +71,7 @@ namespace Hesap.Models
                 {
                     _unitPrice = value;
                     OnPropertyChanged(nameof(UnitPrice));
-                    UpdateRowAmount();  // UnitPrice değiştiğinde RowAmount güncellensin
+                    UpdateRowAmount();
                 }
             }
         }
@@ -66,7 +92,7 @@ namespace Hesap.Models
                 if (_rowAmount != value)
                 {
                     _rowAmount = value;
-                    OnPropertyChanged(nameof(RowAmount)); // RowAmount güncellendikçe bildirim yapıyoruz
+                    OnPropertyChanged(nameof(RowAmount));
                 }
             }
         }
@@ -79,21 +105,60 @@ namespace Hesap.Models
                 {
                     _vat = value;
                     OnPropertyChanged(nameof(Vat));
-                    UpdateRowAmount();  // Vat değiştiğinde RowAmount güncellensin
+                    UpdateRowAmount();
+                }
+            }
+        }
+
+        public string MeasurementUnit
+        {
+            get => _measurementUnit;
+            set
+            {
+                if (_measurementUnit != value)
+                {
+                    _measurementUnit = value;
+                    OnPropertyChanged(nameof(MeasurementUnit));
+                    UpdateRowAmount();
                 }
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         private void UpdateRowAmount()
         {
-            // Piece ve UnitPrice'ı çarparak net tutarı buluyoruz
             var netAmount = Piece * UnitPrice;
 
-            // KDV hesaplaması ve RowAmount'a eklenmesi
-            RowAmount = netAmount + (netAmount * Vat / 100m);  // KDV'yi ekliyoruz
+            switch (MeasurementUnit)
+            {
+                case "Brüt Kg":
+                    RowAmount = CalculateGrossWeight() + (CalculateGrossWeight() * Vat / 100m);
+                    break;
+                case "Net Kg":
+                    RowAmount = CalculateNetWeight() + (CalculateNetWeight() * Vat / 100m);
+                    break;
+                default:
+                    RowAmount = netAmount + (netAmount * Vat / 100m);
+                    break;
+            }
         }
+
+        private decimal CalculateGrossWeight()
+        {
+            return _unitPrice * _grossWeight;
+        }
+        private decimal CalculateNetWeight()
+        {
+            return _unitPrice * _netWeight;
+        }
+        //private void UpdateRowAmount()
+        //{
+        //    // Piece ve UnitPrice'ı çarparak net tutarı buluyoruz
+        //    var netAmount = Piece * UnitPrice;
+
+        //    // KDV hesaplaması ve RowAmount'a eklenmesi
+        //    RowAmount = netAmount + (netAmount * Vat / 100m);  // KDV'yi ekliyoruz
+        //}
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

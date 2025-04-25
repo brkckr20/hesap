@@ -48,6 +48,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             dateTarih.EditValue = DateTime.Now;
             gridControl1.DataSource = new BindingList<ReceiptItem>();
             txtTalimatNo.Text = crudRepository.GetNumaratorWithCondition(TableName1, "ReceiptNo", Convert.ToInt32(ReceiptTypes.IplikSatinAlmaTalimati));
+            crudRepository.GetUserColumns(gridView1,this.Text);
         }
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -56,9 +57,9 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             if (!string.IsNullOrEmpty(frm.IplikKodu))
             {
                 int newRowHandle = gridView1.FocusedRowHandle;
-                gridView1.SetRowCellValue(newRowHandle, "IplikKodu", frm.IplikKodu);
-                gridView1.SetRowCellValue(newRowHandle, "IplikAdi", frm.IplikAdi);
-                gridView1.SetRowCellValue(newRowHandle, "IplikId", frm.Id);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryCode", frm.IplikKodu);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryName", frm.IplikAdi);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryId", frm.Id);
             }
         }
         private void repoBtnMarka_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -383,6 +384,16 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         private void btnYeni_Click(object sender, EventArgs e)
         {
             FormTemizle();
+        }
+
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            crudRepository.SaveColumnStatus(gridView1,this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
         }
 
         private void txtFirmaKodu_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

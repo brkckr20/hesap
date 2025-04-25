@@ -127,11 +127,11 @@ namespace Hesap.DataAccess
             string query;
             if (this.databaseTuru == "mssql")
             {
-                query = $"SELECT top 1 {FieldName} FROM {TableName} WHERE Type = {Type} ORDER BY {FieldName} desc";
+                query = $"SELECT top 1 {FieldName} FROM {TableName} WHERE ReceiptType = {Type} ORDER BY {FieldName} desc";
             }
             else
             {
-                query = $"SELECT {FieldName} FROM {TableName} WHERE Type = {Type} ORDER BY {FieldName} desc LIMIT 1";
+                query = $"SELECT {FieldName} FROM {TableName} WHERE ReceiptType = {Type} ORDER BY {FieldName} desc LIMIT 1";
             }
             var numarator = _dbConnection.QuerySingleOrDefault<string>(query);
             if (numarator != null)

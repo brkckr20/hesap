@@ -197,9 +197,8 @@ namespace Hesap.Utils
                     LabelControl label = (LabelControl)control;
                     label.Text = string.Empty;
                 }
-                else if (control is Label)
+                else if (control is Label label)
                 {
-                    Label label = (Label)control;
                     label.Text = string.Empty;
                 }
                 else if (control is CheckEdit)

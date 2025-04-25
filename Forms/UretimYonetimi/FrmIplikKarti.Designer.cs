@@ -86,6 +86,7 @@
             this.simpleButton1.Size = new System.Drawing.Size(75, 47);
             this.simpleButton1.TabIndex = 100;
             this.simpleButton1.Text = "Yeni";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // simpleButton5
             // 
@@ -96,6 +97,7 @@
             this.simpleButton5.Size = new System.Drawing.Size(75, 47);
             this.simpleButton5.TabIndex = 102;
             this.simpleButton5.Text = "Sil";
+            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
             // 
             // simpleButton4
             // 
@@ -106,6 +108,7 @@
             this.simpleButton4.Size = new System.Drawing.Size(75, 47);
             this.simpleButton4.TabIndex = 102;
             this.simpleButton4.Text = "İleri";
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
             // 
             // simpleButton3
             // 
@@ -116,6 +119,7 @@
             this.simpleButton3.Size = new System.Drawing.Size(75, 47);
             this.simpleButton3.TabIndex = 102;
             this.simpleButton3.Text = "Geri";
+            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
             // 
             // simpleButton2
             // 
