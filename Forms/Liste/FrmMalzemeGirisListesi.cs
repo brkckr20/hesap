@@ -62,7 +62,6 @@ namespace Hesap.Forms.Liste
             listele.Liste(sql, gridControl1);
             crudRepository.GetUserColumns(gridView1,this.Text);
         }
-        public List<Dictionary<string, object>> veriler = new List<Dictionary<string, object>>();
         public List<string> liste = new List<string>();
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {

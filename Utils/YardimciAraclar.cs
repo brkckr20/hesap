@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -554,6 +555,14 @@ namespace Hesap.Utils
                 Forms.Rapor.FrmRaporSecimEkrani frm = new Forms.Rapor.FrmRaporSecimEkrani(Text, Id);
                 frm.ShowDialog();
             }
+        }
+        public decimal ConvertDecimal(string strVal)
+        {
+            if (decimal.TryParse(strVal, NumberStyles.Any, CultureInfo.GetCultureInfo("tr-TR"), out decimal unitPriceValue))
+            {
+                return unitPriceValue;
+            }
+            return 0;
         }
     }
 }

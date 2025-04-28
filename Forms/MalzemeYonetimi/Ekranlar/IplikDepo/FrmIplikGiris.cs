@@ -81,25 +81,25 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         }
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            FrmIplikDepoListe frm = new FrmIplikDepoListe("Giriş");
-            frm.ShowDialog();
-            if (frm.veriler.Count > 0)
-            {
-                this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
-                dateTarih.EditValue = (DateTime)frm.veriler[0]["Tarih"];
-                dateIrsaliyeTarihi.EditValue = (DateTime)frm.veriler[0]["IrsaliyeTarihi"];
-                txtIrsaliyeNo.Text = frm.veriler[0]["IrsaliyeNo"].ToString();
-                txtFirmaKodu.Text = frm.veriler[0]["FirmaKodu"].ToString();
-                txtFirmaUnvan.Text = frm.veriler[0]["FirmaUnvan"].ToString();
-                this.FirmaId = Convert.ToInt32(frm.veriler[0]["FirmaId"]);
-                rchAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
-                string[] columnNames = new string[]
-                {
-                    "KalemIslem", "IplikId", "IplikKodu", "IplikAdi", "BrutKg", "NetKg","Fiyat","DovizFiyat","DovizCinsi","OrganikSertifikaNo","Marka","KullanimYeri","IplikRenkId",
-                    "IplikRenkKodu","IplikRenkAdi","PartiNo","SatirAciklama","Barkod","TalimatNo","UUID","TakipNo","SatirTutari","D2Id",
-                };
-                yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
-            }
+            //FrmIplikDepoListe frm = new FrmIplikDepoListe("Giriş");
+            //frm.ShowDialog();
+            //if (frm.veriler.Count > 0)
+            //{
+            //    this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
+            //    dateTarih.EditValue = (DateTime)frm.veriler[0]["Tarih"];
+            //    dateIrsaliyeTarihi.EditValue = (DateTime)frm.veriler[0]["IrsaliyeTarihi"];
+            //    txtIrsaliyeNo.Text = frm.veriler[0]["IrsaliyeNo"].ToString();
+            //    txtFirmaKodu.Text = frm.veriler[0]["FirmaKodu"].ToString();
+            //    txtFirmaUnvan.Text = frm.veriler[0]["FirmaUnvan"].ToString();
+            //    this.FirmaId = Convert.ToInt32(frm.veriler[0]["FirmaId"]);
+            //    rchAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
+            //    string[] columnNames = new string[]
+            //    {
+            //        "KalemIslem", "IplikId", "IplikKodu", "IplikAdi", "BrutKg", "NetKg","Fiyat","DovizFiyat","DovizCinsi","OrganikSertifikaNo","Marka","KullanimYeri","IplikRenkId",
+            //        "IplikRenkKodu","IplikRenkAdi","PartiNo","SatirAciklama","Barkod","TalimatNo","UUID","TakipNo","SatirTutari","D2Id",
+            //    };
+            //    yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
+            //}
 
         }
         private void simpleButton3_Click(object sender, EventArgs e)

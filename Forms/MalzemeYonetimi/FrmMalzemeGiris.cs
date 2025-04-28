@@ -217,7 +217,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                 {
                     yardimciAraclar.ClearGridViewRows(gridView1);
                     var item = liste[0];
-                    dateTarih.Text = item.ReceiptDate.ToString();
+                    //dateTarih.Text = item.ReceiptDate.ToString();
                     this.Id = Convert.ToInt32(item.Id);
                     this.FirmaId = Convert.ToInt32(item.CompanyId);
                     txtFirmaKodu.Text = item.CompanyCode.ToString();
@@ -227,7 +227,7 @@ namespace Hesap.Forms.MalzemeYonetimi
                     dateIrsaliyeTarihi.Text = item.DispatchDate.ToString();
                     txtIrsaliyeNo.Text = item.DispatchNo.ToString();
                     rchAciklama.Text = item.ExplanationFis.ToString();
-                    gridControl1.DataSource = liste;
+                    //gridControl1.DataSource = liste;
                 }
                 else
                 {
