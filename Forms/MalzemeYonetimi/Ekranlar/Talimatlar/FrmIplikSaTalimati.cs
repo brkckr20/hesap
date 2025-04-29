@@ -23,6 +23,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         CrudRepository crudRepository = new CrudRepository();
         int FirmaId = 0, Id = 0,ReceiptType = Convert.ToInt32(ReceiptTypes.IplikSatinAlmaTalimati);
         private const string TableName1 = "Receipt", TableName2 = "ReceiptItem";
+        private bool Onayli = false;
         public FrmIplikSaTalimati()
         {
             InitializeComponent();
@@ -83,7 +84,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 }
                 var parameters = new Dictionary<string, object>
                 {
-                    { "ReceiptType", ReceiptTypes.IplikSatinAlmaTalimati }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "ReceiptNo", txtTalimatNo.Text },{ "Authorized", txtYetkili.Text },{"Maturity",txtVade.Text},{"PaymentType",comboBoxEdit1.Text}
+                    { "ReceiptType", ReceiptTypes.IplikSatinAlmaTalimati }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "ReceiptNo", txtTalimatNo.Text },{ "Authorized", txtYetkili.Text },{"Maturity",txtVade.Text},{"PaymentType",comboBoxEdit1.Text},{"Approved",false}
                 };
                 if (this.Id == 0)
                 {
@@ -253,7 +254,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                     //dateIrsaliyeTarihi.Text = item.DispatchDate.ToString();
                     //txtIrsaliyeNo.Text = item.DispatchNo.ToString();
                     rchAciklama.Text = item.ExplanationFis.ToString();
-                    txtYetkili.Text = item.Authorization.ToString();
+                    txtYetkili.Text = item.Authorized.ToString();
                     txtVade.Text = item.Maturity.ToString();
                     comboBoxEdit1.Text = item.PaymentType.ToString();
                     gridControl1.DataSource = liste;
@@ -284,6 +285,19 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             crudRepository.SaveColumnStatus(gridView1,this.Text);
+        }
+        void TalimatAcKapat(bool acKapa)
+        {
+            crudRepository.Update(TableName1, this.Id, new Dictionary<string, object> { { "IsFinished", acKapa } }); // talimat kapatma işlemi tamamlandı. giriş içerisinde talimat seçimini düzenle 29.04.2025 17:35
+        }
+        private void talimatKapatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TalimatAcKapat(true);
+        }
+
+        private void talimatAçToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TalimatAcKapat(false);
         }
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)

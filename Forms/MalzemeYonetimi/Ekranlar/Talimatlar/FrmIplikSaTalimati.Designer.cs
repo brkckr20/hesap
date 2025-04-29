@@ -72,6 +72,7 @@
             this.Vat = new DevExpress.XtraGrid.Columns.GridColumn();
             this.MeasurementUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoHesapBirimi = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.ReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoCmbDoviz = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoBoyaRenkKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -82,7 +83,9 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.işlemlerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.talimatAçToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.talimatKapatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -456,7 +459,7 @@
             this.repoCmbKalemIslem.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repoCmbKalemIslem.Items.AddRange(new object[] {
-            "S.Alma Talimatı"});
+            "Satın Alma"});
             this.repoCmbKalemIslem.Name = "repoCmbKalemIslem";
             this.repoCmbKalemIslem.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
@@ -590,6 +593,14 @@
             "Net Kg"});
             this.repoHesapBirimi.Name = "repoHesapBirimi";
             // 
+            // ReceiptItemId
+            // 
+            this.ReceiptItemId.Caption = "Kalem Kayıt No";
+            this.ReceiptItemId.FieldName = "ReceiptItemId";
+            this.ReceiptItemId.Name = "ReceiptItemId";
+            this.ReceiptItemId.Visible = true;
+            this.ReceiptItemId.VisibleIndex = 13;
+            // 
             // repoCmbBirim
             // 
             this.repoCmbBirim.AutoHeight = false;
@@ -644,9 +655,10 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.satınAlmaTalimatFormuToolStripMenuItem,
             this.dizaynKaydetToolStripMenuItem,
-            this.satırİşlemleriToolStripMenuItem});
+            this.satırİşlemleriToolStripMenuItem,
+            this.işlemlerToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(278, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(278, 114);
             // 
             // satınAlmaTalimatFormuToolStripMenuItem
             // 
@@ -681,13 +693,28 @@
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
-            // ReceiptItemId
+            // işlemlerToolStripMenuItem
             // 
-            this.ReceiptItemId.Caption = "Kalem Kayıt No";
-            this.ReceiptItemId.FieldName = "ReceiptItemId";
-            this.ReceiptItemId.Name = "ReceiptItemId";
-            this.ReceiptItemId.Visible = true;
-            this.ReceiptItemId.VisibleIndex = 13;
+            this.işlemlerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.talimatAçToolStripMenuItem,
+            this.talimatKapatToolStripMenuItem});
+            this.işlemlerToolStripMenuItem.Name = "işlemlerToolStripMenuItem";
+            this.işlemlerToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.işlemlerToolStripMenuItem.Text = "İşlemler";
+            // 
+            // talimatAçToolStripMenuItem
+            // 
+            this.talimatAçToolStripMenuItem.Name = "talimatAçToolStripMenuItem";
+            this.talimatAçToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.talimatAçToolStripMenuItem.Text = "Talimat Aç";
+            this.talimatAçToolStripMenuItem.Click += new System.EventHandler(this.talimatAçToolStripMenuItem_Click);
+            // 
+            // talimatKapatToolStripMenuItem
+            // 
+            this.talimatKapatToolStripMenuItem.Name = "talimatKapatToolStripMenuItem";
+            this.talimatKapatToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.talimatKapatToolStripMenuItem.Text = "Talimat Kapat";
+            this.talimatKapatToolStripMenuItem.Click += new System.EventHandler(this.talimatKapatToolStripMenuItem_Click);
             // 
             // FrmIplikSaTalimati
             // 
@@ -784,5 +811,8 @@
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
         private DevExpress.XtraGrid.Columns.GridColumn ReceiptItemId;
+        private System.Windows.Forms.ToolStripMenuItem işlemlerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem talimatAçToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem talimatKapatToolStripMenuItem;
     }
 }
