@@ -1,76 +1,74 @@
 ﻿using DevExpress.XtraEditors;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 {
-    public partial class FrmTalimatlar : DevExpress.XtraEditors.XtraForm
+    public partial class FrmTalimatlar : XtraForm
     {
 		Listele listele = new Listele();
         public List<string> satinAlmaListesi = new List<string>();
+        CrudRepository crudRepository = new CrudRepository();
+        YardimciAraclar yardimciAraclar = new YardimciAraclar();
 
         public FrmTalimatlar()
         {
             InitializeComponent();
+            this.Text += " [ İplik ]";
         }
 
         private void FrmTalimatlar_Load(object sender, EventArgs e)
         {
 			
 			string sql = @"SELECT
-	ISNULL(d1.TalimatNo, '') AS TalimatNo,	
-	ISNULL(d1.Tarih, '') AS Tarih,
-    ISNULL(d1.FirmaId, 0) AS FirmaId,
-	ISNULL(fk.FirmaKodu, '') AS FirmaKodu,
-    ISNULL(fk.FirmaUnvan, '') AS FirmaUnvan,
-	ISNULL(d2.IplikId, '') AS IplikId,
-	ISNULL(ik.IplikKodu, '') AS IplikKodu,
-	ISNULL(ik.IplikAdi, '') AS IplikAdi,
-	ISNULL(d2.Marka, '') AS Marka,
-	ISNULL(d2.IplikRenkId, '') AS IplikRenkId,
-	ISNULL(brk.BoyahaneRenkKodu, '') AS IplikRenkKodu,
-	ISNULL(brk.BoyahaneRenkAdi, '') AS IplikRenkAdi,
-    ISNULL(SUM(d2.BrutKg), 0) AS BrutTalimatKg,
-    ISNULL(SUM(d2.NetKg), 0) AS NetTalimatKg,
-	(select ISNULL(sum(y.BrutKg),0) from IplikDepo1 x inner join IplikDepo2 y on x.Id = y.RefNo where x.IslemCinsi = 'Giriş' and y.TakipNo = d2.Id) [BrutGiriş],
-	(select ISNULL(sum(y.NetKg),0) from IplikDepo1 x inner join IplikDepo2 y on x.Id = y.RefNo where x.IslemCinsi = 'Giriş' and y.TakipNo = d2.Id) [NetGiriş],
-	 ISNULL(SUM(d2.BrutKg), 0) - (select ISNULL(sum(y.BrutKg),0) from IplikDepo1 x inner join IplikDepo2 y on x.Id = y.RefNo where x.IslemCinsi = 'Giriş' and y.TakipNo = d2.Id) BrutKg,
-	 ISNULL(SUM(d2.NetKg), 0) - (select ISNULL(sum(y.NetKg),0) from IplikDepo1 x inner join IplikDepo2 y on x.Id = y.RefNo where x.IslemCinsi = 'Giriş' and y.TakipNo = d2.Id) NetKg,
+	ISNULL(d1.ReceiptNo, '') AS TalimatNo,	
+	ISNULL(d1.ReceiptDate, '') AS Tarih,
+    ISNULL(fk.Id, 0) AS FirmaId,
+	ISNULL(fk.CompanyCode, '') AS FirmaKodu,
+    ISNULL(fk.CompanyName, '') AS FirmaUnvan,
+	ISNULL(d2.InventoryId, '') AS IplikId,
+	ISNULL(ik.InventoryCode, '') AS IplikKodu,
+	ISNULL(ik.InventoryName, '') AS IplikAdi,
+	--ISNULL(d2.Marka, '') AS Marka,
+	ISNULL(d2.ColorId, '') AS IplikRenkId,
+	--ISNULL(brk.BoyahaneRenkKodu, '') AS IplikRenkKodu,
+	--ISNULL(brk.BoyahaneRenkAdi, '') AS IplikRenkAdi,
+    ISNULL(SUM(d2.GrossWeight), 0) AS BrutTalimatKg,
+    ISNULL(SUM(d2.NetWeight), 0) AS NetTalimatKg,
+	--(select ISNULL(sum(y.GrossWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId /*where x.ReceiptType = 'Giriş'*/ and y.TrackingNumber = d2.Id) [BrutGiriş],
+	--(select ISNULL(sum(y.NetWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId /*where x.IslemCinsi = 'Giriş'*/ and y.TrackingNumber = d2.Id) [NetGiriş],
+	 ISNULL(SUM(d2.GrossWeight), 0) - (select ISNULL(sum(y.GrossWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId where x.ReceiptType = 5 and y.TrackingNumber = d2.Id) [Kalan Kg],
+	 --ISNULL(SUM(d2.NetKg), 0) - (select ISNULL(sum(y.NetKg),0) from IplikDepo1 x inner join IplikDepo2 y on x.Id = y.RefNo where x.IslemCinsi = 'Giriş' and y.TakipNo = d2.Id) NetKg,
 	 ISNULL(d2.Id,0) TakipNo
 FROM 
-    IplikDepo1 d1 
-    INNER JOIN IplikDepo2 d2 ON d1.Id = d2.RefNo
-    left JOIN FirmaKarti fk ON d1.FirmaId = fk.Id
-	left join IplikKarti ik on ik.Id = d2.IplikId
-	left join BoyahaneRenkKartlari brk on brk.Id = d2.IplikRenkId
-	where d1.IslemCinsi = 'SaTal'
+    Receipt d1 
+    INNER JOIN ReceiptItem d2 ON d1.Id = d2.ReceiptId
+    left JOIN Company fk ON d1.CompanyId = fk.Id
+	left join Inventory ik on ik.Id = d2.InventoryId
+	--left join BoyahaneRenkKartlari brk on brk.Id = d2.IplikRenkId
+	where d1.ReceiptType = 4 and d1.Approved = 1
 GROUP BY 
-    ISNULL(d1.TalimatNo, ''),
-	ISNULL(d1.Tarih, ''),
-    ISNULL(d1.FirmaId, 0),
-    ISNULL(fk.FirmaUnvan, ''),
-    ISNULL(fk.FirmaKodu, ''),
-    ISNULL(d2.IplikId, ''),
-	ISNULL(ik.IplikKodu, ''),
-	ISNULL(ik.IplikAdi, ''),
-	ISNULL(d2.Marka, ''),
-	ISNULL(d2.IplikRenkId, '') ,
-	iSNULL(brk.BoyahaneRenkKodu, ''),
-	iSNULL(brk.BoyahaneRenkAdi, '')
+    ISNULL(d1.ReceiptNo, ''),
+	ISNULL(d1.ReceiptDate, ''),
+    ISNULL(fk.Id, 0),
+    ISNULL(fk.CompanyCode, ''),
+    ISNULL(fk.CompanyName, ''),
+    ISNULL(d2.InventoryId, ''),
+	ISNULL(ik.InventoryCode, ''),
+	ISNULL(ik.InventoryName, ''),
+	--ISNULL(d2.Marka, ''),
+	ISNULL(d2.ColorId, '')-- ,
+	--iSNULL(brk.BoyahaneRenkKodu, ''),
+	--iSNULL(brk.BoyahaneRenkAdi, '')
 	,d2.Id
 	,ISNULL(d2.Id,0)
 	HAVING 
-	 ISNULL(SUM(d2.NetKg), 0) - (select ISNULL(sum(y.NetKg),0) from IplikDepo1 x inner join IplikDepo2 y on x.Id = y.RefNo where x.IslemCinsi = 'Giriş' and y.TakipNo = d2.Id) > 0
+	 ISNULL(SUM(d2.NetWeight), 0) - (select ISNULL(sum(y.NetWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId where x.ReceiptType = 5 and y.TrackingNumber = d2.Id) > 0
 ";
             listele.Liste(sql, gridControl1);
+            crudRepository.GetUserColumns(gridView1,this.Text);
         }
 
         private void btnAktar_Click(object sender, EventArgs e)
@@ -101,6 +99,21 @@ GROUP BY
 					$"{OrganikSertifikaNo};{Marka};{IplikRenkId};{IplkiRenkKodu};{IplikRenkAdi};{NetKg}");
 			}
             Close();
+        }
+
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            crudRepository.SaveColumnStatus(gridView1,this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
+        }
+
+        private void excelOlarakAktarxlsxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.ExcelOlarakAktar(gridControl1,"Talimat Listesi");
         }
     }
 }
