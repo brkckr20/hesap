@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Text.RegularExpressions;
+using DevExpress.XtraExport.Helpers;
 
 namespace Hesap.Utils
 {
@@ -495,6 +496,6 @@ namespace Hesap.Utils
                 KategoriId = frm.Id;
             }
         }
-
+        
     }
 }

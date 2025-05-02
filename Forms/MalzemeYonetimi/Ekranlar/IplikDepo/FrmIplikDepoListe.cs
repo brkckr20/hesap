@@ -62,7 +62,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                         ISNULL(RI.MeasurementUnit,'') [Hesap Birimi],						
                         ISNULL(R.Authorized,'') [Yetkili],						
                         ISNULL(R.Maturity,'') [Vade],
-						ISNULL(R.PaymentType,'') [Ödeme Şekli]
+						ISNULL(R.PaymentType,'') [Ödeme Şekli],
+						ISNULL(R.Approved,0) [Onaylı]
                     from 
                     Receipt R with(nolock) 
 	                    inner join ReceiptItem RI on R.Id = RI.ReceiptId
@@ -111,7 +112,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     string Yetkili = Convert.ToString(gridView.GetRowCellValue(i, "Yetkili"));
                     int Vade = Convert.ToInt32(gridView.GetRowCellValue(i, "Vade"));
                     string OdemeSekli = Convert.ToString(gridView.GetRowCellValue(i, "Ödeme Şekli"));
-                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama};{TakipNo};{TalimatNo};{BrutKg};{NetKg};{HesapBirimi};{Yetkili};{Vade};{OdemeSekli}");
+                    bool Onayli = Convert.ToBoolean(gridView.GetRowCellValue(i, "Onaylı"));
+                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama};{TakipNo};{TalimatNo};{BrutKg};{NetKg};{HesapBirimi};{Yetkili};{Vade};{OdemeSekli};{Onayli}");
                 }
             }
             Close();

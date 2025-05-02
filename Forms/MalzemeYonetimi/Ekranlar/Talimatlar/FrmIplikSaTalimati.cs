@@ -1,5 +1,4 @@
-﻿using Dapper;
-using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Context;
 using Hesap.DataAccess;
 using Hesap.Models;
@@ -7,7 +6,6 @@ using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo;
 
 namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
@@ -84,7 +82,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 }
                 var parameters = new Dictionary<string, object>
                 {
-                    { "ReceiptType", ReceiptTypes.IplikSatinAlmaTalimati }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "ReceiptNo", txtTalimatNo.Text },{ "Authorized", txtYetkili.Text },{"Maturity",txtVade.Text},{"PaymentType",comboBoxEdit1.Text},{"Approved",false}
+                    { "ReceiptType", ReceiptTypes.IplikSatinAlmaTalimati }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "ReceiptNo", txtTalimatNo.Text },{ "Authorized", txtYetkili.Text },{"Maturity",txtVade.Text},{"PaymentType",comboBoxEdit1.Text},{"Approved",Onayli}
                 };
                 if (this.Id == 0)
                 {
@@ -162,6 +160,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 txtYetkili.Text = values1[26];
                 txtVade.Text = values1[27];
                 comboBoxEdit1.Text = values1[28];
+                Onayli = Convert.ToBoolean(values1[29]); // sağ click ile değiştirmek için
+                chckOnayli.Checked = Convert.ToBoolean(values1[29]);
                 //depo eklenecek
                 foreach (var item in frm.liste)
                 {

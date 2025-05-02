@@ -23,49 +23,35 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         {
 			
 			string sql = @"SELECT
-	ISNULL(d1.ReceiptNo, '') AS TalimatNo,	
-	ISNULL(d1.ReceiptDate, '') AS Tarih,
-    ISNULL(fk.Id, 0) AS FirmaId,
-	ISNULL(fk.CompanyCode, '') AS FirmaKodu,
-    ISNULL(fk.CompanyName, '') AS FirmaUnvan,
-	ISNULL(d2.InventoryId, '') AS IplikId,
-	ISNULL(ik.InventoryCode, '') AS IplikKodu,
-	ISNULL(ik.InventoryName, '') AS IplikAdi,
-	--ISNULL(d2.Marka, '') AS Marka,
-	ISNULL(d2.ColorId, '') AS IplikRenkId,
-	--ISNULL(brk.BoyahaneRenkKodu, '') AS IplikRenkKodu,
-	--ISNULL(brk.BoyahaneRenkAdi, '') AS IplikRenkAdi,
-    ISNULL(SUM(d2.GrossWeight), 0) AS BrutTalimatKg,
-    ISNULL(SUM(d2.NetWeight), 0) AS NetTalimatKg,
-	--(select ISNULL(sum(y.GrossWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId /*where x.ReceiptType = 'Giriş'*/ and y.TrackingNumber = d2.Id) [BrutGiriş],
-	--(select ISNULL(sum(y.NetWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId /*where x.IslemCinsi = 'Giriş'*/ and y.TrackingNumber = d2.Id) [NetGiriş],
-	 ISNULL(SUM(d2.GrossWeight), 0) - (select ISNULL(sum(y.GrossWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId where x.ReceiptType = 5 and y.TrackingNumber = d2.Id) [Kalan Kg],
-	 --ISNULL(SUM(d2.NetKg), 0) - (select ISNULL(sum(y.NetKg),0) from IplikDepo1 x inner join IplikDepo2 y on x.Id = y.RefNo where x.IslemCinsi = 'Giriş' and y.TakipNo = d2.Id) NetKg,
-	 ISNULL(d2.Id,0) TakipNo
-FROM 
-    Receipt d1 
-    INNER JOIN ReceiptItem d2 ON d1.Id = d2.ReceiptId
-    left JOIN Company fk ON d1.CompanyId = fk.Id
-	left join Inventory ik on ik.Id = d2.InventoryId
-	--left join BoyahaneRenkKartlari brk on brk.Id = d2.IplikRenkId
-	where d1.ReceiptType = 4 and d1.Approved = 1
-GROUP BY 
-    ISNULL(d1.ReceiptNo, ''),
-	ISNULL(d1.ReceiptDate, ''),
-    ISNULL(fk.Id, 0),
-    ISNULL(fk.CompanyCode, ''),
-    ISNULL(fk.CompanyName, ''),
-    ISNULL(d2.InventoryId, ''),
-	ISNULL(ik.InventoryCode, ''),
-	ISNULL(ik.InventoryName, ''),
-	--ISNULL(d2.Marka, ''),
-	ISNULL(d2.ColorId, '')-- ,
-	--iSNULL(brk.BoyahaneRenkKodu, ''),
-	--iSNULL(brk.BoyahaneRenkAdi, '')
-	,d2.Id
-	,ISNULL(d2.Id,0)
-	HAVING 
-	 ISNULL(SUM(d2.NetWeight), 0) - (select ISNULL(sum(y.NetWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId where x.ReceiptType = 5 and y.TrackingNumber = d2.Id) > 0
+	                        ISNULL(d1.ReceiptNo, '') AS TalimatNo,	
+	                        ISNULL(d1.ReceiptDate, '') AS Tarih,
+                            ISNULL(fk.Id, 0) AS FirmaId,
+	                        ISNULL(fk.CompanyCode, '') AS FirmaKodu,
+                            ISNULL(fk.CompanyName, '') AS FirmaUnvan,
+	                        ISNULL(d2.InventoryId, '') AS IplikId,
+	                        ISNULL(ik.InventoryCode, '') AS IplikKodu,
+	                        ISNULL(ik.InventoryName, '') AS IplikAdi,
+	                         ISNULL(SUM(d2.NetWeight), 0) - (select ISNULL(sum(y.GrossWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId where x.ReceiptType = 5 and y.TrackingNumber = d2.Id) [Kalan Kg],
+	                         ISNULL(d2.Id,0) TakipNo
+                        FROM 
+                            Receipt d1 
+                            INNER JOIN ReceiptItem d2 ON d1.Id = d2.ReceiptId
+                            left JOIN Company fk ON d1.CompanyId = fk.Id
+	                        left join Inventory ik on ik.Id = d2.InventoryId
+	                        where d1.ReceiptType = 4 and d1.Approved = 1
+                        GROUP BY 
+                            ISNULL(d1.ReceiptNo, ''),
+	                        ISNULL(d1.ReceiptDate, ''),
+                            ISNULL(fk.Id, 0),
+                            ISNULL(fk.CompanyCode, ''),
+                            ISNULL(fk.CompanyName, ''),
+                            ISNULL(d2.InventoryId, ''),
+	                        ISNULL(ik.InventoryCode, ''),
+	                        ISNULL(ik.InventoryName, '')
+	                        ,d2.Id
+	                        ,ISNULL(d2.Id,0)
+	                        HAVING 
+	                         ISNULL(SUM(d2.NetWeight), 0) - (select ISNULL(sum(y.NetWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId where x.ReceiptType = 5 and y.TrackingNumber = d2.Id) > 0
 ";
             listele.Liste(sql, gridControl1);
             crudRepository.GetUserColumns(gridView1,this.Text);
@@ -74,7 +60,7 @@ GROUP BY
         private void btnAktar_Click(object sender, EventArgs e)
         {
             int[] selectedRows = gridView1.GetSelectedRows();
-
+            //bazı alanlar sorgudan kaldırıldı fakat alt kısım sorgudan bağımsız kendi sıralamasına göre çalıştığı için problem olmadı
             foreach (int rowHandle in selectedRows)
             {
                 string TalimatNo = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "TalimatNo"));
@@ -85,7 +71,7 @@ GROUP BY
 				int IplikId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "IplikId"));
                 string IplikKodu = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "IplikKodu"));
                 string IplikAdi = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "IplikAdi"));
-				decimal BrutKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "BrutKg"));
+				decimal BrutKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Kalan Kg"));
 				decimal NetKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "NetKg"));
 				decimal Fiyat = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Fiyat"));
                 string DovizCinsi = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "DovizCinsi"));

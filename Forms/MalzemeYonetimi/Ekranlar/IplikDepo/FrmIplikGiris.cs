@@ -1,17 +1,14 @@
 ﻿using Dapper;
-using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Context;
 using Hesap.Utils;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Hesap.Models;
+using DevExpress.XtraEditors;
+using Hesap.DataAccess;
+using System.Collections.Generic;
 
 namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 {
@@ -25,7 +22,9 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         Ayarlar ayarlar = new Ayarlar();
         Bildirim bildirim = new Bildirim();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        CrudRepository crudRepository = new CrudRepository();
         public int Id, FirmaId;
+        private readonly string TableName1 = "Receipt", TableName2 = "ReceiptItem";
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             hesaplaVeYansit.FirmaKoduVeAdiYansit(txtFirmaKodu, txtFirmaUnvan, ref this.FirmaId);
@@ -38,7 +37,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         {
             dateTarih.EditValue = DateTime.Now;
             dateIrsaliyeTarihi.EditValue = DateTime.Now;
-            gridControl1.DataSource = new BindingList<_IplikDepoKalem>();
+            gridControl1.DataSource = new BindingList<ReceiptItem>();
             gridView1.Columns["IplikRenkId"].Visible = false;
         }
         private void buttonEdit1_Properties_ButtonClick_1(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -52,9 +51,9 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
             if (!string.IsNullOrEmpty(frm.IplikKodu))
             {
                 int newRowHandle = gridView1.FocusedRowHandle;
-                gridView1.SetRowCellValue(newRowHandle, "IplikKodu", frm.IplikKodu);
-                gridView1.SetRowCellValue(newRowHandle, "IplikAdi", frm.IplikAdi);
-                gridView1.SetRowCellValue(newRowHandle, "IplikId", frm.Id);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryCode", frm.IplikKodu);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryName", frm.IplikAdi);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryId", frm.Id);
             }
         }
         private void repoBoyaRenkKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -189,18 +188,18 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 
         private void simpleButton5_Click(object sender, EventArgs e)
         {
-            if (bildirim.SilmeOnayı())
-            {
-                using (var connection = new Baglanti().GetConnection())
-                {
-                    string d1 = "delete from IplikDepo1 where Id = @Id";
-                    string d2 = "delete from IplikDepo2 where RefNo = @Id";
-                    connection.Execute(d1, new { Id = this.Id });
-                    connection.Execute(d2, new { Id = this.Id });
-                    bildirim.SilmeBasarili();
-                    FormTemizle();
-                }
-            }
+            //if (bildirim.SilmeOnayı())
+            //{
+            //    using (var connection = new Baglanti().GetConnection())
+            //    {
+            //        string d1 = "delete from IplikDepo1 where Id = @Id";
+            //        string d2 = "delete from IplikDepo2 where RefNo = @Id";
+            //        connection.Execute(d1, new { Id = this.Id });
+            //        connection.Execute(d2, new { Id = this.Id });
+            //        bildirim.SilmeBasarili();
+            //        FormTemizle();
+            //    }
+            //}
         }
         void FormTemizle()
         {
@@ -227,21 +226,21 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                 gridView1.AddNewRow();
                 int newRowHandle = gridView1.FocusedRowHandle;
                 var values = item.Split(';');
-                gridView1.SetRowCellValue(newRowHandle, "KalemIslem", "Satın Alma");
-                gridView1.SetRowCellValue(newRowHandle, "TakipNo", values[4]);
-                gridView1.SetRowCellValue(newRowHandle, "IplikId", values[5]);
-                gridView1.SetRowCellValue(newRowHandle, "IplikKodu", values[6]);
-                gridView1.SetRowCellValue(newRowHandle, "IplikAdi", values[7]);
-                gridView1.SetRowCellValue(newRowHandle, "BrutKg", values[8]);
-                gridView1.SetRowCellValue(newRowHandle, "Fiyat", values[9]);
-                gridView1.SetRowCellValue(newRowHandle, "DovizCinsi", values[10]);
+                gridView1.SetRowCellValue(newRowHandle, "OperationType", "Satın Alma");
+                gridView1.SetRowCellValue(newRowHandle, "TrackingNumber", values[4]);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryId", values[5]);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryCode", values[6]);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryName", values[7]);
+                gridView1.SetRowCellValue(newRowHandle, "GrossWeight", values[8]);
+                gridView1.SetRowCellValue(newRowHandle, "NetWeight", values[9]);
+                gridView1.SetRowCellValue(newRowHandle, "Forex", values[10]);
                 gridView1.SetRowCellValue(newRowHandle, "OrganikSertifikaNo", values[11]);
                 gridView1.SetRowCellValue(newRowHandle, "Marka", values[12]);
                 gridView1.SetRowCellValue(newRowHandle, "IplikRenkId", values[13]);
                 gridView1.SetRowCellValue(newRowHandle, "IplikRenkKodu", values[14]);
                 gridView1.SetRowCellValue(newRowHandle, "IplikRenkAdi", values[15]);
-                gridView1.SetRowCellValue(newRowHandle, "TalimatNo", values[0]);
-                gridView1.SetRowCellValue(newRowHandle, "NetKg", values[16]);
+                gridView1.SetRowCellValue(newRowHandle, "ReceiptNo", values[0]);
+                //gridView1.SetRowCellValue(newRowHandle, "NetKg", values[16]);
             }
         }
 
@@ -278,11 +277,62 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     gridView1.SetRowCellValue(newRowHandle, "NetKg", values[15]);
                 }
             }
-            
+
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (this.FirmaId == 0)
+                {
+                    bildirim.Uyari("Firma seçilmeden kayıt işlemi gerçekleştirilemez!!");
+                    return;
+                }
+                var parameters = new Dictionary<string, object>
+                {
+                    { "ReceiptType", ReceiptTypes.IplikDepoGiris }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "InvoiceDate", dateIrsaliyeTarihi.EditValue},{ "InvoiceNo", txtIrsaliyeNo.Text }
+                };
+                if (this.Id == 0)
+                {
+                    this.Id = crudRepository.Insert(TableName1, parameters);
+                    var itemList = (BindingList<ReceiptItem>)gridControl1.DataSource;
+                    for (int i = 0; i < itemList.Count; i++)
+                    {
+                        var item = itemList[i];
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "GrossWeight", item.GrossWeight }, { "NetWeight", item.NetWeight }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat }, { "TrackingNumber", item.TrackingNumber }, { "MeasurementUnit", item.MeasurementUnit } };
+                        var rec_id = crudRepository.Insert(TableName2, values);
+                        gridView1.SetRowCellValue(i, "ReceiptItemId", rec_id);
+                    }
+                    bildirim.Basarili();
+                }
+                else
+                {
+                    crudRepository.Update(TableName1, Id, parameters);
+                    for (int i = 0; i < gridView1.RowCount - 1; i++)
+                    {
+                        var recIdObj = gridView1.GetRowCellValue(i, "ReceiptItemId");
+                        int rec_id = recIdObj != null ? Convert.ToInt32(recIdObj) : 0;
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "GrossWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "GrossWeight").ToString()) }, { "NetWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "NetWeight").ToString()) }, { "UnitPrice", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) }, { "Vat", Convert.ToInt32(gridView1.GetRowCellValue(i, "Vat")) }, { "UUID", gridView1.GetRowCellValue(i, "UUID") }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }, { "MeasurementUnit", gridView1.GetRowCellValue(i, "MeasurementUnit") } };
+                        if (rec_id != 0)
+                        {
+                            crudRepository.Update(TableName2, rec_id, values);
+                        }
+                        else
+                        {
+                            var new_rec_id = crudRepository.Insert(TableName2, values);
+                            gridView1.SetRowCellValue(i, "ReceiptItemId", new_rec_id);
+                        }
+                    }
+                    bildirim.GuncellemeBasarili();
+                }
+            }
+            catch (Exception ex)
+            {
+                bildirim.Uyari("Hata : " + ex.Message);
+            }
+            #region eskikodlar
+            /*
             object Baslik = new
             {
                 IslemCinsi = "Giriş",
@@ -420,6 +470,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     }
                 }
             }
+        */
         }
+        #endregion
     }
 }
