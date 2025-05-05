@@ -38,7 +38,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                             INNER JOIN ReceiptItem d2 ON d1.Id = d2.ReceiptId
                             left JOIN Company fk ON d1.CompanyId = fk.Id
 	                        left join Inventory ik on ik.Id = d2.InventoryId
-	                        where d1.ReceiptType = 4 and d1.Approved = 1
+	                        where d1.ReceiptType = 4 and d1.Approved = 1 and d1.IsFinished = 0
                         GROUP BY 
                             ISNULL(d1.ReceiptNo, ''),
 	                        ISNULL(d1.ReceiptDate, ''),

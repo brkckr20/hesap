@@ -24,6 +24,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
             {
                 case 4:
                     return "İplik Satın Alma Talimatı";
+                case 5:
+                    return "İplik Depo Giriş";
                 default:
                     return "";
             }
@@ -63,13 +65,14 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                         ISNULL(R.Authorized,'') [Yetkili],						
                         ISNULL(R.Maturity,'') [Vade],
 						ISNULL(R.PaymentType,'') [Ödeme Şekli],
-						ISNULL(R.Approved,0) [Onaylı]
+						ISNULL(R.Approved,0) [Onaylı],
+						ISNULL(RI.ReceiptNo,0) [Talimat No Kalem]
                     from 
                     Receipt R with(nolock) 
 	                    inner join ReceiptItem RI on R.Id = RI.ReceiptId
 	                    left join Company C with(nolock)  on C.Id = R.CompanyId
 	                    left join Inventory I with(nolock) on RI.InventoryId = I.Id
-						where R.ReceiptType = {Convert.ToInt32(ReceiptTypes.IplikSatinAlmaTalimati)}
+						where R.ReceiptType = {receiptTypes}
 ";
             listele.Liste(sql, gridControl1);
             crudRepository.GetUserColumns(gridView1, this.Text);
