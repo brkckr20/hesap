@@ -38,6 +38,7 @@
             this.btnListe = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.chckOnayli = new DevExpress.XtraEditors.CheckEdit();
             this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.rchAciklama = new DevExpress.XtraEditors.MemoExEdit();
             this.txtTalimatNo = new DevExpress.XtraEditors.TextEdit();
@@ -86,10 +87,11 @@
             this.işlemlerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.talimatAçToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.talimatKapatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chckOnayli = new DevExpress.XtraEditors.CheckEdit();
+            this.kayıtBilgisiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chckOnayli.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTalimatNo.Properties)).BeginInit();
@@ -110,7 +112,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chckOnayli.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -217,6 +218,14 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1560, 145);
             this.panelControl1.TabIndex = 7;
+            // 
+            // chckOnayli
+            // 
+            this.chckOnayli.Location = new System.Drawing.Point(536, 8);
+            this.chckOnayli.Name = "chckOnayli";
+            this.chckOnayli.Properties.Caption = "Onaylı Mı?";
+            this.chckOnayli.Size = new System.Drawing.Size(82, 20);
+            this.chckOnayli.TabIndex = 10001;
             // 
             // comboBoxEdit1
             // 
@@ -659,9 +668,10 @@
             this.satınAlmaTalimatFormuToolStripMenuItem,
             this.dizaynKaydetToolStripMenuItem,
             this.satırİşlemleriToolStripMenuItem,
-            this.işlemlerToolStripMenuItem});
+            this.işlemlerToolStripMenuItem,
+            this.kayıtBilgisiToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(278, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(278, 136);
             // 
             // satınAlmaTalimatFormuToolStripMenuItem
             // 
@@ -719,13 +729,12 @@
             this.talimatKapatToolStripMenuItem.Text = "Talimat Kapat";
             this.talimatKapatToolStripMenuItem.Click += new System.EventHandler(this.talimatKapatToolStripMenuItem_Click);
             // 
-            // chckOnayli
+            // kayıtBilgisiToolStripMenuItem
             // 
-            this.chckOnayli.Location = new System.Drawing.Point(536, 8);
-            this.chckOnayli.Name = "chckOnayli";
-            this.chckOnayli.Properties.Caption = "Onaylı Mı?";
-            this.chckOnayli.Size = new System.Drawing.Size(82, 20);
-            this.chckOnayli.TabIndex = 10001;
+            this.kayıtBilgisiToolStripMenuItem.Name = "kayıtBilgisiToolStripMenuItem";
+            this.kayıtBilgisiToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.kayıtBilgisiToolStripMenuItem.Text = "Kayıt Bilgisi";
+            this.kayıtBilgisiToolStripMenuItem.Click += new System.EventHandler(this.kayıtBilgisiToolStripMenuItem_Click);
             // 
             // FrmIplikSaTalimati
             // 
@@ -743,6 +752,7 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chckOnayli.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rchAciklama.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTalimatNo.Properties)).EndInit();
@@ -763,7 +773,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chckOnayli.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -827,5 +836,6 @@
         private System.Windows.Forms.ToolStripMenuItem talimatAçToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem talimatKapatToolStripMenuItem;
         private DevExpress.XtraEditors.CheckEdit chckOnayli;
+        private System.Windows.Forms.ToolStripMenuItem kayıtBilgisiToolStripMenuItem;
     }
 }

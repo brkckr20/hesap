@@ -152,6 +152,12 @@
     <Compile Include="Forms\Diger\FrmNumerator.Designer.cs">
       <DependentUpon>FrmNumerator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Diger\FrmSaveInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Diger\FrmSaveInfo.Designer.cs">
+      <DependentUpon>FrmSaveInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Diger\UpdateProgress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -622,6 +628,9 @@
     <Compile Include="Utils\YardimciAraclar.cs" />
     <EmbeddedResource Include="Forms\Diger\FrmNumerator.resx">
       <DependentUpon>FrmNumerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Diger\FrmSaveInfo.resx">
+      <DependentUpon>FrmSaveInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Diger\UpdateProgress.resx">
       <DependentUpon>UpdateProgress.cs</DependentUpon>

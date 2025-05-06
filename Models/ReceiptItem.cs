@@ -125,6 +125,7 @@ namespace Hesap.Models
         }
 
         public string ReceiptNo { get; set; }
+        public string Brand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void UpdateRowAmount()

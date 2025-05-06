@@ -30,7 +30,7 @@ namespace Hesap.Forms.Liste
         }
         void Listele()
         {
-            string sql = $"select distinct ISNULL(Marka,'')  [Marka] from {_tabloAdi} where ISNULL(Marka,'') <> ''";
+            string sql = $"select distinct ISNULL(Brand,'')  [Marka] from {_tabloAdi} where ISNULL(Brand,'') <> ''";
             listele.Liste(sql, gridControl1);
         }
 

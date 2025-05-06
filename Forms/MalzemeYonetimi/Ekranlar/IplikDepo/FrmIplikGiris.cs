@@ -1,9 +1,7 @@
-﻿using Dapper;
-using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Utils;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using Hesap.Models;
 using DevExpress.XtraEditors;
 using Hesap.DataAccess;
@@ -69,12 +67,12 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         }
         private void repoBtnMarka_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            Liste.FrmMarkaSecimListesi frm = new Liste.FrmMarkaSecimListesi("IplikDepo2");
+            Liste.FrmMarkaSecimListesi frm = new Liste.FrmMarkaSecimListesi(TableName2);
             frm.ShowDialog();
             if (frm._marka != null)
             {
                 int newRowHandle = gridView1.FocusedRowHandle;
-                gridView1.SetRowCellValue(newRowHandle, "Marka", frm._marka);
+                gridView1.SetRowCellValue(newRowHandle, "Brand", frm._marka);
             }
         }
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -136,97 +134,82 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         {
             KayitlariGetir("Sonraki");
         }
-        public void KayitlariGetir(string OncemiSonrami)
+        public void KayitlariGetir(string KayitTipi)
         {
-            int id = this.Id;
-            int? istenenId = null;
             try
             {
-                using (var connection = new Baglanti().GetConnection())
+                int id = this.Id;
+                int? istenenId = crudRepository.GetIdForAfterOrBeforeRecord(KayitTipi, TableName1, id, TableName2, "ReceiptId", ReceiptType);
+
+                if (istenenId == null)
                 {
-                    string sql;
-                    if (OncemiSonrami == "Önceki")
-                    {
-                        sql = "SELECT MAX(IplikDepo1.Id) FROM IplikDepo1 INNER JOIN IplikDepo2 ON IplikDepo1.Id = IplikDepo2.RefNo WHERE IplikDepo1.Id < @Id and IplikDepo1.IslemCinsi = 'Giriş'";
-                        istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
-                    }
-                    else if (OncemiSonrami == "Sonraki")
-                    {
-                        sql = "SELECT MIN(IplikDepo1.Id) FROM IplikDepo1 INNER JOIN IplikDepo2 ON IplikDepo1.Id = IplikDepo2.RefNo WHERE IplikDepo1.Id > @Id and IplikDepo1.IslemCinsi = 'Giriş'";
-                        istenenId = connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
-                    }
-                    string fisquery = @"SELECT 
-                                        ISNULL(ID.Id,0) Id,
-                                        ISNULL(ID.Tarih,'') Tarih,
-                                        ISNULL(ID.IrsaliyeTarihi,'') IrsaliyeTarihi,
-                                        ISNULL(ID.IrsaliyeNo,'') IrsaliyeNo,
-                                        ISNULL(ID.FirmaId,'') FirmaId,
-                                        ISNULL(FK.FirmaKodu,'') FirmaKodu,
-                                        ISNULL(FK.FirmaUnvan,'') FirmaUnvan,
-                                        ISNULL(ID.Aciklama,'') Aciklama,
-                                        ISNULL(ID.IslemCinsi,'') IslemCinsi FROM IplikDepo1 ID inner join FirmaKarti FK on FK.Id = ID.FirmaId WHERE ID.Id= @Id";
-                    var fis = connection.QueryFirstOrDefault(fisquery, new { Id = istenenId });
-                    string kalemquery = @"select
-	                                    ISNULL(D2.Id,0) TakipNo,ISNULL(D2.RefNo,0) RefNo,ISNULL(D2.KalemIslem,'') KalemIslem,
-	                                    ISNULL(D2.IplikId,0) IplikId,ISNULL(IK.IplikKodu,'') IplikKodu,ISNULL(IK.IplikAdi,'') IplikAdi,
-	                                    ISNULL(D2.BrutKg,0) BrutKg,ISNULL(D2.NetKg,0) NetKg,ISNULL(D2.Fiyat,0) Fiyat,
-	                                    ISNULL(D2.DovizCinsi,'') DovizCinsi,ISNULL(D2.DovizFiyat,0) DovizFiyat,
-	                                    ISNULL(D2.OrganikSertifikaNo,'')OrganikSertifikaNo,ISNULL(D2.Marka,'') Marka,
-	                                    ISNULL(D2.KullanimYeri,'') KullanimYeri,ISNULL(D2.IplikRenkId,0) IplikRenkId,
-	                                    ISNULL(BRK.BoyahaneRenkKodu,'') IplikRenkKodu,ISNULL(BRK.BoyahaneRenkAdi,'') IplikRenkAdi,
-	                                    ISNULL(D2.PartiNo,'') PartiNo,ISNULL(D2.Aciklama,'') SatirAciklama,ISNULL(D2.Barkod,'') Barkod,
-	                                    ISNULL(D2.TalimatNo,'') TalimatNo,ISNULL(D2.UUID,'') UUID,ISNULL(D2.SatirTutari,0) SatirTutari
-                                    from IplikDepo2 D2 left join IplikKarti IK on IK.Id = D2.IplikId
-                                    left join BoyahaneRenkKartlari BRK on D2.IplikRenkId = BRK.Id
-                                    WHERE D2.RefNo = @Id";
-                    var kalemler = connection.Query(kalemquery, new { Id = istenenId });
-                    if (fis != null && kalemler != null)
-                    {
-                        gridControl1.DataSource = null;
-                        this.Id = Convert.ToInt32(fis.Id);
-                        dateTarih.EditValue = (DateTime)fis.Tarih;
-                        dateIrsaliyeTarihi.EditValue = (DateTime)fis.IrsaliyeTarihi;
-                        txtIrsaliyeNo.Text = fis.IrsaliyeNo.ToString();
-                        this.FirmaId = Convert.ToInt32(fis.FirmaId);
-                        txtFirmaKodu.Text = fis.FirmaKodu.ToString();
-                        txtFirmaUnvan.Text = fis.FirmaUnvan.ToString();
-                        rchAciklama.Text = fis.Aciklama.ToString();
-                        gridControl1.DataSource = kalemler.ToList();
-                    }
-                    else
-                    {
-                        bildirim.Uyari("Gösterilecek başka kayıt bulunamadı!!");
-                    }
+                    bildirim.Uyari("Başka bir kayıt bulunamadı.");
+                    return;
+                }
+
+                string query = $@"SELECT 
+                    ISNULL(R.Id,0) Id, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,
+                    ISNULL(R.InvoiceDate,'') InvoiceDate, ISNULL(R.InvoiceNo,'') InvoiceNo, ISNULL(R.DispatchDate,'') DispatchDate,
+                    ISNULL(R.DispatchNo,'') DispatchNo, ISNULL(R.Explanation,'') ExplanationFis,ISNULL(R.ReceiptNo,'') ReceiptNo,ISNULL(R.Authorized,'') Authorized,ISNULL(R.Maturity,0) Maturity,
+					ISNULL(R.PaymentType,0) PaymentType,
+                    ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.Piece,0) Piece, ISNULL(RI.UnitPrice,0) UnitPrice,
+                    ISNULL(RI.UUID,'') UUID, ISNULL(RI.RowAmount,0) RowAmount, ISNULL(RI.Vat,0) Vat, ISNULL(RI.Explanation,'') Explanation, ISNULL(RI.TrackingNumber,'') TrackingNumber,
+					ISNULL(RI.GrossWeight,0) GrossWeight,ISNULL(RI.NetWeight,0) NetWeight,ISNULL(RI.MeasurementUnit,'') MeasurementUnit,
+                    ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
+                    ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName
+                    FROM Receipt R
+                    INNER JOIN ReceiptItem RI ON R.Id = RI.ReceiptId
+                    LEFT JOIN Company C ON C.Id = R.CompanyId
+                    LEFT JOIN Inventory I ON I.Id = RI.InventoryId
+                    WHERE R.ReceiptType = {ReceiptType} AND R.Id = @Id";
+
+                var liste = crudRepository.GetAfterOrBeforeRecord(query, istenenId.Value);
+
+                if (liste != null && liste.Count > 0)
+                {
+                    yardimciAraclar.ClearGridViewRows(gridView1);
+                    var item = liste[0];
+                    dateTarih.Text = item.ReceiptDate.ToString();
+                    this.Id = Convert.ToInt32(item.Id);
+                    this.FirmaId = Convert.ToInt32(item.CompanyId);
+                    txtFirmaKodu.Text = item.CompanyCode.ToString();
+                    txtFirmaUnvan.Text = item.CompanyName.ToString();
+                    //dateFaturaTarihi.Text = item.InvoiceDate.ToString();
+                    //txtFaturaNo.Text = item.InvoiceNo.ToString();
+                    dateIrsaliyeTarihi.Text = item.DispatchDate.ToString();
+                    txtIrsaliyeNo.Text = item.DispatchNo.ToString();
+                    rchAciklama.Text = item.ExplanationFis.ToString();
+                    //txtYetkili.Text = item.Authorized.ToString();
+                    //txtVade.Text = item.Maturity.ToString();
+                    //comboBoxEdit1.Text = item.PaymentType.ToString();
+                    gridControl1.DataSource = liste;
+                }
+                else
+                {
+                    bildirim.Uyari("Kayıt bulunamadı.");
                 }
             }
             catch (Exception ex)
             {
-                bildirim.Uyari("Hata : " + ex.Message);
+                bildirim.Uyari("Hata: " + ex.Message);
             }
         }
 
-        private void gridView1_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        private void gridView1_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             GridView view = sender as GridView;
             string uuid = Guid.NewGuid().ToString();
             view.SetRowCellValue(e.RowHandle, "TakipNo", 0);
             view.SetRowCellValue(e.RowHandle, "UUID", uuid);
         }
-
+        void DeleteRows()
+        {
+            crudRepository.DeleteRows(TableName2, this.Id);
+            FormTemizle();
+        }
         private void simpleButton5_Click(object sender, EventArgs e)
         {
-            //if (bildirim.SilmeOnayı())
-            //{
-            //    using (var connection = new Baglanti().GetConnection())
-            //    {
-            //        string d1 = "delete from IplikDepo1 where Id = @Id";
-            //        string d2 = "delete from IplikDepo2 where RefNo = @Id";
-            //        connection.Execute(d1, new { Id = this.Id });
-            //        connection.Execute(d2, new { Id = this.Id });
-            //        bildirim.SilmeBasarili();
-            //        FormTemizle();
-            //    }
-            //}
+            crudRepository.ConfirmAndDeleteCard(TableName1, Id, DeleteRows);
         }
         void FormTemizle()
         {
@@ -318,7 +301,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                 }
                 var parameters = new Dictionary<string, object>
                 {
-                    { "ReceiptType", ReceiptType }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "InvoiceDate", dateIrsaliyeTarihi.EditValue},{ "InvoiceNo", txtIrsaliyeNo.Text }
+                    { "ReceiptType", ReceiptType }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "DispatchDate", dateIrsaliyeTarihi.EditValue},{ "DispatchNo", txtIrsaliyeNo.Text }
                 };
                 if (this.Id == 0)
                 {
@@ -327,7 +310,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     for (int i = 0; i < itemList.Count; i++)
                     {
                         var item = itemList[i];
-                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "GrossWeight", item.GrossWeight }, { "NetWeight", item.NetWeight }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat }, { "TrackingNumber", item.TrackingNumber }, { "MeasurementUnit", item.MeasurementUnit } };
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "GrossWeight", item.GrossWeight }, { "NetWeight", item.NetWeight }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat }, { "TrackingNumber", item.TrackingNumber }, { "MeasurementUnit", item.MeasurementUnit }, { "Brand", item.Brand } };
                         var rec_id = crudRepository.Insert(TableName2, values);
                         gridView1.SetRowCellValue(i, "ReceiptItemId", rec_id);
                     }
@@ -340,7 +323,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     {
                         var recIdObj = gridView1.GetRowCellValue(i, "ReceiptItemId");
                         int rec_id = recIdObj != null ? Convert.ToInt32(recIdObj) : 0;
-                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "GrossWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "GrossWeight").ToString()) }, { "NetWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "NetWeight").ToString()) }, { "UnitPrice", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) }, { "Vat", Convert.ToInt32(gridView1.GetRowCellValue(i, "Vat")) }, { "UUID", gridView1.GetRowCellValue(i, "UUID") }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }, { "MeasurementUnit", gridView1.GetRowCellValue(i, "MeasurementUnit") } };
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "GrossWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "GrossWeight").ToString()) }, { "NetWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "NetWeight").ToString()) }, { "UnitPrice", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) }, { "Vat", Convert.ToInt32(gridView1.GetRowCellValue(i, "Vat")) }, { "UUID", gridView1.GetRowCellValue(i, "UUID") }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }, { "MeasurementUnit", gridView1.GetRowCellValue(i, "MeasurementUnit") }, { "Brand", gridView1.GetRowCellValue(i, "Brand") } };
                         if (rec_id != 0)
                         {
                             crudRepository.Update(TableName2, rec_id, values);

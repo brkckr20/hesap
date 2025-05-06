@@ -300,6 +300,12 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             TalimatAcKapat(false);
         }
 
+        private void kayıtBilgisiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Diger.FrmSaveInfo frm = new Diger.FrmSaveInfo(100,"tablo adı gelecek");
+            frm.ShowDialog();
+        }
+
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             yardimciAraclar.KolonSecici(gridControl1);

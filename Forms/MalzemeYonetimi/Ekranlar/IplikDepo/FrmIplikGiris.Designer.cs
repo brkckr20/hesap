@@ -519,7 +519,7 @@
             this.GrossWeight.FieldName = "GrossWeight";
             this.GrossWeight.Name = "GrossWeight";
             this.GrossWeight.Visible = true;
-            this.GrossWeight.VisibleIndex = 4;
+            this.GrossWeight.VisibleIndex = 5;
             this.GrossWeight.Width = 61;
             // 
             // NetWeight
@@ -530,7 +530,7 @@
             this.NetWeight.FieldName = "NetWeight";
             this.NetWeight.Name = "NetWeight";
             this.NetWeight.Visible = true;
-            this.NetWeight.VisibleIndex = 5;
+            this.NetWeight.VisibleIndex = 6;
             // 
             // UnitPrice
             // 
@@ -540,7 +540,7 @@
             this.UnitPrice.FieldName = "UnitPrice";
             this.UnitPrice.Name = "UnitPrice";
             this.UnitPrice.Visible = true;
-            this.UnitPrice.VisibleIndex = 6;
+            this.UnitPrice.VisibleIndex = 7;
             // 
             // ForexPrice
             // 
@@ -550,7 +550,7 @@
             this.ForexPrice.FieldName = "ForexPrice";
             this.ForexPrice.Name = "ForexPrice";
             this.ForexPrice.Visible = true;
-            this.ForexPrice.VisibleIndex = 8;
+            this.ForexPrice.VisibleIndex = 9;
             // 
             // Forex
             // 
@@ -559,7 +559,7 @@
             this.Forex.FieldName = "Forex";
             this.Forex.Name = "Forex";
             this.Forex.Visible = true;
-            this.Forex.VisibleIndex = 7;
+            this.Forex.VisibleIndex = 8;
             // 
             // repoCmbDoviz
             // 
@@ -585,6 +585,8 @@
             this.Brand.ColumnEdit = this.repoBtnMarka;
             this.Brand.FieldName = "Brand";
             this.Brand.Name = "Brand";
+            this.Brand.Visible = true;
+            this.Brand.VisibleIndex = 4;
             // 
             // repoBtnMarka
             // 
@@ -642,7 +644,7 @@
             this.Explanation.FieldName = "Explanation";
             this.Explanation.Name = "Explanation";
             this.Explanation.Visible = true;
-            this.Explanation.VisibleIndex = 9;
+            this.Explanation.VisibleIndex = 10;
             // 
             // Barkod
             // 
@@ -656,7 +658,7 @@
             this.ReceiptNo.FieldName = "ReceiptNo";
             this.ReceiptNo.Name = "ReceiptNo";
             this.ReceiptNo.Visible = true;
-            this.ReceiptNo.VisibleIndex = 10;
+            this.ReceiptNo.VisibleIndex = 11;
             // 
             // UUID
             // 
@@ -664,7 +666,7 @@
             this.UUID.FieldName = "UUID";
             this.UUID.Name = "UUID";
             this.UUID.Visible = true;
-            this.UUID.VisibleIndex = 11;
+            this.UUID.VisibleIndex = 12;
             this.UUID.Width = 287;
             // 
             // TrackingNumber
@@ -673,7 +675,7 @@
             this.TrackingNumber.FieldName = "TrackingNumber";
             this.TrackingNumber.Name = "TrackingNumber";
             this.TrackingNumber.Visible = true;
-            this.TrackingNumber.VisibleIndex = 12;
+            this.TrackingNumber.VisibleIndex = 13;
             // 
             // RowAmount
             // 
@@ -683,7 +685,7 @@
             this.RowAmount.FieldName = "RowAmount";
             this.RowAmount.Name = "RowAmount";
             this.RowAmount.Visible = true;
-            this.RowAmount.VisibleIndex = 13;
+            this.RowAmount.VisibleIndex = 14;
             // 
             // ReceiptItemId
             // 
@@ -691,7 +693,7 @@
             this.ReceiptItemId.FieldName = "ReceiptItemId";
             this.ReceiptItemId.Name = "ReceiptItemId";
             this.ReceiptItemId.Visible = true;
-            this.ReceiptItemId.VisibleIndex = 14;
+            this.ReceiptItemId.VisibleIndex = 15;
             // 
             // repoCmbBirim
             // 
