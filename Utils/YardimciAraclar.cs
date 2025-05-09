@@ -564,5 +564,17 @@ namespace Hesap.Utils
             }
             return 0;
         }
+        public void OpenSaveInfoScreen(int id, string tableName)
+        {
+            if (id != 0)
+            {
+                Forms.Diger.FrmSaveInfo frm = new Forms.Diger.FrmSaveInfo(id, tableName);
+                frm.ShowDialog();
+            }
+            else
+            {
+                bildirim.Uyari("Kayıt bilgisini görebilmek için öncelikle listeden bir kayıt seçmelisiniz!");
+            }
+        }
     }
 }

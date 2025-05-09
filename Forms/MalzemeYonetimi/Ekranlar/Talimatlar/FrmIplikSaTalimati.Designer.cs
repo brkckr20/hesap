@@ -226,6 +226,7 @@
             this.chckOnayli.Properties.Caption = "Onaylı Mı?";
             this.chckOnayli.Size = new System.Drawing.Size(82, 20);
             this.chckOnayli.TabIndex = 10001;
+            this.chckOnayli.CheckedChanged += new System.EventHandler(this.chckOnayli_CheckedChanged);
             // 
             // comboBoxEdit1
             // 
@@ -671,7 +672,7 @@
             this.işlemlerToolStripMenuItem,
             this.kayıtBilgisiToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(278, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(278, 114);
             // 
             // satınAlmaTalimatFormuToolStripMenuItem
             // 

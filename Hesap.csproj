@@ -351,6 +351,12 @@
     <Compile Include="Forms\MalzemeYonetimi\Ekranlar\Talimatlar\FrmKumasSaTalimati.Designer.cs">
       <DependentUpon>FrmKumasSaTalimati.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\Talimatlar\FrmTalimatOnaylama.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\Talimatlar\FrmTalimatOnaylama.Designer.cs">
+      <DependentUpon>FrmTalimatOnaylama.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MalzemeYonetimi\FrmIslemBekleyenler.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -727,6 +733,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\Talimatlar\FrmKumasSaTalimati.resx">
       <DependentUpon>FrmKumasSaTalimati.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\Talimatlar\FrmTalimatOnaylama.resx">
+      <DependentUpon>FrmTalimatOnaylama.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MalzemeYonetimi\FrmIslemBekleyenler.resx">
       <DependentUpon>FrmIslemBekleyenler.cs</DependentUpon>

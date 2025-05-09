@@ -36,6 +36,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
             dateTarih.EditValue = DateTime.Now;
             dateIrsaliyeTarihi.EditValue = DateTime.Now;
             gridControl1.DataSource = new BindingList<ReceiptItem>();
+            crudRepository.GetUserColumns(gridView1, this.Text);
         }
         private void buttonEdit1_Properties_ButtonClick_1(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -122,6 +123,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     gridView1.SetRowCellValue(newRowHandle, "GrossWeight", values[23]);
                     gridView1.SetRowCellValue(newRowHandle, "NetWeight", values[24]);
                     gridView1.SetRowCellValue(newRowHandle, "MeasurementUnit", values[25]);
+                    gridView1.SetRowCellValue(newRowHandle, "ReceiptNo", values[30]);
                 }
             }
 
@@ -154,7 +156,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 					ISNULL(R.PaymentType,0) PaymentType,
                     ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.Piece,0) Piece, ISNULL(RI.UnitPrice,0) UnitPrice,
                     ISNULL(RI.UUID,'') UUID, ISNULL(RI.RowAmount,0) RowAmount, ISNULL(RI.Vat,0) Vat, ISNULL(RI.Explanation,'') Explanation, ISNULL(RI.TrackingNumber,'') TrackingNumber,
-					ISNULL(RI.GrossWeight,0) GrossWeight,ISNULL(RI.NetWeight,0) NetWeight,ISNULL(RI.MeasurementUnit,'') MeasurementUnit,
+					ISNULL(RI.GrossWeight,0) GrossWeight,ISNULL(RI.NetWeight,0) NetWeight,ISNULL(RI.MeasurementUnit,'') MeasurementUnit,ISNULL(RI.ReceiptNo,'') ReceiptNo,
                     ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
                     ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName
                     FROM Receipt R
@@ -251,12 +253,25 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                 gridView1.SetRowCellValue(newRowHandle, "IplikRenkAdi", values[15]);
                 gridView1.SetRowCellValue(newRowHandle, "ReceiptNo", values[0]);
                 //gridView1.SetRowCellValue(newRowHandle, "NetKg", values[16]);
+                gridView1.SetRowCellValue(newRowHandle, "UnitPrice", values[17]);
+                gridView1.SetRowCellValue(newRowHandle, "MeasurementUnit", values[18]);
+                gridView1.SetRowCellValue(newRowHandle, "Vat", values[19]);
             }
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             FormTemizle();
+        }
+
+        private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            crudRepository.SaveColumnStatus(gridView1,this.Text);
+        }
+
+        private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            yardimciAraclar.KolonSecici(gridControl1);
         }
 
         private void btnFasonaGidenler_Click(object sender, EventArgs e)
@@ -310,7 +325,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     for (int i = 0; i < itemList.Count; i++)
                     {
                         var item = itemList[i];
-                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "GrossWeight", item.GrossWeight }, { "NetWeight", item.NetWeight }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat }, { "TrackingNumber", item.TrackingNumber }, { "MeasurementUnit", item.MeasurementUnit }, { "Brand", item.Brand } };
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "GrossWeight", item.GrossWeight }, { "NetWeight", item.NetWeight }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat }, { "TrackingNumber", item.TrackingNumber }, { "MeasurementUnit", item.MeasurementUnit }, { "Brand", item.Brand }, { "ReceiptNo", item.ReceiptNo } };
                         var rec_id = crudRepository.Insert(TableName2, values);
                         gridView1.SetRowCellValue(i, "ReceiptItemId", rec_id);
                     }
@@ -323,7 +338,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     {
                         var recIdObj = gridView1.GetRowCellValue(i, "ReceiptItemId");
                         int rec_id = recIdObj != null ? Convert.ToInt32(recIdObj) : 0;
-                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "GrossWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "GrossWeight").ToString()) }, { "NetWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "NetWeight").ToString()) }, { "UnitPrice", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) }, { "Vat", Convert.ToInt32(gridView1.GetRowCellValue(i, "Vat")) }, { "UUID", gridView1.GetRowCellValue(i, "UUID") }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }, { "MeasurementUnit", gridView1.GetRowCellValue(i, "MeasurementUnit") }, { "Brand", gridView1.GetRowCellValue(i, "Brand") } };
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "GrossWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "GrossWeight").ToString()) }, { "NetWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "NetWeight").ToString()) }, { "UnitPrice", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) }, { "Vat", Convert.ToInt32(gridView1.GetRowCellValue(i, "Vat")) }, { "UUID", gridView1.GetRowCellValue(i, "UUID") }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }, { "MeasurementUnit", gridView1.GetRowCellValue(i, "MeasurementUnit") }, { "Brand", gridView1.GetRowCellValue(i, "Brand") }, { "ReceiptNo", gridView1.GetRowCellValue(i, "ReceiptNo") } };
                         if (rec_id != 0)
                         {
                             crudRepository.Update(TableName2, rec_id, values);

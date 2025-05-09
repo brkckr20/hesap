@@ -82,7 +82,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 }
                 var parameters = new Dictionary<string, object>
                 {
-                    { "ReceiptType", ReceiptTypes.IplikSatinAlmaTalimati }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "ReceiptNo", txtTalimatNo.Text },{ "Authorized", txtYetkili.Text },{"Maturity",txtVade.Text},{"PaymentType",comboBoxEdit1.Text},{"Approved",Onayli}
+                    { "ReceiptType", ReceiptTypes.IplikSatinAlmaTalimati }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "ReceiptNo", txtTalimatNo.Text },{ "Authorized", txtYetkili.Text },{"Maturity",txtVade.Text},{"PaymentType",comboBoxEdit1.Text},{"Approved",Onayli},{"SavedUser",CurrentUser.UserId},{"SavedDate",DateTime.Now}, {"IsFinished",0}
                 };
                 if (this.Id == 0)
                 {
@@ -99,6 +99,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 }
                 else
                 {
+                    parameters.Add("UpdatedDate", DateTime.Now);
+                    parameters.Add("UpdatedUser", CurrentUser.UserId);
                     crudRepository.Update(TableName1, Id, parameters);
                     for (int i = 0; i < gridView1.RowCount - 1; i++)
                     {
@@ -288,7 +290,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         }
         void TalimatAcKapat(bool acKapa)
         {
-            crudRepository.Update(TableName1, this.Id, new Dictionary<string, object> { { "IsFinished", acKapa } }); // talimat kapatma işlemi tamamlandı. giriş içerisinde talimat seçimini düzenle 29.04.2025 17:35
+            crudRepository.Update(TableName1, this.Id, new Dictionary<string, object> { { "IsFinished", acKapa } });
         }
         private void talimatKapatToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -302,8 +304,12 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
 
         private void kayıtBilgisiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Diger.FrmSaveInfo frm = new Diger.FrmSaveInfo(100,"tablo adı gelecek");
-            frm.ShowDialog();
+            yardimciAraclar.OpenSaveInfoScreen(Id,TableName1);
+        }
+
+        private void chckOnayli_CheckedChanged(object sender, EventArgs e)
+        {
+            //bildirim.Uyari("Onay durumu yetkili kişi tarafından, tanımlanmış olan ekran üzerinden değiştirilebilir!"); liste yükleme esnasında change olduğu için daha sonra düzenlenecek
         }
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)

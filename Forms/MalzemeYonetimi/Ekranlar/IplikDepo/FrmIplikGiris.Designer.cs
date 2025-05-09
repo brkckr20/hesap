@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmIplikGiris));
             this.panel3 = new System.Windows.Forms.Panel();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -83,7 +84,14 @@
             this.TrackingNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.RowAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.MeasurementUnit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoHesapBirimi = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.Vat = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -106,7 +114,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbDoviz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoHesapBirimi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -396,7 +406,8 @@
             this.repoCmbKalemIslem,
             this.repoCmbDoviz,
             this.repoBoyaRenkKodu,
-            this.repoBtnMarka});
+            this.repoBtnMarka,
+            this.repoHesapBirimi});
             this.gridControl1.Size = new System.Drawing.Size(1560, 480);
             this.gridControl1.TabIndex = 2;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -427,7 +438,9 @@
             this.UUID,
             this.TrackingNumber,
             this.RowAmount,
-            this.ReceiptItemId});
+            this.ReceiptItemId,
+            this.MeasurementUnit,
+            this.Vat});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -480,7 +493,7 @@
             this.InventoryId.FieldName = "InventoryId";
             this.InventoryId.Name = "InventoryId";
             this.InventoryId.Visible = true;
-            this.InventoryId.VisibleIndex = 1;
+            this.InventoryId.VisibleIndex = 13;
             this.InventoryId.Width = 74;
             // 
             // repoBtnUrunKodu
@@ -498,7 +511,7 @@
             this.InventoryCode.Name = "InventoryCode";
             this.InventoryCode.OptionsColumn.AllowEdit = false;
             this.InventoryCode.Visible = true;
-            this.InventoryCode.VisibleIndex = 2;
+            this.InventoryCode.VisibleIndex = 3;
             this.InventoryCode.Width = 70;
             // 
             // InventoryName
@@ -508,7 +521,7 @@
             this.InventoryName.Name = "InventoryName";
             this.InventoryName.OptionsColumn.AllowEdit = false;
             this.InventoryName.Visible = true;
-            this.InventoryName.VisibleIndex = 3;
+            this.InventoryName.VisibleIndex = 5;
             this.InventoryName.Width = 121;
             // 
             // GrossWeight
@@ -519,7 +532,7 @@
             this.GrossWeight.FieldName = "GrossWeight";
             this.GrossWeight.Name = "GrossWeight";
             this.GrossWeight.Visible = true;
-            this.GrossWeight.VisibleIndex = 5;
+            this.GrossWeight.VisibleIndex = 8;
             this.GrossWeight.Width = 61;
             // 
             // NetWeight
@@ -530,7 +543,7 @@
             this.NetWeight.FieldName = "NetWeight";
             this.NetWeight.Name = "NetWeight";
             this.NetWeight.Visible = true;
-            this.NetWeight.VisibleIndex = 6;
+            this.NetWeight.VisibleIndex = 10;
             // 
             // UnitPrice
             // 
@@ -540,7 +553,7 @@
             this.UnitPrice.FieldName = "UnitPrice";
             this.UnitPrice.Name = "UnitPrice";
             this.UnitPrice.Visible = true;
-            this.UnitPrice.VisibleIndex = 7;
+            this.UnitPrice.VisibleIndex = 12;
             // 
             // ForexPrice
             // 
@@ -550,7 +563,7 @@
             this.ForexPrice.FieldName = "ForexPrice";
             this.ForexPrice.Name = "ForexPrice";
             this.ForexPrice.Visible = true;
-            this.ForexPrice.VisibleIndex = 9;
+            this.ForexPrice.VisibleIndex = 14;
             // 
             // Forex
             // 
@@ -559,7 +572,7 @@
             this.Forex.FieldName = "Forex";
             this.Forex.Name = "Forex";
             this.Forex.Visible = true;
-            this.Forex.VisibleIndex = 8;
+            this.Forex.VisibleIndex = 21;
             // 
             // repoCmbDoviz
             // 
@@ -578,6 +591,8 @@
             this.OrganikSertifikaNo.Caption = "Organik Sertifika No";
             this.OrganikSertifikaNo.FieldName = "OrganikSertifikaNo";
             this.OrganikSertifikaNo.Name = "OrganikSertifikaNo";
+            this.OrganikSertifikaNo.Visible = true;
+            this.OrganikSertifikaNo.VisibleIndex = 11;
             // 
             // Brand
             // 
@@ -586,7 +601,7 @@
             this.Brand.FieldName = "Brand";
             this.Brand.Name = "Brand";
             this.Brand.Visible = true;
-            this.Brand.VisibleIndex = 4;
+            this.Brand.VisibleIndex = 16;
             // 
             // repoBtnMarka
             // 
@@ -601,12 +616,16 @@
             this.KullanimYeri.Caption = "Kullanım Yeri";
             this.KullanimYeri.FieldName = "KullanimYeri";
             this.KullanimYeri.Name = "KullanimYeri";
+            this.KullanimYeri.Visible = true;
+            this.KullanimYeri.VisibleIndex = 9;
             // 
             // IplikRenkId
             // 
             this.IplikRenkId.Caption = "İplik Renk Id";
             this.IplikRenkId.FieldName = "IplikRenkId";
             this.IplikRenkId.Name = "IplikRenkId";
+            this.IplikRenkId.Visible = true;
+            this.IplikRenkId.VisibleIndex = 7;
             // 
             // IplikRenkKodu
             // 
@@ -614,6 +633,8 @@
             this.IplikRenkKodu.ColumnEdit = this.repoBoyaRenkKodu;
             this.IplikRenkKodu.FieldName = "IplikRenkKodu";
             this.IplikRenkKodu.Name = "IplikRenkKodu";
+            this.IplikRenkKodu.Visible = true;
+            this.IplikRenkKodu.VisibleIndex = 6;
             this.IplikRenkKodu.Width = 87;
             // 
             // repoBoyaRenkKodu
@@ -629,6 +650,8 @@
             this.IplikRenkAdi.Caption = "İplik Renk Adı";
             this.IplikRenkAdi.FieldName = "IplikRenkAdi";
             this.IplikRenkAdi.Name = "IplikRenkAdi";
+            this.IplikRenkAdi.Visible = true;
+            this.IplikRenkAdi.VisibleIndex = 4;
             this.IplikRenkAdi.Width = 88;
             // 
             // PartiNo
@@ -636,6 +659,8 @@
             this.PartiNo.Caption = "Parti No";
             this.PartiNo.FieldName = "PartiNo";
             this.PartiNo.Name = "PartiNo";
+            this.PartiNo.Visible = true;
+            this.PartiNo.VisibleIndex = 2;
             this.PartiNo.Width = 92;
             // 
             // Explanation
@@ -644,13 +669,15 @@
             this.Explanation.FieldName = "Explanation";
             this.Explanation.Name = "Explanation";
             this.Explanation.Visible = true;
-            this.Explanation.VisibleIndex = 10;
+            this.Explanation.VisibleIndex = 15;
             // 
             // Barkod
             // 
             this.Barkod.Caption = "Barkod";
             this.Barkod.FieldName = "Barkod";
             this.Barkod.Name = "Barkod";
+            this.Barkod.Visible = true;
+            this.Barkod.VisibleIndex = 1;
             // 
             // ReceiptNo
             // 
@@ -658,7 +685,7 @@
             this.ReceiptNo.FieldName = "ReceiptNo";
             this.ReceiptNo.Name = "ReceiptNo";
             this.ReceiptNo.Visible = true;
-            this.ReceiptNo.VisibleIndex = 11;
+            this.ReceiptNo.VisibleIndex = 17;
             // 
             // UUID
             // 
@@ -666,7 +693,7 @@
             this.UUID.FieldName = "UUID";
             this.UUID.Name = "UUID";
             this.UUID.Visible = true;
-            this.UUID.VisibleIndex = 12;
+            this.UUID.VisibleIndex = 18;
             this.UUID.Width = 287;
             // 
             // TrackingNumber
@@ -675,7 +702,7 @@
             this.TrackingNumber.FieldName = "TrackingNumber";
             this.TrackingNumber.Name = "TrackingNumber";
             this.TrackingNumber.Visible = true;
-            this.TrackingNumber.VisibleIndex = 13;
+            this.TrackingNumber.VisibleIndex = 19;
             // 
             // RowAmount
             // 
@@ -685,7 +712,7 @@
             this.RowAmount.FieldName = "RowAmount";
             this.RowAmount.Name = "RowAmount";
             this.RowAmount.Visible = true;
-            this.RowAmount.VisibleIndex = 14;
+            this.RowAmount.VisibleIndex = 20;
             // 
             // ReceiptItemId
             // 
@@ -693,7 +720,38 @@
             this.ReceiptItemId.FieldName = "ReceiptItemId";
             this.ReceiptItemId.Name = "ReceiptItemId";
             this.ReceiptItemId.Visible = true;
-            this.ReceiptItemId.VisibleIndex = 15;
+            this.ReceiptItemId.VisibleIndex = 22;
+            // 
+            // MeasurementUnit
+            // 
+            this.MeasurementUnit.Caption = "Hesap Birimi";
+            this.MeasurementUnit.ColumnEdit = this.repoHesapBirimi;
+            this.MeasurementUnit.FieldName = "MeasurementUnit";
+            this.MeasurementUnit.Name = "MeasurementUnit";
+            this.MeasurementUnit.Visible = true;
+            this.MeasurementUnit.VisibleIndex = 24;
+            // 
+            // repoHesapBirimi
+            // 
+            this.repoHesapBirimi.AutoHeight = false;
+            this.repoHesapBirimi.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repoHesapBirimi.Items.AddRange(new object[] {
+            "Brüt Kg",
+            "Net Kg",
+            "Brüt Metre",
+            "Net Metre",
+            "Adet"});
+            this.repoHesapBirimi.Name = "repoHesapBirimi";
+            this.repoHesapBirimi.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
+            // Vat
+            // 
+            this.Vat.Caption = "KDV %";
+            this.Vat.FieldName = "Vat";
+            this.Vat.Name = "Vat";
+            this.Vat.Visible = true;
+            this.Vat.VisibleIndex = 23;
             // 
             // repoCmbBirim
             // 
@@ -708,11 +766,44 @@
             "Cm"});
             this.repoCmbBirim.Name = "repoCmbBirim";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dizaynKaydetToolStripMenuItem,
+            this.satırİşlemleriToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 48);
+            // 
+            // dizaynKaydetToolStripMenuItem
+            // 
+            this.dizaynKaydetToolStripMenuItem.Name = "dizaynKaydetToolStripMenuItem";
+            this.dizaynKaydetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.dizaynKaydetToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.dizaynKaydetToolStripMenuItem.Text = "Dizayn Kaydet";
+            this.dizaynKaydetToolStripMenuItem.Click += new System.EventHandler(this.dizaynKaydetToolStripMenuItem_Click);
+            // 
+            // satırİşlemleriToolStripMenuItem
+            // 
+            this.satırİşlemleriToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sütunSeçimiToolStripMenuItem});
+            this.satırİşlemleriToolStripMenuItem.Name = "satırİşlemleriToolStripMenuItem";
+            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.satırİşlemleriToolStripMenuItem.Text = "Satır İşlemleri";
+            // 
+            // sütunSeçimiToolStripMenuItem
+            // 
+            this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
+            this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
+            // 
             // FrmIplikGiris
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1560, 731);
+            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.panelControl1);
@@ -742,7 +833,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbDoviz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoHesapBirimi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -804,5 +897,12 @@
         private DevExpress.XtraGrid.Columns.GridColumn ForexPrice;
         private DevExpress.XtraGrid.Columns.GridColumn ReceiptItemId;
         private DevExpress.XtraEditors.SimpleButton btnFasonaGidenler;
+        private DevExpress.XtraGrid.Columns.GridColumn MeasurementUnit;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoHesapBirimi;
+        private DevExpress.XtraGrid.Columns.GridColumn Vat;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
     }
 }

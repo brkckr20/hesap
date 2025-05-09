@@ -31,7 +31,10 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 	                        ISNULL(d2.InventoryId, '') AS IplikId,
 	                        ISNULL(ik.InventoryCode, '') AS IplikKodu,
 	                        ISNULL(ik.InventoryName, '') AS IplikAdi,
+							ISNULL(d2.UnitPrice, 0) AS BirimFiyat,
+							ISNULL(d2.MeasurementUnit, '') AS HesapBirimi,
 	                         ISNULL(SUM(d2.NetWeight), 0) - (select ISNULL(sum(y.GrossWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId where x.ReceiptType = 5 and y.TrackingNumber = d2.Id) [Kalan Kg],
+                            ISNULL(d2.Vat, '') AS [KDV %],
 	                         ISNULL(d2.Id,0) TakipNo
                         FROM 
                             Receipt d1 
@@ -50,8 +53,11 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 	                        ISNULL(ik.InventoryName, '')
 	                        ,d2.Id
 	                        ,ISNULL(d2.Id,0)
+							,ISNULL(d2.UnitPrice, 0)
+							,ISNULL(d2.MeasurementUnit, '')
+                            ,ISNULL(d2.Vat, '')
 	                        HAVING 
-	                         ISNULL(SUM(d2.NetWeight), 0) - (select ISNULL(sum(y.NetWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId where x.ReceiptType = 5 and y.TrackingNumber = d2.Id) > 0
+	                         ISNULL(SUM(d2.NetWeight), 0) - (select ISNULL(sum(y.GrossWeight),0) from Receipt x inner join ReceiptItem y on x.Id = y.ReceiptId where x.ReceiptType = 5 and y.TrackingNumber = d2.Id) > 0
 ";
             listele.Liste(sql, gridControl1);
             crudRepository.GetUserColumns(gridView1,this.Text);
@@ -80,9 +86,12 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 				int IplikRenkId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "IplikRenkId"));
                 string IplkiRenkKodu = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "IplikRenkKodu"));
                 string IplikRenkAdi = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "IplikRenkAdi"));
+                decimal BirimFiyat = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "BirimFiyat"));
+                string HesapBirimi = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "HesapBirimi"));
+				int KDV = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "KDV %"));
 
 				satinAlmaListesi.Add($"{TalimatNo};{FirmaId};{FirmaKodu};{FirmaUnvan};{TakipNo};{IplikId};{IplikKodu};{IplikAdi};{BrutKg};{Fiyat};{DovizCinsi};" +
-					$"{OrganikSertifikaNo};{Marka};{IplikRenkId};{IplkiRenkKodu};{IplikRenkAdi};{NetKg}");
+					$"{OrganikSertifikaNo};{Marka};{IplikRenkId};{IplkiRenkKodu};{IplikRenkAdi};{NetKg};{BirimFiyat};{HesapBirimi};{KDV}");
 			}
             Close();
         }

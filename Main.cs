@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Collections.Generic;
 using DevExpress.XtraBars.Ribbon;
+using Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar;
 
 
 namespace Hesap
@@ -38,6 +39,12 @@ namespace Hesap
             XtraForm newForm = (XtraForm)Activator.CreateInstance(form.GetType());
             newForm.MdiParent = this;
             newForm.Show();
+        }
+        void FormAcParametreli(Type formType, object[] ctorParams)
+        {
+            XtraForm form = (XtraForm)Activator.CreateInstance(formType, ctorParams);
+            form.MdiParent = this;
+            form.Show();
         }
         void EksikFormlariKaydet()
         {
@@ -377,6 +384,12 @@ namespace Hesap
         {
             Forms.Diger.FrmNumerator frm = new Forms.Diger.FrmNumerator();
             FormAc(frm);
+        }
+
+        private void barButtonItem5_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            int _type = Convert.ToInt32(ReceiptTypes.IplikSatinAlmaTalimati);
+            FormAcParametreli(typeof(FrmTalimatOnaylama), new object[] { _type });
         }
     }
 }

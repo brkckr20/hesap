@@ -116,7 +116,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     int Vade = Convert.ToInt32(gridView.GetRowCellValue(i, "Vade"));
                     string OdemeSekli = Convert.ToString(gridView.GetRowCellValue(i, "Ödeme Şekli"));
                     bool Onayli = Convert.ToBoolean(gridView.GetRowCellValue(i, "Onaylı"));
-                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama};{TakipNo};{TalimatNo};{BrutKg};{NetKg};{HesapBirimi};{Yetkili};{Vade};{OdemeSekli};{Onayli}");
+                    string TalimatNoKalem = Convert.ToString(gridView.GetRowCellValue(i, "Talimat No Kalem"));
+                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama};{TakipNo};{TalimatNo};{BrutKg};{NetKg};{HesapBirimi};{Yetkili};{Vade};{OdemeSekli};{Onayli};{TalimatNoKalem}");
                 }
             }
             Close();
