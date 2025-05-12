@@ -69,34 +69,28 @@
             this.btnIplikDepoStok = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.KalemIslem = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.OperationType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbKalemIslem = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.IplikId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.InventoryId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.IplikKodu = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.IplikAdi = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.BrutKg = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.NetKg = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Fiyat = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.DovizFiyat = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.DovizCinsi = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.InventoryCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.InventoryName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GrossWeight = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.NetWeight = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.UnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ForexPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Forex = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbDoviz = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.OrganikSertifikaNo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Marka = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Brand = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoBtnMarka = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.KullanimYeri = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.IplikRenkId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.IplikRenkKodu = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoBoyaRenkKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.IplikRenkAdi = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.PartiNo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.SatirAciklama = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Barkod = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.TalimatNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Explanation = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Barcod = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ReceiptNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UUID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.TakipNo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.SatirTutari = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.D2Id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.TrackingNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.RowAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fişFormlarıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -577,29 +571,23 @@
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.KalemIslem,
-            this.IplikId,
-            this.IplikKodu,
-            this.IplikAdi,
-            this.BrutKg,
-            this.NetKg,
-            this.Fiyat,
-            this.DovizFiyat,
-            this.DovizCinsi,
-            this.OrganikSertifikaNo,
-            this.Marka,
-            this.KullanimYeri,
-            this.IplikRenkId,
-            this.IplikRenkKodu,
-            this.IplikRenkAdi,
-            this.PartiNo,
-            this.SatirAciklama,
-            this.Barkod,
-            this.TalimatNo,
+            this.OperationType,
+            this.InventoryId,
+            this.InventoryCode,
+            this.InventoryName,
+            this.GrossWeight,
+            this.NetWeight,
+            this.UnitPrice,
+            this.ForexPrice,
+            this.Forex,
+            this.Brand,
+            this.Explanation,
+            this.Barcod,
+            this.ReceiptNo,
             this.UUID,
-            this.TakipNo,
-            this.SatirTutari,
-            this.D2Id});
+            this.TrackingNumber,
+            this.RowAmount,
+            this.ReceiptItemId});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -609,15 +597,15 @@
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView1_InitNewRow);
             // 
-            // KalemIslem
+            // OperationType
             // 
-            this.KalemIslem.Caption = "Kalem İşlem";
-            this.KalemIslem.ColumnEdit = this.repoCmbKalemIslem;
-            this.KalemIslem.FieldName = "KalemIslem";
-            this.KalemIslem.Name = "KalemIslem";
-            this.KalemIslem.Visible = true;
-            this.KalemIslem.VisibleIndex = 4;
-            this.KalemIslem.Width = 91;
+            this.OperationType.Caption = "Kalem İşlem";
+            this.OperationType.ColumnEdit = this.repoCmbKalemIslem;
+            this.OperationType.FieldName = "OperationType";
+            this.OperationType.Name = "OperationType";
+            this.OperationType.Visible = true;
+            this.OperationType.VisibleIndex = 0;
+            this.OperationType.Width = 91;
             // 
             // repoCmbKalemIslem
             // 
@@ -637,15 +625,15 @@
             this.repoCmbKalemIslem.Name = "repoCmbKalemIslem";
             this.repoCmbKalemIslem.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
-            // IplikId
+            // InventoryId
             // 
-            this.IplikId.Caption = "Iplik Kayıt No";
-            this.IplikId.ColumnEdit = this.repoBtnUrunKodu;
-            this.IplikId.FieldName = "IplikId";
-            this.IplikId.Name = "IplikId";
-            this.IplikId.Visible = true;
-            this.IplikId.VisibleIndex = 5;
-            this.IplikId.Width = 74;
+            this.InventoryId.Caption = "Iplik Kayıt No";
+            this.InventoryId.ColumnEdit = this.repoBtnUrunKodu;
+            this.InventoryId.FieldName = "InventoryId";
+            this.InventoryId.Name = "InventoryId";
+            this.InventoryId.Visible = true;
+            this.InventoryId.VisibleIndex = 1;
+            this.InventoryId.Width = 74;
             // 
             // repoBtnUrunKodu
             // 
@@ -655,75 +643,75 @@
             this.repoBtnUrunKodu.Name = "repoBtnUrunKodu";
             this.repoBtnUrunKodu.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBtnUrunKodu_ButtonClick);
             // 
-            // IplikKodu
+            // InventoryCode
             // 
-            this.IplikKodu.Caption = "İplik Kodu";
-            this.IplikKodu.FieldName = "IplikKodu";
-            this.IplikKodu.Name = "IplikKodu";
-            this.IplikKodu.OptionsColumn.AllowEdit = false;
-            this.IplikKodu.Visible = true;
-            this.IplikKodu.VisibleIndex = 6;
-            this.IplikKodu.Width = 70;
+            this.InventoryCode.Caption = "İplik Kodu";
+            this.InventoryCode.FieldName = "InventoryCode";
+            this.InventoryCode.Name = "InventoryCode";
+            this.InventoryCode.OptionsColumn.AllowEdit = false;
+            this.InventoryCode.Visible = true;
+            this.InventoryCode.VisibleIndex = 2;
+            this.InventoryCode.Width = 70;
             // 
-            // IplikAdi
+            // InventoryName
             // 
-            this.IplikAdi.Caption = "İplik Adı";
-            this.IplikAdi.FieldName = "IplikAdi";
-            this.IplikAdi.Name = "IplikAdi";
-            this.IplikAdi.OptionsColumn.AllowEdit = false;
-            this.IplikAdi.Visible = true;
-            this.IplikAdi.VisibleIndex = 7;
-            this.IplikAdi.Width = 121;
+            this.InventoryName.Caption = "İplik Adı";
+            this.InventoryName.FieldName = "InventoryName";
+            this.InventoryName.Name = "InventoryName";
+            this.InventoryName.OptionsColumn.AllowEdit = false;
+            this.InventoryName.Visible = true;
+            this.InventoryName.VisibleIndex = 3;
+            this.InventoryName.Width = 121;
             // 
-            // BrutKg
+            // GrossWeight
             // 
-            this.BrutKg.Caption = "Brüt Kg";
-            this.BrutKg.DisplayFormat.FormatString = "0.0000";
-            this.BrutKg.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.BrutKg.FieldName = "BrutKg";
-            this.BrutKg.Name = "BrutKg";
-            this.BrutKg.Visible = true;
-            this.BrutKg.VisibleIndex = 9;
-            this.BrutKg.Width = 61;
+            this.GrossWeight.Caption = "Brüt Kg";
+            this.GrossWeight.DisplayFormat.FormatString = "0.0000";
+            this.GrossWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.GrossWeight.FieldName = "GrossWeight";
+            this.GrossWeight.Name = "GrossWeight";
+            this.GrossWeight.Visible = true;
+            this.GrossWeight.VisibleIndex = 5;
+            this.GrossWeight.Width = 61;
             // 
-            // NetKg
+            // NetWeight
             // 
-            this.NetKg.Caption = "Net Kg";
-            this.NetKg.DisplayFormat.FormatString = "0.0000";
-            this.NetKg.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.NetKg.FieldName = "NetKg";
-            this.NetKg.Name = "NetKg";
-            this.NetKg.Visible = true;
-            this.NetKg.VisibleIndex = 8;
+            this.NetWeight.Caption = "Net Kg";
+            this.NetWeight.DisplayFormat.FormatString = "0.0000";
+            this.NetWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.NetWeight.FieldName = "NetWeight";
+            this.NetWeight.Name = "NetWeight";
+            this.NetWeight.Visible = true;
+            this.NetWeight.VisibleIndex = 4;
             // 
-            // Fiyat
+            // UnitPrice
             // 
-            this.Fiyat.Caption = "Fiyat";
-            this.Fiyat.DisplayFormat.FormatString = "0.0000";
-            this.Fiyat.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.Fiyat.FieldName = "Fiyat";
-            this.Fiyat.Name = "Fiyat";
-            this.Fiyat.Visible = true;
-            this.Fiyat.VisibleIndex = 10;
+            this.UnitPrice.Caption = "Fiyat";
+            this.UnitPrice.DisplayFormat.FormatString = "0.0000";
+            this.UnitPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.UnitPrice.FieldName = "UnitPrice";
+            this.UnitPrice.Name = "UnitPrice";
+            this.UnitPrice.Visible = true;
+            this.UnitPrice.VisibleIndex = 6;
             // 
-            // DovizFiyat
+            // ForexPrice
             // 
-            this.DovizFiyat.Caption = "Döviz Fiyat";
-            this.DovizFiyat.DisplayFormat.FormatString = "0.0000";
-            this.DovizFiyat.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.DovizFiyat.FieldName = "DovizFiyat";
-            this.DovizFiyat.Name = "DovizFiyat";
-            this.DovizFiyat.Visible = true;
-            this.DovizFiyat.VisibleIndex = 3;
+            this.ForexPrice.Caption = "Döviz Fiyat";
+            this.ForexPrice.DisplayFormat.FormatString = "0.0000";
+            this.ForexPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.ForexPrice.FieldName = "ForexPrice";
+            this.ForexPrice.Name = "ForexPrice";
+            this.ForexPrice.Visible = true;
+            this.ForexPrice.VisibleIndex = 8;
             // 
-            // DovizCinsi
+            // Forex
             // 
-            this.DovizCinsi.Caption = "Döviz Cinsi";
-            this.DovizCinsi.ColumnEdit = this.repoCmbDoviz;
-            this.DovizCinsi.FieldName = "DovizCinsi";
-            this.DovizCinsi.Name = "DovizCinsi";
-            this.DovizCinsi.Visible = true;
-            this.DovizCinsi.VisibleIndex = 11;
+            this.Forex.Caption = "Döviz Cinsi";
+            this.Forex.ColumnEdit = this.repoCmbDoviz;
+            this.Forex.FieldName = "Forex";
+            this.Forex.Name = "Forex";
+            this.Forex.Visible = true;
+            this.Forex.VisibleIndex = 7;
             // 
             // repoCmbDoviz
             // 
@@ -737,22 +725,14 @@
             "GBP"});
             this.repoCmbDoviz.Name = "repoCmbDoviz";
             // 
-            // OrganikSertifikaNo
+            // Brand
             // 
-            this.OrganikSertifikaNo.Caption = "Organik Sertifika No";
-            this.OrganikSertifikaNo.FieldName = "OrganikSertifikaNo";
-            this.OrganikSertifikaNo.Name = "OrganikSertifikaNo";
-            this.OrganikSertifikaNo.Visible = true;
-            this.OrganikSertifikaNo.VisibleIndex = 12;
-            // 
-            // Marka
-            // 
-            this.Marka.Caption = "Marka";
-            this.Marka.ColumnEdit = this.repoBtnMarka;
-            this.Marka.FieldName = "Marka";
-            this.Marka.Name = "Marka";
-            this.Marka.Visible = true;
-            this.Marka.VisibleIndex = 13;
+            this.Brand.Caption = "Marka";
+            this.Brand.ColumnEdit = this.repoBtnMarka;
+            this.Brand.FieldName = "Brand";
+            this.Brand.Name = "Brand";
+            this.Brand.Visible = true;
+            this.Brand.VisibleIndex = 9;
             // 
             // repoBtnMarka
             // 
@@ -762,32 +742,6 @@
             this.repoBtnMarka.Name = "repoBtnMarka";
             this.repoBtnMarka.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBtnMarka_ButtonClick);
             // 
-            // KullanimYeri
-            // 
-            this.KullanimYeri.Caption = "Kullanım Yeri";
-            this.KullanimYeri.FieldName = "KullanimYeri";
-            this.KullanimYeri.Name = "KullanimYeri";
-            this.KullanimYeri.Visible = true;
-            this.KullanimYeri.VisibleIndex = 2;
-            // 
-            // IplikRenkId
-            // 
-            this.IplikRenkId.Caption = "İplik Renk Id";
-            this.IplikRenkId.FieldName = "IplikRenkId";
-            this.IplikRenkId.Name = "IplikRenkId";
-            this.IplikRenkId.Visible = true;
-            this.IplikRenkId.VisibleIndex = 15;
-            // 
-            // IplikRenkKodu
-            // 
-            this.IplikRenkKodu.Caption = "İplik Renk Kodu";
-            this.IplikRenkKodu.ColumnEdit = this.repoBoyaRenkKodu;
-            this.IplikRenkKodu.FieldName = "IplikRenkKodu";
-            this.IplikRenkKodu.Name = "IplikRenkKodu";
-            this.IplikRenkKodu.Visible = true;
-            this.IplikRenkKodu.VisibleIndex = 14;
-            this.IplikRenkKodu.Width = 87;
-            // 
             // repoBoyaRenkKodu
             // 
             this.repoBoyaRenkKodu.AutoHeight = false;
@@ -796,47 +750,29 @@
             this.repoBoyaRenkKodu.Name = "repoBoyaRenkKodu";
             this.repoBoyaRenkKodu.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBoyaRenkKodu_ButtonClick);
             // 
-            // IplikRenkAdi
+            // Explanation
             // 
-            this.IplikRenkAdi.Caption = "İplik Renk Adı";
-            this.IplikRenkAdi.FieldName = "IplikRenkAdi";
-            this.IplikRenkAdi.Name = "IplikRenkAdi";
-            this.IplikRenkAdi.Visible = true;
-            this.IplikRenkAdi.VisibleIndex = 16;
-            this.IplikRenkAdi.Width = 88;
+            this.Explanation.Caption = "Açıklama";
+            this.Explanation.FieldName = "Explanation";
+            this.Explanation.Name = "Explanation";
+            this.Explanation.Visible = true;
+            this.Explanation.VisibleIndex = 10;
             // 
-            // PartiNo
+            // Barcod
             // 
-            this.PartiNo.Caption = "Parti No";
-            this.PartiNo.FieldName = "PartiNo";
-            this.PartiNo.Name = "PartiNo";
-            this.PartiNo.Visible = true;
-            this.PartiNo.VisibleIndex = 17;
-            this.PartiNo.Width = 92;
+            this.Barcod.Caption = "Barkod";
+            this.Barcod.FieldName = "Barcod";
+            this.Barcod.Name = "Barcod";
+            this.Barcod.Visible = true;
+            this.Barcod.VisibleIndex = 11;
             // 
-            // SatirAciklama
+            // ReceiptNo
             // 
-            this.SatirAciklama.Caption = "Açıklama";
-            this.SatirAciklama.FieldName = "SatirAciklama";
-            this.SatirAciklama.Name = "SatirAciklama";
-            this.SatirAciklama.Visible = true;
-            this.SatirAciklama.VisibleIndex = 18;
-            // 
-            // Barkod
-            // 
-            this.Barkod.Caption = "Barkod";
-            this.Barkod.FieldName = "Barkod";
-            this.Barkod.Name = "Barkod";
-            this.Barkod.Visible = true;
-            this.Barkod.VisibleIndex = 19;
-            // 
-            // TalimatNo
-            // 
-            this.TalimatNo.Caption = "Talimat No";
-            this.TalimatNo.FieldName = "TalimatNo";
-            this.TalimatNo.Name = "TalimatNo";
-            this.TalimatNo.Visible = true;
-            this.TalimatNo.VisibleIndex = 1;
+            this.ReceiptNo.Caption = "Talimat No";
+            this.ReceiptNo.FieldName = "ReceiptNo";
+            this.ReceiptNo.Name = "ReceiptNo";
+            this.ReceiptNo.Visible = true;
+            this.ReceiptNo.VisibleIndex = 13;
             // 
             // UUID
             // 
@@ -844,34 +780,34 @@
             this.UUID.FieldName = "UUID";
             this.UUID.Name = "UUID";
             this.UUID.Visible = true;
-            this.UUID.VisibleIndex = 20;
+            this.UUID.VisibleIndex = 14;
             this.UUID.Width = 287;
             // 
-            // TakipNo
+            // TrackingNumber
             // 
-            this.TakipNo.Caption = "Takip No";
-            this.TakipNo.FieldName = "TakipNo";
-            this.TakipNo.Name = "TakipNo";
-            this.TakipNo.Visible = true;
-            this.TakipNo.VisibleIndex = 21;
+            this.TrackingNumber.Caption = "Takip No";
+            this.TrackingNumber.FieldName = "TrackingNumber";
+            this.TrackingNumber.Name = "TrackingNumber";
+            this.TrackingNumber.Visible = true;
+            this.TrackingNumber.VisibleIndex = 15;
             // 
-            // SatirTutari
+            // RowAmount
             // 
-            this.SatirTutari.Caption = "Satır Tutarı";
-            this.SatirTutari.DisplayFormat.FormatString = "0.0000";
-            this.SatirTutari.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.SatirTutari.FieldName = "SatirTutari";
-            this.SatirTutari.Name = "SatirTutari";
-            this.SatirTutari.Visible = true;
-            this.SatirTutari.VisibleIndex = 22;
+            this.RowAmount.Caption = "Satır Tutarı";
+            this.RowAmount.DisplayFormat.FormatString = "0.0000";
+            this.RowAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.RowAmount.FieldName = "RowAmount";
+            this.RowAmount.Name = "RowAmount";
+            this.RowAmount.Visible = true;
+            this.RowAmount.VisibleIndex = 16;
             // 
-            // D2Id
+            // ReceiptItemId
             // 
-            this.D2Id.Caption = "Depo 2 Id";
-            this.D2Id.FieldName = "D2Id";
-            this.D2Id.Name = "D2Id";
-            this.D2Id.Visible = true;
-            this.D2Id.VisibleIndex = 0;
+            this.ReceiptItemId.Caption = "Depo 2 Id";
+            this.ReceiptItemId.FieldName = "ReceiptItemId";
+            this.ReceiptItemId.Name = "ReceiptItemId";
+            this.ReceiptItemId.Visible = true;
+            this.ReceiptItemId.VisibleIndex = 12;
             // 
             // repoCmbBirim
             // 
@@ -925,7 +861,7 @@
             // sütunSeçimiToolStripMenuItem
             // 
             this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
-            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
@@ -1016,34 +952,28 @@
         private DevExpress.XtraEditors.SimpleButton btnIplikDepoStok;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn KalemIslem;
+        private DevExpress.XtraGrid.Columns.GridColumn OperationType;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbKalemIslem;
-        private DevExpress.XtraGrid.Columns.GridColumn IplikId;
+        private DevExpress.XtraGrid.Columns.GridColumn InventoryId;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnUrunKodu;
-        private DevExpress.XtraGrid.Columns.GridColumn IplikKodu;
-        private DevExpress.XtraGrid.Columns.GridColumn IplikAdi;
-        private DevExpress.XtraGrid.Columns.GridColumn BrutKg;
-        private DevExpress.XtraGrid.Columns.GridColumn NetKg;
-        private DevExpress.XtraGrid.Columns.GridColumn Fiyat;
-        private DevExpress.XtraGrid.Columns.GridColumn DovizFiyat;
-        private DevExpress.XtraGrid.Columns.GridColumn DovizCinsi;
+        private DevExpress.XtraGrid.Columns.GridColumn InventoryCode;
+        private DevExpress.XtraGrid.Columns.GridColumn InventoryName;
+        private DevExpress.XtraGrid.Columns.GridColumn GrossWeight;
+        private DevExpress.XtraGrid.Columns.GridColumn NetWeight;
+        private DevExpress.XtraGrid.Columns.GridColumn UnitPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn ForexPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn Forex;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbDoviz;
-        private DevExpress.XtraGrid.Columns.GridColumn OrganikSertifikaNo;
-        private DevExpress.XtraGrid.Columns.GridColumn Marka;
+        private DevExpress.XtraGrid.Columns.GridColumn Brand;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnMarka;
-        private DevExpress.XtraGrid.Columns.GridColumn KullanimYeri;
-        private DevExpress.XtraGrid.Columns.GridColumn IplikRenkId;
-        private DevExpress.XtraGrid.Columns.GridColumn IplikRenkKodu;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBoyaRenkKodu;
-        private DevExpress.XtraGrid.Columns.GridColumn IplikRenkAdi;
-        private DevExpress.XtraGrid.Columns.GridColumn PartiNo;
-        private DevExpress.XtraGrid.Columns.GridColumn SatirAciklama;
-        private DevExpress.XtraGrid.Columns.GridColumn Barkod;
-        private DevExpress.XtraGrid.Columns.GridColumn TalimatNo;
+        private DevExpress.XtraGrid.Columns.GridColumn Explanation;
+        private DevExpress.XtraGrid.Columns.GridColumn Barcod;
+        private DevExpress.XtraGrid.Columns.GridColumn ReceiptNo;
         private DevExpress.XtraGrid.Columns.GridColumn UUID;
-        private DevExpress.XtraGrid.Columns.GridColumn TakipNo;
-        private DevExpress.XtraGrid.Columns.GridColumn SatirTutari;
-        private DevExpress.XtraGrid.Columns.GridColumn D2Id;
+        private DevExpress.XtraGrid.Columns.GridColumn TrackingNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn RowAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn ReceiptItemId;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbBirim;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem fişFormlarıToolStripMenuItem;

@@ -47,7 +47,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
 
         private void btnAciklamaGetir_Click(object sender, EventArgs e)
         {
-            Liste.FrmAciklamaListesi frm = new Liste.FrmAciklamaListesi(this.Text);
+            Liste.FrmAciklamaListesi frm = new Liste.FrmAciklamaListesi(0);
             frm.ShowDialog();
             rchAciklama.EditValue = frm.Aciklama;
         }

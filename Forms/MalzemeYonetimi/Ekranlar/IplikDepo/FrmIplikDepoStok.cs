@@ -2,17 +2,11 @@
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 {
-    public partial class FrmIplikDepoStok : DevExpress.XtraEditors.XtraForm
+    public partial class FrmIplikDepoStok : XtraForm
     {
         Listele listele = new Listele();
         public List<string> stokListesi = new List<string>();
@@ -25,54 +19,54 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         {
             string sql = @"SELECT 
                             ISNULL(d2.Id, 0) AS [TakipNo],
-                            ISNULL(d2.KalemIslem, '') AS [KalemIslem],
-                            ISNULL(d2.IplikId, '') AS [IplikId],
-                            ISNULL(ik.IplikKodu, '') AS [IplikKodu],
-                            ISNULL(ik.IplikAdi, '') AS [IplikAdi],
-                            ISNULL(ik.Organik, '') AS [Organik],
-                            ISNULL(d2.Marka, '') AS [Marka],
-                            ISNULL(d2.PartiNo, '') AS [PartiNo],
-                            ISNULL(d2.IplikRenkId, 0) AS [IplikRenkId],
-                            ISNULL(brk.BoyahaneRenkKodu, '') AS [IplikRenkKodu],
-                            ISNULL(brk.BoyahaneRenkAdi, '') AS [IplikRenkAdi],
+                            ISNULL(d2.OperationType, '') AS [KalemIslem],
+                            ISNULL(d2.InventoryId, '') AS [IplikId],
+                            ISNULL(ik.InventoryCode, '') AS [IplikKodu],
+                            ISNULL(ik.InventoryName, '') AS [IplikAdi],
+                            --ISNULL(ik.Organik, '') AS [Organik],
+                            ISNULL(d2.Brand, '') AS [Marka],
+                            --ISNULL(d2.PartiNo, '') AS [PartiNo],
+                            ISNULL(d2.ColorId, 0) AS [IplikRenkId],
+                            --ISNULL(brk.BoyahaneRenkKodu, '') AS [IplikRenkKodu],
+                            --ISNULL(brk.BoyahaneRenkAdi, '') AS [IplikRenkAdi],
                             --SUM(ISNULL(d2.NetKg, 0)) AS [NetKg],
-                            ISNULL(SUM(d2.NetKg), 0) - 
-                                (SELECT ISNULL(SUM(y.NetKg), 0) 
-                                 FROM IplikDepo1 x 
-                                 INNER JOIN IplikDepo2 y ON x.Id = y.RefNo 
-                                 WHERE x.IslemCinsi = 'Çıkış' AND y.TakipNo = ISNULL(d2.Id, 0)) AS NetKg
+                            ISNULL(SUM(d2.NetWeight), 0) - 
+                                (SELECT ISNULL(SUM(y.NetWeight), 0) 
+                                 FROM Receipt x 
+                                 INNER JOIN ReceiptItem y ON x.Id = y.ReceiptId 
+                                 WHERE x.ReceiptType = 6 AND y.TrackingNumber = ISNULL(d2.Id, 0)) AS NetKg
                         FROM 
-                            IplikDepo1 d1 
+                            Receipt d1 
                         INNER JOIN 
-                            IplikDepo2 d2 ON d1.Id = d2.RefNo
+                            ReceiptItem d2 ON d1.Id = d2.ReceiptId
                         LEFT JOIN 
-                            FirmaKarti fk ON d1.FirmaId = fk.Id
+                            Company fk ON d1.CompanyId = fk.Id
                         LEFT JOIN 
-                            IplikKarti ik ON ik.Id = d2.IplikId
-                        LEFT JOIN 
-                            BoyahaneRenkKartlari brk ON brk.Id = d2.IplikRenkId
-                        LEFT JOIN 
-                            OzellikKodlama ok ON ok.Id = ik.IplikNo
+                            Inventory ik ON ik.Id = d2.InventoryId
+                        --LEFT JOIN 
+                        --    BoyahaneRenkKartlari brk ON brk.Id = d2.IplikRenkId
+                        --LEFT JOIN 
+                        --    OzellikKodlama ok ON ok.Id = ik.IplikNo
                         WHERE 
-                            d1.IslemCinsi = 'Giriş'
+                            d1.ReceiptType = 5
                         GROUP BY
-                            ISNULL(d2.KalemIslem, ''),
-                            ISNULL(ik.IplikKodu, ''),
-                            ISNULL(d2.IplikId, ''),
-                            ISNULL(ik.IplikAdi, ''),
-                            ISNULL(ik.Organik, ''),
-                            ISNULL(d2.Marka, ''),
-                            ISNULL(d2.PartiNo, ''),
-                            ISNULL(d2.IplikRenkId, 0),
-                            ISNULL(brk.BoyahaneRenkKodu, ''),
-                            ISNULL(brk.BoyahaneRenkAdi, ''),
+                            ISNULL(d2.OperationType, ''),
+                            ISNULL(ik.InventoryCode, ''),
+                            ISNULL(d2.InventoryId, ''),
+                            ISNULL(ik.InventoryName, ''),
+                            --ISNULL(ik.Organik, ''),
+                            ISNULL(d2.Brand, ''),
+                            --ISNULL(d2.PartiNo, ''),
+                            ISNULL(d2.ColorId, 0),
+                            --ISNULL(brk.BoyahaneRenkKodu, ''),
+                            --ISNULL(brk.BoyahaneRenkAdi, ''),
                             ISNULL(d2.Id, 0)
                         HAVING
-                            ISNULL(SUM(d2.NetKg), 0) - 
-                            (SELECT ISNULL(SUM(y.NetKg), 0) 
-                             FROM IplikDepo1 x 
-                             INNER JOIN IplikDepo2 y ON x.Id = y.RefNo 
-                             WHERE x.IslemCinsi = 'Çıkış' AND y.TakipNo = ISNULL(d2.Id, 0)) <> 0
+                            ISNULL(SUM(d2.NetWeight), 0) - 
+                            (SELECT ISNULL(SUM(y.NetWeight), 0) 
+                             FROM Receipt x 
+                             INNER JOIN ReceiptItem y ON x.Id = y.ReceiptId
+                             WHERE x.ReceiptType = 6 AND y.TrackingNumber = ISNULL(d2.Id, 0)) <> 0
 
 ";
             listele.Liste(sql, gridControl1);
