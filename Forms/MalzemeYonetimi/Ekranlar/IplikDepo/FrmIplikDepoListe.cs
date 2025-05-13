@@ -26,6 +26,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     return "İplik Satın Alma Talimatı";
                 case 5:
                     return "İplik Depo Giriş";
+                case 6:
+                    return "İplik Depo Çıkış";
                 default:
                     return "";
             }
@@ -66,12 +68,21 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                         ISNULL(R.Maturity,'') [Vade],
 						ISNULL(R.PaymentType,'') [Ödeme Şekli],
 						ISNULL(R.Approved,0) [Onaylı],
-						ISNULL(RI.ReceiptNo,0) [Talimat No Kalem]
+						ISNULL(RI.ReceiptNo,0) [Talimat No Kalem],
+						ISNULL(R.TransporterId,0) [Taşıyıcı Id],
+						ISNULL(T.Title,0) [Ünvan],
+						ISNULL(T.Name,0) [Taşıyıcı Adı],
+						ISNULL(T.Surname,0) [Taşıyıcı Soyadı],
+						ISNULL(T.NumberPlate,0) [Plaka],
+						ISNULL(T.TrailerNumber,0) [Dorse],
+                        ISNULL(T.TCKN,'') [TCKN]
+						
                     from 
                     Receipt R with(nolock) 
 	                    inner join ReceiptItem RI on R.Id = RI.ReceiptId
 	                    left join Company C with(nolock)  on C.Id = R.CompanyId
 	                    left join Inventory I with(nolock) on RI.InventoryId = I.Id
+						left join Transporter T on R.TransporterId = T.Id
 						where R.ReceiptType = {receiptTypes}
 ";
             listele.Liste(sql, gridControl1);
@@ -117,7 +128,14 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     string OdemeSekli = Convert.ToString(gridView.GetRowCellValue(i, "Ödeme Şekli"));
                     bool Onayli = Convert.ToBoolean(gridView.GetRowCellValue(i, "Onaylı"));
                     string TalimatNoKalem = Convert.ToString(gridView.GetRowCellValue(i, "Talimat No Kalem"));
-                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama};{TakipNo};{TalimatNo};{BrutKg};{NetKg};{HesapBirimi};{Yetkili};{Vade};{OdemeSekli};{Onayli};{TalimatNoKalem}");
+                    int TasiyiciId = Convert.ToInt32(gridView.GetRowCellValue(i, "Taşıyıcı Id"));
+                    string TasiyiciUnvan = Convert.ToString(gridView.GetRowCellValue(i, "Ünvan"));
+                    string TasiyiciAd = Convert.ToString(gridView.GetRowCellValue(i, "Taşıyıcı Adı"));
+                    string TasiyiciSoyad = Convert.ToString(gridView.GetRowCellValue(i, "Taşıyıcı Soyadı"));
+                    string Plaka = Convert.ToString(gridView.GetRowCellValue(i, "Plaka"));
+                    string Dorse= Convert.ToString(gridView.GetRowCellValue(i, "Dorse"));
+                    string TCKN= Convert.ToString(gridView.GetRowCellValue(i, "TCKN"));
+                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama};{TakipNo};{TalimatNo};{BrutKg};{NetKg};{HesapBirimi};{Yetkili};{Vade};{OdemeSekli};{Onayli};{TalimatNoKalem};{TasiyiciId};{TasiyiciUnvan};{TasiyiciAd};{TasiyiciSoyad};{Plaka};{Dorse};{TCKN}");
                 }
             }
             Close();

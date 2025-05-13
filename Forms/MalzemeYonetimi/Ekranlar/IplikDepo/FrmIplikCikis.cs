@@ -144,32 +144,62 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 
         private void btnListe_Click(object sender, EventArgs e)
         {
-            //FrmIplikDepoListe frm = new FrmIplikDepoListe("Çıkış");
-            //frm.ShowDialog();
-            //if (frm.veriler.Count > 0)
-            //{
-            //    this.Id = Convert.ToInt32(frm.veriler[0]["Id"]);
-            //    dateTarih.EditValue = (DateTime)frm.veriler[0]["Tarih"];
-            //    dateIrsaliyeTarihi.EditValue = (DateTime)frm.veriler[0]["IrsaliyeTarihi"];
-            //    txtIrsaliyeNo.Text = frm.veriler[0]["IrsaliyeNo"].ToString();
-            //    txtFirmaKodu.Text = frm.veriler[0]["FirmaKodu"].ToString();
-            //    txtFirmaUnvan.Text = frm.veriler[0]["FirmaUnvan"].ToString();
-            //    this.FirmaId = Convert.ToInt32(frm.veriler[0]["FirmaId"]);
-            //    rchAciklama.Text = frm.veriler[0]["Aciklama"].ToString();
-            //    txtTasiyiciId.Text = frm.veriler[0]["TasiyiciId"].ToString();
-            //    txtTasiyiciUnvan.Text = frm.veriler[0]["TasiyiciUnvan"].ToString();
-            //    txtTasiyiciAd.Text = frm.veriler[0]["TasiyiciAd"].ToString();
-            //    txtTasiyiciSoyad.Text = frm.veriler[0]["TasiyiciSoyad"].ToString();
-            //    txtTasiyiciTC.Text = frm.veriler[0]["TasiyiciTC"].ToString();
-            //    txtTasiyiciPlaka.Text = frm.veriler[0]["Plaka"].ToString();
-            //    txtTasiyiciDorse.Text = frm.veriler[0]["Dorse"].ToString();
-            //    string[] columnNames = new string[]
-            //    {
-            //        "KalemIslem", "IplikId", "IplikKodu", "IplikAdi", "BrutKg", "NetKg","Fiyat","DovizFiyat","DovizCinsi","OrganikSertifikaNo","Marka","KullanimYeri","IplikRenkId",
-            //        "IplikRenkKodu","IplikRenkAdi","PartiNo","SatirAciklama","Barkod","TalimatNo","UUID","TakipNo","SatirTutari","D2Id",
-            //    };
-            //    yardimciAraclar.ListedenGrideYansit(gridControl1, columnNames, frm.veriler);
-            //}
+            FrmIplikDepoListe frm = new FrmIplikDepoListe(ReceiptType);
+            frm.ShowDialog();
+            DateTime tarih = DateTime.MinValue;
+            if (frm.liste.Count > 0)
+            {
+                yardimciAraclar.ClearGridViewRows(gridView1);
+                var firstItem = frm.liste[0];
+                var values1 = firstItem.Split(';');
+                this.Id = Convert.ToInt32(values1[6]);
+                tarih = Convert.ToDateTime(values1[8]);
+                dateTarih.EditValue = (DateTime)tarih;
+                this.FirmaId = Convert.ToInt32(values1[9]);
+                txtFirmaKodu.Text = values1[10];
+                txtFirmaUnvan.Text = values1[11];
+                //dateFaturaTarihi.EditValue = (DateTime)Convert.ToDateTime(values1[12]);
+                //txtFaturaNo.Text = values1[13];
+                dateIrsaliyeTarihi.EditValue = (DateTime)Convert.ToDateTime(values1[14]);
+                txtIrsaliyeNo.Text = values1[15];
+                rchAciklama.Text = values1[16];
+                //txtTalimatNo.Text = values1[22];
+                //txtYetkili.Text = values1[26];
+                //txtVade.Text = values1[27];
+                //comboBoxEdit1.Text = values1[28];
+                //Onayli = Convert.ToBoolean(values1[29]); // sağ click ile değiştirmek için
+                //chckOnayli.Checked = Convert.ToBoolean(values1[29]);
+                //depo eklenecek
+                TasiyiciId = Convert.ToInt32(values1[31]);
+                txtTasiyiciId.Text = TasiyiciId.ToString();
+                txtTasiyiciUnvan.Text = values1[32];
+                txtTasiyiciAd.Text = values1[33];
+                txtTasiyiciSoyad.Text = values1[34];
+                txtTasiyiciPlaka.Text = values1[35];
+                txtTasiyiciDorse.Text = values1[36];
+                txtTasiyiciTC.Text = values1[37];
+                foreach (var item in frm.liste)
+                {
+                    gridView1.AddNewRow();
+                    int newRowHandle = gridView1.FocusedRowHandle;
+                    var values = item.Split(';');
+                    gridView1.SetRowCellValue(newRowHandle, "InventoryCode", values[0]);
+                    gridView1.SetRowCellValue(newRowHandle, "InventoryName", values[1]);
+                    gridView1.SetRowCellValue(newRowHandle, "Piece", values[2]);
+                    gridView1.SetRowCellValue(newRowHandle, "OperationType", values[3]);
+                    gridView1.SetRowCellValue(newRowHandle, "UUID", values[4]);
+                    gridView1.SetRowCellValue(newRowHandle, "InventoryId", values[5]);
+                    gridView1.SetRowCellValue(newRowHandle, "UnitPrice", values[17]);
+                    gridView1.SetRowCellValue(newRowHandle, "Vat", values[18]);
+                    gridView1.SetRowCellValue(newRowHandle, "ReceiptItemId", values[19]);
+                    gridView1.SetRowCellValue(newRowHandle, "Explanation", values[20]);
+                    gridView1.SetRowCellValue(newRowHandle, "TrackingNumber", values[21]); // 22 receiptNo yukarıda
+                    gridView1.SetRowCellValue(newRowHandle, "GrossWeight", values[23]);
+                    gridView1.SetRowCellValue(newRowHandle, "NetWeight", values[24]);
+                    gridView1.SetRowCellValue(newRowHandle, "MeasurementUnit", values[25]);
+                    gridView1.SetRowCellValue(newRowHandle, "ReceiptNo", values[30]); // 31 tasiyici id yukarida
+                }
+            }
         }
 
         private void gridView1_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
@@ -187,7 +217,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         }
         private void simpleButton5_Click(object sender, EventArgs e)
         {
-            crudRepository.ConfirmAndDeleteCard(TableName1, Id, DeleteRows); // LİSTELEMEDEN DEVAM ET VE SİL 12.05.2025
+            crudRepository.ConfirmAndDeleteCard(TableName1, Id, DeleteRows);
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -347,6 +377,12 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                 Rapor.FrmRaporSecimEkrani frm = new Rapor.FrmRaporSecimEkrani(this.Text, this.Id);
                 frm.ShowDialog();
             }
+        }
+
+        private void eİrsaliyeOluşturVeGönderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmIrsaliyeFaturaGoruntuleyici frm = new FrmIrsaliyeFaturaGoruntuleyici();
+            frm.ShowDialog();
         }
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)

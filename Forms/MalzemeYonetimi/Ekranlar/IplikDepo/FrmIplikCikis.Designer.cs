@@ -83,7 +83,6 @@
             this.repoCmbDoviz = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.Brand = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoBtnMarka = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.repoBoyaRenkKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.Explanation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Barcod = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ReceiptNo = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -92,11 +91,16 @@
             this.RowAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repoBoyaRenkKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fişFormlarıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eİrsaliyeİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eİrsaliyeOluşturVeGönderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eİrsaliyeGörüntüleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eİrsaliyeNoSıfırlamaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -123,8 +127,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbDoviz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).BeginInit();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -742,14 +746,6 @@
             this.repoBtnMarka.Name = "repoBtnMarka";
             this.repoBtnMarka.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBtnMarka_ButtonClick);
             // 
-            // repoBoyaRenkKodu
-            // 
-            this.repoBoyaRenkKodu.AutoHeight = false;
-            this.repoBoyaRenkKodu.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.repoBoyaRenkKodu.Name = "repoBoyaRenkKodu";
-            this.repoBoyaRenkKodu.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBoyaRenkKodu_ButtonClick);
-            // 
             // Explanation
             // 
             this.Explanation.Caption = "Açıklama";
@@ -822,14 +818,23 @@
             "Cm"});
             this.repoCmbBirim.Name = "repoCmbBirim";
             // 
+            // repoBoyaRenkKodu
+            // 
+            this.repoBoyaRenkKodu.AutoHeight = false;
+            this.repoBoyaRenkKodu.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repoBoyaRenkKodu.Name = "repoBoyaRenkKodu";
+            this.repoBoyaRenkKodu.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBoyaRenkKodu_ButtonClick);
+            // 
             // contextMenu
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fişFormlarıToolStripMenuItem,
             this.dizaynKaydetToolStripMenuItem,
-            this.satırİşlemleriToolStripMenuItem});
+            this.satırİşlemleriToolStripMenuItem,
+            this.eİrsaliyeİşlemleriToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(203, 70);
+            this.contextMenu.Size = new System.Drawing.Size(203, 114);
             // 
             // fişFormlarıToolStripMenuItem
             // 
@@ -864,6 +869,36 @@
             this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
+            // 
+            // eİrsaliyeİşlemleriToolStripMenuItem
+            // 
+            this.eİrsaliyeİşlemleriToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eİrsaliyeOluşturVeGönderToolStripMenuItem,
+            this.eİrsaliyeGörüntüleToolStripMenuItem,
+            this.eİrsaliyeNoSıfırlamaToolStripMenuItem});
+            this.eİrsaliyeİşlemleriToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.eİrsaliyeİşlemleriToolStripMenuItem.Name = "eİrsaliyeİşlemleriToolStripMenuItem";
+            this.eİrsaliyeİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.eİrsaliyeİşlemleriToolStripMenuItem.Text = "E-İrsaliye İşlemleri";
+            // 
+            // eİrsaliyeOluşturVeGönderToolStripMenuItem
+            // 
+            this.eİrsaliyeOluşturVeGönderToolStripMenuItem.Name = "eİrsaliyeOluşturVeGönderToolStripMenuItem";
+            this.eİrsaliyeOluşturVeGönderToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.eİrsaliyeOluşturVeGönderToolStripMenuItem.Text = "E-İrsaliye Oluştur ve Gönder";
+            this.eİrsaliyeOluşturVeGönderToolStripMenuItem.Click += new System.EventHandler(this.eİrsaliyeOluşturVeGönderToolStripMenuItem_Click);
+            // 
+            // eİrsaliyeGörüntüleToolStripMenuItem
+            // 
+            this.eİrsaliyeGörüntüleToolStripMenuItem.Name = "eİrsaliyeGörüntüleToolStripMenuItem";
+            this.eİrsaliyeGörüntüleToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.eİrsaliyeGörüntüleToolStripMenuItem.Text = "E-İrsaliye Görüntüle";
+            // 
+            // eİrsaliyeNoSıfırlamaToolStripMenuItem
+            // 
+            this.eİrsaliyeNoSıfırlamaToolStripMenuItem.Name = "eİrsaliyeNoSıfırlamaToolStripMenuItem";
+            this.eİrsaliyeNoSıfırlamaToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.eİrsaliyeNoSıfırlamaToolStripMenuItem.Text = "E-İrsaliye No Sıfırlama";
             // 
             // FrmIplikCikis
             // 
@@ -904,8 +939,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbDoviz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).EndInit();
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -980,5 +1015,9 @@
         private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eİrsaliyeİşlemleriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eİrsaliyeOluşturVeGönderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eİrsaliyeGörüntüleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eİrsaliyeNoSıfırlamaToolStripMenuItem;
     }
 }
