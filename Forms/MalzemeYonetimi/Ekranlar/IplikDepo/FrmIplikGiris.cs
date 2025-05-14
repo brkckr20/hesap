@@ -56,7 +56,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         }
         private void repoBoyaRenkKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            Liste.FrmBoyahaneRenkKartlariListesi frm = new Liste.FrmBoyahaneRenkKartlariListesi();
+            Liste.FrmBoyahaneRenkKartlariListesi frm = new Liste.FrmBoyahaneRenkKartlariListesi(false);
             frm.ShowDialog();
             if (frm.veriler != null)
             {

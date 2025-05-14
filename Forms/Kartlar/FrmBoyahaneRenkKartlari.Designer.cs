@@ -215,6 +215,13 @@
             this.cmbDoviz.Name = "cmbDoviz";
             this.cmbDoviz.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbDoviz.Properties.Items.AddRange(new object[] {
+            "TL",
+            "EUR",
+            "USD",
+            "GBP",
+            "DKK"});
+            this.cmbDoviz.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cmbDoviz.Size = new System.Drawing.Size(85, 22);
             this.cmbDoviz.TabIndex = 11;
             // 

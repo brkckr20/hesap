@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -14,53 +15,85 @@ namespace Hesap.Forms.Liste
 {
     public partial class FrmBoyahaneRenkKartlariListesi : DevExpress.XtraEditors.XtraForm
     {
-        public FrmBoyahaneRenkKartlariListesi()
+        public FrmBoyahaneRenkKartlariListesi(bool isCard) //isCard parametresi eğer true ise kartta görüntülenecek ve ekleme silme güncelleme için kullanılacak
         {
             InitializeComponent();
+            _isCard = isCard;
         }
         Listele listele = new Listele();
         HesaplaVeYansit hesaplaVeYansit = new HesaplaVeYansit();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         public List<Dictionary<string, object>> veriler;
+        public bool _isCard,IsUse;
+        public string Type, Code, Namee, CompanyCode, CompanyName, Date, RequestDate, ConfirmDate, PantoneNo, Price, Forex; // name hata vermesine diye bu şekilde adlandırıldı
+        public int Id, CompanyId,TypeNo;
         private void FrmBoyahaneRenkKartlariListesi_Load(object sender, EventArgs e)
         {
             Listele();
         }
         void Listele()
         {
-            string sql = @"select BRK.Id,
-		case 
-			when RenkTuru = 1 then 'Kumaş'
-			when RenkTuru = 2 then 'İplik'
-			end as [RenkTuru]
-		,BoyahaneRenkKodu
-		,BoyahaneRenkAdi
-		,ISNULL(FK.Id,0) [CariId]
-		,ISNULL(FK.FirmaKodu,'') [FirmaKodu]
-		,ISNULL(FK.FirmaUnvan,'') [FirmaUnvan]
-		,ISNULL(PantoneNo,'') [PantoneNo]
-		,ISNULL(Fiyat,0) [Fiyat]
-		,ISNULL(DovizCinsi,'') [DovizCinsi]
-		,ISNULL(Kullanimda,0) [Kullanimda]
-from BoyahaneRenkKartlari BRK left join FirmaKarti FK on BRK.CariId = FK.Id";
+            string sql;
+            if (_isCard)
+            {
+                sql = @"Select 
+                            case 
+	                            when Type = 1 then 'Kumaş'
+	                            when Type = 2 Then 'İplik'
+	                            end as [Türü],
+	                            ISNULL(C.Code,'') Kodu,
+	                            ISNULL(C.Name,'') Adı,
+	                            ISNULL(C.CompanyId,'') [Firma Id],
+	                            ISNULL(CO.CompanyCode,'') [Firma Kodu],
+	                            ISNULL(CO.CompanyName,'') [Firma Adı],
+	                            ISNULL(C.Date,'') Tarih,
+	                            ISNULL(C.RequestDate,'') [Talep Tarihi],
+	                            ISNULL(C.ConfirmDate,'') [Onay Tarihi],
+	                            ISNULL(C.PantoneNo,'') [Pantone No],
+	                            ISNULL(C.Price,0) [Fiyat],
+	                            ISNULL(C.Forex,'') [Döviz],
+	                            ISNULL(C.Id,'') [Id],
+                                ISNULL(C.Type,0) [Tur No],
+	                            ISNULL(C.IsUse,0) Kullanimda
+                            from Color C left join Company CO on C.CompanyId = CO.Id";
+            }
+            else
+            {
+                sql = @"";
+            }
             listele.Liste(sql, gridControl1);
-            yardimciAraclar.KolonlariGetir(gridView1,this.Text);
+            yardimciAraclar.KolonlariGetir(gridView1, this.Text);
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
-            veriler = hesaplaVeYansit.KartaYansit(sender);
+            GridView gridView = sender as GridView;
+            Type = gridView.GetFocusedRowCellValue("Türü").ToString();
+            Code = gridView.GetFocusedRowCellValue("Kodu").ToString();
+            Namee = gridView.GetFocusedRowCellValue("Adı").ToString();
+            CompanyId = Convert.ToInt32(gridView.GetFocusedRowCellValue("Firma Id"));
+            CompanyCode = gridView.GetFocusedRowCellValue("Firma Kodu").ToString();
+            CompanyName = gridView.GetFocusedRowCellValue("Firma Adı").ToString();
+            Date = gridView.GetFocusedRowCellValue("Tarih").ToString();
+            RequestDate = gridView.GetFocusedRowCellValue("Talep Tarihi").ToString();
+            ConfirmDate = gridView.GetFocusedRowCellValue("Onay Tarihi").ToString();
+            PantoneNo = gridView.GetFocusedRowCellValue("Pantone No").ToString();
+            Price = gridView.GetFocusedRowCellValue("Fiyat").ToString();
+            Forex = gridView.GetFocusedRowCellValue("Döviz").ToString();
+            Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("Id"));
+            TypeNo = Convert.ToInt32(gridView.GetFocusedRowCellValue("Tur No"));
+            IsUse = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Kullanimda"));
             this.Close();
         }
 
         private void excelDosyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.ExcelOlarakAktar(gridControl1,"Boyahane Renk Kartları");
+            yardimciAraclar.ExcelOlarakAktar(gridControl1, "Boyahane Renk Kartları");
         }
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonDurumunuKaydet(gridView1,this.Text);
+            yardimciAraclar.KolonDurumunuKaydet(gridView1, this.Text);
         }
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)

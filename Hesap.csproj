@@ -608,6 +608,7 @@
     </Compile>
     <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\AuthVisibleItems.cs" />
+    <Compile Include="Models\Color.cs" />
     <Compile Include="Models\ColumnSelector.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Cost.cs" />
@@ -901,6 +902,8 @@
     <Content Include="AppIcon.ico" />
     <Content Include="BookmarkBig.ico" />
     <Content Include="e-Irsaliye\Giden\001.xml" />
+    <Content Include="e-Irsaliye\Invoice.xml" />
+    <Content Include="e-Irsaliye\Invoice.xslt" />
     <Content Include="e-Irsaliye\Main.xslt" />
     <Content Include="MaliyetHesaplama_orj.txt" />
     <None Include="Resources\AppIcon.ico" />

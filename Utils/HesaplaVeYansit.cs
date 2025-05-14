@@ -459,7 +459,7 @@ namespace Hesap.Utils
         }
         public void BoyahaneRenkBilgileriYansit(GridView gridView, int focusedRowHandle)
         {
-            Forms.Liste.FrmBoyahaneRenkKartlariListesi frm = new Forms.Liste.FrmBoyahaneRenkKartlariListesi();
+            Forms.Liste.FrmBoyahaneRenkKartlariListesi frm = new Forms.Liste.FrmBoyahaneRenkKartlariListesi(false);
             frm.ShowDialog();
             if (frm.veriler != null)
             {
