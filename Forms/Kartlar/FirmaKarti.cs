@@ -4,6 +4,8 @@ using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Text;
 
 
 namespace Hesap.Forms.Kartlar
@@ -14,6 +16,7 @@ namespace Hesap.Forms.Kartlar
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         CrudRepository crudRepository = new CrudRepository();
         int Id = 0;
+
         private string TableName = "Company";
         public FrmFirmaKarti()
         {

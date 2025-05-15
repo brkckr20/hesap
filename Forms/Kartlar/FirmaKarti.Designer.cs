@@ -31,34 +31,34 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFirmaKarti));
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sonNumarayıAktarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtAdres3 = new DevExpress.XtraEditors.TextEdit();
+            this.txtAdres2 = new DevExpress.XtraEditors.TextEdit();
+            this.txtAdres1 = new DevExpress.XtraEditors.TextEdit();
+            this.txtFirmaUnvan = new DevExpress.XtraEditors.TextEdit();
+            this.txtFirmaKodu = new DevExpress.XtraEditors.TextEdit();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnIleri = new DevExpress.XtraEditors.SimpleButton();
             this.btnGeri = new DevExpress.XtraEditors.SimpleButton();
             this.btnSil = new DevExpress.XtraEditors.SimpleButton();
             this.btnListe = new DevExpress.XtraEditors.SimpleButton();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
-            this.txtAdres3 = new DevExpress.XtraEditors.TextEdit();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtAdres2 = new DevExpress.XtraEditors.TextEdit();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtAdres1 = new DevExpress.XtraEditors.TextEdit();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtFirmaUnvan = new DevExpress.XtraEditors.TextEdit();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtFirmaKodu = new DevExpress.XtraEditors.TextEdit();
-            this.label72 = new System.Windows.Forms.Label();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.sonNumarayıAktarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaKodu.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -74,6 +74,136 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(860, 53);
             this.panel3.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label4.Location = new System.Drawing.Point(12, 119);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 21);
+            this.label4.TabIndex = 1118;
+            this.label4.Tag = "baslik";
+            this.label4.Text = "Adres 3 :";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label3.Location = new System.Drawing.Point(12, 91);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(93, 21);
+            this.label3.TabIndex = 1118;
+            this.label3.Tag = "baslik";
+            this.label3.Text = "Adres 2 :";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(12, 63);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 21);
+            this.label2.TabIndex = 1118;
+            this.label2.Tag = "baslik";
+            this.label2.Text = "Adres 1 :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(12, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 21);
+            this.label1.TabIndex = 1118;
+            this.label1.Tag = "baslik";
+            this.label1.Text = "Firma Unvan :";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label72
+            // 
+            this.label72.BackColor = System.Drawing.Color.Transparent;
+            this.label72.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label72.Location = new System.Drawing.Point(12, 7);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(93, 21);
+            this.label72.TabIndex = 1118;
+            this.label72.Tag = "baslik";
+            this.label72.Text = "Firma Kodu :";
+            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.txtAdres3);
+            this.panelControl1.Controls.Add(this.label4);
+            this.panelControl1.Controls.Add(this.txtAdres2);
+            this.panelControl1.Controls.Add(this.label3);
+            this.panelControl1.Controls.Add(this.txtAdres1);
+            this.panelControl1.Controls.Add(this.label2);
+            this.panelControl1.Controls.Add(this.txtFirmaUnvan);
+            this.panelControl1.Controls.Add(this.label1);
+            this.panelControl1.Controls.Add(this.txtFirmaKodu);
+            this.panelControl1.Controls.Add(this.label72);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl1.Location = new System.Drawing.Point(0, 53);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(860, 463);
+            this.panelControl1.TabIndex = 4;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sonNumarayıAktarToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(193, 26);
+            // 
+            // sonNumarayıAktarToolStripMenuItem
+            // 
+            this.sonNumarayıAktarToolStripMenuItem.Name = "sonNumarayıAktarToolStripMenuItem";
+            this.sonNumarayıAktarToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.sonNumarayıAktarToolStripMenuItem.Text = "Son Numarayı Aktar";
+            this.sonNumarayıAktarToolStripMenuItem.Click += new System.EventHandler(this.sonNumarayıAktarToolStripMenuItem_Click);
+            // 
+            // txtAdres3
+            // 
+            this.txtAdres3.Location = new System.Drawing.Point(111, 118);
+            this.txtAdres3.Name = "txtAdres3";
+            this.txtAdres3.Size = new System.Drawing.Size(206, 22);
+            this.txtAdres3.TabIndex = 5;
+            // 
+            // txtAdres2
+            // 
+            this.txtAdres2.Location = new System.Drawing.Point(111, 90);
+            this.txtAdres2.Name = "txtAdres2";
+            this.txtAdres2.Size = new System.Drawing.Size(206, 22);
+            this.txtAdres2.TabIndex = 4;
+            // 
+            // txtAdres1
+            // 
+            this.txtAdres1.Location = new System.Drawing.Point(111, 62);
+            this.txtAdres1.Name = "txtAdres1";
+            this.txtAdres1.Size = new System.Drawing.Size(206, 22);
+            this.txtAdres1.TabIndex = 3;
+            // 
+            // txtFirmaUnvan
+            // 
+            this.txtFirmaUnvan.Location = new System.Drawing.Point(111, 34);
+            this.txtFirmaUnvan.Name = "txtFirmaUnvan";
+            this.txtFirmaUnvan.Size = new System.Drawing.Size(206, 22);
+            this.txtFirmaUnvan.TabIndex = 2;
+            // 
+            // txtFirmaKodu
+            // 
+            this.txtFirmaKodu.Location = new System.Drawing.Point(111, 6);
+            this.txtFirmaKodu.Name = "txtFirmaKodu";
+            this.txtFirmaKodu.Size = new System.Drawing.Size(206, 22);
+            this.txtFirmaKodu.TabIndex = 1;
+            this.txtFirmaKodu.Tag = "input";
             // 
             // simpleButton1
             // 
@@ -141,130 +271,6 @@
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
             // 
-            // txtAdres3
-            // 
-            this.txtAdres3.Location = new System.Drawing.Point(111, 118);
-            this.txtAdres3.Name = "txtAdres3";
-            this.txtAdres3.Size = new System.Drawing.Size(206, 22);
-            this.txtAdres3.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(12, 119);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 21);
-            this.label4.TabIndex = 1118;
-            this.label4.Text = "Adres 3 :";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtAdres2
-            // 
-            this.txtAdres2.Location = new System.Drawing.Point(111, 90);
-            this.txtAdres2.Name = "txtAdres2";
-            this.txtAdres2.Size = new System.Drawing.Size(206, 22);
-            this.txtAdres2.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(12, 91);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 21);
-            this.label3.TabIndex = 1118;
-            this.label3.Text = "Adres 2 :";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtAdres1
-            // 
-            this.txtAdres1.Location = new System.Drawing.Point(111, 62);
-            this.txtAdres1.Name = "txtAdres1";
-            this.txtAdres1.Size = new System.Drawing.Size(206, 22);
-            this.txtAdres1.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(12, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 21);
-            this.label2.TabIndex = 1118;
-            this.label2.Text = "Adres 1 :";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtFirmaUnvan
-            // 
-            this.txtFirmaUnvan.Location = new System.Drawing.Point(111, 34);
-            this.txtFirmaUnvan.Name = "txtFirmaUnvan";
-            this.txtFirmaUnvan.Size = new System.Drawing.Size(206, 22);
-            this.txtFirmaUnvan.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(12, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 21);
-            this.label1.TabIndex = 1118;
-            this.label1.Text = "Firma Unvan :";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtFirmaKodu
-            // 
-            this.txtFirmaKodu.Location = new System.Drawing.Point(111, 6);
-            this.txtFirmaKodu.Name = "txtFirmaKodu";
-            this.txtFirmaKodu.Size = new System.Drawing.Size(206, 22);
-            this.txtFirmaKodu.TabIndex = 1;
-            // 
-            // label72
-            // 
-            this.label72.BackColor = System.Drawing.Color.Transparent;
-            this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label72.Location = new System.Drawing.Point(12, 7);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(93, 21);
-            this.label72.TabIndex = 1118;
-            this.label72.Text = "Firma Kodu :";
-            this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.txtAdres3);
-            this.panelControl1.Controls.Add(this.label4);
-            this.panelControl1.Controls.Add(this.txtAdres2);
-            this.panelControl1.Controls.Add(this.label3);
-            this.panelControl1.Controls.Add(this.txtAdres1);
-            this.panelControl1.Controls.Add(this.label2);
-            this.panelControl1.Controls.Add(this.txtFirmaUnvan);
-            this.panelControl1.Controls.Add(this.label1);
-            this.panelControl1.Controls.Add(this.txtFirmaKodu);
-            this.panelControl1.Controls.Add(this.label72);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 53);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(860, 463);
-            this.panelControl1.TabIndex = 4;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sonNumarayıAktarToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(193, 48);
-            // 
-            // sonNumarayıAktarToolStripMenuItem
-            // 
-            this.sonNumarayıAktarToolStripMenuItem.Name = "sonNumarayıAktarToolStripMenuItem";
-            this.sonNumarayıAktarToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.sonNumarayıAktarToolStripMenuItem.Text = "Son Numarayı Aktar";
-            this.sonNumarayıAktarToolStripMenuItem.Click += new System.EventHandler(this.sonNumarayıAktarToolStripMenuItem_Click);
-            // 
             // FrmFirmaKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -277,14 +283,14 @@
             this.Text = "Firma Kartı";
             this.Load += new System.EventHandler(this.FrmFirmaKarti_Load);
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdres1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaUnvan.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirmaKodu.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
