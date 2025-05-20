@@ -40,11 +40,11 @@ namespace Hesap.Forms
         void Temizle()
         {
             object[] kart = { txtRenkKodu,txtRenkAdi,btnCari,txtCariAdi,btnVaryant,dateTarih,dateTalepTarihi,dateOkeyTarihi,
-                txtPantoneNo,txtFiyat,chckKullanimda,radioIplik,radioKumas,cmbDoviz };
+                txtPantoneNo,txtFiyat,radioIplik,radioKumas,cmbDoviz };
             yardimciAraclar.KartTemizle(kart);
+            chckKullanimda.Checked = true;
             this.Id = 0; this.FirmaId = 0;
         }
-        //sırf commit olsun diye eklendi
         private void btnListe_Click(object sender, EventArgs e)
         {
             Liste.FrmBoyahaneRenkKartlariListesi frm = new Liste.FrmBoyahaneRenkKartlariListesi(true);

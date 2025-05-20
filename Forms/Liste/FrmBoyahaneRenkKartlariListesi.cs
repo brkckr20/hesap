@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,8 @@ namespace Hesap.Forms.Liste
             _isCard = isCard;
         }
         Listele listele = new Listele();
-        HesaplaVeYansit hesaplaVeYansit = new HesaplaVeYansit();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
+        CrudRepository crudRepository = new CrudRepository();
         public List<Dictionary<string, object>> veriler;
         public bool _isCard,IsUse;
         public string Type, Code, Namee, CompanyCode, CompanyName, Date, RequestDate, ConfirmDate, PantoneNo, Price, Forex; // name hata vermesine diye bu şekilde adlandırıldı
@@ -62,7 +63,7 @@ namespace Hesap.Forms.Liste
                 sql = @"";
             }
             listele.Liste(sql, gridControl1);
-            yardimciAraclar.KolonlariGetir(gridView1, this.Text);
+            crudRepository.GetUserColumns(gridView1, this.Text);
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
@@ -93,7 +94,7 @@ namespace Hesap.Forms.Liste
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonDurumunuKaydet(gridView1, this.Text);
+            crudRepository.SaveColumnStatus(gridView1, this.Text);
         }
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
