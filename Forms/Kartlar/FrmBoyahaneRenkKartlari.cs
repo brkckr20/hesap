@@ -44,6 +44,7 @@ namespace Hesap.Forms
             yardimciAraclar.KartTemizle(kart);
             this.Id = 0; this.FirmaId = 0;
         }
+        //sırf commit olsun diye eklendi
         private void btnListe_Click(object sender, EventArgs e)
         {
             Liste.FrmBoyahaneRenkKartlariListesi frm = new Liste.FrmBoyahaneRenkKartlariListesi(true);
