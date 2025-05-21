@@ -370,7 +370,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         {
             if (this.Id == 0)
             {
-                bildirim.Uyari("Rapor alabilmek için bir kayıt seçmelisiniz!");
+                bildirim.Uyari("Rapor alabilmek için bir kayıt seçmelisiniz!!!");
             }
             else
             {
