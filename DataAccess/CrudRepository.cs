@@ -268,6 +268,14 @@ namespace Hesap.DataAccess
 
             return _dbConnection.QueryFirstOrDefault<int?>(sql, new { Id = id });
         }
+        public int? GetIdTwoJoinTable(string KayitTipi, string TableName, int id, string TableName2, string TableName2Ref, int IsParent)
+        {
+            string sql = KayitTipi == "Önceki"
+                ? $"SELECT MAX(t1.Id) FROM {TableName} t1 left join {TableName2} t2 on t1.{TableName2Ref}=t2.Id WHERE t1.Id < @Id and IsParent = {IsParent}"
+                : $"SELECT MIN(t1.Id) FROM {TableName} t1 left join {TableName2} t2 on t1.{TableName2Ref}=t2.Id WHERE t1.Id > @Id and IsParent = {IsParent}";
+
+            return _dbConnection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+        }
 
     }
 }

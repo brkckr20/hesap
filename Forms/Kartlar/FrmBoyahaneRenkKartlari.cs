@@ -130,28 +130,101 @@ namespace Hesap.Forms
         }
         void ListeGetir(string KayitTipi)
         {
-            //if (this.Id != 0) -- Color modelinde eksik alanlar eklendikten sonra devam edilecek 15.05.2025
-            //{
-            //    var list = crudRepository.GetByList<Models.Color>("Color", KayitTipi, this.Id);
-            //    if (list != null)
-            //    {
-            //        this.Id = list.Id;
-            //        txtFirmaKodu.Text = list.CompanyCode;
-            //        txtFirmaUnvan.Text = list.CompanyName;
-            //        txtAdres1.Text = list.AddressLine1;
-            //        txtAdres2.Text = list.AddressLine2;
-            //        txtAdres3.Text = list.AddressLine3;
-            //    }
-            //    else
-            //    {
-            //        bildirim.Uyari("Gösterilecek herhangi bir kayıt bulunamadı!");
-            //    }
-            //}
-            //else
-            //{
-            //    bildirim.Uyari("Kayıt gösterebilmek için öncelikle listeden bir kayıt getirmelisiniz!");
-            //}
+            /*
+             Listeleme işlemi tamamlanamadı!!! bilgiler araçlara yansımıyor
+            kontrol edilmelidir.
+            22.05.2025
+             */
+            try
+            {
+                int id = this.Id;
+                int? istenenId = crudRepository.GetIdTwoJoinTable(KayitTipi, "Color", id, "Company", "CompanyId", 0);
+                if (istenenId == null)
+                {
+                    bildirim.Uyari("Başka bir kayıt bulunamadı.");
+                    return;
+                }
+                string query = $@"Select 
+                                COL.Id [Id],
+                                ISNULL(Type,0) [Boya Tipi],
+                                ISNULL(Code,'') [Code],
+                                ISNULL(Name,'') [Name],
+                                ISNULL(COM.Id,0) [CompanyId],
+                                ISNULL(COM.CompanyCode,0) [CompanyCode],
+                                ISNULL(COM.CompanyName,0) [CompanyName],
+                                ISNULL(COL.Date,'') [Date],
+                                ISNULL(COL.RequestDate,'') [RequestDate],
+                                ISNULL(COL.ConfirmDate,'') [ConfirmDate],
+                                ISNULL(COL.PantoneNo,'') [Pantone No],
+                                ISNULL(COL.Price,0) [Fiyat],
+                                ISNULL(COL.Forex,0) [Döviz],
+                                ISNULL(COL.IsUse,0) [Kullanımda]
+                                from Color COL
+                                left join Company COM on COL.CompanyId = COM.Id";
+                var liste = crudRepository.GetAfterOrBeforeRecord(query, istenenId.Value);
+                if (liste != null && liste.Count > 0)
+                {
+                    //yardimciAraclar.ClearGridViewRows(gridView1);
+                    var item = liste[0];
+                    dateTarih.Text = item.Date.ToString();
+                    this.Id = Convert.ToInt32(item.Id);
+                    txtRenkKodu.Text = item.Code.ToString();
+                    MessageBox.Show(txtRenkKodu.Text);
+                    txtRenkAdi.Text = item.Name.ToString();
+                    this.FirmaId = Convert.ToInt32(item.CompanyId);
+                    btnCari.Text = item.CompanyCode.ToString();
+                    txtCariAdi.Text = item.CompanyName.ToString();
+                    dateTalepTarihi.Text = item.RequestDate.ToString();
+                    dateOkeyTarihi.Text = item.ConfirmDate.ToString();
+                    //txtYetkili.Text = item.Authorized.ToString();
+                    //txtVade.Text = item.Maturity.ToString();
+                    //comboBoxEdit1.Text = item.PaymentType.ToString();
+                    //gridControl1.DataSource = liste;
+                }
+                else
+                {
+                    bildirim.Uyari("Kayıt bulunamadı.");
+                }
+            }
+            catch (Exception ex)
+            {
+                bildirim.Uyari("Hata: " + ex.Message);
+            }
+            /*
+             try
+            {
 
+
+                if (liste != null && liste.Count > 0)
+                {
+                    yardimciAraclar.ClearGridViewRows(gridView1);
+                    var item = liste[0];
+                    dateTarih.Text = item.ReceiptDate.ToString();
+                    this.Id = Convert.ToInt32(item.Id);
+                    this.FirmaId = Convert.ToInt32(item.CompanyId);
+                    txtFirmaKodu.Text = item.CompanyCode.ToString();
+                    txtFirmaUnvan.Text = item.CompanyName.ToString();
+                    //dateFaturaTarihi.Text = item.InvoiceDate.ToString();
+                    //txtFaturaNo.Text = item.InvoiceNo.ToString();
+                    dateIrsaliyeTarihi.Text = item.DispatchDate.ToString();
+                    txtIrsaliyeNo.Text = item.DispatchNo.ToString();
+                    rchAciklama.Text = item.ExplanationFis.ToString();
+                    //txtYetkili.Text = item.Authorized.ToString();
+                    //txtVade.Text = item.Maturity.ToString();
+                    //comboBoxEdit1.Text = item.PaymentType.ToString();
+                    gridControl1.DataSource = liste;
+                }
+                else
+                {
+                    bildirim.Uyari("Kayıt bulunamadı.");
+                }
+            }
+            catch (Exception ex)
+            {
+                bildirim.Uyari("Hata: " + ex.Message);
+            }
+             
+             */
         }
 
     }

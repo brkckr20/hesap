@@ -202,7 +202,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
             }
         }
 
-        private void gridView1_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        private void gridView1_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             GridView view = sender as GridView;
             //string uuid = Guid.NewGuid().ToString();
@@ -370,7 +370,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
         {
             if (this.Id == 0)
             {
-                bildirim.Uyari("Rapor alabilmek için bir kayıt seçmelisiniz!!!");
+                bildirim.Uyari("Rapor alabilmek için bir kayıt seçmelisiniz!");
             }
             else
             {
