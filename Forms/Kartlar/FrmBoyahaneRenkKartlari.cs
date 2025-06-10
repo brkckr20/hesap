@@ -1,18 +1,7 @@
-﻿using Dapper;
-using DevExpress.XtraEditors;
-using Hesap.DataAccess;
-using Hesap.Models;
+﻿using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static DevExpress.Xpo.Helpers.CommandChannelHelper;
 
 namespace Hesap.Forms
 {
@@ -45,14 +34,24 @@ namespace Hesap.Forms
             chckKullanimda.Checked = true;
             this.Id = 0; this.FirmaId = 0;
         }
+        void GetColorTypeWithCheckedRadio(int Type)
+        {
+            if (Type == 1)
+            {
+                radioKumas.Checked = true;
+            }
+            else if (Type == 2)
+            {
+                radioIplik.Checked = true;
+            }
+        }
         private void btnListe_Click(object sender, EventArgs e)
         {
             Liste.FrmBoyahaneRenkKartlariListesi frm = new Liste.FrmBoyahaneRenkKartlariListesi(true);
             frm.ShowDialog();
             this.Id = frm.Id;
             Tur = frm.TypeNo;
-            radioKumas.Checked = Tur == 1 ? true : false;
-            radioIplik.Checked = Tur == 1 ? false : true;
+            GetColorTypeWithCheckedRadio(Tur);
             txtRenkKodu.Text = frm.Code;
             txtRenkAdi.Text = frm.Namee;
             FirmaId = frm.CompanyId;
@@ -130,11 +129,6 @@ namespace Hesap.Forms
         }
         void ListeGetir(string KayitTipi)
         {
-            /*
-             Listeleme işlemi tamamlanamadı!!! bilgiler araçlara yansımıyor
-            kontrol edilmelidir.
-            22.05.2025
-             */
             try
             {
                 int id = this.Id;
@@ -146,7 +140,7 @@ namespace Hesap.Forms
                 }
                 string query = $@"Select 
                                 COL.Id [Id],
-                                ISNULL(Type,0) [Boya Tipi],
+                                ISNULL(Type,0) [ColorType],
                                 ISNULL(Code,'') [Code],
                                 ISNULL(Name,'') [Name],
                                 ISNULL(COM.Id,0) [CompanyId],
@@ -155,27 +149,32 @@ namespace Hesap.Forms
                                 ISNULL(COL.Date,'') [Date],
                                 ISNULL(COL.RequestDate,'') [RequestDate],
                                 ISNULL(COL.ConfirmDate,'') [ConfirmDate],
-                                ISNULL(COL.PantoneNo,'') [Pantone No],
-                                ISNULL(COL.Price,0) [Fiyat],
-                                ISNULL(COL.Forex,0) [Döviz],
+                                ISNULL(COL.PantoneNo,'') [PantoneNo],
+                                ISNULL(COL.Price,0) [Price],
+                                ISNULL(COL.Forex,0) [Forex],
                                 ISNULL(COL.IsUse,0) [Kullanımda]
                                 from Color COL
-                                left join Company COM on COL.CompanyId = COM.Id";
+                                left join Company COM on COL.CompanyId = COM.Id
+                                where COL.Id = @Id";
                 var liste = crudRepository.GetAfterOrBeforeRecord(query, istenenId.Value);
                 if (liste != null && liste.Count > 0)
                 {
                     //yardimciAraclar.ClearGridViewRows(gridView1);
                     var item = liste[0];
-                    dateTarih.Text = item.Date.ToString();
+                    dateTarih.EditValue = (DateTime)item.Date;
                     this.Id = Convert.ToInt32(item.Id);
+                    this.Tur = item.ColorType;
+                    GetColorTypeWithCheckedRadio(Tur);
                     txtRenkKodu.Text = item.Code.ToString();
-                    MessageBox.Show(txtRenkKodu.Text);
                     txtRenkAdi.Text = item.Name.ToString();
                     this.FirmaId = Convert.ToInt32(item.CompanyId);
                     btnCari.Text = item.CompanyCode.ToString();
                     txtCariAdi.Text = item.CompanyName.ToString();
-                    dateTalepTarihi.Text = item.RequestDate.ToString();
-                    dateOkeyTarihi.Text = item.ConfirmDate.ToString();
+                    dateTalepTarihi.EditValue = (DateTime)item.RequestDate;
+                    dateOkeyTarihi.EditValue = (DateTime)item.ConfirmDate;
+                    txtPantoneNo.Text = item.PantoneNo.ToString();
+                    cmbDoviz.Text = item.Forex.ToString();
+                    txtFiyat.Text = item.Price.ToString();
                     //txtYetkili.Text = item.Authorized.ToString();
                     //txtVade.Text = item.Maturity.ToString();
                     //comboBoxEdit1.Text = item.PaymentType.ToString();
@@ -190,41 +189,6 @@ namespace Hesap.Forms
             {
                 bildirim.Uyari("Hata: " + ex.Message);
             }
-            /*
-             try
-            {
-
-
-                if (liste != null && liste.Count > 0)
-                {
-                    yardimciAraclar.ClearGridViewRows(gridView1);
-                    var item = liste[0];
-                    dateTarih.Text = item.ReceiptDate.ToString();
-                    this.Id = Convert.ToInt32(item.Id);
-                    this.FirmaId = Convert.ToInt32(item.CompanyId);
-                    txtFirmaKodu.Text = item.CompanyCode.ToString();
-                    txtFirmaUnvan.Text = item.CompanyName.ToString();
-                    //dateFaturaTarihi.Text = item.InvoiceDate.ToString();
-                    //txtFaturaNo.Text = item.InvoiceNo.ToString();
-                    dateIrsaliyeTarihi.Text = item.DispatchDate.ToString();
-                    txtIrsaliyeNo.Text = item.DispatchNo.ToString();
-                    rchAciklama.Text = item.ExplanationFis.ToString();
-                    //txtYetkili.Text = item.Authorized.ToString();
-                    //txtVade.Text = item.Maturity.ToString();
-                    //comboBoxEdit1.Text = item.PaymentType.ToString();
-                    gridControl1.DataSource = liste;
-                }
-                else
-                {
-                    bildirim.Uyari("Kayıt bulunamadı.");
-                }
-            }
-            catch (Exception ex)
-            {
-                bildirim.Uyari("Hata: " + ex.Message);
-            }
-             
-             */
         }
 
     }
