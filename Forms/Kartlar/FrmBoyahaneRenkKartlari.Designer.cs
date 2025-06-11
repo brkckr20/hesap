@@ -269,6 +269,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.btnVaryant.Size = new System.Drawing.Size(177, 22);
             this.btnVaryant.TabIndex = 5;
+            this.btnVaryant.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnVaryant_ButtonClick);
             // 
             // label10
             // 

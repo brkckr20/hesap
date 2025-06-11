@@ -87,6 +87,12 @@ namespace Hesap.Forms
         {
             this.Tur = 1;
         }
+
+        private void btnVaryant_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            System.Windows.Forms.MessageBox.Show("Bu butona tıklanınca Varyant kartları açılacak");
+        }
+
         void BaslangicVerileri()
         {
             dateTarih.EditValue = DateTime.Now;

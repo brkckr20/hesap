@@ -17,7 +17,7 @@ namespace Hesap.Forms.Liste
     public partial class FrmBoyahaneRenkKartlariListesi : DevExpress.XtraEditors.XtraForm
     {
         public FrmBoyahaneRenkKartlariListesi(bool isCard) //isCard parametresi eğer true ise kartta görüntülenecek ve ekleme silme güncelleme için kullanılacak
-        {
+        {//varyant seçimleri için de bu ekran kullanılabilir. Revize edilmesi gerekmektedir.
             InitializeComponent();
             _isCard = isCard;
         }
