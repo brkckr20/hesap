@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using Hesap.DataAccess;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -18,30 +19,31 @@ namespace Hesap.Forms.OrderYonetimi.Kartlar
         {
             InitializeComponent();
         }
-        CRUD_Operations cRUD = new CRUD_Operations();
+        CrudRepository crudRepository = new CrudRepository();
         Bildirim bildirim = new Bildirim();
-        Ayarlar ayarlar = new Ayarlar();
-        YardimciAraclar yardimciAraclar = new YardimciAraclar();
         private int Id=0;
         
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             var parameters = new Dictionary<string, object>
             {
-                { "Kodu", txtKodu.Text },
-                { "Adi", txtAdi.Text },
-                { "Kullanimda", chckKullanimda.Checked},
-                { "Aciklama", txtAciklama.Text},
-                { "ErisimKodu", txtErisimKodu.Text},
-                { "PazarlamaciId", 1 },
+                { "Code", txtKodu.Text },
+                { "Name", txtAdi.Text},
+                { "Date",DateTime.Now },
+                { "IsParent",true},
+                { "Explanation", txtAciklama.Text},
+                { "IsUse",chckKullanimda.Checked},
+                { "EmployeeId",1},
             };
-            using (var connection = new Baglanti().GetConnection())
+            if (this.Id == 0)
             {
-                if (this.Id == 0)
-                {
-                    this.Id = cRUD.InsertRecord("RenkKarti", parameters);
-                    bildirim.Basarili();
-                }
+                this.Id = crudRepository.Insert("Color", parameters);
+                bildirim.Basarili();
+            }
+            else
+            {
+                crudRepository.Update("Color", this.Id, parameters);
+                bildirim.GuncellemeBasarili();
             }
         }
     }

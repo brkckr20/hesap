@@ -1,4 +1,5 @@
 ﻿using Hesap.DataAccess;
+using Hesap.Forms.Liste;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Hesap.Forms
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         CRUD_Operations cRUD = new CRUD_Operations();
         Ayarlar ayarlar = new Ayarlar();
-        int Tur = 0, Id = 0, FirmaId = 0, RenkId = 0;
+        int Tur = 0, Id = 0, FirmaId = 0, RenkId = 0; //renkid = varyantid
         CrudRepository crudRepository = new CrudRepository();
         private void FrmBoyahaneRenkKartlari_Load(object sender, EventArgs e)
         {
@@ -61,6 +62,9 @@ namespace Hesap.Forms
             txtFiyat.Text = frm.Price;
             cmbDoviz.Text = frm.Forex;
             chckKullanimda.Checked = frm.IsUse;
+            this.RenkId = frm.VariantId;
+            btnVaryant.Text = frm.VariantCode;
+            lblVaryantAdi.Text = frm.VariantName;
 
         }
         private void btnSil_Click(object sender, EventArgs e)
@@ -90,7 +94,11 @@ namespace Hesap.Forms
 
         private void btnVaryant_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Bu butona tıklanınca Varyant kartları açılacak");
+            FrmBoyahaneRenkKartlariListesi frm = new FrmBoyahaneRenkKartlariListesi(true, true); // true
+            frm.ShowDialog();
+            this.RenkId = frm.Id;
+            btnVaryant.Text = frm.Code;
+            lblVaryantAdi.Text = frm.Namee;
         }
 
         void BaslangicVerileri()
@@ -112,7 +120,7 @@ namespace Hesap.Forms
                 { "Code", txtRenkKodu.Text },
                 { "Name", txtRenkAdi.Text},
                 { "CompanyId", this.FirmaId},
-                { "ParentId",0},
+                { "ParentId",RenkId},
                 { "Date",dateTarih.EditValue},
                 { "RequestDate",dateTalepTarihi.EditValue},
                 { "ConfirmDate",dateOkeyTarihi.EditValue},
@@ -146,9 +154,9 @@ namespace Hesap.Forms
                 }
                 string query = $@"Select 
                                 COL.Id [Id],
-                                ISNULL(Type,0) [ColorType],
-                                ISNULL(Code,'') [Code],
-                                ISNULL(Name,'') [Name],
+                                ISNULL(COL.Type,0) [ColorType],
+                                ISNULL(COL.Code,'') [Code],
+                                ISNULL(COL.Name,'') [Name],
                                 ISNULL(COM.Id,0) [CompanyId],
                                 ISNULL(COM.CompanyCode,0) [CompanyCode],
                                 ISNULL(COM.CompanyName,0) [CompanyName],
@@ -158,10 +166,15 @@ namespace Hesap.Forms
                                 ISNULL(COL.PantoneNo,'') [PantoneNo],
                                 ISNULL(COL.Price,0) [Price],
                                 ISNULL(COL.Forex,0) [Forex],
-                                ISNULL(COL.IsUse,0) [Kullanımda]
+                                ISNULL(COL.IsUse,0) [Kullanımda],
+								ISNULL(COL2.Id,0) [VariantId],
+								ISNULL(COL2.Code,'') [VariantCode],
+								ISNULL(COL2.Name,'') [VariantName]
                                 from Color COL
                                 left join Company COM on COL.CompanyId = COM.Id
-                                where COL.Id = @Id";
+								left join Color COL2 on COL.ParentId = COL2.Id
+								where COL.IsParent = 0 and
+                                COL.Id = @Id";
                 var liste = crudRepository.GetAfterOrBeforeRecord(query, istenenId.Value);
                 if (liste != null && liste.Count > 0)
                 {
@@ -181,6 +194,9 @@ namespace Hesap.Forms
                     txtPantoneNo.Text = item.PantoneNo.ToString();
                     cmbDoviz.Text = item.Forex.ToString();
                     txtFiyat.Text = item.Price.ToString();
+                    RenkId = Convert.ToInt32(item.VariantId);
+                    btnVaryant.Text = item.VariantCode.ToString();
+                    lblVaryantAdi.Text = item.VariantName.ToString();
                     //txtYetkili.Text = item.Authorized.ToString();
                     //txtVade.Text = item.Maturity.ToString();
                     //comboBoxEdit1.Text = item.PaymentType.ToString();

@@ -38,22 +38,22 @@
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.chckKullanimda = new DevExpress.XtraEditors.CheckEdit();
+            this.txtErisimKodu = new DevExpress.XtraEditors.TextEdit();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtAciklama = new DevExpress.XtraEditors.TextEdit();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtAdi = new DevExpress.XtraEditors.TextEdit();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtKodu = new DevExpress.XtraEditors.TextEdit();
             this.label72 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtAdi = new DevExpress.XtraEditors.TextEdit();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtAciklama = new DevExpress.XtraEditors.TextEdit();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtErisimKodu = new DevExpress.XtraEditors.TextEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtKodu.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAdi.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAciklama.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtErisimKodu.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAciklama.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAdi.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKodu.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -157,6 +157,60 @@
             this.chckKullanimda.Size = new System.Drawing.Size(91, 20);
             this.chckKullanimda.TabIndex = 1122;
             // 
+            // txtErisimKodu
+            // 
+            this.txtErisimKodu.Location = new System.Drawing.Point(136, 90);
+            this.txtErisimKodu.Name = "txtErisimKodu";
+            this.txtErisimKodu.Size = new System.Drawing.Size(206, 22);
+            this.txtErisimKodu.TabIndex = 1120;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label3.Location = new System.Drawing.Point(2, 91);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(128, 21);
+            this.label3.TabIndex = 1121;
+            this.label3.Text = "Erişim Kodu :";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtAciklama
+            // 
+            this.txtAciklama.Location = new System.Drawing.Point(136, 62);
+            this.txtAciklama.Name = "txtAciklama";
+            this.txtAciklama.Size = new System.Drawing.Size(206, 22);
+            this.txtAciklama.TabIndex = 1120;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(2, 63);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(128, 21);
+            this.label2.TabIndex = 1121;
+            this.label2.Text = "Açıklama :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtAdi
+            // 
+            this.txtAdi.Location = new System.Drawing.Point(136, 34);
+            this.txtAdi.Name = "txtAdi";
+            this.txtAdi.Size = new System.Drawing.Size(206, 22);
+            this.txtAdi.TabIndex = 1120;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(2, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(128, 21);
+            this.label1.TabIndex = 1121;
+            this.label1.Text = "Renk Adı :";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // txtKodu
             // 
             this.txtKodu.Location = new System.Drawing.Point(136, 6);
@@ -167,67 +221,13 @@
             // label72
             // 
             this.label72.BackColor = System.Drawing.Color.Transparent;
-            this.label72.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label72.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label72.Location = new System.Drawing.Point(2, 7);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(128, 21);
             this.label72.TabIndex = 1121;
             this.label72.Text = "Renk Kodu :";
             this.label72.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(2, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 21);
-            this.label1.TabIndex = 1121;
-            this.label1.Text = "Renk Adı :";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtAdi
-            // 
-            this.txtAdi.Location = new System.Drawing.Point(136, 34);
-            this.txtAdi.Name = "txtAdi";
-            this.txtAdi.Size = new System.Drawing.Size(206, 22);
-            this.txtAdi.TabIndex = 1120;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(2, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 21);
-            this.label2.TabIndex = 1121;
-            this.label2.Text = "Açıklama :";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtAciklama
-            // 
-            this.txtAciklama.Location = new System.Drawing.Point(136, 62);
-            this.txtAciklama.Name = "txtAciklama";
-            this.txtAciklama.Size = new System.Drawing.Size(206, 22);
-            this.txtAciklama.TabIndex = 1120;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(2, 91);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 21);
-            this.label3.TabIndex = 1121;
-            this.label3.Text = "Erişim Kodu :";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtErisimKodu
-            // 
-            this.txtErisimKodu.Location = new System.Drawing.Point(136, 90);
-            this.txtErisimKodu.Name = "txtErisimKodu";
-            this.txtErisimKodu.Size = new System.Drawing.Size(206, 22);
-            this.txtErisimKodu.TabIndex = 1120;
             // 
             // FrmRenkKarti
             // 
@@ -237,15 +237,15 @@
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.panel3);
             this.Name = "FrmRenkKarti";
-            this.Text = "FrmRenkKarti";
+            this.Text = "Renk Kartı";
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chckKullanimda.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtKodu.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAdi.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAciklama.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtErisimKodu.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAciklama.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAdi.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKodu.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
