@@ -75,7 +75,10 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 						ISNULL(T.Surname,0) [Taşıyıcı Soyadı],
 						ISNULL(T.NumberPlate,0) [Plaka],
 						ISNULL(T.TrailerNumber,0) [Dorse],
-                        ISNULL(T.TCKN,'') [TCKN]
+                        ISNULL(T.TCKN,'') [TCKN],
+						ISNULL(CO.Id,0) [Renk Id],
+						ISNULL(CO.Code,'') [Renk Kodu],
+						ISNULL(CO.Name,'') [Renk Adı]
 						
                     from 
                     Receipt R with(nolock) 
@@ -83,6 +86,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 	                    left join Company C with(nolock)  on C.Id = R.CompanyId
 	                    left join Inventory I with(nolock) on RI.InventoryId = I.Id
 						left join Transporter T on R.TransporterId = T.Id
+						left join Color CO on CO.Id = RI.ColorId
 						where R.ReceiptType = {receiptTypes}
 ";
             listele.Liste(sql, gridControl1);
@@ -135,7 +139,10 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     string Plaka = Convert.ToString(gridView.GetRowCellValue(i, "Plaka"));
                     string Dorse= Convert.ToString(gridView.GetRowCellValue(i, "Dorse"));
                     string TCKN= Convert.ToString(gridView.GetRowCellValue(i, "TCKN"));
-                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama};{TakipNo};{TalimatNo};{BrutKg};{NetKg};{HesapBirimi};{Yetkili};{Vade};{OdemeSekli};{Onayli};{TalimatNoKalem};{TasiyiciId};{TasiyiciUnvan};{TasiyiciAd};{TasiyiciSoyad};{Plaka};{Dorse};{TCKN}");
+                    int RenkId= Convert.ToInt32(gridView.GetRowCellValue(i, "Renk Id"));
+                    string RenkKodu= Convert.ToString(gridView.GetRowCellValue(i, "Renk Kodu"));
+                    string RenkAdi= Convert.ToString(gridView.GetRowCellValue(i, "Renk Adı"));
+                    liste.Add($"{MalzemeKodu};{MalzemeAdi};{kalanAdet};{IslemTipi};{UUID};{MalzemeId};{clickedId};{TeslimAlan};{Tarih};{FirmaId};{FirmaKodu};{FirmaAdi};{FaturaTarihi};{FaturaNo};{IrsaliyeTarihi};{IrsaliyeNo};{Aciklama};{BirimFiyat};{Kdv};{KalemKayitNo};{SatirAciklama};{TakipNo};{TalimatNo};{BrutKg};{NetKg};{HesapBirimi};{Yetkili};{Vade};{OdemeSekli};{Onayli};{TalimatNoKalem};{TasiyiciId};{TasiyiciUnvan};{TasiyiciAd};{TasiyiciSoyad};{Plaka};{Dorse};{TCKN};{RenkId};{RenkKodu};{RenkAdi}");
                 }
             }
             Close();

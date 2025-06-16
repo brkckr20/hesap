@@ -76,7 +76,9 @@ namespace Hesap.Models
             }
         }
         public int VariantId { get; set; }
-        public int ColorId { get; set; }
+        public int ColorId { get; set; } // fişlerde Boyahane renk kodunu - siparişlerde ise varyantı temsil edecektir.
+        public string ColorCode { get; set; }
+        public string ColorName { get; set; }
         public string Explanation { get; set; }
         public string UUID { get; set; }
         public int TrackingNumber { get; set; }

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo;
+using Hesap.Forms.Liste;
 
 namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
 {
@@ -19,7 +20,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         Bildirim bildirim = new Bildirim();
         CRUD_Operations cRUD = new CRUD_Operations();
         CrudRepository crudRepository = new CrudRepository();
-        int FirmaId = 0, Id = 0,ReceiptType = Convert.ToInt32(ReceiptTypes.IplikSatinAlmaTalimati);
+        int FirmaId = 0, Id = 0,ReceiptType = Convert.ToInt32(ReceiptTypes.IplikSatinAlmaTalimati), DyeHouseColorId=0;
         private const string TableName1 = "Receipt", TableName2 = "ReceiptItem";
         private bool Onayli = false;
         public FrmIplikSaTalimati()
@@ -91,7 +92,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                     for (int i = 0; i < itemList.Count; i++)
                     {
                         var item = itemList[i];
-                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "GrossWeight", item.GrossWeight }, { "NetWeight", item.NetWeight }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat }, { "TrackingNumber", item.TrackingNumber }, { "MeasurementUnit", item.MeasurementUnit } };
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", item.OperationType }, { "InventoryId", item.InventoryId }, { "GrossWeight", item.GrossWeight }, { "NetWeight", item.NetWeight }, { "UnitPrice", item.UnitPrice }, { "Explanation", item.Explanation }, { "UUID", item.UUID }, { "RowAmount", item.RowAmount }, { "Vat", item.Vat }, { "TrackingNumber", item.TrackingNumber }, { "MeasurementUnit", item.MeasurementUnit }, { "ColorId", item.ColorId } };
                         var rec_id = crudRepository.Insert(TableName2, values);
                         gridView1.SetRowCellValue(i, "ReceiptItemId", rec_id);
                     }
@@ -106,7 +107,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                     {
                         var recIdObj = gridView1.GetRowCellValue(i, "ReceiptItemId");
                         int rec_id = recIdObj != null ? Convert.ToInt32(recIdObj) : 0;
-                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "GrossWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "GrossWeight").ToString()) }, { "NetWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "NetWeight").ToString()) }, { "UnitPrice", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) }, { "Vat", Convert.ToInt32(gridView1.GetRowCellValue(i, "Vat")) }, { "UUID", gridView1.GetRowCellValue(i, "UUID") }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }, { "MeasurementUnit", gridView1.GetRowCellValue(i, "MeasurementUnit") } };
+                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "GrossWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "GrossWeight").ToString()) }, { "NetWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "NetWeight").ToString()) }, { "UnitPrice", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) }, { "Vat", Convert.ToInt32(gridView1.GetRowCellValue(i, "Vat")) }, { "UUID", gridView1.GetRowCellValue(i, "UUID") }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }, { "MeasurementUnit", gridView1.GetRowCellValue(i, "MeasurementUnit") }, { "ColorId", Convert.ToInt32(gridView1.GetRowCellValue(i, "ColorId")) } };
                         if (rec_id != 0)
                         {
                             crudRepository.Update(TableName2, rec_id, values);
@@ -184,6 +185,9 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                     gridView1.SetRowCellValue(newRowHandle, "BrutWeight", values[23]);
                     gridView1.SetRowCellValue(newRowHandle, "NetWeight", values[24]);
                     gridView1.SetRowCellValue(newRowHandle, "MeasurementUnit", values[25]);
+                    gridView1.SetRowCellValue(newRowHandle, "ColorId", values[38]);
+                    gridView1.SetRowCellValue(newRowHandle, "ColorCode", values[39]);
+                    gridView1.SetRowCellValue(newRowHandle, "ColorName", values[40]);
                 }
             }
         }
@@ -307,6 +311,19 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             yardimciAraclar.OpenSaveInfoScreen(Id,TableName1);
         }
 
+        private void repoColorCode_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            FrmBoyahaneRenkKartlariListesi frm = new FrmBoyahaneRenkKartlariListesi("İplik");
+            frm.ShowDialog();
+            if (!string.IsNullOrEmpty(frm.Code))
+            {
+                int newRowHandle = gridView1.FocusedRowHandle;
+                gridView1.SetRowCellValue(newRowHandle, "ColorId", frm.Id);
+                gridView1.SetRowCellValue(newRowHandle, "ColorCode", frm.Code);
+                gridView1.SetRowCellValue(newRowHandle, "ColorName", frm.Namee);
+            }
+        }
+
         private void chckOnayli_CheckedChanged(object sender, EventArgs e)
         {
             //bildirim.Uyari("Onay durumu yetkili kişi tarafından, tanımlanmış olan ekran üzerinden değiştirilebilir!"); liste yükleme esnasında change olduğu için daha sonra düzenlenecek
@@ -324,15 +341,15 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
 
         private void repoBoyaRenkKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            Liste.FrmBoyahaneRenkKartlariListesi frm = new Liste.FrmBoyahaneRenkKartlariListesi(false);
-            frm.ShowDialog();
-            if (frm.veriler.Count > 0)
-            {
-                int newRowHandle = gridView1.FocusedRowHandle;
-                gridView1.SetRowCellValue(newRowHandle, "IplikRenkId", Convert.ToInt32(frm.veriler[0]["Id"]));
-                gridView1.SetRowCellValue(newRowHandle, "IplikRenkKodu", frm.veriler[0]["BoyahaneRenkKodu"].ToString());
-                gridView1.SetRowCellValue(newRowHandle, "IplikRenkAdi", frm.veriler[0]["BoyahaneRenkAdi"].ToString());
-            }
+            //Liste.FrmBoyahaneRenkKartlariListesi frm = new Liste.FrmBoyahaneRenkKartlariListesi(false);
+            //frm.ShowDialog();
+            //if (frm.veriler.Count > 0)
+            //{
+            //    int newRowHandle = gridView1.FocusedRowHandle;
+            //    gridView1.SetRowCellValue(newRowHandle, "IplikRenkId", Convert.ToInt32(frm.veriler[0]["Id"]));
+            //    gridView1.SetRowCellValue(newRowHandle, "IplikRenkKodu", frm.veriler[0]["BoyahaneRenkKodu"].ToString());
+            //    gridView1.SetRowCellValue(newRowHandle, "IplikRenkAdi", frm.veriler[0]["BoyahaneRenkAdi"].ToString());
+            //}
         }
     }
 }

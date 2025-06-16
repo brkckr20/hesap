@@ -74,11 +74,14 @@
             this.MeasurementUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoHesapBirimi = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.ReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColorId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColorCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoColorCode = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.ColorName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoCmbDoviz = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoBoyaRenkKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repoBtnMarka = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.satınAlmaTalimatFormuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,11 +109,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoHesapBirimi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoColorCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbDoviz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -423,7 +426,7 @@
             this.repoCmbDoviz,
             this.repoBoyaRenkKodu,
             this.repoBtnMarka,
-            this.repositoryItemButtonEdit1,
+            this.repoColorCode,
             this.repoHesapBirimi});
             this.gridControl1.Size = new System.Drawing.Size(1560, 533);
             this.gridControl1.TabIndex = 8;
@@ -446,7 +449,10 @@
             this.TrackingNumber,
             this.Vat,
             this.MeasurementUnit,
-            this.ReceiptItemId});
+            this.ReceiptItemId,
+            this.ColorId,
+            this.ColorCode,
+            this.ColorName});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -614,6 +620,39 @@
             this.ReceiptItemId.Visible = true;
             this.ReceiptItemId.VisibleIndex = 13;
             // 
+            // ColorId
+            // 
+            this.ColorId.Caption = "Renk Id";
+            this.ColorId.FieldName = "ColorId";
+            this.ColorId.Name = "ColorId";
+            this.ColorId.Visible = true;
+            this.ColorId.VisibleIndex = 14;
+            // 
+            // ColorCode
+            // 
+            this.ColorCode.Caption = "Boyahane Renk Kodu";
+            this.ColorCode.ColumnEdit = this.repoColorCode;
+            this.ColorCode.FieldName = "ColorCode";
+            this.ColorCode.Name = "ColorCode";
+            this.ColorCode.Visible = true;
+            this.ColorCode.VisibleIndex = 15;
+            // 
+            // repoColorCode
+            // 
+            this.repoColorCode.AutoHeight = false;
+            this.repoColorCode.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repoColorCode.Name = "repoColorCode";
+            this.repoColorCode.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoColorCode_ButtonClick);
+            // 
+            // ColorName
+            // 
+            this.ColorName.Caption = "Boyahane Renk Adı";
+            this.ColorName.FieldName = "ColorName";
+            this.ColorName.Name = "ColorName";
+            this.ColorName.Visible = true;
+            this.ColorName.VisibleIndex = 16;
+            // 
             // repoCmbBirim
             // 
             this.repoCmbBirim.AutoHeight = false;
@@ -654,13 +693,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repoBtnMarka.Name = "repoBtnMarka";
             this.repoBtnMarka.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBtnMarka_ButtonClick);
-            // 
-            // repositoryItemButtonEdit1
-            // 
-            this.repositoryItemButtonEdit1.AutoHeight = false;
-            this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             // 
             // contextMenuStrip1
             // 
@@ -768,11 +800,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoHesapBirimi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoColorCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbDoviz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -828,7 +860,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn Vat;
         private DevExpress.XtraGrid.Columns.GridColumn MeasurementUnit;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoHesapBirimi;
-        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoColorCode;
         private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
@@ -838,5 +870,8 @@
         private System.Windows.Forms.ToolStripMenuItem talimatKapatToolStripMenuItem;
         private DevExpress.XtraEditors.CheckEdit chckOnayli;
         private System.Windows.Forms.ToolStripMenuItem kayıtBilgisiToolStripMenuItem;
+        private DevExpress.XtraGrid.Columns.GridColumn ColorId;
+        private DevExpress.XtraGrid.Columns.GridColumn ColorCode;
+        private DevExpress.XtraGrid.Columns.GridColumn ColorName;
     }
 }

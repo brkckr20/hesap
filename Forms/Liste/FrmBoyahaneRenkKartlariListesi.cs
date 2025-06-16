@@ -26,16 +26,64 @@ namespace Hesap.Forms.Liste
                 this.Text = "Varyant (Renk) Kartları Listesi";
             }
         }
+        public FrmBoyahaneRenkKartlariListesi(string _colorType)
+        {
+            InitializeComponent();
+            this.ColorType = _colorType;
+        }
         Listele listele = new Listele();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         CrudRepository crudRepository = new CrudRepository();
         public List<Dictionary<string, object>> veriler;
         public bool _isCard, IsUse, _isVariant;
-        public string Type, Code, Namee, CompanyCode, CompanyName, Date, RequestDate, ConfirmDate, PantoneNo, Price, Forex,VariantCode,VariantName; // name hata vermesine diye bu şekilde adlandırıldı
-        public int Id, CompanyId, TypeNo,VariantId;
+        string ColorType;
+        public string Type, Code, Namee, CompanyCode, CompanyName, Date, RequestDate, ConfirmDate, PantoneNo, Price, Forex, VariantCode, VariantName; // name hata vermesine diye bu şekilde adlandırıldı
+        public int Id, CompanyId, TypeNo, VariantId;
         private void FrmBoyahaneRenkKartlariListesi_Load(object sender, EventArgs e)
         {
-            Listele();
+            if (ColorType == "İplik")
+            {
+                RenkleriListele(2);
+            }
+            else if (ColorType == "Kumaş")
+            {
+                RenkleriListele(1);
+            }
+            else
+            {
+                Listele();
+            }
+        }
+        void RenkleriListele(int Type)
+        {
+            string sql = $@"Select 
+                            case 
+	                            when C.Type = 1 then 'Kumaş'
+	                            when C.Type = 2 Then 'İplik'
+	                            end as [Türü],
+	                            ISNULL(C.Code,'') Kodu,
+	                            ISNULL(C.Name,'') Adı,
+                                ISNULL(C2.Id,'') VaryantId,
+	                            ISNULL(C2.Code,'') VaryantKodu,
+								ISNULL(C2.Name,'') VaryantAdi,
+	                            ISNULL(C.CompanyId,'') [Firma Id],
+	                            ISNULL(CO.CompanyCode,'') [Firma Kodu],
+	                            ISNULL(CO.CompanyName,'') [Firma Adı],
+	                            ISNULL(C.Date,'') Tarih,
+	                            ISNULL(C.RequestDate,'') [Talep Tarihi],
+	                            ISNULL(C.ConfirmDate,'') [Onay Tarihi],
+	                            ISNULL(C.PantoneNo,'') [Pantone No],
+	                            ISNULL(C.Price,0) [Fiyat],
+	                            ISNULL(C.Forex,'') [Döviz],
+	                            ISNULL(C.Id,'') [Id],
+                                ISNULL(C.Type,0) [Tur No],
+	                            ISNULL(C.IsUse,0) Kullanimda
+                            from Color C left join Company CO on C.CompanyId = CO.Id
+							left join Color C2 on C.ParentId = C2.Id
+                            WHERE C.Type = {Type}";
+            listele.Liste(sql, gridControl1);
+            crudRepository.GetUserColumns(gridView1, this.Text);
+
         }
         void Listele()
         {
