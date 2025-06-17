@@ -15,7 +15,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
             InitializeComponent();
         }
 
-        private void FrmIplikDepoStok_Load(object sender, EventArgs e)
+        private void FrmIplikDepoStok_Load(object sender, EventArgs e) // kontrol edilecek. son girişi göstermemişti
         {
             string sql = @"SELECT 
                             ISNULL(d2.Id, 0) AS [TakipNo],
@@ -26,9 +26,9 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                             --ISNULL(ik.Organik, '') AS [Organik],
                             ISNULL(d2.Brand, '') AS [Marka],
                             --ISNULL(d2.PartiNo, '') AS [PartiNo],
-                            ISNULL(d2.ColorId, 0) AS [IplikRenkId],
-                            --ISNULL(brk.BoyahaneRenkKodu, '') AS [IplikRenkKodu],
-                            --ISNULL(brk.BoyahaneRenkAdi, '') AS [IplikRenkAdi],
+                            ISNULL(brk.Id, 0) AS [IplikRenkId],
+                            ISNULL(brk.Code, '') AS [IplikRenkKodu],
+                            ISNULL(brk.Name, '') AS [IplikRenkAdi],
                             --SUM(ISNULL(d2.NetKg, 0)) AS [NetKg],
                             ISNULL(SUM(d2.NetWeight), 0) - 
                                 (SELECT ISNULL(SUM(y.NetWeight), 0) 
@@ -43,8 +43,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                             Company fk ON d1.CompanyId = fk.Id
                         LEFT JOIN 
                             Inventory ik ON ik.Id = d2.InventoryId
-                        --LEFT JOIN 
-                        --    BoyahaneRenkKartlari brk ON brk.Id = d2.IplikRenkId
+                        LEFT JOIN 
+                            Color brk ON brk.Id = d2.ColorId
                         --LEFT JOIN 
                         --    OzellikKodlama ok ON ok.Id = ik.IplikNo
                         WHERE 
@@ -57,9 +57,9 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                             --ISNULL(ik.Organik, ''),
                             ISNULL(d2.Brand, ''),
                             --ISNULL(d2.PartiNo, ''),
-                            ISNULL(d2.ColorId, 0),
-                            --ISNULL(brk.BoyahaneRenkKodu, ''),
-                            --ISNULL(brk.BoyahaneRenkAdi, ''),
+                            ISNULL(brk.Id, 0),
+                            ISNULL(brk.Code, ''),
+                            ISNULL(brk.Name, ''),
                             ISNULL(d2.Id, 0)
                         HAVING
                             ISNULL(SUM(d2.NetWeight), 0) - 

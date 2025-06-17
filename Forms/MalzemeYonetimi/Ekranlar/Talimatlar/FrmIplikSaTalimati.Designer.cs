@@ -488,7 +488,7 @@
             this.InventoryId.FieldName = "InventoryId";
             this.InventoryId.Name = "InventoryId";
             this.InventoryId.Visible = true;
-            this.InventoryId.VisibleIndex = 12;
+            this.InventoryId.VisibleIndex = 14;
             this.InventoryId.Width = 74;
             // 
             // InventoryCode
@@ -548,7 +548,7 @@
             this.UnitPrice.FieldName = "UnitPrice";
             this.UnitPrice.Name = "UnitPrice";
             this.UnitPrice.Visible = true;
-            this.UnitPrice.VisibleIndex = 5;
+            this.UnitPrice.VisibleIndex = 7;
             // 
             // Explanation
             // 
@@ -556,7 +556,7 @@
             this.Explanation.FieldName = "Explanation";
             this.Explanation.Name = "Explanation";
             this.Explanation.Visible = true;
-            this.Explanation.VisibleIndex = 9;
+            this.Explanation.VisibleIndex = 11;
             // 
             // UUID
             // 
@@ -564,7 +564,7 @@
             this.UUID.FieldName = "UUID";
             this.UUID.Name = "UUID";
             this.UUID.Visible = true;
-            this.UUID.VisibleIndex = 11;
+            this.UUID.VisibleIndex = 13;
             this.UUID.Width = 287;
             // 
             // RowAmount
@@ -575,7 +575,7 @@
             this.RowAmount.FieldName = "RowAmount";
             this.RowAmount.Name = "RowAmount";
             this.RowAmount.Visible = true;
-            this.RowAmount.VisibleIndex = 8;
+            this.RowAmount.VisibleIndex = 10;
             // 
             // TrackingNumber
             // 
@@ -583,7 +583,7 @@
             this.TrackingNumber.FieldName = "TrackingNumber";
             this.TrackingNumber.Name = "TrackingNumber";
             this.TrackingNumber.Visible = true;
-            this.TrackingNumber.VisibleIndex = 10;
+            this.TrackingNumber.VisibleIndex = 12;
             // 
             // Vat
             // 
@@ -591,7 +591,7 @@
             this.Vat.FieldName = "Vat";
             this.Vat.Name = "Vat";
             this.Vat.Visible = true;
-            this.Vat.VisibleIndex = 6;
+            this.Vat.VisibleIndex = 8;
             // 
             // MeasurementUnit
             // 
@@ -600,7 +600,7 @@
             this.MeasurementUnit.FieldName = "MeasurementUnit";
             this.MeasurementUnit.Name = "MeasurementUnit";
             this.MeasurementUnit.Visible = true;
-            this.MeasurementUnit.VisibleIndex = 7;
+            this.MeasurementUnit.VisibleIndex = 9;
             // 
             // repoHesapBirimi
             // 
@@ -618,7 +618,7 @@
             this.ReceiptItemId.FieldName = "ReceiptItemId";
             this.ReceiptItemId.Name = "ReceiptItemId";
             this.ReceiptItemId.Visible = true;
-            this.ReceiptItemId.VisibleIndex = 13;
+            this.ReceiptItemId.VisibleIndex = 15;
             // 
             // ColorId
             // 
@@ -626,7 +626,7 @@
             this.ColorId.FieldName = "ColorId";
             this.ColorId.Name = "ColorId";
             this.ColorId.Visible = true;
-            this.ColorId.VisibleIndex = 14;
+            this.ColorId.VisibleIndex = 16;
             // 
             // ColorCode
             // 
@@ -635,7 +635,8 @@
             this.ColorCode.FieldName = "ColorCode";
             this.ColorCode.Name = "ColorCode";
             this.ColorCode.Visible = true;
-            this.ColorCode.VisibleIndex = 15;
+            this.ColorCode.VisibleIndex = 5;
+            this.ColorCode.Width = 153;
             // 
             // repoColorCode
             // 
@@ -651,7 +652,7 @@
             this.ColorName.FieldName = "ColorName";
             this.ColorName.Name = "ColorName";
             this.ColorName.Visible = true;
-            this.ColorName.VisibleIndex = 16;
+            this.ColorName.VisibleIndex = 6;
             // 
             // repoCmbBirim
             // 
@@ -704,15 +705,15 @@
             this.işlemlerToolStripMenuItem,
             this.kayıtBilgisiToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(278, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(263, 114);
             // 
             // satınAlmaTalimatFormuToolStripMenuItem
             // 
-            this.satınAlmaTalimatFormuToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.satınAlmaTalimatFormuToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9F);
             this.satınAlmaTalimatFormuToolStripMenuItem.Name = "satınAlmaTalimatFormuToolStripMenuItem";
             this.satınAlmaTalimatFormuToolStripMenuItem.ShortcutKeyDisplayString = "(F10)";
             this.satınAlmaTalimatFormuToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
-            this.satınAlmaTalimatFormuToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.satınAlmaTalimatFormuToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.satınAlmaTalimatFormuToolStripMenuItem.Text = "Satın Alma Talimat Formu";
             this.satınAlmaTalimatFormuToolStripMenuItem.Click += new System.EventHandler(this.satınAlmaTalimatFormuToolStripMenuItem_Click);
             // 
@@ -720,7 +721,7 @@
             // 
             this.dizaynKaydetToolStripMenuItem.Name = "dizaynKaydetToolStripMenuItem";
             this.dizaynKaydetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.dizaynKaydetToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.dizaynKaydetToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.dizaynKaydetToolStripMenuItem.Text = "Dizayn Kaydet";
             this.dizaynKaydetToolStripMenuItem.Click += new System.EventHandler(this.dizaynKaydetToolStripMenuItem_Click);
             // 
@@ -729,7 +730,7 @@
             this.satırİşlemleriToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sütunSeçimiToolStripMenuItem});
             this.satırİşlemleriToolStripMenuItem.Name = "satırİşlemleriToolStripMenuItem";
-            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.satırİşlemleriToolStripMenuItem.Text = "Satır İşlemleri";
             // 
             // sütunSeçimiToolStripMenuItem
@@ -745,7 +746,7 @@
             this.talimatAçToolStripMenuItem,
             this.talimatKapatToolStripMenuItem});
             this.işlemlerToolStripMenuItem.Name = "işlemlerToolStripMenuItem";
-            this.işlemlerToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.işlemlerToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.işlemlerToolStripMenuItem.Text = "İşlemler";
             // 
             // talimatAçToolStripMenuItem
@@ -765,7 +766,7 @@
             // kayıtBilgisiToolStripMenuItem
             // 
             this.kayıtBilgisiToolStripMenuItem.Name = "kayıtBilgisiToolStripMenuItem";
-            this.kayıtBilgisiToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.kayıtBilgisiToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.kayıtBilgisiToolStripMenuItem.Text = "Kayıt Bilgisi";
             this.kayıtBilgisiToolStripMenuItem.Click += new System.EventHandler(this.kayıtBilgisiToolStripMenuItem_Click);
             // 

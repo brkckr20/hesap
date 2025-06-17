@@ -72,10 +72,10 @@
             this.Brand = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoBtnMarka = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.KullanimYeri = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.IplikRenkId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.IplikRenkKodu = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColorId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColorCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoBoyaRenkKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.IplikRenkAdi = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColorName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PartiNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Explanation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Barkod = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -428,9 +428,9 @@
             this.OrganikSertifikaNo,
             this.Brand,
             this.KullanimYeri,
-            this.IplikRenkId,
-            this.IplikRenkKodu,
-            this.IplikRenkAdi,
+            this.ColorId,
+            this.ColorCode,
+            this.ColorName,
             this.PartiNo,
             this.Explanation,
             this.Barkod,
@@ -619,23 +619,23 @@
             this.KullanimYeri.Visible = true;
             this.KullanimYeri.VisibleIndex = 9;
             // 
-            // IplikRenkId
+            // ColorId
             // 
-            this.IplikRenkId.Caption = "İplik Renk Id";
-            this.IplikRenkId.FieldName = "IplikRenkId";
-            this.IplikRenkId.Name = "IplikRenkId";
-            this.IplikRenkId.Visible = true;
-            this.IplikRenkId.VisibleIndex = 7;
+            this.ColorId.Caption = "İplik Renk Id";
+            this.ColorId.FieldName = "ColorId";
+            this.ColorId.Name = "ColorId";
+            this.ColorId.Visible = true;
+            this.ColorId.VisibleIndex = 7;
             // 
-            // IplikRenkKodu
+            // ColorCode
             // 
-            this.IplikRenkKodu.Caption = "İplik Renk Kodu";
-            this.IplikRenkKodu.ColumnEdit = this.repoBoyaRenkKodu;
-            this.IplikRenkKodu.FieldName = "IplikRenkKodu";
-            this.IplikRenkKodu.Name = "IplikRenkKodu";
-            this.IplikRenkKodu.Visible = true;
-            this.IplikRenkKodu.VisibleIndex = 6;
-            this.IplikRenkKodu.Width = 87;
+            this.ColorCode.Caption = "İplik Renk Kodu";
+            this.ColorCode.ColumnEdit = this.repoBoyaRenkKodu;
+            this.ColorCode.FieldName = "ColorCode";
+            this.ColorCode.Name = "ColorCode";
+            this.ColorCode.Visible = true;
+            this.ColorCode.VisibleIndex = 6;
+            this.ColorCode.Width = 87;
             // 
             // repoBoyaRenkKodu
             // 
@@ -645,14 +645,14 @@
             this.repoBoyaRenkKodu.Name = "repoBoyaRenkKodu";
             this.repoBoyaRenkKodu.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBoyaRenkKodu_ButtonClick);
             // 
-            // IplikRenkAdi
+            // ColorName
             // 
-            this.IplikRenkAdi.Caption = "İplik Renk Adı";
-            this.IplikRenkAdi.FieldName = "IplikRenkAdi";
-            this.IplikRenkAdi.Name = "IplikRenkAdi";
-            this.IplikRenkAdi.Visible = true;
-            this.IplikRenkAdi.VisibleIndex = 4;
-            this.IplikRenkAdi.Width = 88;
+            this.ColorName.Caption = "İplik Renk Adı";
+            this.ColorName.FieldName = "ColorName";
+            this.ColorName.Name = "ColorName";
+            this.ColorName.Visible = true;
+            this.ColorName.VisibleIndex = 4;
+            this.ColorName.Width = 88;
             // 
             // PartiNo
             // 
@@ -883,9 +883,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn OrganikSertifikaNo;
         private DevExpress.XtraGrid.Columns.GridColumn Brand;
         private DevExpress.XtraGrid.Columns.GridColumn KullanimYeri;
-        private DevExpress.XtraGrid.Columns.GridColumn IplikRenkId;
-        private DevExpress.XtraGrid.Columns.GridColumn IplikRenkKodu;
-        private DevExpress.XtraGrid.Columns.GridColumn IplikRenkAdi;
+        private DevExpress.XtraGrid.Columns.GridColumn ColorId;
+        private DevExpress.XtraGrid.Columns.GridColumn ColorCode;
+        private DevExpress.XtraGrid.Columns.GridColumn ColorName;
         private DevExpress.XtraGrid.Columns.GridColumn PartiNo;
         private DevExpress.XtraGrid.Columns.GridColumn Explanation;
         private DevExpress.XtraGrid.Columns.GridColumn Barkod;
