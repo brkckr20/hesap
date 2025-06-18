@@ -6,6 +6,7 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Text.RegularExpressions;
 using DevExpress.XtraExport.Helpers;
+using Hesap.Forms.Liste;
 
 namespace Hesap.Utils
 {
@@ -457,17 +458,28 @@ namespace Hesap.Utils
                 gridView.SetRowCellValue(focusedRowHandle, "KumasAdi", frm.UrunAdi);
             }
         }
-        public void BoyahaneRenkBilgileriYansit(GridView gridView, int focusedRowHandle)
+        public void BoyahaneRenkBilgileriYansit(GridView gridView1, string RenkTuru)
         {
-            Forms.Liste.FrmBoyahaneRenkKartlariListesi frm = new Forms.Liste.FrmBoyahaneRenkKartlariListesi(false);
+            FrmBoyahaneRenkKartlariListesi frm = new FrmBoyahaneRenkKartlariListesi(RenkTuru);
+            frm.ShowDialog();
+            if (!string.IsNullOrEmpty(frm.Code))
+            {
+                int newRowHandle = gridView1.FocusedRowHandle;
+                gridView1.SetRowCellValue(newRowHandle, "ColorId", frm.Id);
+                gridView1.SetRowCellValue(newRowHandle, "ColorCode", frm.Code);
+                gridView1.SetRowCellValue(newRowHandle, "ColorName", frm.Namee);
+            }
+            #region eski-kodlar
+            /*Forms.Liste.FrmBoyahaneRenkKartlariListesi frm = new Forms.Liste.FrmBoyahaneRenkKartlariListesi(false);
             frm.ShowDialog();
             if (frm.veriler != null)
             {
                 int newRowHandle = gridView.FocusedRowHandle;
-                gridView.SetRowCellValue(newRowHandle, "RenkId", Convert.ToInt32(frm.veriler[0]["Id"]));
+                gridView.SetRowCellValue(newRowHandle, "ColorId", Convert.ToInt32(frm.veriler[0]["Id"]));
                 gridView.SetRowCellValue(newRowHandle, "BoyahaneRenkKodu", frm.veriler[0]["BoyahaneRenkKodu"].ToString());
                 gridView.SetRowCellValue(newRowHandle, "BoyahaneRenkAdi", frm.veriler[0]["BoyahaneRenkAdi"].ToString());
-            }
+            }*/
+            #endregion
         }
         public string[] SorgudakiKolonIsimleriniAl(string sql)
         {

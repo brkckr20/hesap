@@ -107,8 +107,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
         }
         private void repoBoyaRenkKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            int newRowHandle = gridView1.FocusedRowHandle;
-            yansit.BoyahaneRenkBilgileriYansit(gridView1, newRowHandle);
+            //int newRowHandle = gridView1.FocusedRowHandle;
+            //yansit.BoyahaneRenkBilgileriYansit(gridView1, newRowHandle);
         }
         private void btnYeni_Click(object sender, EventArgs e)
         {

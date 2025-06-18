@@ -29,12 +29,11 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                             ISNULL(brk.Id, 0) AS [IplikRenkId],
                             ISNULL(brk.Code, '') AS [IplikRenkKodu],
                             ISNULL(brk.Name, '') AS [IplikRenkAdi],
-                            --SUM(ISNULL(d2.NetKg, 0)) AS [NetKg],
-                            ISNULL(SUM(d2.NetWeight), 0) - 
-                                (SELECT ISNULL(SUM(y.NetWeight), 0) 
-                                 FROM Receipt x 
-                                 INNER JOIN ReceiptItem y ON x.Id = y.ReceiptId 
-                                 WHERE x.ReceiptType = 6 AND y.TrackingNumber = ISNULL(d2.Id, 0)) AS NetKg
+							ISNULL(SUM(d2.NetWeight), 0) - 
+								(SELECT ISNULL(SUM(y.GrossWeight), 0) 
+									FROM Receipt x 
+									INNER JOIN ReceiptItem y ON x.Id = y.ReceiptId 
+									WHERE x.ReceiptType = 6 AND y.TrackingNumber = ISNULL(d2.Id, 0)) AS [Kalan Kg]
                         FROM 
                             Receipt d1 
                         INNER JOIN 
@@ -63,7 +62,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                             ISNULL(d2.Id, 0)
                         HAVING
                             ISNULL(SUM(d2.NetWeight), 0) - 
-                            (SELECT ISNULL(SUM(y.NetWeight), 0) 
+                            (SELECT ISNULL(SUM(y.GrossWeight), 0) 
                              FROM Receipt x 
                              INNER JOIN ReceiptItem y ON x.Id = y.ReceiptId
                              WHERE x.ReceiptType = 6 AND y.TrackingNumber = ISNULL(d2.Id, 0)) <> 0
@@ -87,7 +86,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                 int IplikRenkId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "IplikRenkId"));
                 string IplkiRenkKodu = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "IplikRenkKodu"));
                 string IplikRenkAdi = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "IplikRenkAdi"));
-                decimal NetKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "NetKg"));
+                decimal NetKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Kalan Kg"));
                 string TakipNo = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "TakipNo"));
 
 
