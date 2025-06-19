@@ -446,7 +446,9 @@ namespace Hesap.Utils
         }
         public void KumasBilgileriYansit(GridView gridView, int focusedRowHandle = 0)
         {
-            int rowHandle = gridView.FocusedRowHandle;
+            #region eskikodlar 
+            //buradaki kodlar kumaş depo işlemlerine gelince malzemebilgilerini yansıt metodu ile değiştirilecek
+            /*int rowHandle = gridView.FocusedRowHandle;
             focusedRowHandle = rowHandle;
             Forms.Liste.FrmUrunKartiListesi frm = new Forms.Liste.FrmUrunKartiListesi(Convert.ToInt32(InventoryTypes.Kumas));
             frm.ShowDialog();
@@ -456,6 +458,19 @@ namespace Hesap.Utils
                 gridView.SetRowCellValue(focusedRowHandle, "KumasId", Convert.ToInt32(frm.Id));
                 gridView.SetRowCellValue(focusedRowHandle, "KumasKodu", frm.UrunKodu);
                 gridView.SetRowCellValue(focusedRowHandle, "KumasAdi", frm.UrunAdi);
+            }*/
+            #endregion
+        }
+        public void MalzemeBilgileriniGrideYansit(GridView gridView1, InventoryTypes type)
+        {
+            FrmMalzemeKartiListesi frm = new FrmMalzemeKartiListesi(Convert.ToInt32(type));
+            frm.ShowDialog();
+            if (!string.IsNullOrEmpty(frm.Kodu) && !string.IsNullOrEmpty(frm.Adi))
+            {
+                int newRowHandle = gridView1.FocusedRowHandle;
+                gridView1.SetRowCellValue(newRowHandle, "InventoryId", frm.Id);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryCode", frm.Kodu);
+                gridView1.SetRowCellValue(newRowHandle, "InventoryName", frm.Adi);
             }
         }
         public void BoyahaneRenkBilgileriYansit(GridView gridView1, string RenkTuru)

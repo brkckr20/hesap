@@ -109,6 +109,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
+            hesaplaVeYansit.MalzemeBilgileriniGrideYansit(gridView1,InventoryTypes.Iplik);
             //Liste.FrmIplikKartiListesi frm = new Liste.FrmIplikKartiListesi();
             //frm.ShowDialog();
             //if (!string.IsNullOrEmpty(frm.IplikKodu))

@@ -1,14 +1,6 @@
-﻿using DevExpress.XtraEditors;
-using Hesap.Utils;
+﻿using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 {
@@ -29,59 +21,59 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
             if (this._firmaId !=0)
             {
                 sql = $@"SELECT 
-    ISNULL(d1.Tarih, '') AS Tarih,
+    ISNULL(d1.ReceiptDate, '') AS Tarih,
     ISNULL(d2.Id, '') AS TakipNo,
-    ISNULL(d2.KalemIslem, '') AS KalemIslem,
-    ISNULL(d1.FirmaId, 0) AS FirmaId,
-    ISNULL(fk.FirmaKodu, '') AS FirmaKodu,
-    ISNULL(fk.FirmaUnvan, '') AS FirmaUnvan,
-    ISNULL(d2.IplikId, '') AS IplikId,
-    ISNULL(ik.IplikKodu, '') AS IplikKodu,
-    ISNULL(ik.IplikAdi, '') AS IplikAdi,
-    ISNULL(d2.Marka, '') AS Marka,
-    ISNULL(d2.IplikRenkId, '') AS IplikRenkId,
-    ISNULL(brk.BoyahaneRenkKodu, '') AS IplikRenkKodu,
-    ISNULL(brk.BoyahaneRenkAdi, '') AS IplikRenkAdi,
-    ISNULL(SUM(d2.NetKg), 0) - 
-        (SELECT ISNULL(SUM(y.BrutKg), 0) 
-         FROM IplikDepo1 x 
-         INNER JOIN IplikDepo2 y ON x.Id = y.RefNo 
-         WHERE x.IslemCinsi = 'Giriş' AND y.TakipNo = ISNULL(d2.Id, '')) AS NetKg
+    ISNULL(d2.OperationType, '') AS KalemIslem,
+    ISNULL(fk.Id, 0) AS FirmaId,
+    ISNULL(fk.CompanyCode, '') AS FirmaKodu,
+    ISNULL(fk.CompanyName, '') AS FirmaUnvan,
+    ISNULL(ik.Id, '') AS IplikId,
+    ISNULL(ik.InventoryCode, '') AS IplikKodu,
+    ISNULL(ik.InventoryName, '') AS IplikAdi,
+    ISNULL(d2.Brand, '') AS Marka,
+    ISNULL(brk.Id, '') AS IplikRenkId,
+    ISNULL(brk.Code, '') AS IplikRenkKodu,
+    ISNULL(brk.Name, '') AS IplikRenkAdi,
+    ISNULL(SUM(d2.NetWeight), 0) - 
+        (SELECT ISNULL(SUM(y.GrossWeight), 0) 
+         FROM Receipt x 
+         INNER JOIN ReceiptItem y ON x.Id = y.ReceiptId 
+         WHERE x.ReceiptType = 5 AND y.TrackingNumber = ISNULL(d2.Id, '')) AS KalanKg
 
 FROM 
-    IplikDepo1 d1 
+    Receipt d1 
 INNER JOIN 
-    IplikDepo2 d2 ON d1.Id = d2.RefNo
+    ReceiptItem d2 ON d1.Id = d2.ReceiptId
 LEFT JOIN 
-    FirmaKarti fk ON d1.FirmaId = fk.Id
+    Company fk ON d1.CompanyId = fk.Id
 LEFT JOIN 
-    IplikKarti ik ON ik.Id = d2.IplikId
+    Inventory ik ON ik.Id = d2.InventoryId
 LEFT JOIN 
-    BoyahaneRenkKartlari brk ON brk.Id = d2.IplikRenkId
+    Color brk ON brk.Id = d2.ColorId
 WHERE 
-    d1.IslemCinsi = 'Çıkış' 
-    AND d2.KalemIslem NOT IN ('Satış','Fason İade','Alış İade') 
-     AND d1.FirmaId = '{this._firmaId}'
+    d1.ReceiptType = 6
+    AND d2.OperationType NOT IN ('Satış','Fason İade','Alış İade') 
+     AND d1.CompanyId = '{this._firmaId}'
 GROUP BY
-    ISNULL(d1.Tarih, ''),
+    ISNULL(d1.ReceiptDate, ''),
     ISNULL(d2.Id, ''),
-    ISNULL(d2.KalemIslem, ''),
-    ISNULL(d1.FirmaId, 0),
-    ISNULL(fk.FirmaKodu, ''),
-    ISNULL(fk.FirmaUnvan, ''),
-    ISNULL(d2.IplikId, ''),
-    ISNULL(ik.IplikKodu, ''),
-    ISNULL(ik.IplikAdi, ''),
-    ISNULL(d2.Marka, ''),
-    ISNULL(d2.IplikRenkId, ''),
-    ISNULL(brk.BoyahaneRenkKodu, ''),
-    ISNULL(brk.BoyahaneRenkAdi, '')
+    ISNULL(d2.OperationType, ''),
+    ISNULL(fk.Id, 0),
+    ISNULL(fk.CompanyCode, ''),
+    ISNULL(fk.CompanyName, ''),
+    ISNULL(ik.Id, ''),
+    ISNULL(ik.InventoryCode, ''),
+    ISNULL(ik.InventoryName, ''),
+    ISNULL(d2.Brand, ''),
+    ISNULL(brk.Id, ''),
+    ISNULL(brk.Code, ''),
+    ISNULL(brk.Name, '')
 HAVING 
-    ISNULL(SUM(d2.NetKg), 0) - 
-    (SELECT ISNULL(SUM(y.BrutKg), 0) 
-     FROM IplikDepo1 x 
-     INNER JOIN IplikDepo2 y ON x.Id = y.RefNo 
-     WHERE x.IslemCinsi = 'Giriş' AND y.TakipNo = ISNULL(d2.Id, '')) > 0
+    ISNULL(SUM(d2.NetWeight), 0) - 
+    (SELECT ISNULL(SUM(y.GrossWeight), 0) 
+     FROM Receipt x 
+     INNER JOIN ReceiptItem y ON x.Id = y.ReceiptId
+     WHERE x.ReceiptType = 5 AND y.TrackingNumber = ISNULL(d2.Id, '')) > 0
 
 					";
             }
@@ -108,7 +100,7 @@ HAVING
                 string IplikKodu = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "IplikKodu"));
                 string IplikAdi = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "IplikAdi"));
                 decimal BrutKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "BrutKg"));
-                decimal NetKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "NetKg"));
+                decimal NetKg = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "KalanKg"));
                 decimal Fiyat = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Fiyat"));
                 string DovizCinsi = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "DovizCinsi"));
                 string OrganikSertifikaNo = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "OrganikSertifikaNo"));

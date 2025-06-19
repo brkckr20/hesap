@@ -15,6 +15,7 @@ namespace Hesap.Utils
         IplikSatinAlmaTalimati=4,
         IplikDepoGiris = 5,
         IplikDepoCikis = 6,
+        KumasSatinAlmaTalimati = 7,
     }
 
     public enum InventoryTypes

@@ -72,8 +72,8 @@
             this.OperationType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbKalemIslem = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.InventoryId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.InventoryCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.InventoryName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GrossWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.NetWeight = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -638,12 +638,22 @@
             // InventoryId
             // 
             this.InventoryId.Caption = "Iplik Kayıt No";
-            this.InventoryId.ColumnEdit = this.repoBtnUrunKodu;
             this.InventoryId.FieldName = "InventoryId";
             this.InventoryId.Name = "InventoryId";
+            this.InventoryId.OptionsColumn.AllowEdit = false;
             this.InventoryId.Visible = true;
             this.InventoryId.VisibleIndex = 1;
             this.InventoryId.Width = 74;
+            // 
+            // InventoryCode
+            // 
+            this.InventoryCode.Caption = "İplik Kodu";
+            this.InventoryCode.ColumnEdit = this.repoBtnUrunKodu;
+            this.InventoryCode.FieldName = "InventoryCode";
+            this.InventoryCode.Name = "InventoryCode";
+            this.InventoryCode.Visible = true;
+            this.InventoryCode.VisibleIndex = 2;
+            this.InventoryCode.Width = 70;
             // 
             // repoBtnUrunKodu
             // 
@@ -652,16 +662,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repoBtnUrunKodu.Name = "repoBtnUrunKodu";
             this.repoBtnUrunKodu.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBtnUrunKodu_ButtonClick);
-            // 
-            // InventoryCode
-            // 
-            this.InventoryCode.Caption = "İplik Kodu";
-            this.InventoryCode.FieldName = "InventoryCode";
-            this.InventoryCode.Name = "InventoryCode";
-            this.InventoryCode.OptionsColumn.AllowEdit = false;
-            this.InventoryCode.Visible = true;
-            this.InventoryCode.VisibleIndex = 2;
-            this.InventoryCode.Width = 70;
             // 
             // InventoryName
             // 

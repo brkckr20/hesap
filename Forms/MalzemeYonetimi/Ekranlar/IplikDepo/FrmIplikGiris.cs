@@ -292,21 +292,21 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
                     gridView1.AddNewRow();
                     int newRowHandle = gridView1.FocusedRowHandle;
                     var values = item.Split(';');
-                    gridView1.SetRowCellValue(newRowHandle, "KalemIslem", values[16]);
-                    gridView1.SetRowCellValue(newRowHandle, "TakipNo", values[3]);
-                    gridView1.SetRowCellValue(newRowHandle, "IplikId", values[4]);
-                    gridView1.SetRowCellValue(newRowHandle, "IplikKodu", values[5]);
-                    gridView1.SetRowCellValue(newRowHandle, "IplikAdi", values[6]);
-                    gridView1.SetRowCellValue(newRowHandle, "BrutKg", values[7]);
-                    gridView1.SetRowCellValue(newRowHandle, "Fiyat", values[8]);
-                    gridView1.SetRowCellValue(newRowHandle, "DovizCinsi", values[9]);
-                    gridView1.SetRowCellValue(newRowHandle, "OrganikSertifikaNo", values[10]);
-                    gridView1.SetRowCellValue(newRowHandle, "Marka", values[11]);
-                    gridView1.SetRowCellValue(newRowHandle, "IplikRenkId", values[12]);
-                    gridView1.SetRowCellValue(newRowHandle, "IplikRenkKodu", values[13]);
-                    gridView1.SetRowCellValue(newRowHandle, "IplikRenkAdi", values[14]);
+                    gridView1.SetRowCellValue(newRowHandle, "OperationType", values[16]);
+                    gridView1.SetRowCellValue(newRowHandle, "TrackingNumber", values[3]);
+                    gridView1.SetRowCellValue(newRowHandle, "InventoryId", values[4]);
+                    gridView1.SetRowCellValue(newRowHandle, "InventoryCode", values[5]);
+                    gridView1.SetRowCellValue(newRowHandle, "InventoryName", values[6]);
+                    gridView1.SetRowCellValue(newRowHandle, "GrossWeight", values[15]);
+                    gridView1.SetRowCellValue(newRowHandle, "Price", values[8]);
+                    gridView1.SetRowCellValue(newRowHandle, "Forex", values[9]);
+                    //gridView1.SetRowCellValue(newRowHandle, "OrganikSertifikaNo", values[10]);
+                    gridView1.SetRowCellValue(newRowHandle, "Brand", values[11]);
+                    gridView1.SetRowCellValue(newRowHandle, "ColorId", values[12]);
+                    gridView1.SetRowCellValue(newRowHandle, "ColorCode", values[13]);
+                    gridView1.SetRowCellValue(newRowHandle, "ColorName", values[14]);
                     //gridView1.SetRowCellValue(newRowHandle, "TalimatNo", values[0]);
-                    gridView1.SetRowCellValue(newRowHandle, "NetKg", values[15]);
+                    //gridView1.SetRowCellValue(newRowHandle, "NetWeight", values[15]);
                 }
             }
 
