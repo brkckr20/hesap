@@ -68,8 +68,8 @@
             this.GrossMeter = new DevExpress.XtraGrid.Columns.GridColumn();
             this.NetMeter = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Piece = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Fire = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.TopSayisi = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Wastage = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Quantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.MeasurementUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoFiyatBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
@@ -435,8 +435,8 @@
             this.GrossMeter,
             this.NetMeter,
             this.Piece,
-            this.Fire,
-            this.TopSayisi,
+            this.Wastage,
+            this.Quantity,
             this.UnitPrice,
             this.MeasurementUnit,
             this.Forex,
@@ -573,21 +573,24 @@
             this.Piece.Visible = true;
             this.Piece.VisibleIndex = 9;
             // 
-            // Fire
+            // Wastage
             // 
-            this.Fire.Caption = "Fire";
-            this.Fire.FieldName = "Fire";
-            this.Fire.Name = "Fire";
-            this.Fire.Visible = true;
-            this.Fire.VisibleIndex = 10;
+            this.Wastage.Caption = "Fire %";
+            this.Wastage.DisplayFormat.FormatString = "0.00";
+            this.Wastage.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.Wastage.FieldName = "Wastage";
+            this.Wastage.Name = "Wastage";
+            this.Wastage.OptionsColumn.ReadOnly = true;
+            this.Wastage.Visible = true;
+            this.Wastage.VisibleIndex = 10;
             // 
-            // TopSayisi
+            // Quantity
             // 
-            this.TopSayisi.Caption = "Top Sayısı";
-            this.TopSayisi.FieldName = "TopSayisi";
-            this.TopSayisi.Name = "TopSayisi";
-            this.TopSayisi.Visible = true;
-            this.TopSayisi.VisibleIndex = 11;
+            this.Quantity.Caption = "Paket / Top Sayısı";
+            this.Quantity.FieldName = "Quantity";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.Visible = true;
+            this.Quantity.VisibleIndex = 11;
             // 
             // UnitPrice
             // 
@@ -891,8 +894,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn GrossMeter;
         private DevExpress.XtraGrid.Columns.GridColumn NetMeter;
         private DevExpress.XtraGrid.Columns.GridColumn Piece;
-        private DevExpress.XtraGrid.Columns.GridColumn Fire;
-        private DevExpress.XtraGrid.Columns.GridColumn TopSayisi;
+        private DevExpress.XtraGrid.Columns.GridColumn Wastage;
+        private DevExpress.XtraGrid.Columns.GridColumn Quantity;
         private DevExpress.XtraGrid.Columns.GridColumn MeasurementUnit;
         private DevExpress.XtraGrid.Columns.GridColumn PatternId;
         private DevExpress.XtraGrid.Columns.GridColumn ProcessId;

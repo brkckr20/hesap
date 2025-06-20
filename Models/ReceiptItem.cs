@@ -9,6 +9,7 @@ namespace Hesap.Models
         private decimal _netWeight;
         private decimal _unitPrice;
         private decimal _rowAmount;
+        private decimal _wastage;
         private int _vat;
         private string _measurementUnit;
         public int Id { get; set; }
@@ -126,8 +127,11 @@ namespace Hesap.Models
             }
         }
 
+        public decimal Wastage => CalculateWastage();
+
         public string ReceiptNo { get; set; }
         public string Brand { get; set; }
+        public int Quantity { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void UpdateRowAmount()
@@ -155,6 +159,14 @@ namespace Hesap.Models
         private decimal CalculateNetWeight()
         {
             return _unitPrice * _netWeight;
+        }
+
+        private decimal CalculateWastage()
+        {
+            if (_grossWeight == 0)
+                return 0; // Sıfıra bölme hatasını önlemek için
+
+            return ((_grossWeight - _netWeight) / _grossWeight) * 100;
         }
         //private void UpdateRowAmount()
         //{
