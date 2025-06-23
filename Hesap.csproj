@@ -399,6 +399,12 @@
     <Compile Include="Forms\MalzemeYonetimi\Kartlar\FrmKumasKarti.Designer.cs">
       <DependentUpon>FrmKumasKarti.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\LstIslemListesi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\LstIslemListesi.Designer.cs">
+      <DependentUpon>LstIslemListesi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\OrderYonetimi\Kartlar\FrmCinsiKarti.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -765,6 +771,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Kartlar\FrmKumasKarti.resx">
       <DependentUpon>FrmKumasKarti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MalzemeYonetimi\LstIslemListesi.resx">
+      <DependentUpon>LstIslemListesi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OrderYonetimi\Kartlar\FrmCinsiKarti.resx">
       <DependentUpon>FrmCinsiKarti.cs</DependentUpon>

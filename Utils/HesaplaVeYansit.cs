@@ -484,17 +484,6 @@ namespace Hesap.Utils
                 gridView1.SetRowCellValue(newRowHandle, "ColorCode", frm.Code);
                 gridView1.SetRowCellValue(newRowHandle, "ColorName", frm.Namee);
             }
-            #region eski-kodlar
-            /*Forms.Liste.FrmBoyahaneRenkKartlariListesi frm = new Forms.Liste.FrmBoyahaneRenkKartlariListesi(false);
-            frm.ShowDialog();
-            if (frm.veriler != null)
-            {
-                int newRowHandle = gridView.FocusedRowHandle;
-                gridView.SetRowCellValue(newRowHandle, "ColorId", Convert.ToInt32(frm.veriler[0]["Id"]));
-                gridView.SetRowCellValue(newRowHandle, "BoyahaneRenkKodu", frm.veriler[0]["BoyahaneRenkKodu"].ToString());
-                gridView.SetRowCellValue(newRowHandle, "BoyahaneRenkAdi", frm.veriler[0]["BoyahaneRenkAdi"].ToString());
-            }*/
-            #endregion
         }
         public string[] SorgudakiKolonIsimleriniAl(string sql)
         {

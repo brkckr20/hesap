@@ -85,7 +85,7 @@
             this.TrackingNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PatternId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ProcessId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.D2Id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoBtnMarka = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.contextMenu1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -130,6 +130,7 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1531, 53);
             this.panel3.TabIndex = 7;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // btnYeni
             // 
@@ -449,7 +450,7 @@
             this.TrackingNumber,
             this.PatternId,
             this.ProcessId,
-            this.D2Id});
+            this.ReceiptItemId});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -522,7 +523,7 @@
             this.GrM2.Name = "GrM2";
             this.GrM2.Visible = true;
             this.GrM2.VisibleIndex = 4;
-            this.GrM2.Width = 121;
+            this.GrM2.Width = 53;
             // 
             // GrossWeight
             // 
@@ -732,13 +733,13 @@
             this.ProcessId.Visible = true;
             this.ProcessId.VisibleIndex = 23;
             // 
-            // D2Id
+            // ReceiptItemId
             // 
-            this.D2Id.Caption = "Depo 2 Kayıt No";
-            this.D2Id.FieldName = "Id";
-            this.D2Id.Name = "D2Id";
-            this.D2Id.Visible = true;
-            this.D2Id.VisibleIndex = 24;
+            this.ReceiptItemId.Caption = "Depo 2 Kayıt No";
+            this.ReceiptItemId.FieldName = "ReceiptItemId";
+            this.ReceiptItemId.Name = "ReceiptItemId";
+            this.ReceiptItemId.Visible = true;
+            this.ReceiptItemId.VisibleIndex = 24;
             // 
             // repoCmbBirim
             // 
@@ -906,6 +907,6 @@
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
         private DevExpress.XtraGrid.Columns.GridColumn InventoryName;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoFiyatBirim;
-        private DevExpress.XtraGrid.Columns.GridColumn D2Id;
+        private DevExpress.XtraGrid.Columns.GridColumn ReceiptItemId;
     }
 }
