@@ -391,5 +391,11 @@ namespace Hesap
             int _type = Convert.ToInt32(ReceiptTypes.IplikSatinAlmaTalimati);
             FormAcParametreli(typeof(FrmTalimatOnaylama), new object[] { _type });
         }
+
+        private void barButtonItem8_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            int _type = Convert.ToInt32(ReceiptTypes.KumasSatinAlmaTalimati);
+            FormAcParametreli(typeof(FrmTalimatOnaylama), new object[] { _type });
+        }
     }
 }

@@ -84,7 +84,7 @@ namespace Hesap.Forms.MalzemeYonetimi
 						
                     from 
                     Receipt R with(nolock) 
-	                    inner join ReceiptItem RI on R.Id = RI.ReceiptId
+	                    left join ReceiptItem RI on R.Id = RI.ReceiptId
 	                    left join Company C with(nolock)  on C.Id = R.CompanyId
 	                    left join Inventory I with(nolock) on RI.InventoryId = I.Id
 						left join Transporter T on R.TransporterId = T.Id

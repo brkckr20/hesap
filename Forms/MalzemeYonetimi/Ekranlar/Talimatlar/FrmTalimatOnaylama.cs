@@ -2,6 +2,7 @@
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 
 namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
@@ -45,7 +46,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
 
                         from Receipt R left join ReceiptItem RI on R.Id = RI.ReceiptId
                         left join Company C on C.Id = R.CompanyId
-                        where R.ReceiptType = 4 and ISNULL(IsFinished,0) <> 1
+                        where R.ReceiptType = {_types} and ISNULL(IsFinished,0) <> 1
                         group by
                         ISNULL(R.Id,''),ISNULL(R.ReceiptNo,''),ISNULL(R.ReceiptDate,''),ISNULL(C.CompanyCode,''),ISNULL(C.CompanyName,''),R.Approved
 ";
@@ -64,7 +65,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
 
                         from Receipt R left join ReceiptItem RI on R.Id = RI.ReceiptId
                         left join Company C on C.Id = R.CompanyId
-                        where R.ReceiptType = 4 and R.Approved = {onay} and ISNULL(IsFinished,0) <> 1
+                        where R.ReceiptType = {_types} and R.Approved = {onay} and ISNULL(IsFinished,0) <> 1
                         group by
                         ISNULL(R.Id,''),ISNULL(R.ReceiptNo,''),ISNULL(R.ReceiptDate,''),ISNULL(C.CompanyCode,''),ISNULL(C.CompanyName,''),R.Approved
 ";

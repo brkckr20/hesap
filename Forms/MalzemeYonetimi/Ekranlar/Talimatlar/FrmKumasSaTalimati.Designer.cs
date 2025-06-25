@@ -86,6 +86,7 @@
             this.PatternId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ProcessId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Vat = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoBtnMarka = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.contextMenu1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -93,6 +94,7 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblOnayDurumu = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -211,6 +213,7 @@
             this.panelControl1.Controls.Add(this.label2);
             this.panelControl1.Controls.Add(this.label6);
             this.panelControl1.Controls.Add(this.label4);
+            this.panelControl1.Controls.Add(this.lblOnayDurumu);
             this.panelControl1.Controls.Add(this.label9);
             this.panelControl1.Controls.Add(this.label7);
             this.panelControl1.Controls.Add(this.label5);
@@ -450,7 +453,8 @@
             this.TrackingNumber,
             this.PatternId,
             this.ProcessId,
-            this.ReceiptItemId});
+            this.ReceiptItemId,
+            this.Vat});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.NewItemRowText = "Yeni satır eklemek için tıklayınız";
@@ -741,6 +745,14 @@
             this.ReceiptItemId.Visible = true;
             this.ReceiptItemId.VisibleIndex = 24;
             // 
+            // Vat
+            // 
+            this.Vat.Caption = "KDV %";
+            this.Vat.FieldName = "Vat";
+            this.Vat.Name = "Vat";
+            this.Vat.Visible = true;
+            this.Vat.VisibleIndex = 25;
+            // 
             // repoCmbBirim
             // 
             this.repoCmbBirim.AutoHeight = false;
@@ -803,6 +815,18 @@
             this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
+            // 
+            // lblOnayDurumu
+            // 
+            this.lblOnayDurumu.BackColor = System.Drawing.Color.Transparent;
+            this.lblOnayDurumu.Font = new System.Drawing.Font("Corbel", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblOnayDurumu.ForeColor = System.Drawing.Color.Red;
+            this.lblOnayDurumu.Location = new System.Drawing.Point(527, 8);
+            this.lblOnayDurumu.Name = "lblOnayDurumu";
+            this.lblOnayDurumu.Size = new System.Drawing.Size(95, 21);
+            this.lblOnayDurumu.TabIndex = 1120;
+            this.lblOnayDurumu.Text = "Onaylanmadı";
+            this.lblOnayDurumu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FrmKumasSaTalimati
             // 
@@ -908,5 +932,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn InventoryName;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoFiyatBirim;
         private DevExpress.XtraGrid.Columns.GridColumn ReceiptItemId;
+        private DevExpress.XtraGrid.Columns.GridColumn Vat;
+        private System.Windows.Forms.Label lblOnayDurumu;
     }
 }

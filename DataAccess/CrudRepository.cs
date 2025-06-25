@@ -277,5 +277,20 @@ namespace Hesap.DataAccess
             return _dbConnection.QueryFirstOrDefault<int?>(sql, new { Id = id });
         }
 
+        public void RemoveRowAndDatabase(GridView gridView, string TableName)
+        {
+            int rowHandle = gridView.FocusedRowHandle;
+            int Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("ReceiptItemId"));
+           
+            if (rowHandle != -1)
+            {
+                if (bildirim.SilmeOnayı())
+                {
+                    this.Delete(TableName, Id);
+                    gridView.DeleteRow(rowHandle);
+                }
+            }
+        }
+
     }
 }
