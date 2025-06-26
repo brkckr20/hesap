@@ -29,6 +29,8 @@ namespace Hesap.Forms.MalzemeYonetimi
                     return "İplik Depo Çıkış";
                 case 7:
                     return "Kumaş Satın Alma Talimatı";
+                case 8:
+                    return "Kumaş Depo Giriş";
                 default:
                     return "";
             }

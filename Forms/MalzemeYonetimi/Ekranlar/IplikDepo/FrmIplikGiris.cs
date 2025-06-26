@@ -228,7 +228,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
 
         private void btnTalimatlar_Click(object sender, EventArgs e)
         {
-            FrmTalimatlar frm = new FrmTalimatlar();
+            FrmTalimatlar frm = new FrmTalimatlar(ReceiptTypes.IplikSatinAlmaTalimati);
             frm.ShowDialog();
             if (frm.satinAlmaListesi.Count > 0)
             {

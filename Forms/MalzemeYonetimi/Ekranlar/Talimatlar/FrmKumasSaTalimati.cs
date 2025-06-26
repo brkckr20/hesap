@@ -60,7 +60,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 }
                 var parameters = new Dictionary<string, object>
                 {
-                    { "ReceiptType", ReceiptTypes.KumasSatinAlmaTalimati }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "ReceiptNo", txtTalimatNo.Text },{ "Authorized", txtYetkili.Text },{"Maturity",txtVade.Text},{"PaymentType",comboBoxEdit1.Text},/*{"Approved",Onayli},*/{"SavedUser",CurrentUser.UserId},{"SavedDate",DateTime.Now}, {"IsFinished",0}
+                    { "ReceiptType", ReceiptTypes.KumasSatinAlmaTalimati }, { "ReceiptDate", dateTarih.EditValue }, { "CompanyId", this.FirmaId },{ "Explanation", rchAciklama.Text }, { "ReceiptNo", txtTalimatNo.Text },{ "Authorized", txtYetkili.Text },{"Maturity",txtVade.Text},{"PaymentType",comboBoxEdit1.Text},/*{"Approved",Onayli},*/{"SavedUser",CurrentUser.UserId},{"SavedDate",DateTime.Now}, {"IsFinished",0},{"Approved",0}
                 };
                 if (this.Id == 0)
                 {
@@ -73,31 +73,43 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                         var rec_id = crudRepository.Insert(TableName2, values);
                         gridView1.SetRowCellValue(i, "ReceiptItemId", rec_id);
                     }
+                    lblOnayDurumu.Text = "Onaylanmadı";
+                    lblOnayDurumu.ForeColor = System.Drawing.Color.Red;
                     lblOnayDurumu.Visible = true;
                     bildirim.Basarili();
                 }
                 else
                 {
-                    parameters.Add("UpdatedDate", DateTime.Now);
-                    parameters.Add("UpdatedUser", CurrentUser.UserId);
-                    crudRepository.Update(TableName1, Id, parameters);
-                    for (int i = 0; i < gridView1.RowCount - 1; i++)
+                    if (lblOnayDurumu.Text == "Onaylandı")
                     {
-                        var recIdObj = gridView1.GetRowCellValue(i, "ReceiptItemId");
-                        int rec_id = recIdObj != null ? Convert.ToInt32(recIdObj) : 0;
-                        var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "GrossWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "GrossWeight").ToString()) }, { "NetWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "NetWeight").ToString()) }, { "UnitPrice", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) }, { "Vat", Convert.ToInt32(gridView1.GetRowCellValue(i, "Vat")) }, { "UUID", gridView1.GetRowCellValue(i, "UUID") }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }, { "MeasurementUnit", gridView1.GetRowCellValue(i, "MeasurementUnit") }, { "ColorId", Convert.ToInt32(gridView1.GetRowCellValue(i, "ColorId")) }, { "Wastage", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "Wastage").ToString()) }, { "Quantity", Convert.ToInt32(gridView1.GetRowCellValue(i, "Quantity")) } };
-                        if (rec_id != 0)
-                        {
-                            crudRepository.Update(TableName2, rec_id, values);
-                        }
-                        else
-                        {
-                            var new_rec_id = crudRepository.Insert(TableName2, values);
-                            gridView1.SetRowCellValue(i, "ReceiptItemId", new_rec_id);
-                        }
+                        bildirim.Uyari("Onaylanmış talimat üzerinde değişiklik yapamazsınız!\nİşleme devam edebilmek için yetkili kişinden onayı kaldırmasını talep ediniz");
+                        return;
                     }
-                    lblOnayDurumu.Visible = true;
-                    bildirim.GuncellemeBasarili();
+                    else
+                    {
+                        parameters.Add("UpdatedDate", DateTime.Now);
+                        parameters.Add("UpdatedUser", CurrentUser.UserId);
+                        crudRepository.Update(TableName1, Id, parameters);
+                        for (int i = 0; i < gridView1.RowCount - 1; i++)
+                        {
+                            var recIdObj = gridView1.GetRowCellValue(i, "ReceiptItemId");
+                            int rec_id = recIdObj != null ? Convert.ToInt32(recIdObj) : 0;
+                            var values = new Dictionary<string, object> { { "ReceiptId", this.Id }, { "OperationType", gridView1.GetRowCellValue(i, "OperationType") }, { "InventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "InventoryId")) }, { "GrossWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "GrossWeight").ToString()) }, { "NetWeight", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "NetWeight").ToString()) }, { "UnitPrice", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "UnitPrice").ToString()) }, { "RowAmount", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "RowAmount").ToString()) }, { "Vat", Convert.ToInt32(gridView1.GetRowCellValue(i, "Vat")) }, { "UUID", gridView1.GetRowCellValue(i, "UUID") }, { "Explanation", gridView1.GetRowCellValue(i, "Explanation") }, { "MeasurementUnit", gridView1.GetRowCellValue(i, "MeasurementUnit") }, { "ColorId", Convert.ToInt32(gridView1.GetRowCellValue(i, "ColorId")) }, { "Wastage", yardimciAraclar.ConvertDecimal(gridView1.GetRowCellValue(i, "Wastage").ToString()) }, { "Quantity", Convert.ToInt32(gridView1.GetRowCellValue(i, "Quantity")) } };
+                            if (rec_id != 0)
+                            {
+                                crudRepository.Update(TableName2, rec_id, values);
+                            }
+                            else
+                            {
+                                var new_rec_id = crudRepository.Insert(TableName2, values);
+                                gridView1.SetRowCellValue(i, "ReceiptItemId", new_rec_id);
+                            }
+                        }
+                        lblOnayDurumu.Text = "Onaylanmadı";
+                        lblOnayDurumu.ForeColor = System.Drawing.Color.Red;
+                        lblOnayDurumu.Visible = true;
+                        bildirim.GuncellemeBasarili();
+                    }
                 }
             }
             catch (Exception ex)
@@ -135,6 +147,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             gridControl1.DataSource = new BindingList<ReceiptItem>();
             this.Id = 0;
             this.FirmaId = 0;
+            lblOnayDurumu.Visible = false;
         }
 
         private void btnListe_Click(object sender, EventArgs e)
@@ -193,7 +206,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                     gridView1.SetRowCellValue(newRowHandle, "ColorName", values[40]);
                 }
             }
-    }
+        }
 
         private void gridView1_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
         {
@@ -231,7 +244,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                     ISNULL(R.Id,0) Id, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,
                     ISNULL(R.InvoiceDate,'') InvoiceDate, ISNULL(R.InvoiceNo,'') InvoiceNo, ISNULL(R.DispatchDate,'') DispatchDate,
                     ISNULL(R.DispatchNo,'') DispatchNo, ISNULL(R.Explanation,'') ExplanationFis,ISNULL(R.ReceiptNo,'') ReceiptNo,ISNULL(R.Authorized,'') Authorized,ISNULL(R.Maturity,0) Maturity,
-					ISNULL(R.PaymentType,0) PaymentType,
+					ISNULL(R.PaymentType,0) PaymentType,ISNULL(R.Approved,0) Approved,
                     ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.Piece,0) Piece, ISNULL(RI.UnitPrice,0) UnitPrice,
                     ISNULL(RI.UUID,'') UUID, ISNULL(RI.RowAmount,0) RowAmount, ISNULL(RI.Vat,0) Vat, ISNULL(RI.Explanation,'') Explanation, ISNULL(RI.TrackingNumber,'') TrackingNumber,
 					ISNULL(RI.GrossWeight,0) GrossWeight,ISNULL(RI.NetWeight,0) NetWeight,ISNULL(RI.MeasurementUnit,'') MeasurementUnit,ISNULL(RI.ReceiptNo,'') ReceiptNo,
@@ -249,7 +262,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                 {
                     yardimciAraclar.ClearGridViewRows(gridView1);
                     var item = liste[0];
-                    dateTarih.Text = item.ReceiptDate.ToString();
+                    dateTarih.EditValue = item.ReceiptDate;
                     this.Id = Convert.ToInt32(item.Id);
                     this.FirmaId = Convert.ToInt32(item.CompanyId);
                     txtFirmaKodu.Text = item.CompanyCode.ToString();
@@ -263,6 +276,8 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
                     txtYetkili.Text = item.Authorized.ToString();
                     txtVade.Text = item.Maturity.ToString();
                     comboBoxEdit1.Text = item.PaymentType.ToString();
+                    lblOnayDurumu.Text = Convert.ToBoolean(item.Approved) == true ? "Onaylandı" : "Onaylanmadı";
+                    lblOnayDurumu.ForeColor = lblOnayDurumu.Text == "Onaylandı" ? System.Drawing.Color.Green : System.Drawing.Color.Red;
                     gridControl1.DataSource = liste;
                 }
                 else
@@ -290,7 +305,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             GridView gridView = sender as GridView;
             if (e.KeyCode == Keys.Delete)
             {
-                crudRepository.RemoveRowAndDatabase(gridView,TableName2);
+                crudRepository.RemoveRowAndDatabase(gridView, TableName2);
             }
         }
 
@@ -310,7 +325,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
 
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            yansit.MalzemeBilgileriniGrideYansit(gridView1,InventoryTypes.Kumas);
+            yansit.MalzemeBilgileriniGrideYansit(gridView1, InventoryTypes.Kumas);
         }
 
     }
