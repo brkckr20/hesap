@@ -74,10 +74,10 @@
             this.btnStokSecimi = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.KalemIslem = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.OperationType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbKalemIslem = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.KumasId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.KumasKodu = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.InventoryId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.InventoryCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.KumasAdi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GrM2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -639,9 +639,9 @@
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.KalemIslem,
-            this.KumasId,
-            this.KumasKodu,
+            this.OperationType,
+            this.InventoryId,
+            this.InventoryCode,
             this.KumasAdi,
             this.GrM2,
             this.BrutKg,
@@ -672,15 +672,15 @@
             this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // KalemIslem
+            // OperationType
             // 
-            this.KalemIslem.Caption = "Kalem İşlem";
-            this.KalemIslem.ColumnEdit = this.repoCmbKalemIslem;
-            this.KalemIslem.FieldName = "KalemIslem";
-            this.KalemIslem.Name = "KalemIslem";
-            this.KalemIslem.Visible = true;
-            this.KalemIslem.VisibleIndex = 0;
-            this.KalemIslem.Width = 91;
+            this.OperationType.Caption = "Kalem İşlem";
+            this.OperationType.ColumnEdit = this.repoCmbKalemIslem;
+            this.OperationType.FieldName = "OperationType";
+            this.OperationType.Name = "OperationType";
+            this.OperationType.Visible = true;
+            this.OperationType.VisibleIndex = 0;
+            this.OperationType.Width = 91;
             // 
             // repoCmbKalemIslem
             // 
@@ -700,24 +700,24 @@
             this.repoCmbKalemIslem.Name = "repoCmbKalemIslem";
             this.repoCmbKalemIslem.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
-            // KumasId
+            // InventoryId
             // 
-            this.KumasId.Caption = "Kumaş Kayıt No";
-            this.KumasId.FieldName = "KumasId";
-            this.KumasId.Name = "KumasId";
-            this.KumasId.Visible = true;
-            this.KumasId.VisibleIndex = 1;
-            this.KumasId.Width = 74;
+            this.InventoryId.Caption = "Kumaş Kayıt No";
+            this.InventoryId.FieldName = "InventoryId";
+            this.InventoryId.Name = "InventoryId";
+            this.InventoryId.Visible = true;
+            this.InventoryId.VisibleIndex = 1;
+            this.InventoryId.Width = 74;
             // 
-            // KumasKodu
+            // InventoryCode
             // 
-            this.KumasKodu.Caption = "Kumaş Kodu";
-            this.KumasKodu.ColumnEdit = this.repoBtnUrunKodu;
-            this.KumasKodu.FieldName = "KumasKodu";
-            this.KumasKodu.Name = "KumasKodu";
-            this.KumasKodu.Visible = true;
-            this.KumasKodu.VisibleIndex = 2;
-            this.KumasKodu.Width = 70;
+            this.InventoryCode.Caption = "Kumaş Kodu";
+            this.InventoryCode.ColumnEdit = this.repoBtnUrunKodu;
+            this.InventoryCode.FieldName = "InventoryCode";
+            this.InventoryCode.Name = "InventoryCode";
+            this.InventoryCode.Visible = true;
+            this.InventoryCode.VisibleIndex = 2;
+            this.InventoryCode.Width = 70;
             // 
             // repoBtnUrunKodu
             // 
@@ -1086,10 +1086,10 @@
         private DevExpress.XtraEditors.SimpleButton btnStokSecimi;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn KalemIslem;
+        private DevExpress.XtraGrid.Columns.GridColumn OperationType;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbKalemIslem;
-        private DevExpress.XtraGrid.Columns.GridColumn KumasId;
-        private DevExpress.XtraGrid.Columns.GridColumn KumasKodu;
+        private DevExpress.XtraGrid.Columns.GridColumn InventoryId;
+        private DevExpress.XtraGrid.Columns.GridColumn InventoryCode;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnUrunKodu;
         private DevExpress.XtraGrid.Columns.GridColumn KumasAdi;
         private DevExpress.XtraGrid.Columns.GridColumn GrM2;

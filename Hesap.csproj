@@ -393,12 +393,6 @@
     <Compile Include="Forms\MalzemeYonetimi\FrmMalzemeKarti.Designer.cs">
       <DependentUpon>FrmMalzemeKarti.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MalzemeYonetimi\Kartlar\FrmKumasKarti.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MalzemeYonetimi\Kartlar\FrmKumasKarti.Designer.cs">
-      <DependentUpon>FrmKumasKarti.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\MalzemeYonetimi\LstIslemListesi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -769,9 +763,6 @@
     <EmbeddedResource Include="Forms\MalzemeYonetimi\FrmMalzemeKarti.resx">
       <DependentUpon>FrmMalzemeKarti.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MalzemeYonetimi\Kartlar\FrmKumasKarti.resx">
-      <DependentUpon>FrmKumasKarti.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MalzemeYonetimi\LstIslemListesi.resx">
       <DependentUpon>LstIslemListesi.cs</DependentUpon>
     </EmbeddedResource>
@@ -927,7 +918,9 @@
     <None Include="Resources\BookmarkBig.ico" />
     <None Include="Resources\Yarn Emoji.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Forms\MalzemeYonetimi\Kartlar\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

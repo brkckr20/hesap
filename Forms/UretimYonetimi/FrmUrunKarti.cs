@@ -46,7 +46,7 @@ namespace Hesap.Forms.UretimYonetimi
                 var InvParams = new Dictionary<string, object>
             {
                 { "InventoryCode", txtUrunKodu.Text }, { "InventoryName", InventoryName },
-                {"Type" , InventoryTypes.Kumas}, { "IsUse", chckPasif.Checked }, {"Unit",""},{"CombinedCode",CombinedCode},{"SubType" , KumasAdiOzellik},{"IsPrefix" , false}
+                {"Type" , InventoryTypes.Kumas}, { "IsUse", chckPasif.Checked }, {"Unit",""},{"CombinedCode",CombinedCode},{"SubType" , KumasAdiOzellik},{"IsPrefix" , false}//,{"IsStock" , true}
             };
                 if (this.Id == 0)
                 {

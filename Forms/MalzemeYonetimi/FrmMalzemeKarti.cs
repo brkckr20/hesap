@@ -31,17 +31,18 @@ namespace Hesap.Forms.MalzemeYonetimi
                 { "SubType", ""},
                 { "IsUse", chckKullanimda.Checked},
                 { "IsStock", chckStokMu.Checked},
+                { "IsPrefix", false},
             };
             using (var connection = new Baglanti().GetConnection())
             {
                 if (this.Id == 0)
                 {
-                    this.Id = cRUD.InsertRecord(TableName, parameters);
+                    this.Id = crudRepository.Insert(TableName, parameters);
                     bildirim.Basarili();
                 }
                 else
                 {
-                    cRUD.UpdateRecord(TableName, parameters, this.Id);
+                    crudRepository.Update(TableName, this.Id, parameters);
                     bildirim.GuncellemeBasarili();
                 }
             }
@@ -49,7 +50,7 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void grupKodlarınıGösterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          //  pnlGrupKodlari.Visible = !pnlGrupKodlari.Visible;
+            //  pnlGrupKodlari.Visible = !pnlGrupKodlari.Visible;
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace Hesap.Forms.MalzemeYonetimi
 
         private void simpleButton5_Click(object sender, EventArgs e)
         {
-            crudRepository.ConfirmAndDeleteCard(TableName,this.Id,Temizle);
+            crudRepository.ConfirmAndDeleteCard(TableName, this.Id, Temizle);
         }
         void ListeGetir(string KayitTipi)
         {

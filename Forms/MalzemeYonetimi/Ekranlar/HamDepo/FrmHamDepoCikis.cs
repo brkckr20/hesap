@@ -1,15 +1,9 @@
-﻿using DevExpress.XtraEditors;
-using Hesap.Context;
+﻿using Hesap.DataAccess;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
 {
@@ -21,6 +15,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         }
         int Id = 0, FirmaId = 0, TalimatId = 0, TasiyiciId = 0;
         CRUD_Operations cRUD = new CRUD_Operations();
+        CrudRepository crudRepository = new CrudRepository();
         Metotlar metotlar = new Metotlar();
         Bildirim bildirim = new Bildirim();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
@@ -29,7 +24,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         {
             yansit.FirmaKoduVeAdiYansit(txtFirmaKodu, txtFirmaUnvan, ref this.FirmaId);
         }
-
+        //gridcontrol üzerindeki field isimlerinden devam edilecek - 27.06.2025 
         private void FrmHamDepoCikis_Load(object sender, EventArgs e)
         {
             BaslangicVerileri();
@@ -37,7 +32,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            yardimciAraclar.KolonDurumunuKaydet(gridView1, this.Text);
+            crudRepository.SaveColumnStatus(gridView1, this.Text);
         }
 
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -47,9 +42,9 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
 
         private void btnAciklamaGetir_Click(object sender, EventArgs e)
         {
-            Liste.FrmAciklamaListesi frm = new Liste.FrmAciklamaListesi(0);
-            frm.ShowDialog();
-            rchAciklama.EditValue = frm.Aciklama;
+            //Liste.FrmAciklamaListesi frm = new Liste.FrmAciklamaListesi(0);
+            //frm.ShowDialog();
+            //rchAciklama.EditValue = frm.Aciklama;
         }
 
         private void btnStokSecimi_Click(object sender, EventArgs e)
@@ -79,66 +74,67 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             int newRowHandle = gridView1.FocusedRowHandle;
-            yansit.KumasBilgileriYansit(gridView1, newRowHandle);
+            yansit.MalzemeBilgileriniGrideYansit(gridView1, InventoryTypes.Kumas);
         }
 
         private void txtNakliyeci_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            yansit.TasiyiciBilgileriYansit(txtUnvan,txtAd,txtSoyad,txtTC,txtPlaka,txtDorse,txtNakliyeci,ref this.TasiyiciId);
+            yansit.TasiyiciBilgileriYansit(txtUnvan, txtAd, txtSoyad, txtTC, txtPlaka, txtDorse, txtNakliyeci, ref this.TasiyiciId);
         }
 
         void BaslangicVerileri()
         {
             dateTarih.EditValue = DateTime.Now;
             dateIrsaliyeTarihi.EditValue = DateTime.Now;
-            gridControl1.DataSource = new BindingList<_KumasDepoKalem>();
-            yardimciAraclar.KolonlariGetir(gridView1, this.Text);
+            gridControl1.DataSource = new BindingList<ReceiptItem>();
+            crudRepository.GetUserColumns(gridView1, this.Text);
         }
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            var parameters = new Dictionary<string, object>
-            {
-                { "IslemCinsi", "Çıkış" },
-                { "Tarih", dateTarih.EditValue },
-                { "IrsaliyeTarihi", dateIrsaliyeTarihi.EditValue },
-                { "IrsaliyeNo", txtIrsaliyeNo.Text },
-                { "FirmaId", this.FirmaId },
-                { "Aciklama", rchAciklama.Text },
-                { "TasiyiciId", txtNakliyeci.Text },
-                { "TalimatId", TalimatId },
+            //    var parameters = new Dictionary<string, object>
+            //    {
+            //        { "IslemCinsi", "Çıkış" },
+            //        { "Tarih", dateTarih.EditValue },
+            //        { "IrsaliyeTarihi", dateIrsaliyeTarihi.EditValue },
+            //        { "IrsaliyeNo", txtIrsaliyeNo.Text },
+            //        { "FirmaId", this.FirmaId },
+            //        { "Aciklama", rchAciklama.Text },
+            //        { "TasiyiciId", txtNakliyeci.Text },
+            //        { "TalimatId", TalimatId },
 
-            };
-            if (this.Id == 0)
-            {
-                this.Id = cRUD.InsertRecord("HamDepo1", parameters);
-                txtKayitNo.Text = this.Id.ToString();
-                for (int i = 0; i < gridView1.RowCount - 1; i++)
-                {
-                    var kalemParameters = metotlar.CreateHameDepo2KalemParameters(i, this.Id, gridView1);
-                    var d2Id = cRUD.InsertRecord("HamDepo2", kalemParameters);
-                    gridView1.SetRowCellValue(i, "D2Id", d2Id);
-                }
-                bildirim.Basarili();
-            }
-            else
-            {
-                cRUD.UpdateRecord("HamDepo1", parameters, this.Id);
-                for (int i = 0; i < gridView1.RowCount - 1; i++)
-                {
-                    var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
-                    var kalemParameters = metotlar.CreateHameDepo2KalemParameters(i, this.Id, gridView1);
-                    if (d2Id > 0)
-                    {
-                        cRUD.UpdateRecord("HamDepo2", kalemParameters, d2Id);
-                    }
-                    else
-                    {
-                        var yeniId = cRUD.InsertRecord("HamDepo2", kalemParameters);
-                        gridView1.SetRowCellValue(i, "D2Id", yeniId);
-                    }
-                }
-                bildirim.GuncellemeBasarili();
-            }
+            //    };
+            //    if (this.Id == 0)
+            //    {
+            //        this.Id = cRUD.InsertRecord("HamDepo1", parameters);
+            //        txtKayitNo.Text = this.Id.ToString();
+            //        for (int i = 0; i < gridView1.RowCount - 1; i++)
+            //        {
+            //            var kalemParameters = metotlar.CreateHameDepo2KalemParameters(i, this.Id, gridView1);
+            //            var d2Id = cRUD.InsertRecord("HamDepo2", kalemParameters);
+            //            gridView1.SetRowCellValue(i, "D2Id", d2Id);
+            //        }
+            //        bildirim.Basarili();
+            //    }
+            //    else
+            //    {
+            //        cRUD.UpdateRecord("HamDepo1", parameters, this.Id);
+            //        for (int i = 0; i < gridView1.RowCount - 1; i++)
+            //        {
+            //            var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
+            //            var kalemParameters = metotlar.CreateHameDepo2KalemParameters(i, this.Id, gridView1);
+            //            if (d2Id > 0)
+            //            {
+            //                cRUD.UpdateRecord("HamDepo2", kalemParameters, d2Id);
+            //            }
+            //            else
+            //            {
+            //                var yeniId = cRUD.InsertRecord("HamDepo2", kalemParameters);
+            //                gridView1.SetRowCellValue(i, "D2Id", yeniId);
+            //            }
+            //        }
+            //        bildirim.GuncellemeBasarili();
+            //    }
+            //}
         }
     }
 }

@@ -38,8 +38,8 @@ namespace Hesap.Forms.Liste
 	                    ISNULL(InventoryCode,'') [Kodu]
 	                    ,ISNULL(InventoryName,'') [Adi]
 						,ISNULL(IsUse,'') [Kullanimda]						
-						,ISNULL(IsStock,'') [Stok]
-                    FROM Inventory where Type = {this._Type}";
+						--,ISNULL(IsStock,'') [Stok]
+                    FROM Inventory where Type = {this._Type} and IsPrefix = 0";
             listele.Liste(sql, gridControl1);
         }
 
