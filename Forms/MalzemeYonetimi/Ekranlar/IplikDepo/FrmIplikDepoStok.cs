@@ -15,7 +15,7 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.IplikDepo
             InitializeComponent();
         }
 
-        private void FrmIplikDepoStok_Load(object sender, EventArgs e) // kontrol edilecek. son girişi göstermemişti
+        private void FrmIplikDepoStok_Load(object sender, EventArgs e)
         {
             string sql = @"SELECT 
                             ISNULL(d2.Id, 0) AS [TakipNo],

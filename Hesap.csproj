@@ -272,6 +272,12 @@
     <Compile Include="Forms\Liste\FrmUrunReceteKartiListesi.Designer.cs">
       <DependentUpon>FrmUrunReceteKartiListesi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\FrmStokSecimi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\FrmStokSecimi.Designer.cs">
+      <DependentUpon>FrmStokSecimi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoCikis.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -702,6 +708,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Liste\FrmUrunReceteKartiListesi.resx">
       <DependentUpon>FrmUrunReceteKartiListesi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\FrmStokSecimi.resx">
+      <DependentUpon>FrmStokSecimi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\HamDepo\FrmHamDepoCikis.resx">
       <DependentUpon>FrmHamDepoCikis.cs</DependentUpon>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hesap.Utils
+﻿namespace Hesap.Utils
 {
     public enum ReceiptTypes
     {
@@ -17,6 +11,7 @@ namespace Hesap.Utils
         IplikDepoCikis = 6,
         KumasSatinAlmaTalimati = 7,
         KumasDepoGiris = 8,
+        KumasDepoCikis = 9,
     }
 
     public enum InventoryTypes
