@@ -138,6 +138,91 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo
             }
         }
 
+        private void btnGeri_Click(object sender, EventArgs e)
+        {
+            KayitlariGetir("Önceki");
+        }
+
+        private void btnIleri_Click(object sender, EventArgs e)
+        {
+            KayitlariGetir("Sonraki");
+        }
+        public void KayitlariGetir(string KayitTipi)
+        {
+            try
+            {
+                int id = this.Id;
+                int? istenenId = crudRepository.GetIdForAfterOrBeforeRecord(KayitTipi, TableName1, id, TableName2, "ReceiptId", ReceiptType);
+
+                if (istenenId == null)
+                {
+                    bildirim.Uyari("Başka bir kayıt bulunamadı.");
+                    return;
+                }
+
+                string query = $@"SELECT 
+                    ISNULL(R.Id,0) Id, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,
+                    ISNULL(R.InvoiceDate,'') InvoiceDate, ISNULL(R.InvoiceNo,'') InvoiceNo, ISNULL(R.DispatchDate,'') DispatchDate,
+                    ISNULL(R.DispatchNo,'') DispatchNo, ISNULL(R.Explanation,'') ExplanationFis,ISNULL(R.ReceiptNo,'') ReceiptNo,ISNULL(R.Authorized,'') Authorized,ISNULL(R.Maturity,0) Maturity,
+					ISNULL(R.PaymentType,0) PaymentType,
+                    ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.Piece,0) Piece, ISNULL(RI.UnitPrice,0) UnitPrice,
+                    ISNULL(RI.UUID,'') UUID, ISNULL(RI.RowAmount,0) RowAmount, ISNULL(RI.Vat,0) Vat, ISNULL(RI.Explanation,'') Explanation, ISNULL(RI.TrackingNumber,'') TrackingNumber,
+					ISNULL(RI.GrossWeight,0) GrossWeight,ISNULL(RI.NetWeight,0) NetWeight,ISNULL(RI.MeasurementUnit,'') MeasurementUnit,ISNULL(RI.ReceiptNo,'') ReceiptNo,
+                    ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
+                    ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName
+					,ISNULL(T.Name,'') [TName],ISNULL(T.Surname,'') [Surname],ISNULL(T.TCKN,'') [TCKN],ISNULL(T.NumberPlate,'') [NumberPlate],ISNULL(T.TrailerNumber,'') [TrailerNumber],ISNULL(T.Title,'') [Title],ISNULL(T.Id,'') [TransporterId]
+                    FROM Receipt R
+                    INNER JOIN ReceiptItem RI ON R.Id = RI.ReceiptId
+                    LEFT JOIN Company C ON C.Id = R.CompanyId
+                    LEFT JOIN Inventory I ON I.Id = RI.InventoryId
+                    left join Transporter T on T.Id = R.TransporterId
+                    WHERE R.ReceiptType = {ReceiptType} AND R.Id = @Id";
+
+                var liste = crudRepository.GetAfterOrBeforeRecord(query, istenenId.Value);
+
+                if (liste != null && liste.Count > 0)
+                {
+                    yardimciAraclar.ClearGridViewRows(gridView1);
+                    var item = liste[0];
+                    dateTarih.EditValue = item.ReceiptDate;
+                    this.Id = Convert.ToInt32(item.Id);
+                    this.FirmaId = Convert.ToInt32(item.CompanyId);
+                    txtFirmaKodu.Text = item.CompanyCode.ToString();
+                    txtFirmaUnvan.Text = item.CompanyName.ToString();
+                    //dateFaturaTarihi.Text = item.InvoiceDate.ToString();
+                    //txtFaturaNo.Text = item.InvoiceNo.ToString();
+                    dateIrsaliyeTarihi.EditValue = item.DispatchDate;
+                    txtIrsaliyeNo.Text = item.DispatchNo.ToString();
+                    rchAciklama.Text = item.ExplanationFis.ToString();
+                    //txtYetkili.Text = item.Authorized.ToString();
+                    //txtVade.Text = item.Maturity.ToString();
+                    //comboBoxEdit1.Text = item.PaymentType.ToString();
+                    txtNakliyeci.Text = item.TransporterId.ToString();
+                    this.TasiyiciId = Convert.ToInt32(item.TransporterId.ToString());
+                    txtAd.Text = item.TName.ToString();
+                    txtSoyad.Text = item.Surname.ToString();
+                    txtTC.Text = item.TCKN.ToString();
+                    txtPlaka.Text = item.NumberPlate.ToString();
+                    txtDorse.Text = item.TrailerNumber.ToString();
+                    txtUnvan.Text = item.Title.ToString();
+                    gridControl1.DataSource = liste;
+                }
+                else
+                {
+                    bildirim.Uyari("Kayıt bulunamadı.");
+                }
+            }
+            catch (Exception ex)
+            {
+                bildirim.Uyari("Hata: " + ex.Message);
+            }
+        }
+
+        private void btnTalimatlar_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             yansit.MalzemeBilgileriniGrideYansit(gridView1, InventoryTypes.Kumas);

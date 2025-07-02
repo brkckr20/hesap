@@ -12,6 +12,7 @@
         KumasSatinAlmaTalimati = 7,
         KumasDepoGiris = 8,
         KumasDepoCikis = 9,
+        BoyahaneTalimati = 10,
     }
 
     public enum InventoryTypes

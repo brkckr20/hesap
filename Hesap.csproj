@@ -351,6 +351,12 @@
     <Compile Include="Forms\MalzemeYonetimi\Ekranlar\IplikDepo\FrmTalimatlar.Designer.cs">
       <DependentUpon>FrmTalimatlar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\Talimatlar\FrmBoyaTalimati.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MalzemeYonetimi\Ekranlar\Talimatlar\FrmBoyaTalimati.Designer.cs">
+      <DependentUpon>FrmBoyaTalimati.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MalzemeYonetimi\Ekranlar\Talimatlar\FrmIplikSaTalimati.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -748,6 +754,9 @@
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\IplikDepo\FrmTalimatlar.resx">
       <DependentUpon>FrmTalimatlar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\Talimatlar\FrmBoyaTalimati.resx">
+      <DependentUpon>FrmBoyaTalimati.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MalzemeYonetimi\Ekranlar\Talimatlar\FrmIplikSaTalimati.resx">
       <DependentUpon>FrmIplikSaTalimati.cs</DependentUpon>
     </EmbeddedResource>
@@ -915,6 +924,7 @@
     <Content Include="e-Irsaliye\Invoice.xslt" />
     <Content Include="e-Irsaliye\Main.xslt" />
     <Content Include="MaliyetHesaplama_orj.txt" />
+    <None Include="Resources\BoyaTal.png" />
     <None Include="Resources\AppIcon.ico" />
     <None Include="Resources\Towel.ico" />
     <None Include="Resources\Diversity.ico" />

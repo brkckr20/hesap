@@ -304,7 +304,7 @@ namespace Hesap
 
         private void barButtonItem18_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Forms.MalzemeYonetimi.Ekranlar.Talimatlar.FrmKumasSaTalimati frm = new Forms.MalzemeYonetimi.Ekranlar.Talimatlar.FrmKumasSaTalimati();
+            FrmKumasSaTalimati frm = new FrmKumasSaTalimati();
             FormAc(frm);
         }
 
@@ -396,6 +396,12 @@ namespace Hesap
         {
             int _type = Convert.ToInt32(ReceiptTypes.KumasSatinAlmaTalimati);
             FormAcParametreli(typeof(FrmTalimatOnaylama), new object[] { _type });
+        }
+
+        private void barBtnBoyaTalimati_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            FrmBoyaTalimati frm = new FrmBoyaTalimati();
+            FormAc(frm);
         }
     }
 }

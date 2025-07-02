@@ -93,6 +93,16 @@ namespace Hesap.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BoyaTal {
+            get {
+                object obj = ResourceManager.GetObject("BoyaTal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Brief {
             get {
                 object obj = ResourceManager.GetObject("Brief", resourceCulture);

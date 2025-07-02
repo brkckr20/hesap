@@ -78,8 +78,10 @@
             this.barOnayIslemleri = new DevExpress.XtraBars.BarButtonItem();
             this.barOnayIslem = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
+            this.barBtnBoyaTalimati = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -103,7 +105,6 @@
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -163,9 +164,10 @@
             this.barButtonItem5,
             this.barButtonItem7,
             this.barSubItem1,
-            this.barButtonItem8});
+            this.barButtonItem8,
+            this.barBtnBoyaTalimati});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 52;
+            this.ribbon.MaxItemId = 53;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -569,6 +571,15 @@
             this.barButtonItem5.Name = "barButtonItem5";
             this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick_1);
             // 
+            // barButtonItem8
+            // 
+            this.barButtonItem8.Caption = "Kumaş Satın Alma Talimatı Onaylama";
+            this.barButtonItem8.Id = 51;
+            this.barButtonItem8.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.Image")));
+            this.barButtonItem8.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.LargeImage")));
+            this.barButtonItem8.Name = "barButtonItem8";
+            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem8_ItemClick_1);
+            // 
             // barButtonItem7
             // 
             this.barButtonItem7.Caption = "Fason İşlem Talimat Girişi";
@@ -583,7 +594,17 @@
             this.barSubItem1.Id = 50;
             this.barSubItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barSubItem1.ImageOptions.Image")));
             this.barSubItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barSubItem1.ImageOptions.LargeImage")));
+            this.barSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barBtnBoyaTalimati)});
             this.barSubItem1.Name = "barSubItem1";
+            // 
+            // barBtnBoyaTalimati
+            // 
+            this.barBtnBoyaTalimati.Caption = "Boya Talimatı Girişi";
+            this.barBtnBoyaTalimati.Id = 52;
+            this.barBtnBoyaTalimati.ImageOptions.Image = global::Hesap.Properties.Resources.BoyaTal;
+            this.barBtnBoyaTalimati.Name = "barBtnBoyaTalimati";
+            this.barBtnBoyaTalimati.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnBoyaTalimati_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -755,15 +776,6 @@
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Kartlar";
             // 
-            // barButtonItem8
-            // 
-            this.barButtonItem8.Caption = "Kumaş Satın Alma Talimatı Onaylama";
-            this.barButtonItem8.Id = 51;
-            this.barButtonItem8.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.Image")));
-            this.barButtonItem8.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.LargeImage")));
-            this.barButtonItem8.Name = "barButtonItem8";
-            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem8_ItemClick_1);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -862,5 +874,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem7;
         private DevExpress.XtraBars.BarSubItem barSubItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem8;
+        private DevExpress.XtraBars.BarButtonItem barBtnBoyaTalimati;
     }
 }
