@@ -89,6 +89,9 @@
             this.Vat = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repoBtnMarka = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.panelGrid = new DevExpress.XtraEditors.PanelControl();
+            this.panelAltButonlar = new DevExpress.XtraEditors.PanelControl();
+            this.btnSiparisler = new DevExpress.XtraEditors.SimpleButton();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -110,6 +113,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).BeginInit();
+            this.panelGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelAltButonlar)).BeginInit();
+            this.panelAltButonlar.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -409,7 +416,7 @@
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.gridControl1.Location = new System.Drawing.Point(0, 198);
+            this.gridControl1.Location = new System.Drawing.Point(2, 2);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -420,7 +427,7 @@
             this.repoBoyaRenkKodu,
             this.repoBtnMarka,
             this.repoFiyatBirim});
-            this.gridControl1.Size = new System.Drawing.Size(1518, 420);
+            this.gridControl1.Size = new System.Drawing.Size(1514, 427);
             this.gridControl1.TabIndex = 10;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -507,6 +514,7 @@
             this.repoBtnUrunKodu.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repoBtnUrunKodu.Name = "repoBtnUrunKodu";
+            this.repoBtnUrunKodu.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoBtnUrunKodu_ButtonClick);
             // 
             // InventoryName
             // 
@@ -770,12 +778,42 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repoBtnMarka.Name = "repoBtnMarka";
             // 
+            // panelGrid
+            // 
+            this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelGrid.Controls.Add(this.gridControl1);
+            this.panelGrid.Location = new System.Drawing.Point(0, 198);
+            this.panelGrid.Name = "panelGrid";
+            this.panelGrid.Size = new System.Drawing.Size(1518, 431);
+            this.panelGrid.TabIndex = 11;
+            // 
+            // panelAltButonlar
+            // 
+            this.panelAltButonlar.Controls.Add(this.btnSiparisler);
+            this.panelAltButonlar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelAltButonlar.Location = new System.Drawing.Point(0, 635);
+            this.panelAltButonlar.Name = "panelAltButonlar";
+            this.panelAltButonlar.Size = new System.Drawing.Size(1518, 62);
+            this.panelAltButonlar.TabIndex = 12;
+            // 
+            // btnSiparisler
+            // 
+            this.btnSiparisler.Location = new System.Drawing.Point(5, 5);
+            this.btnSiparisler.Name = "btnSiparisler";
+            this.btnSiparisler.Size = new System.Drawing.Size(130, 52);
+            this.btnSiparisler.TabIndex = 1;
+            this.btnSiparisler.Text = "Sipariş İhtiyaç Miktarları";
+            this.btnSiparisler.Click += new System.EventHandler(this.btnSiparisler_Click);
+            // 
             // FrmBoyaTalimati
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1518, 618);
-            this.Controls.Add(this.gridControl1);
+            this.ClientSize = new System.Drawing.Size(1518, 697);
+            this.Controls.Add(this.panelAltButonlar);
+            this.Controls.Add(this.panelGrid);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.panel3);
             this.Name = "FrmBoyaTalimati";
@@ -802,6 +840,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoBoyaRenkKodu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnMarka)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelGrid)).EndInit();
+            this.panelGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelAltButonlar)).EndInit();
+            this.panelAltButonlar.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -868,5 +910,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn Vat;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbBirim;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnMarka;
+        private DevExpress.XtraEditors.PanelControl panelGrid;
+        private DevExpress.XtraEditors.PanelControl panelAltButonlar;
+        private DevExpress.XtraEditors.SimpleButton btnSiparisler;
     }
 }

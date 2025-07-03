@@ -102,6 +102,16 @@ namespace Hesap.Forms.MalzemeYonetimi.Ekranlar.Talimatlar
             yansit.BoyahaneRenkBilgileriYansit(gridView1, "Kumaş");
         }
 
+        private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            yansit.MalzemeBilgileriniGrideYansit(gridView1, InventoryTypes.Kumas);
+        }
+
+        private void btnSiparisler_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Siparişe bağlı ihtiyaç miktarları listelenecek");
+        }
+
         private void FrmBoyaTalimati_Load(object sender, EventArgs e)
         {
             BaslangicVerileri();

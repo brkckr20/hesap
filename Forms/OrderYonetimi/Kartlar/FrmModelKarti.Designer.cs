@@ -39,16 +39,6 @@
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.gridBedenler = new DevExpress.XtraGrid.GridControl();
-            this.gridViewBedenler = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.Beden = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.BedenId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repoCmbBirim = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.repoBtnUrunKodu = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.repoCmbKalemIslem = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.picResim = new DevExpress.XtraEditors.PictureEdit();
             this.chckKullanimda = new DevExpress.XtraEditors.CheckEdit();
@@ -99,15 +89,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
-            this.panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
-            this.xtraTabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridBedenler)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewBedenler)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picResim.Properties)).BeginInit();
@@ -223,115 +204,11 @@
             // panelControl3
             // 
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl3.Controls.Add(this.xtraTabControl1);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl3.Location = new System.Drawing.Point(0, 209);
             this.panelControl3.Name = "panelControl3";
             this.panelControl3.Size = new System.Drawing.Size(1525, 495);
             this.panelControl3.TabIndex = 1122;
-            // 
-            // xtraTabControl1
-            // 
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1525, 495);
-            this.xtraTabControl1.TabIndex = 0;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
-            // 
-            // xtraTabPage1
-            // 
-            this.xtraTabPage1.Controls.Add(this.gridBedenler);
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1523, 471);
-            this.xtraTabPage1.Text = "Beden Seti";
-            // 
-            // gridBedenler
-            // 
-            this.gridBedenler.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridBedenler.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.gridBedenler.Location = new System.Drawing.Point(0, 0);
-            this.gridBedenler.MainView = this.gridViewBedenler;
-            this.gridBedenler.Name = "gridBedenler";
-            this.gridBedenler.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repoCmbBirim,
-            this.repoBtnUrunKodu,
-            this.repoCmbKalemIslem});
-            this.gridBedenler.Size = new System.Drawing.Size(1523, 471);
-            this.gridBedenler.TabIndex = 10;
-            this.gridBedenler.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewBedenler});
-            // 
-            // gridViewBedenler
-            // 
-            this.gridViewBedenler.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.Beden,
-            this.BedenId});
-            this.gridViewBedenler.GridControl = this.gridBedenler;
-            this.gridViewBedenler.Name = "gridViewBedenler";
-            this.gridViewBedenler.NewItemRowText = "Yeni satır eklemek için tıklayınız";
-            this.gridViewBedenler.OptionsView.ColumnAutoWidth = false;
-            this.gridViewBedenler.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
-            this.gridViewBedenler.OptionsView.ShowFooter = true;
-            this.gridViewBedenler.OptionsView.ShowGroupPanel = false;
-            // 
-            // Beden
-            // 
-            this.Beden.Caption = "Bedenler";
-            this.Beden.FieldName = "Beden";
-            this.Beden.Name = "Beden";
-            this.Beden.Visible = true;
-            this.Beden.VisibleIndex = 0;
-            this.Beden.Width = 110;
-            // 
-            // BedenId
-            // 
-            this.BedenId.Caption = "Kayıt No";
-            this.BedenId.FieldName = "Id";
-            this.BedenId.Name = "BedenId";
-            this.BedenId.Visible = true;
-            this.BedenId.VisibleIndex = 1;
-            // 
-            // repoCmbBirim
-            // 
-            this.repoCmbBirim.AutoHeight = false;
-            this.repoCmbBirim.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repoCmbBirim.Items.AddRange(new object[] {
-            "Kg",
-            "Mt",
-            "Adet",
-            "Gr",
-            "Cm"});
-            this.repoCmbBirim.Name = "repoCmbBirim";
-            // 
-            // repoBtnUrunKodu
-            // 
-            this.repoBtnUrunKodu.AutoHeight = false;
-            this.repoBtnUrunKodu.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.repoBtnUrunKodu.Name = "repoBtnUrunKodu";
-            // 
-            // repoCmbKalemIslem
-            // 
-            this.repoCmbKalemIslem.AutoHeight = false;
-            this.repoCmbKalemIslem.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repoCmbKalemIslem.Items.AddRange(new object[] {
-            "Dolum",
-            "Tamir",
-            "Stok",
-            "İşletme"});
-            this.repoCmbKalemIslem.Name = "repoCmbKalemIslem";
-            // 
-            // xtraTabPage2
-            // 
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1523, 471);
-            this.xtraTabPage2.Text = "xtraTabPage2";
             // 
             // panelControl2
             // 
@@ -464,7 +341,7 @@
             // label19
             // 
             this.label19.BackColor = System.Drawing.Color.Transparent;
-            this.label19.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label19.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label19.Location = new System.Drawing.Point(675, 25);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(113, 21);
@@ -475,7 +352,7 @@
             // label17
             // 
             this.label17.BackColor = System.Drawing.Color.Transparent;
-            this.label17.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label17.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label17.Location = new System.Drawing.Point(344, 179);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(113, 21);
@@ -496,7 +373,7 @@
             // label16
             // 
             this.label16.BackColor = System.Drawing.Color.Transparent;
-            this.label16.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label16.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label16.Location = new System.Drawing.Point(344, 157);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(113, 21);
@@ -507,7 +384,7 @@
             // label72
             // 
             this.label72.BackColor = System.Drawing.Color.Transparent;
-            this.label72.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label72.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label72.Location = new System.Drawing.Point(12, 3);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(113, 21);
@@ -518,7 +395,7 @@
             // label15
             // 
             this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label15.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label15.Location = new System.Drawing.Point(344, 135);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(113, 21);
@@ -543,7 +420,7 @@
             // label14
             // 
             this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label14.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label14.Location = new System.Drawing.Point(344, 113);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(113, 21);
@@ -561,7 +438,7 @@
             // label18
             // 
             this.label18.BackColor = System.Drawing.Color.Transparent;
-            this.label18.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label18.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label18.Location = new System.Drawing.Point(675, 3);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(113, 21);
@@ -572,7 +449,7 @@
             // label13
             // 
             this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label13.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label13.Location = new System.Drawing.Point(344, 91);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(113, 21);
@@ -583,7 +460,7 @@
             // label12
             // 
             this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label12.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label12.Location = new System.Drawing.Point(344, 69);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(113, 21);
@@ -601,7 +478,7 @@
             // label11
             // 
             this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label11.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label11.Location = new System.Drawing.Point(344, 47);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(113, 21);
@@ -619,7 +496,7 @@
             // label10
             // 
             this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label10.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label10.Location = new System.Drawing.Point(344, 25);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(113, 21);
@@ -637,7 +514,7 @@
             // label9
             // 
             this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label9.Font = new System.Drawing.Font("Calibri", 11.25F);
             this.label9.Location = new System.Drawing.Point(344, 3);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(113, 21);
@@ -655,7 +532,7 @@
             // label8
             // 
             this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label8.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label8.Location = new System.Drawing.Point(12, 179);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(113, 21);
@@ -673,7 +550,7 @@
             // label7
             // 
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label7.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label7.Location = new System.Drawing.Point(12, 157);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(113, 21);
@@ -684,7 +561,7 @@
             // label6
             // 
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.label6.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label6.Location = new System.Drawing.Point(5, 135);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(120, 21);
@@ -695,7 +572,7 @@
             // label5
             // 
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label5.Location = new System.Drawing.Point(12, 113);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(113, 21);
@@ -706,7 +583,7 @@
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label4.Location = new System.Drawing.Point(12, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(113, 21);
@@ -724,7 +601,7 @@
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label3.Location = new System.Drawing.Point(12, 69);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 21);
@@ -735,7 +612,7 @@
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.Location = new System.Drawing.Point(12, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 21);
@@ -760,7 +637,7 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label2.Location = new System.Drawing.Point(12, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 21);
@@ -775,12 +652,12 @@
             this.dizaynKaydetToolStripMenuItem,
             this.satırİşlemleriToolStripMenuItem});
             this.contextBedenler.Name = "contextBedenler";
-            this.contextBedenler.Size = new System.Drawing.Size(181, 70);
+            this.contextBedenler.Size = new System.Drawing.Size(160, 48);
             // 
             // dizaynKaydetToolStripMenuItem
             // 
             this.dizaynKaydetToolStripMenuItem.Name = "dizaynKaydetToolStripMenuItem";
-            this.dizaynKaydetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dizaynKaydetToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.dizaynKaydetToolStripMenuItem.Text = "Dizayn Kaydet";
             this.dizaynKaydetToolStripMenuItem.Click += new System.EventHandler(this.dizaynKaydetToolStripMenuItem_Click);
             // 
@@ -789,13 +666,13 @@
             this.satırİşlemleriToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sütunSeçimiToolStripMenuItem});
             this.satırİşlemleriToolStripMenuItem.Name = "satırİşlemleriToolStripMenuItem";
-            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.satırİşlemleriToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.satırİşlemleriToolStripMenuItem.Text = "Satır İşlemleri";
             // 
             // sütunSeçimiToolStripMenuItem
             // 
             this.sütunSeçimiToolStripMenuItem.Name = "sütunSeçimiToolStripMenuItem";
-            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sütunSeçimiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
@@ -814,15 +691,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
-            this.panelControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridBedenler)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewBedenler)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoCmbBirim)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repoCmbKalemIslem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picResim.Properties)).EndInit();
@@ -904,16 +772,6 @@
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.CheckEdit chckKullanimda;
         private System.Windows.Forms.Label label19;
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
-        private DevExpress.XtraGrid.GridControl gridBedenler;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewBedenler;
-        private DevExpress.XtraGrid.Columns.GridColumn Beden;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbBirim;
-        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnUrunKodu;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCmbKalemIslem;
-        private DevExpress.XtraGrid.Columns.GridColumn BedenId;
         private System.Windows.Forms.ContextMenuStrip contextBedenler;
         private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
