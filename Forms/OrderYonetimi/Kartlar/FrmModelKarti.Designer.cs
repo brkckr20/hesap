@@ -85,10 +85,16 @@
             this.dizaynKaydetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.satırİşlemleriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.context1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.bedenSetiGirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.tabKumasBilgi = new DevExpress.XtraTab.XtraTabPage();
+            this.tabIplikBilgileri = new DevExpress.XtraTab.XtraTabPage();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
+            this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picResim.Properties)).BeginInit();
@@ -113,6 +119,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjModelAdi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).BeginInit();
             this.contextBedenler.SuspendLayout();
+            this.context1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -204,6 +213,7 @@
             // panelControl3
             // 
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl3.Controls.Add(this.xtraTabControl1);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl3.Location = new System.Drawing.Point(0, 209);
             this.panelControl3.Name = "panelControl3";
@@ -676,11 +686,50 @@
             this.sütunSeçimiToolStripMenuItem.Text = "Sütun Seçimi";
             this.sütunSeçimiToolStripMenuItem.Click += new System.EventHandler(this.sütunSeçimiToolStripMenuItem_Click);
             // 
+            // context1
+            // 
+            this.context1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bedenSetiGirToolStripMenuItem});
+            this.context1.Name = "context1";
+            this.context1.Size = new System.Drawing.Size(181, 48);
+            // 
+            // bedenSetiGirToolStripMenuItem
+            // 
+            this.bedenSetiGirToolStripMenuItem.Name = "bedenSetiGirToolStripMenuItem";
+            this.bedenSetiGirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bedenSetiGirToolStripMenuItem.Text = "Beden Seti Gir";
+            this.bedenSetiGirToolStripMenuItem.Click += new System.EventHandler(this.bedenSetiGirToolStripMenuItem_Click);
+            // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.tabKumasBilgi;
+            this.xtraTabControl1.Size = new System.Drawing.Size(1525, 483);
+            this.xtraTabControl1.TabIndex = 0;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tabKumasBilgi,
+            this.tabIplikBilgileri});
+            // 
+            // tabKumasBilgi
+            // 
+            this.tabKumasBilgi.Name = "tabKumasBilgi";
+            this.tabKumasBilgi.Size = new System.Drawing.Size(1523, 459);
+            this.tabKumasBilgi.Text = "Kumaş Bilgileri";
+            // 
+            // tabIplikBilgileri
+            // 
+            this.tabIplikBilgileri.Name = "tabIplikBilgileri";
+            this.tabIplikBilgileri.Size = new System.Drawing.Size(1523, 459);
+            this.tabIplikBilgileri.Text = "İplik Bilgileri";
+            // 
             // FrmModelKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1525, 757);
+            this.ContextMenuStrip = this.context1;
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.panel3);
             this.IconOptions.Image = global::Hesap.Properties.Resources.Bookmark;
@@ -691,6 +740,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
+            this.panelControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picResim.Properties)).EndInit();
@@ -715,6 +765,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtOrjModelAdi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).EndInit();
             this.contextBedenler.ResumeLayout(false);
+            this.context1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -776,5 +829,10 @@
         private System.Windows.Forms.ToolStripMenuItem dizaynKaydetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem satırİşlemleriToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sütunSeçimiToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip context1;
+        private System.Windows.Forms.ToolStripMenuItem bedenSetiGirToolStripMenuItem;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabPage tabKumasBilgi;
+        private DevExpress.XtraTab.XtraTabPage tabIplikBilgileri;
     }
 }

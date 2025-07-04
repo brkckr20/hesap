@@ -1,44 +1,31 @@
-﻿using DevExpress.Pdf.Native.BouncyCastle.Ocsp;
-using DevExpress.XtraEditors;
-using Hesap.Context;
+﻿using DevExpress.XtraEditors;
 using Hesap.DataAccess;
-using Hesap.Forms.MalzemeYonetimi.Ekranlar.HamDepo;
-using Hesap.Forms.OrderYonetimi.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.OrderYonetimi
 {
-    public partial class FrmModelKarti : DevExpress.XtraEditors.XtraForm
+    public partial class FrmModelKarti : XtraForm
     {
         public FrmModelKarti()
         {
             InitializeComponent();
         }
         int Id = 0, FirmaId = 0, KategoriId = 0, CinsiId = 0, PazarlamaciId = Properties.Settings.Default.Id, KullaniciId;
-        Metotlar metotlar = new Metotlar();
         HesaplaVeYansit yansit = new HesaplaVeYansit();
-        CRUD_Operations cRUD = new CRUD_Operations();
         Bildirim bildirim = new Bildirim();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
         CrudRepository crudRepository = new CrudRepository();
 
         private void txtKategori_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            yansit.KategoriYansit(txtKategori, txtOrjKategoriAdi, ref this.KategoriId, "Kategori Kartı");
+            //yansit.KategoriYansit(txtKategori, txtOrjKategoriAdi, ref this.KategoriId, "Kategori Kartı");
         }
 
         private void txtCinsi_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            yansit.KategoriYansit(txtCinsi, txtOrjCinsiAdi, ref this.CinsiId, "Cinsi Kartı");
+            //yansit.KategoriYansit(txtCinsi, txtOrjCinsiAdi, ref this.CinsiId, "Cinsi Kartı");
         }
 
         void BaslangicVerileri()
@@ -56,6 +43,12 @@ namespace Hesap.Forms.OrderYonetimi
         private void sütunSeçimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //yardimciAraclar.KolonSecici(gridBedenler);
+        }
+
+        private void bedenSetiGirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OrderIslemleri.FrmBedenSeti frm = new OrderIslemleri.FrmBedenSeti();
+            frm.ShowDialog();
         }
 
         private void FrmModelKarti_Load(object sender, EventArgs e)
@@ -80,13 +73,15 @@ namespace Hesap.Forms.OrderYonetimi
                 { "SpecialCode2",txtOzelKod2.Text},
                 { "GrM2",txtGrM2.Text},
                 { "UserId",CurrentUser.UserId},
-                { "FabricOK",false},
-                { "ColorOK",false},
-                { "EmbroideryOK",false},
-                { "YarnOK",false},
-                { "AccessoriesOK",false},
+                { "FabricOK",chckKumasOK.Checked},
+                { "ColorOK",chckBoyaOK.Checked},
+                { "EmbroideryOK",chckNakisOK.Checked},
+                { "YarnOK",chckIplikOK.Checked},
+                { "AccessoriesOK",chckAksesuarOK.Checked},
                 { "GTIPNo",txtGTIP.Text},
-                { "IsUse",chckKullanimda.Checked},//bradan devam edilecek
+                { "IsUse",chckKullanimda.Checked},
+                { "Unit",""},
+                { "Type",InventoryTypes.Model},
             };
             if (this.Id == 0)
             {
@@ -98,57 +93,6 @@ namespace Hesap.Forms.OrderYonetimi
                 crudRepository.Update("Inventory", this.Id, parameters);
                 bildirim.GuncellemeBasarili();
             }
-            //    var parameters = new Dictionary<string, object>
-            //    {
-            //        { "ModelKodu", txtModelKodu.Text },
-            //        { "ModelAdi", txtModelAdi.Text },
-            //        { "OrjModelAdi", txtOrjModelAdi.Text },
-            //        { "FirmaId", this.FirmaId },
-            //        { "KategoriId", this.KategoriId},
-            //        { "CinsiId", this.CinsiId},
-            //        { "GrM2", txtGrM2.Text},
-            //        { "OzelKod",txtOzelKod.Text},
-            //        { "OzelKod2",txtOzelKod2.Text},
-            //        { "Fiyat",},
-            //        { "DovizCinsi",},
-            //        { "PazarlamaciId",this.PazarlamaciId},
-            //        { "KayitTarihi",DateTime.Now},
-            //        { "KayitEdenId",this.KullaniciId},
-            //        { "KumasOK",chckKumasOK.Checked},
-            //        { "BoyaOK",chckBoyaOK.Checked},
-            //        { "NakisOK",chckNakisOK.Checked},
-            //        { "AksesuarOK",chckAksesuarOK.Checked},
-            //        { "IplikOK",chckIplikOK.Checked},
-            //        { "GTIP",txtGTIP.Text},
-            //        { "GTIP",txtGTIP.Text},
-            //};
-            //    if (this.Id == 0)
-            //    {
-            //        this.Id = cRUD.InsertRecord("ModelKarti", parameters);
-            //        BedenleriKaydet();
-            //        bildirim.Basarili();
-            //    }
-            //    else
-            //    {
-            //        cRUD.UpdateRecord("ModelKarti", parameters, this.Id);
-            //        BedenleriGuncelle();
-            //        /*
-            //         for (int i = 0; i < gridView1.RowCount - 1; i++)
-            //        {
-            //            var d2Id = Convert.ToInt32(gridView1.GetRowCellValue(i, "D2Id"));
-            //            var kalemParameters = metotlar.CreateHameDepo2KalemParameters(i, this.Id, gridView1);
-            //            if (d2Id > 0)
-            //            {
-            //                cRUD.UpdateRecord("HamDepo2", kalemParameters, d2Id);
-            //            }
-            //            else
-            //            {
-            //                var yeniId = cRUD.InsertRecord("HamDepo2", kalemParameters);
-            //                gridView1.SetRowCellValue(i, "D2Id", yeniId);
-            //            }
-            //        }
-            //         */
-            //    }
         }
 
         void BedenleriKaydet()
