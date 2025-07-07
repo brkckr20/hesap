@@ -42,6 +42,8 @@
             this.lstBedenler.Name = "lstBedenler";
             this.lstBedenler.Size = new System.Drawing.Size(209, 264);
             this.lstBedenler.TabIndex = 0;
+            this.lstBedenler.SelectedIndexChanged += new System.EventHandler(this.lstBedenler_SelectedIndexChanged);
+            this.lstBedenler.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstBedenler_KeyDown);
             // 
             // btnKaydet
             // 
@@ -76,6 +78,7 @@
             this.Name = "FrmBedenSeti";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bedenler";
+            this.Load += new System.EventHandler(this.FrmBedenSeti_Load);
             ((System.ComponentModel.ISupportInitialize)(this.lstBedenler)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBedenSeti.Properties)).EndInit();
             this.ResumeLayout(false);

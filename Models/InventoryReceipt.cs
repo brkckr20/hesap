@@ -42,11 +42,26 @@ namespace Hesap.Models
         [Display(Name = "Ürün Resmi")]
         public byte[] ReceiptImage1 { get; set; }
 
-        //[Display(Name = "Dosya Adı")]
-        //public string ImageFileName { get; set; }
+        [Display(Name = "Kullanım Yeri")]
+        public string PlaceOfUse { get; set; }
 
-        // Navigation property to Inventory
-        //public Inventory Inventory { get; set; }
+        [Display(Name = "Nakış Referans")]
+        public int EmbroideryRef { get; set; }
+
+        [Display(Name = "Cinsi")]
+        public string Genus { get; set; }
+
+        [Display(Name = "GrM2")]
+        public int GrM2 { get; set; }
+
+        [Display(Name = "Organik Mi?")]
+        public bool IsOrganic { get; set; }
+
+        [Display(Name = "Malzeme Kodu")]
+        public string InventoryCode { get; set; }
+
+        [Display(Name = "Malzeme Adı")]
+        public string InventoryName { get; set; }
 
     }
 }

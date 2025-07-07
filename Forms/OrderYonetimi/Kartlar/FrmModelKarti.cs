@@ -1,8 +1,10 @@
 ﻿using DevExpress.XtraEditors;
 using Hesap.DataAccess;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Hesap.Forms.OrderYonetimi
 {
@@ -30,9 +32,13 @@ namespace Hesap.Forms.OrderYonetimi
 
         void BaslangicVerileri()
         {
-            //gridBedenler.DataSource = new BindingList<Bedenler>();
-            //yardimciAraclar.KolonlariGetir(gridViewBedenler, this.Text + " [Bedenler]");
-            //gridBedenler.ContextMenuStrip = contextBedenler;
+            gridKumasBilgileri.DataSource = new BindingList<InventoryReceipt>();
+            repoCinsi.Items.Add("Ana Kumaş");
+            repoCinsi.Items.Add("Biye");
+            repoCinsi.Items.Add("Desen");
+            repoCinsi.Items.Add("Aplika 1");
+            repoCinsi.Items.Add("Aplika 2");
+            repoCinsi.Items.Add("Aplika 3");
         }
 
         private void dizaynKaydetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -47,19 +53,34 @@ namespace Hesap.Forms.OrderYonetimi
 
         private void bedenSetiGirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OrderIslemleri.FrmBedenSeti frm = new OrderIslemleri.FrmBedenSeti();
+            Kaydet();
+            OrderIslemleri.FrmBedenSeti frm = new OrderIslemleri.FrmBedenSeti(this.Id);
             frm.ShowDialog();
+        }
+
+        private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            yansit.MalzemeBilgileriniGrideYansit(gridView1, InventoryTypes.Kumas);
         }
 
         private void FrmModelKarti_Load(object sender, EventArgs e)
         {
-            
+
             BaslangicVerileri();
         }
-        
 
+        private void repoSutunSecimi_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            OrderIslemleri.FrmBedenSecimi frm = new OrderIslemleri.FrmBedenSecimi();
+            frm.ShowDialog();
+        }
 
         private void btnKaydet_Click(object sender, EventArgs e)
+        {
+            Kaydet();
+        }
+
+        void Kaydet()
         {
             var parameters = new Dictionary<string, object>
             {
@@ -86,12 +107,12 @@ namespace Hesap.Forms.OrderYonetimi
             if (this.Id == 0)
             {
                 this.Id = crudRepository.Insert("Inventory", parameters);
-                bildirim.Basarili();
+                // bildirim.Basarili();
             }
             else
             {
                 crudRepository.Update("Inventory", this.Id, parameters);
-                bildirim.GuncellemeBasarili();
+                // bildirim.GuncellemeBasarili();
             }
         }
 
