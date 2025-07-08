@@ -55,6 +55,8 @@
             this.GrM2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IsOrganic = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Explanation = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.SizeChoose = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoSutunSecimi = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.tabIplikBilgileri = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.picResim = new DevExpress.XtraEditors.PictureEdit();
@@ -104,8 +106,6 @@
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.context1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.bedenSetiGirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SizeChoose = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repoSutunSecimi = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -119,6 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoKullanimYeri)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCinsi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoSutunSecimi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picResim.Properties)).BeginInit();
@@ -144,7 +145,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).BeginInit();
             this.contextBedenler.SuspendLayout();
             this.context1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.repoSutunSecimi)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -406,6 +406,24 @@
             this.Explanation.VisibleIndex = 8;
             this.Explanation.Width = 598;
             // 
+            // SizeChoose
+            // 
+            this.SizeChoose.Caption = "Beden Seçimi";
+            this.SizeChoose.ColumnEdit = this.repoSutunSecimi;
+            this.SizeChoose.FieldName = "SizeChoose";
+            this.SizeChoose.Name = "SizeChoose";
+            this.SizeChoose.Visible = true;
+            this.SizeChoose.VisibleIndex = 7;
+            this.SizeChoose.Width = 79;
+            // 
+            // repoSutunSecimi
+            // 
+            this.repoSutunSecimi.AutoHeight = false;
+            this.repoSutunSecimi.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repoSutunSecimi.Name = "repoSutunSecimi";
+            this.repoSutunSecimi.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoSutunSecimi_ButtonClick);
+            // 
             // tabIplikBilgileri
             // 
             this.tabIplikBilgileri.Name = "tabIplikBilgileri";
@@ -529,6 +547,7 @@
             this.txtCinsi.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtCinsi_Properties_ButtonClick);
             this.txtCinsi.Size = new System.Drawing.Size(206, 22);
             this.txtCinsi.TabIndex = 8;
+            this.txtCinsi.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtCinsi_ButtonClick);
             // 
             // txtKategori
             // 
@@ -539,6 +558,7 @@
             this.txtKategori.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtKategori_Properties_ButtonClick);
             this.txtKategori.Size = new System.Drawing.Size(206, 22);
             this.txtKategori.TabIndex = 6;
+            this.txtKategori.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtKategori_ButtonClick);
             // 
             // label19
             // 
@@ -892,24 +912,6 @@
             this.bedenSetiGirToolStripMenuItem.Text = "Beden Seti Girişi";
             this.bedenSetiGirToolStripMenuItem.Click += new System.EventHandler(this.bedenSetiGirToolStripMenuItem_Click);
             // 
-            // SizeChoose
-            // 
-            this.SizeChoose.Caption = "Beden Seçimi";
-            this.SizeChoose.ColumnEdit = this.repoSutunSecimi;
-            this.SizeChoose.FieldName = "SizeChoose";
-            this.SizeChoose.Name = "SizeChoose";
-            this.SizeChoose.Visible = true;
-            this.SizeChoose.VisibleIndex = 7;
-            this.SizeChoose.Width = 79;
-            // 
-            // repoSutunSecimi
-            // 
-            this.repoSutunSecimi.AutoHeight = false;
-            this.repoSutunSecimi.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.repoSutunSecimi.Name = "repoSutunSecimi";
-            this.repoSutunSecimi.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoSutunSecimi_ButtonClick);
-            // 
             // FrmModelKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -935,6 +937,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoKullanimYeri)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCinsi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoSutunSecimi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picResim.Properties)).EndInit();
@@ -960,7 +963,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).EndInit();
             this.contextBedenler.ResumeLayout(false);
             this.context1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.repoSutunSecimi)).EndInit();
             this.ResumeLayout(false);
 
         }

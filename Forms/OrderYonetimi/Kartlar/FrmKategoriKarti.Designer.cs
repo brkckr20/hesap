@@ -151,6 +151,7 @@
             this.chckKullanimda.Properties.Caption = "Kullanımda";
             this.chckKullanimda.Size = new System.Drawing.Size(91, 20);
             this.chckKullanimda.TabIndex = 1119;
+            this.chckKullanimda.Visible = false;
             // 
             // txtOrjAd
             // 

@@ -37,6 +37,7 @@
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
+            this.Id = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -62,7 +63,8 @@
             this.SizeId,
             this.Size,
             this.Footage,
-            this.Piece});
+            this.Piece,
+            this.Id});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
@@ -122,6 +124,13 @@
             this.btnKaydet.Size = new System.Drawing.Size(82, 40);
             this.btnKaydet.TabIndex = 0;
             this.btnKaydet.Text = "Kaydet";
+            this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
+            // 
+            // Id
+            // 
+            this.Id.Caption = "Id";
+            this.Id.FieldName = "Id";
+            this.Id.Name = "Id";
             // 
             // FrmBedenSecimi
             // 
@@ -159,5 +168,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn Size;
         private DevExpress.XtraGrid.Columns.GridColumn Footage;
         private DevExpress.XtraGrid.Columns.GridColumn Piece;
+        private DevExpress.XtraGrid.Columns.GridColumn Id;
     }
 }

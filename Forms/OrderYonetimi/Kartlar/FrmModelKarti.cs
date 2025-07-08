@@ -22,7 +22,7 @@ namespace Hesap.Forms.OrderYonetimi
 
         private void txtKategori_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            //yansit.KategoriYansit(txtKategori, txtOrjKategoriAdi, ref this.KategoriId, "Kategori Kartı");
+            //
         }
 
         private void txtCinsi_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -53,9 +53,16 @@ namespace Hesap.Forms.OrderYonetimi
 
         private void bedenSetiGirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Kaydet();
-            OrderIslemleri.FrmBedenSeti frm = new OrderIslemleri.FrmBedenSeti(this.Id);
-            frm.ShowDialog();
+            if (txtModelKodu.Text.Trim() != "")
+            {
+                Kaydet();
+                OrderIslemleri.FrmBedenSeti frm = new OrderIslemleri.FrmBedenSeti(this.Id);
+                frm.ShowDialog();
+            }
+            else
+            {
+                bildirim.Uyari("Kayıt yapabilmek için Model Kodu alanını doldurunuz!");
+            }
         }
 
         private void repoBtnUrunKodu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -71,16 +78,26 @@ namespace Hesap.Forms.OrderYonetimi
 
         private void repoSutunSecimi_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            OrderIslemleri.FrmBedenSecimi frm = new OrderIslemleri.FrmBedenSecimi();
+            OrderIslemleri.FrmBedenSecimi frm = new OrderIslemleri.FrmBedenSecimi(this.Id);
             frm.ShowDialog();
+        }
+
+        private void txtKategori_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            yansit.KategoriYansit(txtKategori, txtOrjKategoriAdi, ref this.KategoriId, "Kategori Kartı");
+        }
+
+        private void txtCinsi_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            yansit.KategoriYansit(txtCinsi, txtOrjCinsiAdi, ref this.CinsiId, "Cinsi Kartı");
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            Kaydet();
+            Kaydet(true);
         }
 
-        void Kaydet()
+        void Kaydet(bool showNotification = false)
         {
             var parameters = new Dictionary<string, object>
             {
@@ -88,8 +105,8 @@ namespace Hesap.Forms.OrderYonetimi
                 { "InventoryName", txtModelAdi.Text},
                 { "InventoryOriginalName", txtOrjModelAdi.Text},
                 { "CompanyId", this.FirmaId},
-                { "CategoryId",0},
-                { "GenusId",0},
+                { "CategoryId",this.KategoriId},
+                { "GenusId",this.CinsiId},
                 { "SpecialCode",txtOzelKod.Text},
                 { "SpecialCode2",txtOzelKod2.Text},
                 { "GrM2",txtGrM2.Text},
@@ -106,43 +123,29 @@ namespace Hesap.Forms.OrderYonetimi
             };
             if (this.Id == 0)
             {
-                this.Id = crudRepository.Insert("Inventory", parameters);
-                // bildirim.Basarili();
+                if (txtModelKodu.Text.Trim()=="")
+                {
+                    bildirim.Uyari("Kayıt yapabilmek için Model Kodu alanını doldurunuz!");
+                    return;
+                }
+                else
+                {
+                    this.Id = crudRepository.Insert("Inventory", parameters);
+                    if (showNotification)
+                    {
+                        bildirim.Basarili();
+                    }
+                }
             }
             else
             {
                 crudRepository.Update("Inventory", this.Id, parameters);
-                // bildirim.GuncellemeBasarili();
+                if (showNotification)
+                {
+                    bildirim.GuncellemeBasarili();
+                }
             }
         }
-
-        void BedenleriKaydet()
-        {
-            //for (int i = 0; i < gridViewBedenler.RowCount - 1; i++)
-            //{
-            //    var parameters = metotlar.ModelBeden(i, this.Id, gridViewBedenler);
-            //    var BedenId = cRUD.InsertRecord("ModelBedenSeti", parameters);
-            //    gridViewBedenler.SetRowCellValue(i, "Id", BedenId);
-            //}
-        }
-        void BedenleriGuncelle()
-        {
-            //for (int i = 0; i < gridViewBedenler.RowCount - 1; i++)
-            //{
-            //    var d2Id = Convert.ToInt32(gridViewBedenler.GetRowCellValue(i, "Id"));
-            //    var kalemParameters = metotlar.ModelBeden(i, this.Id, gridViewBedenler);
-            //    if (d2Id > 0)
-            //    {
-            //        cRUD.UpdateRecord("ModelBedenSeti", kalemParameters, d2Id);
-            //    }
-            //    else
-            //    {
-            //        var yeniId = cRUD.InsertRecord("ModelBedenSeti", kalemParameters);
-            //        gridViewBedenler.SetRowCellValue(i, "Id", yeniId);
-            //    }
-            //}
-        }
-
 
         private void buttonEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {

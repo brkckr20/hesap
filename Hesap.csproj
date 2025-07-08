@@ -637,6 +637,7 @@
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\InventoryRequirement.cs" />
+    <Compile Include="Models\Lookup.cs" />
     <Compile Include="Models\Numerator.cs" />
     <Compile Include="Models\ProductionManagementParams.cs" />
     <Compile Include="Models\Currency.cs" />

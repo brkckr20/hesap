@@ -36,6 +36,7 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
                     crudRepository.Insert("InventoryRequirement", size_params);
                     txtBedenSeti.Text = string.Empty;
                     txtBedenSeti.Focus();
+                    BedenleriGetir();
                 }
                 else
                 {
@@ -79,7 +80,7 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         void BedenleriGetir()
         {
             lstBedenler.DisplayMember = "SizeName";
-            lstBedenler.DataSource = crudRepository.GetAll<Size>("Size").ToList();
+            lstBedenler.DataSource = crudRepository.GetAll<Size>("Size").Where(x => x.InventoryId == modelId).ToList();
         }
 
         private void FrmBedenSeti_Load(object sender, EventArgs e)

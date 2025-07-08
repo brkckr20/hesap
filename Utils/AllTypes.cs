@@ -27,4 +27,10 @@
     {
         Malzeme = 0,
     }
+
+    public enum LookupTypes // bu enum, Kategori, Cinsi gibi kartları ayrı ayro tablo yapmak yerine tek tablo olarak kullanılacak
+    {
+        Kategori =0,
+        Cinsi=1
+    }
 }
