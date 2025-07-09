@@ -71,6 +71,7 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
                     {
                         lstBedenler.Items.Remove(seciliBeden);
                         crudRepository.Delete("Size",secilenBedenId);
+                        crudRepository.Delete("InventoryRequirement",secilenBedenId); // bedenlerden silinince ihtiyaç tablosundaki bedenlerden silinmiyor
                         BedenleriGetir();
                     }
                 }

@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using Hesap.DataAccess;
+using Hesap.Forms.OrderYonetimi.Liste;
 using Hesap.Models;
 using Hesap.Utils;
 using System;
@@ -80,6 +81,39 @@ namespace Hesap.Forms.OrderYonetimi
         {
             OrderIslemleri.FrmBedenSecimi frm = new OrderIslemleri.FrmBedenSecimi(this.Id);
             frm.ShowDialog();
+        }
+
+        private void btnListe_Click(object sender, EventArgs e)
+        {
+            FrmModelKartiListesi frm = new FrmModelKartiListesi();
+            frm.ShowDialog();
+            if (frm.Id != null)
+            {
+                this.Id = frm.Id;
+                txtModelKodu.Text = frm.Kodu;
+                txtModelAdi.Text = frm.Adi;
+                txtOrjModelAdi.Text = frm.OrjAdi;
+                this.FirmaId = frm.FirmaId;
+                txtMusteriKodu.Text = frm.FirmaKodu;
+                txtMusteriAdi.Text = frm.FirmaAdi;
+                this.KategoriId = frm.KategoriId;
+                txtKategori.Text = frm.KategoriAdi;
+                txtOrjKategoriAdi.Text = frm.KategorOrjAdi;
+                this.CinsiId = frm.CinsiId;
+                txtCinsi.Text = frm.CinsiAdi;
+                txtOrjCinsiAdi.Text = frm.CinsiOrjAdi;
+                txtOzelKod.Text = frm.OzelKod;
+                txtOzelKod2.Text = frm.OzelKod2;
+                txtGrM2.Text = frm.GrM2;
+                this.PazarlamaciId = frm.PazarlamaciId;
+                txtPazarlamaci.Text = frm.Pazarlamaci;
+                chckKumasOK.Checked = frm.KumasOk;
+                chckBoyaOK.Checked = frm.BoyaOk;
+                chckNakisOK.Checked = frm.NakisOk;
+                chckIplikOK.Checked = frm.IplikOk;
+                chckAksesuarOK.Checked = frm.AksesuarOk;
+                txtGTIP.Text = frm.GTIPNo;
+            }
         }
 
         private void txtKategori_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

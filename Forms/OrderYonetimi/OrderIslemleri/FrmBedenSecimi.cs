@@ -52,13 +52,16 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
             {
                 for (int i = 0; i < gridView1.RowCount; i++)
                 {
-                    var obj_id = gridView1.GetRowCellValue(i, "Id");
-                    var values = new Dictionary<string, object>
+                    if (gridView1.GetRowCellValue(i, "Size") != null)
+                    {
+                        var obj_id = gridView1.GetRowCellValue(i, "Id");
+                        var values = new Dictionary<string, object>
                     {
                         {"Quantity", Convert.ToDecimal(gridView1.GetRowCellValue(i,"Footage")) }
                     };
-                    crudRepository.Update("InventoryRequirement", obj_id, values);
-                    this.Close();
+                        crudRepository.Update("InventoryRequirement", obj_id, values);
+                        this.Close();
+                    }
                 }
             }
             catch (Exception ex)

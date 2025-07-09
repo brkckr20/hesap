@@ -105,6 +105,7 @@
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -165,9 +166,10 @@
             this.barButtonItem7,
             this.barSubItem1,
             this.barButtonItem8,
-            this.barBtnBoyaTalimati});
+            this.barBtnBoyaTalimati,
+            this.barButtonItem9});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 53;
+            this.ribbon.MaxItemId = 54;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -643,6 +645,7 @@
             // rbnParams
             // 
             this.rbnParams.ItemLinks.Add(this.barUretimYonetimiParametreleri);
+            this.rbnParams.ItemLinks.Add(this.barButtonItem9);
             this.rbnParams.Name = "rbnParams";
             this.rbnParams.Text = "Parametreler";
             // 
@@ -776,6 +779,14 @@
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Kartlar";
             // 
+            // barButtonItem9
+            // 
+            this.barButtonItem9.Caption = "Order Yönetimi Parametreleri";
+            this.barButtonItem9.Id = 53;
+            this.barButtonItem9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.Image")));
+            this.barButtonItem9.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.LargeImage")));
+            this.barButtonItem9.Name = "barButtonItem9";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -875,5 +886,6 @@
         private DevExpress.XtraBars.BarSubItem barSubItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem8;
         private DevExpress.XtraBars.BarButtonItem barBtnBoyaTalimati;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
     }
 }

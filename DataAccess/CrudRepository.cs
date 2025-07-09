@@ -81,6 +81,11 @@ namespace Hesap.DataAccess
             string query = $"DELETE FROM {TableName} WHERE Id = @Id";
             return _dbConnection.Execute(query, new { Id = id });
         }
+        public int DeleteRequirementSize(string TableName, object SizeId)
+        {
+            string query = $"DELETE FROM {TableName} WHERE SizeId = @SizeId";
+            return _dbConnection.Execute(query, new { SizeId = SizeId });
+        }
         public int DeleteRows(string TableName, object id)
         {
             string query = $"DELETE FROM {TableName} WHERE ReceiptId = @Id";
