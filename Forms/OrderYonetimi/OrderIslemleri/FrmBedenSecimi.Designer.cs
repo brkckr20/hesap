@@ -34,10 +34,10 @@
             this.Size = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Footage = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Piece = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Id = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.btnKaydet = new DevExpress.XtraEditors.SimpleButton();
-            this.Id = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -60,11 +60,11 @@
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.Id,
             this.SizeId,
             this.Size,
             this.Footage,
-            this.Piece,
-            this.Id});
+            this.Piece});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
@@ -72,8 +72,10 @@
             // SizeId
             // 
             this.SizeId.Caption = "Beden Id";
-            this.SizeId.FieldName = "Size Id";
+            this.SizeId.FieldName = "SizeId";
             this.SizeId.Name = "SizeId";
+            this.SizeId.Visible = true;
+            this.SizeId.VisibleIndex = 0;
             // 
             // Size
             // 
@@ -81,7 +83,7 @@
             this.Size.FieldName = "Size";
             this.Size.Name = "Size";
             this.Size.Visible = true;
-            this.Size.VisibleIndex = 0;
+            this.Size.VisibleIndex = 2;
             // 
             // Footage
             // 
@@ -89,7 +91,7 @@
             this.Footage.FieldName = "Footage";
             this.Footage.Name = "Footage";
             this.Footage.Visible = true;
-            this.Footage.VisibleIndex = 1;
+            this.Footage.VisibleIndex = 3;
             // 
             // Piece
             // 
@@ -97,7 +99,15 @@
             this.Piece.FieldName = "Piece";
             this.Piece.Name = "Piece";
             this.Piece.Visible = true;
-            this.Piece.VisibleIndex = 2;
+            this.Piece.VisibleIndex = 4;
+            // 
+            // Id
+            // 
+            this.Id.Caption = "Id";
+            this.Id.FieldName = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = true;
+            this.Id.VisibleIndex = 1;
             // 
             // panelControl1
             // 
@@ -125,12 +135,6 @@
             this.btnKaydet.TabIndex = 0;
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
-            // 
-            // Id
-            // 
-            this.Id.Caption = "Id";
-            this.Id.FieldName = "Id";
-            this.Id.Name = "Id";
             // 
             // FrmBedenSecimi
             // 

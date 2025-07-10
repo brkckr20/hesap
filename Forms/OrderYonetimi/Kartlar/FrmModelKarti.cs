@@ -6,6 +6,7 @@ using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Hesap.Forms.OrderYonetimi
 {
@@ -62,7 +63,7 @@ namespace Hesap.Forms.OrderYonetimi
             }
             else
             {
-                bildirim.Uyari("Kayıt yapabilmek için Model Kodu alanını doldurunuz!");
+                bildirim.Uyari("Kayıt yapabilmek için 'Model Kodu' alanını doldurunuz!");
             }
         }
 
@@ -81,6 +82,17 @@ namespace Hesap.Forms.OrderYonetimi
         {
             OrderIslemleri.FrmBedenSecimi frm = new OrderIslemleri.FrmBedenSecimi(this.Id);
             frm.ShowDialog();
+            var secilenIdler = frm.SecilenIdler;
+            MessageBox.Show(frm.SecilenIdler.Count.ToString());
+            if (secilenIdler != null && secilenIdler.Count > 0)
+            {
+                string idText = string.Join(", ", secilenIdler);
+                gridView1.SetFocusedRowCellValue("SizeText", idText); // örnek bir kolon ismi
+            }
+            else
+            {
+                gridView1.SetFocusedRowCellValue("SizeText", ""); // veya null
+            }
         }
 
         private void btnListe_Click(object sender, EventArgs e)
@@ -165,6 +177,14 @@ namespace Hesap.Forms.OrderYonetimi
                 else
                 {
                     this.Id = crudRepository.Insert("Inventory", parameters);
+                    var itemList = (BindingList<InventoryReceipt>)gridKumasBilgileri.DataSource;
+                    for (int i = 0; i < itemList.Count; i++)
+                    {
+                        var item = itemList[i];
+                        var values = new Dictionary<string, object> { { "InventoryId", this.Id }, { "PlaceOfUse", item.PlaceOfUse}, { "Genus", item.Genus },{ "ReceiptType", InventoryReceiptTypes.KumasRecetesi } , { "RecipeInventoryId", item.InventoryId }, { "GrM2", item.GrM2}, { "Explanation", item.Explanation }, { "EmbroideryRef", item.EmbroideryRef}, { "IsOrganic", item.IsOrganic }, { "SizeText", item.SizeText } };
+                        var rec_id = crudRepository.Insert("InventoryReceipt", values);
+                        gridView1.SetRowCellValue(i, "InventoryReceiptItemId", rec_id);
+                    }
                     if (showNotification)
                     {
                         bildirim.Basarili();
@@ -174,6 +194,21 @@ namespace Hesap.Forms.OrderYonetimi
             else
             {
                 crudRepository.Update("Inventory", this.Id, parameters);
+                for (int i = 0; i < gridView1.RowCount - 1; i++)
+                {
+                    var recIdObj = gridView1.GetRowCellValue(i, "InventoryReceiptItemId");
+                    int rec_id = recIdObj != null ? Convert.ToInt32(recIdObj) : 0;
+                    var values = new Dictionary<string, object> { { "RecipeInventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "RecipeInventoryId")) }, { "PlaceOfUse", gridView1.GetRowCellValue(i, "PlaceOfUse") }, { "Genus", gridView1.GetRowCellValue(i, "Genus") }, { "SizeText", gridView1.GetRowCellValue(i, "SizeText") }, { "ReceiptType", InventoryReceiptTypes.KumasRecetesi } }; // buradan devam --> modelin reçetesi satıra aktarılacak ve güncelleme işlemleri yapılacak
+                    if (rec_id != 0)
+                    {
+                        crudRepository.Update("InventoryReceipt", rec_id, values);
+                    }
+                    else
+                    {
+                        var new_rec_id = crudRepository.Insert("InventoryReceipt", values);
+                        gridView1.SetRowCellValue(i, "ReceiptItemId", new_rec_id);
+                    }
+                }
                 if (showNotification)
                 {
                     bildirim.GuncellemeBasarili();

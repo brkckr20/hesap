@@ -4,6 +4,7 @@ using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
 {
@@ -13,6 +14,7 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         Listele listele = new Listele();
         Bildirim bildirim = new Bildirim();
         int _malzemeId;
+        public List<int> SecilenIdler { get; private set; } = new List<int>();
         public FrmBedenSecimi(int malzemeId)
         {
             InitializeComponent();
@@ -50,19 +52,27 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         {
             try
             {
+                SecilenIdler.Clear();
+
                 for (int i = 0; i < gridView1.RowCount; i++)
                 {
-                    if (gridView1.GetRowCellValue(i, "Size") != null)
+                    var footage = gridView1.GetRowCellValue(i, "Footage");
+                    if (footage != null && Convert.ToDecimal(footage) > 0)
                     {
-                        var obj_id = gridView1.GetRowCellValue(i, "Id");
-                        var values = new Dictionary<string, object>
-                    {
-                        {"Quantity", Convert.ToDecimal(gridView1.GetRowCellValue(i,"Footage")) }
-                    };
-                        crudRepository.Update("InventoryRequirement", obj_id, values);
-                        this.Close();
+                        var obj_id = gridView1.GetRowCellValue(i, "SizeId");
+                        if (obj_id != null)
+                        {
+                            var values = new Dictionary<string, object>
+                                        {
+                                            { "Quantity", Convert.ToDecimal(footage) }
+                                        };
+                            crudRepository.Update("InventoryRequirement", obj_id, values);
+                            SecilenIdler.Add(Convert.ToInt32(obj_id));
+                        }
                     }
                 }
+                //MessageBox.Show(SecilenIdler.Count.ToString());
+                this.Close();
             }
             catch (Exception ex)
             {

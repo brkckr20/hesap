@@ -6,7 +6,7 @@
         MalzemeDepoGiris = 1,
         MusteriSiparisi = 2,
         MalzemeDepoCikis = 3,
-        IplikSatinAlmaTalimati=4,
+        IplikSatinAlmaTalimati = 4,
         IplikDepoGiris = 5,
         IplikDepoCikis = 6,
         KumasSatinAlmaTalimati = 7,
@@ -30,7 +30,12 @@
 
     public enum LookupTypes // bu enum, Kategori, Cinsi gibi kartları ayrı ayro tablo yapmak yerine tek tablo olarak kullanılacak
     {
-        Kategori =0,
-        Cinsi=1
+        Kategori = 0,
+        Cinsi = 1
+    }
+
+    public enum InventoryReceiptTypes
+    {
+        KumasRecetesi = 0
     }
 }

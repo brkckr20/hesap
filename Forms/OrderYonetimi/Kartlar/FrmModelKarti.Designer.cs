@@ -55,7 +55,7 @@
             this.GrM2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IsOrganic = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Explanation = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.SizeChoose = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.SizeText = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoSutunSecimi = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.tabIplikBilgileri = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
@@ -106,6 +106,7 @@
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.context1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.bedenSetiGirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.InventoryReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -291,7 +292,8 @@
             this.GrM2,
             this.IsOrganic,
             this.Explanation,
-            this.SizeChoose});
+            this.SizeText,
+            this.InventoryReceiptItemId});
             this.gridView1.GridControl = this.gridKumasBilgileri;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
@@ -407,15 +409,15 @@
             this.Explanation.VisibleIndex = 8;
             this.Explanation.Width = 598;
             // 
-            // SizeChoose
+            // SizeText
             // 
-            this.SizeChoose.Caption = "Beden Seçimi";
-            this.SizeChoose.ColumnEdit = this.repoSutunSecimi;
-            this.SizeChoose.FieldName = "SizeChoose";
-            this.SizeChoose.Name = "SizeChoose";
-            this.SizeChoose.Visible = true;
-            this.SizeChoose.VisibleIndex = 7;
-            this.SizeChoose.Width = 79;
+            this.SizeText.Caption = "Beden Seçimi";
+            this.SizeText.ColumnEdit = this.repoSutunSecimi;
+            this.SizeText.FieldName = "SizeText";
+            this.SizeText.Name = "SizeText";
+            this.SizeText.Visible = true;
+            this.SizeText.VisibleIndex = 7;
+            this.SizeText.Width = 79;
             // 
             // repoSutunSecimi
             // 
@@ -913,6 +915,14 @@
             this.bedenSetiGirToolStripMenuItem.Text = "Beden Seti Girişi";
             this.bedenSetiGirToolStripMenuItem.Click += new System.EventHandler(this.bedenSetiGirToolStripMenuItem_Click);
             // 
+            // InventoryReceiptItemId
+            // 
+            this.InventoryReceiptItemId.Caption = "Reçete Satır Kayıt No";
+            this.InventoryReceiptItemId.FieldName = "InventoryReceiptItemId";
+            this.InventoryReceiptItemId.Name = "InventoryReceiptItemId";
+            this.InventoryReceiptItemId.Visible = true;
+            this.InventoryReceiptItemId.VisibleIndex = 9;
+            // 
             // FrmModelKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1044,7 +1054,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoKullanimYeri;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repoCinsi;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoBtnUrunKodu;
-        private DevExpress.XtraGrid.Columns.GridColumn SizeChoose;
+        private DevExpress.XtraGrid.Columns.GridColumn SizeText;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoSutunSecimi;
+        private DevExpress.XtraGrid.Columns.GridColumn InventoryReceiptItemId;
     }
 }

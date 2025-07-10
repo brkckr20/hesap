@@ -63,5 +63,13 @@ namespace Hesap.Models
         [Display(Name = "Malzeme Adı")]
         public string InventoryName { get; set; }
 
+        [Display(Name = "Reçete Malzeme Id")] // buradan reçetede kullanılan malzeme id tutulacak ve Inventoryname ve code ile de adı çekilecek
+        public int RecipeInventoryId { get; set; }
+        [Display(Name = "Beden Seti")]
+        public string SizeText { get; set; }
+
+        [Display(Name = "Reçete Satır Kayıt No")]
+        public int InventoryReceiptItemId { get; set; }
+
     }
 }
