@@ -57,6 +57,7 @@
             this.Explanation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.SizeText = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoSutunSecimi = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.InventoryReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tabIplikBilgileri = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.picResim = new DevExpress.XtraEditors.PictureEdit();
@@ -106,7 +107,7 @@
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.context1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.bedenSetiGirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.InventoryReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.RecipeInventoryId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -293,7 +294,8 @@
             this.IsOrganic,
             this.Explanation,
             this.SizeText,
-            this.InventoryReceiptItemId});
+            this.InventoryReceiptItemId,
+            this.RecipeInventoryId});
             this.gridView1.GridControl = this.gridKumasBilgileri;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
@@ -426,6 +428,14 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repoSutunSecimi.Name = "repoSutunSecimi";
             this.repoSutunSecimi.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repoSutunSecimi_ButtonClick);
+            // 
+            // InventoryReceiptItemId
+            // 
+            this.InventoryReceiptItemId.Caption = "Reçete Satır Kayıt No";
+            this.InventoryReceiptItemId.FieldName = "InventoryReceiptItemId";
+            this.InventoryReceiptItemId.Name = "InventoryReceiptItemId";
+            this.InventoryReceiptItemId.Visible = true;
+            this.InventoryReceiptItemId.VisibleIndex = 9;
             // 
             // tabIplikBilgileri
             // 
@@ -915,13 +925,13 @@
             this.bedenSetiGirToolStripMenuItem.Text = "Beden Seti Girişi";
             this.bedenSetiGirToolStripMenuItem.Click += new System.EventHandler(this.bedenSetiGirToolStripMenuItem_Click);
             // 
-            // InventoryReceiptItemId
+            // RecipeInventoryId
             // 
-            this.InventoryReceiptItemId.Caption = "Reçete Satır Kayıt No";
-            this.InventoryReceiptItemId.FieldName = "InventoryReceiptItemId";
-            this.InventoryReceiptItemId.Name = "InventoryReceiptItemId";
-            this.InventoryReceiptItemId.Visible = true;
-            this.InventoryReceiptItemId.VisibleIndex = 9;
+            this.RecipeInventoryId.Caption = "Kumaş Id";
+            this.RecipeInventoryId.FieldName = "RecipeInventoryId";
+            this.RecipeInventoryId.Name = "RecipeInventoryId";
+            this.RecipeInventoryId.Visible = true;
+            this.RecipeInventoryId.VisibleIndex = 10;
             // 
             // FrmModelKarti
             // 
@@ -1057,5 +1067,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn SizeText;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoSutunSecimi;
         private DevExpress.XtraGrid.Columns.GridColumn InventoryReceiptItemId;
+        private DevExpress.XtraGrid.Columns.GridColumn RecipeInventoryId;
     }
 }

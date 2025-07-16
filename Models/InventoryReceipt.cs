@@ -71,5 +71,7 @@ namespace Hesap.Models
         [Display(Name = "Reçete Satır Kayıt No")]
         public int InventoryReceiptItemId { get; set; }
 
+        public virtual Inventory _Inventory { get; set; }
+
     }
 }

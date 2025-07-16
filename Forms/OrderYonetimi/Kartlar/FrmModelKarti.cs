@@ -125,6 +125,7 @@ namespace Hesap.Forms.OrderYonetimi
                 chckIplikOK.Checked = frm.IplikOk;
                 chckAksesuarOK.Checked = frm.AksesuarOk;
                 txtGTIP.Text = frm.GTIPNo;
+                gridKumasBilgileri.DataSource = frm.fabricRecipe;
             }
         }
 

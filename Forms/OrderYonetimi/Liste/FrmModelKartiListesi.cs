@@ -1,6 +1,11 @@
 ﻿using DevExpress.XtraGrid.Views.Grid;
+using Hesap.DataAccess;
+using Hesap.Models;
 using Hesap.Utils;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Hesap.Forms.OrderYonetimi.Liste
 {
@@ -12,10 +17,13 @@ namespace Hesap.Forms.OrderYonetimi.Liste
         }
         Listele listele = new Listele();
         YardimciAraclar yardimciAraclar = new YardimciAraclar();
-        public int Id,FirmaId,KategoriId,CinsiId,PazarlamaciId;
-        public string Kodu,Adi, OrjAdi,FirmaKodu,FirmaAdi,KategoriAdi,KategorOrjAdi,CinsiAdi,CinsiOrjAdi,OzelKod,OzelKod2,GrM2,Pazarlamaci,GTIPNo;
-        public bool KumasOk,BoyaOk,NakisOk,IplikOk,AksesuarOk;
+        CrudRepository crudRepository = new CrudRepository();
+        public int Id, FirmaId, KategoriId, CinsiId, PazarlamaciId;
+        public string Kodu, Adi, OrjAdi, FirmaKodu, FirmaAdi, KategoriAdi, KategorOrjAdi, CinsiAdi, CinsiOrjAdi, OzelKod, OzelKod2, GrM2, Pazarlamaci, GTIPNo;
+        public bool KumasOk, BoyaOk, NakisOk, IplikOk, AksesuarOk;
         bool KullanicininKendiModelleriListelenecek = false; // bu alan parametre olarak seçilebilecek
+
+        public List<InventoryReceipt> fabricRecipe = new List<InventoryReceipt>();
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
@@ -30,20 +38,38 @@ namespace Hesap.Forms.OrderYonetimi.Liste
             KategoriId = Convert.ToInt32(gridView.GetFocusedRowCellValue("Kategori Id"));
             KategoriAdi = gridView.GetFocusedRowCellValue("Kategori Adı").ToString();
             KategorOrjAdi = gridView.GetFocusedRowCellValue("Orj. Kategori Adı").ToString();
-            CinsiId= Convert.ToInt32(gridView.GetFocusedRowCellValue("Cinsi Id"));
+            CinsiId = Convert.ToInt32(gridView.GetFocusedRowCellValue("Cinsi Id"));
             CinsiAdi = gridView.GetFocusedRowCellValue("Cinsi Adı").ToString();
             CinsiOrjAdi = gridView.GetFocusedRowCellValue("Orj. Cinsi Adı").ToString();
             OzelKod = gridView.GetFocusedRowCellValue("Özel Kod").ToString();
             OzelKod2 = gridView.GetFocusedRowCellValue("Özel Kod 2").ToString();
-            GrM2= gridView.GetFocusedRowCellValue("GrM2").ToString();
-            PazarlamaciId= Convert.ToInt32(gridView.GetFocusedRowCellValue("Kullanıcı Id"));
-            Pazarlamaci= gridView.GetFocusedRowCellValue("Kullanıcı").ToString();
+            GrM2 = gridView.GetFocusedRowCellValue("GrM2").ToString();
+            PazarlamaciId = Convert.ToInt32(gridView.GetFocusedRowCellValue("Kullanıcı Id"));
+            Pazarlamaci = gridView.GetFocusedRowCellValue("Kullanıcı").ToString();
             KumasOk = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Kumaş Ok"));
             BoyaOk = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Boya Ok"));
             NakisOk = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Nakış Ok"));
             IplikOk = Convert.ToBoolean(gridView.GetFocusedRowCellValue("İplik Ok"));
             AksesuarOk = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Aksesuar Ok"));
-            GTIPNo= gridView.GetFocusedRowCellValue("GTIP No").ToString();
+            GTIPNo = gridView.GetFocusedRowCellValue("GTIP No").ToString();
+            //var kumasRecetesi = crudRepository.GetAll<InventoryReceipt>("InventoryReceipt")
+            //    .Where(x => x.InventoryId == Id)
+            //    .ToList();
+            var kumasRecetesi = (from receipt in crudRepository.GetAll<InventoryReceipt>("InventoryReceipt")
+                                 join inventory in crudRepository.GetAll<Inventory>("Inventory")
+                                 on receipt.InventoryId equals inventory.Id
+                                 where receipt.RecipeInventoryId == Id
+                                 select new InventoryReceipt // Anonim tip yerine InventoryReceipt oluşturuyoruz
+                                 {
+                                     Id = receipt.Id,
+                                     RecipeInventoryId = receipt.RecipeInventoryId,
+                                 }).ToList();
+
+            fabricRecipe.Clear();
+            if (kumasRecetesi != null && kumasRecetesi.Any())
+            {
+                fabricRecipe.AddRange(kumasRecetesi);
+            }
             this.Close();
         }
 
@@ -74,12 +100,16 @@ namespace Hesap.Forms.OrderYonetimi.Liste
                             ISNULL(I.EmbroideryOK,'') [Nakış Ok],
                             ISNULL(I.YarnOK,'') [İplik Ok],
                             ISNULL(I.AccessoriesOK,'') [Aksesuar Ok],
-                            ISNULL(I.GTIPNo,'') [GTIP No]
+                            ISNULL(I.GTIPNo,'') [GTIP No],
+                            ISNULL(IR.PlaceOfUse,'') [Kullanım Yeri],
+                            ISNULL(IR.GrM2,'') [GrM2],
+                            ISNULL(IR.Genus,'') [Cinsi]
                             from Inventory I 
                             left join Company C on C.Id = I.CompanyId
                             left join Lookup L1 on I.CategoryId = L1.Id
                             left join Lookup L2 on I.GenusId = L2.Id
                             left join Users U on I.UserId = U.Id
+                            left join InventoryReceipt IR on I.Id = IR.InventoryId
                             where ISNULL(I.Type,0)=3";
             //if (!KullanicininKendiModelleriListelenecek) // bu alan order yönetimi parametrelerinden gelecek
             //{
