@@ -23,7 +23,7 @@ namespace Hesap.Forms.OrderYonetimi.Liste
         public bool KumasOk, BoyaOk, NakisOk, IplikOk, AksesuarOk;
         bool KullanicininKendiModelleriListelenecek = false; // bu alan parametre olarak seçilebilecek
 
-        public List<InventoryReceipt> fabricRecipe = new List<InventoryReceipt>();
+        public List<dynamic> fabricRecipe = new List<dynamic>();
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
@@ -55,15 +55,8 @@ namespace Hesap.Forms.OrderYonetimi.Liste
             //var kumasRecetesi = crudRepository.GetAll<InventoryReceipt>("InventoryReceipt")
             //    .Where(x => x.InventoryId == Id)
             //    .ToList();
-            var kumasRecetesi = (from receipt in crudRepository.GetAll<InventoryReceipt>("InventoryReceipt")
-                                 join inventory in crudRepository.GetAll<Inventory>("Inventory")
-                                 on receipt.InventoryId equals inventory.Id
-                                 where receipt.RecipeInventoryId == Id
-                                 select new InventoryReceipt // Anonim tip yerine InventoryReceipt oluşturuyoruz
-                                 {
-                                     Id = receipt.Id,
-                                     RecipeInventoryId = receipt.RecipeInventoryId,
-                                 }).ToList();
+            var sql = $"Select I1.Id [RecipeInventoryId], I1.InventoryName,I1.InventoryCode, IR.PlaceOfUse, IR.Genus, IR.GrM2 from Inventory I left join InventoryReceipt IR with(nolock) on I.Id = IR.InventoryId left join Inventory I1 on I1.Id = IR.RecipeInventoryId where I.Id = {Id}"; // REÇETEDEKİ DİĞER ALANLARDAN DEVAM EDİLECEK
+            var kumasRecetesi = crudRepository.GetListWithCustomQuery(sql);
 
             fabricRecipe.Clear();
             if (kumasRecetesi != null && kumasRecetesi.Any())

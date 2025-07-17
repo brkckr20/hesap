@@ -148,7 +148,7 @@ namespace Hesap.DataAccess
                 return "00000001";
             }
         }
-        public string GetInventoryNumerator(string TableName,string FieldName,int Type,string Prefix)
+        public string GetInventoryNumerator(string TableName, string FieldName, int Type, string Prefix)
         {
             string query;
             if (this.databaseTuru == "mssql")
@@ -265,7 +265,7 @@ namespace Hesap.DataAccess
         {
             return _dbConnection.Query(query, new { Id = id }).ToList();
         }
-        public int? GetIdForAfterOrBeforeRecord(string KayitTipi, string TableName, int id, string TableName2, string TableName2Ref ,int ReceiptType)
+        public int? GetIdForAfterOrBeforeRecord(string KayitTipi, string TableName, int id, string TableName2, string TableName2Ref, int ReceiptType)
         {
             string sql = KayitTipi == "Önceki"
                 ? $"SELECT MAX(t1.Id) FROM {TableName} t1 inner join {TableName2} t2 on t1.Id=t2.{TableName2Ref} WHERE t1.Id < @Id and ReceiptType = {ReceiptType}"
@@ -281,12 +281,11 @@ namespace Hesap.DataAccess
 
             return _dbConnection.QueryFirstOrDefault<int?>(sql, new { Id = id });
         }
-
         public void RemoveRowAndDatabase(GridView gridView, string TableName)
         {
             int rowHandle = gridView.FocusedRowHandle;
             int Id = Convert.ToInt32(gridView.GetFocusedRowCellValue("ReceiptItemId"));
-           
+
             if (rowHandle != -1)
             {
                 if (bildirim.SilmeOnayı())
@@ -295,6 +294,10 @@ namespace Hesap.DataAccess
                     gridView.DeleteRow(rowHandle);
                 }
             }
+        }
+        public List<dynamic> GetListWithCustomQuery(string sql)
+        {
+            return _dbConnection.Query(sql).AsList();
         }
 
     }
