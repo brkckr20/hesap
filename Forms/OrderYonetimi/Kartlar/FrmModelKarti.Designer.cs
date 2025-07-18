@@ -58,6 +58,7 @@
             this.SizeText = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoSutunSecimi = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.InventoryReceiptItemId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.RecipeInventoryId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tabIplikBilgileri = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.picResim = new DevExpress.XtraEditors.PictureEdit();
@@ -107,7 +108,7 @@
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.context1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.bedenSetiGirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RecipeInventoryId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoOrganik = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -147,6 +148,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).BeginInit();
             this.contextBedenler.SuspendLayout();
             this.context1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repoOrganik)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -275,7 +277,8 @@
             this.repoKullanimYeri,
             this.repoCinsi,
             this.repoBtnUrunKodu,
-            this.repoSutunSecimi});
+            this.repoSutunSecimi,
+            this.repoOrganik});
             this.gridKumasBilgileri.Size = new System.Drawing.Size(1523, 459);
             this.gridKumasBilgileri.TabIndex = 0;
             this.gridKumasBilgileri.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -396,6 +399,7 @@
             // IsOrganic
             // 
             this.IsOrganic.Caption = "Organik ?";
+            this.IsOrganic.ColumnEdit = this.repoOrganik;
             this.IsOrganic.FieldName = "IsOrganic";
             this.IsOrganic.Name = "IsOrganic";
             this.IsOrganic.Visible = true;
@@ -436,6 +440,14 @@
             this.InventoryReceiptItemId.Name = "InventoryReceiptItemId";
             this.InventoryReceiptItemId.Visible = true;
             this.InventoryReceiptItemId.VisibleIndex = 9;
+            // 
+            // RecipeInventoryId
+            // 
+            this.RecipeInventoryId.Caption = "Kumaş Id";
+            this.RecipeInventoryId.FieldName = "RecipeInventoryId";
+            this.RecipeInventoryId.Name = "RecipeInventoryId";
+            this.RecipeInventoryId.Visible = true;
+            this.RecipeInventoryId.VisibleIndex = 10;
             // 
             // tabIplikBilgileri
             // 
@@ -925,13 +937,10 @@
             this.bedenSetiGirToolStripMenuItem.Text = "Beden Seti Girişi";
             this.bedenSetiGirToolStripMenuItem.Click += new System.EventHandler(this.bedenSetiGirToolStripMenuItem_Click);
             // 
-            // RecipeInventoryId
+            // repoOrganik
             // 
-            this.RecipeInventoryId.Caption = "Kumaş Id";
-            this.RecipeInventoryId.FieldName = "RecipeInventoryId";
-            this.RecipeInventoryId.Name = "RecipeInventoryId";
-            this.RecipeInventoryId.Visible = true;
-            this.RecipeInventoryId.VisibleIndex = 10;
+            this.repoOrganik.AutoHeight = false;
+            this.repoOrganik.Name = "repoOrganik";
             // 
             // FrmModelKarti
             // 
@@ -984,6 +993,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).EndInit();
             this.contextBedenler.ResumeLayout(false);
             this.context1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.repoOrganik)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1068,5 +1078,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repoSutunSecimi;
         private DevExpress.XtraGrid.Columns.GridColumn InventoryReceiptItemId;
         private DevExpress.XtraGrid.Columns.GridColumn RecipeInventoryId;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repoOrganik;
     }
 }

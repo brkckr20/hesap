@@ -55,7 +55,7 @@ namespace Hesap.Forms.OrderYonetimi.Liste
             //var kumasRecetesi = crudRepository.GetAll<InventoryReceipt>("InventoryReceipt")
             //    .Where(x => x.InventoryId == Id)
             //    .ToList();
-            var sql = $"Select I1.Id [RecipeInventoryId], I1.InventoryName,I1.InventoryCode, IR.PlaceOfUse, IR.Genus, IR.GrM2 from Inventory I left join InventoryReceipt IR with(nolock) on I.Id = IR.InventoryId left join Inventory I1 on I1.Id = IR.RecipeInventoryId where I.Id = {Id}"; // REÇETEDEKİ DİĞER ALANLARDAN DEVAM EDİLECEK
+            var sql = $"Select I1.Id [RecipeInventoryId], I1.InventoryName,I1.InventoryCode, IR.PlaceOfUse, IR.Genus, IR.GrM2,IR.IsOrganic,IR.EmbroideryRef from Inventory I left join InventoryReceipt IR with(nolock) on I.Id = IR.InventoryId left join Inventory I1 on I1.Id = IR.RecipeInventoryId where I.Id = {Id}"; // reçetedeki beden seçimi ekranından devam edilecek - 18-07-2025
             var kumasRecetesi = crudRepository.GetListWithCustomQuery(sql);
 
             fabricRecipe.Clear();

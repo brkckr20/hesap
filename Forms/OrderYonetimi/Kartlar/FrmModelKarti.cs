@@ -199,7 +199,7 @@ namespace Hesap.Forms.OrderYonetimi
                 {
                     var recIdObj = gridView1.GetRowCellValue(i, "InventoryReceiptItemId");
                     int rec_id = recIdObj != null ? Convert.ToInt32(recIdObj) : 0;
-                    var values = new Dictionary<string, object> { { "RecipeInventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "RecipeInventoryId")) }, { "PlaceOfUse", gridView1.GetRowCellValue(i, "PlaceOfUse") }, { "Genus", gridView1.GetRowCellValue(i, "Genus") }, { "SizeText", gridView1.GetRowCellValue(i, "SizeText") }, { "ReceiptType", InventoryReceiptTypes.KumasRecetesi } }; // buradan devam --> modelin reçetesi satıra aktarılacak ve güncelleme işlemleri yapılacak
+                    var values = new Dictionary<string, object> { { "RecipeInventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "RecipeInventoryId")) }, { "PlaceOfUse", gridView1.GetRowCellValue(i, "PlaceOfUse") }, { "Genus", gridView1.GetRowCellValue(i, "Genus") }, { "SizeText", gridView1.GetRowCellValue(i, "SizeText") }, { "ReceiptType", InventoryReceiptTypes.KumasRecetesi } };
                     if (rec_id != 0)
                     {
                         crudRepository.Update("InventoryReceipt", rec_id, values);
