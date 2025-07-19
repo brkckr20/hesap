@@ -4,6 +4,7 @@ using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
@@ -14,11 +15,18 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         Listele listele = new Listele();
         Bildirim bildirim = new Bildirim();
         int _malzemeId;
+        string _sizeText;
         public List<int> SecilenIdler { get; private set; } = new List<int>();
         public FrmBedenSecimi(int malzemeId)
         {
             InitializeComponent();
             _malzemeId = malzemeId;
+            BaslangicVerileri();
+        }
+        public FrmBedenSecimi(string sizeText)
+        {
+            InitializeComponent();
+            _sizeText = sizeText;
             BaslangicVerileri();
         }
         void BaslangicVerileri()
@@ -29,18 +37,44 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
         {
             Listele();
         }
-
+        string sql;
         void Listele()
         {
-            string sql = $@"
-                        select 
-                        IR.Id [Id],
-                        S.Id [SizeId],
-                        S.SizeName [Size],
-                        IR.Quantity [Footage] from InventoryRequirement IR 
-                        left join Inventory I on I.Id = IR.InventoryId
-                        left join Size S on S.Id = IR.SizeId
-                        where IR.InventoryId = {_malzemeId} ";
+            if (_sizeText.Length > 0)
+            {
+                // Virgülle ayrılmış ID'leri diziye çevir ve SQL IN clause için formatla
+                var sizeIds = _sizeText.Split(',')
+                                      .Select(x => x.Trim())
+                                      .Where(x => !string.IsNullOrEmpty(x));
+
+                // IN clause için uygun format: '40','41','42'
+                var formattedSizeIds = string.Join(",", sizeIds.Select(x => $"'{x}'"));
+
+                        sql = $@"
+                SELECT 
+                    IR.Id [Id],
+                    S.Id [SizeId],
+                    S.SizeName [Size],
+                    IR.Quantity [Footage] 
+                FROM InventoryRequirement IR 
+                LEFT JOIN Inventory I ON I.Id = IR.InventoryId
+                LEFT JOIN Size S ON S.Id = IR.SizeId
+                WHERE S.Id IN ({formattedSizeIds})";
+                    }
+                    else
+                    {
+                        sql = $@"
+                SELECT 
+                    IR.Id [Id],
+                    S.Id [SizeId],
+                    S.SizeName [Size],
+                    IR.Quantity [Footage] 
+                FROM InventoryRequirement IR 
+                LEFT JOIN Inventory I ON I.Id = IR.InventoryId
+                LEFT JOIN Size S ON S.Id = IR.SizeId
+                WHERE IR.InventoryId = {_malzemeId}";
+            }
+
             listele.Liste(sql, gridControl1);
         }
 
@@ -53,13 +87,12 @@ namespace Hesap.Forms.OrderYonetimi.OrderIslemleri
             try
             {
                 SecilenIdler.Clear();
-
                 for (int i = 0; i < gridView1.RowCount; i++)
                 {
                     var footage = gridView1.GetRowCellValue(i, "Footage");
                     if (footage != null && Convert.ToDecimal(footage) > 0)
                     {
-                        var obj_id = gridView1.GetRowCellValue(i, "SizeId");
+                        var obj_id = gridView1.GetRowCellValue(i, "Id");
                         if (obj_id != null)
                         {
                             var values = new Dictionary<string, object>

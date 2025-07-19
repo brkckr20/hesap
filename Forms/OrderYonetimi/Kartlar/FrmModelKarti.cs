@@ -80,19 +80,27 @@ namespace Hesap.Forms.OrderYonetimi
 
         private void repoSutunSecimi_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            OrderIslemleri.FrmBedenSecimi frm = new OrderIslemleri.FrmBedenSecimi(this.Id);
-            frm.ShowDialog();
-            var secilenIdler = frm.SecilenIdler;
-            MessageBox.Show(frm.SecilenIdler.Count.ToString());
-            if (secilenIdler != null && secilenIdler.Count > 0)
+            string _sizeText = gridView1.GetFocusedRowCellValue("SizeText").ToString();
+            if (_sizeText != string.Empty)
             {
-                string idText = string.Join(", ", secilenIdler);
-                gridView1.SetFocusedRowCellValue("SizeText", idText); // örnek bir kolon ismi
+                OrderIslemleri.FrmBedenSecimi frm = new OrderIslemleri.FrmBedenSecimi(_sizeText);
+                frm.ShowDialog();
             }
-            else
-            {
-                gridView1.SetFocusedRowCellValue("SizeText", ""); // veya null
-            }
+            //ALT KISIMDAN DEVAM ET. 19/07/2025
+            
+            //OrderIslemleri.FrmBedenSecimi frm = new OrderIslemleri.FrmBedenSecimi(this.Id);
+            //frm.ShowDialog();
+            //var secilenIdler = frm.SecilenIdler;
+            ////MessageBox.Show(frm.SecilenIdler.Count.ToString());
+            //if (secilenIdler != null && secilenIdler.Count > 0)
+            //{
+            //    string idText = string.Join(", ", secilenIdler);
+            //    gridView1.SetFocusedRowCellValue("SizeText", idText); // örnek bir kolon ismi
+            //}
+            //else
+            //{
+            //    gridView1.SetFocusedRowCellValue("SizeText", ""); // veya null
+            //}
         }
 
         private void btnListe_Click(object sender, EventArgs e)
