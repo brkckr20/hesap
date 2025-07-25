@@ -1,11 +1,9 @@
 ﻿using DevExpress.XtraGrid.Views.Grid;
 using Hesap.DataAccess;
-using Hesap.Models;
 using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.OrderYonetimi.Liste
 {
@@ -16,7 +14,6 @@ namespace Hesap.Forms.OrderYonetimi.Liste
             InitializeComponent();
         }
         Listele listele = new Listele();
-        YardimciAraclar yardimciAraclar = new YardimciAraclar();
         CrudRepository crudRepository = new CrudRepository();
         public int Id, FirmaId, KategoriId, CinsiId, PazarlamaciId;
         public string Kodu, Adi, OrjAdi, FirmaKodu, FirmaAdi, KategoriAdi, KategorOrjAdi, CinsiAdi, CinsiOrjAdi, OzelKod, OzelKod2, GrM2, Pazarlamaci, GTIPNo;
@@ -52,10 +49,7 @@ namespace Hesap.Forms.OrderYonetimi.Liste
             IplikOk = Convert.ToBoolean(gridView.GetFocusedRowCellValue("İplik Ok"));
             AksesuarOk = Convert.ToBoolean(gridView.GetFocusedRowCellValue("Aksesuar Ok"));
             GTIPNo = gridView.GetFocusedRowCellValue("GTIP No").ToString();
-            //var kumasRecetesi = crudRepository.GetAll<InventoryReceipt>("InventoryReceipt")
-            //    .Where(x => x.InventoryId == Id)
-            //    .ToList();
-            var sql = $"SELECT I1.Id AS [RecipeInventoryId], I1.InventoryName, I1.InventoryCode, IR.PlaceOfUse, IR.Genus, IR.GrM2, IR.IsOrganic, IR.EmbroideryRef, STRING_AGG(CAST(IRQ.SizeId AS NVARCHAR(MAX)), ', ') AS SizeText FROM Inventory I LEFT JOIN InventoryReceipt IR WITH(NOLOCK) ON I.Id = IR.InventoryId LEFT JOIN Inventory I1 ON I1.Id = IR.RecipeInventoryId LEFT JOIN InventoryRequirement IRQ ON I.Id = IRQ.InventoryId WHERE I.Id = {Id} GROUP BY I1.Id, I1.InventoryName, I1.InventoryCode, IR.PlaceOfUse, IR.Genus, IR.GrM2, IR.IsOrganic, IR.EmbroideryRef";
+            var sql = $"SELECT I1.Id AS [RecipeInventoryId], I1.InventoryName, I1.InventoryCode, IR.PlaceOfUse, IR.Genus, IR.GrM2, IR.IsOrganic, IR.EmbroideryRef, STRING_AGG(CAST(IRQ.SizeId AS NVARCHAR(MAX)), ', ') AS SizeText,IR.Explanation FROM Inventory I LEFT JOIN InventoryReceipt IR WITH(NOLOCK) ON I.Id = IR.InventoryId LEFT JOIN Inventory I1 ON I1.Id = IR.RecipeInventoryId LEFT JOIN InventoryRequirement IRQ ON I.Id = IRQ.InventoryId WHERE I.Id = {Id} GROUP BY I1.Id, I1.InventoryName, I1.InventoryCode, IR.PlaceOfUse, IR.Genus, IR.GrM2, IR.IsOrganic, IR.EmbroideryRef,IR.Explanation";
             var kumasRecetesi = crudRepository.GetListWithCustomQuery(sql);
 
             fabricRecipe.Clear();

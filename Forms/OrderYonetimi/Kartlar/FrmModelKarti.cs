@@ -6,7 +6,6 @@ using Hesap.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace Hesap.Forms.OrderYonetimi
 {
@@ -137,6 +136,12 @@ namespace Hesap.Forms.OrderYonetimi
             }
         }
 
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            //crudRepository.ConfirmAndDeleteCard("Inventory",this.Id,null);
+            //crudRepository.RemoveRowAndDatabase(gridView1,"InventoryReceipt");
+        }
+
         private void txtKategori_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             yansit.KategoriYansit(txtKategori, txtOrjKategoriAdi, ref this.KategoriId, "Kategori Kartı");
@@ -190,7 +195,7 @@ namespace Hesap.Forms.OrderYonetimi
                     for (int i = 0; i < itemList.Count; i++)
                     {
                         var item = itemList[i];
-                        var values = new Dictionary<string, object> { { "InventoryId", this.Id }, { "PlaceOfUse", item.PlaceOfUse}, { "Genus", item.Genus },{ "ReceiptType", InventoryReceiptTypes.KumasRecetesi } , { "RecipeInventoryId", item.InventoryId }, { "GrM2", item.GrM2}, { "Explanation", item.Explanation }, { "EmbroideryRef", item.EmbroideryRef}, { "IsOrganic", item.IsOrganic }, { "SizeText", item.SizeText } };
+                        var values = new Dictionary<string, object> { { "InventoryId", this.Id }, { "PlaceOfUse", item.PlaceOfUse}, { "Genus", item.Genus },{ "ReceiptType", InventoryReceiptTypes.KumasRecetesi } , { "RecipeInventoryId", item.InventoryId }, { "GrM2", item.GrM2}, { "Explanation", item.Explanation }, { "EmbroideryRef", item.EmbroideryRef}, { "IsOrganic", item.IsOrganic }, { "SizeText", item.SizeText }, { "Explanation", item.Explanation } };
                         var rec_id = crudRepository.Insert("InventoryReceipt", values);
                         gridView1.SetRowCellValue(i, "InventoryReceiptItemId", rec_id);
                     }
@@ -207,7 +212,7 @@ namespace Hesap.Forms.OrderYonetimi
                 {
                     var recIdObj = gridView1.GetRowCellValue(i, "InventoryReceiptItemId");
                     int rec_id = recIdObj != null ? Convert.ToInt32(recIdObj) : 0;
-                    var values = new Dictionary<string, object> { { "RecipeInventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "RecipeInventoryId")) }, { "PlaceOfUse", gridView1.GetRowCellValue(i, "PlaceOfUse") }, { "Genus", gridView1.GetRowCellValue(i, "Genus") }, { "SizeText", gridView1.GetRowCellValue(i, "SizeText") }, { "ReceiptType", InventoryReceiptTypes.KumasRecetesi } };
+                    var values = new Dictionary<string, object> { { "RecipeInventoryId", Convert.ToInt32(gridView1.GetRowCellValue(i, "RecipeInventoryId")) }, { "PlaceOfUse", gridView1.GetRowCellValue(i, "PlaceOfUse") }, { "Genus", gridView1.GetRowCellValue(i, "Genus") }, { "SizeText", gridView1.GetRowCellValue(i, "SizeText") }, { "ReceiptType", InventoryReceiptTypes.KumasRecetesi }, { "Explanation", gridView1.GetRowCellValue(i,"Explanation")} };
                     if (rec_id != 0)
                     {
                         crudRepository.Update("InventoryReceipt", rec_id, values);

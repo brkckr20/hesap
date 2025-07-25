@@ -54,6 +54,7 @@
             this.InventoryName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GrM2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IsOrganic = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoOrganik = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.Explanation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.SizeText = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoSutunSecimi = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -108,7 +109,6 @@
             this.sütunSeçimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.context1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.bedenSetiGirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.repoOrganik = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -122,6 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoKullanimYeri)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCinsi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoOrganik)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoSutunSecimi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
@@ -148,7 +149,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).BeginInit();
             this.contextBedenler.SuspendLayout();
             this.context1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.repoOrganik)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -204,6 +204,7 @@
             this.btnSil.Size = new System.Drawing.Size(75, 47);
             this.btnSil.TabIndex = 105;
             this.btnSil.Text = "Sil";
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnListe
             // 
@@ -405,6 +406,11 @@
             this.IsOrganic.Visible = true;
             this.IsOrganic.VisibleIndex = 5;
             this.IsOrganic.Width = 70;
+            // 
+            // repoOrganik
+            // 
+            this.repoOrganik.AutoHeight = false;
+            this.repoOrganik.Name = "repoOrganik";
             // 
             // Explanation
             // 
@@ -937,11 +943,6 @@
             this.bedenSetiGirToolStripMenuItem.Text = "Beden Seti Girişi";
             this.bedenSetiGirToolStripMenuItem.Click += new System.EventHandler(this.bedenSetiGirToolStripMenuItem_Click);
             // 
-            // repoOrganik
-            // 
-            this.repoOrganik.AutoHeight = false;
-            this.repoOrganik.Name = "repoOrganik";
-            // 
             // FrmModelKarti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -967,6 +968,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoKullanimYeri)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoCinsi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnUrunKodu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoOrganik)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoSutunSecimi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
@@ -993,7 +995,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModelAdi.Properties)).EndInit();
             this.contextBedenler.ResumeLayout(false);
             this.context1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.repoOrganik)).EndInit();
             this.ResumeLayout(false);
 
         }
