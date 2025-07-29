@@ -216,7 +216,7 @@ namespace Hesap.Forms.OrderYonetimi
                     if (rec_id != 0)
                     {
                         crudRepository.Update("InventoryReceipt", rec_id, values);
-                    }
+                    }//asad
                     else
                     {
                         var new_rec_id = crudRepository.Insert("InventoryReceipt", values);
